@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dada Jee Ka Khet - Riddle Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      /* Updated CSS for a more polished, child-friendly design */
+
+      :root {
+        --primary: #ffe066; /* Soft yellow */
+        --accent: #ffffff; /* White text or highlights */
+        --background: #fcefee; /* Light pastel pink */
+        --secondary-bg: #7cccb7; /* Calming mint green */
+        --text-dark: #333333;
+        --correct: #4caf50;
+        --incorrect: #e74c3c;
+      }
+
+      body {
+        color: var(--text-dark);
+        background: linear-gradient(135deg, var(--background), #d6f5f2);
+        font-family: "Grandstander", cursive, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+     header {
+        width: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--secondary-bg)
+        );
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+.logo {
+  width: 120px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+      nav {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--secondary-bg);
+        font-weight: bold;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .title-container {
+        background: var(--secondary-bg);
+        padding: 20px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
+        margin: 20px auto;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        margin: 8px 0;
+        color: var(--accent);
+      }
+
+     
+      
+      .settings-container,
+      .drop-zone {
+        width: 250px;
+        background-color: var(--primary);
+        border-radius: 12px;
+
+        padding: 15px 10px;
+        position: relative;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: 0 auto 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--text-dark);
+
+        transition: background 0.3s ease, transform 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .settings-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+
+        gap: 8px;
+        text-align: center;
+      }
+
+      .arrow {
+        transition: transform 0.3s ease;
+      }
+
+      .arrow.rotated {
+        transform: rotate(180deg);
+      }
+
+      .settings-dropdown {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid var(--secondary-bg);
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        z-index: 10;
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .settings-dropdown.visible {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .difficulty-option,
+      .language-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 0;
+        font-size: 14px;
+        color: var(--text-dark);
+      }
+
+      .game-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .riddle-container {
+        background-color: var(--primary);
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100px;
+        margin: 30px auto 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .riddle-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .riddle-box {
+        background: var(--secondary-bg);
+        padding: 15px;
+        border-radius: 10px;
+        min-width: 100px;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        color: white;
+      }
+
+      .drop-zone:hover {
+        transform: scale(1.05);
+      }
+
+      .dropzone-image {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        margin: 5px auto;
+        display: block;
+        background-color: var(--primary);
+        border-radius: 8px;
+        padding: 5px;
+      }
+
+      .word-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 10px;
+      }
+
+      .option-image {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        margin: 5px auto;
+        display: block;
+
+        border-radius: 8px;
+        padding: 5px;
+      }
+
+      .word {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 140px;
+        box-sizing: border-box;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .word:active {
+        transform: scale(0.95);
+        cursor: grabbing;
+      }
+
+      .word:hover {
+        transform: scale(1.08);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .word .roman-text {
+        text-transform: uppercase;
+      }
+
+      .correct {
+        color: white;
+        border: 3px solid var(--background);
+        box-shadow: 0 0 15px var(--primary);
+        transition: all 0.5s ease;
+      }
+
+      .incorrect {
+        animation: shake 0.3s ease-in-out;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+      }
+
+      .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .confetti {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        animation: fall 3s linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10px) rotate(0deg);
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .word {
+          width: 45%;
+          font-size: 14px;
+        }
+
+        .option-image {
+          width: 80px;
+          height: 80px;
+        }
+
+        /* .drop-zone {
+                width: 90%;
+                max-width: 300px;
+              } */
+      }
+
+      @media (min-width: 1024px) {
+        .word-options {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 20px;
+          justify-items: center;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .word {
+          width: 100%;
+          max-width: 140px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+      <header>
+      <a href="https://kahanikorner.com/">
+        <img src="/quicklinks/images/logo.png" alt="Kahani Korner Logo" class="logo" />
+      </a>
+    </header>
+
+      
+
+    <div class="container">
+      <div class="title-container">
+        <h1 class="roman">Main Kaun Hoon?</h1>
+        <h1 class="urdu">میں کون ہوں؟</h1>
+        <h1 class="english">Who Am I?</h1>
+      </div>
+
+      <!-- settings container -->
+
+      <div class="settings-container">
+        <div class="settings-header" id="settings-toggle">
+          <span>Settings: <span id="selected-difficulty">Easy</span></span>
+          <span class="arrow">▼</span>
+        </div>
+
+        <div class="settings-dropdown hidden" id="settings-dropdown">
+          <div class="difficulty-section">
+            <label class="difficulty-option">
+              <input
+                type="radio"
+                name="difficulty"
+                id="easy"
+                value="Easy"
+                checked />
+              Easy
+            </label>
+            <label class="difficulty-option">
+              <input
+                type="radio"
+                name="difficulty"
+                id="medium"
+                value="Medium" />
+              Medium
+            </label>
+            <label class="difficulty-option">
+              <input type="radio" name="difficulty" id="hard" value="Hard" />
+              Hard
+            </label>
+          </div>
+
+          <div class="language-section">
+            <label class="language-option">
+              <input type="checkbox" id="romanUrdu" checked /> Roman Urdu
+            </label>
+            <label class="language-option">
+              <input type="checkbox" id="urdu" checked /> اردو
+            </label>
+            <label class="language-option">
+              <input type="checkbox" id="english" checked /> English
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-area">
+        <div class="riddle-container" id="riddle-container">
+          <!-- Riddle will be displayed here dynamically -->
+        </div>
+
+        <div class="drop-zone settings-header" id="drop-zone">
+          Select An Answer
+        </div>
+
+        <div class="word-options" id="word-options">
+          <!-- Words will be inserted dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { riddles } from "../vocab.js";
+
+      // Now you can use the riddles array as before
+      console.log(riddles);
+
+      // confetti function/code
+      function launchConfetti() {
+        const confettiContainer = document.createElement("div");
+        confettiContainer.classList.add("confetti-container");
+
+        for (let i = 0; i < 30; i++) {
+          const confettiPiece = document.createElement("div");
+          confettiPiece.classList.add("confetti");
+          confettiPiece.style.left = `${Math.random() * 100}%`;
+          confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+          confettiPiece.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }, 100%, 70%)`;
+          confettiContainer.appendChild(confettiPiece);
+        }
+
+        document.body.appendChild(confettiContainer);
+
+        setTimeout(() => {
+          confettiContainer.remove();
+        }, 3000);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const settingsContainer = document.querySelector(".settings-container");
+        const settingsDropdown = document.getElementById("settings-dropdown");
+        const difficultyOptions = document.querySelectorAll(
+          "input[name='difficulty']"
+        );
+        const selectedDifficulty = document.getElementById(
+          "selected-difficulty"
+        );
+        const correctSound = new Audio("../sounds/success.wav");
+        const incorrectSound = new Audio("../sounds/incorrect.wav");
+
+        const isTouchDevice =
+          "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+        const arrow = document.querySelector(".settings-header .arrow");
+
+        if (isTouchDevice) {
+          settingsContainer.addEventListener("click", (e) => {
+            e.stopPropagation();
+            settingsDropdown.classList.toggle("visible");
+            arrow.classList.toggle("rotated");
+          });
+
+          document.addEventListener("click", () => {
+            settingsDropdown.classList.remove("visible");
+            arrow.classList.remove("rotated");
+          });
+        } else {
+          // 💻 Desktop behavior: hover
+          settingsContainer.addEventListener("mouseenter", () => {
+            settingsDropdown.classList.add("visible");
+          });
+
+          settingsContainer.addEventListener("mouseleave", () => {
+            settingsDropdown.classList.remove("visible");
+          });
+        }
+
+        difficultyOptions.forEach((option) => {
+          option.addEventListener("change", () => {
+            selectedDifficulty.textContent = option.value;
+          });
+        });
+
+        const dropdownInputs = settingsDropdown.querySelectorAll("input");
+
+        dropdownInputs.forEach((input) => {
+          input.addEventListener("change", () => {
+            if (isTouchDevice) {
+              settingsDropdown.classList.remove("visible");
+              arrow.classList.remove("rotated");
+            }
+          });
+        });
+
+        const riddlesContainer = document.getElementById("riddle-container");
+        const dropZone = document.getElementById("drop-zone");
+        const wordOptions = document.getElementById("word-options");
+        const languageCheckboxes = {
+          romanUrdu: document.getElementById("romanUrdu"),
+          urdu: document.getElementById("urdu"),
+          english: document.getElementById("english"),
+        };
+
+        let currentDifficulty = "Easy";
+        let currentRiddle = null;
+
+        function getRandomRiddle() {
+          const filteredRiddles = riddles.filter(
+            (r) => r.riddles[currentDifficulty.toLowerCase()]
+          );
+          return filteredRiddles[
+            Math.floor(Math.random() * filteredRiddles.length)
+          ];
+        }
+
+        function updateRiddle() {
+          currentRiddle = getRandomRiddle();
+          if (!currentRiddle) return;
+          const riddleTexts =
+            currentRiddle.riddles[currentDifficulty.toLowerCase()];
+
+          riddlesContainer.innerHTML = "";
+          wordOptions.innerHTML = "";
+
+          const selectedLanguages = Object.keys(languageCheckboxes).filter(
+            (lang) => languageCheckboxes[lang].checked
+          );
+
+          if (selectedLanguages.length === 0) {
+            riddlesContainer.innerHTML =
+              "<p>Please select at least one language.</p>";
+            return;
+          }
+
+          const riddleRow = document.createElement("div");
+          riddleRow.classList.add("riddle-row");
+          const riddleBox = document.createElement("div");
+          riddleBox.classList.add("riddle-box");
+
+          if (languageCheckboxes.romanUrdu.checked) {
+            const romanText = document.createElement("p");
+            romanText.textContent = riddleTexts.romanUrdu;
+            romanText.classList.add("roman-text");
+            riddleBox.appendChild(romanText);
+          }
+
+          if (languageCheckboxes.urdu.checked) {
+            const urduText = document.createElement("p");
+            urduText.textContent = riddleTexts.urdu;
+            urduText.classList.add("urdu-text");
+            riddleBox.appendChild(urduText);
+          }
+
+          if (languageCheckboxes.english.checked) {
+            const englishText = document.createElement("p");
+            englishText.textContent = riddleTexts.english;
+            englishText.classList.add("english-text");
+            riddleBox.appendChild(englishText);
+          }
+
+          riddleRow.appendChild(riddleBox);
+          riddlesContainer.appendChild(riddleRow);
+          generateWordOptions(currentRiddle.word);
+        }
+
+        function generateWordOptions(correctAnswer) {
+          if (!correctAnswer) return;
+          wordOptions.innerHTML = "";
+
+          const wordCount =
+            currentDifficulty === "Easy"
+              ? 3
+              : currentDifficulty === "Medium"
+              ? 5
+              : 10;
+
+          const words = [
+            {
+              romanUrdu: correctAnswer.romanUrdu,
+              urdu: correctAnswer.urdu,
+              image: currentRiddle.image, // ✅ get correct image from riddle object
+            },
+            ...getRandomIncorrectWords(wordCount - 1, correctAnswer),
+          ];
+
+          shuffleArray(words);
+
+          words.forEach((word) => {
+            const wordBox = document.createElement("div");
+            wordBox.classList.add("word");
+
+            wordBox.innerHTML = `
+        <p class='roman-text'>${word.romanUrdu}</p>
+        <img src="${word.image}" alt="${word.romanUrdu}" class="option-image" />
+        <p class='urdu-text'>${word.urdu}</p>
+      `;
+
+            wordBox.addEventListener("click", () => {
+              const selectedWord = word;
+              const correctWord = currentRiddle.word;
+
+              if (
+                selectedWord.romanUrdu === correctWord.romanUrdu &&
+                selectedWord.urdu === correctWord.urdu
+              ) {
+                dropZone.innerHTML = `
+            <div class="roman">${selectedWord.romanUrdu}</div>
+            <img src="${selectedWord.image}" alt="${selectedWord.romanUrdu}" class="dropzone-image" />
+            <div class="urdu">${selectedWord.urdu}</div>
+          `;
+                dropZone.classList.add("correct");
+                correctSound.play();
+                launchConfetti();
+
+                setTimeout(() => {
+                  updateRiddle();
+                  dropZone.textContent = "Select An Answer";
+                  dropZone.classList.remove("correct");
+                }, 2000);
+              } else {
+                dropZone.textContent = "Try Again!";
+                dropZone.classList.add("incorrect");
+                wordBox.classList.add("incorrect"); // ✅ Highlight the incorrect word
+                incorrectSound.play();
+
+                setTimeout(() => {
+                  dropZone.classList.remove("incorrect");
+                  wordBox.classList.remove("incorrect"); // ✅ Remove the visual indicator
+                }, 500);
+              }
+            });
+
+            wordOptions.appendChild(wordBox);
+          });
+        }
+
+        function getRandomIncorrectWords(count, correctAnswer) {
+          const allWords = riddles
+            .filter((r) => r.word.romanUrdu !== correctAnswer.romanUrdu)
+            .map((r) => ({
+              romanUrdu: r.word.romanUrdu,
+              urdu: r.word.urdu,
+              image: r.image, // ✅ pull image from main riddle object
+            }));
+          shuffleArray(allWords);
+          return allWords.slice(0, count);
+        }
+
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        }
+
+        difficultyOptions.forEach((option) => {
+          option.addEventListener("change", (event) => {
+            currentDifficulty = event.target.value;
+            updateRiddle();
+          });
+        });
+
+        Object.values(languageCheckboxes).forEach((checkbox) => {
+          checkbox.addEventListener("change", updateRiddle);
+        });
+
+        updateRiddle();
+      });
+    </script>
+  </body>
+</html>
