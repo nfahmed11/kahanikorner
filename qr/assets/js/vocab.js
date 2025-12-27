@@ -5,7 +5,7 @@ export const vocab = [
       urdu: "گھر",
       english: "home",
     },
-    image: "/assets/images/ghar.png",
+    image: "/qr/assets/images/ghar.png",
     riddles: {
       easy: {
         english:
@@ -37,7 +37,7 @@ export const vocab = [
       urdu: "پیلا",
       english: "yellow",
     },
-    image: "/assets/images/peela.png",
+    image: "/qr/assets/images/peela.png",
     riddles: {
       easy: {
         english:
@@ -68,7 +68,7 @@ export const vocab = [
       urdu: "لال",
       english: "red",
     },
-    image: "/assets/images/laal.png",
+    image: "/qr/assets/images/laal.png",
     riddles: {
       easy: {
         english:
@@ -99,7 +99,7 @@ export const vocab = [
       urdu: "نارنگی",
       english: "orange",
     },
-    image: "/assets/images/narangi.png",
+    image: "/qr/assets/images/narangi.png",
     riddles: {
       easy: {
         english:
@@ -129,7 +129,7 @@ export const vocab = [
       urdu: "نیلا",
       english: "blue",
     },
-    image: "/assets/images/neela.png",
+    image: "/qr/assets/images/neela.png",
     riddles: {
       easy: {
         english:
@@ -160,7 +160,7 @@ export const vocab = [
       urdu: "شیشہ",
       english: "glass",
     },
-    image: "/assets/images/sheesha.png",
+    image: "/qr/assets/images/sheesha.png",
     riddles: {
       easy: {
         english:
@@ -191,7 +191,7 @@ export const vocab = [
       urdu: "سڑک",
       english: "road",
     },
-    image: "/assets/images/sarak.png",
+    image: "/qr/assets/images/sarak.png",
     riddles: {
       easy: {
         english: "Cars and buses move on me,\nI take you places — can you see?",
@@ -221,7 +221,7 @@ export const vocab = [
       urdu: "آواز",
       english: "sound",
     },
-    image: "/assets/images/awaaz.png",
+    image: "/qr/assets/images/awaaz.png",
     riddles: {
       easy: {
         english:
@@ -252,7 +252,7 @@ export const vocab = [
       urdu: "دھوپ",
       english: "sunlight",
     },
-    image: "/assets/images/dhoop.png",
+    image: "/qr/assets/images/dhoop.png",
     riddles: {
       easy: {
         english: "I come from the sun up high,\nWarm and bright in the sky.",
@@ -281,7 +281,7 @@ export const vocab = [
       urdu: "بارش",
       english: "rain",
     },
-    image: "/assets/images/barish.png",
+    image: "/qr/assets/images/barish.png",
     riddles: {
       easy: {
         english:
@@ -312,7 +312,7 @@ export const vocab = [
       urdu: "دل",
       english: "heart",
     },
-    image: "/assets/images/dil.png",
+    image: "/qr/assets/images/dil.png",
     riddles: {
       easy: {
         english:
@@ -342,7 +342,7 @@ export const vocab = [
       urdu: "یاد",
       english: "memory",
     },
-    image: "/assets/images/yaad.png",
+    image: "/qr/assets/images/yaad.png",
     riddles: {
       easy: {
         english: "I help you remember fun and play,\nThings from yesterday.",
@@ -372,7 +372,7 @@ export const vocab = [
       urdu: "جاندار",
       english: "lively",
     },
-    image: "/assets/images/jandaar.png",
+    image: "/qr/assets/images/jandaar.png",
     riddles: {
       easy: {
         english:
@@ -404,7 +404,7 @@ export const vocab = [
       urdu: "خوشبو",
       english: "scent",
     },
-    image: "/assets/images/khushboo.png",
+    image: "/qr/assets/images/khushboo.png",
     riddles: {
       easy: {
         english:
@@ -436,7 +436,7 @@ export const vocab = [
       urdu: "سمندر",
       english: "ocean",
     },
-    image: "/assets/images/samandar.png",
+    image: "/qr/assets/images/samandar.png",
     riddles: {
       easy: {
         english:
@@ -468,7 +468,7 @@ export const vocab = [
       urdu: "سکون",
       english: "peace",
     },
-    image: "/assets/images/sukoon.png",
+    image: "/qr/assets/images/sukoon.png",
     riddles: {
       easy: {
         english:
@@ -500,7 +500,7 @@ export const vocab = [
       urdu: "چلتی",
       english: "moving",
     },
-    image: "/assets/images/chalti.png",
+    image: "/qr/assets/images/chalti.png",
     riddles: {
       easy: {
         english:
@@ -532,7 +532,7 @@ export const vocab = [
       urdu: "کھیتوں",
       english: "fields",
     },
-    image: "/assets/images/kheton.png",
+    image: "/qr/assets/images/kheton.png",
     riddles: {
       easy: {
         english: "Plants and crops grow in me,\nWide open land — can you see?",
@@ -561,7 +561,7 @@ export const vocab = [
       urdu: "خوشی",
       english: "happiness",
     },
-    image: "/assets/images/khushi.png",
+    image: "/qr/assets/images/khushi.png",
     riddles: {
       easy: {
         english:
@@ -592,7 +592,7 @@ export const vocab = [
       urdu: "ذائقہ",
       english: "flavor",
     },
-    image: "/assets/images/zaika.png",
+    image: "/qr/assets/images/zaika.png",
     riddles: {
       easy: {
         english:
@@ -624,7 +624,7 @@ export const vocab = [
       urdu: "ٹھنڈا",
       english: "cool",
     },
-    image: "/assets/images/thanda.png",
+    image: "/qr/assets/images/thanda.png",
     riddles: {
       easy: {
         english: "I feel nice on a hot day,\nIce and breeze come out to play.",
@@ -655,7 +655,7 @@ export const vocab = [
       urdu: "گلابی",
       english: "pink",
     },
-    image: "/assets/images/gulabi.png",
+    image: "/qr/assets/images/gulabi.png",
     riddles: {
       easy: {
         english:
@@ -686,7 +686,7 @@ export const vocab = [
       urdu: "سنہری",
       english: "golden",
     },
-    image: "/assets/images/sunheri.png",
+    image: "/qr/assets/images/sunheri.png",
     riddles: {
       easy: {
         english:
@@ -718,7 +718,7 @@ export const vocab = [
       urdu: "سرمئی",
       english: "gray",
     },
-    image: "/assets/images/surmai.png",
+    image: "/qr/assets/images/surmai.png",
     riddles: {
       easy: {
         english:
@@ -749,7 +749,7 @@ export const vocab = [
       urdu: "روشن",
       english: "bright",
     },
-    image: "/assets/images/roshan.png",
+    image: "/qr/assets/images/roshan.png",
     riddles: {
       easy: {
         english:
@@ -780,7 +780,7 @@ export const vocab = [
       urdu: "جگہ",
       english: "place",
     },
-    image: "/assets/images/jagah.png",
+    image: "/qr/assets/images/jagah.png",
     riddles: {
       easy: {
         english:
@@ -811,7 +811,7 @@ export const vocab = [
       urdu: "اکیلا",
       english: "alone",
     },
-    image: "/assets/images/akela.png",
+    image: "/qr/assets/images/akela.png",
     riddles: {
       easy: {
         english: "When no one else is near,\nBeing by yourself feels clear.",
@@ -840,7 +840,7 @@ export const vocab = [
       urdu: "بدلنا",
       english: "to change",
     },
-    image: "/assets/images/badalna.png",
+    image: "/qr/assets/images/badalna.png",
     riddles: {
       easy: {
         english:
@@ -871,7 +871,7 @@ export const vocab = [
       urdu: "بتانا",
       english: "to tell",
     },
-    image: "/assets/images/batana.png",
+    image: "/qr/assets/images/batana.png",
     riddles: {
       easy: {
         english:
@@ -902,7 +902,7 @@ export const vocab = [
       urdu: "پوچھا",
       english: "asked",
     },
-    image: "/assets/images/poocha.png",
+    image: "/qr/assets/images/poocha.png",
     riddles: {
       easy: {
         english: "I wanted to know, so I spoke,\nWaiting to hear — no joke.",
@@ -930,7 +930,7 @@ export const vocab = [
       urdu: "احساس",
       english: "realize",
     },
-    image: "/assets/images/ehsas.png",
+    image: "/qr/assets/images/ehsas.png",
     riddles: {
       easy: {
         english:
@@ -959,7 +959,7 @@ export const vocab = [
       urdu: "اجنبی",
       english: "stranger",
     },
-    image: "/assets/images/ajnabi.png",
+    image: "/qr/assets/images/ajnabi.png",
     riddles: {
       easy: {
         english: "Someone new you’ve never met,\nA face you don’t know yet.",
@@ -988,7 +988,7 @@ export const vocab = [
       urdu: "سمجھ",
       english: "understand",
     },
-    image: "/assets/images/samajh.png",
+    image: "/qr/assets/images/samajh.png",
     riddles: {
       easy: {
         english:
@@ -1015,7 +1015,7 @@ export const vocab = [
       urdu: "شاید",
       english: "maybe",
     },
-    image: "/assets/images/shayad.png",
+    image: "/qr/assets/images/shayad.png",
     riddles: {
       easy: {
         english:
@@ -1047,7 +1047,7 @@ export const vocab = [
       urdu: "خاموش",
       english: "quiet",
     },
-    image: "/assets/images/khamosh.png",
+    image: "/qr/assets/images/khamosh.png",
     riddles: {
       easy: {
         english: "No sound around, no one speaks,\nStillness is what you seek.",
@@ -1077,7 +1077,7 @@ export const vocab = [
       urdu: "اونچے",
       english: "high",
     },
-    image: "/assets/images/oonchay.png",
+    image: "/qr/assets/images/oonchay.png",
     riddles: {
       easy: {
         english: "Far above the ground you see,\nUp in the air — tall it be.",
@@ -1106,7 +1106,7 @@ export const vocab = [
       urdu: "چیخ",
       english: "scream",
     },
-    image: "/assets/images/cheekh.png",
+    image: "/qr/assets/images/cheekh.png",
     riddles: {
       easy: {
         english:
@@ -1137,7 +1137,7 @@ export const vocab = [
       urdu: "رنگ",
       english: "color",
     },
-    image: "/assets/images/rang.png",
+    image: "/qr/assets/images/rang.png",
     riddles: {
       easy: {
         english:
