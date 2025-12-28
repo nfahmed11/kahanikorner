@@ -1,51 +1,20 @@
 console.log("[tasveer] script loaded");
 
-// ✅ Put allowed words INSIDE the module
-const ALLOWED_WORDS = new Set([
-  "peela",
-  "laal",
-  "narangi",
-  "hara",
-  "neela",
-  "sheesha",
-  "gulabi",
-  "sunheri",
-  "surmai",
-  "sarak",
-  "awaaz",
-  "dhoop",
-  "barish",
-  "dil",
-  "yaad",
-  "rang",
-  "ghar",
-  "jandaar",
-  "khushboo",
-  "samandar",
-  "sukoon",
-  "chalti",
-  "kheton",
-  "khushi",
-  "zaika",
-  "thanda",
-  "roshan",
-  "jagah",
-  "akela",
-  "badalna",
-  "batana",
-  "poocha",
-  "ehsas",
-  "ajnabi",
-  "samajh",
-  "shayad",
-  "khamosh",
-  "oonchay",
-  "cheekh",
-]);
+// ✅ grab allowed words from HTML
+const ALLOWED_WORDS = window.ALLOWED_WORDS;
 
-// ✅ FIX THIS PATH based on where vocab.js actually is:
+if (!(ALLOWED_WORDS instanceof Set)) {
+  console.error(
+    "[tasveer] window.ALLOWED_WORDS is missing or not a Set. " +
+      "Make sure you set window.ALLOWED_WORDS in HTML BEFORE loading matching.js"
+  );
+}
+
+// ✅ import your BIG vocab file (tons of words)
+// IMPORTANT: path must be correct relative to /assets/js/matching.js
+// If vocab.js is at /assets/vocab.js => use "../vocab.js"
+// If vocab.js is at root /vocab.js => use "/vocab.js"
 import { vocab as originalVocab } from "./vocab.js";
-// If your vocab.js is at root, use: import { vocab as originalVocab } from "/vocab.js";
 
 console.log(
   "[tasveer] vocab loaded?",
@@ -65,6 +34,12 @@ function resetDeck() {
     return;
   }
 
+  if (!(ALLOWED_WORDS instanceof Set)) {
+    deck = [];
+    return;
+  }
+
+  // ✅ Filter big vocab down to allowed subset
   deck = originalVocab.filter((card) =>
     ALLOWED_WORDS.has(card.word?.romanUrdu)
   );
@@ -75,28 +50,34 @@ function resetDeck() {
   });
 
   if (deck.length === 0) {
-    console.warn("[tasveer] deck empty after filtering. romanUrdu mismatch?");
+    console.warn("[tasveer] deck empty after filtering.");
+    console.warn(
+      "[tasveer] sample romanUrdu in vocab:",
+      originalVocab.slice(0, 20).map((v) => v.word?.romanUrdu)
+    );
   }
 }
 
 function launchConfetti() {
-  const confettiContainer = document.createElement("div");
-  confettiContainer.classList.add("confetti-container");
-
-  for (let i = 0; i < 30; i++) {
-    const confettiPiece = document.createElement("div");
-    confettiPiece.classList.add("confetti");
-    confettiPiece.style.left = `${Math.random() * 100}%`;
-    confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
-    confettiPiece.style.backgroundColor = `hsl(${
-      Math.random() * 360
-    }, 100%, 70%)`;
-    confettiContainer.appendChild(confettiPiece);
+    const confettiContainer = document.createElement("div");
+    confettiContainer.className = "confetti-container";
+  
+    for (let i = 0; i < 40; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = `${Math.random() * 100}%`;
+      c.style.width = `${6 + Math.random() * 8}px`;
+      c.style.height = `${6 + Math.random() * 8}px`;
+      c.style.animationDuration = `${1.4 + Math.random() * 1.2}s`;
+      c.style.animationDelay = `${Math.random() * 0.2}s`;
+      c.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      confettiContainer.appendChild(c);
+    }
+  
+    document.body.appendChild(confettiContainer);
+    setTimeout(() => confettiContainer.remove(), 2500);
   }
-
-  document.body.appendChild(confettiContainer);
-  setTimeout(() => confettiContainer.remove(), 3000);
-}
+  
 
 document.addEventListener("DOMContentLoaded", () => {
   const correctSound = new Audio("../sounds/success.wav");
