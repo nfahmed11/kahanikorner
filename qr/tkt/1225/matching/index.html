@@ -40,12 +40,7 @@
 
   <body>
     <div class="top-bar">
-      <div class="logo-back">
-        <a href="https://kahanikorner.company.site/">
-          <img src="/quicklinks/images/logo.png" alt="Logo" class="logo" />
-        </a>
-        <a href="../index.html" class="back-button">⬅ Back</a>
-      </div>
+      <a href="../index.html" class="back-button">⬅ Back</a>
 
       <div class="title">
         <div class="roman">TASVEER SE PEHCHAAN</div>
@@ -97,10 +92,8 @@
     </div>
 
     <script>
-      // --------------------
-      // Allowed vocab filter
-      // --------------------
-      const ALLOWED_WORDS = new Set([
+      // ✅ MUST be on window so matching.js (module) can read it
+      window.ALLOWED_WORDS = new Set([
         "peela",
         "laal",
         "narangi",
@@ -110,7 +103,6 @@
         "gulabi",
         "sunheri",
         "surmai",
-
         "sarak",
         "awaaz",
         "dhoop",
@@ -119,7 +111,6 @@
         "yaad",
         "rang",
         "ghar",
-
         "jandaar",
         "khushboo",
         "samandar",
@@ -129,14 +120,12 @@
         "khushi",
         "zaika",
         "thanda",
-
         "roshan",
         "jagah",
         "akela",
         "badalna",
         "batana",
         "poocha",
-
         "ehsas",
         "ajnabi",
         "samajh",
@@ -146,7 +135,7 @@
         "cheekh",
       ]);
     </script>
-    <!-- ✅ JS moved out -->
+
     <script type="module" src="/assets/js/matching.js"></script>
   </body>
 </html>
