@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Microsoft Analytics tag to track analytics  -->
+    <!-- Microsoft Clarity -->
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -17,168 +17,104 @@
       })(window, document, "clarity", "script", "tp6dow982y");
     </script>
 
-    <!-- Google tag to track analytics (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-N97Z02BGG4");
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Urdu-English Flashcards</title>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>EN↔RU Word Search — v4 (No Theme)</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="./styles.css" />
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/qr/assets/css/flashcards.css" />
   </head>
 
-  <body>
-    <header>
-      <div class="wrap toolbar-header">
-        <button
-          id="menuToggle"
-          class="menu-btn"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          aria-controls="toolbar"
-        >
-          ☰
-        </button>
-
-        <!-- always-visible status strip on mobile -->
-        <div id="statusBar" class="status-bar" aria-live="polite"></div>
-
-        <div id="toolbar" class="toolbar" aria-label="Toolbar">
-          <button id="newGame" class="primary">New Game</button>
-
-          <span class="divider" aria-hidden="true"></span>
-
-          <div class="slider-group">
-            <label for="levelRange" class="slider-label">
-              <strong id="levelLabel">Level 1</strong>
-            </label>
-            <div class="slider-wrap">
-              <input
-                id="levelRange"
-                type="range"
-                min="0"
-                max="5"
-                step="1"
-                value="0"
-                aria-label="Level (1 → 6)"
-              />
-            </div>
-          </div>
-
-          <div class="slider-group">
-            <label for="densityRange" class="slider-label">
-              Words: <strong id="densityLabel">20%</strong>
-            </label>
-            <div class="slider-wrap">
-              <input
-                id="densityRange"
-                type="range"
-                min="0"
-                max="4"
-                step="1"
-                value="0"
-                aria-label="Word density (20% → 100%)"
-              />
-            </div>
-          </div>
-
-          <span class="divider" aria-hidden="true"></span>
-
-          <button id="toggleTimer" class="primary">Timer: On</button>
-
-          <div class="stats" role="status" aria-live="polite">
-            <span>⏱️ <b id="time">0:00</b></span>
-            <span>✅ <b id="foundCount">0</b>/<b id="goalCount">0</b></span>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <section class="panel" aria-labelledby="clueHeader">
-        <h2 id="clueHeader">
-          <div class="clue-chooser">
-            <button
-              id="clueBtn"
-              class="primary clue-btn"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="clueMenu"
+  <body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+      <div
+        class="bg-white bg-opacity-90 rounded-3xl p-6 md:p-8 shadow-xl border-8 border-white">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8 text-center md:text-left">
+          <div
+            class="mt-4 md:mt-0 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+            <span class="text-fuchsia-600 font-medium kid-title"
+              >Progress:</span
             >
-              Clues
-            </button>
+            <div class="w-48 progress-bar">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span
+              class="text-fuchsia-600 font-medium kid-title"
+              id="progress-text"
+              >0/0</span
+            >
+          </div>
+        </div>
 
-            <div id="clueMenu" class="clue-menu" role="menu" hidden>
-              <button role="menuitemradio" aria-checked="true" data-side="en">
-                English → Find Roman Urdu
-              </button>
-              <button role="menuitemradio" aria-checked="false" data-side="ru">
-                Roman Urdu → Find English
-              </button>
+        <div class="flex justify-center mb-8">
+          <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+              <div class="flashcard-front" id="flashcard-front"></div>
+              <div class="flashcard-back" id="flashcard-back"></div>
             </div>
           </div>
-        </h2>
-
-        <div class="clue-head">
-          <div class="legend" id="legendClues"></div>
         </div>
 
-        <ul id="clues" class="clue-list"></ul>
-      </section>
-
-      <section class="panel" aria-labelledby="gridHeader">
-        <button id="hintBtn" class="hint-btn primary">Hint</button>
-        <h2 id="gridHeader">Word Grid</h2>
-        <div class="legend" id="legendGrid"></div>
-
-        <div class="grid-scroll-wrapper">
-          <div id="grid" class="grid" aria-label="Word search grid"></div>
-        </div>
-      </section>
-    </main>
-
-    <div
-      id="winModal"
-      class="modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="winTitle"
-    >
-      <div class="box">
-        <h3 id="winTitle">Great job! 🎉</h3>
-        <p>You found all the words.</p>
-        <p>
-          <span class="pill">Time: <span id="finalTime">0:00</span></span>
-          <span class="pill">Words: <span id="finalWords">0</span></span>
-        </p>
-        <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap">
-          <button id="playAgain" class="primary">Play again</button>
-          <button id="closeModal" class="ghost">Close</button>
+        <div
+          class="flex flex-row flex-nowrap justify-center items-center gap-3 mb-6"
+          id="nav-buttons">
+          <button
+            id="prev-btn"
+            class="nav-btn w-40 md:w-48 text-white py-2 rounded-full text-base md:text-lg shadow-md font-semibold"
+            type="button">
+            Previous
+          </button>
+          <button
+            id="next-btn"
+            class="nav-btn w-40 md:w-48 text-white py-2 rounded-full text-base md:text-lg shadow-md font-semibold"
+            type="button">
+            Next
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- --------------------
-         Allowed vocab filter
-         -------------------- -->
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-90 backdrop-blur-lg border-t border-gray-200 flex justify-around items-center py-2 shadow-lg z-50">
+      <button
+        id="toggle-lang"
+        class="btn border-4 border-green-400 text-green-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        English → Urdu
+      </button>
+
+      <button
+        id="toggle-image"
+        class="btn border-4 border-pink-400 text-pink-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        Hide Image
+      </button>
+
+      <button
+        id="quiz-btn"
+        class="btn border-4 border-blue-400 text-blue-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        Quiz Mode
+      </button>
+
+      <button
+        id="shuffle-btn"
+        class="btn border-4 border-yellow-400 text-yellow-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        Shuffle Cards
+      </button>
+    </div>
+
+    <!-- App JS (module) -->
     <script>
-      // IMPORTANT: This must run BEFORE the module script loads.
-      window.ALLOWED_WORDS = new Set([
+      // --------------------
+      // Allowed vocab filter
+      // --------------------
+      const ALLOWED_WORDS = new Set([
         "peela",
         "laal",
         "narangi",
@@ -224,8 +160,6 @@
         "cheekh",
       ]);
     </script>
-
-    <!-- App JS (module) -->
-    <script type="module" src="./wordsearch.js"></script>
+    <script type="module" src="/qr/assets/js/flashcards.js"></script>
   </body>
 </html>
