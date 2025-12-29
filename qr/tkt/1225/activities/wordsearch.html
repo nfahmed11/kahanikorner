@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics  -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag to track analytics (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>EN↔RU Word Search — v4 (No Theme)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="/qr/assets/css/wordsearch.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="wrap toolbar-header">
+        <button
+          id="menuToggle"
+          class="menu-btn"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="toolbar">
+          ☰
+        </button>
+
+        <!-- always-visible status strip on mobile -->
+        <div id="statusBar" class="status-bar" aria-live="polite"></div>
+
+        <div id="toolbar" class="toolbar" aria-label="Toolbar">
+          <button id="newGame" class="primary">New Game</button>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <div class="slider-group">
+            <label for="levelRange" class="slider-label">
+              <strong id="levelLabel">Difficulty 1</strong>
+            </label>
+            <div class="slider-wrap">
+              <input
+                id="levelRange"
+                type="range"
+                min="0"
+                max="5"
+                step="1"
+                value="0"
+                aria-label="Level (1 → 6)" />
+            </div>
+          </div>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <button id="toggleTimer" class="primary">Timer: On</button>
+
+          <div class="stats" role="status" aria-live="polite">
+            <span>⏱️ <b id="time">0:00</b></span>
+            <span>✅ <b id="foundCount">0</b>/<b id="goalCount">0</b></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" aria-labelledby="clueHeader">
+        <h2 id="clueHeader">
+          <div class="clue-chooser">
+            <button
+              id="clueBtn"
+              class="primary clue-btn"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="clueMenu">
+              Clues
+            </button>
+
+            <div id="clueMenu" class="clue-menu" role="menu" hidden>
+              <button role="menuitemradio" aria-checked="true" data-side="en">
+                English → Find Roman Urdu
+              </button>
+              <button role="menuitemradio" aria-checked="false" data-side="ru">
+                Roman Urdu → Find English
+              </button>
+            </div>
+          </div>
+        </h2>
+
+        <div class="clue-head">
+          <div class="legend" id="legendClues"></div>
+        </div>
+
+        <ul id="clues" class="clue-list"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="gridHeader">
+        <button id="hintBtn" class="hint-btn primary">Hint</button>
+        <h2 id="gridHeader">Word Grid</h2>
+        <div class="legend" id="legendGrid"></div>
+
+        <div class="grid-scroll-wrapper">
+          <div id="grid" class="grid" aria-label="Word search grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      id="winModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="winTitle">
+      <div class="box">
+        <h3 id="winTitle">Great job! 🎉</h3>
+        <p>You found all the words.</p>
+        <p>
+          <span class="pill">Time: <span id="finalTime">0:00</span></span>
+          <span class="pill">Words: <span id="finalWords">0</span></span>
+        </p>
+        <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap">
+          <button id="playAgain" class="primary">Play again</button>
+          <button id="closeModal" class="ghost">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------
+         Allowed vocab filter
+         -------------------- -->
+    <script>
+      // IMPORTANT: This must run BEFORE the module script loads.
+      window.ALLOWED_WORDS = new Set([
+        "peela",
+        "laal",
+        "narangi",
+        "hara",
+        "neela",
+        "sheesha",
+        "gulabi",
+        "sunheri",
+        "surmai",
+
+        "sarak",
+        "awaaz",
+        "dhoop",
+        "barish",
+        "dil",
+        "yaad",
+        "rang",
+        "ghar",
+
+        "jandaar",
+        "khushboo",
+        "samandar",
+        "sukoon",
+        "chalti",
+        "kheton",
+        "khushi",
+        "zaika",
+        "thanda",
+
+        "roshan",
+        "jagah",
+        "akela",
+        "badalna",
+        "batana",
+        "poocha",
+
+        "ehsas",
+        "ajnabi",
+        "samajh",
+        "shayad",
+        "khamosh",
+        "oonchay",
+        "cheekh",
+      ]);
+    </script>
+
+    <!-- App JS (module) -->
+    <script type="module" src="/qr/assets/js/wordsearch.js"></script>
+  </body>
+</html>

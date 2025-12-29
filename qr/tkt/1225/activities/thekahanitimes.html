@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+    <title>The Kahani Times Audio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="/qr/assets/css/thekahanitimes.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img
+          src="/quicklinks/images/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo" />
+      </a>
+    </header>
+
+    <main>
+      <h1>The Kahani Times — Audio Newsletter</h1>
+      <p class="subtitle">
+        Flip through the pages and tap any section to listen to the audio
+        version.
+      </p>
+
+      <div class="page-nav">
+        <button class="page-tab active" data-page="1" type="button">
+          Page 1
+        </button>
+        <button class="page-tab" data-page="2" type="button">Page 2</button>
+        <button class="page-tab" data-page="3" type="button">Page 3</button>
+        <button class="page-tab" data-page="4" type="button">Page 4</button>
+      </div>
+
+      <div class="page-meta">
+        Use the tabs above to “flip” through the newsletter pages.
+      </div>
+
+      <div class="page-wrapper">
+        <!-- PAGE 1 -->
+        <section class="newsletter-page active" data-page="1">
+          <div class="page-heading">
+            <h2>Page 1 — Front Page</h2>
+            <div class="page-tag">Intro & Headlines</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              type="button"
+              data-audio="/qr/tkt/1225/assets/audio/story.mp3"
+              data-title="Dono Mulkon ke Rang">
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Dono Mulkon ke Rang</span>
+                <span class="label-sub">This Month's Story</span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- PAGE 2 -->
+        <section class="newsletter-page" data-page="2">
+          <div class="page-heading">
+            <h2>Page 2 — Activities</h2>
+            <div class="page-tag">Articles & Reflections</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              type="button"
+              data-audio="/qr/tkt/1225/assets/audio/askdada.mp3"
+              data-title="Dada Se Poocho">
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Dada Se Poocho</span>
+                <span class="label-sub">Get some advice from Dada</span>
+              </span>
+            </button>
+
+            <button
+              class="section-button"
+              type="button"
+              data-audio="/qr/tkt/1225/assets/audio/naikikanaap.mp3"
+              data-title="Naiki Ka Naap">
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Naiki Ka Naap</span>
+                <span class="label-sub">Do some good deeds today!</span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- PAGE 3 -->
+        <section class="newsletter-page" data-page="3">
+          <div class="page-heading">
+            <h2>Page 3 — Continued</h2>
+            <div class="page-tag">--</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              type="button"
+              data-audio="/qr/tkt/1225/assets/audio/word.mp3"
+              data-title="Word of the day">
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Aaj Ka Lafz</span>
+                <span class="label-sub">Word of the day</span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- PAGE 4 -->
+        <section class="newsletter-page" data-page="4">
+          <div class="page-heading">
+            <h2>Page 4 — Closing & Extras</h2>
+            <div class="page-tag">Closing Notes</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              type="button"
+              data-audio="/qr/tkt/1225/assets/audio/khatt.mp3"
+              data-title="Closing Note">
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Closing Note</span>
+                <span class="label-sub">A Letter From Dada Jee</span>
+              </span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="audio-player-bar">
+      <div class="audio-inner">
+        <div class="now-playing" id="nowPlaying">
+          Now playing: <strong>Nothing yet — tap a section to start.</strong>
+        </div>
+        <audio id="audioPlayer" controls preload="none">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <script src="/qr/assets/js/thekahanitimes.js" defer></script>
+  </body>
+</html>

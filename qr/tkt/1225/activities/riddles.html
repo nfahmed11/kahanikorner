@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Riddle Game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- your shared site style if you still need it -->
+    <link rel="stylesheet" href="/qr/assets/css/riddles.css" />
+  </head>
+
+  <body>
+    <!-- ✅ HEADER: put this inside your <header class="header"> ... </header> -->
+    <header class="header">
+      <a class="home-link" href="https://kahanikorner.com/">Kahani Korner</a>
+
+      <!-- Settings trigger -->
+      <button
+        class="settings-btn"
+        id="settings-toggle"
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded="false">
+        ⚙️ Settings <span class="arrow" id="settings-arrow">▼</span>
+      </button>
+
+      <!-- ✅ Desktop dropdown (same content, reused) -->
+      <div class="settings-dropdown" id="settings-dropdown" aria-hidden="true">
+        <div class="difficulty-section">
+          <label class="difficulty-option">
+            <input type="radio" name="difficulty" value="Easy" checked />
+            Easy
+          </label>
+          <label class="difficulty-option">
+            <input type="radio" name="difficulty" value="Medium" />
+            Medium
+          </label>
+          <label class="difficulty-option">
+            <input type="radio" name="difficulty" value="Hard" />
+            Hard
+          </label>
+        </div>
+
+        <div class="language-section">
+          <label class="language-option">
+            <input type="checkbox" id="romanUrdu" checked /> Roman Urdu
+          </label>
+          <label class="language-option">
+            <input type="checkbox" id="urdu" checked /> اردو
+          </label>
+          <label class="language-option">
+            <input type="checkbox" id="english" checked /> English
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <!-- ✅ SETTINGS MODAL (mobile) — put right before </body> -->
+    <div
+      class="settings-modal hidden"
+      id="settings-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settings-modal-title">
+      <div class="settings-modal-backdrop" id="settings-modal-backdrop"></div>
+
+      <div class="settings-modal-card" role="document">
+        <div class="settings-modal-header">
+          <h2 id="settings-modal-title">Settings</h2>
+          <button
+            class="settings-close"
+            id="settings-modal-close"
+            type="button"
+            aria-label="Close settings">
+            ✕
+          </button>
+        </div>
+
+        <!-- ✅ IMPORTANT: we will MOVE the same dropdown content into here on mobile,
+         so we don't duplicate inputs -->
+        <div class="settings-modal-body" id="settings-modal-body"></div>
+
+        <div class="settings-modal-footer">
+          <button class="settings-done" id="settings-modal-done" type="button">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <section class="title-container">
+        <h1 class="roman">Main Kaun Hoon?</h1>
+        <h1 class="urdu">میں کون ہوں؟</h1>
+        <h1 class="english">Who Am I?</h1>
+      </section>
+
+      <section class="game-area">
+        <div class="riddle-container" id="riddle-container"></div>
+
+        <div class="drop-zone" id="drop-zone">Select An Answer</div>
+
+        <div class="word-options" id="word-options"></div>
+      </section>
+    </main>
+
+    <script>
+      // ✅ MUST be on window so matching.js (module) can read it
+      window.ALLOWED_WORDS = new Set([
+        "peela",
+        "laal",
+        "narangi",
+        "hara",
+        "neela",
+        "sheesha",
+        "gulabi",
+        "sunheri",
+        "surmai",
+        "sarak",
+        "awaaz",
+        "dhoop",
+        "barish",
+        "dil",
+        "yaad",
+        "rang",
+        "ghar",
+        "jandaar",
+        "khushboo",
+        "samandar",
+        "sukoon",
+        "chalti",
+        "kheton",
+        "khushi",
+        "zaika",
+        "thanda",
+        "roshan",
+        "jagah",
+        "akela",
+        "badalna",
+        "batana",
+        "poocha",
+        "ehsas",
+        "ajnabi",
+        "samajh",
+        "shayad",
+        "khamosh",
+        "oonchay",
+        "cheekh",
+      ]);
+    </script>
+    <script type="module" src="/qr/assets/js/riddles.js"></script>
+  </body>
+</html>
