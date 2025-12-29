@@ -56,8 +56,8 @@ function resetDeck() {
 }
 
 // ✅ ROOT audio paths (as requested)
-const correctSound = new Audio("/qr/assets/audio/cardflip.mp3");
-const incorrectSound = new Audio("/qr/assets/audio/cardflip.mp3");
+const correctSound = new Audio("/qr/assets/audio/success.wav");
+const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
 // swap incorrectSound to a different file if you have it
 
 function playSound(sound) {
