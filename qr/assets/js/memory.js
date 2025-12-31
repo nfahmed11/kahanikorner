@@ -134,9 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
           ${
             type === "english"
               ? `<img src="${secondaryText}" alt="${primaryText}" class="w-16 h-16 mb-2 object-contain" />
-                 <span class="font-bold text-gray-800">${primaryText}</span>`
-              : `<span class="font-bold text-xl mb-1">${primaryText}</span>
-                 <span class="text-2xl">${secondaryText}</span>`
+              <span class="font-bold text-gray-800 fit-text">${primaryText}</span>`
+              : `<span class="font-bold mb-1 fit-text">${primaryText}</span>
+              <span class="fit-text-urdu">${secondaryText}</span>
+              `
           }
         </div>
       </div>
