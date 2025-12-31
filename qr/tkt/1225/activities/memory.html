@@ -1,3 +1,4 @@
+<!-- memory.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,79 +35,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory Game</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
-      rel="stylesheet" />
-
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- ✅ your extracted CSS -->
     <link rel="stylesheet" href="/qr/assets/css/memory.css" />
   </head>
 
   <body>
-    <header>
-      <a href="https://kahanikorner.com/">
-        <img
-          src="/quicklinks/images/logo.png"
-          alt="Kahani Korner Logo"
-          class="logo" />
-      </a>
+    <!-- ✅ Slim HUD header -->
+    <header class="hud">
+      <div class="hud-inner">
+        <div class="hud-title">
+          <h1 class="hud-h1">Memory Game</h1>
+          <p class="hud-sub">Match Urdu words with their English translations</p>
+        </div>
+
+        <!-- ✅ compact top-right controls -->
+        <div class="hud-controls">
+          <!-- Progress (small, corner) -->
+          <div class="hud-progress-mini" aria-label="Progress">
+            <div class="hud-progress-top">
+              <span id="progress-text" class="hud-progress-text">0/6</span>
+            </div>
+            <div class="hud-progress-track-mini">
+              <div id="progress-bar" class="progress-bar-mini" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Settings button -->
+          <button id="settings-btn" class="hud-settings-btn" aria-haspopup="dialog" aria-expanded="false">
+            ⚙️
+          </button>
+
+          <!-- Settings popover -->
+          <div id="settings-popover" class="hud-popover hidden" role="dialog" aria-label="Settings">
+            <div class="hud-popover-header">
+              <div class="hud-popover-title">Settings</div>
+              <button id="settings-close" class="hud-popover-close" aria-label="Close settings">✕</button>
+            </div>
+
+            <div class="hud-popover-body">
+              <div class="hud-row">
+                <span class="hud-label">Difficulty</span>
+                <span id="difficulty-label" class="hud-value">Level 5</span>
+              </div>
+
+              <input
+                id="difficulty-slider"
+                type="range"
+                min="1"
+                max="10"
+                step="1"
+                value="5"
+                class="hud-slider" />
+
+              <div class="hud-scale">
+                <span>Less</span>
+                <span>More</span>
+              </div>
+
+              <button id="settings-done" class="hud-done-btn">Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <div class="p-4 md:p-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-8">
-          <h1 class="text-3xl md:text-4xl font-bold text-indigo-800 mb-2">
-            Memory Game
-          </h1>
-          <p class="text-gray-600">
-            Match Urdu words with their English translations
-          </p>
-        </div>
-
-        <div class="mb-6 bg-white p-4 rounded-lg shadow-md">
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-medium text-indigo-700">Progress:</span>
-            <span id="progress-text" class="text-indigo-700 font-medium"
-              >0/6 Pairs</span
-            >
-          </div>
-          <div class="w-full bg-gray-200 rounded-full h-2.5">
-            <div id="progress-bar" class="progress-bar w-0"></div>
-          </div>
-        </div>
-
-        <div class="mb-6 bg-white p-4 rounded-lg shadow-md">
-          <div class="flex justify-center gap-4">
-            <button
-              id="easy-mode"
-              class="mode-btn bg-gradient-to-r from-green-300 via-green-400 to-green-500 hover:from-green-400 hover:via-green-500 hover:to-green-600 text-white font-bold py-2 px-4 rounded">
-              Easy
-            </button>
-
-            <button
-              id="medium-mode"
-              class="mode-btn bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 hover:from-yellow-400 hover:via-yellow-500 hover:to-yellow-600 text-white font-bold py-2 px-4 rounded">
-              Medium
-            </button>
-
-            <button
-              id="hard-mode"
-              class="mode-btn bg-gradient-to-r from-red-300 via-red-400 to-red-500 hover:from-red-400 hover:via-red-500 hover:to-red-600 text-white font-bold py-2 px-4 rounded">
-              Hard
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="game-board"
-          class="grid grid-cols-4 md:grid-cols-6 gap-4"></div>
+    <main class="game-wrap">
+      <div class="game-inner">
+        <div id="game-board" class="grid grid-cols-4 md:grid-cols-6 gap-4"></div>
 
         <div
           id="win-message"
-          class="hidden mt-8 p-6 bg-white rounded-xl shadow-lg text-center">
+          class="hidden mt-6 p-6 bg-white rounded-xl shadow-lg text-center">
           <h2 class="text-2xl font-bold text-indigo-700 mb-3">
             Congratulations! 🎉
           </h2>
@@ -120,59 +120,19 @@
           </button>
         </div>
       </div>
-    </div>
+    </main>
 
-    <!-- ✅ your extracted JS (module) -->
     <script>
-      // --------------------
-      // Allowed vocab filter
-      // --------------------
       window.ALLOWED_WORDS = new Set([
-        "peela",
-        "laal",
-        "narangi",
-        "hara",
-        "neela",
-        "sheesha",
-        "gulabi",
-        "sunheri",
-        "surmai",
-
-        "sarak",
-        "awaaz",
-        "dhoop",
-        "barish",
-        "dil",
-        "yaad",
-        "rang",
-        "ghar",
-
-        "jandaar",
-        "khushboo",
-        "samandar",
-        "sukoon",
-        "chalti",
-        "kheton",
-        "khushi",
-        "zaika",
-        "thanda",
-
-        "roshan",
-        "jagah",
-        "akela",
-        "badalna",
-        "batana",
-        "poocha",
-
-        "ehsas",
-        "ajnabi",
-        "samajh",
-        "shayad",
-        "khamosh",
-        "oonchay",
-        "cheekh",
+        "peela","laal","narangi","hara","neela","sheesha","gulabi","sunheri","surmai",
+        "sarak","awaaz","dhoop","barish","dil","yaad","rang","ghar","jandaar","khushboo",
+        "samandar","sukoon","chalti","kheton","khushi","zaika","thanda",
+        "roshan","jagah","akela","badalna","batana","poocha",
+        "ehsas","ajnabi","samajh","shayad","khamosh","oonchay","cheekh",
       ]);
     </script>
+
+  
 
     <script type="module" src="/qr/assets/js/memory.js"></script>
   </body>
