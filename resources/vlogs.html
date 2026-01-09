@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kahani Korner Cartoons</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
+ 
+  </head>
+
+
+    
+  <body>
+   
+   <header>
+      <a href="https://kahanikorner.com/">
+        <img src="images/logo.png" alt="Kahani Korner Logo" class="logo" />
+      </a> 
+    </header>
+
+  <div class="container">
+    <h1>Vloggers</h1>
+
+    <p class="subheading">Here are some of our favorite Urdu vloggers who share everyday family life in a fun and relatable way. Their content naturally introduces Urdu to kids and parents—without the overstimulation of animated cartoons.</p>
+
+    <div class="filter-container">
+      <select id="categoryFilter">
+        <option value="all">All Videos</option>
+        
+      </select>
+    </div>
+
+    
+      <div class="grid">
+        <!-- Video wrappers will be dynamically inserted here -->
+      </div>
+    
+
+     <div class="footer">
+      Rooted in culture, topped with sweetness, made for little hearts.
+      <div class="social-icons">
+        <a
+          href="https://www.instagram.com/kahani.korner/"
+          target="_blank"
+          aria-label="Instagram">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
+            alt="Instagram" />
+        </a>
+        <a
+          href="https://facebook.com/kahanikorner"
+          target="_blank"
+          aria-label="Facebook">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
+            alt="Facebook" />
+        </a>
+        <a
+          href="https://tiktok.com/@kahanikorner"
+          target="_blank"
+          aria-label="TikTok">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
+            alt="TikTok" />
+        </a>
+      </div>
+    </div>
+  </div> <!-- End of container -->
+
+  
+<script>
+  // object and function to add new videos onto the page
+  const videolist =  [
+  {
+    name: "Siachen Village Vlogs",
+    type: "channel",
+    url: "https://www.youtube.com/@SiachenVillageVlogs/videos",
+    image: "/assets/images/resources/vlog1.png",
+    category: "Urdu",
+    description: "Welcome to Siachen Village Vlogs. Discover the real mountain life of northern Pakistan — simple, tough, yet full of heart.",
+  },
+
+  {
+  name: "MUSA TANVEER",
+  type: "channel",
+  url: "https://www.youtube.com/@MUSATANVEER/videos",
+  image: "https://yt3.googleusercontent.com/EiS5vEmZz2VnyZyQK3lUcd0LAw-e_0hJa7HXGSDuCU10k1KyBPr2LnZreRgYr0pbQz-BovN0OQ=s160-c-k-c0x00ffffff-no-rj",
+  category: "Comedy / Skits / Urdu Kids",
+  description: "Musa Tanveer is a child YouTuber known for entertaining Urdu skits, life lessons, and family-friendly content that kids love.",
+},
+   {
+    name: "Wildlens by Abrar",
+    type: "channel",
+    url: "https://www.youtube.com/@WildlensbyAbrar/videos",
+    image: "/assets/images/resources/abrar.png",
+    category: "Travel / Urdu",
+    description: "I'm Abrar Hassan, a travel vlogger riding around the world on my motorcycle.",
+  },
+  {
+    name: "Sanakay Sang",
+    type: "channel",
+    url: "https://www.youtube.com/@SanakaySang/videos",
+    image: "/assets/images/resources/sanakaysang.png",
+    category: "Educational / Kids",
+    description: "Let's have fun and learn together while we discover new things along the way.",
+  },
+
+  {
+    name: "Urdu Aami",
+    type: "channel",
+    url: "https://www.youtube.com/@urduami/videos",
+    image: "/assets/images/resources/sarah.png",
+    category: "Urdu",
+    description: "An American Pakistani Mom of TWO. Trying to spread the love of an utmost tehzeeb URDU. We share Urdu lessons, Urdu stories and everything about URDU, our culture. ",
+  },
+  
+  
+  {
+    name: "We The Masti Kids",
+    type: "channel",
+    url: "https://www.youtube.com/@WeTheMastiKids",
+    image: "https://yt3.googleusercontent.com/ytc/AIdro_nX4cByod2SgtQ6FE168plNMr6YfAOdPTB_kdrjSJZdtg=s160-c-k-c0x00ffffff-no-rj",
+    category: "family",
+    description: "Follow two brothers, Ishmael and Isaac as they expand their knowledge and learn new Urdu words",
+  },
+  {
+  name: "Life with Hafsaa",
+  type: "channel",
+  url: "https://www.youtube.com/@LifewithHafsaa",
+  image: "https://yt3.googleusercontent.com/vC0ONj5Ngf0dKxu2167TQg0CneHZccVywfFKbmKQYuVLjBLFZuNKRUiAPbTeg7FZqUZm6rC2Aw=s160-c-k-c0x00ffffff-no-rj",
+  category: "Family / Islamic / Urdu",
+  description: "A family-friendly Urdu vlogging channel where Hafsaa shares her daily life, Islamic reflections, and routines with young children.",
+},
+{
+  name: "Sehrish Luqman Vlogs",
+  type: "channel",
+  url: "https://www.youtube.com/@SehrishLuqmanVlogss/videos",
+  image: "https://yt3.googleusercontent.com/LEz1Tn8cN3KcaZZ5bkqbWHMpu66-_2YqTprXRZlvHDzhbLwsKCEwo3_9tku2fSwmU0ksyHChzw=s160-c-k-c0x00ffffff-no-rj",
+  category: "Lifestyle / Urdu Vlogs",
+  description: "Sehrish Luqman shares Urdu-language lifestyle vlogs that include family moments, parenting, and engaging storytelling.",
+},
+
+{
+  name: "Abdul Rahman's Adventures",
+  type: "channel",
+  url: "https://www.youtube.com/@AbdulRahmankAdventures/videos",
+  image: "https://yt3.googleusercontent.com/JmH2tor51cQTuHrpUWM9PYlHN8vd2an7cd2RdgyhNsigAfLR3NYqIXUkIu-t8yfFUkOQOrjk3w=s160-c-k-c0x00ffffff-no-rj",
+  category: "Travel / Educational / Islamic",
+  description: "Young Abdul Rahman explores the world through Islamic family travel vlogs, Urdu storytelling, and cultural adventures.",
+},
+
+
+    
+  ];
+
+  const grid = document.querySelector(".grid");
+  grid.innerHTML = ""; // Clear any hardcoded video-wrapper divs
+
+  function getYouTubeID(embedURL) {
+    const match = embedURL.match(/embed\/([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : "";
+  }
+
+  videolist.forEach((video) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = `video-wrapper video ${video.category}`;
+
+    const title = document.createElement("div");
+    title.className = `video-title ${video.category}`;
+    title.textContent = video.name;
+
+    if (video.type === "channel") {
+      const preview = document.createElement("a");
+      preview.href = video.url;
+      preview.target = "_blank";
+      preview.style.textDecoration = "none";
+
+      const banner = document.createElement("img");
+      banner.src = video.image;
+      banner.alt = video.name;
+      banner.style.width = "100%";
+      banner.style.display = "block";
+      banner.style.objectFit = "cover";
+      banner.style.height = "180px"; // keep same height as iframe thumbnails
+
+      preview.appendChild(banner);
+      wrapper.appendChild(preview);
+    } else {
+      // default behavior for embedded videos
+      const preview = document.createElement("div");
+      preview.className = "video-thumbnail";
+      preview.style.position = "relative";
+      preview.style.cursor = "pointer";
+
+      const thumbnail = document.createElement("img");
+      thumbnail.src = `https://img.youtube.com/vi/${getYouTubeID(
+        video.embed
+      )}/hqdefault.jpg`;
+      thumbnail.alt = video.name;
+      thumbnail.style.width = "100%";
+      thumbnail.style.display = "block";
+
+      const playButton = document.createElement("div");
+      playButton.innerHTML = "▶️";
+      playButton.style.position = "absolute";
+      playButton.style.top = "50%";
+      playButton.style.left = "50%";
+      playButton.style.transform = "translate(-50%, -50%)";
+      playButton.style.fontSize = "2rem";
+      playButton.style.color = "#fff";
+      playButton.style.textShadow = "0 0 10px rgba(0,0,0,0.6)";
+
+      preview.addEventListener("click", () => {
+        const iframe = document.createElement("iframe");
+        iframe.src = video.embed + "?autoplay=1";
+        iframe.setAttribute("allowfullscreen", true);
+        iframe.setAttribute("loading", "lazy");
+        iframe.style.width = "100%";
+        iframe.style.height = "180px";
+        preview.replaceWith(iframe);
+      });
+
+      preview.appendChild(thumbnail);
+      preview.appendChild(playButton);
+      wrapper.appendChild(preview);
+    }
+
+    const translation = document.createElement("div");
+    translation.className = "translation";
+    translation.textContent = video.description;
+
+    wrapper.appendChild(title);
+    wrapper.appendChild(translation);
+    grid.appendChild(wrapper);
+  });
+
+  // Filter for category selection
+  const filter = document.getElementById("categoryFilter");
+
+  filter.addEventListener("change", () => {
+    const value = filter.value;
+    const allVideos = document.querySelectorAll(".video");
+    allVideos.forEach((video) => {
+      if (value === "all" || video.classList.contains(value)) {
+        video.style.display = "block";
+      } else {
+        video.style.display = "none";
+      }
+    });
+  });
+
+  window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+
+     // pink heart images from Icons8
+const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+
+for (let i = 0; i < 15; i++) {
+  const icon = document.createElement("img");
+  icon.src = iconSrc;
+  icon.classList.add("heart");
+  icon.style.left = Math.random() * 100 + "vw";
+  icon.style.animationDelay = Math.random() * 10 + "s";
+  icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+  icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+  document.body.appendChild(icon);
+}
+
+
+  });
+</script>
+
+</body> 
+
+
+</html>

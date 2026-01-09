@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Urdu-English Flashcards</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/qr/assets/css/flashcards.css" />
+  </head>
+
+  <body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+      <div
+        class="bg-white bg-opacity-90 rounded-3xl p-6 md:p-8 shadow-xl border-8 border-white">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8 text-center md:text-left">
+          <div
+            class="mt-4 md:mt-0 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+            <span class="text-fuchsia-600 font-medium kid-title"
+              >Progress:</span
+            >
+            <div class="w-48 progress-bar">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span
+              class="text-fuchsia-600 font-medium kid-title"
+              id="progress-text"
+              >0/0</span
+            >
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-8">
+          <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+              <div class="flashcard-front" id="flashcard-front"></div>
+              <div class="flashcard-back" id="flashcard-back"></div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-row flex-nowrap justify-center items-center gap-3 mb-6"
+          id="nav-buttons">
+          <button
+            id="prev-btn"
+            class="nav-btn w-40 md:w-48 text-white py-2 rounded-full text-base md:text-lg shadow-md font-semibold"
+            type="button">
+            Previous
+          </button>
+          <button
+            id="next-btn"
+            class="nav-btn w-40 md:w-48 text-white py-2 rounded-full text-base md:text-lg shadow-md font-semibold"
+            type="button">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-90 backdrop-blur-lg border-t border-gray-200 flex justify-around items-center py-2 shadow-lg z-50">
+      <button
+        id="toggle-lang"
+        class="btn border-4 border-green-400 text-green-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        English → Urdu
+      </button>
+
+      <button
+        id="toggle-image"
+        class="btn border-4 border-pink-400 text-pink-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        Hide Image
+      </button>
+
+      <button
+        id="quiz-btn"
+        class="btn border-4 border-blue-400 text-blue-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        Quiz Mode
+      </button>
+
+      <button
+        id="shuffle-btn"
+        class="btn border-4 border-yellow-400 text-yellow-600 bg-white px-3 py-1 rounded-full text-sm"
+        type="button">
+        Shuffle Cards
+      </button>
+    </div>
+
+    <!-- App JS (module) -->
+    <script>
+      // --------------------
+      // Allowed vocab filter
+      // --------------------
+      const ALLOWED_WORDS = new Set([
+        "peela",
+        "laal",
+        "narangi",
+        "hara",
+        "neela",
+        "sheesha",
+        "gulabi",
+        "sunheri",
+        "surmai",
+
+        "sarak",
+        "awaaz",
+        "dhoop",
+        "barish",
+        "dil",
+        "yaad",
+        "rang",
+        "ghar",
+
+        "jandaar",
+        "khushboo",
+        "samandar",
+        "sukoon",
+        "chalti",
+        "kheton",
+        "khushi",
+        "zaika",
+        "thanda",
+
+        "roshan",
+        "jagah",
+        "akela",
+        "badalna",
+        "batana",
+        "poocha",
+
+        "ehsas",
+        "ajnabi",
+        "samajh",
+        "shayad",
+        "khamosh",
+        "oonchay",
+        "cheekh",
+      ]);
+    </script>
+    <script type="module" src="/qr/assets/js/flashcards.js"></script>
+  </body>
+</html>

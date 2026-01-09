@@ -1,0 +1,1033 @@
+<html lang="en">
+  <head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TASVEER SE PEHCHAAN</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+      :root {
+        --primary: #6366f1; /* Indigo */
+        --primary-light: #a5b4fc; /* Light indigo */
+        --primary-lighter: #e0e7ff; /* Very light indigo */
+        --secondary: #f97316; /* Orange */
+        --secondary-light: #fed7aa; /* Light orange */
+        --secondary-lighter: #fff7ed; /* Very light orange */
+        --background: #eef2ff; /* Light indigo background */
+        --card-bg: #f8fafc; /* Light slate */
+        --text: #1e293b; /* Slate 800 */
+        --text-light: #64748b; /* Slate 500 */
+        --correct: #10b981; /* Emerald 500 */
+        --incorrect: #ef4444; /* Red 500 */
+        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      }
+      /* begin */
+
+      .noto-nastaliq-urdu {
+        font-family: "Noto Nastaliq Urdu", serif;
+        font-optical-sizing: auto;
+
+        font-weight: 500;
+
+        font-style: normal;
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        box-shadow: var(--shadow);
+        position: relative;
+        flex-direction: column; /* stack vertically by default */
+        animation: fadeSlideIn 0.8s ease-out;
+      }
+
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (min-width: 767px) {
+        .top-bar {
+          flex-direction: row; /* revert to horizontal on larger screens */
+        }
+      }
+
+      .logo-back {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;      
+        text-align: center;
+        }
+      
+
+      .back-button {
+        background: linear-gradient(to right, #b8b9f5, #6366f1);
+        text-decoration: none;
+        font-size: 0.9rem;
+        color: #ffffff;
+        padding: 0.2rem 0.2rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        border: 2px solid #6366f1;
+        width: 100%;
+        text-align: center;
+      }
+
+      .back-button:hover {
+        background: #7f83f6;
+        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        transition: all 1s ease;
+      }
+
+      .logo {
+        height: 50px;
+      }
+
+      .title {
+        min-width: 200px;
+        flex: 1;
+        line-height: 1.3rem;
+
+        background: rgba(255, 255, 255, 0.15);
+        padding: 0.5rem 0.75rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(6px);
+        text-align: center;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (min-width: 767px) {
+        .title {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+        }
+      }
+
+      .title .roman {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .title .urdu {
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+      }
+
+      .title .english {
+        font-size: 1rem;
+        margin-top: 0.2rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .timer-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: white;
+        font-weight: 500;
+      }
+
+      /* emd */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Quicksand", sans-serif;
+        background-color: var(--background);
+        background-image: radial-gradient(
+            var(--primary-light) 0.5px,
+            transparent 0.5px
+          ),
+          radial-gradient(var(--primary-light) 0.5px, var(--background) 0.5px);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+        color: var(--text);
+        min-height: 100vh;
+        padding-bottom: 2rem;
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 20% 50%,
+          rgba(255, 255, 255, 0.15) 0%,
+          rgba(255, 255, 255, 0) 50%
+        );
+        pointer-events: none;
+      }
+
+      .logo {
+        height: 60px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      }
+
+      nav {
+        background-color: var(--primary);
+        padding: 0.75rem;
+        text-align: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background-color: white;
+        transition: all 0.3s ease;
+        display: inline-block;
+        background: var(--secondary-lighter);
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+      }
+
+      nav a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: var(--secondary-light);
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+
+      .title-container {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        padding: 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        margin: 1.5rem auto;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .title-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 70% 30%,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        pointer-events: none;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        margin: 0.5rem 0;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      h1.english {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .timer-container {
+        background: linear-gradient(
+          to right,
+          var(--secondary),
+          var(--secondary-light)
+        );
+        padding: 0.2rem 0.2rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        width: 100%;
+        max-width: 500px;
+        margin-top: 0.5rem;
+        border: 2px solid var(--secondary);
+      }
+
+      @media (min-width: 768px) {
+        .timer-container {
+          width: auto;
+          margin-top: 0;
+        }
+      }
+
+      .timer-toggle-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 600;
+        color: white;
+        font-size: 0.95rem;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        background-color: #ccc;
+        border-radius: 34px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.4s;
+      }
+
+      .switch input:checked + .slider {
+        background-color: var(--secondary);
+      }
+
+      .switch input:checked + .slider:before {
+        transform: translateX(24px);
+      }
+
+      .game-status {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+
+        min-height: 40px;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .game-status.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #timer,
+      #score {
+        display: flex; /* ✅ Enables centering */
+        align-items: center; /* ✅ Vertically center */
+        justify-content: center; /* ✅ Horizontally center */
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        white-space: nowrap;
+        flex: 1;
+        max-width: 45%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: white;
+      }
+
+      #timer {
+        background-color: var(--secondary);
+      }
+
+      #score {
+        background-color: var(--primary);
+      }
+
+      .flash-red {
+        animation: flash 0.5s infinite alternate;
+        background-color: var(--incorrect) !important;
+      }
+
+      @keyframes flash {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0.7;
+        }
+      }
+
+      .game-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem;
+      }
+
+      .image-container {
+        width: 250px;
+        height: 250px;
+        padding: 0.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary-light),
+          var(--primary-lighter)
+        );
+        border-radius: 1.25rem;
+        box-shadow: var(--shadow);
+        position: relative;
+        transition: transform 0.3s ease;
+      }
+
+      .image-container:hover {
+        transform: scale(1.02);
+      }
+
+      .target-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1rem;
+        background-color: var(--primary-lighter);
+        border: 3px solid var(--primary);
+      }
+
+      .drop-zone {
+        width: 280px;
+        min-height: 80px;
+        border: 2px dashed var(--primary);
+        font-size: 1.1rem;
+        font-weight: 500;
+        border-radius: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary-lighter),
+          var(--card-bg)
+        );
+        padding: 1.25rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: var(--primary);
+      }
+
+      .drop-zone::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+          to right,
+          var(--primary-light),
+          var(--primary)
+        );
+        border-radius: 5px 5px 0 0;
+      }
+
+      .drop-zone.correct {
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.1),
+          rgba(16, 185, 129, 0.2)
+        );
+        border: 2px solid var(--correct);
+        color: var(--correct);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+      }
+
+      .drop-zone.correct::before {
+        background: var(--correct);
+      }
+
+      .drop-zone.incorrect {
+        animation: shake 0.3s ease-in-out;
+        background: linear-gradient(
+          135deg,
+          rgba(239, 68, 68, 0.1),
+          rgba(239, 68, 68, 0.2)
+        );
+        border-color: var(--incorrect);
+      }
+
+      .drop-zone.incorrect::before {
+        background: var(--incorrect);
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-8px);
+        }
+        50% {
+          transform: translateX(8px);
+        }
+        75% {
+          transform: translateX(-8px);
+        }
+      }
+
+      .word-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem;
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .word {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: linear-gradient(
+          135deg,
+          var(--secondary-lighter),
+          var(--secondary-light)
+        );
+        border: 2px solid var(--secondary);
+        padding: 0.75rem 1.25rem;
+        border-radius: 1rem;
+        font-size: 1.1rem;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .word::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0)
+        );
+        pointer-events: none;
+      }
+
+      .word .roman {
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .title .urdu {
+        font-family: "Noto Nastaliq Urdu", serif;
+        font-weight: 600;
+        padding: 0.5rem 0;
+      }
+
+      .word .urdu {
+        font-size: 1.3rem;
+        color: var(--text);
+        font-family: "Noto Nastaliq Urdu", serif;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1000;
+      }
+
+      .confetti {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        animation: fall 3s linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10px) rotate(0deg) scale(1);
+        }
+        25% {
+          transform: translateY(25vh) rotate(90deg) scale(0.9);
+        }
+        50% {
+          transform: translateY(50vh) rotate(180deg) scale(1.1);
+        }
+        75% {
+          transform: translateY(75vh) rotate(270deg) scale(0.9);
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg) scale(1);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0.75rem;
+        }
+
+        .title-container {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 1.4rem;
+        }
+
+        h1.english {
+          font-size: 1.2rem;
+        }
+
+        .image-container {
+          width: 200px;
+          height: 200px;
+        }
+
+        .drop-zone {
+          width: 90%;
+          max-width: 280px;
+        }
+
+        .word {
+          min-width: 100px;
+          padding: 0.6rem 1rem;
+        }
+
+        .top-bar > div {
+          width: 100%;
+          max-width: 250px;
+          margin: 0 auto;
+        }
+
+        
+
+        .title {
+          position: static;
+          transform: none;
+          margin: 0.5rem auto;
+        }
+
+        .timer-container {
+          margin: 0 auto;
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(30, 41, 59, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        backdrop-filter: blur(3px);
+      }
+
+      .modal.hidden {
+        display: none;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 2rem 2.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        animation: scaleIn 0.3s ease-out;
+        max-width: 90%;
+        color: var(--text);
+      }
+
+      .modal-content h2 {
+        font-size: 1.8rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .modal-content p {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .modal-content button {
+        background-color: var(--secondary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .modal-content button:hover {
+        background-color: #fb923c;
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="logo-back">
+        <a href="https://kahanikorner.company.site/"
+          ><img src="/quicklinks/images/logo.png" alt="Logo" class="logo"
+        /></a>
+
+        <a href="../index.html" class="back-button">⬅ Back</a>
+      </div>
+
+      <div class="title">
+        <div class="roman">TASVEER SE PEHCHAAN</div>
+        <div class="urdu">تصویر سے پہچان</div>
+        <div class="english">Guess the Picture</div>
+      </div>
+
+      <div class="timer-container">
+        <div class="timer-toggle-wrapper">
+          <span id="timer-status-label">Timer OFF</span>
+          <label class="switch">
+            <input type="checkbox" id="timer-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="game-status hidden" id="game-status">
+          <div id="timer">Time: 60s</div>
+          <div id="score">Score: 0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- original -->
+
+    <div class="container">
+      <div class="game-area">
+        <div class="image-container">
+          <img
+            id="target-image"
+            src=""
+            alt="Target Image"
+            class="target-image" />
+        </div>
+
+        <div class="drop-zone" id="drop-zone">Select An Answer</div>
+
+        <div class="word-options" id="word-options">
+          <!-- Words will be inserted dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { riddles } from "../vocab.js";
+
+      // Now you can use the riddles array as before
+      console.log(riddles);
+
+      function launchConfetti() {
+        const confettiContainer = document.createElement("div");
+        confettiContainer.classList.add("confetti-container");
+
+        for (let i = 0; i < 30; i++) {
+          const confettiPiece = document.createElement("div");
+          confettiPiece.classList.add("confetti");
+          confettiPiece.style.left = `${Math.random() * 100}%`;
+          confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+          confettiPiece.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }, 100%, 70%)`;
+          confettiContainer.appendChild(confettiPiece);
+        }
+
+        document.body.appendChild(confettiContainer);
+        setTimeout(() => {
+          confettiContainer.remove();
+        }, 3000);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const correctSound = new Audio("../sounds/success.wav");
+        const incorrectSound = new Audio("../sounds/incorrect.wav");
+        const targetImage = document.getElementById("target-image");
+        const wordOptions = document.getElementById("word-options");
+        const dropZone = document.getElementById("drop-zone");
+
+        const timerDisplay = document.getElementById("timer");
+        const scoreDisplay = document.getElementById("score");
+        const timerToggle = document.getElementById("timer-toggle");
+        const gameStatus = document.getElementById("game-status");
+        let timer = 60;
+        let score = 0;
+        let gameInterval;
+
+        function startGame() {
+          score = 0;
+          scoreDisplay.textContent = `Score: ${score}`;
+          timer = 60;
+          timerDisplay.textContent = `Time: ${timer}s`;
+          timerDisplay.classList.remove("flash-red");
+
+          gameInterval = setInterval(() => {
+            if (timer > 0) {
+              timer--;
+              timerDisplay.textContent = `Time: ${timer}s`;
+              if (timer <= 5) {
+                timerDisplay.classList.add("flash-red");
+              } else {
+                timerDisplay.classList.remove("flash-red");
+              }
+            } else {
+              clearInterval(gameInterval);
+              document.getElementById("final-score").textContent = score;
+              document
+                .getElementById("game-over-modal")
+                .classList.remove("hidden");
+            }
+          }, 1000);
+        }
+
+        function loadNewWord() {
+          dropZone.innerHTML = "Choose the correct word!";
+          dropZone.classList.remove("correct", "incorrect", "answered");
+
+          // 🔁 Fully clear the word options DOM and remove any leftover styles
+          wordOptions.innerHTML = "";
+
+          // ✅ Reset styles from previous round
+          document.querySelectorAll(".word").forEach((btn) => {
+            btn.style.pointerEvents = "auto";
+            btn.style.opacity = "1";
+            btn.style.border = "";
+            btn.style.background = "";
+            btn.style.boxShadow = "";
+          });
+
+          const word = riddles[Math.floor(Math.random() * riddles.length)];
+          targetImage.src = word.image;
+          targetImage.setAttribute("data-correct", word.word.urdu);
+          wordOptions.innerHTML = "";
+
+          let shuffledWords = riddles
+            .filter((w) => w.word.urdu !== word.word.urdu)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 2);
+          shuffledWords.push(word);
+          shuffledWords.sort(() => 0.5 - Math.random());
+
+          shuffledWords.forEach((w) => {
+            const wordDiv = document.createElement("div");
+            wordDiv.classList.add("word");
+            wordDiv.setAttribute("data-urdu", w.word.urdu);
+            wordDiv.setAttribute("data-roman", w.word.romanUrdu);
+            wordDiv.innerHTML = `<div class="roman">${w.word.romanUrdu}</div><div class="urdu">${w.word.urdu}</div>`;
+
+            wordDiv.addEventListener("click", () => {
+              // Prevent multiple selections
+              if (dropZone.classList.contains("answered")) return;
+
+              const correctWord = targetImage.getAttribute("data-correct");
+
+              // Disable all options immediately
+              document.querySelectorAll(".word").forEach((btn) => {
+                btn.style.pointerEvents = "none";
+                btn.style.opacity = "0.6";
+              });
+
+              // Mark this dropZone as "answered" to block further interactions
+              dropZone.classList.add("answered");
+
+              if (w.word.urdu === correctWord) {
+                dropZone.innerHTML = `<div class="roman">${w.word.romanUrdu}</div><div class="urdu">${w.word.urdu}</div>`;
+                dropZone.classList.add("correct");
+                correctSound.play();
+                launchConfetti();
+
+                if (timerToggle.checked) {
+                  score++;
+                  scoreDisplay.textContent = `Score: ${score}`;
+                }
+              } else {
+                dropZone.classList.add("incorrect");
+                incorrectSound.play();
+
+                // Find the correct word and highlight it
+                const correctUrdu = correctWord;
+                const correctOption = [
+                  ...document.querySelectorAll(".word"),
+                ].find((btn) => btn.getAttribute("data-urdu") === correctUrdu);
+
+                if (correctOption) {
+                  correctOption.style.border = "2px solid var(--correct)";
+                  correctOption.style.background =
+                    "linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2))";
+                  correctOption.style.boxShadow =
+                    "0 0 10px rgba(16, 185, 129, 0.5)";
+                }
+              }
+
+              setTimeout(() => {
+                // Remove any lingering styles from previous round
+                document.querySelectorAll(".word").forEach((btn) => {
+                  btn.removeAttribute("style");
+                });
+
+                loadNewWord();
+              }, 1500);
+            });
+
+            wordOptions.appendChild(wordDiv);
+          });
+        }
+
+        loadNewWord();
+
+        timerToggle.addEventListener("change", () => {
+          clearInterval(gameInterval);
+
+          if (timerToggle.checked) {
+            timerStatusLabel.textContent = "Timer ON";
+            gameStatus.classList.remove("hidden");
+            startGame();
+          } else {
+            timerStatusLabel.textContent = "Timer OFF";
+            gameStatus.classList.add("hidden");
+          }
+        });
+
+        //
+      });
+
+      document
+        .getElementById("restart-button")
+        .addEventListener("click", () => {
+          location.reload();
+        });
+
+      const timerStatusLabel = document.getElementById("timer-status-label");
+    </script>
+
+    <!-- Custom Game Over Modal -->
+    <div id="game-over-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>⏰ Time’s Up!</h2>
+        <p>Your final score is: <span id="final-score">0</span></p>
+        <button id="restart-button">Play Again!</button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urdu-English Flashcards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bubblegum+Sans&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #ff9a8b, #ff6b95);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .noto-nastaliq-urdu {
+        font-family: "Noto Nastaliq Urdu", serif;
+        font-optical-sizing: auto;
+
+        font-weight: 500;
+
+        font-style: normal;
+      }
+
+      .text-green {
+        color: #17746b;
+      }
+
+      .text-lightpurple {
+        color: #6e6ce0;
+      }
+
+      .kid-title {
+        font-family: "Bubblegum Sans", cursive;
+      }
+
+      .flashcard-container {
+        height: 60vh;
+        max-height: 400px;
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+      }
+
+      .flashcard {
+        position: absolute;
+
+        width: 100%;
+
+        height: 100%;
+
+        transform-style: preserve-3d;
+
+        transition: transform 0.8s;
+      }
+
+      .flashcard.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .flashcard-front,
+      .flashcard-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        overflow-y: auto;
+      }
+
+      .flashcard-front {
+        background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+        border: 8px solid #fff;
+      }
+
+      .flashcard-back {
+        background: linear-gradient(
+          135deg,
+          rgb(144, 247, 236),
+          rgb(50 150 204)
+        );
+        transform: rotateY(180deg);
+        border: 8px solid #fff;
+      }
+
+      .hint-image,
+      .filler-image {
+        width: 96px;
+        height: 96px;
+        transition: opacity 0.5s ease;
+      }
+
+      .hint-image {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .top-2 {
+        top: -1.6rem !important;
+      }
+
+      .right-2 {
+        right: -2rem !important;
+      }
+
+      .progress-bar {
+        height: 12px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.5);
+        overflow: hidden;
+        border: 2px solid #fff;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #43e695, #3bb2b8);
+        transition: width 0.5s ease;
+      }
+
+      .nav-btn {
+        background: linear-gradient(135deg, #ff9a8b, #ff6b95);
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-btn:active {
+        transform: translateY(1px);
+      }
+
+      .nav-btn {
+        background: linear-gradient(135deg, #ff9a8b, #ff6b95);
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn {
+        transition: all 0.3s ease;
+        font-family: "Bubblegum Sans", cursive;
+        letter-spacing: 0.5px;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
+          0 3px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkle 1s ease-out forwards;
+      }
+
+      @keyframes sparkle {
+        0% {
+          transform: scale(0.5) translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5) translateY(-50px);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+
+      .shake {
+        animation: shake 0.4s ease-in-out;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-6px);
+        }
+        40% {
+          transform: translateX(6px);
+        }
+        60% {
+          transform: translateX(-4px);
+        }
+        80% {
+          transform: translateX(4px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .quiz-complete-card {
+        background: linear-gradient(135deg, #d0f0c0, #a3e4b8);
+        border: 8px solid #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+      <div
+        class="bg-white bg-opacity-90 rounded-3xl p-6 md:p-8 shadow-xl border-8 border-white">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8 text-center md:text-left">
+         
+          <div
+            class="mt-4 md:mt-0 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+            <span class="text-fuchsia-600 font-medium kid-title"
+              >Progress:</span
+            >
+            <div class="w-48 progress-bar">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span
+              class="text-fuchsia-600 font-medium kid-title"
+              id="progress-text"
+              >0/0</span
+            >
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-8">
+          <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+              <div class="flashcard-front" id="flashcard-front"></div>
+              <div class="flashcard-back" id="flashcard-back"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div
+          class="flex flex-row flex-nowrap justify-center items-center gap-3 mb-6"
+          id="nav-buttons">
+          <button
+            id="prev-btn"
+            class="btn bg-white border-4 border-purple-400 text-purple-500 px-4 md:px-6 py-2 rounded-full text-base md:text-lg shadow-sm">
+            Previous
+          </button>
+          <button
+            id="next-btn"
+            class="btn bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg shadow-sm hover:from-fuchsia-600 hover:to-purple-700">
+            Next
+          </button>
+        </div> -->
+
+        <div
+          class="flex flex-row flex-nowrap justify-center items-center gap-3 mb-6"
+          id="nav-buttons">
+          <button
+            id="prev-btn"
+            class="nav-btn w-40 md:w-48 text-white py-2 rounded-full text-base md:text-lg shadow-md font-semibold">
+            Previous
+          </button>
+          <button
+            id="next-btn"
+            class="nav-btn w-40 md:w-48 text-white py-2 rounded-full text-base md:text-lg shadow-md font-semibold">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-90 backdrop-blur-lg border-t border-gray-200 flex justify-around items-center py-2 shadow-lg z-50">
+      <button
+        id="toggle-lang"
+        class="btn border-4 border-green-400 text-green-600 bg-white px-3 py-1 rounded-full text-sm">
+        English → Urdu
+      </button>
+
+      <button
+        id="toggle-image"
+        class="btn border-4 border-pink-400 text-pink-600 bg-white px-3 py-1 rounded-full text-sm">
+        Hide Image
+      </button>
+
+      <button
+        id="quiz-btn"
+        class="btn border-4 border-blue-400 text-blue-600 bg-white px-3 py-1 rounded-full text-sm">
+        Quiz Mode
+      </button>
+
+      <button
+        id="shuffle-btn"
+        class="btn border-4 border-yellow-400 text-yellow-600 bg-white px-3 py-1 rounded-full text-sm">
+        Shuffle Cards
+      </button>
+    </div>
+
+    <script type="module">
+      import { riddles as originalRiddles } from "../vocab.js";
+
+      let currentIndex = 0;
+      let riddles = [...originalRiddles];
+      let isQuizMode = false;
+      let isEnglishToUrdu = false;
+      let correctAnswers = 0;
+      let showImage = true; // default is showing the actual image
+
+      const flashcard = document.getElementById("flashcard");
+      const flashcardFront = document.getElementById("flashcard-front");
+      const flashcardBack = document.getElementById("flashcard-back");
+      const progressFill = document.querySelector(".progress-fill");
+      const progressText = document.getElementById("progress-text");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+      const shuffleBtn = document.getElementById("shuffle-btn");
+      const quizBtn = document.getElementById("quiz-btn");
+      const toggleLangBtn = document.getElementById("toggle-lang");
+      const navButtons = document.getElementById("nav-buttons");
+      const toggleImageBtn = document.getElementById("toggle-image");
+      const shuffleButton = document.getElementById("shuffle-btn");
+
+      const sparkleSound = new Audio("../sounds/sparkle.mp3");
+      const correctSound = new Audio("../sounds/success.wav");
+      const incorrectSound = new Audio("../sounds/incorrect.wav");
+      const cardFlipSound = new Audio("../sounds/cardflip.mp3");
+
+      toggleImageBtn.addEventListener("click", () => {
+        showImage = !showImage;
+        toggleImageBtn.textContent = showImage ? "Hide Image" : "Show Image";
+        updateFlashcard(currentIndex);
+      });
+
+      toggleLangBtn.addEventListener("click", () => {
+        isEnglishToUrdu = !isEnglishToUrdu;
+        toggleLangBtn.textContent = isEnglishToUrdu
+          ? "Urdu → English"
+          : "English → Urdu";
+        flashcard.classList.remove("flipped");
+        updateFlashcard(currentIndex);
+      });
+
+      function createSparkle(x, y) {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+      }
+
+      function triggerSparkles(centerX, centerY) {
+        sparkleSound.currentTime = 0;
+        sparkleSound.play();
+        for (let i = 0; i < 10; i++) {
+          const x = centerX + (Math.random() * 60 - 30);
+          const y = centerY + (Math.random() * 30 - 15);
+          createSparkle(x, y);
+        }
+      }
+
+      function launchConfetti() {
+        const confettiContainer = document.createElement("div");
+        confettiContainer.classList.add("confetti-container");
+        confettiContainer.style.position = "fixed";
+        confettiContainer.style.top = "0";
+        confettiContainer.style.left = "0";
+        confettiContainer.style.width = "100%";
+        confettiContainer.style.height = "100%";
+        confettiContainer.style.pointerEvents = "none";
+        confettiContainer.style.zIndex = "9999";
+
+        for (let i = 0; i < 30; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.position = "absolute";
+          confetti.style.width = "10px";
+          confetti.style.height = "10px";
+          confetti.style.borderRadius = "50%";
+          confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+          confetti.style.top = "0";
+          confetti.style.left = `${Math.random() * 100}%`;
+          confetti.style.animation = `fall ${2 + Math.random() * 2}s ease-out`;
+          confettiContainer.appendChild(confetti);
+        }
+
+        document.body.appendChild(confettiContainer);
+        setTimeout(() => confettiContainer.remove(), 4000);
+      }
+
+      function showQuizCompleteCard() {
+        // toggleLangBtn.style.display = "inline-block";
+
+        flashcardFront.innerHTML = `
+                        <div class="quiz-complete-card">
+                          <h2 class="text-3xl font-bold text-green-700 kid-title mb-4">🎉 Quiz Complete!</h2>
+                          <p class="text-lg text-green-800 mb-6">You got ${correctAnswers} out of ${riddles.length} correct!</p>
+                          <div class="flex justify-center gap-4">
+                            <button id="try-again" class="btn bg-white border-4 border-green-400 text-green-600 px-6 py-2 rounded-full text-lg shadow-sm">Try Again</button>
+                            <button id="exit-quiz" class="btn bg-green-600 text-white px-6 py-2 rounded-full text-lg shadow-sm">Exit Quiz Mode</button>
+                          </div>
+                        </div>`;
+        flashcardBack.innerHTML = "";
+
+        document.getElementById("try-again").addEventListener("click", () => {
+          riddles = [...originalRiddles].sort(() => Math.random() - 0.5);
+          currentIndex = 0;
+          correctAnswers = 0;
+          updateFlashcard(currentIndex);
+        });
+
+        document.getElementById("exit-quiz").addEventListener("click", () => {
+          isQuizMode = false;
+          correctAnswers = 0;
+          currentIndex = 0;
+          riddles = [...originalRiddles];
+
+          // Reset UI elements
+          quizBtn.textContent = "🎯 Quiz Mode";
+          toggleLangBtn.style.display = "inline-block";
+          toggleImageBtn.style.display = "inline-block";
+          shuffleButton.style.display = "inline-block";
+          navButtons.style.display = "flex";
+
+          // Reset flip state just in case
+          flashcard.classList.remove("flipped");
+
+          updateFlashcard(currentIndex);
+        });
+      }
+      function renderHintBlock(card, side = "front") {
+        if (side !== "front") return ""; // 🧼 Clean: No image/hint on back
+
+        if (showImage) {
+          return `
+      <div class="absolute top-2 right-2 flex flex-col items-center space-y-1 scale-75 z-10">
+        <img 
+          src="${card.image}" 
+          alt="Word Image" 
+          class="w-24 h-24 md:w-28 md:h-28 object-contain" 
+        />
+      </div>`;
+        } else {
+          return `
+      <button id="hint-btn" class="absolute top-2 right-2 scale-90 z-10 w-32 h-32 flex flex-col items-center space-y-1">
+        <div class="relative w-full h-full">
+          <img class="filler-image w-full h-full object-contain absolute top-0 left-0" src="https://cdn-icons-png.flaticon.com/512/427/427735.png" alt="Hint Icon" />
+          <img class="hint-image w-full h-full object-contain absolute top-0 left-0" style="opacity: 0;" src="${card.image}" alt="Word Image" />
+        </div>
+        <span class="text-xs font-semibold text-yellow-600 bg-white border border-yellow-400 px-2 py-1 rounded-full shadow-sm">
+          Hint
+        </span>
+      </button>`;
+        }
+      }
+
+      function removeHintBlock() {
+        document.querySelectorAll(".top-2.right-2").forEach((el) => {
+          el.remove();
+        });
+      }
+
+      function attachHintListeners() {
+        document.querySelectorAll("#hint-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const cardSection = e.target.closest(
+              ".flashcard-front, .flashcard-back"
+            );
+            const hintImg = cardSection.querySelector(".hint-image");
+            const fillerImg = cardSection.querySelector(".filler-image");
+            fillerImg.style.opacity = "0";
+            hintImg.style.opacity = "1";
+
+            const rect = hintImg.getBoundingClientRect();
+            const sparkleCenterX = rect.left + rect.width / 2;
+            const sparkleCenterY = rect.top + rect.height / 2;
+            triggerSparkles(sparkleCenterX, sparkleCenterY);
+
+            setTimeout(() => {
+              hintImg.style.opacity = "0";
+              fillerImg.style.opacity = "1";
+            }, 3000);
+          });
+        });
+      }
+
+      function updateFlashcard(index) {
+        const card = riddles[index];
+        progressFill.style.width = `${((index + 1) / riddles.length) * 100}%`;
+        progressText.textContent = `${index + 1}/${riddles.length}`;
+
+        if (!card || !card.word || !card.word.english) {
+          flashcardFront.innerHTML =
+            '<div class="text-center text-white">No card data</div>';
+          flashcardBack.innerHTML = "";
+          return;
+        }
+
+        const urduLabelClass = "text-fuchsia-500";
+        const urduFontClass = "text-fuchsia-600";
+        const englishLabelClass = "text-green";
+        const englishFontClass = "text-green";
+        const urduGradient = "linear-gradient(135deg, #fbc2eb, #a6c1ee)";
+        const englishGradient = "linear-gradient(135deg, #90f7ec, #3296cc)";
+
+        if (isQuizMode) {
+          navButtons.style.display = "none";
+          flashcard.classList.remove("flipped");
+
+          flashcardFront.style.background = isEnglishToUrdu
+            ? englishGradient
+            : urduGradient;
+          flashcardBack.style.background = "";
+
+          const options = [...riddles]
+            .filter((r) => r.word.english !== card.word.english)
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 2)
+            .concat(card)
+            .sort(() => Math.random() - 0.5);
+
+          flashcardFront.innerHTML = `
+                          <div class="relative w-full h-full flex flex-col justify-center text-center gap-4 px-4">
+
+                            <div class="text-sm ${
+                              isEnglishToUrdu
+                                ? englishLabelClass
+                                : urduLabelClass
+                            } text-center mt-2">
+                              ${isEnglishToUrdu ? "English" : "Urdu"}
+                            </div>
+                            <div class="flex-grow flex flex-col justify-center items-center text-center gap-3">
+                              ${
+                                isEnglishToUrdu
+                                  ? `<div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">
+${card.word.english}</div>`
+                                  : `<div class="text-3xl md:text-5xl font-bold text-lightpurple break-words">
+${card.word.romanUrdu}</div>
+<div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">
+${card.word.urdu}</div>`
+                              }
+                            </div>
+                            <div class="text-purple-600 text-center mt-3 mb-3">What does this mean?</div>
+                            <div class="flex flex-col items-center mb-4">
+                              ${options
+                                .map((item) => {
+                                  const isCorrect =
+                                    item.word.english === card.word.english;
+                                  const label = isEnglishToUrdu
+                                    ? `${item.word.urdu} (${item.word.romanUrdu})`
+                                    : item.word.english;
+                                  return `<button class="quiz-option btn w-3/4 max-w-xs my-1 border border-purple-300 text-purple-700 bg-white py-1 rounded-full" data-correct="${isCorrect}">${label}</button>`;
+                                })
+                                .join("")}
+                            </div>
+                            ${renderHintBlock(card)}
+                          </div>`;
+
+          flashcardBack.innerHTML = "";
+
+          document.querySelectorAll(".quiz-option").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const isCorrect =
+                e.target.getAttribute("data-correct") === "true";
+
+              document.querySelectorAll(".quiz-option").forEach((opt) => {
+                opt.disabled = true;
+                opt.classList.add("opacity-50", "cursor-not-allowed");
+              });
+
+              if (isCorrect) {
+                correctSound.currentTime = 0;
+                correctSound.play();
+                launchConfetti();
+                e.target.classList.add("border-green-400", "text-green-600");
+                correctAnswers++;
+              } else {
+                incorrectSound.currentTime = 0;
+                incorrectSound.play();
+                e.target.classList.add(
+                  "border-red-400",
+                  "text-red-600",
+                  "shake"
+                );
+                setTimeout(() => e.target.classList.remove("shake"), 400);
+              }
+
+              setTimeout(() => {
+                if (currentIndex < riddles.length - 1) {
+                  currentIndex++;
+                  updateFlashcard(currentIndex);
+                } else {
+                  showQuizCompleteCard();
+                }
+              }, 1500);
+            });
+          });
+
+          attachHintListeners();
+          return;
+        }
+
+        // Non-quiz mode
+        navButtons.style.display = "flex";
+        flashcard.classList.remove("flipped");
+        flashcardFront.style.background = isEnglishToUrdu
+          ? englishGradient
+          : urduGradient;
+        flashcardBack.style.background = isEnglishToUrdu
+          ? urduGradient
+          : englishGradient;
+
+        if (isEnglishToUrdu) {
+          flashcardFront.innerHTML = `
+                          <div class="relative w-full h-full flex flex-col justify-between">
+                            ${renderHintBlock(card, "front")}
+                            <div class="text-sm ${englishLabelClass} text-center mt-2">English</div>
+                            <div class="flex-grow flex justify-center items-center">
+                              <div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${
+            card.word.english
+          }</div>
+                            </div>
+                            <div class="text-sm ${englishLabelClass} text-center mb-4">Click card for Urdu</div>
+                          </div>`;
+
+          flashcardBack.innerHTML = `
+          
+                          <div class="relative w-full h-full flex flex-col justify-between">
+                            ${renderHintBlock(card, "back")}
+                            <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
+                             <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
+
+
+
+                              
+                              
+                              
+                              <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">
+${card.word.romanUrdu}</div>
+                              <div >
+
+    <img 
+      src="${card.image}" 
+      alt="Word Image" 
+      class="w-28 h-28 md:w-28 md:h-28 object-contain" 
+    />
+  </div>
+                              <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">
+${card.word.urdu}</div>
+                            </div>
+                          </div>`;
+        } else {
+          flashcardFront.innerHTML = `
+                          <div class="relative w-full h-full flex flex-col justify-between">
+                            ${renderHintBlock(card, "front")}
+                            <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
+                            <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
+                              <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">
+${card.word.romanUrdu}</div>
+                              
+                              <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">
+${card.word.urdu}</div>
+                            </div>
+                            <div class="text-sm ${urduLabelClass} text-center mb-4">Click card for English</div>
+                          </div>`;
+          flashcardBack.innerHTML = `
+                          <div class="relative w-full h-full flex flex-col justify-between">
+                         ${renderHintBlock(card, "back")}
+                            <div class="text-sm ${englishLabelClass} text-center mt-2">English</div>
+                            <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
+                               <div>
+
+    <img 
+      src="${card.image}" 
+      alt="Word Image" 
+      class="w-28 h-28 md:w-28 md:h-28 object-contain" 
+    />
+  </div>
+                              <div class="text-6xl font-bold ${englishFontClass} text-center">${
+            card.word.english
+          }</div>
+                            </div>
+                          </div>`;
+        }
+
+        attachHintListeners();
+      }
+
+      flashcard.addEventListener("click", (e) => {
+        if (isQuizMode || e.target.closest("#hint-btn")) return;
+
+        removeHintBlock(); // Remove image/hint from front before flipping
+
+        cardFlipSound.currentTime = 0;
+        cardFlipSound.play();
+
+        // 🔁 Flip the card and get the current flipped state
+        const isNowFlipped = flashcard.classList.toggle("flipped");
+
+        // ✅ If we're now seeing the front again, re-render it
+        if (!isNowFlipped) {
+          setTimeout(() => {
+            updateFlashcard(currentIndex);
+          }, 500); // 1000ms = 1 second
+        }
+      });
+
+      // Next and Previous buttons
+      prevBtn.addEventListener("click", () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateFlashcard(currentIndex);
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentIndex < riddles.length - 1) {
+          currentIndex++;
+          updateFlashcard(currentIndex);
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (isQuizMode) return; // Optional: disable arrow keys during quiz mode
+
+        if (e.key === "ArrowRight") {
+          nextBtn.click();
+        } else if (e.key === "ArrowLeft") {
+          prevBtn.click();
+        }
+      });
+
+      shuffleBtn.addEventListener("click", () => {
+        riddles = [...originalRiddles].sort(() => Math.random() - 0.5);
+        currentIndex = 0;
+        updateFlashcard(currentIndex);
+      });
+
+      quizBtn.addEventListener("click", () => {
+        isQuizMode = !isQuizMode;
+        quizBtn.textContent = isQuizMode ? "Exit Quiz Mode" : "Quiz Mode";
+
+        toggleLangBtn.style.display = isQuizMode ? "none" : "inline-block";
+        shuffleButton.style.display = isQuizMode ? "none" : "inline-block";
+        toggleImageBtn.style.display = isQuizMode ? "none" : "inline-block";
+
+        if (isQuizMode) {
+          riddles = [...originalRiddles].sort(() => Math.random() - 0.5);
+          currentIndex = 0;
+          correctAnswers = 0;
+        }
+
+        updateFlashcard(currentIndex);
+      });
+
+      updateFlashcard(currentIndex);
+    </script>
+  </body>
+</html>

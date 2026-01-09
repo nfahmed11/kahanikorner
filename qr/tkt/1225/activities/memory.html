@@ -1,0 +1,139 @@
+<!-- memory.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics  -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag to track analytics (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="/qr/assets/css/memory.css" />
+  </head>
+
+  <body>
+    <!-- ✅ Slim HUD header -->
+    <header class="hud">
+      <div class="hud-inner">
+        <div class="hud-title">
+          <h1 class="hud-h1">Memory Game</h1>
+          <p class="hud-sub">Match Urdu words with their English translations</p>
+        </div>
+
+        <!-- ✅ compact top-right controls -->
+        <div class="hud-controls">
+          <!-- Progress (small, corner) -->
+          <div class="hud-progress-mini" aria-label="Progress">
+            <div class="hud-progress-top">
+              <span id="progress-text" class="hud-progress-text">0/6</span>
+            </div>
+            <div class="hud-progress-track-mini">
+              <div id="progress-bar" class="progress-bar-mini" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Settings button -->
+          <button id="settings-btn" class="hud-settings-btn" aria-haspopup="dialog" aria-expanded="false">
+            ⚙️
+          </button>
+
+          <!-- Settings popover -->
+          <div id="settings-popover" class="hud-popover hidden" role="dialog" aria-label="Settings">
+            <div class="hud-popover-header">
+              <div class="hud-popover-title">Settings</div>
+              <button id="settings-close" class="hud-popover-close" aria-label="Close settings">✕</button>
+            </div>
+
+            <div class="hud-popover-body">
+              <div class="hud-row">
+                <span class="hud-label">Difficulty</span>
+                <span id="difficulty-label" class="hud-value">Level 5</span>
+              </div>
+
+              <input
+                id="difficulty-slider"
+                type="range"
+                min="1"
+                max="10"
+                step="1"
+                value="5"
+                class="hud-slider" />
+
+              <div class="hud-scale">
+                <span>Less</span>
+                <span>More</span>
+              </div>
+
+              <button id="settings-done" class="hud-done-btn">Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="game-wrap">
+      <div class="game-inner">
+        <div id="game-board" class="grid grid-cols-4 md:grid-cols-6 gap-4"></div>
+
+        <div
+          id="win-message"
+          class="hidden mt-6 p-6 bg-white rounded-xl shadow-lg text-center">
+          <h2 class="text-2xl font-bold text-indigo-700 mb-3">
+            Congratulations! 🎉
+          </h2>
+          <p class="text-gray-600 mb-4">
+            You've matched all the vocabulary pairs!
+          </p>
+          <button
+            id="play-again"
+            class="px-6 py-2 bg-gradient-to-r text-white font-medium rounded-full shadow-md">
+            Play Again
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      window.ALLOWED_WORDS = new Set([
+        "peela","laal","narangi","hara","neela","sheesha","gulabi","sunheri","surmai",
+        "sarak","awaaz","dhoop","barish","dil","yaad","rang","ghar","jandaar","khushboo",
+        "samandar","sukoon","chalti","kheton","khushi","zaika","thanda",
+        "roshan","jagah","akela","badalna","batana","poocha",
+        "ehsas","ajnabi","samajh","shayad","khamosh","oonchay","cheekh",
+      ]);
+    </script>
+
+  
+
+    <script type="module" src="/qr/assets/js/memory.js"></script>
+  </body>
+</html>

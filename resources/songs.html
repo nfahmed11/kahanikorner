@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kahani Korner Songs</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
+    <style>
+     
+
+    </style>
+  </head>
+  <body>
+         <header>
+      <a href="https://kahanikorner.com/">
+        <img src="images/logo.png" alt="Kahani Korner Logo" class="logo" />
+      </a> 
+    </header>
+    
+    
+    <div class="container">
+    <h1>Songs</h1>
+
+    <p class="subheading">
+      Sing along, learn along — our favorite Urdu tunes for little ears!
+    </p>
+
+    <div class="filter-container">
+      <select id="categoryFilter">
+        <option value="all">All Songs</option>
+        <option value="animals">Animals</option>
+        <option value="counting">Counting</option>
+        <option value="transport">Transport</option>
+        <option value="classic">Classic</option>
+        <option value="letters">Letters</option>
+        <option value="rhyme">Rhymes</option>
+        <option value="food">Food</option>
+        <option value="family">Family</option>
+        <option value="routine">Routine</option>
+        <option value="story">Story</option>
+        <option value="weather">Weather</option>
+        <option value="fun">Fun</option>
+      </select>
+    </div>
+
+    <div class="grid"></div>
+
+     <div class="footer">
+      Rooted in culture, topped with sweetness, made for little hearts.
+      <div class="social-icons">
+        <a
+          href="https://www.instagram.com/kahani.korner/"
+          target="_blank"
+          aria-label="Instagram">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
+            alt="Instagram" />
+        </a>
+        <a
+          href="https://facebook.com/kahanikorner"
+          target="_blank"
+          aria-label="Facebook">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
+            alt="Facebook" />
+        </a>
+        <a
+          href="https://tiktok.com/@kahanikorner"
+          target="_blank"
+          aria-label="TikTok">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
+            alt="TikTok" />
+        </a>
+      </div>
+    </div>
+    </div>
+
+    <script>
+      // object and function to add new videos onto the page
+      const songlist = [
+        {
+          name: "Kut kut murghi",
+          embed: "https://www.youtube.com/embed/gOgfKlsaIxU",
+          category: "animals",
+          description: "Chicken - A fun song about a chicken!",
+        },
+        {
+          name: "Gaari Aye",
+          embed: "https://www.youtube.com/embed/HiZ7x55IHps",
+          category: "transport",
+          description: "The Car is Here – A joyful tune about cars arriving.",
+        },
+        {
+          name: "Lakri ki Kaanti",
+          embed: "https://www.youtube.com/embed/P2r7LoytBfo",
+          category: "classic",
+          description:
+            "Wooden Stick Song – A classic rhyme with catchy repetition.",
+        },
+        {
+          name: "Ghora",
+          embed: "https://www.youtube.com/embed/vjyHKPPIlpI",
+          category: "animals",
+          description:
+            "Horse Song – Galloping rhythm introduces animal vocabulary.",
+        },
+        {
+          name: "Alphabet Urdu",
+          embed: "https://www.youtube.com/embed/WeQDABiJ5a8",
+          category: "letters",
+          description:
+            "Learn Urdu Alphabet – Visuals and repetition of Urdu letters.",
+        },
+        {
+          name: "ABC Animals in Urdu",
+          embed: "https://www.youtube.com/embed/lml8gwRNZj4",
+          category: "animals",
+          description: "Alphabet Animals – Urdu alphabet paired with animals.",
+        },
+        {
+          name: "ABC Urdu",
+          embed: "https://www.youtube.com/embed/XUhe_Q1q66c",
+          category: "letters",
+          description: "Urdu ABC – Simple, beginner-friendly letter song.",
+        },
+        {
+          name: "Akar Bakr",
+          embed: "https://www.youtube.com/embed/YH0vJ3v4l14",
+          category: "rhyme",
+          description: "Traditional Urdu rhyme for playful fun and rhythm.",
+        },
+        {
+          name: "Aloo Miyan",
+          embed: "https://www.youtube.com/embed/9bQqTgCNmmI",
+          category: "food",
+          description: "Mr. Potato – Cute song using food to teach Urdu.",
+        },
+        {
+          name: "Nani Teri Morne",
+          embed: "https://www.youtube.com/embed/yrynT4T55Xc",
+          category: "family",
+          description: "Grandma’s Peacock – Sweet lullaby about Nani.",
+        },
+        {
+          name: "Haathi",
+          embed: "https://www.youtube.com/embed/i35AUg11hvo",
+          category: "animals",
+          description:
+            "Elephant Song – Fun lyrics describing a haathi (elephant).",
+        },
+        {
+          name: "Haathi (Alternate)",
+          embed: "https://www.youtube.com/embed/rbX-ZgvD1Jc",
+          category: "animals",
+          description: "Another version of the popular elephant rhyme.",
+        },
+        {
+          name: "Abu Laye Motor Car",
+          embed: "https://www.youtube.com/embed/k83yNjbv_Ig",
+          category: "transport",
+          description: "Dad Brings a Car – Story-driven song with repetition.",
+        },
+        {
+          name: "Bulbul Ka Bacha",
+          embed: "https://www.youtube.com/embed/Kn0iazTunQI",
+          category: "animals",
+          description: "The Baby Bulbul – A classic Urdu rhyme with birds.",
+        },
+        {
+          name: "Kachwa",
+          embed: "https://www.youtube.com/embed/o-Sp3d2sn3I",
+          category: "animals",
+          description: "Turtle Song – Slow and steady wins the rhyme!",
+        },
+        {
+          name: "Utho Baita",
+          embed: "https://www.youtube.com/embed/hylhIXUA-J0",
+          category: "routine",
+          description: "Wake Up Little One – Urdu morning routine tune.",
+        },
+        {
+          name: "Tota",
+          embed: "https://www.youtube.com/embed/0a2IYv2_kfk",
+          category: "animals",
+          description: "Parrot Song – Rhythmic and repetitive vocabulary song.",
+        },
+        {
+          name: "Titli",
+          embed: "https://www.youtube.com/embed/cVoO_k7R4ac",
+          category: "animals",
+          description: "Butterfly Song – Gentle and colorful nature tune.",
+        },
+        {
+          name: "Pyasa Kawa",
+          embed: "https://www.youtube.com/embed/M41oOKxf03Y",
+          category: "story",
+          description: "Thirsty Crow – Urdu moral story turned into a rhyme.",
+        },
+        {
+          name: "Barish",
+          embed: "https://www.youtube.com/embed/4kOkOvbTpZY",
+          category: "weather",
+          description: "Rain Song – Sounds of the rain with playful lyrics.",
+        },
+        {
+          name: "Chuchu Chacha",
+          embed: "https://www.youtube.com/embed/Ehj6WCdNcYI",
+          category: "fun",
+          description: "ChuChu Chacha– Silly, catchy tune with lots of laughs.",
+        },
+        {
+          name: "Aloo Kachaloo",
+          embed: "https://www.youtube.com/embed/1E6jXT47Vlo",
+          category: "food",
+          description: "Potato Song – Classic nursery rhyme with wordplay.",
+        },
+
+        {
+          name: "Pakkay Dost",
+          embed: "https://www.youtube.com/@pakkaydost/playlists",
+          category: "puppets",
+          description: "Good Friends – Urdu puppet show with songs.",
+        },
+        
+      ];
+
+      const grid = document.querySelector(".grid");
+      grid.innerHTML = ""; // Clear any hardcoded video-wrapper divs
+
+      function getYouTubeID(embedURL) {
+        const match = embedURL.match(/embed\/([a-zA-Z0-9_-]+)/);
+        return match ? match[1] : "";
+      }
+
+      songlist.forEach((song) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = `video-wrapper song ${song.category}`;
+
+        const title = document.createElement("div");
+        title.className = `video-title ${song.category}`;
+        title.textContent = song.name;
+
+        const preview = document.createElement("div");
+        preview.className = "video-thumbnail";
+        preview.style.position = "relative";
+        preview.style.cursor = "pointer";
+
+        // Thumbnail Image
+        const thumbnail = document.createElement("img");
+        thumbnail.src = `https://img.youtube.com/vi/${getYouTubeID(
+          song.embed
+        )}/hqdefault.jpg`;
+        thumbnail.alt = song.name;
+        thumbnail.style.width = "100%";
+        thumbnail.style.display = "block";
+
+        // Play Button Overlay
+        const playButton = document.createElement("div");
+        playButton.innerHTML = "▶️";
+        playButton.style.position = "absolute";
+        playButton.style.top = "50%";
+        playButton.style.left = "50%";
+        playButton.style.transform = "translate(-50%, -50%)";
+        playButton.style.fontSize = "2rem";
+        playButton.style.color = "#fff";
+        playButton.style.textShadow = "0 0 10px rgba(0,0,0,0.6)";
+
+        // On Click → Replace with iframe
+        preview.addEventListener("click", () => {
+          const iframe = document.createElement("iframe");
+          iframe.src = song.embed + "?autoplay=1";
+          iframe.setAttribute("allowfullscreen", true);
+          iframe.setAttribute("loading", "lazy");
+          iframe.style.width = "100%";
+          iframe.style.height = "180px";
+          preview.replaceWith(iframe);
+        });
+
+        preview.appendChild(thumbnail);
+        preview.appendChild(playButton);
+        wrapper.appendChild(preview);
+
+        const translation = document.createElement("div");
+        translation.className = "translation";
+        translation.textContent = song.description;
+
+        wrapper.appendChild(title);
+        // wrapper.appendChild(iframe);
+        wrapper.appendChild(translation);
+        grid.appendChild(wrapper);
+      });
+
+      //   filter for search
+      const filter = document.getElementById("categoryFilter");
+
+      filter.addEventListener("change", () => {
+        const value = filter.value;
+        const allSongs = document.querySelectorAll(".song");
+        allSongs.forEach((song) => {
+          if (value === "all" || song.classList.contains(value)) {
+            song.style.display = "block";
+          } else {
+            song.style.display = "none";
+          }
+        });
+      });
+
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+
+        // pink heart images from Icons8
+const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+
+for (let i = 0; i < 15; i++) {
+  const icon = document.createElement("img");
+  icon.src = iconSrc;
+  icon.classList.add("heart");
+  icon.style.left = Math.random() * 100 + "vw";
+  icon.style.animationDelay = Math.random() * 10 + "s";
+  icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+  icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+  document.body.appendChild(icon);
+}
+
+      });
+    </script>
+  </body>
+</html>

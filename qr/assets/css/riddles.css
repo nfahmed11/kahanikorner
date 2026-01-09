@@ -1,0 +1,540 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+
+:root {
+  --primary: #ffe066; /* Soft yellow */
+  --accent: #ffffff; /* White */
+  --background: #fcefee; /* Pastel pink */
+  --secondary-bg: #7cccb7; /* Mint */
+  --text-dark: #333333;
+  --correct: #4caf50;
+  --incorrect: #e74c3c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--background), #d6f5f2);
+  font-family: "Grandstander", cursive, system-ui, sans-serif;
+  margin: 0;
+}
+
+/* ✅ Replace your header CSS with this version (or merge carefully) */
+.header {
+  width: 100%;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary-bg));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative; /* needed for desktop dropdown positioning */
+}
+
+.home-link {
+  text-decoration: none;
+  font-weight: 800;
+  color: #2b2b2b;
+  background: rgba(255, 255, 255, 0.45);
+  padding: 8px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ✅ header settings button */
+.settings-btn {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 14px;
+  color: #2b2b2b;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 8px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.settings-btn:active {
+  transform: scale(0.98);
+}
+
+.arrow {
+  transition: transform 0.25s ease;
+}
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* ✅ Desktop dropdown lives off header, anchored to the button */
+.settings-dropdown {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--secondary-bg);
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 16px;
+  z-index: 50;
+
+  width: min(92vw, 320px);
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.settings-dropdown.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ✅ MOBILE MODAL */
+.settings-modal.hidden {
+  display: none;
+}
+
+.settings-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+}
+
+.settings-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.settings-modal-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 420px);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.settings-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px;
+  background: linear-gradient(135deg, rgba(255, 224, 102, 0.65), rgba(124, 204, 183, 0.55));
+}
+
+.settings-modal-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #2b2b2b;
+}
+
+.settings-close {
+  border: 0;
+  background: rgba(255, 255, 255, 0.6);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.settings-modal-body {
+  padding: 12px 14px;
+}
+
+.settings-modal-footer {
+  padding: 12px 14px 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.settings-done {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 900;
+  background: var(--secondary-bg);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  /* On mobile we don't use dropdown at all */
+  .settings-dropdown {
+    display: none;
+  }
+
+  /* allow header to wrap nicely */
+  .header {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* Header settings wrapper */
+.header-settings {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Make the settings button look like a pill in the header */
+.header-settings .settings-header {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  padding: 8px 12px;
+  border: 0;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Dropdown anchored to the header button */
+.header-settings .settings-dropdown {
+  top: calc(100% + 10px);
+  right: 0;
+  left: auto;
+  width: 280px;
+}
+
+/* On desktop we show "Settings:" label */
+.settings-label-desktop {
+  display: inline;
+}
+
+/* MOBILE: turn it into a simple Settings button */
+@media (max-width: 768px) {
+  .settings-label-desktop {
+    display: none;
+  }
+
+  /* Optional: show a gear icon on mobile via CSS */
+  .header-settings .settings-header::before {
+    content: "⚙️";
+    margin-right: 2px;
+  }
+
+  .header-settings .settings-dropdown {
+    width: min(92vw, 320px);
+  }
+}
+
+.container {
+  min-height: calc(100vh - 62px);
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.title-container {
+  background: var(--secondary-bg);
+  padding: 14px 14px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: min(92vw, 420px);
+}
+
+.title-container h1 {
+  margin: 6px 0;
+  color: var(--accent);
+}
+
+.title-container .urdu {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.title-container .roman {
+  font-size: 1.5rem;
+}
+.title-container .english {
+  font-size: 1.05rem;
+  opacity: 0.95;
+}
+
+.settings-container,
+.drop-zone {
+  width: min(92vw, 320px);
+  background-color: var(--primary);
+  border-radius: 12px;
+  padding: 12px 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.settings-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+}
+
+.settings-header {
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    padding: 8px 14px;
+    border: 0;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+  
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .settings-icon {
+    font-size: 16px;
+  }
+  
+  .settings-text {
+    font-weight: 900;
+  }
+  
+  /* Arrow rotation stays the same */
+  .arrow {
+    transition: transform 0.25s ease;
+  }
+  .arrow.rotated {
+    transform: rotate(180deg);
+  }
+  
+  /* Mobile: slightly tighter */
+  @media (max-width: 768px) {
+    .settings-header {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+  }
+  
+
+.settings-dropdown {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--secondary-bg);
+  position: absolute;
+  width: 100%;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.settings-dropdown.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.difficulty-option,
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 14px;
+}
+
+.game-area {
+  width: 100%;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.riddle-container {
+  background-color: var(--primary);
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  min-height: 92px;
+  width: min(92vw, 560px);
+  display: grid;
+  place-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.riddle-row {
+  display: flex;
+  justify-content: center;
+}
+.riddle-box {
+  background: var(--secondary-bg);
+  padding: 14px;
+  border-radius: 12px;
+  min-width: min(86vw, 520px);
+  text-align: center;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.drop-zone {
+  min-height: 72px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.drop-zone.correct {
+  color: white;
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, 0.85),
+    rgba(76, 175, 80, 0.65)
+  );
+}
+
+.drop-zone.incorrect {
+  animation: shake 0.3s ease-in-out;
+  background: rgba(231, 76, 60, 0.18);
+  border: 2px solid rgba(231, 76, 60, 0.5);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.dropzone-image {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+  margin: 6px auto 0;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.word-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: min(92vw, 560px);
+  justify-items: center;
+}
+
+.word {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.12);
+  width: 160px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.word:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.18);
+}
+
+.word:active {
+  transform: scale(0.98);
+}
+
+.word .roman-text {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.word .urdu-text {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.option-image {
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  margin: 6px auto;
+  display: block;
+  border-radius: 10px;
+  background: rgba(252, 239, 238, 0.45);
+  padding: 6px;
+}
+
+.word.incorrect {
+  border: 3px solid rgba(231, 76, 60, 0.55);
+}
+
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.confetti {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: fall 1.8s linear forwards;
+  top: -20px;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .word-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .word {
+    width: min(42vw, 170px);
+  }
+}

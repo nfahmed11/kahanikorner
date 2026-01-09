@@ -1,0 +1,662 @@
+
+:root{
+  --gridgap:4px; /* layout constant */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Show pointer cursor on all obvious interactive elements */
+button,
+a,
+select,
+input[type="range"],
+.clue,
+.clue-btn,
+.menu-btn,
+.hint-btn,
+#clueMenu button,
+.chipbar .chip {
+  cursor: pointer;
+}
+
+
+/* ===== Global Styles ===== */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Baloo 2",cursive;
+  /* Funky permanent gradient background */
+  background: linear-gradient(135deg, #76eefe 0%, #fce4ec 50%, #f3e5f5 100%);
+  background-size:cover;
+  background-attachment:scroll;
+  color:#0f172a;
+  min-height:100svh;
+}
+
+.wrap{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  padding:14px 16px;
+}
+
+
+header{
+  position:sticky;
+  top:0;
+  background:#ffffffee;
+  backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid #e5e7eb;
+  z-index:10;
+  isolation:isolate;
+}
+header::before{
+  content:"";
+  position:fixed;
+  inset:0 0 auto 0;
+  height:var(--header-h, 64px);
+  z-index:-1;
+}
+
+/* ===== Toolbar / Hamburger ===== */
+.toolbar-header{display:flex; align-items:center; gap:12px}
+.menu-btn{
+  background:none; border:none; font-size:1.9rem; line-height:1; cursor:pointer; color:#0f172a;
+  display:none;
+}
+.toolbar{
+  display: flex
+;
+    flex-direction: row;
+    justify-content: center;
+  gap:12px; flex-wrap:wrap; align-items:center;
+  transition:max-height .3s ease, opacity .3s ease; width:100%;
+
+  
+}
+
+
+.status-bar{
+  display:none;
+      
+}
+
+/* ===== Chip bars (horizontal, scrollable) ===== */
+/* ===== Pretty sliders (cyan ring thumb + filled track) ===== */
+.slider-group{ margin:6px 0 10px;
+    display: flex
+;
+    flex-direction: column;
+    align-items: center; }
+.slider-label{ font-weight:800; color:#0f172a; display:block; margin-bottom:6px; }
+
+.slider-wrap{ position:relative; padding:10px 2px 14px; }
+
+/* base */
+.slider-wrap input[type="range"]{
+  -webkit-appearance:none; width:100%; background:transparent; height:32px; cursor:pointer;
+  --fill:#42c8ff;         /* left (filled) */
+  --rest:#cfefff;         /* right (unfilled) */
+  --p:0%;                 /* progress (set in JS) */
+}
+
+/* track (WebKit) */
+.slider-wrap input[type="range"]::-webkit-slider-runnable-track{
+  height:10px; border-radius:999px;
+  background:
+    linear-gradient(var(--fill),var(--fill)) 0/var(--p) 100% no-repeat,
+    var(--rest);
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.06);
+}
+.slider-wrap input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:26px; height:26px; border-radius:50%;
+  background:#fff; border:6px solid var(--fill);
+  margin-top:-8px;           /* centers thumb on 10px track */
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+
+/* track (Firefox) */
+.slider-wrap input[type="range"]::-moz-range-track{
+  height:10px; border-radius:999px; background:var(--rest);
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.06);
+}
+.slider-wrap input[type="range"]::-moz-range-progress{
+  height:10px; border-radius:999px; background:var(--fill);
+}
+.slider-wrap input[type="range"]::-moz-range-thumb{
+  width:26px; height:26px; border-radius:50%;
+  background:#fff; border:6px solid var(--fill);
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+
+/* focus/active */
+.slider-wrap input[type="range"]:focus{ outline:none; }
+.slider-wrap input[type="range"]:focus::-webkit-slider-thumb{ box-shadow:0 0 0 6px rgba(66,200,255,.25), 0 2px 8px rgba(0,0,0,.18); }
+.slider-wrap input[type="range"]:active::-webkit-slider-thumb{ transform:scale(1.02); }
+.slider-wrap input[type="range"]::-moz-range-thumb:focus{ box-shadow:0 0 0 6px rgba(66,200,255,.25), 0 2px 8px rgba(0,0,0,.18); }
+
+.chipbar{
+  display:flex;
+  gap:8px;
+  padding:8px 0;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.chipbar::-webkit-scrollbar{ display:none; }
+
+.chipbar .chip{
+  appearance:none;
+  border:1px solid #dbeafe;
+  background:#ffffff;
+  color:#0f172a;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:800;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 2px 0 #e5e7eb inset;
+  transition:transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.chipbar .chip:hover{ box-shadow:0 0 0 3px #9B5DE533 inset; }
+.chipbar .chip:active{ transform:translateY(1px); }
+.chipbar .chip:focus{ outline:none; box-shadow:0 0 0 3px #00BBF980; }
+
+.chipbar .chip.active{
+  background:#00BBF9;
+  border-color:#00BBF9;
+  color:#fff;
+}
+
+/* Center chip bars on wide screens */
+@media (min-width: 769px){
+  #levelBar, #densityBar{ justify-content:center; }
+}
+
+
+
+
+
+/* ===== Controls ===== */
+select,
+button{
+  appearance:none;
+  border:1px solid #dbeafe;
+  background:#ffffff;
+  color:#0f172a;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:700;
+  box-shadow:0 2px 0 #e5e7eb inset;
+  transition:transform .06s ease, box-shadow .2s ease;
+}
+button.primary{
+  background:#00BBF9;
+  border-color:#00BBF9;
+  color:#fff;
+}
+button.ghost{
+  background:#ffffff;
+  color:#0f172a;
+}
+button:hover, select:hover{ box-shadow:0 0 0 3px #9B5DE555 inset; }
+button:active{ transform:translateY(1px); }
+button:disabled{ opacity:.6; }
+
+.stats{
+  display:flex;
+  gap:14px;
+  color:#64748b;
+  font-weight:700;
+}
+
+/* Hint button */
+
+.hint-btn{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:2;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 #e5e7eb inset;
+  transition: transform .06s ease, box-shadow .2s ease;
+  cursor: pointer;
+}
+.hint-btn:hover{ box-shadow:0 0 0 3px #9B5DE555 inset; }
+.hint-btn:active{ transform:translateY(1px); }
+
+/* ===== Layout ===== */
+main{
+  width:100%;
+  max-width:1120px;
+  margin:18px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:minmax(260px, 360px) 1fr;
+  gap:18px;
+}
+
+.panel{
+  position:relative;
+  width:100%;
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 6px 24px rgba(0,0,0,.06);
+  overflow:hidden;
+}
+
+.panel h2{
+  margin:6px 0 10px;
+  font-size:24px;
+  text-align:center;
+  font-weight:700;
+}
+
+/* ===== Clues ===== */
+.clue-chooser {
+  position: relative;
+  font-size: 24px;
+}
+
+.clue-head{
+  display:flex;
+  align-items:center;
+  justify-content:center;   /* keeps pill + button as a compact group */
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.clue-head .legend{ margin:0; }  /* remove extra bottom margin from pill row */
+
+@media (max-width:768px){
+  .clue-head{ justify-content:center; }
+}
+
+
+.clue-list{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.clue {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  text-align:left;
+}
+.clue.found{opacity:.75; text-decoration:line-through}
+.legend{color:#64748b; font-size:12px; margin-bottom:8px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
+.dot{width:12px; height:12px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px #e5e7eb; display:inline-block}
+
+/* ===== Grid ===== */
+.grid{
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+  display:grid;
+  gap:var(--gridgap);
+  background:#ffffff;
+  border:3px solid #00BBF9;
+  border-radius:20px;
+  padding:calc(var(--gridgap) * 2);
+  box-shadow:inset 0 1px 0 #f1f5f9;
+
+  /* max-width:100%; */
+
+
+  width: fit-content;
+  min-width: max-content;
+  margin: 0 auto;
+
+}
+
+.grid-scroll-wrapper {
+  overflow: auto;
+  max-width: 100%;
+  border-radius: 16px;
+      padding-bottom: 20px;
+
+  /* NEW: Force hard clipping */
+  mask-image: none;
+  -webkit-mask-image: none;
+  background-clip: padding-box;
+  clip-path: inset(0 round 16px);
+  -webkit-overflow-scrolling: auto;
+
+
+}
+
+.grid-scroll-wrapper::-webkit-scrollbar {
+  height: 20px;
+  width: 2px;
+}
+
+.grid-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #02bbf9;
+  border-radius: 999px;
+  border: 2px solid #ffffffaa; /* adds space and contrast */
+  width: 50px;
+}
+
+
+.cell{
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  font-weight:800; letter-spacing:.5px;
+  text-transform:lowercase;
+  cursor:pointer;
+  border-radius:8px;
+  transition:transform .07s ease, background .15s ease, color .15s ease;
+  color:#111827;
+  background:#ffffff;
+  line-height: 1;
+  overflow: hidden;
+  touch-action: none;           /* NEW: ensure dragging isn’t turned into scrolling/zoom */
+}
+
+
+.cell:hover{outline:2px solid #e0f2fe;}
+.cell[data-sel="1"]{background:#f1f5f9}
+.cell[data-word="1"]{background:#dbeafe}
+.cell[data-found="1"]{background:#dbeafe; color:#0b0f19}
+.cell.pop{animation:pop .28s ease}
+@keyframes pop{50%{transform:scale(1.12)} 100%{transform:none}}
+
+.modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.18); padding:20px}
+.modal.show{display:grid}
+.modal .box{background:#fff; border-radius:16px; padding:20px; width:min(520px,92vw); border:1px solid #eee}
+.box h3{margin:0 0 10px}
+
+.pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; background:#eef2ff; color:#312e81;
+      border-radius:999px; font-weight:700; font-size:12px}
+.hint-flash {
+  animation: hintFlash 0.8s ease-in-out 0s 2;
+  background-color: #fcd34d2b !important;  /* bright yellow flash */
+  color: #1f2937 !important;             /* dark text for contrast */
+  border-radius: 8px;
+  z-index: 2;
+}
+
+@keyframes hintFlash {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.22); background-color: #fcd34d4d; }
+  100% { transform: scale(1); }
+}
+
+/* ===== Mobile: swipable one-at-a-time clues ===== */
+@media (max-width: 768px){
+
+
+
+.toolbar > *{margin:4px 0}
+/* when collapsed */
+  .toolbar.collapsed{
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);    /* ✨ slide up a bit */
+    padding-top: 0;                   /* avoid leftover vertical space */
+    padding-bottom: 0;
+    border-width: 0;                  /* optional: hide border while collapsed */
+  }
+
+  /* Show the hamburger on small screens */
+  .menu-btn{
+    display: inline-block;          /* was display:none globally */
+  }
+
+  /* (Optional) nicer open animation when JS adds .open */
+  .toolbar.open{
+    max-height: 600px;          /* enough for all controls */
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);   /* slide in place */
+  }
+  main{ grid-template-columns: 1fr; gap:12px; }
+
+    /* Make list a swipeable carousel that shows 2–3 per view */
+ #clues {
+  --slides: 2;
+  --gap: 8px;
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  touch-action: pan-x;
+  scrollbar-width: none;
+
+  /* NEW: Prevent layout jumps */
+  will-change: transform, scroll-position;
+  scroll-timeline: --scrolling inline;
+  scroll-snap-stop: always;
+}
+
+
+  #clues::-webkit-scrollbar{ display:none; }
+
+  /* Each slide takes 1/(slides) of width, accounting for gaps */
+  .clue{
+    flex: 0 0 calc((100% - (var(--gap) * (var(--slides) - 1))) / var(--slides));
+    min-width: calc((100% - (var(--gap) * (var(--slides) - 1))) / var(--slides));
+    justify-content:center;
+    text-align:center;
+    height:44px;
+    font-size:clamp(18px, 5.2vw, 26px);
+    scroll-snap-align:center;
+    border-width:2px;
+    border-radius:16px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+
+  }
+
+  /* Hide the colored dot; center just the label */
+  .clue .dot{ display:none; }
+  .clue [data-role="label"]{
+    margin:0 !important;
+    display:inline-block;
+  }
+
+ 
+  #legendGrid{ display:flex; }
+
+
+
+}
+
+/* Mobile header layout (burger | words-left centered | timer right) */
+@media (max-width: 768px){
+  /* Make the header a 2-col grid: [hamburger] [status area] */
+  .toolbar-header{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Status area sits in column 2 and itself is a 2-col grid */
+  #statusBar{
+    grid-column: 2;
+    
+    display: flex
+;
+    justify-content: flex-end;
+  }
+  #statusBar .stats{
+    display: flex;
+    justify-content: center;
+    grid-template-columns: 1fr auto;    /* [centered words-left] [timer right] */
+    align-items: center;
+  }
+  /* ✅ found/goal centered in the whole header */
+  #statusBar .stats > span:nth-child(2){
+    grid-column: 1;
+    justify-self: center;
+  }
+  /* ⏱️ timer pinned to the right edge */
+  #statusBar .stats > span:nth-child(1){
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  /* Put the collapsible toolbar (buttons/selects) on the next row */
+  .toolbar{
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===== Sleeker header & control bar ===== */
+header{
+  --bg: rgba(255,255,255,.72);
+  background: var(--bg);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(15,23,42,.06);
+  box-shadow: 0 1px 0 rgba(15,23,42,.04);
+  transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+header.scrolled{
+  --bg: rgba(255,255,255,.86);
+  border-bottom-color: transparent;
+  box-shadow: 0 10px 30px rgba(15,23,42,.12);
+}
+
+/* Turn the toolbar into a pill-shaped control pod */
+.toolbar{
+  background: rgba(255,255,255,.92);
+  border: 1px solid #e6eaf5;
+  border-radius: 999px;
+  padding: 8px 12px;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+
+  /* ✨ for animation */
+  transform: translateY(0);
+  transition:
+    transform .28s cubic-bezier(.22,.61,.36,1),
+    opacity  .25s ease,
+    max-height .32s ease;
+  will-change: transform, opacity, max-height;
+}
+
+.toolbar > *{ margin:0 !important; }          /* override earlier margin rule */
+
+/* Dividers between control groups */
+.toolbar .divider{
+  width:1px; height:24px; background:#e6eaf5; flex:0 0 1px; border-radius:2px;
+}
+
+/* Make controls feel consistent (pill look) */
+select, button{
+  border-radius: 999px;
+  padding: 8px 12px;
+  box-shadow: none;
+  border:1px solid #e6eaf5;
+}
+button.primary{ background:#00BBF9; border-color:#00BBF9; color:#fff; }
+
+/* Compact slider groups inside the pod */
+.slider-group{
+  margin:0;
+  align-items: flex-start;
+}
+.slider-label{
+  font-size:12px;
+  letter-spacing:.2px;
+  text-transform:uppercase;
+  color:#475569;
+  margin-bottom:4px;
+}
+.slider-wrap{ padding:6px 0 8px; }
+
+/* Stats as a subtle pill on the right */
+.stats{
+  margin-left:auto;                           /* push to the far right */
+  background:#f0f9ff;
+  border:1px solid #e0f2fe;
+  border-radius:999px;
+  padding:6px 10px;
+  gap:10px;
+  color:#0369a1;
+}
+
+/* Nicer hamburger */
+.menu-btn{
+  border:1px solid #e6eaf5;
+  border-radius:12px;
+  padding:6px 10px;
+  background: rgba(255,255,255,.95);
+}
+
+/* When toolbar is expanded on mobile, use a card look instead of a long pill */
+@media (max-width:768px){
+  .toolbar{
+    border-radius:16px;
+    padding:12px;
+    gap:12px;
+  }
+  .toolbar .divider{ display:none; }
+}
+
+
+.clue-btn{
+
+  display:inline-flex; align-items:center; gap:8px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 #e5e7eb inset;
+  transition: transform .06s ease, box-shadow .2s ease;
+  cursor: pointer;
+}
+.clue-btn:hover{ box-shadow:0 0 0 3px #9B5DE533 inset; }
+.clue-btn:active{ transform:translateY(1px); }
+
+/* Blue version that matches “New Game” */
+.clue-btn.primary{
+  background:#00BBF9;
+  border-color:#00BBF9;
+  color:#fff;
+  box-shadow:none;
+}
+.clue-btn.primary:hover{ box-shadow:0 0 0 3px rgba(0,187,249,.25) inset; }
+.clue-btn.primary:focus{ outline:none; box-shadow:0 0 0 3px rgba(0,187,249,.35); }
+.clue-btn.primary:active{ transform:translateY(1px); }
+
+.clue-menu{
+  position:absolute; top:calc(100% + 8px); left:0;
+  min-width: 240px;
+  background:#fff; border:1px solid #eaeef7;
+  border-radius:14px; padding:6px;
+  box-shadow:0 10px 30px rgba(15,23,42,.12);
+  z-index:20;
+}
+.clue-menu button{
+  width:100%; text-align:left;
+  border:none; background:transparent; cursor:pointer;
+  padding:10px 12px; border-radius:10px; font-weight:800; color:#0f172a;
+}
+.clue-menu button:hover{ background:#f1f5f9; }
+.clue-menu button[aria-checked="true"]{ background:#eff6ff; }
+
+
+

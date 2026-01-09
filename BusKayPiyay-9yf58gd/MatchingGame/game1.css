@@ -1,0 +1,261 @@
+h1 {
+  font-size: 1.2rem;
+  color: #4a594a;
+  margin: 5px;
+}
+
+.title-container {
+  background-color: #b0c3b7;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* timer area */
+
+.hidden {
+  display: none;
+}
+
+.timer-container {
+  background-color: #ebe1e3;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Increased to allow flexibility */
+  max-width: 400px; /* Prevents it from being too wide */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.timer-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4a594a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.game-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #e0cfd2;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap; /* Forces wrapping */
+}
+
+#timer,
+#score {
+  padding: 8px 15px;
+  background-color: #b89794;
+  color: #f3f1f0;
+  border-radius: 5px;
+  white-space: nowrap;
+  text-align: center;
+  max-width: 45%; /* Prevents them from expanding too much */
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+/* timer flashes red at 5 seconds */
+.flash-red {
+  color: red;
+  animation: flash 0.5s infinite alternate;
+}
+
+@keyframes flash {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+/* Force vertical stacking if the container is too small */
+@media (max-width: 320px) {
+  .game-status {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #timer,
+  #score {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* game area */
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.image-container {
+  width: 200px;
+  height: 200px;
+}
+
+.target-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  background-color: #b89794;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.drop-zone {
+  width: 220px;
+  height: 80px;
+  border: 2px dashed #4a594a;
+  justify-content: center;
+  font-size: 18px;
+  color: #4a594a;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: #ebe1e3;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.word-options {
+  display: flex;
+  gap: 15px;
+}
+
+.word {
+  background-color: #b0c3b7;
+  padding: 15px 30px;
+  border-radius: 10px;
+  cursor: grab;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.word .roman {
+  text-transform: uppercase;
+}
+
+.word:active {
+  cursor: grabbing;
+}
+
+.correct {
+  color: white;
+  background-color: #4a594a;
+  border: 3px solid #bae1ba;
+  box-shadow: 0 0 15px #bae1ba;
+  transition: all 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.incorrect {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+/* confetti code */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}

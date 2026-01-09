@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocabulary Memory Game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+
+       :root {
+        --primary: #1777af; /* Soft yellow */
+        --accent: #ffffff; /* White text or highlights */
+        --background: #fcefee; /* Light pastel pink */
+        --secondary-bg: #c151e7; /* Calming mint green */
+        --text-dark: #333333;
+        --correct: #4caf50;
+        --incorrect: #e74c3c;
+      }
+
+      
+      body {
+        font-family: "Quicksand", sans-serif;
+        background: linear-gradient(135deg, #f9f7fe 0%, #e4f1fe 100%);
+        min-height: 100vh;
+      }
+
+       header {
+        width: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--secondary-bg)
+        );
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+.logo {
+  width: 120px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+
+      .mode-btn {
+        transition: background-color 0.3s ease;
+      }
+
+      .card {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        cursor: pointer;
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+      }
+
+      .card.flipped .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-front {
+        background: linear-gradient(135deg, #fff983 0%, #f3a89c 100%);
+        transform: rotateY(0deg);
+      }
+
+      .card-back {
+        transform: rotateY(180deg);
+      }
+
+      .english-card {
+        background: linear-gradient(135deg, #ff94f9 0%, #f5e3de 100%);
+      }
+
+      .urdu-card {
+        background: linear-gradient(135deg, #86ebbd 0%, #b4cdf5 100%);
+      }
+      #play-again {
+        background: linear-gradient(135deg, #f3a89c 0%, #fff983 100%);
+        transition: transform 1s ease, box-shadow 1s ease;
+      }
+
+      #play-again:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .match-animation {
+        animation: matchPulse 0.8s ease-in-out;
+      }
+
+      @keyframes matchPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        opacity: 0;
+        animation: confetti-fall 3s ease-in-out forwards;
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-50px);
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+
+      .progress-bar {
+        height: 10px;
+        background: linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%);
+        border-radius: 5px;
+        transition: width 0.5s ease;
+      }
+    </style>
+  </head>
+
+  <body>
+       <header>
+      <a href="https://kahanikorner.com/">
+        <img src="/quicklinks/images/logo.png" alt="Kahani Korner Logo" class="logo" />
+      </a>
+    </header>
+
+    <div  class="p-4 md:p-8">
+
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-indigo-800 mb-2">
+          Memory Game
+        </h1>
+        <p class="text-gray-600">
+          Match Urdu words with their English translations
+        </p>
+      </div>
+
+      <div class="mb-6 bg-white p-4 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-medium text-indigo-700">Progress:</span>
+          <span id="progress-text" class="text-indigo-700 font-medium"
+            >0/6 Pairs</span
+          >
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div id="progress-bar" class="progress-bar w-0"></div>
+        </div>
+      </div>
+
+      <div class="mb-6 bg-white p-4 rounded-lg shadow-md">
+        <div class="flex justify-center gap-4">
+          <button
+            id="easy-mode"
+            class="mode-btn bg-gradient-to-r from-green-300 via-green-400 to-green-500 hover:from-green-400 hover:via-green-500 hover:to-green-600 text-white font-bold py-2 px-4 rounded">
+            Easy
+          </button>
+
+          <button
+            id="medium-mode"
+            class="mode-btn bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 hover:from-yellow-400 hover:via-yellow-500 hover:to-yellow-600 text-white font-bold py-2 px-4 rounded">
+            Medium
+          </button>
+
+          <button
+            id="hard-mode"
+            class="mode-btn bg-gradient-to-r from-red-300 via-red-400 to-red-500 hover:from-red-400 hover:via-red-500 hover:to-red-600 text-white font-bold py-2 px-4 rounded">
+            Hard
+          </button>
+        </div>
+      </div>
+
+      <div id="game-board" class="grid grid-cols-4 md:grid-cols-6 gap-4"></div>
+
+      <div
+        id="win-message"
+        class="hidden mt-8 p-6 bg-white rounded-xl shadow-lg text-center">
+        <h2 class="text-2xl font-bold text-indigo-700 mb-3">
+          Congratulations! 🎉
+        </h2>
+        <p class="text-gray-600 mb-4">
+          You've matched all the vocabulary pairs!
+        </p>
+        <button
+          id="play-again"
+          class="px-6 py-2 bg-gradient-to-r text-white font-medium rounded-full shadow-md">
+          Play Again
+        </button>
+      </div>
+    </div>
+
+    </div>
+
+    <script type="module">
+      import { riddles as originalRiddles } from "../vocab.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const gameBoard = document.getElementById("game-board");
+        const progressBar = document.getElementById("progress-bar");
+        const progressText = document.getElementById("progress-text");
+        const winMessage = document.getElementById("win-message");
+        const playAgainBtn = document.getElementById("play-again");
+
+        // Vocabulary pairs with English, Roman Urdu, and Urdu
+
+        // Prepare vocabularyPairs from imported riddles
+        const vocabularyPairs = originalRiddles.map((item) => ({
+          english: { word: item.word.english, image: item.image },
+          urdu: { romanUrdu: item.word.romanUrdu, urduWord: item.word.urdu },
+        }));
+
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let canFlip = true;
+        let selectedDifficulty = "easy"; // default
+        let currentPairs = []; // Tracks current vocabulary set depending on mode
+
+        // Difficulty mode buttons
+        document.getElementById("easy-mode").addEventListener("click", () => {
+          selectedDifficulty = "easy";
+          initGame();
+        });
+
+        document.getElementById("medium-mode").addEventListener("click", () => {
+          selectedDifficulty = "medium";
+          initGame();
+        });
+
+        document.getElementById("hard-mode").addEventListener("click", () => {
+          selectedDifficulty = "hard";
+          initGame();
+        });
+
+        // Initialize game
+        function initGame() {
+          gameBoard.innerHTML = "";
+          cards = [];
+          flippedCards = [];
+          matchedPairs = 0;
+          canFlip = true;
+          winMessage.classList.add("hidden");
+
+          // Filter vocabulary based on difficulty
+          if (selectedDifficulty === "easy") {
+            currentPairs = vocabularyPairs.slice(
+              0,
+              Math.ceil(vocabularyPairs.length / 3)
+            );
+          } else if (selectedDifficulty === "medium") {
+            currentPairs = vocabularyPairs.slice(
+              0,
+              Math.ceil((vocabularyPairs.length * 2) / 3)
+            );
+          } else {
+            currentPairs = vocabularyPairs.slice(); // All
+          }
+
+          progressBar.style.width = "0%";
+          progressText.textContent = `0/${currentPairs.length} Pairs`;
+
+          // Create cards for each filtered vocabulary pair
+          currentPairs.forEach((pair, index) => {
+            const englishCard = createCard(
+              pair.english.word,
+              pair.english.image,
+              "english",
+              index
+            );
+            cards.push(englishCard);
+
+            const urduCard = createCard(
+              pair.urdu.romanUrdu,
+              pair.urdu.urduWord,
+              "urdu",
+              index
+            );
+            cards.push(urduCard);
+          });
+
+          // Shuffle cards
+          shuffleArray(cards);
+
+          // Add cards to the game board
+          cards.forEach((card) => {
+            gameBoard.appendChild(card);
+          });
+        }
+
+        // Create a card element
+        function createCard(primaryText, secondaryText, type, pairIndex) {
+          const card = document.createElement("div");
+          card.className = "card aspect-square";
+          card.dataset.pairIndex = pairIndex;
+          card.dataset.type = type;
+
+          card.innerHTML = `
+    <div class="card-inner w-full h-full">
+      <div class="card-front flex items-center justify-center">
+        <span class="text-3xl font-bold text-white">?</span>
+      </div>
+      <div class="card-back ${
+        type === "english" ? "english-card" : "urdu-card"
+      } p-3 flex flex-col items-center justify-center text-center">
+        ${
+          type === "english"
+            ? `<img src="${secondaryText}" alt="${primaryText}" class="w-16 h-16 mb-2 object-contain" />
+               <span class="font-bold text-gray-800">${primaryText}</span>`
+            : `<span class="font-bold text-xl mb-1">${primaryText}</span>
+               <span class="text-2xl">${secondaryText}</span>`
+        }
+      </div>
+    </div>
+  `;
+
+          card.addEventListener("click", () => flipCard(card));
+          return card;
+        }
+
+        // Flip a card
+        function flipCard(card) {
+          if (
+            !canFlip ||
+            card.classList.contains("flipped") ||
+            flippedCards.includes(card)
+          ) {
+            return;
+          }
+
+          card.classList.add("flipped");
+          flippedCards.push(card);
+
+          if (flippedCards.length === 2) {
+            canFlip = false;
+            checkForMatch();
+          }
+        }
+
+        // Check if the flipped cards match
+        function checkForMatch() {
+          const [card1, card2] = flippedCards;
+          const isMatch =
+            card1.dataset.pairIndex === card2.dataset.pairIndex &&
+            card1.dataset.type !== card2.dataset.type;
+
+          if (isMatch) {
+            setTimeout(() => {
+              card1.classList.add("match-animation");
+              card2.classList.add("match-animation");
+              createConfetti(card1);
+              createConfetti(card2);
+
+              matchedPairs++;
+              updateProgress();
+
+              flippedCards = [];
+              canFlip = true;
+
+              if (matchedPairs === currentPairs.length) {
+                setTimeout(() => {
+                  showWinMessage();
+                }, 1000);
+              }
+            }, 500);
+          } else {
+            setTimeout(() => {
+              card1.classList.remove("flipped");
+              card2.classList.remove("flipped");
+              flippedCards = [];
+              canFlip = true;
+            }, 1000);
+          }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+          const progressPercentage = (matchedPairs / currentPairs.length) * 100;
+          progressBar.style.width = `${progressPercentage}%`;
+          progressText.textContent = `${matchedPairs}/${currentPairs.length} Pairs`;
+        }
+
+        // Show win message
+        function showWinMessage() {
+          winMessage.classList.remove("hidden");
+          createWinConfetti();
+        }
+
+        // Create confetti effect for matched cards
+        function createConfetti(card) {
+          const rect = card.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const colors = [
+            "#FF9AA2",
+            "#FFB7B2",
+            "#FFDAC1",
+            "#E2F0CB",
+            "#B5EAD7",
+            "#C7CEEA",
+          ];
+
+          for (let i = 0; i < 20; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = `${centerX}px`;
+            confetti.style.top = `${centerY}px`;
+            confetti.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.width = `${5 + Math.random() * 10}px`;
+            confetti.style.height = `${5 + Math.random() * 10}px`;
+            confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+              confetti.remove();
+            }, 3000);
+          }
+        }
+
+        // Create confetti for win celebration
+        function createWinConfetti() {
+          const colors = [
+            "#FF9AA2",
+            "#FFB7B2",
+            "#FFDAC1",
+            "#E2F0CB",
+            "#B5EAD7",
+            "#C7CEEA",
+          ];
+
+          for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = `${Math.random() * window.innerWidth}px`;
+            confetti.style.top = "0px";
+            confetti.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.width = `${5 + Math.random() * 10}px`;
+            confetti.style.height = `${5 + Math.random() * 10}px`;
+            confetti.style.animationDelay = `${Math.random() * 2}s`;
+
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+              confetti.remove();
+            }, 5000);
+          }
+        }
+
+        // Shuffle array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+
+        // Play again button
+        playAgainBtn.addEventListener("click", initGame);
+
+        // Initialize the game
+        initGame();
+      });
+    </script>
+  </body>
+</html>

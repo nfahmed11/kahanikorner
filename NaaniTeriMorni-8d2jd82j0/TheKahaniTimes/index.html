@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Analytics (same as your other page) -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N97Z02BGG4');
+    </script>
+
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>The Kahani Times</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Your shared styles -->
+    <link rel="stylesheet" href="/SharedCode4Books/common.css" />
+
+    <style>
+      /* GLOBAL “NEWSPAPER” FEEL */
+    body {
+  font-family: "Authentic Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #e4e0d4;
+  margin: 0;
+  min-height: 100vh;
+
+  /* a bit more space so the full player is always above the bar */
+  padding-bottom: 140px;
+}
+
+
+
+      header {
+        padding: 0.75rem 1rem 0;
+        text-align: center;
+      }
+
+      main {
+        max-width: 960px;
+        margin: 1.5rem auto 2rem auto;
+        padding: 1.75rem 1.5rem 2.25rem;
+        background: #fdf9f0; /* off-white page */
+        border: 1px solid #d2c7af;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 0.35rem;
+        font-family: "Grandstander", system-ui, sans-serif;
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border-bottom: 2px solid #333333;
+        padding-bottom: 0.35rem;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #6b6255;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+      }
+
+      .page-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .page-tab {
+        border: 1px solid #b7aa91;
+        background: #fdf9f0;
+        padding: 0.3rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+          transform 0.1s ease;
+      }
+
+      .page-tab:hover {
+        transform: translateY(-1px);
+      }
+
+      .page-tab.active {
+        background: #333333;
+        color: #fdf9f0;
+        border-color: #333333;
+        font-weight: 600;
+      }
+
+      .page-meta {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #7b7264;
+        margin-bottom: 1rem;
+        font-style: italic;
+      }
+
+      .page-wrapper {
+        background: #fdf9f0;
+        border-radius: 0;
+        padding: 1rem 0;
+        border-top: 1px solid #d2c7af;
+        border-bottom: 1px solid #d2c7af;
+      }
+
+      .newsletter-page {
+        display: none;
+        padding: 0.75rem 0.25rem;
+      }
+
+      .newsletter-page.active {
+        display: block;
+      }
+
+      .page-heading {
+        display: block;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #d2c7af;
+        padding-bottom: 0.35rem;
+      }
+
+      .page-heading h2 {
+        font-size: 1rem;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #333333;
+      }
+
+      .page-tag {
+        font-size: 0.75rem;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        background: #f1e4cf;
+        color: #4a4338;
+        white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        display: inline-block;
+        margin-top: 0.3rem;
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+        justify-items: center; /* center the items in their grid cells */
+      }
+
+      /* ARTICLE-LIKE BUTTONS INSTEAD OF CARDS */
+      .section-button {
+        border: none;
+        border-radius: 0;
+        padding: 0.55rem 0.75rem;
+        text-align: left;
+        background: transparent;
+        cursor: pointer;
+        font-size: 0.88rem;
+        line-height: 1.35;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        border-left: 2px solid #b7aa91; /* column-style rule */
+        transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+        max-width: 360px; /* keeps them looking like neat "articles" */
+        width: 100%;
+      }
+
+      .section-button:hover {
+        background: rgba(0, 0, 0, 0.03);
+        border-color: #333333;
+        transform: translateY(-1px);
+      }
+
+      .section-button span.icon {
+        font-size: 1rem;
+        line-height: 1;
+        margin-top: 0.15rem;
+      }
+
+      .section-button .label-main {
+        font-weight: 700;
+        text-transform: none;
+      }
+
+      .section-button .label-sub {
+        display: block;
+        font-size: 0.78rem;
+        color: #6b6255;
+      }
+
+      /* BOTTOM “STRIP” AUDIO PLAYER LIKE A NEWSPAPER FOOTER — FIXED TO BOTTOM */
+.audio-player-bar {
+  position: fixed !important;   /* override anything from common.css */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  background: #f1e4cf;
+  border-top: 1px solid #c9bda6;
+
+  /* extra vertical padding so the audio controls sit well above the bottom edge */
+  padding: 0.75rem 1rem 1.25rem;
+  padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+
+  box-shadow: 0 -8px 20px rgba(15, 23, 42, 0.18);
+  z-index: 9999;
+}
+
+
+
+      .audio-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        text-align: center;
+      }
+
+      .now-playing {
+        font-size: 0.8rem;
+        color: #4a4338;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .now-playing strong {
+        color: #111111;
+        text-transform: none;
+        letter-spacing: normal;
+      }
+
+      audio {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        display: block;
+      }
+
+      @media (min-width: 640px) {
+        .audio-inner {
+          flex-direction: row;
+          justify-content: center;
+          gap: 1.25rem;
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 480px) {
+  main {
+    margin: 1rem 0.5rem 2rem;
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        
+        <img
+          src="/quicklinks/images/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo"
+        />
+      </a>
+    </header>
+
+    <main>
+      <h1>The Kahani Times — Audio Newsletter</h1>
+      <p class="subtitle">
+        Flip through the pages and tap any section to listen to the audio version.
+      </p>
+
+      <!-- Page selector -->
+      <div class="page-nav">
+        <button class="page-tab active" data-page="1">Page 1</button>
+        <button class="page-tab" data-page="2">Page 2</button>
+        <button class="page-tab" data-page="3">Page 3</button>
+        <button class="page-tab" data-page="4">Page 4</button>
+      </div>
+
+      <div class="page-meta">
+        Use the tabs above to “flip” through the newsletter pages.
+      </div>
+
+      <div class="page-wrapper">
+        <!-- PAGE 1 -->
+        <section class="newsletter-page active" data-page="1">
+          <div class="page-heading">
+            <h2>Page 1 — Front Page</h2>
+            <div class="page-tag">Intro & Headlines</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              data-audio="./audio/naanitermorni.mp3"
+              data-title="Naani Teri Morni"
+            >
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Naani Teri Morni</span>
+                <span class="label-sub">This Month's Story</span>
+              </span>
+            </button>
+
+           
+
+           
+          </div>
+        </section>
+
+        <!-- PAGE 2 -->
+        <section class="newsletter-page" data-page="2">
+          <div class="page-heading">
+            <h2>Page 2 — Activities</h2>
+            <div class="page-tag">Articles & Reflections</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              data-audio="./audio/dadasepoocho.mp3"
+              data-title="Dada Se Poocho"
+            >
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Dada Se Poocho</span>
+                <span class="label-sub">Get some advice from Dada</span>
+              </span>
+            </button>
+
+          
+                <button
+              class="section-button"
+              data-audio="./audio/naikikanaap.mp3"
+              data-title="Naiki Ka Naap"
+            >
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Naiki Ka Naap</span>
+                <span class="label-sub">Do some good deeds today!</span>
+              </span>
+            </button>
+
+          </div>
+        </section>
+
+        <!-- PAGE 3 -->
+        <section class="newsletter-page" data-page="3">
+          <div class="page-heading">
+            <h2>Page 3 — Continued</h2>
+            <div class="page-tag">--</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              data-audio="./audio/aajkalafz.mp3"
+              data-title="Word of the day"
+            >
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Aaj Ka Lafz</span>
+                <span class="label-sub">Word of the day</span>
+              </span>
+            </button>
+
+          </div>
+        </section>
+
+        <!-- PAGE 4 -->
+        <section class="newsletter-page" data-page="4">
+          <div class="page-heading">
+            <h2>Page 4 — Closing & Extras</h2>
+            <div class="page-tag">Closing Notes</div>
+          </div>
+
+          <div class="section-grid">
+            <button
+              class="section-button"
+              data-audio="./audio/khatt.mp3"
+              data-title="Closing Note"
+            >
+              <span class="icon">🔊</span>
+              <span>
+                <span class="label-main">Closing Note</span>
+                <span class="label-sub">A Letter From Dada Jee</span>
+              </span>
+            </button>
+
+          
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Shared audio player -->
+    <div class="audio-player-bar">
+      <div class="audio-inner">
+        <div class="now-playing" id="nowPlaying">
+          Now playing: <strong>Nothing yet — tap a section to start.</strong>
+        </div>
+        <audio id="audioPlayer" controls preload="none">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <script>
+      // Page tab logic
+      const pageTabs = document.querySelectorAll(".page-tab");
+      const pages = document.querySelectorAll(".newsletter-page");
+
+      pageTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const targetPage = tab.dataset.page;
+
+          // Toggle active tab
+          pageTabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+
+          // Toggle visible page
+          pages.forEach((page) => {
+            if (page.dataset.page === targetPage) {
+              page.classList.add("active");
+            } else {
+              page.classList.remove("active");
+            }
+          });
+        });
+      });
+
+      // Audio logic
+      const audioPlayer = document.getElementById("audioPlayer");
+      const nowPlaying = document.getElementById("nowPlaying");
+      const sectionButtons = document.querySelectorAll(".section-button");
+
+      sectionButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const src = btn.dataset.audio;
+          const title = btn.dataset.title || btn.innerText.trim();
+
+          if (!src) return;
+
+          if (audioPlayer.src !== src) {
+            audioPlayer.src = src;
+          }
+
+          audioPlayer.play().catch(() => {
+            // autoplay might be blocked; user will press play
+          });
+
+          nowPlaying.innerHTML = `Now playing: <strong>${title}</strong>`;
+        });
+      });
+    </script>
+  </body>
+</html>

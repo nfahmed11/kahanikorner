@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>                                 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kahani Korner | Chhota Sa Makora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/SharedCode4Books/common.css">
+   <style>
+      
+      .book-placeholder {
+        background-image: url("images/bookcover.png");
+      
+      }
+
+
+
+
+
+    </style>
+  </head>
+
+  <body>
+<div id="overlay">
+      🔈 <br> Tap to Unmute
+</div>
+
+
+    
+
+
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img src="../quicklinks/images/logo.png" alt="Kahani Korner Logo" class="logo" />
+      </a>
+    </header>
+
+      <h1>Chhota Sa Makora</h1>
+
+    
+    <div class="container">
+      <div class="book-placeholder"></div>
+
+      <div class="button-container">
+        <a href="video.html" class="button">Read Aloud</a>
+        <a href="Flashcards/game3.html" class="button">Flashcards</a>
+        <a href="MatchingGame/game1.html" class="button">Picture Match</a>
+        <a href="RiddleGame/game2.html" class="button">Riddles</a>
+        <a href="MemoryGame/game4.html" class="button">Memory Game</a>
+        <a href="Wordsearch/game.html" class="button">Word Search</a>
+      </div>
+    </div>
+
+    
+<iframe
+  id="ytplayer"
+  src="https://www.youtube.com/embed/yt6k3gzGMjY?enablejsapi=1&autoplay=1&mute=1&start=0&end=98&loop=1&playlist=yt6k3gzGMjY"
+  title="YouTube video player"
+  frameborder="0"
+  allow="autoplay; encrypted-media; accelerometer; clipboard-write; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+
+  </body>
+
+   <script>
+
+   // pink heart images from Icons8
+const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+
+for (let i = 0; i < 15; i++) {
+  const icon = document.createElement("img");
+  icon.src = iconSrc;
+  icon.classList.add("heart");
+  icon.style.left = Math.random() * 100 + "vw";
+  icon.style.animationDelay = Math.random() * 10 + "s";
+  icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+  icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+  document.body.appendChild(icon);
+}
+
+  </script>
+
+
+<script>
+// Load YouTube API
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(tag);
+
+let player;
+let loopInterval;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('ytplayer', {
+    events: {
+      'onReady': () => player.playVideo(),
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.PLAYING) {
+    clearInterval(loopInterval);
+    loopInterval = setInterval(() => {
+      let t = player.getCurrentTime();
+      if (t >= 98) {
+        player.seekTo(0, true); // restart & play from beginning
+      }
+    }, 500);
+  } else {
+    clearInterval(loopInterval);
+  }
+}
+
+// Overlay click: unmute and hide overlay
+const overlay = document.getElementById("overlay");
+overlay.addEventListener("click", () => {
+  if (player && player.unMute) {
+    player.unMute();
+    player.playVideo(); // ensure video resumes after unmute
+    overlay.style.display = "none";
+  }
+});
+</script>
+
+
+</html>

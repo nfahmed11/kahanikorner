@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Microsoft Analytics tag to track analytics  -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "tp6dow982y");
+</script>
+
+<!-- Google tag to track analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N97Z02BGG4');
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EN↔RU Word Search — v4 (No Theme)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --gridgap:4px; /* layout constant */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Show pointer cursor on all obvious interactive elements */
+button,
+a,
+select,
+input[type="range"],
+.clue,
+.clue-btn,
+.menu-btn,
+.hint-btn,
+#clueMenu button,
+.chipbar .chip {
+  cursor: pointer;
+}
+
+
+/* ===== Global Styles ===== */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Baloo 2",cursive;
+  /* Funky permanent gradient background */
+  background: linear-gradient(135deg, #76eefe 0%, #fce4ec 50%, #f3e5f5 100%);
+  background-size:cover;
+  background-attachment:scroll;
+  color:#0f172a;
+  min-height:100svh;
+}
+
+.wrap{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  padding:14px 16px;
+}
+
+
+header{
+  position:sticky;
+  top:0;
+  background:#ffffffee;
+  backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid #e5e7eb;
+  z-index:10;
+  isolation:isolate;
+}
+header::before{
+  content:"";
+  position:fixed;
+  inset:0 0 auto 0;
+  height:var(--header-h, 64px);
+  z-index:-1;
+}
+
+/* ===== Toolbar / Hamburger ===== */
+.toolbar-header{display:flex; align-items:center; gap:12px}
+.menu-btn{
+  background:none; border:none; font-size:1.9rem; line-height:1; cursor:pointer; color:#0f172a;
+  display:none;
+}
+.toolbar{
+  display: flex
+;
+    flex-direction: row;
+    justify-content: center;
+  gap:12px; flex-wrap:wrap; align-items:center;
+  transition:max-height .3s ease, opacity .3s ease; width:100%;
+
+  
+}
+
+
+.status-bar{
+  display:none;
+      
+}
+
+/* ===== Chip bars (horizontal, scrollable) ===== */
+/* ===== Pretty sliders (cyan ring thumb + filled track) ===== */
+.slider-group{ margin:6px 0 10px;
+    display: flex
+;
+    flex-direction: column;
+    align-items: center; }
+.slider-label{ font-weight:800; color:#0f172a; display:block; margin-bottom:6px; }
+
+.slider-wrap{ position:relative; padding:10px 2px 14px; }
+
+/* base */
+.slider-wrap input[type="range"]{
+  -webkit-appearance:none; width:100%; background:transparent; height:32px; cursor:pointer;
+  --fill:#42c8ff;         /* left (filled) */
+  --rest:#cfefff;         /* right (unfilled) */
+  --p:0%;                 /* progress (set in JS) */
+}
+
+/* track (WebKit) */
+.slider-wrap input[type="range"]::-webkit-slider-runnable-track{
+  height:10px; border-radius:999px;
+  background:
+    linear-gradient(var(--fill),var(--fill)) 0/var(--p) 100% no-repeat,
+    var(--rest);
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.06);
+}
+.slider-wrap input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:26px; height:26px; border-radius:50%;
+  background:#fff; border:6px solid var(--fill);
+  margin-top:-8px;           /* centers thumb on 10px track */
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+
+/* track (Firefox) */
+.slider-wrap input[type="range"]::-moz-range-track{
+  height:10px; border-radius:999px; background:var(--rest);
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.06);
+}
+.slider-wrap input[type="range"]::-moz-range-progress{
+  height:10px; border-radius:999px; background:var(--fill);
+}
+.slider-wrap input[type="range"]::-moz-range-thumb{
+  width:26px; height:26px; border-radius:50%;
+  background:#fff; border:6px solid var(--fill);
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+
+/* focus/active */
+.slider-wrap input[type="range"]:focus{ outline:none; }
+.slider-wrap input[type="range"]:focus::-webkit-slider-thumb{ box-shadow:0 0 0 6px rgba(66,200,255,.25), 0 2px 8px rgba(0,0,0,.18); }
+.slider-wrap input[type="range"]:active::-webkit-slider-thumb{ transform:scale(1.02); }
+.slider-wrap input[type="range"]::-moz-range-thumb:focus{ box-shadow:0 0 0 6px rgba(66,200,255,.25), 0 2px 8px rgba(0,0,0,.18); }
+
+.chipbar{
+  display:flex;
+  gap:8px;
+  padding:8px 0;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.chipbar::-webkit-scrollbar{ display:none; }
+
+.chipbar .chip{
+  appearance:none;
+  border:1px solid #dbeafe;
+  background:#ffffff;
+  color:#0f172a;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:800;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 2px 0 #e5e7eb inset;
+  transition:transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.chipbar .chip:hover{ box-shadow:0 0 0 3px #9B5DE533 inset; }
+.chipbar .chip:active{ transform:translateY(1px); }
+.chipbar .chip:focus{ outline:none; box-shadow:0 0 0 3px #00BBF980; }
+
+.chipbar .chip.active{
+  background:#00BBF9;
+  border-color:#00BBF9;
+  color:#fff;
+}
+
+/* Center chip bars on wide screens */
+@media (min-width: 769px){
+  #levelBar, #densityBar{ justify-content:center; }
+}
+
+
+
+
+
+/* ===== Controls ===== */
+select,
+button{
+  appearance:none;
+  border:1px solid #dbeafe;
+  background:#ffffff;
+  color:#0f172a;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:700;
+  box-shadow:0 2px 0 #e5e7eb inset;
+  transition:transform .06s ease, box-shadow .2s ease;
+}
+button.primary{
+  background:#00BBF9;
+  border-color:#00BBF9;
+  color:#fff;
+}
+button.ghost{
+  background:#ffffff;
+  color:#0f172a;
+}
+button:hover, select:hover{ box-shadow:0 0 0 3px #9B5DE555 inset; }
+button:active{ transform:translateY(1px); }
+button:disabled{ opacity:.6; }
+
+.stats{
+  display:flex;
+  gap:14px;
+  color:#64748b;
+  font-weight:700;
+}
+
+/* Hint button */
+
+.hint-btn{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:2;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 #e5e7eb inset;
+  transition: transform .06s ease, box-shadow .2s ease;
+  cursor: pointer;
+}
+.hint-btn:hover{ box-shadow:0 0 0 3px #9B5DE555 inset; }
+.hint-btn:active{ transform:translateY(1px); }
+
+/* ===== Layout ===== */
+main{
+  width:100%;
+  max-width:1120px;
+  margin:18px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:minmax(260px, 360px) 1fr;
+  gap:18px;
+}
+
+.panel{
+  position:relative;
+  width:100%;
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 6px 24px rgba(0,0,0,.06);
+  overflow:hidden;
+}
+
+.panel h2{
+  margin:6px 0 10px;
+  font-size:24px;
+  text-align:center;
+  font-weight:700;
+}
+
+/* ===== Clues ===== */
+.clue-chooser {
+  position: relative;
+  font-size: 24px;
+}
+
+.clue-head{
+  display:flex;
+  align-items:center;
+  justify-content:center;   /* keeps pill + button as a compact group */
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.clue-head .legend{ margin:0; }  /* remove extra bottom margin from pill row */
+
+@media (max-width:768px){
+  .clue-head{ justify-content:center; }
+}
+
+
+.clue-list{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.clue {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  text-align:left;
+}
+.clue.found{opacity:.75; text-decoration:line-through}
+.legend{color:#64748b; font-size:12px; margin-bottom:8px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
+.dot{width:12px; height:12px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px #e5e7eb; display:inline-block}
+
+/* ===== Grid ===== */
+.grid{
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+  display:grid;
+  gap:var(--gridgap);
+  background:#ffffff;
+  border:3px solid #00BBF9;
+  border-radius:20px;
+  padding:calc(var(--gridgap) * 2);
+  box-shadow:inset 0 1px 0 #f1f5f9;
+
+  /* max-width:100%; */
+
+
+  width: fit-content;
+  min-width: max-content;
+  margin: 0 auto;
+
+}
+
+.grid-scroll-wrapper {
+  overflow: auto;
+  max-width: 100%;
+  border-radius: 16px;
+      padding-bottom: 20px;
+
+  /* NEW: Force hard clipping */
+  mask-image: none;
+  -webkit-mask-image: none;
+  background-clip: padding-box;
+  clip-path: inset(0 round 16px);
+  -webkit-overflow-scrolling: auto;
+
+
+}
+
+.grid-scroll-wrapper::-webkit-scrollbar {
+  height: 20px;
+  width: 2px;
+}
+
+.grid-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #02bbf9;
+  border-radius: 999px;
+  border: 2px solid #ffffffaa; /* adds space and contrast */
+  width: 50px;
+}
+
+
+.cell{
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  font-weight:800; letter-spacing:.5px;
+  text-transform:lowercase;
+  cursor:pointer;
+  border-radius:8px;
+  transition:transform .07s ease, background .15s ease, color .15s ease;
+  color:#111827;
+  background:#ffffff;
+  line-height: 1;
+  overflow: hidden;
+  touch-action: none;           /* NEW: ensure dragging isn’t turned into scrolling/zoom */
+}
+
+
+.cell:hover{outline:2px solid #e0f2fe;}
+.cell[data-sel="1"]{background:#f1f5f9}
+.cell[data-word="1"]{background:#dbeafe}
+.cell[data-found="1"]{background:#dbeafe; color:#0b0f19}
+.cell.pop{animation:pop .28s ease}
+@keyframes pop{50%{transform:scale(1.12)} 100%{transform:none}}
+
+.modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.18); padding:20px}
+.modal.show{display:grid}
+.modal .box{background:#fff; border-radius:16px; padding:20px; width:min(520px,92vw); border:1px solid #eee}
+.box h3{margin:0 0 10px}
+
+.pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; background:#eef2ff; color:#312e81;
+      border-radius:999px; font-weight:700; font-size:12px}
+.hint-flash {
+  animation: hintFlash 0.8s ease-in-out 0s 2;
+  background-color: #fcd34d2b !important;  /* bright yellow flash */
+  color: #1f2937 !important;             /* dark text for contrast */
+  border-radius: 8px;
+  z-index: 2;
+}
+
+@keyframes hintFlash {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.22); background-color: #fcd34d4d; }
+  100% { transform: scale(1); }
+}
+
+/* ===== Mobile: swipable one-at-a-time clues ===== */
+@media (max-width: 768px){
+
+
+
+.toolbar > *{margin:4px 0}
+/* when collapsed */
+  .toolbar.collapsed{
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);    /* ✨ slide up a bit */
+    padding-top: 0;                   /* avoid leftover vertical space */
+    padding-bottom: 0;
+    border-width: 0;                  /* optional: hide border while collapsed */
+  }
+
+  /* Show the hamburger on small screens */
+  .menu-btn{
+    display: inline-block;          /* was display:none globally */
+  }
+
+  /* (Optional) nicer open animation when JS adds .open */
+  .toolbar.open{
+    max-height: 600px;          /* enough for all controls */
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);   /* slide in place */
+  }
+  main{ grid-template-columns: 1fr; gap:12px; }
+
+    /* Make list a swipeable carousel that shows 2–3 per view */
+ #clues {
+  --slides: 2;
+  --gap: 8px;
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  touch-action: pan-x;
+  scrollbar-width: none;
+
+  /* NEW: Prevent layout jumps */
+  will-change: transform, scroll-position;
+  scroll-timeline: --scrolling inline;
+  scroll-snap-stop: always;
+}
+
+
+  #clues::-webkit-scrollbar{ display:none; }
+
+  /* Each slide takes 1/(slides) of width, accounting for gaps */
+  .clue{
+    flex: 0 0 calc((100% - (var(--gap) * (var(--slides) - 1))) / var(--slides));
+    min-width: calc((100% - (var(--gap) * (var(--slides) - 1))) / var(--slides));
+    justify-content:center;
+    text-align:center;
+    height:44px;
+    font-size:clamp(18px, 5.2vw, 26px);
+    scroll-snap-align:center;
+    border-width:2px;
+    border-radius:16px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+
+  }
+
+  /* Hide the colored dot; center just the label */
+  .clue .dot{ display:none; }
+  .clue [data-role="label"]{
+    margin:0 !important;
+    display:inline-block;
+  }
+
+ 
+  #legendGrid{ display:flex; }
+
+
+
+}
+
+/* Mobile header layout (burger | words-left centered | timer right) */
+@media (max-width: 768px){
+  /* Make the header a 2-col grid: [hamburger] [status area] */
+  .toolbar-header{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Status area sits in column 2 and itself is a 2-col grid */
+  #statusBar{
+    grid-column: 2;
+    
+    display: flex
+;
+    justify-content: flex-end;
+  }
+  #statusBar .stats{
+    display: flex;
+    justify-content: center;
+    grid-template-columns: 1fr auto;    /* [centered words-left] [timer right] */
+    align-items: center;
+  }
+  /* ✅ found/goal centered in the whole header */
+  #statusBar .stats > span:nth-child(2){
+    grid-column: 1;
+    justify-self: center;
+  }
+  /* ⏱️ timer pinned to the right edge */
+  #statusBar .stats > span:nth-child(1){
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  /* Put the collapsible toolbar (buttons/selects) on the next row */
+  .toolbar{
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===== Sleeker header & control bar ===== */
+header{
+  --bg: rgba(255,255,255,.72);
+  background: var(--bg);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(15,23,42,.06);
+  box-shadow: 0 1px 0 rgba(15,23,42,.04);
+  transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+header.scrolled{
+  --bg: rgba(255,255,255,.86);
+  border-bottom-color: transparent;
+  box-shadow: 0 10px 30px rgba(15,23,42,.12);
+}
+
+/* Turn the toolbar into a pill-shaped control pod */
+.toolbar{
+  background: rgba(255,255,255,.92);
+  border: 1px solid #e6eaf5;
+  border-radius: 999px;
+  padding: 8px 12px;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+
+  /* ✨ for animation */
+  transform: translateY(0);
+  transition:
+    transform .28s cubic-bezier(.22,.61,.36,1),
+    opacity  .25s ease,
+    max-height .32s ease;
+  will-change: transform, opacity, max-height;
+}
+
+.toolbar > *{ margin:0 !important; }          /* override earlier margin rule */
+
+/* Dividers between control groups */
+.toolbar .divider{
+  width:1px; height:24px; background:#e6eaf5; flex:0 0 1px; border-radius:2px;
+}
+
+/* Make controls feel consistent (pill look) */
+select, button{
+  border-radius: 999px;
+  padding: 8px 12px;
+  box-shadow: none;
+  border:1px solid #e6eaf5;
+}
+button.primary{ background:#00BBF9; border-color:#00BBF9; color:#fff; }
+
+/* Compact slider groups inside the pod */
+.slider-group{
+  margin:0;
+  align-items: flex-start;
+}
+.slider-label{
+  font-size:12px;
+  letter-spacing:.2px;
+  text-transform:uppercase;
+  color:#475569;
+  margin-bottom:4px;
+}
+.slider-wrap{ padding:6px 0 8px; }
+
+/* Stats as a subtle pill on the right */
+.stats{
+  margin-left:auto;                           /* push to the far right */
+  background:#f0f9ff;
+  border:1px solid #e0f2fe;
+  border-radius:999px;
+  padding:6px 10px;
+  gap:10px;
+  color:#0369a1;
+}
+
+/* Nicer hamburger */
+.menu-btn{
+  border:1px solid #e6eaf5;
+  border-radius:12px;
+  padding:6px 10px;
+  background: rgba(255,255,255,.95);
+}
+
+/* When toolbar is expanded on mobile, use a card look instead of a long pill */
+@media (max-width:768px){
+  .toolbar{
+    border-radius:16px;
+    padding:12px;
+    gap:12px;
+  }
+  .toolbar .divider{ display:none; }
+}
+
+
+.clue-btn{
+
+  display:inline-flex; align-items:center; gap:8px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 #e5e7eb inset;
+  transition: transform .06s ease, box-shadow .2s ease;
+  cursor: pointer;
+}
+.clue-btn:hover{ box-shadow:0 0 0 3px #9B5DE533 inset; }
+.clue-btn:active{ transform:translateY(1px); }
+
+/* Blue version that matches “New Game” */
+.clue-btn.primary{
+  background:#00BBF9;
+  border-color:#00BBF9;
+  color:#fff;
+  box-shadow:none;
+}
+.clue-btn.primary:hover{ box-shadow:0 0 0 3px rgba(0,187,249,.25) inset; }
+.clue-btn.primary:focus{ outline:none; box-shadow:0 0 0 3px rgba(0,187,249,.35); }
+.clue-btn.primary:active{ transform:translateY(1px); }
+
+.clue-menu{
+  position:absolute; top:calc(100% + 8px); left:0;
+  min-width: 240px;
+  background:#fff; border:1px solid #eaeef7;
+  border-radius:14px; padding:6px;
+  box-shadow:0 10px 30px rgba(15,23,42,.12);
+  z-index:20;
+}
+.clue-menu button{
+  width:100%; text-align:left;
+  border:none; background:transparent; cursor:pointer;
+  padding:10px 12px; border-radius:10px; font-weight:800; color:#0f172a;
+}
+.clue-menu button:hover{ background:#f1f5f9; }
+.clue-menu button[aria-checked="true"]{ background:#eff6ff; }
+
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap toolbar-header">
+   <button id="menuToggle" class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="toolbar">☰</button>
+
+<!-- NEW: always-visible status strip on mobile -->
+<div id="statusBar" class="status-bar" aria-live="polite"></div>
+
+    <div id="toolbar" class="toolbar" aria-label="Toolbar">
+  <button id="newGame" class="primary">New Game</button>
+
+  <span class="divider" aria-hidden="true"></span>
+
+  <div class="slider-group">
+    <label for="levelRange" class="slider-label">
+      <strong id="levelLabel">Level 1</strong>
+    </label>
+    <div class="slider-wrap">
+      <input id="levelRange" type="range" min="0" max="5" step="1" value="0" aria-label="Level (1 → 6)">
+    </div>
+  </div>
+
+  <div class="slider-group">
+    <label for="densityRange" class="slider-label">
+      Words: <strong id="densityLabel">20%</strong>
+    </label>
+    <div class="slider-wrap">
+      <input id="densityRange" type="range" min="0" max="4" step="1" value="0" aria-label="Word density (20% → 100%)">
+    </div>
+  </div>
+
+  <span class="divider" aria-hidden="true"></span>
+
+ 
+
+
+ <!-- was: class="ghost" -->
+<button id="toggleTimer" class="primary">Timer: On</button>
+
+
+  <!-- stats will sit at far right thanks to margin-left:auto -->
+  <div class="stats" role="status" aria-live="polite">
+    <span>⏱️ <b id="time">0:00</b></span>
+    <span>✅ <b id="foundCount">0</b>/<b id="goalCount">0</b></span>
+  </div>
+</div>
+
+
+  </div>
+</header>
+
+<main>
+  <section class="panel" aria-labelledby="clueHeader">
+    <h2 id="clueHeader">
+      <div class="clue-chooser">
+    <button id="clueBtn" class="primary clue-btn"
+            aria-haspopup="true" aria-expanded="false" aria-controls="clueMenu">
+      Clues
+    </button>
+
+    <div id="clueMenu" class="clue-menu" role="menu" hidden>
+      <button role="menuitemradio" aria-checked="true"  data-side="en">English → Find Roman Urdu</button>
+      <button role="menuitemradio" aria-checked="false" data-side="ru">Roman Urdu → Find English</button>
+    </div>
+  </div>
+    </h2>
+
+<!-- New compact head row: pill + clues button -->
+<div class="clue-head">
+  <div class="legend" id="legendClues"></div>
+
+
+</div>
+
+
+<ul id="clues" class="clue-list"></ul>
+
+  </section>
+
+ <section class="panel" aria-labelledby="gridHeader">
+  <button id="hintBtn" class="hint-btn primary">Hint</button>
+  <h2 id="gridHeader">Word Grid</h2>
+  <div class="legend" id="legendGrid"></div>
+
+  <!-- 👇 NEW WRAPPER ADDED HERE -->
+  <div class="grid-scroll-wrapper">
+    <div id="grid" class="grid" aria-label="Word search grid"></div>
+  </div>
+</section>
+
+</main>
+
+<div id="winModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+  <div class="box">
+    <h3 id="winTitle">Great job! 🎉</h3>
+    <p>You found all the words.</p>
+    <p>
+      <span class="pill">Time: <span id="finalTime">0:00</span></span>
+      <span class="pill">Words: <span id="finalWords">0</span></span>
+    </p>
+    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+      <button id="playAgain" class="primary">Play again</button>
+      <button id="closeModal" class="ghost">Close</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { riddles } from "../vocab.js";
+
+/* ===================== Config ===================== */
+const WORDS = riddles
+  .filter(r => r.word && r.word.english && r.word.romanUrdu)
+  .map(r => ({ en: r.word.english.trim(), ru: r.word.romanUrdu.trim() }));
+
+// Direction vectors (we place letters in the step order below)
+const DIRS = {
+  H:  { dx:  1, dy:  0 },   // horizontal (L→R)
+  HB: { dx: -1, dy:  0 },   // horizontal backwards (R→L)
+  V:  { dx:  0, dy:  1 },   // vertical down
+  VU: { dx:  0, dy: -1 },   // vertical up (backwards vertical)
+  DR: { dx:  1, dy:  1 },   // diagonal down-right
+  DL: { dx: -1, dy:  1 },   // diagonal down-left
+  UR: { dx:  1, dy: -1 },   // diagonal up-right (backwards diagonal)
+  UL: { dx: -1, dy: -1 },   // diagonal up-left  (backwards diagonal)
+};
+
+// Presets per your spec (adult-norm is 17×17 and includes HB)
+const PRESETS = {
+  'kids-easy':  { rows: 8, cols:8, dirs:['H'],                         timer:false },
+  'kids-med':   { rows: 9, cols:9, dirs:['H','V'],                     timer:false },
+  'kids-hard':  { rows: 10, cols:10, dirs:['H','V','DR'],                timer:false },
+  'adult-easy': { rows: 11, cols:11, dirs:['H','V','DR','DL'],           timer:true  },
+  'adult-norm': { rows: 12, cols:12, dirs:['H','V','DR','DL','HB'],      timer:true  },
+  'adult-hard': { rows: 13, cols:13, dirs:['H','V','DR','DL','HB','VU','UR','UL'], timer:true },
+};
+
+// Order for chipbar
+const LEVELS = [
+  { key: 'kids-easy',  label: 'Level 1' },
+  { key: 'kids-med',   label: 'Level 2' },
+  { key: 'kids-hard',  label: 'Level 3' },
+  { key: 'adult-easy', label: 'Level 4' },
+  { key: 'adult-norm', label: 'Level 5' },
+  { key: 'adult-hard', label: 'Level 6' },
+];
+
+// 1/5 → 5/5
+const DENSITIES = [0.2, 0.4, 0.6, 0.8, 1.0];
+const DENSITY_LABELS = DENSITIES.map(d => `${Math.round(d*100)}%`); // 20…100%
+
+
+const MAX_ATTEMPTS = 2500;
+const PALETTE = ["#9B5DE5","#F15BB5","#FEE440","#00BBF9","#00F5D4"];
+
+
+/* === Condensed-grid tuning === */
+const MAX_CELL_PX = 34;        // cap cell px so tiny grids don’t fill the panel
+const MAX_GRID_AUTOSIZE = 24;  // safety upper bound for auto-sizing (increase if needed)
+
+
+let state = {
+  // grid & placement
+  rows: 10, cols: 10, grid: [],
+  wordsPlaced: [], selection: [], isDragging:false, startCell:null,
+  found: new Set(),
+
+  // controls
+  timerOn: true, t0: 0, tId: null,
+  userTimerOverridden: false,
+
+  // language / UI
+  clueSide: 'en',
+
+  // NEW: chipbar-driven config
+  preset: 'kids-easy',              // default
+  densityIdx: 0,                    // 0..4 => 1/5..5/5
+  allowedDirs: PRESETS['kids-easy'].dirs.slice(),
+};
+
+
+/* ===== Utility Functions ===== */
+const qs = s => document.querySelector(s);
+const qsa = s => [...document.querySelectorAll(s)];
+const rand = n => Math.floor(Math.random()*n);
+const choice = arr => arr[rand(arr.length)];
+const letters = 'abcdefghijklmnopqrstuvwxyz';
+const norm = s => (s||'').toLowerCase().replace(/[^a-z]/g,'');
+const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
+const fmtTime = s => { const m = Math.floor(s/60), r = s%60; return `${m}:${r.toString().padStart(2,'0')}`; };
+
+// === Slider helpers ===
+const LEVEL_KEYS = LEVELS.map(x => x.key);               // ["kids-easy", ...]
+const levelRange   = document.getElementById('levelRange');
+const levelLabel   = document.getElementById('levelLabel');
+const densityRange = document.getElementById('densityRange');
+const densityLabel = document.getElementById('densityLabel');
+
+function idxToLevelLabel(i){ return LEVELS[i].label; }
+
+function updateRangeFill(el){
+  const min = +el.min, max = +el.max, val = +el.value;
+  el.style.setProperty('--p', ((val-min)/(max-min))*100 + '%');
+}
+
+// keep sliders + labels in sync with state
+function syncSlidersFromState(){
+  levelRange.value   = LEVEL_KEYS.indexOf(state.preset);
+  densityRange.value = state.densityIdx;
+  levelLabel.textContent   = idxToLevelLabel(+levelRange.value);
+  densityLabel.textContent = DENSITY_LABELS[+densityRange.value];
+  updateRangeFill(levelRange);
+  updateRangeFill(densityRange);
+}
+
+// allowed direction vectors for the current preset
+function getAllowedDirs(){ return state.allowedDirs.map(k => DIRS[k]); }
+
+
+
+
+// live update fill + label while dragging
+levelRange.addEventListener('input', e => {
+  updateRangeFill(e.target);
+  levelLabel.textContent = idxToLevelLabel(+e.target.value);
+  selectLevel(LEVEL_KEYS[+e.target.value]);
+});
+
+densityRange.addEventListener('input',e => { updateRangeFill(e.target); densityLabel.textContent = DENSITY_LABELS[+e.target.value]; });
+
+
+densityRange.addEventListener('change', e => {
+  selectDensity(+e.target.value);    // calls buildPuzzle()
+});
+
+
+/* ===== Chip bars (levels & density) ===== */
+
+function selectLevel(key){
+  state.preset = key;
+  const P = PRESETS[key];
+  state.rows = P.rows; state.cols = P.cols;
+  state.allowedDirs = P.dirs.slice();
+
+  // Respect user choice: only change timer if not overridden
+  if(!state.userTimerOverridden){
+    state.timerOn = !!P.timer;
+    const btn = qs('#toggleTimer');
+    if(btn) btn.textContent = `Timer: ${state.timerOn ? 'On' : 'Off'}`;
+  }
+
+  syncSlidersFromState();
+
+  buildPuzzle();
+
+
+}
+
+function selectDensity(idx){
+  state.densityIdx = idx;
+
+
+  buildPuzzle();
+  syncSlidersFromState();
+
+}
+
+
+/* Timer */
+function startTimer(){ state.t0 = Date.now(); stopTimer(); if(!state.timerOn){ qs('#time').textContent='0:00'; return; } state.tId=setInterval(()=>{ const sec=Math.floor((Date.now()-state.t0)/1000); qs('#time').textContent=fmtTime(sec); }, 500); }
+function stopTimer(){ if(state.tId){ clearInterval(state.tId); state.tId=null; } }
+function addPenalty(seconds=10){ state.t0 -= seconds*1000; }
+
+/* Grid + Word Placement Helpers */
+function makeGrid(rows, cols){ return Array.from({length:rows},()=>Array.from({length:cols},()=>null)); }
+function inBounds(r,c){ return r>=0 && c>=0 && r<state.rows && c<state.cols; }
+/* === Placement helpers that don’t rely on global state === */
+function inBoundsSize(r,c, rows, cols){ return r>=0 && c>=0 && r<rows && c<cols; }
+
+function canPlaceSize(grid, word, r, c, dir, rows, cols, allowOverlap=true){
+  for(let i=0;i<word.length;i++){
+    const rr = r + dir.dy*i, cc = c + dir.dx*i;
+    if(!inBoundsSize(rr,cc,rows,cols)) return false;
+    const cell = grid[rr][cc];
+    if(cell){
+      if(!allowOverlap) return false;      // no reuse allowed
+      if(cell !== word[i]) return false;   // reuse allowed only if letters match
+    }
+  }
+  return true;
+}
+
+function placeWordSize(grid, word, r, c, dir){
+  const cells=[];
+  for(let i=0;i<word.length;i++){
+    const rr = r + dir.dy*i, cc = c + dir.dx*i;
+    grid[rr][cc] = word[i];
+    cells.push({r:rr,c:cc});
+  }
+  return cells;
+}
+
+function canPlace(grid, word, r,c, dir){
+  for(let i=0;i<word.length;i++){
+    const rr=r+dir.dy*i, cc=c+dir.dx*i;
+    if(!inBounds(rr,cc)) return false;
+    const cell = grid[rr][cc];
+    if(cell && cell!==word[i]) return false;
+  }
+  return true;
+}
+function placeWord(grid, word, r,c, dir){
+  const cells=[];
+  for(let i=0;i<word.length;i++){
+    const rr=r+dir.dy*i, cc=c+dir.dx*i;
+    grid[rr][cc]=word[i];
+    cells.push({r:rr,c:cc});
+  }
+  return cells;
+}
+
+// Try to place words within a given size, using only the allowed directions
+function layoutWordsForSize(rawPairs, rows, cols, allowOverlap, dirs){
+  const grid = Array.from({length:rows},()=>Array.from({length:cols},()=>null));
+  const placed = [];
+  const pairs = [...rawPairs]
+    .sort((a,b)=> norm(b.target).length - norm(a.target).length); // longest first
+
+  for (const p of pairs) {
+    const target = norm(p.target);
+    if (!target || target.length < 2) continue;
+
+    let ok = false;
+
+    // 1) random attempts using only the allowed dirs
+    for (let attempts = 0; attempts < MAX_ATTEMPTS && !ok; attempts++) {
+      const dir = choice(dirs);
+      const r = rand(rows), c = rand(cols);
+      if (canPlaceSize(grid, target, r, c, dir, rows, cols, allowOverlap)) {
+        const cells = placeWordSize(grid, target, r, c, dir);
+        placed.push({ id:p.id, text:target, show:p.show, clue:p.clue, color:p.color, cells });
+        ok = true;
+      }
+    }
+
+    // 2) exhaustive sweep (still only the allowed dirs)
+    if (!ok) {
+      outer: for (const dir of dirs) {
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (canPlaceSize(grid, target, r, c, dir, rows, cols, allowOverlap)) {
+              const cells = placeWordSize(grid, target, r, c, dir);
+              placed.push({ id:p.id, text:target, show:p.show, clue:p.clue, color:p.color, cells });
+              ok = true;
+              break outer;
+            }
+          }
+        }
+      }
+    }
+
+    if (!ok) return { success:false };
+  }
+
+  // fill empties
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (!grid[r][c]) grid[r][c] = letters[rand(letters.length)];
+    }
+  }
+
+  return { success:true, grid, placed, rows, cols };
+}
+
+
+
+
+function buildPuzzle(){
+  // rows/cols + allowed directions come from the selected preset
+  const P = PRESETS[state.preset];
+  state.rows = P.rows;
+  state.cols = P.cols;
+  state.allowedDirs = P.dirs.slice();
+
+// If the old select exists, use it; otherwise keep current state
+const sel = qs('#clueSide');
+if (sel) state.clueSide = sel.value;
+
+
+  // number of words from the density slider
+  const frac = DENSITIES[state.densityIdx];
+// number of words from the density slider — based on grid capacity
+const area = state.rows * state.cols;
+const avgLen = 6; // rough average word length
+const maxByArea = Math.max(6, Math.floor(area / (avgLen + 2))); // padding for crossings
+const densityScale = [0.4, 0.6, 0.75, 0.9, 1.0][state.densityIdx]; // 20→100% feel
+const N = Math.min(WORDS.length, Math.max(6, Math.floor(maxByArea * densityScale)));
+
+
+  // pick words
+  const chosen = shuffle([...WORDS]).slice(0, Math.min(N, WORDS.length));
+  const pairs = chosen.map((w,idx)=>{
+    const show   = state.clueSide==='en' ? w.ru : w.en;
+    const clue   = state.clueSide==='en' ? w.en : w.ru;
+    const color  = PALETTE[idx % PALETTE.length];
+    return { id: idx+'_'+Date.now(), show, clue, target: show, color };
+  });
+
+// Lay out with the preset’s directions; auto-expand grid if too tight
+const dirs = getAllowedDirs();
+
+function tryLayout(r, c, overlap = false) {
+  return layoutWordsForSize(pairs, r, c, overlap, dirs);
+}
+
+let res = tryLayout(state.rows, state.cols, /*overlap=*/false);
+if (!res.success) res = tryLayout(state.rows, state.cols, /*overlap=*/true);
+
+// 🚀 Grow the grid up to +8 cells each way until it works
+let grew = 0;
+const MAX_GROW = 8;
+while (!res.success && grew < MAX_GROW) {
+  grew++;
+  const newRows = state.rows + grew;
+  const newCols = state.cols + grew;
+  res = tryLayout(newRows, newCols, /*overlap=*/true);
+  if (res.success) {
+    // lock in the larger size so renderGrid() uses it
+    state.rows = newRows;
+    state.cols = newCols;
+  }
+}
+
+// Final guard: bail gracefully if *still* failing
+if (!res.success) {
+  console.error('Could not generate puzzle even after expanding board.');
+  alert('Too many/long words for this setup. Try a lower density or easier level.');
+  return; // prevents renderGrid() from running with an undefined grid
+}
+
+
+// Fallback: if still failing, progressively trim the word set and retry
+if (!res.success) {
+  let attemptPairs = pairs.slice();
+  for (let tries = 0; tries < 3 && !res.success; tries++) {
+    attemptPairs = attemptPairs.slice(0, Math.max(6, Math.floor(attemptPairs.length * 0.75)));
+    res = layoutWordsForSize(attemptPairs, state.rows, state.cols, /*allowOverlap=*/true, dirs);
+  }
+}
+
+// Final guard: don’t render without a valid grid
+if (!res.success) {
+  console.error('Could not generate puzzle for current settings.');
+  alert('Too many words for this board. Try a lower density or easier level.');
+  return; // prevents renderGrid() from running with an undefined grid
+}
+
+state.grid = res.grid;
+state.wordsPlaced = res.placed;
+
+
+  state.grid = res.grid;
+  state.wordsPlaced = res.placed;
+  state.found = new Set();
+
+  renderGrid();
+  renderClues();
+  setupClueCarousel();
+
+  qs('#goalCount').textContent = String(state.wordsPlaced.length);
+  qs('#foundCount').textContent = '0';
+  const legendClues = qs('#legendClues');
+const legendGrid  = qs('#legendGrid');
+
+if (legendClues) {
+  legendClues.innerHTML =
+    state.clueSide === 'en'
+      ? '<span class="pill">Clues: English</span>'
+      : '<span class="pill">Clues: Roman Urdu</span>';
+}
+
+if (legendGrid) {
+  legendGrid.innerHTML =
+    state.clueSide === 'en'
+      ? '<span class="pill">Find: Roman Urdu</span>'
+      : '<span class="pill">Find: English</span>';
+}
+
+  startTimer();
+}
+
+
+/* Render Clues (desktop list + mobile carousel) */
+function renderClues(){
+  const ul = qs('#clues'); ul.innerHTML='';
+  for(const w of state.wordsPlaced){
+    const li = document.createElement('li');
+    li.className='clue';
+    li.dataset.id = w.id;
+    li.style.boxShadow = `inset 6px 0 0 ${w.color}66`;
+
+    const dot   = document.createElement('span');
+    dot.className='dot';
+    dot.style.background = w.color;
+
+    const label = document.createElement('span');
+    label.textContent = w.clue;
+    label.style.marginLeft='6px';
+    label.setAttribute('data-role','label');   // <-- used by mobile CSS
+
+    const leftWrap = document.createElement('span');
+    leftWrap.style.display='inline-flex';
+    leftWrap.style.alignItems='center';
+    leftWrap.append(dot,label);
+
+    li.append(leftWrap);
+    li.addEventListener('click', (ev)=> { 
+  ev.stopPropagation();           // don’t toggle pause when tapping a clue
+  flashFirstCell(w.id); 
+});
+
+    ul.appendChild(li);
+  }
+}
+
+
+/* ===== Mobile Clue Carousel: auto-scroll + tap to pause + swipe ===== */
+let autoScrollId = null;
+let carouselPaused = false;
+let slidesPerView = 2;
+
+function applySlidesPerView(){
+  const ul = qs('#clues'); 
+  if(!ul) return;
+  // 2 per view for narrow phones, 3 if a bit wider (still <=768px)
+  const w = ul.clientWidth;
+  slidesPerView = (w >= 560 ? 3 : 2);
+  ul.style.setProperty('--slides', String(slidesPerView));
+}
+function scrollNextClue() {
+  const ul = qs('#clues'); 
+  if (!ul) return;
+const amount = Math.round((ul.clientWidth / slidesPerView) * 0.95);
+
+
+  const maxScroll = ul.scrollWidth - ul.clientWidth;
+  const currentScroll = ul.scrollLeft;
+
+  // If near the end, reset to beginning
+  if (currentScroll + amount >= maxScroll - 5) {
+    ul.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    ul.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+}
+
+function startClueAuto(){
+  if(window.innerWidth > 768) return;      // only mobile auto-scroll
+  stopClueAuto();
+  autoScrollId = setInterval(scrollNextClue, 2200); // speed
+}
+
+function stopClueAuto(){
+  if(autoScrollId){
+    clearInterval(autoScrollId);
+    autoScrollId = null;
+  }
+}
+
+function setCarouselPaused(p){
+  carouselPaused = p;
+  if(p) stopClueAuto(); else startClueAuto();
+}
+
+function onCluesClickToggle(){
+  if(window.innerWidth > 768) return;
+  setCarouselPaused(!carouselPaused); // tap to pause/resume
+}
+
+function onCluesPointerDown(){ 
+  if(window.innerWidth > 768) return;
+  setCarouselPaused(true); // any drag/touch pauses auto
+}
+
+function onCluesWheel(){
+  if(window.innerWidth > 768) return;
+  setCarouselPaused(true); // wheel also pauses
+}
+
+function setupClueCarousel(){
+  const ul = qs('#clues'); 
+  if(!ul) return;
+
+  applySlidesPerView();
+
+  // Ensure single listeners (remove then add)
+  ul.removeEventListener('click', onCluesClickToggle);
+  ul.removeEventListener('pointerdown', onCluesPointerDown);
+  ul.removeEventListener('wheel', onCluesWheel);
+
+  ul.addEventListener('click', onCluesClickToggle);
+  ul.addEventListener('pointerdown', onCluesPointerDown, { passive:true });
+  ul.addEventListener('wheel', onCluesWheel, { passive:true });
+
+  // Start/stop auto based on viewport
+  if(window.innerWidth <= 768){
+    setCarouselPaused(false); // auto-run initially on mobile
+  }else{
+    setCarouselPaused(true);  // never auto on desktop
+  }
+}
+
+
+
+function renderGrid(){
+  const g = qs('#grid');
+  g.innerHTML = '';
+
+  // Compute available width inside the panel (minus padding)
+  const panel = g.closest('.panel');
+  const panelStyles = getComputedStyle(panel);
+  const panelInnerWidth =
+    panel.clientWidth
+    - parseFloat(panelStyles.paddingLeft)
+    - parseFloat(panelStyles.paddingRight);
+
+  // Grid own padding/gap/border
+  const gs = getComputedStyle(g);
+  const gap = parseFloat(gs.gap) || 4;
+  const paddingX =
+    (parseFloat(gs.paddingLeft) || 0) + (parseFloat(gs.paddingRight) || 0);
+  const borderX = 6; // 3px left + 3px right
+
+  // Width available for the cells themselves (subtract gaps between columns)
+  const cellsBand =
+    panelInnerWidth - paddingX - borderX - gap * (state.cols - 1);
+
+  // Final cell size (min 24px for readability)
+  const cell = Math.min(MAX_CELL_PX, Math.max(24, Math.floor(cellsBand / state.cols)));
+
+
+  // Lock columns and rows so boxes are perfect squares
+  g.style.gridTemplateColumns = `repeat(${state.cols}, ${cell}px)`;
+  g.style.gridAutoRows = `${cell}px`;
+
+  for(let r=0; r<state.rows; r++){
+    for(let c=0; c<state.cols; c++){
+      const d = document.createElement('div');
+      d.className = 'cell';
+
+      // Size the box
+      d.style.width = d.style.height = `${cell}px`;
+
+      // Safe font sizing for Baloo 2 @ 800 weight
+      d.style.fontSize = `${Math.max(12, Math.floor(cell * 0.52))}px`;
+      d.style.lineHeight = '1';
+
+      d.dataset.r = r;
+      d.dataset.c = c;
+      d.textContent = state.grid[r][c];
+
+      d.addEventListener('pointerdown', onStart);
+      d.addEventListener('pointerenter', onMove);
+      d.addEventListener('pointerup', onEnd);
+
+      g.appendChild(d);
+    }
+  }
+
+g.addEventListener('pointerleave', () => state.isDragging && clearSelection());
+
+
+
+}
+
+/* Interaction */
+function cellAt(ev){
+  const el = ev.target.closest('.cell');
+  if(!el) return null;
+  return { el, r:+el.dataset.r, c:+el.dataset.c };
+}
+
+function onStart(ev){
+  ev.preventDefault();
+  const cell = cellAt(ev); if(!cell) return;
+  state.isDragging = true; 
+  state.selection = [cell]; 
+  state.startCell = cell;
+
+  // Capture on the element that received pointerdown
+  cell.el.setPointerCapture?.(ev.pointerId);
+
+  markSelected();
+}
+
+
+function onMove(ev){
+  if(!state.isDragging) return;
+
+  // Find the element under the pointer (touch or mouse)
+  const elAtPoint = document.elementFromPoint(ev.clientX, ev.clientY);
+  const cellEl = elAtPoint && elAtPoint.closest('.cell');
+  if(!cellEl) return;
+
+  const cell = { el: cellEl, r:+cellEl.dataset.r, c:+cellEl.dataset.c };
+
+  const a = state.startCell; const b = cell;
+  const dr = b.r - a.r, dc = b.c - a.c;
+  const adR = Math.abs(dr), adC = Math.abs(dc);
+  if(!(adR===0 || adC===0 || adR===adC)) return;
+
+  const stepR = Math.sign(dr), stepC = Math.sign(dc);
+  const len = Math.max(adR, adC);
+  const path=[];
+  for(let i=0;i<=len;i++){
+    const r=a.r+i*stepR, c=a.c+i*stepC;
+    if(!inBounds(r,c)) return;
+    path.push({ r, c });
+  }
+
+  state.selection = path.map(p => ({
+    el: document.querySelector(`.cell[data-r="${p.r}"][data-c="${p.c}"]`),
+    r:p.r, c:p.c
+  }));
+  markSelected();
+}
+
+
+function onEnd(){
+  if(!state.isDragging) return;
+  state.isDragging=false;
+  checkSelection();
+  clearSelection();
+}
+
+function onCancel(){
+  if(!state.isDragging) return;
+  state.isDragging = false;
+  clearSelection();
+}
+
+
+function markSelected(){
+  qsa('.cell').forEach(el=> el.dataset.sel='0');
+  for(const s of state.selection){ s.el.dataset.sel='1'; }
+}
+function clearSelection(){ qsa('.cell').forEach(el=> el.dataset.sel='0'); state.selection=[]; state.startCell=null; }
+
+function moveClueToEnd(wordId) {
+  const li = document.querySelector(`.clue[data-id="${wordId}"]`);
+  if (!li || !li.parentElement) return;
+
+  const parent = li.parentElement;
+
+  // Only animate on large screens
+  if (window.innerWidth <= 768) {
+    parent.appendChild(li);
+    return;
+  }
+
+  const allItems = [...parent.children];
+
+  // Capture all items’ current positions
+  const firstRects = new Map();
+  allItems.forEach(item => {
+    firstRects.set(item, item.getBoundingClientRect());
+  });
+
+  // Move the item to the end
+  parent.appendChild(li);
+
+  // Capture new positions
+  const lastRects = new Map();
+  allItems.forEach(item => {
+    lastRects.set(item, item.getBoundingClientRect());
+  });
+
+  // Invert + animate
+  allItems.forEach(item => {
+    const first = firstRects.get(item);
+    const last = lastRects.get(item);
+    const dx = first.left - last.left;
+    const dy = first.top - last.top;
+
+    if (dx !== 0 || dy !== 0) {
+      item.style.transform = `translate(${dx}px, ${dy}px)`;
+      item.style.transition = 'none';
+
+      // Trigger reflow
+      item.offsetHeight;
+
+      item.style.transition = 'transform 0.5s ease';
+      item.style.transform = 'translate(0, 0)';
+
+      item.addEventListener(
+        'transitionend',
+        () => {
+          item.style.transform = '';
+          item.style.transition = '';
+        },
+        { once: true }
+      );
+    }
+  });
+}
+
+function checkSelection(){
+  if(state.selection.length<2) return;
+  const lettersSel = state.selection.map(s=> state.grid[s.r][s.c]).join('');
+  const hit = state.wordsPlaced.find(w=> !state.found.has(w.id) && lettersSel===w.text);
+  if(!hit) return;
+
+  state.found.add(hit.id);
+
+  // Color the path
+  for(const s of state.selection){
+    s.el.dataset.found='1'; s.el.dataset.word='1';
+    s.el.style.background = hit.color; s.el.style.color = '#0b0f19';
+    s.el.classList.add('pop'); setTimeout(()=>s.el.classList.remove('pop'), 300);
+  }
+
+  // Strike the clue and move to end on mobile
+  const li = document.querySelector(`.clue[data-id="${hit.id}"]`);
+  
+  if (li){
+  li.classList.add('found');
+  li.style.background = hit.color;
+  li.style.borderColor = hit.color;
+  li.style.color = '#0b0f19';
+
+  // Delay slightly to ensure DOM is stable before moving
+  setTimeout(() => moveClueToEnd(hit.id), 0);
+}
+
+
+  qs('#foundCount').textContent = String(state.found.size);
+
+  if(state.found.size === state.wordsPlaced.length){
+    stopTimer();
+    qs('#finalTime').textContent = qs('#time').textContent;
+    qs('#finalWords').textContent = String(state.found.size);
+    qs('#winModal').classList.add('show');
+  }
+}
+
+function flashFirstCell(wordId){
+  const w = state.wordsPlaced.find(x=> x.id===wordId);
+  if(!w) return;
+  const first = w.cells[0];
+  const el = document.querySelector(`.cell[data-r="${first.r}"][data-c="${first.c}"]`);
+  if(el){ el.classList.add('hint-flash'); setTimeout(()=> el.classList.remove('hint-flash'), 1600); }
+}
+
+/* Menu toggle */
+const toolbar = qs('#toolbar');
+const menuToggle = qs('#menuToggle');
+function setMenu(open){
+  if(open){
+    toolbar.classList.add('open');
+    toolbar.classList.remove('collapsed');
+    menuToggle.setAttribute('aria-expanded','true');
+    menuToggle.textContent = '✕';
+  }else{
+    toolbar.classList.remove('open');
+    toolbar.classList.add('collapsed');
+    menuToggle.setAttribute('aria-expanded','false');
+    menuToggle.textContent = '☰';
+  }
+}
+menuToggle.addEventListener('click', ()=>{
+  const open = !toolbar.classList.contains('open');
+  setMenu(open);
+});
+
+// --- Mobile-only helpers to auto-close the toolbar ---
+const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+// Close when tapping/clicking anywhere outside the toolbar
+function closeIfOutside(e){
+  if (!isMobile()) return;
+  if (!toolbar.classList.contains('open')) return;
+
+  const clickedInsideToolbar = toolbar.contains(e.target);
+  const clickedToggle = menuToggle.contains(e.target);
+
+  if (clickedInsideToolbar || clickedToggle) return; // don't auto-close
+  setMenu(false);
+}
+
+
+// use pointerdown so it feels instant on touch devices
+document.addEventListener('click', closeIfOutside);
+
+// Close when scrolling DOWN a bit
+let lastY = window.scrollY;
+window.addEventListener('scroll', () => {
+  if (!isMobile()) { lastY = window.scrollY; return; }
+  const y = window.scrollY;
+  const scrolledDown = y > lastY + 10; // small threshold to avoid jitter
+  lastY = y;
+  if (scrolledDown && toolbar.classList.contains('open')) {
+    setMenu(false);
+  }
+}, { passive: true });
+
+
+/* ===== Mobile status bar relocation ===== */
+function relocateStats(){
+  const toolbar = qs('#toolbar');
+  const statusBar = qs('#statusBar');
+  const stats = qs('.stats'); // existing stats div with #time/#foundCount/#goalCount
+  if(!stats || !toolbar || !statusBar) return;
+
+  if(window.innerWidth <= 768){
+    // Move stats into status bar if not already there
+    if(!statusBar.contains(stats)) statusBar.appendChild(stats);
+  }else{
+    // Move stats back into toolbar on desktop
+    if(!toolbar.contains(stats)) toolbar.appendChild(stats);
+  }
+}
+
+/* Controls */
+qs('#newGame').addEventListener('click', ()=>{
+  buildPuzzle();
+  if(window.innerWidth <= 768){ setMenu(false); }
+});
+
+/* ===== Clue chooser (popover) ===== */
+const clueBtn   = qs('#clueBtn');
+const clueMenu  = qs('#clueMenu');
+
+function updateClueUI(){
+  const modeText = state.clueSide === 'en'
+    ? 'English → Roman Urdu'
+    : 'Roman Urdu → English';
+
+  // Keep the radio menu in sync
+  clueMenu.querySelectorAll('[role="menuitemradio"]').forEach(b=>{
+    b.setAttribute('aria-checked', b.dataset.side === state.clueSide ? 'true' : 'false');
+  });
+
+  // Nice accessibility/tooltip hint since the button text is now just “Clues”
+  clueBtn.setAttribute('aria-label', `Clues (${modeText})`);
+  clueBtn.setAttribute('title', `Clues — ${modeText}`);
+}
+function setClueSide(side){
+  state.clueSide = side;
+  updateClueUI();
+  buildPuzzle();
+}
+
+function toggleClueMenu(open){
+  if(open){
+    clueMenu.hidden = false;
+    clueBtn.setAttribute('aria-expanded','true');
+    clueMenu.querySelector(`[data-side="${state.clueSide}"]`)?.focus();
+  }else{
+    clueMenu.hidden = true;
+    clueBtn.setAttribute('aria-expanded','false');
+  }
+}
+
+clueBtn.addEventListener('click', ()=>{
+  toggleClueMenu(clueMenu.hidden);
+});
+
+clueMenu.addEventListener('click', (e)=>{
+  const item = e.target.closest('[data-side]');
+  if(!item) return;
+  setClueSide(item.dataset.side);
+  toggleClueMenu(false);
+});
+
+// close on outside click / esc
+document.addEventListener('click', (e)=>{
+  if(clueMenu.hidden) return;
+  if(e.target === clueBtn || clueMenu.contains(e.target)) return;
+  toggleClueMenu(false);
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') toggleClueMenu(false);
+});
+
+// keep button label in sync on load
+updateClueUI();
+
+qs('#hintBtn').addEventListener('click', ()=>{
+  addPenalty(10);
+  for(const w of state.wordsPlaced){ if(!state.found.has(w.id)) flashFirstCell(w.id); }
+});
+qs('#toggleTimer').addEventListener('click', (e)=>{
+  const wasOn = state.timerOn;
+  state.timerOn = !state.timerOn;
+  e.target.textContent = `Timer: ${state.timerOn ? 'On' : 'Off'}`;
+
+  // If turning ON, restart with a new puzzle using current settings
+  if (!wasOn && state.timerOn) {
+    buildPuzzle();
+  } else {
+    startTimer(); // just update timer display if toggled off
+  }
+});
+
+qs('#playAgain').addEventListener('click', ()=>{ qs('#winModal').classList.remove('show'); buildPuzzle(); });
+qs('#closeModal').addEventListener('click', ()=>{ qs('#winModal').classList.remove('show'); });
+
+document.addEventListener('pointermove', onMove, { passive: true });
+document.addEventListener('pointerup', onEnd);
+document.addEventListener('pointercancel', onCancel);
+
+(function init(){
+  if (window.innerWidth <= 768) setMenu(false);
+  else {
+    toolbar.classList.remove('collapsed', 'open');
+    menuToggle.textContent = '☰';
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  relocateStats();
+  window.addEventListener('resize', relocateStats); // ← put #3 here
+
+  // sliders reflect default state
+  syncSlidersFromState();
+
+  buildPuzzle();
+})();
+
+// Elevate header slightly when page scrolls
+const bumpHeader = () => {
+  const h = document.querySelector('header');
+  if (!h) return;
+  h.classList.toggle('scrolled', window.scrollY > 2);
+};
+window.addEventListener('scroll', bumpHeader, { passive: true });
+bumpHeader();
+
+
+</script>
+</body>
+</html>

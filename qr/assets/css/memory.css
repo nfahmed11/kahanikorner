@@ -1,0 +1,321 @@
+/* memory.css */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary: #1777af;
+  --secondary-bg: #c151e7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background: linear-gradient(135deg, #f9f7fe 0%, #e4f1fe 100%);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* -----------------------------
+   Slim HUD Header
+------------------------------ */
+header.hud {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary-bg));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+}
+
+.hud-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hud-title {
+  color: white;
+  min-width: 0;
+}
+
+.hud-h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hud-sub {
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+/* Right-side controls */
+.hud-controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* -----------------------------
+   Mini progress in the corner
+------------------------------ */
+.hud-progress-mini {
+  width: 90px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  padding: 6px 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.hud-progress-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.hud-progress-text {
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: #1f3a8a;
+}
+
+.hud-progress-track-mini {
+  width: 100%;
+  height: 7px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-mini {
+  height: 7px;
+  background: linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+/* -----------------------------
+   Settings popover
+------------------------------ */
+.hud-settings-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  font-size: 18px;
+}
+
+.hud-popover {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  width: 240px;
+  background: rgba(255,255,255,0.98);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.20);
+  overflow: hidden;
+  z-index: 50;
+}
+
+.hud-popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(23,119,175,0.12), rgba(193,81,231,0.12));
+}
+
+.hud-popover-title {
+  font-weight: 800;
+  color: #1f3a8a;
+}
+
+.hud-popover-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #1f3a8a;
+}
+
+.hud-popover-body {
+  padding: 12px;
+}
+
+.hud-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.hud-label {
+  font-weight: 700;
+  color: #1f3a8a;
+  font-size: 0.9rem;
+}
+.hud-value {
+  font-weight: 800;
+  color: #1f3a8a;
+  font-size: 0.9rem;
+}
+
+.hud-slider {
+  width: 100%;
+  accent-color: #6d28d9;
+}
+
+.hud-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.hud-done-btn {
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  box-shadow: 0 10px 22px rgba(99,102,241,0.25);
+}
+
+/* Mobile: keep header compact */
+@media (max-width: 520px) {
+  .hud-inner { gap: 8px; }
+  .hud-sub { display: none; } /* optional: hide subtitle on tiny screens */
+  .hud-progress-mini { width: 76px; padding: 5px 7px; }
+}
+
+/* -----------------------------
+   Main game area
+------------------------------ */
+.game-wrap {
+  padding: 12px 16px 18px;
+}
+.game-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* -----------------------------
+   Cards
+------------------------------ */
+.card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.english-card {
+  background: linear-gradient(135deg, #ff94f9 0%, #f5e3de 100%);
+}
+
+.urdu-card {
+  background: linear-gradient(135deg, #86ebbd 0%, #b4cdf5 100%);
+}
+
+/* Play again */
+#play-again {
+  background: linear-gradient(135deg, #f3a89c 0%, #fff983 100%);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#play-again:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Match animation */
+.match-animation {
+  animation: matchPulse 0.8s ease-in-out;
+}
+
+@keyframes matchPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  animation: confetti-fall 3s ease-in-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-50px); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Text sizing (start smaller; JS will shrink further if needed) */
+.fit-text {
+  font-size: clamp(0.65rem, 1.1vw, 1rem);
+  line-height: 1.15;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.fit-text-urdu {
+  font-size: clamp(0.75rem, 1.25vw, 1.1rem);
+  line-height: 1.2;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

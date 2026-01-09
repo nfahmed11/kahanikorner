@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics  -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag to track analytics (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kahani Korner</title>
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="preload" as="image" href="/assets/images/homepage/fam.png" />
+    <!-- Custom Styles -->
+    <style>
+      /* Floating hearts (kept) */
+      .heart {
+        position: fixed;
+        bottom: -40px;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.9;
+        animation: floatUp linear infinite;
+        z-index: 50;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-120vh);
+          opacity: 0;
+        }
+      }
+
+      /* --- THEME VARIABLES --- */
+      :root {
+        --granite: #4a594a;
+        --deep-teal: #687d70;
+        --ash-grey: #b0c3b7;
+        --white-smoke: #f3f1f0;
+        --soft-blush: #f3dedd;
+        --cotton-rose: #ffc4c3;
+        --rosy-taupe: #d49797;
+        --black: #1c2524;
+        --white: #ffffff;
+
+        --green: #b0c3b7;
+        --mint: #c9dcce; /* ✅ new light green */
+        --radius-lg: 24px;
+        --radius-md: 16px;
+        --radius-pill: 999px;
+        --radius: 1.5rem;
+
+        --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
+        --shadow-hover: 0 22px 50px rgba(74, 89, 74, 0.25);
+
+        --card-bg: #ffffff;
+        --danger: #ef4444;
+        --muted: #5c6b68;
+      }
+
+      /* --- RESET & BASE --- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Open Sans", system-ui, sans-serif;
+        color: var(--granite);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Grandstander", cursive;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0 0 1rem;
+        color: var(--white-smoke);
+
+        /* Dark green outline */
+        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* --- GENERIC SECTION LAYOUT --- */
+      .section {
+        padding: 4rem 2rem;
+      }
+
+      .section__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section__title {
+        font-size: 2.2rem;
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+
+      /* TOP PROMO BAR */
+      .topbar {
+        background: var(--green);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 500;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .topbar__inner {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .topbar__track {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 22s linear infinite;
+      }
+
+      .topbar__track span {
+        display: inline-block;
+        padding-right: 50px;
+        opacity: 0.9;
+      }
+
+      .topbar__inner span {
+        opacity: 0.9;
+      }
+
+      .topbar__dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 999px;
+        background: #ffffff;
+      }
+
+      /* marquee animation */
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      :root {
+        --topbar-h: 15px; /* adjust to your topbar’s real height */
+        --header-top-gap: 1.75rem;
+        --header-h: 74px; /* blueprint header pill height */
+      }
+
+      .header {
+        position: fixed;
+        top: calc(var(--topbar-h) + var(--header-top-gap));
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(1200px, calc(100% - 2rem)); /* <-- blueprint style */
+        z-index: 100;
+        padding: 0.5rem 2rem;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(176, 195, 183, 0.7);
+        border-radius: 999px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        transition: background 0.25s ease, border-color 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      /* Spacer clears TOPBAR + header gap + header height */
+      .header-spacer {
+        height: calc(
+          var(--topbar-h) + var(--header-top-gap) + var(--header-h) + 1rem
+        );
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Grandstander", cursive;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--granite);
+      }
+
+      .brand-icon {
+        font-size: 1.8rem;
+        color: var(--rosy-taupe);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        font-weight: 300;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .nav a:hover {
+        color: var(--soft-blush); /* light pink fill */
+        font-weight: 700;
+        transform: scale(1.05);
+
+        /* dark green outline using multi-direction shadows */
+        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--granite);
+      }
+
+      /* --- MOBILE MENU (SLIDE-IN DRAWER) --- */
+      @media (max-width: 768px) {
+        .header__inner {
+          display: grid !important;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: center;
+          width: 100%;
+        }
+
+        .mobile-toggle {
+          display: block !important;
+          grid-column: 1;
+          justify-self: start;
+        }
+
+        .brand {
+          grid-column: 2;
+          justify-self: center;
+          margin-right: 0;
+          font-size: 1rem;
+        }
+
+        .cart-btn-landing {
+          grid-column: 3;
+          justify-self: end;
+        }
+
+        .nav {
+          display: none !important;
+        }
+      }
+
+      .mobile-menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(28, 37, 36, 0.35);
+        backdrop-filter: blur(4px);
+        z-index: 120;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-menu-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: var(--white);
+        border-left: 2px solid var(--ash-grey);
+        box-shadow: -4px 0 30px rgba(0, 0, 0, 0.18);
+        border-radius: 24px 0 0 24px;
+        padding: 1.75rem 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      .mobile-menu-overlay.open .mobile-menu {
+        transform: translateX(0);
+      }
+
+      .mobile-menu__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+      }
+
+      .mobile-menu__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Grandstander", cursive;
+        font-weight: 700;
+        color: var(--granite);
+      }
+
+      .mobile-menu__brand i {
+        color: var(--rosy-taupe);
+      }
+
+      .mobile-menu__close {
+        background: var(--soft-blush);
+        border: 2px solid var(--granite);
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: var(--granite);
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.1s ease;
+      }
+
+      .mobile-menu__close:hover {
+        background: var(--cotton-rose);
+        transform: translateY(-1px);
+      }
+
+      .mobile-menu__links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .mobile-menu__links li a {
+        display: block;
+        padding: 0.75rem 0.25rem;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+        color: var(--granite);
+        border-bottom: 1px dashed var(--white-smoke);
+        transition: color 0.2s ease, transform 0.1s ease;
+      }
+
+      .mobile-menu__links li:last-child a {
+        border-bottom: none;
+      }
+
+      .mobile-menu__links li a:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
+
+      /* Only show mobile menu trigger on small screens */
+      @media (min-width: 769px) {
+        .mobile-menu-overlay {
+          display: none;
+        }
+      }
+
+      /* Cart Button Styling matching Product Page */
+      .cart-btn-landing {
+        background: var(--mint);
+        border: 1px solid var(--granite);
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--granite);
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .cart-btn-landing:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 0 var(--granite);
+        background: var(--ash-grey);
+      }
+
+      .cart-btn-landing:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--granite);
+      }
+
+      .cart-badge-landing {
+        position: absolute;
+        top: -0.25rem;
+        right: -0.25rem;
+        background: var(--rosy-taupe);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+        min-width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--white-smoke);
+      }
+
+      /* --- CART OVERLAY --- */
+      .cart-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(74, 89, 74, 0.2);
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      .cart-overlay.open {
+        opacity: 1;
+      }
+
+      .cart-sidebar {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        width: calc(100% - 2rem);
+        max-width: 400px;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        box-shadow: 0 0 0 4px var(--ash-grey);
+        transform: translateX(110%);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .cart-overlay.open .cart-sidebar {
+        transform: translateX(0);
+      }
+
+      .cart-header {
+        padding: 1.5rem;
+        border-bottom: 2px dashed var(--ash-grey);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--white-smoke);
+      }
+
+      .close-btn {
+        background: var(--soft-blush);
+        border: none;
+        font-size: 1.25rem;
+        color: var(--granite);
+        padding: 0.5rem;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+
+      .close-btn:hover {
+        background: var(--cotton-rose);
+      }
+
+      .cart-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.5rem;
+      }
+
+      .cart-item {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        background: var(--white-smoke);
+        padding: 1rem;
+        border-radius: 1rem;
+      }
+
+      .cart-item img {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 0.75rem;
+        object-fit: cover;
+        background: white;
+      }
+
+      .cart-item-details {
+        flex: 1;
+      }
+
+      .cart-item-details h4 {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .cart-item-price {
+        font-weight: 700;
+        color: var(--rosy-taupe);
+        margin-bottom: 0.5rem;
+      }
+
+      .cart-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .qty-btn {
+        width: 1.75rem;
+        height: 1.75rem;
+        border: 2px solid var(--ash-grey);
+        background: white;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--granite);
+      }
+
+      .qty-btn:hover {
+        border-color: var(--deep-teal);
+        color: var(--deep-teal);
+      }
+
+      .remove-btn {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: var(--danger);
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .cart-footer {
+        padding: 1.5rem;
+        border-top: 2px dashed var(--ash-grey);
+        background: var(--white-smoke);
+      }
+
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--granite);
+        margin-bottom: 1rem;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        padding: 1.25rem;
+        background: var(--granite);
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 0 var(--deep-teal);
+      }
+
+      .checkout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--deep-teal);
+      }
+
+      .checkout-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--deep-teal);
+      }
+
+      .empty-cart-msg {
+        text-align: center;
+        color: var(--deep-teal);
+        margin-top: 2rem;
+        font-style: italic;
+      }
+
+      /* --- HERO SECTION --- */
+      .hero {
+        position: relative;
+        color: #ffffff;
+      }
+
+      .hero__bg {
+        position: relative;
+        min-height: 80vh; /* taller hero */
+        border-radius: 0 0 28px 28px;
+        overflow: hidden;
+        box-shadow: 0 32px 60px rgba(223, 225, 229, 0.35);
+        margin-bottom: 4rem;
+        display: flex;
+      }
+
+      .hero__bg-image {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -40px;
+        background-image: linear-gradient(
+            120deg,
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.25)
+          ),
+          url("/assets/images/homepage/fam.png");
+        background-size: cover;
+        background-position: center top;
+        will-change: transform;
+      }
+
+      @media (max-width: 768px) {
+        .hero__bg {
+          min-height: 420px;
+        }
+
+        .hero__bg-image {
+          top: -10px;
+          bottom: -20px;
+          left: 0;
+          right: 0;
+          background-position: center top;
+        }
+      }
+      .hero__inner {
+        position: relative;
+        width: 100%;
+        max-width: 1200px; /* match header width */
+        margin: 0 auto; /* center like header */
+
+        /* top padding accounts for fixed header; horizontal padding = 2rem to match */
+        padding: 120px 2rem 88px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .hero__heading {
+        font-family: "Grandstander", cursive;
+        font-weight: 700;
+        font-size: clamp(32px, 5vw, 54px);
+        line-height: 1.1;
+        margin: 0 0 16px;
+        max-width: 560px;
+      }
+
+      .hero__sub {
+        max-width: 540px;
+        font-size: 16px;
+        line-height: 1.6;
+        opacity: 0.96;
+        margin-bottom: 24px;
+        color: var(--white-smoke);
+        text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5),
+          1px -1px 0 rgba(0, 0, 0, 0.5), -1px 1px 0 rgba(0, 0, 0, 0.5),
+          1px 1px 0 rgba(0, 0, 0, 0.5);
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 12px 26px;
+        border-radius: var(--radius-pill);
+        border: 0;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.08s ease, box-shadow 0.08s ease,
+          background 0.15s ease;
+        text-decoration: none;
+      }
+      .btn--primary {
+        background: var(--mint); /* same color */
+        color: var(--granite); /* same text color */
+        border: 2px solid var(--granite); /* a bit sturdier border */
+        box-shadow: 0 4px 0 var(--deep-teal); /* 3D base like Subscribe */
+      }
+
+      .btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--deep-teal);
+        background: #d7e5db; /* same hover color */
+      }
+
+      .btn--primary:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--deep-teal);
+      }
+
+      .btn--ghost {
+        background: var(--granite);
+        border: 1px solid var(--granite);
+        color: white;
+        box-shadow: 0 4px 0 var(--deep-teal);
+      }
+
+      .btn--ghost:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--deep-teal);
+        background: var(--deep-teal);
+      }
+
+      .btn--ghost:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--deep-teal);
+      }
+
+      /* STARTER PACK SPLIT SECTION */
+      .starter {
+        width: 100%;
+        background: var(--white);
+        /* padding now comes from the shared rule above */
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: 40px;
+        align-items: center;
+      }
+
+      @media (max-width: 880px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .starter-media {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        background: #000;
+      }
+
+      .starter-video {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 ratio */
+      }
+
+      .starter-video iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .starter-video__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.25);
+        pointer-events: none;
+      }
+
+      .split--pink {
+        background: var(--soft-blush);
+        border-radius: 28px;
+        padding: 34px 32px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .split__title {
+        font-family: "Grandstander", cursive;
+        font-size: 30px;
+        margin: 0 0 10px;
+      }
+
+      .split__text {
+        margin: 0 0 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      /* --- FEATURE CARDS --- */
+      .features {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid var(--ash-grey);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--rosy-taupe);
+      }
+
+      .feature-card__img-wrapper {
+        height: 280px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .feature-card__img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .feature-card:hover .feature-card__img-wrapper img {
+        transform: scale(1.05);
+      }
+
+      .feature-card__content {
+        padding: 2rem;
+      }
+
+      .feature-tag {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--rosy-taupe);
+        margin-bottom: 0.8rem;
+      }
+
+      .card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: var(--deep-teal);
+        margin-top: 1rem;
+      }
+
+      .card-link i {
+        transition: transform 0.2s;
+      }
+      .card-link:hover i {
+        transform: translateX(4px);
+      }
+
+      /* --- WHY KAHANI KORNER SECTION --- */
+      .why {
+        background: var(--green);
+      }
+
+      /* Center the Why Kahani Korner heading */
+      .why .section__title {
+        text-align: center;
+      }
+
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.75rem;
+      }
+
+      .why-card {
+        background: var(--white-smoke);
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--ash-grey);
+        padding: 1.75rem 1.75rem 1.5rem;
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .why-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--rosy-taupe);
+      }
+
+      .why-card__icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .why-card h3 {
+        font-size: 1.1rem;
+        margin: 0 0 0.35rem;
+        color: var(--granite);
+        text-shadow: none; /* keep subheads cleaner */
+      }
+
+      .why-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .why-mobile {
+        display: none;
+      }
+
+      .why-mobile-grid {
+        display: none;
+      }
+
+      /* --- MOBILE WHY FLOATING ICON MODE --- */
+
+      @media (max-width: 768px) {
+        .why-grid {
+          display: none;
+        }
+
+        .why-mobile {
+          display: block;
+          margin-top: 2rem;
+        }
+
+        .why-mobile-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 1rem;
+          justify-items: center;
+        }
+
+        .why-float {
+          width: 80px;
+          height: 80px;
+          border-radius: 18px;
+          border: 2px solid var(--ash-grey);
+          background: var(--white);
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+          display: flex;
+          flex-direction: column; /* icon + label stacked */
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          color: var(--granite);
+          font-size: 1.6rem; /* icon size */
+          cursor: pointer;
+          animation: whyFloat 4.5s ease-in-out infinite alternate;
+          transition: transform 0.2s ease, box-shadow 0.2s ease,
+            border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .why-float-label {
+          font-size: 0.7rem;
+          line-height: 1.2;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        /* rest of your staggered animation durations + whyFloat keyframes + active state etc... */
+      }
+
+      /* slightly staggered animation speeds so they don't move in sync */
+      .why-float:nth-child(2) {
+        animation-duration: 5s;
+      }
+      .why-float:nth-child(3) {
+        animation-duration: 5.5s;
+      }
+      .why-float:nth-child(4) {
+        animation-duration: 4.2s;
+      }
+      .why-float:nth-child(5) {
+        animation-duration: 5.8s;
+      }
+      .why-float:nth-child(6) {
+        animation-duration: 4.7s;
+      }
+      .why-float:nth-child(7) {
+        animation-duration: 5.3s;
+      }
+      .why-float:nth-child(8) {
+        animation-duration: 4.9s;
+      }
+
+      @keyframes whyFloat {
+        0% {
+          margin-top: 0;
+        }
+        100% {
+          margin-top: 6px;
+        }
+      }
+
+      /* glow on hover and when active (clicked) */
+      .why-float:hover,
+      .why-float.active {
+        background: var(--soft-blush);
+        border-color: var(--rosy-taupe);
+        box-shadow: 0 0 0 2px var(--cotton-rose),
+          0 0 18px rgba(212, 151, 151, 0.7);
+        transform: translateY(-4px) scale(1.03);
+      }
+
+      /* Expanded text card below icons */
+      .why-mobile-card {
+        margin-top: 1.75rem;
+        background: var(--white);
+        border-radius: 18px;
+        border: 2px solid var(--ash-grey);
+        box-shadow: var(--shadow-soft);
+
+        /* smooth open/close */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transform: translateY(8px);
+        padding: 0 1.4rem; /* no vertical padding when closed */
+        position: relative;
+
+        transition: max-height 0.35s ease, opacity 0.3s ease,
+          transform 0.3s ease, padding 0.3s ease;
+      }
+
+      .why-mobile-card.open {
+        max-height: 260px; /* enough room for text */
+        opacity: 1;
+        transform: translateY(0);
+        padding: 1.2rem 1.4rem 1.6rem;
+      }
+
+      #why-mobile-close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.6rem;
+        line-height: 1;
+        color: var(--granite);
+        cursor: pointer;
+      }
+
+      #why-mobile-title {
+        margin: 0 1.2rem 0.4rem 0;
+        color: var(--granite);
+        text-shadow: none;
+        font-size: 1.05rem;
+      }
+
+      #why-mobile-text {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      /*  --- OUR STORY --- */
+
+      .story,
+      .story h2 {
+        text-align: center;
+      }
+
+      /* --- REVIEWS SECTION (MARQUEE CAROUSEL) --- */
+
+      .reviews-section {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        text-align: center;
+      }
+
+      .section-header {
+        max-width: 640px;
+        margin: 0 auto 1rem;
+        padding: 0; /* was 0 20px */
+        text-align: center;
+      }
+
+      .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        padding: 1.25rem 0; /* was 2rem 0 */
+        position: relative;
+      }
+
+      .marquee-container::before,
+      .marquee-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 80px;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .marquee-container::before {
+        left: 0;
+        background: linear-gradient(to right, var(--white), transparent);
+      }
+
+      .marquee-container::after {
+        right: 0;
+        background: linear-gradient(to left, var(--white), transparent);
+      }
+
+      .marquee-track {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+        animation: reviews-scroll 45s linear infinite;
+      }
+
+      .marquee-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes reviews-scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .review-card {
+        background: var(--granite);
+        padding: 1.75rem; /* was 2.5rem */
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--ash-grey);
+        text-align: left;
+        position: relative;
+        width: 300px; /* was 350px */
+        flex-shrink: 0;
+      }
+
+      .review-card::before {
+        content: "\f10d";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 1.5rem; /* was 2rem */
+        right: 1.5rem; /* was 2rem */
+        font-size: 1.6rem; /* was 2rem */
+        color: var(--cotton-rose);
+      }
+
+      .review-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem; /* was 1rem */
+        margin-bottom: 1rem; /* was 1.5rem */
+      }
+
+      .review-avatar {
+        width: 50px; /* was 60px */
+        height: 50px; /* was 60px */
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--white);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .review-author h4 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .review-author span {
+        font-size: 0.85rem;
+        color: var(--deep-teal);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .review-text {
+        font-size: 0.95rem; /* slightly smaller */
+        color: var(--card-bg);
+        line-height: 1.6; /* was 1.7 */
+        font-style: italic;
+      }
+
+      /* --- CONTACT SECTION --- */
+      .contact-section {
+        padding: 6rem 2rem;
+        background: var(--soft-blush);
+      }
+
+      .contact-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-content {
+        padding: 4rem 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .contact-image {
+        position: relative;
+        background: var(--rosy-taupe);
+      }
+
+      .contact-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .contact-note {
+        font-family: "Grandstander", cursive;
+        font-size: 1.4rem;
+        color: var(--deep-teal);
+        margin-bottom: 1.5rem;
+        text-shadow: none;
+      }
+
+      .contact-link {
+        display: inline-block;
+        margin-top: 1rem;
+        font-weight: 700;
+        color: var(--granite);
+        text-decoration: underline;
+        text-decoration-color: var(--cotton-rose);
+        text-decoration-thickness: 3px;
+        transition: color 0.2s;
+      }
+
+      .contact-link:hover {
+        color: var(--rosy-taupe);
+      }
+
+      /* --- FAQ SECTION --- */
+      .faq-section {
+        padding: 6rem 2rem;
+        background: var(--white-smoke);
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        margin-bottom: 1rem;
+        border-radius: var(--radius-md);
+        border: 2px solid var(--ash-grey);
+        overflow: hidden;
+        background: var(--ash-grey);
+        transition: background-color 0.35s ease, border-color 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+
+      .faq-item:hover {
+        border-color: var(--deep-teal);
+      }
+
+      .faq-item[open] {
+        background: var(--white-smoke);
+        border-color: var(--deep-teal);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .faq-item summary {
+        padding: 1.5rem;
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--granite);
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1rem;
+        transition: background-color 0.35s ease, color 0.35s ease;
+      }
+
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq-item summary::after {
+        content: "+";
+        font-size: 1.5rem;
+        color: var(--deep-teal);
+        font-weight: 700;
+        transition: transform 0.3s ease, color 0.35s ease;
+      }
+
+      .faq-item[open] summary::after {
+        transform: rotate(45deg);
+        color: var(--granite);
+      }
+
+      .faq-item[open] summary {
+        background: var(--ash-grey);
+        color: var(--black);
+      }
+
+      .faq-item p {
+        margin: 0;
+        color: var(--black);
+        opacity: 0;
+        line-height: 1.7;
+        border-top: 1px solid var(--white-smoke);
+        max-height: 0;
+        padding: 0 1.5rem;
+        overflow: hidden;
+        transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.35s ease;
+      }
+
+      .faq-item[open] p {
+        opacity: 1;
+        max-height: 400px;
+        padding: 1rem 1.5rem 1.5rem;
+      }
+
+      /* --- FOOTER --- */
+      .footer {
+        background: var(--granite);
+        color: var(--ash-grey);
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+
+      .footer-tagline {
+        margin: 0 0 1rem;
+        font-size: 0.95rem;
+        color: var(--white-smoke);
+      }
+
+      .footer a {
+        color: var(--white);
+        font-weight: 700;
+      }
+
+      /* Social icons */
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .social-icons img {
+        width: 26px;
+        height: 26px;
+        filter: invert(1);
+        opacity: 0.85;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .social-icons a:hover img {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 768px) {
+        .nav {
+          display: none;
+        }
+        .mobile-toggle {
+          display: block;
+        }
+
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+        .contact-image {
+          height: 300px;
+        }
+
+        .section__title {
+          text-align: left;
+        }
+
+        .story p {
+          padding: 1.25rem 1.5rem;
+        }
+      }
+
+      /* 1️⃣ Same padding for all major sections */
+      .section,
+      .starter,
+      .features,
+      .reviews-section,
+      .faq-section,
+      .contact-section {
+        padding: 4rem 2rem; /* 4rem top/bottom, 2rem left/right */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Promo Bar -->
+    <div class="topbar">
+      <div class="topbar__inner">
+        <div class="topbar__track">
+          <span>Pre-Order Books Now</span>
+          <span>•</span>
+          <span>Free Shipping on All US Orders</span>
+          <span>•</span>
+          <span>Pre-Order Books Now</span>
+          <span>•</span>
+          <span>Free Shipping on All US Orders</span>
+          <span>•</span>
+          <span>Pre-Order Books Now</span>
+          <span>•</span>
+          <span>Free Shipping on All US Orders</span>
+          <span>•</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="https://kahanikorner.com" class="brand">
+          <i class="fa-solid fa-book-open-reader brand-icon"></i>
+          Kahani Korner
+        </a>
+
+        <nav class="nav">
+          <a href="products.html">Shop</a>
+          <a href="subscribe.html">Subscribe</a>
+          <a href="/resources/resources.html">Resources</a>
+          <a href="#faq">Help</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <button class="cart-btn-landing" id="cart-btn">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay hidden">
+      <div class="cart-sidebar">
+        <div class="cart-header">
+          <h2>Your Cart</h2>
+          <button id="close-cart" class="close-btn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="cart-items" class="cart-items">
+          <!-- Items will be injected here by JS -->
+          <div class="empty-cart-msg">Your cart is empty.</div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total</span>
+            <span id="cart-total-amount">$0.00</span>
+          </div>
+          <button id="checkout-btn" class="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
+      <nav class="mobile-menu">
+        <div class="mobile-menu__header">
+          <span class="mobile-menu__brand">
+            <i class="fa-solid fa-book-open-reader"></i>
+            Kahani Korner
+          </span>
+          <button class="mobile-menu__close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <ul class="mobile-menu__links">
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="subscribe.html">Subscribe</a></li>
+          <li><a href="/resources/resources.html">Resources</a></li>
+          <li><a href="#faq">Help</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__bg">
+        <div class="hero__bg-image"></div>
+        <div class="hero__inner">
+          <h1 id="hero-heading" class="hero__heading">
+            One Story,<br />Two Languages,<br />Endless Memories
+          </h1>
+          <p class="hero__sub">
+            Explore enchanting Urdu–English books designed to preserve culture,
+            foster connection, and make little hearts love to read.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="products.html">Shop</a>
+            <a class="btn btn--ghost" href="subscribe.html">Subscribe</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STARTER PACK SPLIT SECTION -->
+    <section class="starter">
+      <div class="section__inner">
+        <div class="split split--pink">
+          <div>
+            <h2 class="split__title">Everything A Bundle Includes</h2>
+            <p class="split__text">
+              Kahani Korner isn’t just a book — it’s a toolkit for language
+              learning. Stories, stickers, flashcards, and digital games make
+              Urdu fun, even if you don’t speak it yourself.
+            </p>
+            <button class="btn btn--primary">
+              <a href="products.html"> Shop Now </a>
+            </button>
+          </div>
+
+          <!-- VIDEO COLUMN -->
+          <div class="starter-media">
+            <div class="starter-video">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/PonnXQJ7Jnk?si=zZA2s23n6UVxf21D"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+              <div class="starter-video__overlay"></div>
+            </div>
+          </div>
+          <!-- END VIDEO COLUMN -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="features">
+      <div class="features-grid">
+        <!-- Card 1 -->
+        <div class="feature-card">
+          <div class="feature-card__img-wrapper">
+            <img
+              src="/assets/images/products/books/books.png"
+              alt="Urdu–English picture books spread out on a rug" />
+          </div>
+          <div class="feature-card__content">
+            <span class="feature-tag">Bilingual Books</span>
+            <h3>Build Your Library</h3>
+            <p>
+              Beautifully illustrated stories in Urdu & English to spark
+              imagination.
+            </p>
+            <a href="products.html" class="card-link"
+              >Shop Books <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card">
+          <div class="feature-card__img-wrapper">
+            <img
+              src="/assets/images/products/subscribe/subscribe7.png"
+              alt="Language activity kit with flashcards and stickers on a table" />
+          </div>
+          <div class="feature-card__content">
+            <span class="feature-tag">Monthly Fun Snail Mail</span>
+            <h3>The Kahani Times Subscription</h3>
+            <p>
+              Get stickers, activities, and new stories delivered to your door
+              every month.
+            </p>
+            <a href="subscribe.html" class="card-link"
+              >Join the Club <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY KAHANI KORNER -->
+    <section class="section why" id="why">
+      <div class="section__inner">
+        <h2 class="section__title">Why Kahani Korner?</h2>
+
+        <div class="why-grid">
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <h3>Preserving Cultural Identity</h3>
+            <p>
+              Pass on Pakistani heritage and language proudly, through stories
+              kids actually ask for.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <h3>Inclusive for Multiethnic Families</h3>
+            <p>
+              English, Urdu, and Roman Urdu support homes where not everyone
+              speaks the same language.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h3>Bilingual Skill Development</h3>
+            <p>
+              Gentle exposure across both scripts builds confidence,
+              recognition, and real-world vocabulary.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3>Adaptable to Different Ages</h3>
+            <p>
+              From toddlers to early readers, activities stretch to match your
+              child’s stage.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <h3>Joyful & Cost-Effective</h3>
+            <p>
+              Each bundle is packed with reusable prompts so one story creates
+              many play sessions.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h3>Story-First Magic</h3>
+            <p>
+              Kids ask to read again — and again — because the fun doesn’t stop
+              at “The End.”
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h3>Parent-Friendly Resources</h3>
+            <p>
+              You don’t need to be fluent in Urdu — English, Roman Urdu, and
+              built-in prompts make it easy for everyone.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <div class="why-card__icon">
+              <i class="fa-solid fa-house-chimney"></i>
+            </div>
+            <h3>Made for Real-Life Homes</h3>
+            <p>
+              Short stories, tactile elements, and activities that fit naturally
+              into busy family routines.
+            </p>
+          </article>
+        </div>
+
+        <!-- MOBILE FLOATING ICON MODE -->
+
+        <div class="why-mobile-grid">
+          <button class="why-float" data-card="identity">
+            <i class="fa-solid fa-leaf"></i>
+            <span class="why-float-label">Identity</span>
+          </button>
+
+          <button class="why-float" data-card="families">
+            <i class="fa-solid fa-people-group"></i>
+            <span class="why-float-label">Families</span>
+          </button>
+
+          <button class="why-float" data-card="skills">
+            <i class="fa-solid fa-brain"></i>
+            <span class="why-float-label">Skills</span>
+          </button>
+
+          <button class="why-float" data-card="ages">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="why-float-label">Ages</span>
+          </button>
+
+          <button class="why-float" data-card="value">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span class="why-float-label">Value</span>
+          </button>
+
+          <button class="why-float" data-card="magic">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span class="why-float-label">Magic</span>
+          </button>
+
+          <button class="why-float" data-card="parents">
+            <i class="fa-solid fa-book-open"></i>
+            <span class="why-float-label">Parents</span>
+          </button>
+
+          <button class="why-float" data-card="home">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span class="why-float-label">Home</span>
+          </button>
+        </div>
+
+        <div class="why-mobile">
+          <div id="why-mobile-card" class="why-mobile-card">
+            <button id="why-mobile-close" aria-label="Close details">×</button>
+            <h3 id="why-mobile-title"></h3>
+            <p id="why-mobile-text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section class="section story-section">
+      <div class="section__inner">
+        <div class="story">
+          <h2 class="section__title">Our Story</h2>
+          <p>
+            Kahani Korner was born at 3 a.m. — somewhere between rocking a baby
+            and wondering why all Urdu bilingual books cost an arm and a leg and
+            looked so boring. We wanted stories that sounded like home and
+            looked like our kids. So we created cozy, activity-rich books that
+            invite Urdu into everyday family life, one little kahani at a time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+      <div class="section-header" style="margin-bottom: 1rem">
+        <h2>Community Love</h2>
+        <p>
+          Why families around the world are falling in love with Kahani Korner.
+        </p>
+      </div>
+
+      <div class="marquee-container">
+        <div class="marquee-track">
+          <!-- SET 1: 5 UNIQUE REVIEWS -->
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Sarah Ahmed</h4>
+                <span>London, UK</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "Finally, resources that make teaching Urdu fun! My kids actually
+              ask to do their 'Kahani time' now. The bilingual format is a game
+              changer for us living in the diaspora."
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Omar Khan</h4>
+                <span>Toronto, CA</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "The illustrations are stunning and the stories are so relatable.
+              It's amazing to see my daughter connect with her heritage in such
+              a joyful, modern way."
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Fatima Z.</h4>
+                <span>Chicago, USA</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "A must-have for any bilingual home. The quality of the books and
+              the thoughtfulness behind the activities is just incredible.
+              Highly recommend!"
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Ayesha Malik</h4>
+                <span>Sydney, AU</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "We read one Kahani Korner story every night. My son now surprises
+              his nani on video calls with new Urdu words. It’s become our
+              favorite family ritual."
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Imran &amp; Sana</h4>
+                <span>Houston, USA</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "The books feel nostalgic for us and fresh for our kids at the
+              same time. It’s exactly what we were looking for to keep Urdu
+              alive at home."
+            </p>
+          </div>
+
+          <!-- SET 2: DUPLICATE FOR LOOP -->
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Sarah Ahmed</h4>
+                <span>London, UK</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "Finally, resources that make teaching Urdu fun! My kids actually
+              ask to do their 'Kahani time' now. The bilingual format is a game
+              changer for us living in the diaspora."
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Omar Khan</h4>
+                <span>Toronto, CA</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "The illustrations are stunning and the stories are so relatable.
+              It's amazing to see my daughter connect with her heritage in such
+              a joyful, modern way."
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Fatima Z.</h4>
+                <span>Chicago, USA</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "A must-have for any bilingual home. The quality of the books and
+              the thoughtfulness behind the activities is just incredible.
+              Highly recommend!"
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Ayesha Malik</h4>
+                <span>Sydney, AU</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "We read one Kahani Korner story every night. My son now surprises
+              his nani on video calls with new Urdu words. It’s become our
+              favorite family ritual."
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <img
+                src="/assets/images/homepage/user.png"
+                alt="Reviewer"
+                class="review-avatar" />
+              <div class="review-author">
+                <h4>Imran &amp; Sana</h4>
+                <span>Houston, USA</span>
+              </div>
+            </div>
+            <p class="review-text">
+              "The books feel nostalgic for us and fresh for our kids at the
+              same time. It’s exactly what we were looking for to keep Urdu
+              alive at home."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Got questions? We've got answers.</p>
+      </div>
+
+      <div class="faq-container">
+        <details class="faq-item">
+          <summary>What age range are the resources for?</summary>
+          <p>
+            Our books are designed for children ages 0–8, The Kahani Times is
+            for preteens and up, but language learners of all ages enjoy them!
+            Everything is meant to grow as you go!
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do I need to know Urdu to read them?</summary>
+          <p>
+            Not at all! Every book includes English, Urdu script, and Roman Urdu
+            (Urdu written in English letters) so anyone can read along,
+            regardless of fluency. The QR codes included also have audio read
+            alouds so you can listen or read along.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Where do you ship?</summary>
+          <p>
+            We currently ship worldwide! Free shipping is available for all
+            orders within the US. International rates are calculated at
+            checkout.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What comes in the subscription box?</summary>
+          <p>
+            Each monthly box is a surprise theme packed with a new bilingual
+            akhbar (newspaper), stickers, activities and more to keep you
+            engaged and learning Urdu.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I buy in bulk for my classroom?</summary>
+          <p>
+            Yes! We love supporting educators. Please contact us for special
+            bulk pricing and lesson plan resources.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact / Collab Section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <div class="contact-content">
+          <span class="feature-tag">Get in Touch</span>
+          <h2>Let's Create Magic!</h2>
+          <p class="contact-note">
+            Whether you want to collaborate on a new story, have a question
+            about your order, or just want to say Salaam, we'd love to hear from
+            you!
+          </p>
+          <p>Drop us a note anytime:</p>
+          <a href="mailto:admin@kahanikorner.com" class="contact-link"
+            >admin@kahanikorner.com</a
+          >
+        </div>
+        <div class="contact-image">
+          <img
+            src="/assets/images/homepage/contact.png"
+            alt="Vintage Phone Aesthetic" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div
+        class="brand"
+        style="
+          justify-content: center;
+          color: var(--white);
+          margin-bottom: 1rem;
+        ">
+        <i class="fa-solid fa-book-open-reader"></i> Kahani Korner
+      </div>
+
+      <p class="footer-tagline">
+        Rooted in culture, topped with sweetness, made for little hearts.
+      </p>
+
+      <div class="social-icons">
+        <a
+          href="https://www.instagram.com/kahani.korner/"
+          target="_blank"
+          aria-label="Instagram">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
+            alt="Instagram" />
+        </a>
+        <a
+          href="https://facebook.com/kahanikorner"
+          target="_blank"
+          aria-label="Facebook">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
+            alt="Facebook" />
+        </a>
+        <a
+          href="https://tiktok.com/@kahanikorner"
+          target="_blank"
+          aria-label="TikTok">
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
+            alt="TikTok" />
+        </a>
+      </div>
+
+      <p>&copy; 2025 Kahani Korner. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // --- WHY MOBILE FLOATING ICONS LOGIC ---
+      const whyData = {
+        identity: {
+          title: "Preserving Cultural Identity",
+          text: "Pass on Pakistani heritage proudly through stories kids genuinely enjoy.",
+        },
+        families: {
+          title: "Inclusive for Multiethnic Families",
+          text: "Urdu, English, and Roman Urdu support blended-language homes.",
+        },
+        skills: {
+          title: "Bilingual Skill Development",
+          text: "Early exposure builds recognition, confidence, and joyful learning.",
+        },
+        ages: {
+          title: "Adaptable to Different Ages",
+          text: "Toddlers to early readers all learn at their own level.",
+        },
+        value: {
+          title: "Joyful & Cost-Effective",
+          text: "Each bundle provides reusable prompts so one story becomes many play sessions.",
+        },
+        magic: {
+          title: "Story-First Magic",
+          text: "Kids reread again and again — the fun doesn’t stop at 'The End.'",
+        },
+        parents: {
+          title: "Parent-Friendly Resources",
+          text: "Designed for Urdu speakers and non-speakers alike, with built-in prompts.",
+        },
+        home: {
+          title: "Made for Real-Life Homes",
+          text: "Short stories, tactile elements, and activities that slide into busy routines.",
+        },
+      };
+
+      const whyIcons = document.querySelectorAll(".why-float");
+      const whyCard = document.getElementById("why-mobile-card");
+      const whyTitle = document.getElementById("why-mobile-title");
+      const whyText = document.getElementById("why-mobile-text");
+      const whyClose = document.getElementById("why-mobile-close");
+
+      let openWhyKey = null;
+
+      function closeWhyCard() {
+        if (!whyCard) return;
+        whyCard.classList.remove("open");
+        openWhyKey = null;
+        whyIcons.forEach((icon) => icon.classList.remove("active"));
+      }
+
+      if (whyIcons && whyCard && whyTitle && whyText) {
+        // Set up click handlers
+        whyIcons.forEach((icon) => {
+          icon.addEventListener("click", () => {
+            const key = icon.dataset.card;
+            const data = whyData[key];
+
+            // If tapping the same icon, close
+            if (openWhyKey === key) {
+              closeWhyCard();
+              return;
+            }
+
+            // Mark active icon (glow) & clear others
+            whyIcons.forEach((i) => i.classList.remove("active"));
+            icon.classList.add("active");
+
+            // Update content
+            whyTitle.textContent = data.title;
+            whyText.textContent = data.text;
+
+            // Open card with smooth transition
+            whyCard.classList.add("open");
+            openWhyKey = key;
+          });
+        });
+
+        // Open the first why card by default on mobile
+        if (window.innerWidth <= 768 && whyIcons.length > 0) {
+          const first = whyIcons[0];
+          const key = first.dataset.card;
+          const data = whyData[key];
+
+          whyIcons.forEach((i) => i.classList.remove("active"));
+          first.classList.add("active");
+          whyTitle.textContent = data.title;
+          whyText.textContent = data.text;
+          whyCard.classList.add("open");
+          openWhyKey = key;
+        }
+      }
+
+      if (whyClose) {
+        whyClose.addEventListener("click", () => {
+          closeWhyCard();
+        });
+      }
+
+      // --- MOBILE MENU LOGIC ---
+      const mobileToggle = document.getElementById("mobile-toggle");
+      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+
+      function openMobileMenu() {
+        if (!mobileMenuOverlay) return;
+        mobileMenuOverlay.classList.remove("hidden");
+        requestAnimationFrame(() => {
+          mobileMenuOverlay.classList.add("open");
+        });
+      }
+
+      function closeMobileMenu() {
+        if (!mobileMenuOverlay) return;
+        mobileMenuOverlay.classList.remove("open");
+        setTimeout(() => {
+          mobileMenuOverlay.classList.add("hidden");
+        }, 300); // match CSS transition
+      }
+
+      // --- PARALLAX EFFECT FOR HERO ---
+      const heroBgImage = document.querySelector(".hero__bg-image");
+
+      function handleParallax() {
+        if (!heroBgImage) return;
+
+        const viewportHeight = window.innerHeight;
+        const scrolled = window.scrollY;
+        const clamped = Math.max(0, Math.min(scrolled, viewportHeight));
+
+        const maxShift = window.innerWidth <= 768 ? 40 : 60;
+        const progress = clamped / viewportHeight;
+        const shift = progress * maxShift;
+
+        heroBgImage.style.transform = `translateY(${shift}px)`;
+      }
+
+      function initLandingPage() {
+        // Mobile menu wiring
+        if (mobileToggle && mobileMenuOverlay) {
+          mobileToggle.addEventListener("click", openMobileMenu);
+
+          mobileMenuOverlay.addEventListener("click", (e) => {
+            if (e.target === mobileMenuOverlay) closeMobileMenu();
+          });
+
+          const closeBtn = mobileMenuOverlay.querySelector(
+            ".mobile-menu__close"
+          );
+          const menuLinks = mobileMenuOverlay.querySelectorAll(
+            ".mobile-menu__links a"
+          );
+
+          if (closeBtn) {
+            closeBtn.addEventListener("click", closeMobileMenu);
+          }
+          menuLinks.forEach((link) => {
+            link.addEventListener("click", closeMobileMenu);
+          });
+        }
+
+        handleParallax();
+      }
+
+      window.addEventListener("scroll", handleParallax);
+      window.addEventListener("load", initLandingPage);
+
+      window.addEventListener("load", () => {
+        const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+        for (let i = 0; i < 15; i++) {
+          const icon = document.createElement("img");
+          icon.src = iconSrc;
+          icon.classList.add("heart");
+          icon.style.left = Math.random() * 100 + "vw";
+          icon.style.animationDelay = Math.random() * 10 + "s";
+          icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+          icon.style.animationDuration =
+            (6 + Math.random() * 4).toFixed(2) + "s";
+          document.body.appendChild(icon);
+        }
+      });
+    </script>
+    <script src="/assets/cart.js"></script>
+  </body>
+</html>
