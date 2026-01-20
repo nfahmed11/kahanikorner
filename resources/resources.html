@@ -252,26 +252,31 @@
         color: var(--granite);
       }
 
-      .cart-btn-landing {
+      /* UPDATED: slightly larger circles so cart + chai feel balanced */
+      .icon-btn-circle {
         background: var(--mint);
         border: 1px solid var(--granite);
-        width: 2rem;
-        height: 2rem;
+        width: 2.35rem;
+        height: 2.35rem;
         border-radius: 50%;
         position: relative;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         color: var(--granite);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
         cursor: pointer;
         font-size: 1rem;
       }
 
-      .cart-btn-landing:hover {
+      .icon-btn-circle:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 0 var(--granite);
         background: var(--ash-grey);
+      }
+
+      .cart-btn-landing {
+        /* keep existing class for your JS hooks, but share styles */
       }
 
       .cart-badge-landing {
@@ -289,6 +294,112 @@
         align-items: center;
         justify-content: center;
         border: 2px solid var(--white-smoke);
+      }
+
+      /* --- NEW: Right-side icon cluster (cart + chai) --- */
+      .header-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* --- NEW: Chai button fun hover + tooltip --- */
+      .chai-btn {
+        position: relative;
+        isolation: isolate;
+      }
+
+      /* subtle “steam” animation */
+      .chai-btn::before,
+      .chai-btn::after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        border: 2px solid rgba(212, 151, 151, 0.7);
+        opacity: 0;
+        transform: translateY(0) scale(0.9);
+        pointer-events: none;
+      }
+
+      .chai-btn::before {
+        left: 11px;
+      }
+      .chai-btn::after {
+        right: 11px;
+      }
+
+      .chai-btn:hover::before {
+        animation: steamUp 1.1s ease-in-out infinite;
+      }
+      .chai-btn:hover::after {
+        animation: steamUp 1.1s 0.15s ease-in-out infinite;
+      }
+
+      @keyframes steamUp {
+        0% {
+          opacity: 0;
+          transform: translateY(6px) scale(0.8);
+        }
+        30% {
+          opacity: 0.55;
+        }
+        70% {
+          opacity: 0.2;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10px) scale(1.15);
+        }
+      }
+
+      .chai-tooltip {
+        position: absolute;
+        right: 0;
+        top: 130%;
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid rgba(176, 195, 183, 0.8);
+        color: var(--granite);
+        padding: 0.55rem 0.7rem;
+        border-radius: 14px;
+        box-shadow: 0 14px 30px rgba(74, 89, 74, 0.18);
+        font-weight: 800;
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateY(-6px);
+        pointer-events: none;
+        transition: opacity 0.18s ease, transform 0.18s ease;
+      }
+
+      .chai-tooltip::after {
+        content: "";
+        position: absolute;
+        right: 16px;
+        top: -8px;
+        width: 14px;
+        height: 14px;
+        background: rgba(255, 255, 255, 0.95);
+        border-left: 2px solid rgba(176, 195, 183, 0.8);
+        border-top: 2px solid rgba(176, 195, 183, 0.8);
+        transform: rotate(45deg);
+      }
+
+      .chai-btn:hover .chai-tooltip,
+      .chai-btn:focus-visible .chai-tooltip {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* nice keyboard focus */
+      .chai-btn:focus-visible,
+      .cart-btn-landing:focus-visible {
+        outline: 3px solid var(--cotton-rose);
+        outline-offset: 3px;
       }
 
       @media (max-width: 768px) {
@@ -311,7 +422,7 @@
           font-size: 1rem;
         }
 
-        .cart-btn-landing {
+        .header-actions {
           grid-column: 3;
           justify-self: end;
         }
@@ -745,10 +856,26 @@
           <a href="../index.html#contact">Contact</a>
         </nav>
 
-        <button class="cart-btn-landing" id="cart-btn" aria-label="Open cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-        </button>
+        <!-- ✅ NEW: cart + chai cluster -->
+        <div class="header-actions">
+          <button
+            class="icon-btn-circle cart-btn-landing"
+            id="cart-btn"
+            aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
+          </button>
+
+          <a
+            class="icon-btn-circle chai-btn"
+            href="https://buy.stripe.com/cNiaEZ2oa31zefxcon0Fi0b"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Buy me chai">
+            <i class="fa-solid fa-mug-hot"></i>
+            <span class="chai-tooltip">Buy me chai ☕</span>
+          </a>
+        </div>
       </div>
     </header>
 
