@@ -264,6 +264,29 @@ header.hud {
   background: linear-gradient(135deg, #86ebbd 0%, #b4cdf5 100%);
 }
 
+/* Ensure nothing spills outside rounded card */
+.card-front,
+.card-back {
+  overflow: hidden;
+}
+
+/* Responsive square image box inside the card */
+.card-image-box {
+  width: clamp(44px, 22%, 84px);
+  height: clamp(44px, 22%, 84px);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* ✅ always fit inside the square */
+  display: block;
+}
+
+
 /* Play again */
 #play-again {
   background: linear-gradient(135deg, #f3a89c 0%, #fff983 100%);

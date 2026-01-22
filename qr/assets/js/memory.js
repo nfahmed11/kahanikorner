@@ -228,8 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ${
         type === "english"
           ? `
-            <img src="${secondaryText}" alt="${primaryText}"
-                 class="w-16 h-16 object-contain" />
+          <div class="card-image-box">
+          <img src="${secondaryText}" alt="${primaryText}" />
+        </div>
+        
     
             <div class="w-full h-10 flex items-center justify-center">
               <span class="font-bold text-gray-800 fit-text">
