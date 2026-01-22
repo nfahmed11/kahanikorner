@@ -10,7 +10,7 @@ let deck = [];
 let isQuizMode = false;
 let isEnglishToUrdu = false;
 let correctAnswers = 0;
-let showImage = true;
+let showImage = false;
 
 // --------------------
 // DOM Lookups
