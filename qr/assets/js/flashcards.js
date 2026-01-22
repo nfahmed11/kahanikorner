@@ -1,12 +1,6 @@
-console.log("[flashcards] script loaded: start");
 
-// ✅ Import (keep yours, but note: likely wrong unless bundler/importmap)
+
 import { vocab as originalVocab } from "./vocab.js";
-
-console.log(
-  "[flashcards] after import statement (if you see this, import did not crash)"
-);
-
 
 // --------------------
 // State
@@ -17,14 +11,6 @@ let isQuizMode = false;
 let isEnglishToUrdu = false;
 let correctAnswers = 0;
 let showImage = true;
-
-console.log("[flashcards] initial state", {
-  currentIndex,
-  isQuizMode,
-  isEnglishToUrdu,
-  correctAnswers,
-  showImage,
-});
 
 // --------------------
 // DOM Lookups
@@ -43,22 +29,7 @@ const navButtons = document.getElementById("nav-buttons");
 const toggleImageBtn = document.getElementById("toggle-image");
 const shuffleButton = document.getElementById("shuffle-btn");
 
-console.log("[flashcards] DOM refs", {
-  flashcard: !!flashcard,
-  flashcardFront: !!flashcardFront,
-  flashcardBack: !!flashcardBack,
-  progressFill: !!progressFill,
-  progressText: !!progressText,
-  prevBtn: !!prevBtn,
-  nextBtn: !!nextBtn,
-  shuffleBtn: !!shuffleBtn,
-  quizBtn: !!quizBtn,
-  toggleLangBtn: !!toggleLangBtn,
-  navButtons: !!navButtons,
-  toggleImageBtn: !!toggleImageBtn,
-});
-
-// If anything is missing, stop with a clear error
+// Hard fail if DOM is missing (keep this—it's not "random", it prevents silent failure)
 const missing = [];
 if (!flashcard) missing.push("flashcard");
 if (!flashcardFront) missing.push("flashcard-front");
@@ -74,100 +45,60 @@ if (!navButtons) missing.push("nav-buttons");
 if (!toggleImageBtn) missing.push("toggle-image");
 
 if (missing.length) {
-  console.error("[flashcards] MISSING DOM ELEMENTS:", missing);
-  throw new Error(
-    "Flashcards init failed: missing DOM elements: " + missing.join(", ")
-  );
+  console.error("[flashcards] Missing DOM elements:", missing);
+  throw new Error("Flashcards init failed: missing DOM elements: " + missing.join(", "));
 }
 
 // --------------------
 // Audio
 // --------------------
-console.log("[flashcards] initializing audio objects...");
 const sparkleSound = new Audio("/qr/assets/audio/sparkle.mp3");
 const correctSound = new Audio("/qr/assets/audio/success.wav");
 const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
 const cardFlipSound = new Audio("/qr/assets/audio/cardflip.mp3");
 
-// Check if audio paths resolve (won’t guarantee they exist, but helps)
-console.log("[flashcards] audio paths", {
-  sparkleSound: sparkleSound.src,
-  correctSound: correctSound.src,
-  incorrectSound: incorrectSound.src,
-  cardFlipSound: cardFlipSound.src,
-});
-
-// Optional: log if audio errors
-[sparkleSound, correctSound, incorrectSound, cardFlipSound].forEach((a) => {
-  a.addEventListener("error", () => {
-    console.warn("[flashcards] audio failed to load:", a.src);
-  });
-});
-
 // --------------------
 // Deck setup
 // --------------------
-console.log(
-  "[flashcards] originalVocab loaded?",
-  Array.isArray(originalVocab),
-  "length:",
-  originalVocab?.length
-);
-
 function resetDeck({ shuffle = false } = {}) {
-  console.log("[flashcards] resetDeck called", { shuffle });
-
   if (!Array.isArray(originalVocab)) {
-    console.error(
-      "[flashcards] originalVocab is NOT an array. Import/path issue?",
-      originalVocab
-    );
+    console.error("[flashcards] vocab import failed: originalVocab is not an array", originalVocab);
     deck = [];
     return;
   }
 
-  // ✅ Filter vocab down to only allowed romanUrdu words
-  deck = originalVocab.filter((card) =>
-    ALLOWED_WORDS.has(card.word?.romanUrdu)
+  // Build lookup set of vocab romanUrdu words
+  const vocabWords = new Set(
+    originalVocab.map((c) => c.word?.romanUrdu).filter(Boolean)
   );
 
-  if (shuffle) deck.sort(() => Math.random() - 0.5);
+  // ✅ Only logs you asked for
+  console.log("[flashcards] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
 
-  console.log("[flashcards] deck rebuilt", {
-    deckLength: deck.length,
-    words: deck.map((c) => c.word?.romanUrdu),
-    firstCard: deck[0],
-  });
-
-  // If you accidentally typo'd any allowed words, this helps catch it
-  if (deck.length === 0) {
-    console.warn(
-      "[flashcards] deck is empty AFTER filtering. Likely romanUrdu spellings don't match ALLOWED_WORDS."
-    );
+  const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
+  if (missingWords.length) {
+    console.warn("[flashcards] Missing in vocab.js:", missingWords);
   }
+
+  // Filter deck to allowed words
+  deck = originalVocab.filter((card) => ALLOWED_WORDS.has(card.word?.romanUrdu));
+
+  if (shuffle) deck.sort(() => Math.random() - 0.5);
 }
 
 // --------------------
 // UI Events
 // --------------------
-console.log("[flashcards] attaching event listeners...");
-
 toggleImageBtn.addEventListener("click", () => {
-  console.log("[flashcards] toggle-image clicked (before)", { showImage });
   showImage = !showImage;
   toggleImageBtn.textContent = showImage ? "Hide Image" : "Show Image";
-  console.log("[flashcards] toggle-image clicked (after)", { showImage });
   updateFlashcard(currentIndex);
 });
 
 toggleLangBtn.addEventListener("click", () => {
-  console.log("[flashcards] toggle-lang clicked (before)", { isEnglishToUrdu });
   isEnglishToUrdu = !isEnglishToUrdu;
-  toggleLangBtn.textContent = isEnglishToUrdu
-    ? "Urdu → English"
-    : "English → Urdu";
+  toggleLangBtn.textContent = isEnglishToUrdu ? "Urdu → English" : "English → Urdu";
   flashcard.classList.remove("flipped");
-  console.log("[flashcards] toggle-lang clicked (after)", { isEnglishToUrdu });
   updateFlashcard(currentIndex);
 });
 
@@ -175,7 +106,6 @@ toggleLangBtn.addEventListener("click", () => {
 // Effects
 // --------------------
 function createSparkle(x, y) {
-  console.log("[flashcards] createSparkle", { x, y });
   const sparkle = document.createElement("div");
   sparkle.classList.add("sparkle");
   sparkle.style.left = `${x}px`;
@@ -185,11 +115,8 @@ function createSparkle(x, y) {
 }
 
 function triggerSparkles(centerX, centerY) {
-  console.log("[flashcards] triggerSparkles", { centerX, centerY });
   sparkleSound.currentTime = 0;
-  sparkleSound.play().catch((err) => {
-    console.warn("[flashcards] sparkleSound.play() blocked/failed:", err);
-  });
+  sparkleSound.play().catch(() => {});
 
   for (let i = 0; i < 10; i++) {
     const x = centerX + (Math.random() * 60 - 30);
@@ -199,7 +126,6 @@ function triggerSparkles(centerX, centerY) {
 }
 
 function launchConfetti() {
-  console.log("[flashcards] launchConfetti");
   const confettiContainer = document.createElement("div");
   confettiContainer.classList.add("confetti-container");
   confettiContainer.style.position = "fixed";
@@ -231,11 +157,6 @@ function launchConfetti() {
 // Quiz Complete Card
 // --------------------
 function showQuizCompleteCard() {
-  console.log("[flashcards] showQuizCompleteCard", {
-    correctAnswers,
-    deckLength: deck.length,
-  });
-
   flashcardFront.innerHTML = `
     <div class="quiz-complete-card">
       <h2 class="text-3xl font-bold text-green-700 kid-title mb-4">🎉 Quiz Complete!</h2>
@@ -250,13 +171,7 @@ function showQuizCompleteCard() {
   const tryAgain = document.getElementById("try-again");
   const exitQuiz = document.getElementById("exit-quiz");
 
-  console.log("[flashcards] quiz complete buttons exist?", {
-    tryAgain: !!tryAgain,
-    exitQuiz: !!exitQuiz,
-  });
-
   tryAgain?.addEventListener("click", () => {
-    console.log("[flashcards] try-again clicked");
     resetDeck({ shuffle: true });
     currentIndex = 0;
     correctAnswers = 0;
@@ -264,7 +179,6 @@ function showQuizCompleteCard() {
   });
 
   exitQuiz?.addEventListener("click", () => {
-    console.log("[flashcards] exit-quiz clicked");
     isQuizMode = false;
     correctAnswers = 0;
     currentIndex = 0;
@@ -286,8 +200,6 @@ function showQuizCompleteCard() {
 // Hint block
 // --------------------
 function renderHintBlock(card, side = "front") {
-  console.log("[flashcards] renderHintBlock", { side, showImage });
-
   if (side !== "front") return "";
 
   if (showImage) {
@@ -312,37 +224,20 @@ function renderHintBlock(card, side = "front") {
 }
 
 function removeHintBlock() {
-  console.log("[flashcards] removeHintBlock");
   document.querySelectorAll(".top-2.right-2").forEach((el) => el.remove());
 }
 
 function attachHintListeners() {
-  console.log(
-    "[flashcards] attachHintListeners (hint buttons count):",
-    document.querySelectorAll("#hint-btn").length
-  );
-
   document.querySelectorAll("#hint-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      console.log("[flashcards] hint-btn clicked");
       e.stopPropagation();
 
       const cardSection = e.target.closest(".flashcard-front, .flashcard-back");
-      if (!cardSection) {
-        console.warn("[flashcards] hint clicked but couldn't find cardSection");
-        return;
-      }
+      if (!cardSection) return;
 
       const hintImg = cardSection.querySelector(".hint-image");
       const fillerImg = cardSection.querySelector(".filler-image");
-
-      if (!hintImg || !fillerImg) {
-        console.warn("[flashcards] hint elements missing", {
-          hintImg: !!hintImg,
-          fillerImg: !!fillerImg,
-        });
-        return;
-      }
+      if (!hintImg || !fillerImg) return;
 
       fillerImg.style.opacity = "0";
       hintImg.style.opacity = "1";
@@ -362,17 +257,11 @@ function attachHintListeners() {
 // Core render
 // --------------------
 function updateFlashcard(index) {
-  console.log("[flashcards] updateFlashcard called", {
-    index,
-    deckLength: deck.length,
-  });
-
   const card = deck[index];
 
   if (!deck.length) {
-    console.error("[flashcards] deck is empty. Check vocab import/path OR ALLOWED_WORDS spellings.");
-    flashcardFront.innerHTML =
-      '<div class="text-center text-white">Deck is empty</div>';
+    console.error("[flashcards] deck is empty");
+    flashcardFront.innerHTML = '<div class="text-center text-white">Deck is empty</div>';
     flashcardBack.innerHTML = "";
     return;
   }
@@ -381,17 +270,10 @@ function updateFlashcard(index) {
   progressText.textContent = `${index + 1}/${deck.length}`;
 
   if (!card || !card.word || !card.word.english) {
-    console.error("[flashcards] No card data at index", { index, card });
-    flashcardFront.innerHTML =
-      '<div class="text-center text-white">No card data</div>';
+    flashcardFront.innerHTML = '<div class="text-center text-white">No card data</div>';
     flashcardBack.innerHTML = "";
     return;
   }
-
-  console.log("[flashcards] rendering card", {
-    word: card.word,
-    image: card.image,
-  });
 
   const urduLabelClass = "text-fuchsia-500";
   const urduFontClass = "text-fuchsia-600";
@@ -401,14 +283,10 @@ function updateFlashcard(index) {
   const englishGradient = "linear-gradient(135deg, #90f7ec, #3296cc)";
 
   if (isQuizMode) {
-    console.log("[flashcards] rendering QUIZ mode", { isEnglishToUrdu });
-
     navButtons.style.display = "none";
     flashcard.classList.remove("flipped");
 
-    flashcardFront.style.background = isEnglishToUrdu
-      ? englishGradient
-      : urduGradient;
+    flashcardFront.style.background = isEnglishToUrdu ? englishGradient : urduGradient;
     flashcardBack.style.background = "";
 
     const options = [...deck]
@@ -418,16 +296,9 @@ function updateFlashcard(index) {
       .concat(card)
       .sort(() => Math.random() - 0.5);
 
-    console.log(
-      "[flashcards] quiz options",
-      options.map((o) => o.word.english)
-    );
-
     flashcardFront.innerHTML = `
       <div class="relative w-full h-full flex flex-col justify-center text-center gap-4 px-4">
-        <div class="text-sm ${
-          isEnglishToUrdu ? englishLabelClass : urduLabelClass
-        } text-center mt-2">
+        <div class="text-sm ${isEnglishToUrdu ? englishLabelClass : urduLabelClass} text-center mt-2">
           ${isEnglishToUrdu ? "English" : "Urdu"}
         </div>
 
@@ -459,17 +330,9 @@ function updateFlashcard(index) {
 
     flashcardBack.innerHTML = "";
 
-    console.log(
-      "[flashcards] attaching quiz option listeners:",
-      document.querySelectorAll(".quiz-option").length
-    );
-
     document.querySelectorAll(".quiz-option").forEach((btn) => {
       btn.addEventListener("click", (e) => {
-        console.log("[flashcards] quiz-option clicked", e.target.textContent);
-
         const isCorrect = e.target.getAttribute("data-correct") === "true";
-        console.log("[flashcards] quiz-option isCorrect?", isCorrect);
 
         document.querySelectorAll(".quiz-option").forEach((opt) => {
           opt.disabled = true;
@@ -482,9 +345,6 @@ function updateFlashcard(index) {
           launchConfetti();
           e.target.classList.add("border-green-400", "text-green-600");
           correctAnswers++;
-          console.log("[flashcards] correctAnswers incremented", {
-            correctAnswers,
-          });
         } else {
           incorrectSound.currentTime = 0;
           incorrectSound.play().catch(() => {});
@@ -493,7 +353,6 @@ function updateFlashcard(index) {
         }
 
         setTimeout(() => {
-          console.log("[flashcards] moving to next quiz card");
           if (currentIndex < deck.length - 1) {
             currentIndex++;
             updateFlashcard(currentIndex);
@@ -508,16 +367,10 @@ function updateFlashcard(index) {
     return;
   }
 
-  console.log("[flashcards] rendering NORMAL mode", { isEnglishToUrdu });
-
   navButtons.style.display = "flex";
   flashcard.classList.remove("flipped");
-  flashcardFront.style.background = isEnglishToUrdu
-    ? englishGradient
-    : urduGradient;
-  flashcardBack.style.background = isEnglishToUrdu
-    ? urduGradient
-    : englishGradient;
+  flashcardFront.style.background = isEnglishToUrdu ? englishGradient : urduGradient;
+  flashcardBack.style.background = isEnglishToUrdu ? urduGradient : englishGradient;
 
   if (isEnglishToUrdu) {
     flashcardFront.innerHTML = `
@@ -525,9 +378,7 @@ function updateFlashcard(index) {
         ${renderHintBlock(card, "front")}
         <div class="text-sm ${englishLabelClass} text-center mt-2">English</div>
         <div class="flex-grow flex justify-center items-center">
-          <div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${
-            card.word.english
-          }</div>
+          <div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${card.word.english}</div>
         </div>
         <div class="text-sm ${englishLabelClass} text-center mb-4">Click card for Urdu</div>
       </div>`;
@@ -547,12 +398,8 @@ function updateFlashcard(index) {
         ${renderHintBlock(card, "front")}
         <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
         <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-          <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${
-            card.word.romanUrdu
-          }</div>
-          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${
-            card.word.urdu
-          }</div>
+          <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${card.word.romanUrdu}</div>
+          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>
         </div>
         <div class="text-sm ${urduLabelClass} text-center mb-4">Click card for English</div>
       </div>`;
@@ -574,11 +421,6 @@ function updateFlashcard(index) {
 // More listeners
 // --------------------
 flashcard.addEventListener("click", (e) => {
-  console.log("[flashcards] flashcard clicked", {
-    isQuizMode,
-    target: e.target?.id || e.target?.className,
-  });
-
   if (isQuizMode || e.target.closest("#hint-btn")) return;
 
   removeHintBlock();
@@ -587,7 +429,6 @@ flashcard.addEventListener("click", (e) => {
   cardFlipSound.play().catch(() => {});
 
   const isNowFlipped = flashcard.classList.toggle("flipped");
-  console.log("[flashcards] flip toggled", { isNowFlipped });
 
   if (!isNowFlipped) {
     setTimeout(() => updateFlashcard(currentIndex), 500);
@@ -595,7 +436,6 @@ flashcard.addEventListener("click", (e) => {
 });
 
 prevBtn.addEventListener("click", () => {
-  console.log("[flashcards] prev clicked", { currentIndex });
   if (currentIndex > 0) {
     currentIndex--;
     updateFlashcard(currentIndex);
@@ -603,7 +443,6 @@ prevBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", () => {
-  console.log("[flashcards] next clicked", { currentIndex });
   if (currentIndex < deck.length - 1) {
     currentIndex++;
     updateFlashcard(currentIndex);
@@ -612,26 +451,17 @@ nextBtn.addEventListener("click", () => {
 
 document.addEventListener("keydown", (e) => {
   if (isQuizMode) return;
-  if (e.key === "ArrowRight") {
-    console.log("[flashcards] ArrowRight");
-    nextBtn.click();
-  }
-  if (e.key === "ArrowLeft") {
-    console.log("[flashcards] ArrowLeft");
-    prevBtn.click();
-  }
+  if (e.key === "ArrowRight") nextBtn.click();
+  if (e.key === "ArrowLeft") prevBtn.click();
 });
 
 shuffleBtn.addEventListener("click", () => {
-  console.log("[flashcards] shuffle clicked");
   resetDeck({ shuffle: true });
   currentIndex = 0;
   updateFlashcard(currentIndex);
 });
 
 quizBtn.addEventListener("click", () => {
-  console.log("[flashcards] quiz clicked (before)", { isQuizMode });
-
   isQuizMode = !isQuizMode;
   quizBtn.textContent = isQuizMode ? "Exit Quiz Mode" : "Quiz Mode";
 
@@ -643,12 +473,9 @@ quizBtn.addEventListener("click", () => {
     resetDeck({ shuffle: true });
     currentIndex = 0;
     correctAnswers = 0;
-    console.log("[flashcards] quiz mode ON: reset + shuffled", {
-      currentIndex,
-      correctAnswers,
-    });
   } else {
-    console.log("[flashcards] quiz mode OFF");
+    resetDeck({ shuffle: false });
+    currentIndex = 0;
   }
 
   updateFlashcard(currentIndex);
@@ -657,12 +484,5 @@ quizBtn.addEventListener("click", () => {
 // --------------------
 // Init
 // --------------------
-console.log("[flashcards] INIT start");
-try {
-  resetDeck({ shuffle: false });
-  console.log("[flashcards] INIT after resetDeck", { deckLength: deck.length });
-  updateFlashcard(currentIndex);
-  console.log("[flashcards] INIT complete");
-} catch (err) {
-  console.error("[flashcards] INIT failed with error:", err);
-}
+resetDeck({ shuffle: false });
+updateFlashcard(currentIndex);

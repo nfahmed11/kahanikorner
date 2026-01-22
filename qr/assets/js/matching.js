@@ -1,4 +1,4 @@
-console.log("[tasveer] script loaded");
+
 
 // ✅ grab allowed words from HTML
 const ALLOWED_WORDS = window.ALLOWED_WORDS;
