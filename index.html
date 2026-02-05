@@ -2624,16 +2624,28 @@
       });
 
       window.addEventListener("load", () => {
+        // Only run on homepage
+        if (window.location.pathname !== "/") return;
+
+        // Only show once per session
+        if (sessionStorage.getItem("heartsShown")) return;
+        sessionStorage.setItem("heartsShown", "true");
+
         const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
-        for (let i = 0; i < 15; i++) {
+        const HEART_COUNT = 8;
+
+        for (let i = 0; i < HEART_COUNT; i++) {
           const icon = document.createElement("img");
           icon.src = iconSrc;
           icon.classList.add("heart");
+
           icon.style.left = Math.random() * 100 + "vw";
-          icon.style.animationDelay = Math.random() * 10 + "s";
-          icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+          icon.style.opacity = "0.35";
+          icon.style.width = (14 + Math.random() * 8).toFixed(2) + "px";
+          icon.style.animationDelay = Math.random() * 4 + "s";
           icon.style.animationDuration =
-            (6 + Math.random() * 4).toFixed(2) + "s";
+            (10 + Math.random() * 6).toFixed(2) + "s";
+
           document.body.appendChild(icon);
         }
       });

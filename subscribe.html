@@ -945,6 +945,16 @@
         box-shadow: 0 0 0 var(--deep-teal);
       }
 
+      /* NEW: stacked subscribe buttons (USA + Intl) */
+      .subscribe-btns {
+        display: grid;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+      }
+      .subscribe-btns .add-to-cart-btn {
+        margin-top: 0; /* remove extra spacing when stacked */
+      }
+
       /* --- PRODUCT DETAIL VIEW --- */
       .product-detail-view {
         padding-bottom: 4rem;
@@ -1320,7 +1330,7 @@
     <!-- MAIN SHOP CONTENT -->
     <main class="shop-main">
       <div class="shop-main-inner">
-        <!-- Shop hero text -->
+        <!-- Shop hero text (UNCHANGED) -->
         <section id="shop-hero" aria-labelledby="shop-heading">
           <h1 id="shop-heading" class="shop-hero-heading">
             Kahani Korner Subscriptions
@@ -1332,7 +1342,7 @@
           </p>
         </section>
 
-        <!-- Filter Section -->
+        <!-- Filter Section (UNCHANGED visually; kept in place) -->
         <div class="filter-container">
           <div class="custom-select-wrapper">
             <div class="custom-select">
@@ -1386,11 +1396,21 @@
                 <ul id="detail-features"></ul>
               </div>
 
-              <button
-                id="detail-add-to-cart-btn"
-                class="add-to-cart-btn large-btn">
-                Subscribe Now <i class="fa-solid fa-plus"></i>
-              </button>
+              <!-- ✅ TWO SUBSCRIBE BUTTONS on detail view -->
+              <div class="subscribe-btns">
+                <button
+                  id="detail-subscribe-usa-btn"
+                  class="add-to-cart-btn large-btn">
+                  Subscribe Now (USA) <i class="fa-solid fa-plus"></i>
+                </button>
+
+                <button
+                  id="detail-subscribe-intl-btn"
+                  class="add-to-cart-btn large-btn">
+                  Subscribe Now (International)
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
 
               <button id="manage-subscription-btn" class="secondary-btn">
                 Manage subscription <i class="fa-solid fa-gear"></i>
@@ -1514,6 +1534,12 @@
     </footer>
 
     <script>
+      // --- STRIPE URLS ---
+      const CHECKOUT_USA =
+        "https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08";
+      const CHECKOUT_INTL =
+        "https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a";
+
       // --- STRIPE PAYLOAD BUILDER (inline, same as landing) ---
       function buildStripePayload(cartItems) {
         const line_items = cartItems.map((item) => ({
@@ -1523,12 +1549,14 @@
         return { line_items };
       }
 
-      // --- PRODUCT DATA (CONDENSED) ---
-      const subscriptionBase = {
+      // --- PRODUCT DATA (SINGLE CARD ONLY) ---
+      const product = {
+        id: "kahani-times",
+        name: "The Kahani Times Subscription",
+        priceDisplay: "$9.99 / $11.99",
         description:
           "For those who treasure stories, color, and connection — The Kahani Times revives the charm of old-school storytelling. Each month’s envelope feels like a keepsake from gentler times: printed paper, nostalgic items, and the quiet thrill of opening real mail. Inside are stories, art, and small surprises that make learning Urdu feel natural and joyful — like the way our parents once learned, slowly and beautifully, over a warm cup of chai.",
         image: "/assets/images/products/subscribe/jan.png",
-        category: "kahani-times",
         images: [
           "/assets/images/products/subscribe/jan.png",
           "/assets/images/products/subscribe/dec.png",
@@ -1543,32 +1571,8 @@
         ],
       };
 
-      const products = [
-        {
-          ...subscriptionBase,
-          id: "usa-sub",
-          name: "The Kahani Times Subscription (USA)",
-          price: 9.99,
-          checkoutUrl: "https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08",
-        },
-        {
-          ...subscriptionBase,
-          id: "intl-sub",
-          name: "The Kahani Times Subscription (International)",
-          price: 11.99,
-          checkoutUrl: "https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a",
-          features: subscriptionBase.features.map((line) =>
-            line.startsWith("Example timeline:")
-              ? "Example timeline: If you subscribe on December 21st, your first package ships at the end of January (ex: January 30th) and typically arrives in early February (international delivery times may vary)."
-              : line
-          ),
-        },
-      ];
-
       // --- STATE ---
       let cart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
-      let currentCategory = "all";
-      let currentProductId = null;
 
       // --- DOM ELEMENTS ---
       const cartBtn = document.getElementById("cart-btn");
@@ -1590,9 +1594,14 @@
       const detailPrice = document.getElementById("detail-price");
       const detailDescription = document.getElementById("detail-description");
       const detailFeatures = document.getElementById("detail-features");
-      const detailAddToCartBtn = document.getElementById(
-        "detail-add-to-cart-btn"
+
+      const detailSubscribeUsaBtn = document.getElementById(
+        "detail-subscribe-usa-btn"
       );
+      const detailSubscribeIntlBtn = document.getElementById(
+        "detail-subscribe-intl-btn"
+      );
+
       const manageSubscriptionBtn = document.getElementById(
         "manage-subscription-btn"
       );
@@ -1638,7 +1647,7 @@
           );
         }
 
-        setupCustomDropdown();
+        setupCustomDropdown(); // kept (visual unchanged)
 
         // cross-tab sync
         window.addEventListener("storage", (event) => {
@@ -1651,11 +1660,15 @@
         if (backToStoreBtn)
           backToStoreBtn.addEventListener("click", closeProductDetails);
 
-        if (detailAddToCartBtn) {
-          detailAddToCartBtn.addEventListener("click", () => {
-            const product = products.find((p) => p.id === currentProductId);
-            if (!product) return;
-            window.location.href = product.checkoutUrl;
+        // ✅ TWO subscribe buttons on detail
+        if (detailSubscribeUsaBtn) {
+          detailSubscribeUsaBtn.addEventListener("click", () => {
+            window.location.href = CHECKOUT_USA;
+          });
+        }
+        if (detailSubscribeIntlBtn) {
+          detailSubscribeIntlBtn.addEventListener("click", () => {
+            window.location.href = CHECKOUT_INTL;
           });
         }
 
@@ -1670,7 +1683,7 @@
         }
       }
 
-      // --- DROPDOWN ---
+      // --- DROPDOWN (kept; now doesn't change the grid content) ---
       function setupCustomDropdown() {
         const wrapper = document.querySelector(".custom-select-wrapper");
         if (!wrapper) return;
@@ -1691,7 +1704,7 @@
             option.classList.add("selected");
             triggerSpan.textContent = option.textContent;
 
-            currentCategory = option.getAttribute("data-value");
+            // still re-render (but we only have one product)
             renderProducts();
           });
         });
@@ -1703,52 +1716,44 @@
         });
       }
 
-      // --- PRODUCT RENDERING ---
+      // --- PRODUCT RENDERING (SINGLE CARD + 2 SUBSCRIBE BUTTONS) ---
       function renderProducts() {
         if (!productGrid) return;
 
-        const filteredProducts =
-          currentCategory === "all"
-            ? products
-            : products.filter((p) => p.category === currentCategory);
-
-        productGrid.innerHTML = filteredProducts
-          .map(
-            (product) => `
-        <article class="product-card" onclick="openProductDetails('${
-          product.id
-        }')">
-          <div class="product-image-container">
-            <img src="${product.image}" alt="${product.name}">
-          </div>
-          <div class="product-info">
-            <div class="product-header">
-              <h3>${product.name}</h3>
-              <span class="price">$${product.price.toFixed(2)}</span>
+        productGrid.innerHTML = `
+          <article class="product-card" onclick="openProductDetails()">
+            <div class="product-image-container">
+              <img src="${product.image}" alt="${product.name}">
             </div>
-            <button class="add-to-cart-btn"
-              onclick="event.stopPropagation(); window.location.href='${
-                product.checkoutUrl
-              }'">
-              Subscribe Now <i class="fa-solid fa-arrow-right"></i>
-            </button>
-          </div>
-        </article>
-      `
-          )
-          .join("");
+            <div class="product-info">
+              <div class="product-header">
+                <h3>${product.name}</h3>
+                <span class="price">${product.priceDisplay}</span>
+              </div>
+
+              <div class="subscribe-btns">
+                <button class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); window.location.href='${CHECKOUT_USA}'">
+                  Subscribe Now (USA) <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); window.location.href='${CHECKOUT_INTL}'">
+                  Subscribe Now (International) <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
       }
 
       // --- DETAIL VIEW ---
-      window.openProductDetails = (productId) => {
-        const product = products.find((p) => p.id === productId);
-        if (!product || !productDetailView) return;
-
-        currentProductId = productId;
+      window.openProductDetails = () => {
+        if (!productDetailView) return;
 
         detailImage.src = product.image;
         detailTitle.textContent = product.name;
-        detailPrice.textContent = `$${product.price.toFixed(2)}`;
+        detailPrice.textContent = product.priceDisplay;
         detailDescription.textContent = product.description;
 
         const thumbnailsContainer =
@@ -1758,12 +1763,12 @@
             .slice(0, 5)
             .map(
               (img, index) => `
-          <div class="thumbnail ${
-            index === 0 ? "active" : ""
-          }" onmouseover="updateMainImage('${img}', this)">
-            <img src="${img}" alt="View ${index + 1}">
-          </div>
-        `
+              <div class="thumbnail ${
+                index === 0 ? "active" : ""
+              }" onmouseover="updateMainImage('${img}', this)">
+                <img src="${img}" alt="View ${index + 1}">
+              </div>
+            `
             )
             .join("");
         } else {
@@ -1805,7 +1810,6 @@
         if (!productDetailView || !productGrid) return;
         productDetailView.classList.add("hidden");
         productGrid.classList.remove("hidden");
-        currentProductId = null;
 
         // ✅ Show hero + filter again when returning to grid
         if (shopHeroSection) shopHeroSection.classList.remove("hidden");
@@ -1839,40 +1843,38 @@
           cartItemsContainer.innerHTML = cart
             .map(
               (item) => `
-          <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}">
-            <div class="cart-item-details">
-              <h4>${item.name}</h4>
-              <div class="cart-item-price">$${(
-                item.price * item.quantity
-              ).toFixed(2)}</div>
-              <div class="cart-controls">
-                <button class="qty-btn" onclick="updateQuantity('${
-                  item.id
-                }', -1)">-</button>
-                <span>${item.quantity}</span>
-                <button class="qty-btn" onclick="updateQuantity('${
-                  item.id
-                }', 1)">+</button>
-                <button class="remove-btn" onclick="removeFromCart('${
-                  item.id
-                }')">Remove</button>
+              <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="cart-item-details">
+                  <h4>${item.name}</h4>
+                  <div class="cart-item-price">$${(
+                    item.price * item.quantity
+                  ).toFixed(2)}</div>
+                  <div class="cart-controls">
+                    <button class="qty-btn" onclick="updateQuantity('${
+                      item.id
+                    }', -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity('${
+                      item.id
+                    }', 1)">+</button>
+                    <button class="remove-btn" onclick="removeFromCart('${
+                      item.id
+                    }')">Remove</button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        `
+            `
             )
             .join("");
         }
       }
 
       window.addToCart = function (productId) {
-        const product = products.find((p) => p.id === productId);
-        if (!product) return;
-
+        // kept for compatibility; not used in this flow
         const existingItem = cart.find((item) => item.id === productId);
         if (existingItem) existingItem.quantity++;
-        else cart.push({ ...product, quantity: 1 });
+        else cart.push({ id: productId, quantity: 1 });
 
         saveCart();
         updateCartUI();
