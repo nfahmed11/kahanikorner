@@ -57,9 +57,39 @@ const correctSound = new Audio("/qr/assets/audio/success.wav");
 const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
 const cardFlipSound = new Audio("/qr/assets/audio/cardflip.mp3");
 
+
+
+
+function getRomanForms(card) {
+  const v = card?.word?.romanUrdu;
+  if (!v) return [];
+  return Array.isArray(v) ? v : [v];
+}
+
+function primaryRoman(card) {
+  return getRomanForms(card)[0] || "";
+}
+
+function matchesAllowed(card) {
+  const forms = getRomanForms(card);
+  return forms.some((w) => ALLOWED_WORDS.has(w));
+}
+function displayRoman(card) {
+  const forms = getRomanForms(card);
+
+  // Prefer the alias that is actually in ALLOWED_WORDS
+  const matched = forms.find((w) => ALLOWED_WORDS.has(w));
+  return matched || forms[0] || "";
+}
+
+
+
 // --------------------
 // Deck setup
 // --------------------
+
+
+
 function resetDeck({ shuffle = false } = {}) {
   if (!Array.isArray(originalVocab)) {
     console.error("[flashcards] vocab import failed: originalVocab is not an array", originalVocab);
@@ -68,9 +98,9 @@ function resetDeck({ shuffle = false } = {}) {
   }
 
   // Build lookup set of vocab romanUrdu words
-  const vocabWords = new Set(
-    originalVocab.map((c) => c.word?.romanUrdu).filter(Boolean)
-  );
+  const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
+
+  
 
   // ✅ Only logs you asked for
   console.log("[flashcards] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
@@ -81,7 +111,8 @@ function resetDeck({ shuffle = false } = {}) {
   }
 
   // Filter deck to allowed words
-  deck = originalVocab.filter((card) => ALLOWED_WORDS.has(card.word?.romanUrdu));
+  deck = originalVocab.filter(matchesAllowed);
+
 
   if (shuffle) deck.sort(() => Math.random() - 0.5);
 }
@@ -306,8 +337,10 @@ function updateFlashcard(index) {
           ${
             isEnglishToUrdu
               ? `<div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${card.word.english}</div>`
-              : `<div class="text-3xl md:text-5xl font-bold text-lightpurple break-words">${card.word.romanUrdu}</div>
-                 <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>`
+              : `<div class="text-3xl md:text-5xl font-bold text-lightpurple break-words">${displayRoman(card)}</div>
+              <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>`
+            
+           
           }
         </div>
 
@@ -318,8 +351,8 @@ function updateFlashcard(index) {
             .map((item) => {
               const isCorrect = item.word.english === card.word.english;
               const label = isEnglishToUrdu
-                ? `${item.word.urdu} (${item.word.romanUrdu})`
-                : item.word.english;
+              ? `${item.word.urdu} (${displayRoman(item)})`
+              : item.word.english;            
               return `<button class="quiz-option btn w-3/4 max-w-xs my-1 border border-purple-300 text-purple-700 bg-white py-1 rounded-full" data-correct="${isCorrect}">${label}</button>`;
             })
             .join("")}
@@ -387,7 +420,8 @@ function updateFlashcard(index) {
       <div class="relative w-full h-full flex flex-col justify-between">
         <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
         <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-          <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${card.word.romanUrdu}</div>
+        <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(card)}</div>
+
           <div><img src="${card.image}" alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
           <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>
         </div>
@@ -398,7 +432,8 @@ function updateFlashcard(index) {
         ${renderHintBlock(card, "front")}
         <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
         <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-          <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${card.word.romanUrdu}</div>
+        <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(card)}</div>
+
           <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>
         </div>
         <div class="text-sm ${urduLabelClass} text-center mb-4">Click card for English</div>

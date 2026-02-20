@@ -1652,7 +1652,7 @@ export const vocab = [
   },
 
   {
-    word: { romanUrdu: "muskurana", urdu: "مسکرانا", english: "to smile" },
+    word: {   romanUrdu: ["muskurana", "muskurahat"], urdu: "مسکرانا", english: "to smile" },
     image: "/qr/assets/images/muskurana.png",
     riddles: {
       english:
