@@ -5,7 +5,7 @@ export const riddles = [
       urdu: "آلو",
       english: "Potato",
     },
-    image: "../images/aloo.png",
+    image: "../images/aaloo.png",
     riddles: {
       easy: {
         english:
