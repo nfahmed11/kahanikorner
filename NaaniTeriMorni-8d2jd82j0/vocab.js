@@ -85,7 +85,7 @@ export const riddles = [
     urdu: "دے دے",
     english: "give me",
   },
-  image: "../images/de_de.png",
+  image: "../images/dede.png",
   riddles: {
     easy: {
       english: "A little request said with a plea,\nWhen you want something handed to thee.",
