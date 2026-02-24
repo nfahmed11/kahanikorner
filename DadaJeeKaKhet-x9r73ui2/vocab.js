@@ -424,7 +424,7 @@ export const riddles = [
       urdu: "دادا جی",
       english: "Grandpa",
     },
-    image: "../images/dadajee.png",
+    image: "../images/dada.png",
     riddles: {
       easy: {
         romanUrdu:
