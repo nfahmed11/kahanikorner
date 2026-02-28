@@ -264,6 +264,27 @@
         );
       }
 
+      /* Brand logo swap */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;              /* no gap since it's just the logo now */
+}
+
+.brand-logo {
+  height: 44px;        /* tweak if needed */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* slightly smaller on mobile */
+@media (max-width: 768px) {
+  .brand-logo {
+    height: 34px;
+  }
+}
+
       .brand {
         display: flex;
         align-items: center;
@@ -1701,12 +1722,15 @@
     <header class="header">
       <div class="header__inner">
         <button class="mobile-toggle" id="mobile-toggle">
-          <i class="fa-solid fa-bars"></i>
+          <img src="" alt="">
         </button>
 
-        <a href="https://kahanikorner.com" class="brand">
-          <i class="fa-solid fa-book-open-reader brand-icon"></i>
-          Kahani Korner
+        <a href="https://kahanikorner.com" class="brand" aria-label="Kahani Korner Home">
+          <img
+            src="/assets/images/homepage/logo.png"
+            alt="Kahani Korner"
+            class="brand-logo"
+          />
         </a>
 
         <nav class="nav">
@@ -1752,10 +1776,13 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
       <nav class="mobile-menu">
         <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <i class="fa-solid fa-book-open-reader"></i>
-            Kahani Korner
-          </span>
+          <a href="https://kahanikorner.com" class="mobile-menu__brand" aria-label="Kahani Korner Home">
+            <img
+              src="/assets/images/homepage/logo.png"
+              alt="Kahani Korner"
+              style="height: 34px; width: auto; display: block"
+            />
+          </a>
           <button class="mobile-menu__close" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
           </button>
