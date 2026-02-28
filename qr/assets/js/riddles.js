@@ -100,6 +100,12 @@ function shuffleArray(arr) {
   return arr;
 }
 
+function getRomanForms(card) {
+  const v = card?.word?.romanUrdu;
+  if (!v) return [];
+  return Array.isArray(v) ? v : [v];
+}
+
 function resetDeck() {
   if (!Array.isArray(originalVocab)) {
     console.error("[riddle] vocab import failed or not array", originalVocab);
@@ -108,19 +114,50 @@ function resetDeck() {
   }
 
   if (!(ALLOWED_WORDS instanceof Set)) {
+    console.error("[riddle] ALLOWED_WORDS is not a Set");
     deck = [];
     return;
   }
 
-  deck = originalVocab.filter((card) =>
-    ALLOWED_WORDS.has(card.word?.romanUrdu)
+  // ✅ Build lookup of ALL vocab roman forms
+  const vocabWords = new Set(
+    originalVocab.flatMap((card) => getRomanForms(card))
   );
 
-  if (!deck.length) {
-    console.warn(
-      "[riddle] deck empty after filtering. Check romanUrdu spellings."
-    );
+  // ✅ Filter deck correctly (supports arrays)
+  deck = originalVocab.filter((card) =>
+    getRomanForms(card).some((form) => ALLOWED_WORDS.has(form))
+  );
+
+  // ----------------------------
+  // 🔥 LOGGING SECTION
+  // ----------------------------
+
+  console.log("========== RIDDLE DEBUG ==========");
+
+  console.log("Total ALLOWED_WORDS:", ALLOWED_WORDS.size);
+  console.log("ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+
+  console.log("Total vocab words available:", vocabWords.size);
+
+  console.log("Total words loaded into deck:", deck.length);
+
+  console.log(
+    "Loaded words:",
+    deck.map((card) => getRomanForms(card)[0])
+  );
+
+  const missing = [...ALLOWED_WORDS].filter(
+    (word) => !vocabWords.has(word)
+  );
+
+  if (missing.length) {
+    console.warn("❌ Words NOT found in vocab.js:", missing);
+  } else {
+    console.log("✅ All ALLOWED_WORDS found in vocab.js");
   }
+
+  console.log("==================================");
 }
 
 function sliderValueToDifficulty(v) {

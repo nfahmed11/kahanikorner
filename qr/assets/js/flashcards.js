@@ -1,5 +1,3 @@
-
-
 import { vocab as originalVocab } from "./vocab.js";
 
 // --------------------
@@ -46,7 +44,9 @@ if (!toggleImageBtn) missing.push("toggle-image");
 
 if (missing.length) {
   console.error("[flashcards] Missing DOM elements:", missing);
-  throw new Error("Flashcards init failed: missing DOM elements: " + missing.join(", "));
+  throw new Error(
+    "Flashcards init failed: missing DOM elements: " + missing.join(", ")
+  );
 }
 
 // --------------------
@@ -56,9 +56,6 @@ const sparkleSound = new Audio("/qr/assets/audio/sparkle.mp3");
 const correctSound = new Audio("/qr/assets/audio/success.wav");
 const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
 const cardFlipSound = new Audio("/qr/assets/audio/cardflip.mp3");
-
-
-
 
 function getRomanForms(card) {
   const v = card?.word?.romanUrdu;
@@ -82,13 +79,9 @@ function displayRoman(card) {
   return matched || forms[0] || "";
 }
 
-
-
 // --------------------
 // Deck setup
 // --------------------
-
-
 
 function resetDeck({ shuffle = false } = {}) {
   if (!Array.isArray(originalVocab)) {
@@ -97,26 +90,37 @@ function resetDeck({ shuffle = false } = {}) {
     return;
   }
 
-  // Build lookup set of vocab romanUrdu words
+  // Build lookup set of vocab romanUrdu words (including aliases)
   const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
 
-  
-
-  // ✅ Only logs you asked for
-  console.log("[flashcards] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-
+  // Precompute missing allowed words
   const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
-  if (missingWords.length) {
-    console.warn("[flashcards] Missing in vocab.js:", missingWords);
-  }
 
   // Filter deck to allowed words
   deck = originalVocab.filter(matchesAllowed);
 
+  // ----------------------------
+  // 🔥 DEBUG LOGGING (on load)
+  // ----------------------------
+  console.log("========== FLASHCARDS DEBUG ==========");
+  console.log("[flashcards] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
+  console.log("[flashcards] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+  console.log("[flashcards] Total vocab roman forms available:", vocabWords.size);
+
+  const loaded = deck.map((card) => displayRoman(card));
+  console.log("[flashcards] Total words loaded into deck:", deck.length);
+  console.log("[flashcards] Loaded words:", loaded);
+
+  if (missingWords.length) {
+    console.warn("[flashcards] ❌ Words NOT found in vocab.js:", missingWords);
+  } else {
+    console.log("[flashcards] ✅ All ALLOWED_WORDS found in vocab.js");
+  }
+
+  console.log("======================================");
 
   if (shuffle) deck.sort(() => Math.random() - 0.5);
-}
-
+} // ✅ END resetDeck
 // --------------------
 // UI Events
 // --------------------
@@ -128,7 +132,9 @@ toggleImageBtn.addEventListener("click", () => {
 
 toggleLangBtn.addEventListener("click", () => {
   isEnglishToUrdu = !isEnglishToUrdu;
-  toggleLangBtn.textContent = isEnglishToUrdu ? "Urdu → English" : "English → Urdu";
+  toggleLangBtn.textContent = isEnglishToUrdu
+    ? "Urdu → English"
+    : "English → Urdu";
   flashcard.classList.remove("flipped");
   updateFlashcard(currentIndex);
 });
@@ -292,7 +298,8 @@ function updateFlashcard(index) {
 
   if (!deck.length) {
     console.error("[flashcards] deck is empty");
-    flashcardFront.innerHTML = '<div class="text-center text-white">Deck is empty</div>';
+    flashcardFront.innerHTML =
+      '<div class="text-center text-white">Deck is empty</div>';
     flashcardBack.innerHTML = "";
     return;
   }
@@ -301,7 +308,8 @@ function updateFlashcard(index) {
   progressText.textContent = `${index + 1}/${deck.length}`;
 
   if (!card || !card.word || !card.word.english) {
-    flashcardFront.innerHTML = '<div class="text-center text-white">No card data</div>';
+    flashcardFront.innerHTML =
+      '<div class="text-center text-white">No card data</div>';
     flashcardBack.innerHTML = "";
     return;
   }
@@ -317,7 +325,9 @@ function updateFlashcard(index) {
     navButtons.style.display = "none";
     flashcard.classList.remove("flipped");
 
-    flashcardFront.style.background = isEnglishToUrdu ? englishGradient : urduGradient;
+    flashcardFront.style.background = isEnglishToUrdu
+      ? englishGradient
+      : urduGradient;
     flashcardBack.style.background = "";
 
     const options = [...deck]
@@ -329,7 +339,9 @@ function updateFlashcard(index) {
 
     flashcardFront.innerHTML = `
       <div class="relative w-full h-full flex flex-col justify-center text-center gap-4 px-4">
-        <div class="text-sm ${isEnglishToUrdu ? englishLabelClass : urduLabelClass} text-center mt-2">
+        <div class="text-sm ${
+          isEnglishToUrdu ? englishLabelClass : urduLabelClass
+        } text-center mt-2">
           ${isEnglishToUrdu ? "English" : "Urdu"}
         </div>
 
@@ -337,10 +349,12 @@ function updateFlashcard(index) {
           ${
             isEnglishToUrdu
               ? `<div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${card.word.english}</div>`
-              : `<div class="text-3xl md:text-5xl font-bold text-lightpurple break-words">${displayRoman(card)}</div>
-              <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>`
-            
-           
+              : `<div class="text-3xl md:text-5xl font-bold text-lightpurple break-words">${displayRoman(
+                  card
+                )}</div>
+              <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${
+                  card.word.urdu
+                }</div>`
           }
         </div>
 
@@ -351,8 +365,8 @@ function updateFlashcard(index) {
             .map((item) => {
               const isCorrect = item.word.english === card.word.english;
               const label = isEnglishToUrdu
-              ? `${item.word.urdu} (${displayRoman(item)})`
-              : item.word.english;            
+                ? `${item.word.urdu} (${displayRoman(item)})`
+                : item.word.english;
               return `<button class="quiz-option btn w-3/4 max-w-xs my-1 border border-purple-300 text-purple-700 bg-white py-1 rounded-full" data-correct="${isCorrect}">${label}</button>`;
             })
             .join("")}
@@ -402,8 +416,12 @@ function updateFlashcard(index) {
 
   navButtons.style.display = "flex";
   flashcard.classList.remove("flipped");
-  flashcardFront.style.background = isEnglishToUrdu ? englishGradient : urduGradient;
-  flashcardBack.style.background = isEnglishToUrdu ? urduGradient : englishGradient;
+  flashcardFront.style.background = isEnglishToUrdu
+    ? englishGradient
+    : urduGradient;
+  flashcardBack.style.background = isEnglishToUrdu
+    ? urduGradient
+    : englishGradient;
 
   if (isEnglishToUrdu) {
     flashcardFront.innerHTML = `
@@ -411,7 +429,9 @@ function updateFlashcard(index) {
         ${renderHintBlock(card, "front")}
         <div class="text-sm ${englishLabelClass} text-center mt-2">English</div>
         <div class="flex-grow flex justify-center items-center">
-          <div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${card.word.english}</div>
+          <div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${
+      card.word.english
+    }</div>
         </div>
         <div class="text-sm ${englishLabelClass} text-center mb-4">Click card for Urdu</div>
       </div>`;
@@ -420,10 +440,16 @@ function updateFlashcard(index) {
       <div class="relative w-full h-full flex flex-col justify-between">
         <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
         <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-        <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(card)}</div>
+        <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(
+          card
+        )}</div>
 
-          <div><img src="${card.image}" alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
-          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>
+          <div><img src="${
+            card.image
+          }" alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
+          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${
+      card.word.urdu
+    }</div>
         </div>
       </div>`;
   } else {
@@ -432,9 +458,13 @@ function updateFlashcard(index) {
         ${renderHintBlock(card, "front")}
         <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
         <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-        <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(card)}</div>
+        <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(
+          card
+        )}</div>
 
-          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${card.word.urdu}</div>
+          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${
+      card.word.urdu
+    }</div>
         </div>
         <div class="text-sm ${urduLabelClass} text-center mb-4">Click card for English</div>
       </div>`;

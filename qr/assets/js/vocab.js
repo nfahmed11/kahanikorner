@@ -1652,16 +1652,6 @@ export const vocab = [
   },
 
   {
-    word: {   romanUrdu: ["muskurana", "muskurahat"], urdu: "مسکرانا", english: "to smile" },
-    image: "/qr/assets/images/muskurana.png",
-    riddles: {
-      english:
-        "Lips turn up, eyes shine bright,\nA silent laugh, a gentle sight!",
-      romanUrdu: "Hont upar, aankhon mein noor,\nKhamoshi mein khushi ka door!",
-      urdu: "ہونٹ اوپر، آنکھوں میں نور،\nخاموشی میں خوشی کا دور!",
-    },
-  },
-  {
     word: { romanUrdu: "pata", urdu: "پتا", english: "know" },
     image: "/qr/assets/images/pata.png",
     riddles: {
@@ -1880,8 +1870,8 @@ export const vocab = [
     },
   },
   {
-    word: { romanUrdu: "khamosh", urdu: "خاموش", english: "silent" },
-    image: "/qr/assets/images/khamosh.png",
+    word: { romanUrdu: "khamoshi", urdu: "خاموش", english: "silent" },
+    image: "/qr/assets/images/khamoshi.png",
     riddles: {
       english:
         "No sound at all, not even a peep,\nThe world feels calm, quiet and deep!",
@@ -2009,6 +1999,309 @@ export const vocab = [
         "Blue by day, with stars at night,\nAbove us all, a massive sight!",
       romanUrdu: "Din mein neela, raat sitaaray,\nSar ke upar, sab ko pyaaray!",
       urdu: "دن میں نیلا، رات ستارے،\nسر کے اوپر، سب کو پیارے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["maheena"], urdu: "مہینہ", english: "month" },
+    image: "/qr/assets/images/maheena.png",
+    riddles: {
+      english: "Thirty days go passing by,\nTime moves fast, oh my oh my!",
+      romanUrdu: "Tees din yun beet jaayein,\nWaqt ke par lag jaayein!",
+      urdu: "تیس دن یوں بیت جائیں،\nوقت کے پر لگ جائیں!",
+    },
+  },
+  {
+    word: { romanUrdu: ["tayari"], urdu: "تیاری", english: "preparation" },
+    image: "/qr/assets/images/tayari.png",
+    riddles: {
+      english: "Before we start, we get set,\nReady, steady — no regret!",
+      romanUrdu: "Shuru se pehle sab taiyaar,\nPhir ho kaam asaan aur pyaar!",
+      urdu: "شروع سے پہلے سب تیار،\nپھر ہو کام آسان اور پیار!",
+    },
+  },
+  {
+    word: { romanUrdu: ["roti"], urdu: "روٹی", english: "bread" },
+    image: "/qr/assets/images/roti.png",
+    riddles: {
+      english:
+        "Round and warm upon your plate,\nWith curry beside — it tastes so great!",
+      romanUrdu:
+        "Gol aur garam thali mein aaye,\nSalan ke saath mazaa badhaaye!",
+      urdu: "گول اور گرم تھالی میں آئے،\nسالن کے ساتھ مزہ بڑھائے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["daura"], urdu: "دوڑ", english: "run" },
+    image: "/qr/assets/images/daura.png",
+    riddles: {
+      english: "Feet move fast, zoom zoom zoom,\nRace ahead across the room!",
+      romanUrdu: "Paon tez bhagein jhoom jhoom,\nSab se aage pohochay boom!",
+      urdu: "پاؤں تیز بھاگیں جھوم جھوم،\nسب سے آگے پہنچے بوم!",
+    },
+  },
+  {
+    word: { romanUrdu: ["ami"], urdu: "امی", english: "mother" },
+    image: "/qr/assets/images/ami.png",
+    riddles: {
+      english: "Gentle hug and loving care,\nAlways there and always fair!",
+      romanUrdu:
+        "Pyaar bhari baahon ka ghera,\nHar mushkil mein sab se pehla sahara!",
+      urdu: "پیار بھری بانہوں کا گھیرہ،\nہر مشکل میں سب سے پہلا سہارا!",
+    },
+  },
+  {
+    word: { romanUrdu: ["mubarak"], urdu: "مبارک", english: "blessed" },
+    image: "/qr/assets/images/mubarak.png",
+    riddles: {
+      english:
+        "A happy wish on special days,\nFull of joy and thankful praise!",
+      romanUrdu: "Khushi ka paighaam sunaye,\nHar din ko barkat dilaye!",
+      urdu: "خوشی کا پیغام سنائے،\nہر دن کو برکت دلائے!",
+    },
+  },
+
+  {
+    word: { romanUrdu: ["dadi"], urdu: "دادی", english: "grandmother" },
+    image: "/qr/assets/images/dadi.png",
+    riddles: {
+      english: "Stories told in loving tone,\nWarmest hugs I’ve ever known!",
+      romanUrdu: "Kahaniyaan jo pyaar sunaye,\nGodi mein sukoon dilaye!",
+      urdu: "کہانیاں جو پیار سنائے،\nگودی میں سکون دلائے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["dada"], urdu: "دادا", english: "grandfather" },
+    image: "/qr/assets/images/dada.png",
+    riddles: {
+      english: "Wise and kind with silver hair,\nGuiding us with gentle care!",
+      romanUrdu: "Safed baal aur dil se pyare,\nRehnuma hum sab ke sahare!",
+      urdu: "سفید بال اور دل سے پیارے،\nرہنما ہم سب کے سہارے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["dua"], urdu: "دعا", english: "prayer" },
+    image: "/qr/assets/images/dua.png",
+    riddles: {
+      english:
+        "Hands raised high, eyes closed tight,\nWhispered hope both day and night!",
+      romanUrdu: "Haath utha kar maangein pyaar,\nDil se nikle dua har baar!",
+      urdu: "ہاتھ اٹھا کر مانگیں پیار،\nدل سے نکلے دعا ہر بار!",
+    },
+  },
+  {
+    word: { romanUrdu: ["chacha"], urdu: "چچا", english: "uncle" },
+    image: "/qr/assets/images/chacha.png",
+    riddles: {
+      english: "Fun and laughter every day,\nPlays with us in every way!",
+      romanUrdu: "Hansi mazaak aur pyari baat,\nHar din laaye khushi ki raat!",
+      urdu: "ہنسی مذاق اور پیاری بات،\nہر دن لائے خوشی کی رات!",
+    },
+  },
+  {
+    word: {
+      romanUrdu: ["dastarkhwan"],
+      urdu: "دسترخوان",
+      english: "tablecloth",
+    },
+    image: "/qr/assets/images/dastarkhwan.png",
+    riddles: {
+      english: "Spread it wide before we eat,\nFamily gathers — what a treat!",
+      romanUrdu: "Khaane se pehle bichha jaye,\nSab ko saath bitha jaye!",
+      urdu: "کھانے سے پہلے بچھا جائے،\nسب کو ساتھ بٹھا جائے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["ailan"], urdu: "اعلان", english: "announcement" },
+    image: "/qr/assets/images/ailan.png",
+    riddles: {
+      english:
+        "Hear the news, come gather near,\nSomething important you must hear!",
+      romanUrdu:
+        "Sab ko bulaye zor se awaaz,\nSuno zaroor — hai khaas yeh baat!",
+      urdu: "سب کو بلائے زور سے آواز،\nسنو ضرور — ہے خاص یہ بات!",
+    },
+  },
+  {
+    word: { romanUrdu: ["khabar"], urdu: "خبر", english: "news" },
+    image: "/qr/assets/images/khabar.png",
+    riddles: {
+      english:
+        "Something happened — what, where, when?\nLet’s find out and tell again!",
+      romanUrdu: "Kya hua aur kab hua?\nSab ko bataye yeh zaroor hua!",
+      urdu: "کیا ہوا اور کب ہوا؟\nسب کو بتائے یہ ضرور ہوا!",
+    },
+  },
+  {
+    word: { romanUrdu: ["aag"], urdu: "آگ", english: "fire" },
+    image: "/qr/assets/images/aag.png",
+    riddles: {
+      english:
+        "Bright and hot with dancing flame,\nUse with care — it’s not a game!",
+      romanUrdu: "Garam sholay cham cham cham,\nSambhal kar rehna har dam!",
+      urdu: "گرم شولے چم چم چم،\nسنبھل کر رہنا ہر دم!",
+    },
+  },
+  {
+    word: { romanUrdu: ["parosi"], urdu: "پڑوسی", english: "neighbor" },
+    image: "/qr/assets/images/parosi.png",
+    riddles: {
+      english: "Lives nearby, just next door,\nFriendly smile we can’t ignore!",
+      romanUrdu: "Ghar ke paas rehta hai,\nHansi khushi se milta hai!",
+      urdu: "گھر کے پاس رہتا ہے،\nہنسی خوشی سے ملتا ہے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["kaam"], urdu: "کام", english: "work" },
+    image: "/qr/assets/images/kaam.png",
+    riddles: {
+      english:
+        "Something to do, big or small,\nFinish it well, give it your all!",
+      romanUrdu: "Chhota ho ya bada ho kaam,\nMehnat se milta hai inaam!",
+      urdu: "چھوٹا ہو یا بڑا ہو کام،\nمحنت سے ملتا ہے انعام!",
+    },
+  },
+  {
+    word: { romanUrdu: ["ghabrana"], urdu: "گھبرانا", english: "to worry" },
+    image: "/qr/assets/images/ghabrana.png",
+    riddles: {
+      english:
+        "Heart beats fast, you feel unsure,\nTake a breath — you’ll feel secure!",
+      romanUrdu: "Dil dhadke tez kabhi kabhi,\nSabr karo sab theek abhi!",
+      urdu: "دل دھڑکے تیز کبھی کبھی،\nصبر کرو سب ٹھیک ابھی!",
+    },
+  },
+  {
+    word: { romanUrdu: ["pakarna"], urdu: "پکڑنا", english: "to hold" },
+    image: "/qr/assets/images/pakarna.png",
+    riddles: {
+      english: "Grip it tight, don’t let go,\nHands together, steady so!",
+      romanUrdu: "Mazboot haath se thaam lo,\nGirne na do, sambhaal lo!",
+      urdu: "مضبوط ہاتھ سے تھام لو،\nگرنے نہ دو، سنبھال لو!",
+    },
+  },
+  {
+    word: { romanUrdu: ["madad"], urdu: "مدد", english: "help" },
+    image: "/qr/assets/images/madad.png",
+    riddles: {
+      english:
+        "When someone needs a caring hand,\nBe there to help and understand!",
+      romanUrdu: "Jab koi mushkil mein aaye,\nMadad ko haath barhaye!",
+      urdu: "جب کوئی مشکل میں آئے،\nمدد کو ہاتھ بڑھائے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["khajoor"], urdu: "کھجور", english: "dates" },
+    image: "/qr/assets/images/khajoor.png",
+    riddles: {
+      english: "Sweet and soft, brown and small,\nRamadan treat loved by all!",
+      romanUrdu: "Meethi si chhoti si cheez,\nRoza kholay badi azeez!",
+      urdu: "میٹھی سی چھوٹی سی چیز،\nروزہ کھولے بڑی عزیز!",
+    },
+  },
+  {
+    word: { romanUrdu: ["pani"], urdu: "پانی", english: "water" },
+    image: "/qr/assets/images/pani.png",
+    riddles: {
+      english:
+        "Clear and cool, we drink each day,\nKeeps us strong in every way!",
+      romanUrdu:
+        "Saaf aur thanda har din peeyein,\nSehat ke liye zaroori jeeyein!",
+      urdu: "صاف اور ٹھنڈا ہر دن پئیں،\nصحت کے لیے ضروری جئیں!",
+    },
+  },
+  {
+    word: { romanUrdu: ["saath"], urdu: "ساتھ", english: "together" },
+    image: "/qr/assets/images/saath.png",
+    riddles: {
+      english:
+        "Side by side we laugh and play,\nBetter when we’re all one way!",
+      romanUrdu:
+        "Mil kar hansi mil kar khel,\nSaath ho to sab kuchh asaan hai bhai!",
+      urdu: "مل کر ہنسی مل کر کھیل،\nساتھ ہو تو سب کچھ آسان ہے بھئی!",
+    },
+  },
+  {
+    word: { romanUrdu: ["aansoo"], urdu: "آنسو", english: "tears" },
+    image: "/qr/assets/images/aansoo.png",
+    riddles: {
+      english: "When we’re sad, they gently fall,\nTiny drops that say it all!",
+      romanUrdu:
+        "Dukh mein aankh se gir jaayein,\nChhote qatre dil samjhaayein!",
+      urdu: "دکھ میں آنکھ سے گر جائیں،\nچھوٹے قطرے دل سمجھائیں!",
+    },
+  },
+  {
+    word: { romanUrdu: ["shukriya"], urdu: "شکریہ", english: "thanks" },
+    image: "/qr/assets/images/shukriya.png",
+    riddles: {
+      english:
+        "A little word both kind and sweet,\nMakes good manners feel complete!",
+      romanUrdu: "Chhota lafz magar hai pyara,\nAdaab ka hai yeh sahara!",
+      urdu: "چھوٹا لفظ مگر ہے پیارا،\nآداب کا ہے یہ سہارا!",
+    },
+  },
+  {
+    word: { romanUrdu: ["azan"], urdu: "اذان", english: "call to prayer" },
+    image: "/qr/assets/images/azan.png",
+    riddles: {
+      english: "A beautiful voice fills the air,\nCalling us all to prayer!",
+      romanUrdu: "Khoobsurat awaaz bulaye,\nNamaz ke liye sab ko bulaye!",
+      urdu: "خوبصورت آواز بلائے،\nنماز کے لیے سب کو بلائے!",
+    },
+  },
+  {
+    word: { romanUrdu: ["wapas"], urdu: "واپس", english: "return" },
+    image: "/qr/assets/images/wapas.png",
+    riddles: {
+      english: "You go away, then come again,\nBack you travel now and then!",
+      romanUrdu: "Door ja kar phir aa jao,\nWapas ghar ka raasta pao!",
+      urdu: "دور جا کر پھر آ جاؤ،\nواپس گھر کا راستہ پاؤ!",
+    },
+  },
+  {
+    word: { romanUrdu: ["pura"], urdu: "پورا", english: "whole" },
+    image: "/qr/assets/images/pura.png",
+    riddles: {
+      english:
+        "Nothing missing, full and round,\nAll together, safe and sound!",
+      romanUrdu: "Kuchh na baqi sab hai saath,\nPura ho to khush har baat!",
+      urdu: "کچھ نہ باقی سب ہے ساتھ،\nپورا ہو تو خوش ہر بات!",
+    },
+  },
+  {
+    word: { romanUrdu: ["roza"], urdu: "روزہ", english: "fast" },
+    image: "/qr/assets/images/roza.png",
+    riddles: {
+      english:
+        "From dawn till sunset, we don’t eat,\nPatient hearts make it complete!",
+      romanUrdu:
+        "Subah se shaam tak sabr karein,\nRoza rakh kar khushiyan bharein!",
+      urdu: "صبح سے شام تک صبر کریں،\nروزہ رکھ کر خوشیاں بھریں!",
+    },
+  },
+  {
+    word: { romanUrdu: ["pyara"], urdu: "پیارا", english: "love" },
+    image: "/qr/assets/images/pyara.png",
+    riddles: {
+      english:
+        "Warm and kind inside your heart,\nBrings us close, never apart!",
+      romanUrdu: "Dil mein rehta naram sa ehsaas,\nPyara lafz jo kare paas!",
+      urdu: "دل میں رہتا نرم سا احساس،\nپیارا لفظ جو کرے پاس!",
+    },
+  },
+
+  {
+    word: {
+      romanUrdu: ["muskurana", "muskurahat"],
+      urdu: "مسکرانا",
+      english: "to smile",
+    },
+    image: "/qr/assets/images/muskurana.png",
+    riddles: {
+      english:
+        "Lips turn up, eyes shine bright,\nA silent laugh, a gentle sight!",
+      romanUrdu: "Hont upar, aankhon mein noor,\nKhamoshi mein khushi ka door!",
+      urdu: "ہونٹ اوپر، آنکھوں میں نور،\nخاموشی میں خوشی کا دور!",
     },
   },
 ];

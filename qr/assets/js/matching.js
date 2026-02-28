@@ -22,6 +22,24 @@ console.log(
   originalVocab?.length
 );
 
+function getRomanForms(card) {
+  const v = card?.word?.romanUrdu;
+  if (!v) return [];
+  return Array.isArray(v) ? v : [v];
+}
+
+function matchesAllowed(card) {
+  const forms = getRomanForms(card);
+  return forms.some((w) => ALLOWED_WORDS.has(w));
+}
+
+function displayRoman(card) {
+  const forms = getRomanForms(card);
+  const matched = forms.find((w) => ALLOWED_WORDS.has(w));
+  return matched || forms[0] || "";
+}
+
+
 let deck = [];
 
 function resetDeck() {
@@ -39,15 +57,33 @@ function resetDeck() {
     return;
   }
 
-  // ✅ Filter big vocab down to allowed subset
-  deck = originalVocab.filter((card) =>
-    ALLOWED_WORDS.has(card.word?.romanUrdu)
-  );
+// Build lookup set of vocab roman forms (includes aliases)
+const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
 
-  console.log("[tasveer] deck rebuilt", {
-    deckLength: deck.length,
-    words: deck.map((c) => c.word?.romanUrdu),
-  });
+// ✅ Filter big vocab down to allowed subset (supports string OR array romanUrdu)
+deck = originalVocab.filter(matchesAllowed);
+
+// ----------------------------
+// 🔥 DEBUG LOGGING (on load)
+// ----------------------------
+console.log("========== TASVEER DEBUG ==========");
+console.log("[tasveer] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
+console.log("[tasveer] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+
+console.log("[tasveer] Total vocab roman forms available:", vocabWords.size);
+
+const loaded = deck.map((card) => displayRoman(card));
+console.log("[tasveer] Total words loaded into deck:", deck.length);
+console.log("[tasveer] Loaded words:", loaded);
+
+const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
+if (missingWords.length) {
+  console.warn("[tasveer] ❌ Words NOT found in vocab.js:", missingWords);
+} else {
+  console.log("[tasveer] ✅ All ALLOWED_WORDS found in vocab.js");
+}
+
+console.log("===================================");
 
   if (deck.length === 0) {
     console.warn("[tasveer] deck empty after filtering.");
@@ -149,10 +185,10 @@ document.addEventListener("DOMContentLoaded", () => {
       wordDiv.classList.add("word");
       wordDiv.setAttribute("data-urdu", card.word.urdu);
 
-      wordDiv.innerHTML = `
-        <div class="roman">${card.word.romanUrdu}</div>
-        <div class="urdu">${card.word.urdu}</div>
-      `;
+      dropZone.innerHTML = `
+      <div class="roman">${displayRoman(card)}</div>
+      <div class="urdu">${card.word.urdu}</div>
+    `;
 
       wordDiv.addEventListener("click", () => {
         if (dropZone.classList.contains("answered")) return;
@@ -168,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (card.word.urdu === correctUrdu) {
           dropZone.innerHTML = `
-            <div class="roman">${card.word.romanUrdu}</div>
+          <div class="roman">${displayRoman(card)}</div>
             <div class="urdu">${card.word.urdu}</div>
           `;
           dropZone.classList.add("correct");

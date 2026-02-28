@@ -16,18 +16,74 @@ if (!(ALLOWED_WORDS instanceof Set)) {
 }
 
 /* ===================== Build WORDS from vocab.js ===================== */
+
+// ✅ normalize allowed words to lowercase once (so Set lookups work reliably)
+const ALLOWED_WORDS_LOWER =
+  ALLOWED_WORDS instanceof Set
+    ? new Set([...ALLOWED_WORDS].map((w) => String(w).trim().toLowerCase()))
+    : null;
+
+// ✅ helper: romanUrdu can be string OR array (ex: ["azan"])
+function getRomanForms(item) {
+  const v = item?.word?.romanUrdu;
+  if (!v) return [];
+  return Array.isArray(v) ? v : [v];
+}
+
+// ✅ Build WORDS by expanding romanUrdu arrays into separate entries
 const WORDS = (Array.isArray(originalVocab) ? originalVocab : [])
-  .filter((item) => item?.word?.english && item?.word?.romanUrdu)
-  .map((item) => ({
-    en: String(item.word.english).trim(),
-    ru: String(item.word.romanUrdu).trim(),
-  }))
-  // ✅ Only keep words that are explicitly allowed by your HTML Set (match by romanUrdu)
+  .filter((item) => item?.word?.english && getRomanForms(item).length)
+  .flatMap((item) => {
+    const en = String(item.word.english).trim();
+    return getRomanForms(item).map((ru) => ({
+      en,
+      ru: String(ru).trim(),
+    }));
+  })
+  // ✅ Only keep words explicitly allowed (match by romanUrdu, case-insensitive)
   .filter((w) => {
-    if (!(ALLOWED_WORDS instanceof Set)) return true; // fail-open if missing
-    const key = w.ru.toLowerCase();
-    return ALLOWED_WORDS.has(key);
+    if (!ALLOWED_WORDS_LOWER) return true; // fail-open if missing
+    return ALLOWED_WORDS_LOWER.has(w.ru.toLowerCase());
   });
+
+/* ===================== DEBUG LOGGING (on load) ===================== */
+(function debugWords() {
+  console.log("========== WORD SEARCH DEBUG ==========");
+
+  const allowedCount = ALLOWED_WORDS instanceof Set ? ALLOWED_WORDS.size : 0;
+  console.log("[word-search] Total ALLOWED_WORDS:", allowedCount);
+  console.log(
+    "[word-search] ALLOWED_WORDS:",
+    ALLOWED_WORDS instanceof Set ? [...ALLOWED_WORDS] : ALLOWED_WORDS
+  );
+
+  // Build a lookup set of ALL roman forms in vocab.js (lowercased)
+  const vocabRoman = new Set(
+    (Array.isArray(originalVocab) ? originalVocab : [])
+      .flatMap((item) => getRomanForms(item))
+      .map((w) => String(w).trim().toLowerCase())
+      .filter(Boolean)
+  );
+
+  console.log("[word-search] Total vocab roman forms available:", vocabRoman.size);
+
+  // Loaded words (romanUrdu) after filtering
+  const loaded = WORDS.map((w) => w.ru.toLowerCase());
+  console.log("[word-search] Total words loaded into WORDS:", WORDS.length);
+  console.log("[word-search] Loaded romanUrdu:", loaded);
+
+  // Missing allowed words (allowed but not present in vocab roman forms)
+  if (ALLOWED_WORDS_LOWER) {
+    const missing = [...ALLOWED_WORDS_LOWER].filter((w) => !vocabRoman.has(w));
+    if (missing.length) {
+      console.warn("[word-search] ❌ Words NOT found in vocab.js:", missing);
+    } else {
+      console.log("[word-search] ✅ All allowed words exist in vocab.js");
+    }
+  }
+
+  console.log("======================================");
+})();
 
 /* ===================== Config ===================== */
 // Direction vectors

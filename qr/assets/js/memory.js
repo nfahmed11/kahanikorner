@@ -90,15 +90,56 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // ✅ Filter vocab using ALLOWED_WORDS (by romanUrdu)
-  const filteredVocab = (
-    Array.isArray(originalVocab) ? originalVocab : []
-  ).filter((item) => ALLOWED_WORDS?.has(item.word?.romanUrdu));
 
+  function getRomanForms(card) {
+    const v = card?.word?.romanUrdu;
+    if (!v) return [];
+    return Array.isArray(v) ? v : [v];
+  }
+  
+  function matchesAllowed(card) {
+    const forms = getRomanForms(card);
+    return forms.some((w) => ALLOWED_WORDS.has(w));
+  }
+  
+  function displayRoman(card) {
+    const forms = getRomanForms(card);
+    const matched = forms.find((w) => ALLOWED_WORDS.has(w));
+    return matched || forms[0] || "";
+  }
+
+// ✅ Filter vocab using ALLOWED_WORDS (supports romanUrdu string OR array)
+const safeVocab = Array.isArray(originalVocab) ? originalVocab : [];
+
+// Build lookup of all roman forms in vocab (includes aliases)
+const vocabWords = new Set(safeVocab.flatMap((c) => getRomanForms(c)));
+
+const filteredVocab = safeVocab.filter(matchesAllowed);
+
+// ----------------------------
+// 🔥 DEBUG LOGGING (on load)
+// ----------------------------
+console.log("========== MEMORY DEBUG ==========");
+console.log("[memory-game] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
+console.log("[memory-game] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+
+console.log("[memory-game] Total vocab roman forms available:", vocabWords.size);
+
+const loaded = filteredVocab.map((c) => displayRoman(c));
+console.log("[memory-game] Total words loaded into deck:", filteredVocab.length);
+console.log("[memory-game] Loaded words:", loaded);
+
+const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
+if (missingWords.length) {
+  console.warn("[memory-game] ❌ Words NOT found in vocab.js:", missingWords);
+} else {
+  console.log("[memory-game] ✅ All ALLOWED_WORDS found in vocab.js");
+}
+console.log("==================================");
   // Prepare vocabularyPairs from filtered vocab
   const vocabularyPairs = filteredVocab.map((item) => ({
     english: { word: item.word.english, image: item.image },
-    urdu: { romanUrdu: item.word.romanUrdu, urduWord: item.word.urdu },
+    urdu: { romanUrdu: displayRoman(item), urduWord: item.word.urdu },
   }));
 
   function shrinkTextToFit(el, { minPx = 10, stepPx = 1 } = {}) {
