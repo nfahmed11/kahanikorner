@@ -1,4 +1,5 @@
-// cart.js (NOT a module; just a normal script for now)
+// cart.js — shared cart logic for all Kahani Korner pages
+// NOT a module; loaded as a plain <script> tag
 
 // ---- CONFIG ----
 const CART_KEY = "kahani_cart";
@@ -6,14 +7,14 @@ const CART_KEY = "kahani_cart";
 // ---- STATE ----
 let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
 
-// ---- DOM HOOKS (will be null on some pages, that's fine) ----
-const cartBtn        = document.getElementById("cart-btn");
-const closeCartBtn   = document.getElementById("close-cart");
-const cartOverlay    = document.getElementById("cart-overlay");
-const cartItemsBox   = document.getElementById("cart-items");
-const cartTotal      = document.getElementById("cart-total-amount");
-const cartBadge      = document.getElementById("cart-badge");
-const checkoutBtn    = document.getElementById("checkout-btn");
+// ---- DOM HOOKS (gracefully null on pages that don't have them) ----
+const cartBtn      = document.getElementById("cart-btn");
+const closeCartBtn = document.getElementById("close-cart");
+const cartOverlay  = document.getElementById("cart-overlay");
+const cartItemsBox = document.getElementById("cart-items");
+const cartTotal    = document.getElementById("cart-total-amount");
+const cartBadge    = document.getElementById("cart-badge");
+const checkoutBtn  = document.getElementById("checkout-btn");
 
 // ---- HELPERS ----
 function saveCart() {
@@ -28,7 +29,17 @@ function getCartTotalPrice() {
   return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
-// ---- PUBLIC API (attach to window so any page can call it) ----
+function buildStripePayload(cartItems) {
+  const line_items = cartItems.map((item) => ({
+    price: item.id,
+    quantity: item.quantity,
+  }));
+  return { line_items };
+}
+
+// ---- PUBLIC API ----
+// Exposed on window so any page script can call these directly.
+
 window.addToCart = function (product) {
   // product must have: id, name, price, image
   const existing = cart.find((item) => item.id === product.id);
@@ -60,6 +71,9 @@ window.updateQuantity = function (productId, delta) {
   }
 };
 
+window.openCart = openCart;   // expose so inline onclick attributes can call it
+window.closeCart = closeCart; // same
+
 // ---- UI ----
 function updateCartUI() {
   if (cartBadge) {
@@ -74,7 +88,8 @@ function updateCartUI() {
 
   if (cartItemsBox) {
     if (cart.length === 0) {
-      cartItemsBox.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
+      cartItemsBox.innerHTML =
+        '<div class="empty-cart-msg">Your cart is empty.</div>';
     } else {
       cartItemsBox.innerHTML = cart
         .map(
@@ -111,7 +126,40 @@ function closeCart() {
   setTimeout(() => cartOverlay.classList.add("hidden"), 300);
 }
 
-// ---- EVENT WIRING ----
+// ---- CHECKOUT ----
+async function handleCheckout() {
+  if (!checkoutBtn || cart.length === 0) return;
+
+  const { line_items } = buildStripePayload(cart);
+  const originalText = checkoutBtn.innerText;
+  checkoutBtn.innerText = "Redirecting to Stripe...";
+  checkoutBtn.disabled = true;
+
+  try {
+    const response = await fetch("/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: line_items }),
+    });
+
+    if (!response.ok) {
+      alert("There was a problem starting checkout. Please try again.");
+      checkoutBtn.innerText = originalText;
+      checkoutBtn.disabled = false;
+      return;
+    }
+
+    const data = await response.json();
+    window.location.href = data.url;
+  } catch (err) {
+    console.error("Checkout error:", err);
+    alert("Unexpected error. Please try again.");
+    checkoutBtn.innerText = originalText;
+    checkoutBtn.disabled = false;
+  }
+}
+
+// ---- INIT ----
 function initCart() {
   updateCartUI();
 
@@ -122,8 +170,10 @@ function initCart() {
       if (e.target === cartOverlay) closeCart();
     });
   }
+  // Wire checkout button — was missing in the original cart.js
+  if (checkoutBtn)  checkoutBtn.addEventListener("click", handleCheckout);
 
-  // listen for changes from OTHER tabs/pages
+  // Sync cart across tabs/pages
   window.addEventListener("storage", (event) => {
     if (event.key === CART_KEY) {
       cart = JSON.parse(event.newValue) || [];
@@ -132,5 +182,4 @@ function initCart() {
   });
 }
 
-// run on load
 document.addEventListener("DOMContentLoaded", initCart);
