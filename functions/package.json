@@ -1,0 +1,17 @@
+{
+  "name": "kahani-korner-functions",
+  "description": "Firebase Functions for Kahani Korner",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-functions": "^4.0.0",
+    "stripe": "^14.0.0"
+  },
+  "private": true
+}

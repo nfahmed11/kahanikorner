@@ -1,0 +1,6 @@
+# Secret keys — never commit these
+functions/.env
+
+# Dependencies
+functions/node_modules/
+node_modules/

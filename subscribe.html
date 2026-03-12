@@ -947,12 +947,36 @@
 
       /* NEW: stacked subscribe buttons (USA + Intl) */
       .subscribe-btns {
-        display: grid;
+        display: flex;
+        flex-direction: row;
         gap: 0.6rem;
         margin-top: 0.75rem;
       }
+
       .subscribe-btns .add-to-cart-btn {
         margin-top: 0; /* remove extra spacing when stacked */
+      }
+
+      .detail-subscribe-btns {
+        margin-bottom: 1.35rem;
+      }
+
+      .detail-info .subscribe-btns {
+        align-items: stretch;
+      }
+
+      @media (max-width: 768px) {
+        .detail-info .subscribe-btns {
+          flex-direction: column;
+        }
+
+        .detail-features-box {
+          padding: 1.1rem;
+        }
+
+        .detail-features-box > h3 {
+          font-size: 1.08rem;
+        }
       }
 
       /* --- PRODUCT DETAIL VIEW --- */
@@ -1102,11 +1126,20 @@
       .detail-description-box h3,
       .detail-features-box h3 {
         font-size: 1rem;
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.9rem;
         color: var(--rosy-taupe);
         text-transform: uppercase;
         letter-spacing: 0.05em;
         text-shadow: none;
+      }
+
+      .detail-features-box > h3 {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 1.1rem;
+        letter-spacing: 0.04em;
+        text-shadow: 0 1px 0 rgba(74, 89, 74, 0.18),
+          0 2px 4px rgba(74, 89, 74, 0.08);
       }
 
       .detail-description-box p {
@@ -1118,31 +1151,96 @@
 
       .detail-features-box {
         margin-bottom: 2rem;
-        background: var(--white-smoke);
-        padding: 1.3rem;
+        background: linear-gradient(180deg, #f7f4f3 0%, #f3f1f0 100%);
+        padding: 1.4rem;
         border-radius: 1.5rem;
+        border: 1.5px solid rgba(176, 195, 183, 0.75);
+        box-shadow: 0 10px 24px rgba(74, 89, 74, 0.08);
       }
 
-      .detail-features-box ul {
+      .detail-feature-sections {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .detail-feature-section {
+        background: rgba(255, 255, 255, 0.82);
+        border: 1.5px solid rgba(176, 195, 183, 0.8);
+        border-radius: 1.1rem;
+        padding: 1rem;
+        box-shadow: 0 4px 14px rgba(74, 89, 74, 0.05);
+      }
+
+      .detail-feature-section-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .detail-feature-icon {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 999px;
+        background: var(--soft-blush);
+        color: var(--granite);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .detail-feature-icon svg {
+        width: 1.05rem;
+        height: 1.05rem;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .detail-feature-section-title {
+        font-family: "Grandstander", cursive;
+        font-size: 0.98rem;
+        font-weight: 800;
+        color: var(--rosy-taupe);
+        margin: 0;
+        line-height: 1.15;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-shadow: none;
+      }
+
+      .detail-feature-list {
         list-style: none;
         padding: 0;
         margin: 0;
       }
 
-      .detail-features-box li {
+      .detail-feature-list li {
         position: relative;
-        padding-left: 1.4rem;
+        padding-left: 1.2rem;
         margin-bottom: 0.5rem;
         color: var(--deep-teal);
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.92rem;
+        line-height: 1.6;
       }
 
-      .detail-features-box li::before {
+      .detail-feature-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      .detail-feature-list li::before {
         content: "★";
         position: absolute;
         left: 0;
+        top: 0.14rem;
         color: var(--rosy-taupe);
+        font-size: 0.78rem;
+        line-height: 1;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
       }
 
       .large-btn {
@@ -1391,9 +1489,23 @@
                 <p id="detail-description"></p>
               </div>
 
+              <div class="subscribe-btns detail-subscribe-btns">
+                <button
+                  id="detail-subscribe-usa-btn"
+                  class="add-to-cart-btn large-btn">
+                  USA Subscription
+                </button>
+
+                <button
+                  id="detail-subscribe-intl-btn"
+                  class="add-to-cart-btn large-btn">
+                  International Subscription
+                </button>
+              </div>
+
               <div class="detail-features-box">
                 <h3>What you need to know</h3>
-                <ul id="detail-features"></ul>
+                <div id="detail-features" class="detail-feature-sections"></div>
               </div>
 
               <!-- ✅ TWO SUBSCRIBE BUTTONS on detail view -->
@@ -1401,14 +1513,13 @@
                 <button
                   id="detail-subscribe-usa-btn"
                   class="add-to-cart-btn large-btn">
-                  Subscribe Now (USA) <i class="fa-solid fa-plus"></i>
+                  USA Subscription
                 </button>
 
                 <button
                   id="detail-subscribe-intl-btn"
                   class="add-to-cart-btn large-btn">
-                  Subscribe Now (International)
-                  <i class="fa-solid fa-plus"></i>
+                  International Subscription
                 </button>
               </div>
 
@@ -1443,15 +1554,6 @@
     </div>
 
     <!-- Simple FAQ + Contact anchors to satisfy nav links -->
-    <section class="section faq-section" id="faq">
-      <div class="section__inner" style="max-width: 800px; margin: 0 auto">
-        <h2 class="section__title" style="text-align: left">Need Help?</h2>
-        <p style="color: var(--muted); max-width: 520px">
-          Have a question about shipping, subscriptions, or gifts? Email us
-          anytime — we’re a tiny team but we read every message.
-        </p>
-      </div>
-    </section>
 
     <section class="section contact-section" id="contact">
       <div
@@ -1472,6 +1574,10 @@
         <h2 class="section__title" style="text-align: center">
           Questions, Collabs, or Salaam?
         </h2>
+        <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1rem">
+          Have a question about shipping, subscriptions, or gifts? Email us
+          anytime — we’re a tiny team but we read every message.
+        </p>
         <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1rem">
           Drop us a note at
           <a
@@ -1535,10 +1641,8 @@
 
     <script>
       // --- STRIPE URLS ---
-      const CHECKOUT_USA =
-        "https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08";
-      const CHECKOUT_INTL =
-        "https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a";
+      const CHECKOUT_USA = "https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08";
+      const CHECKOUT_INTL = "https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a";
 
       // --- STRIPE PAYLOAD BUILDER (inline, same as landing) ---
       function buildStripePayload(cartItems) {
@@ -1562,12 +1666,42 @@
           "/assets/images/products/subscribe/dec.png",
           "/assets/images/products/subscribe/nov.png",
         ],
-        features: [
-          "Shipping occurs the last week of each month; orders placed after the 20th begin the following month.",
-          "Example timeline: If you subscribe on December 21st, your first package ships at the end of January (ex: January 30th) and typically arrives in early February.",
-          "Subscription is a recurring monthly charge; you can skip, pause, or cancel anytime via your account.",
-          "Monthly contents include a mini newspaper (Urdu & English), collectible items (stickers/recipes/prints), and occasional surprise extras.",
-          "Shipping is free; update your address before the 20th for timely delivery.",
+        featureSections: [
+          {
+            title: "When your package ships",
+            icon: "shipping",
+            items: [
+              "Shipping occurs during the last week of each month.",
+              "Orders placed after the 20th begin with the following month’s shipment.",
+              "Example: if you subscribe on December 21, your first package ships at the end of January and typically arrives in early February.",
+              "Shipping is free, and address updates should be made before the 20th for the next shipment.",
+            ],
+          },
+          {
+            title: "How payments work",
+            icon: "card",
+            items: [
+              "Your first payment is charged on the day you subscribe.",
+              "After that, future payments are charged on the 1st of the next month you have not yet paid for.",
+              "Example: if you subscribe on December 21, you are charged that day for January’s package, and your next payment is taken on February 1 for February’s package.",
+            ],
+          },
+          {
+            title: "What’s included",
+            icon: "package",
+            items: [
+              "Each month includes a mini newspaper in Urdu and English.",
+              "Packages also include collectible items such as stickers, recipes, prints, and occasional surprise extras.",
+            ],
+          },
+          {
+            title: "Managing your subscription",
+            icon: "mail",
+            items: [
+              "This is a recurring monthly subscription.",
+              "You can skip, pause, or cancel anytime by emailing us.",
+            ],
+          },
         ],
       };
 
@@ -1734,12 +1868,12 @@
               <div class="subscribe-btns">
                 <button class="add-to-cart-btn"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_USA}'">
-                  Subscribe Now (USA) <i class="fa-solid fa-arrow-right"></i>
+                  USA Subscription <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button class="add-to-cart-btn"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_INTL}'">
-                  Subscribe Now (International) <i class="fa-solid fa-arrow-right"></i>
+                  International Subscription <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -1748,6 +1882,64 @@
       }
 
       // --- DETAIL VIEW ---
+
+      function getFeatureIcon(icon) {
+        const icons = {
+          shipping: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 7h11v8H3z"></path>
+        <path d="M14 10h3l3 3v2h-6z"></path>
+        <circle cx="8" cy="18" r="1.75"></circle>
+        <circle cx="18" cy="18" r="1.75"></circle>
+      </svg>
+    `,
+          card: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+        <path d="M3 10h18"></path>
+        <path d="M7 14h4"></path>
+      </svg>
+    `,
+          package: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 8.5 12 4l8 4.5"></path>
+        <path d="M4 8.5V16L12 20l8-4V8.5"></path>
+        <path d="M12 4v16"></path>
+      </svg>
+    `,
+          mail: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+        <path d="m5 8 7 6 7-6"></path>
+      </svg>
+    `,
+        };
+
+        return icons[icon] || icons.package;
+      }
+
+      function renderFeatureSections(sections = []) {
+        if (!sections.length) return "";
+
+        return sections
+          .map(
+            (section) => `
+        <div class="detail-feature-section">
+          <div class="detail-feature-section-header">
+            <span class="detail-feature-icon">
+              ${getFeatureIcon(section.icon)}
+            </span>
+            <h4 class="detail-feature-section-title">${section.title}</h4>
+          </div>
+          <ul class="detail-feature-list">
+            ${section.items.map((item) => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+      `
+          )
+          .join("");
+      }
+
       window.openProductDetails = () => {
         if (!productDetailView) return;
 
@@ -1775,10 +1967,10 @@
           thumbnailsContainer.innerHTML = "";
         }
 
-        if (product.features) {
-          detailFeatures.innerHTML = product.features
-            .map((f) => `<li>${f}</li>`)
-            .join("");
+        if (product.featureSections) {
+          detailFeatures.innerHTML = renderFeatureSections(
+            product.featureSections
+          );
         } else {
           detailFeatures.innerHTML = "";
         }
