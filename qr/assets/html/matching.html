@@ -34,7 +34,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matching Game</title>
 
-    <!-- ✅ CSS moved out -->
     <link rel="stylesheet" href="/qr/assets/css/matching.css" />
   </head>
 
@@ -83,55 +82,36 @@
     <!-- Custom Game Over Modal -->
     <div id="game-over-modal" class="modal hidden">
       <div class="modal-content">
-        <h2>⏰ Time’s Up!</h2>
+        <h2>⏰ Time's Up!</h2>
         <p>Your final score is: <span id="final-score">0</span></p>
         <button id="restart-button">Play Again!</button>
       </div>
     </div>
 
     <script>
-      window.ALLOWED_WORDS = new Set([
-       "muskurahat",
-       "maheena",
-       "tayari",
-       "roti",
-       "khushboo",
-       "daura",
-       "ami",
-       "mubarak",
-       "dadi",
-       "dada",
-       "dua",
-       "chacha",
-       "dastarkhwan",
-       "ailan",
-       "hansna",
-       "achanak",
-       "khabar",
-       "aag",
-       "khamoshi",
-       "parosi",
-       "kaam",
-       "ghabrana",
-       "pakarna",
-       "madad",
-       "khajoor",
-       "pani",
-       "saath",
-       "aansoo",
-       "shukriya",
-       "dil",
-       "shehar",
-       "azan",
-       "wapas",
-       "khush",
-       "pura",
-       "awaaz",
-       "roza",
-       "pyara"
-     ]);
-     
-         </script>
+      // Read ALLOWED_WORDS from the ?words= query param set by the story's index.html
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get("words");
+        if (!raw) {
+          console.warn(
+            "[matching] No ?words= param found in URL. Deck will be empty."
+          );
+          window.ALLOWED_WORDS = new Set();
+          return;
+        }
+        window.ALLOWED_WORDS = new Set(
+          raw
+            .split(",")
+            .map((w) => w.trim())
+            .filter(Boolean)
+        );
+        console.log("[matching] ALLOWED_WORDS loaded from URL:", [
+          ...window.ALLOWED_WORDS,
+        ]);
+      })();
+    </script>
+
     <script type="module" src="/qr/assets/js/matching.js"></script>
   </body>
 </html>

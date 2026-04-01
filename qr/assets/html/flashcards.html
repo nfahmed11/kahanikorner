@@ -36,17 +36,13 @@
           class="flex flex-col md:flex-row justify-between items-center mb-8 text-center md:text-left">
           <div
             class="mt-4 md:mt-0 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
-            <span class="text-fuchsia-600 font-medium kid-title"
-              >Progress:</span
-            >
+            <span class="text-fuchsia-600 font-medium kid-title">Progress:</span>
             <div class="w-48 progress-bar">
               <div class="progress-fill" style="width: 0%"></div>
             </div>
             <span
               class="text-fuchsia-600 font-medium kid-title"
-              id="progress-text"
-              >0/0</span
-            >
+              id="progress-text">0/0</span>
           </div>
         </div>
 
@@ -109,67 +105,24 @@
       </button>
     </div>
 
-    <!-- App JS (module) -->
     <script>
-      window.ALLOWED_WORDS = new Set([
-        "subah",
-        "jaldi",
-        "din",
-        "lagbhag",
-        "pachees",
-        "saalon",
-        "baad",
-        "shehar",
-        "phir",
-        "manayi",
-        "khirki",
-        "bahar",
-        "aasmaan",
-        "saaf",
-        "dhoop",
-        "halki",
-        "hawa",
-        "mausam",
-        "acha",
-        "peela",
-        "qameez",
-        "khush",
-        "khaas",
-        "muskurana",
-        "pata",
-        "patang",
-        "urana",
-        "chhat",
-        "shor",
-        "hansna",
-        "baatein",
-        "rang barangi",
-        "kabhi",
-        "tez",
-        "upar",
-        "sochna",
-        "bachpan",
-        "paas",
-        "ahista",
-        "dor",
-        "achanak",
-        "kat",
-        "ghoomna",
-        "neeche",
-        "udaas",
-        "khamosh",
-        "nayi",
-        "jeet",
-        "haar",
-        "khel",
-        "hissa",
-        "shaam",
-        "thand",
-        "narangi",
-        "gulabi",
-        "seekhna",
-      ]);
+      // Read ALLOWED_WORDS from the ?words= query param set by the story's index.html
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get("words");
+        if (!raw) {
+          console.warn("[flashcards] No ?words= param found in URL. Deck will be empty.");
+          window.ALLOWED_WORDS = new Set();
+          return;
+        }
+        window.ALLOWED_WORDS = new Set(
+          raw.split(",").map((w) => w.trim()).filter(Boolean)
+        );
+        console.log("[flashcards] ALLOWED_WORDS loaded from URL:", [...window.ALLOWED_WORDS]);
+      })();
     </script>
+
+    <!-- App JS (module) -->
     <script type="module" src="/qr/assets/js/flashcards.js"></script>
   </body>
 </html>

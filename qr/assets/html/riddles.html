@@ -145,48 +145,22 @@
     </main>
 
     <script>
-      window.ALLOWED_WORDS = new Set([
-       "muskurahat",
-       "maheena",
-       "tayari",
-       "roti",
-       "khushboo",
-       "daura",
-       "ami",
-       "mubarak",
-       "dadi",
-       "dada",
-       "dua",
-       "chacha",
-       "dastarkhwan",
-       "ailan",
-       "hansna",
-       "achanak",
-       "khabar",
-       "aag",
-       "khamoshi",
-       "parosi",
-       "kaam",
-       "ghabrana",
-       "pakarna",
-       "madad",
-       "khajoor",
-       "pani",
-       "saath",
-       "aansoo",
-       "shukriya",
-       "dil",
-       "shehar",
-       "azan",
-       "wapas",
-       "khush",
-       "pura",
-       "awaaz",
-       "roza",
-       "pyara"
-     ]);
-     
-         </script>
+      // Read ALLOWED_WORDS from the ?words= query param set by the story's index.html
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get("words");
+        if (!raw) {
+          console.warn("[riddles] No ?words= param found in URL. Deck will be empty.");
+          window.ALLOWED_WORDS = new Set();
+          return;
+        }
+        window.ALLOWED_WORDS = new Set(
+          raw.split(",").map((w) => w.trim()).filter(Boolean)
+        );
+        console.log("[riddles] ALLOWED_WORDS loaded from URL:", [...window.ALLOWED_WORDS]);
+      })();
+    </script>
+
     <script type="module" src="/qr/assets/js/riddles.js"></script>
   </body>
 </html>
