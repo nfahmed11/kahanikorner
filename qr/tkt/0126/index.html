@@ -27,9 +27,9 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-N97Z02BGG4");
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kahani Korner | Basant Ki Masti</title>
@@ -63,19 +63,95 @@
 
       <div class="button-container">
         <a href="thekahanitimes.html" class="button">Read Aloud</a>
-        <a href="flashcards.html" class="button">Flashcards</a>
-        <a href="matching.html" class="button">Picture Match</a>
-        <a href="riddles.html" class="button">Riddles</a>
-        <a href="memory.html" class="button">Memory Game</a>
-        <a href="wordsearch.html" class="button">Word Search</a>
+        <a href="#" id="flashcards-link" class="button">Flashcards</a>
+        <a href="#" id="matching-link" class="button">Picture Match</a>
+        <a href="#" id="riddles-link" class="button">Riddles</a>
+        <a href="#" id="memory-link" class="button">Memory Game</a>
+        <a href="#" id="wordsearch-link" class="button">Word Search</a>
       </div>
     </div>
   </body>
 
   <script>
-    // pink heart images from Icons8
-    const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+    // ─── Story vocab ───────────────────────────────────────────────
+    // Single source of truth for ALL activities.
+    // Edit this list and every game updates automatically.
+    window.STORY_WORDS = [
+      "subah",
+      "jaldi",
+      "din",
+      "lagbhag",
+      "pachees",
+      "saalon",
+      "baad",
+      "shehar",
+      "phir",
+      "manayi",
+      "khirki",
+      "bahar",
+      "aasmaan",
+      "saaf",
+      "dhoop",
+      "halki",
+      "hawa",
+      "mausam",
+      "acha",
+      "peela",
+      "qameez",
+      "khush",
+      "khaas",
+      "muskurana",
+      "pata",
+      "patang",
+      "urana",
+      "chhat",
+      "shor",
+      "hansna",
+      "baatein",
+      "rang barangi",
+      "kabhi",
+      "tez",
+      "upar",
+      "sochna",
+      "bachpan",
+      "paas",
+      "ahista",
+      "dor",
+      "achanak",
+      "kat",
+      "ghoomna",
+      "neeche",
+      "udaas",
+      "khamosh",
+      "nayi",
+      "jeet",
+      "haar",
+      "khel",
+      "hissa",
+      "shaam",
+      "thand",
+      "narangi",
+      "gulabi",
+      "seekhna",
+    ];
 
+    // ─── Build activity URLs from STORY_WORDS ──────────────────────
+    const wordParam = encodeURIComponent(window.STORY_WORDS.join(","));
+    const base = location.origin + "/qr/assets/html/";
+
+    document.getElementById("flashcards-link").href =
+      base + "flashcards.html?words=" + wordParam;
+    document.getElementById("matching-link").href =
+      base + "matching.html?words=" + wordParam;
+    document.getElementById("memory-link").href =
+      base + "memory.html?words=" + wordParam;
+    document.getElementById("riddles-link").href =
+      base + "riddles.html?words=" + wordParam;
+    document.getElementById("wordsearch-link").href =
+      base + "wordsearch.html?words=" + wordParam;
+
+    // ─── Floating hearts ───────────────────────────────────────────
+    const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
     for (let i = 0; i < 15; i++) {
       const icon = document.createElement("img");
       icon.src = iconSrc;

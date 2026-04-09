@@ -1,19 +1,4 @@
-
-
-// ✅ grab allowed words from HTML
-const ALLOWED_WORDS = window.ALLOWED_WORDS;
-
-if (!(ALLOWED_WORDS instanceof Set)) {
-  console.error(
-    "[tasveer] window.ALLOWED_WORDS is missing or not a Set. " +
-      "Make sure you set window.ALLOWED_WORDS in HTML BEFORE loading matching.js"
-  );
-}
-
-// ✅ import your BIG vocab file (tons of words)
-// IMPORTANT: path must be correct relative to /assets/js/matching.js
-// If vocab.js is at /assets/vocab.js => use "../vocab.js"
-// If vocab.js is at root /vocab.js => use "/vocab.js"
+// ✅ import your BIG vocab file
 import { vocab as originalVocab } from "./vocab.js";
 
 console.log(
@@ -30,19 +15,31 @@ function getRomanForms(card) {
 
 function matchesAllowed(card) {
   const forms = getRomanForms(card);
-  return forms.some((w) => ALLOWED_WORDS.has(w));
+  // Read window.ALLOWED_WORDS fresh each time — never cache at module level
+  return forms.some((w) => window.ALLOWED_WORDS?.has(w));
 }
 
 function displayRoman(card) {
   const forms = getRomanForms(card);
-  const matched = forms.find((w) => ALLOWED_WORDS.has(w));
+  const matched = forms.find((w) => window.ALLOWED_WORDS?.has(w));
   return matched || forms[0] || "";
 }
-
 
 let deck = [];
 
 function resetDeck() {
+  // Read window.ALLOWED_WORDS here, not at module load time
+  const ALLOWED_WORDS = window.ALLOWED_WORDS;
+
+  if (!(ALLOWED_WORDS instanceof Set)) {
+    console.error(
+      "[tasveer] window.ALLOWED_WORDS is missing or not a Set. " +
+        "Make sure the ?words= param is in the URL and the HTML script block runs before matching.js"
+    );
+    deck = [];
+    return;
+  }
+
   if (!Array.isArray(originalVocab)) {
     console.error(
       "[tasveer] vocab import failed or not an array",
@@ -52,38 +49,32 @@ function resetDeck() {
     return;
   }
 
-  if (!(ALLOWED_WORDS instanceof Set)) {
-    deck = [];
-    return;
+  // Build lookup set of vocab roman forms (includes aliases)
+  const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
+
+  // Filter big vocab down to allowed subset
+  deck = originalVocab.filter(matchesAllowed);
+
+  // ----------------------------
+  // 🔥 DEBUG LOGGING (on load)
+  // ----------------------------
+  console.log("========== TASVEER DEBUG ==========");
+  console.log("[tasveer] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
+  console.log("[tasveer] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+  console.log("[tasveer] Total vocab roman forms available:", vocabWords.size);
+
+  const loaded = deck.map((card) => displayRoman(card));
+  console.log("[tasveer] Total words loaded into deck:", deck.length);
+  console.log("[tasveer] Loaded words:", loaded);
+
+  const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
+  if (missingWords.length) {
+    console.warn("[tasveer] ❌ Words NOT found in vocab.js:", missingWords);
+  } else {
+    console.log("[tasveer] ✅ All ALLOWED_WORDS found in vocab.js");
   }
 
-// Build lookup set of vocab roman forms (includes aliases)
-const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
-
-// ✅ Filter big vocab down to allowed subset (supports string OR array romanUrdu)
-deck = originalVocab.filter(matchesAllowed);
-
-// ----------------------------
-// 🔥 DEBUG LOGGING (on load)
-// ----------------------------
-console.log("========== TASVEER DEBUG ==========");
-console.log("[tasveer] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
-console.log("[tasveer] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-
-console.log("[tasveer] Total vocab roman forms available:", vocabWords.size);
-
-const loaded = deck.map((card) => displayRoman(card));
-console.log("[tasveer] Total words loaded into deck:", deck.length);
-console.log("[tasveer] Loaded words:", loaded);
-
-const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
-if (missingWords.length) {
-  console.warn("[tasveer] ❌ Words NOT found in vocab.js:", missingWords);
-} else {
-  console.log("[tasveer] ✅ All ALLOWED_WORDS found in vocab.js");
-}
-
-console.log("===================================");
+  console.log("===================================");
 
   if (deck.length === 0) {
     console.warn("[tasveer] deck empty after filtering.");
@@ -185,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
       wordDiv.classList.add("word");
       wordDiv.setAttribute("data-urdu", card.word.urdu);
 
-      dropZone.innerHTML = `
-      <div class="roman">${displayRoman(card)}</div>
-      <div class="urdu">${card.word.urdu}</div>
-    `;
+      wordDiv.innerHTML = `
+        <div class="roman">${displayRoman(card)}</div>
+        <div class="urdu">${card.word.urdu}</div>
+      `;
 
       wordDiv.addEventListener("click", () => {
         if (dropZone.classList.contains("answered")) return;
@@ -204,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (card.word.urdu === correctUrdu) {
           dropZone.innerHTML = `
-          <div class="roman">${displayRoman(card)}</div>
+            <div class="roman">${displayRoman(card)}</div>
             <div class="urdu">${card.word.urdu}</div>
           `;
           dropZone.classList.add("correct");

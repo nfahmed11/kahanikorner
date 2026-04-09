@@ -1,14 +1,18 @@
 /* GLOBAL “NEWSPAPER” FEEL */
 body {
-    font-family: "Authentic Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      sans-serif;
-    background: #e4e0d4;
-    margin: 0;
-    min-height: 100vh;
-  
-    /* a bit more space so the full player is always above the bar */
-    padding-bottom: 140px;
-  }
+  font-family: "Authentic Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #e4e0d4;
+  margin: 0;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;   /* horizontal centering */
+  align-items: center;       /* vertical centering */
+
+  padding: 1rem;
+  padding-bottom: 140px; /* space for audio bar */
+  box-sizing: border-box;
+}
   
   header {
     padding: 0.75rem 1rem 0;
@@ -16,8 +20,8 @@ body {
   }
   
   main {
+    width: 100%;
     max-width: 960px;
-    margin: 1.5rem auto 2rem auto;
     padding: 1.75rem 1.5rem 2.25rem;
     background: #fdf9f0;
     border: 1px solid #d2c7af;

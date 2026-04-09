@@ -1,7 +1,7 @@
 // riddles.js (FULL UPDATED)
 // ✅ Centered UI (CSS-driven)
 // ✅ Header wraps on small screens (CSS) so title can drop to its own line
-// ✅ More “pop”: correct option highlight + status pop/shake animations
+// ✅ More "pop": correct option highlight + status pop/shake animations
 // ✅ Dropzone removed
 // ✅ SINGLE status line: uses ONLY #status-instruction (status-message removed)
 
@@ -35,15 +35,6 @@ function startHeaderTitleRotation() {
 }
 
 console.log("[riddle] script loaded");
-
-// ✅ grab allowed words from HTML
-const ALLOWED_WORDS = window.ALLOWED_WORDS;
-
-if (!(ALLOWED_WORDS instanceof Set)) {
-  console.error(
-    "[riddle] window.ALLOWED_WORDS missing or not a Set. Ensure it exists BEFORE riddles.js loads."
-  );
-}
 
 // ✅ import your vocab file
 import { vocab as originalVocab } from "./vocab.js";
@@ -107,6 +98,9 @@ function getRomanForms(card) {
 }
 
 function resetDeck() {
+  // Read window.ALLOWED_WORDS here, not at module load time
+  const ALLOWED_WORDS = window.ALLOWED_WORDS;
+
   if (!Array.isArray(originalVocab)) {
     console.error("[riddle] vocab import failed or not array", originalVocab);
     deck = [];
@@ -114,7 +108,7 @@ function resetDeck() {
   }
 
   if (!(ALLOWED_WORDS instanceof Set)) {
-    console.error("[riddle] ALLOWED_WORDS is not a Set");
+    console.error("[riddle] window.ALLOWED_WORDS is not a Set. Make sure the ?words= param is in the URL.");
     deck = [];
     return;
   }
@@ -132,31 +126,22 @@ function resetDeck() {
   // ----------------------------
   // 🔥 LOGGING SECTION
   // ----------------------------
-
   console.log("========== RIDDLE DEBUG ==========");
-
   console.log("Total ALLOWED_WORDS:", ALLOWED_WORDS.size);
   console.log("ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-
   console.log("Total vocab words available:", vocabWords.size);
-
   console.log("Total words loaded into deck:", deck.length);
-
   console.log(
     "Loaded words:",
     deck.map((card) => getRomanForms(card)[0])
   );
 
-  const missing = [...ALLOWED_WORDS].filter(
-    (word) => !vocabWords.has(word)
-  );
-
+  const missing = [...ALLOWED_WORDS].filter((word) => !vocabWords.has(word));
   if (missing.length) {
     console.warn("❌ Words NOT found in vocab.js:", missing);
   } else {
     console.log("✅ All ALLOWED_WORDS found in vocab.js");
   }
-
   console.log("==================================");
 }
 
@@ -286,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!show) answerArea.innerHTML = "";
   }
 
-  // Init deck
+  // Init deck — read window.ALLOWED_WORDS now that DOM is ready
   resetDeck();
   if (!deck.length) {
     setStatus("No words loaded (deck is empty)", "bad");
@@ -610,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (hintBtn) hintBtn.textContent = "Reveal Answer";
-        setHardMessage("Here’s a hint 🙂");
+        setHardMessage("Here's a hint 🙂");
         setStatus("Hint unlocked 👀");
         return;
       }

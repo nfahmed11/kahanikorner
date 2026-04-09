@@ -1,11 +1,10 @@
-// ✅ Pull allowed words from HTML (this is defined in a plain <script> BEFORE this module runs)
-// In your HTML: const ALLOWED_WORDS = new Set([...])
-const ALLOWED_WORDS = window.ALLOWED_WORDS;
-
-// ✅ Import vocab (NOT riddles)
+// ✅ Import vocab
 import { vocab as originalVocab } from "./vocab.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Read window.ALLOWED_WORDS here, not at module load time
+  const ALLOWED_WORDS = window.ALLOWED_WORDS;
+
   const PASTEL_FRONTS = [
     "#FFDEE9", // pink
     "#DFF7E3", // mint
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // deterministic per-card color (so it stays consistent)
   function getFrontColor(pairIndex, type) {
-    const offset = type === "english" ? 0 : 1; // make each pair's 2 cards different
+    const offset = type === "english" ? 0 : 1;
     return PASTEL_FRONTS[(pairIndex * 2 + offset) % PASTEL_FRONTS.length];
   }
 
@@ -60,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
   close?.addEventListener("click", closePop);
   done?.addEventListener("click", closePop);
 
-  // click outside to close
   document.addEventListener("click", (e) => {
     if (!pop || pop.classList.contains("hidden")) return;
     const target = e.target;
@@ -68,18 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
     closePop();
   });
 
-  // ESC to close
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && pop && !pop.classList.contains("hidden")) {
       closePop();
     }
   });
 
-  // ✅ Safety checks (same pattern as your other game)
+  // ✅ Safety checks
   if (!(ALLOWED_WORDS instanceof Set)) {
     console.error(
       "[memory-game] window.ALLOWED_WORDS is missing or not a Set. " +
-        "Define it in a <script> BEFORE this module script."
+        "Make sure the ?words= param is in the URL and the HTML script block runs before memory.js"
     );
   }
 
@@ -90,52 +87,48 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-
   function getRomanForms(card) {
     const v = card?.word?.romanUrdu;
     if (!v) return [];
     return Array.isArray(v) ? v : [v];
   }
-  
+
   function matchesAllowed(card) {
     const forms = getRomanForms(card);
     return forms.some((w) => ALLOWED_WORDS.has(w));
   }
-  
+
   function displayRoman(card) {
     const forms = getRomanForms(card);
     const matched = forms.find((w) => ALLOWED_WORDS.has(w));
     return matched || forms[0] || "";
   }
 
-// ✅ Filter vocab using ALLOWED_WORDS (supports romanUrdu string OR array)
-const safeVocab = Array.isArray(originalVocab) ? originalVocab : [];
+  // ✅ Filter vocab using ALLOWED_WORDS
+  const safeVocab = Array.isArray(originalVocab) ? originalVocab : [];
+  const vocabWords = new Set(safeVocab.flatMap((c) => getRomanForms(c)));
+  const filteredVocab = safeVocab.filter(matchesAllowed);
 
-// Build lookup of all roman forms in vocab (includes aliases)
-const vocabWords = new Set(safeVocab.flatMap((c) => getRomanForms(c)));
+  // ----------------------------
+  // 🔥 DEBUG LOGGING (on load)
+  // ----------------------------
+  console.log("========== MEMORY DEBUG ==========");
+  console.log("[memory-game] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
+  console.log("[memory-game] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+  console.log("[memory-game] Total vocab roman forms available:", vocabWords.size);
 
-const filteredVocab = safeVocab.filter(matchesAllowed);
+  const loaded = filteredVocab.map((c) => displayRoman(c));
+  console.log("[memory-game] Total words loaded into deck:", filteredVocab.length);
+  console.log("[memory-game] Loaded words:", loaded);
 
-// ----------------------------
-// 🔥 DEBUG LOGGING (on load)
-// ----------------------------
-console.log("========== MEMORY DEBUG ==========");
-console.log("[memory-game] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
-console.log("[memory-game] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+  const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
+  if (missingWords.length) {
+    console.warn("[memory-game] ❌ Words NOT found in vocab.js:", missingWords);
+  } else {
+    console.log("[memory-game] ✅ All ALLOWED_WORDS found in vocab.js");
+  }
+  console.log("==================================");
 
-console.log("[memory-game] Total vocab roman forms available:", vocabWords.size);
-
-const loaded = filteredVocab.map((c) => displayRoman(c));
-console.log("[memory-game] Total words loaded into deck:", filteredVocab.length);
-console.log("[memory-game] Loaded words:", loaded);
-
-const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
-if (missingWords.length) {
-  console.warn("[memory-game] ❌ Words NOT found in vocab.js:", missingWords);
-} else {
-  console.log("[memory-game] ✅ All ALLOWED_WORDS found in vocab.js");
-}
-console.log("==================================");
   // Prepare vocabularyPairs from filtered vocab
   const vocabularyPairs = filteredVocab.map((item) => ({
     english: { word: item.word.english, image: item.image },
@@ -144,14 +137,9 @@ console.log("==================================");
 
   function shrinkTextToFit(el, { minPx = 10, stepPx = 1 } = {}) {
     if (!el) return;
-
-    // If it wraps or overflows vertically, reduce font-size until it fits
     const style = window.getComputedStyle(el);
     let size = parseFloat(style.fontSize);
-
-    // guard
     if (!Number.isFinite(size)) return;
-
     while (
       size > minPx &&
       (el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth)
@@ -165,7 +153,7 @@ console.log("==================================");
   let flippedCards = [];
   let matchedPairs = 0;
   let canFlip = true;
-  let difficultyLevel = 5; // 1..10
+  let difficultyLevel = 5;
   let currentPairs = [];
 
   if (difficultySlider) {
@@ -181,7 +169,6 @@ console.log("==================================");
     });
   }
 
-  // Initialize game
   function initGame() {
     gameBoard.innerHTML = "";
     cards = [];
@@ -190,13 +177,8 @@ console.log("==================================");
     canFlip = true;
     winMessage.classList.add("hidden");
 
-    // ✅ 10 levels (1..10). Level 10 = all words.
     const total = vocabularyPairs.length;
-
-    // ratio: level 1 = 0.1, level 10 = 1.0
     const ratio = difficultyLevel / 10;
-
-    // number of pairs to include (round up), at least 1, at most total
     const count = Math.min(total, Math.max(1, Math.ceil(total * ratio)));
 
     currentPairs = vocabularyPairs.slice(0, count);
@@ -204,7 +186,6 @@ console.log("==================================");
     progressBar.style.width = "0%";
     progressText.textContent = `0/${currentPairs.length} Pairs`;
 
-    // Create cards for each filtered vocabulary pair
     currentPairs.forEach((pair, index) => {
       const englishCard = createCard(
         pair.english.word,
@@ -223,27 +204,19 @@ console.log("==================================");
       cards.push(urduCard);
     });
 
-    // Shuffle cards
     shuffleArray(cards);
+    cards.forEach((card) => gameBoard.appendChild(card));
 
-    // Add cards to the game board
-    cards.forEach((card) => {
-      gameBoard.appendChild(card);
-    });
-
-    // ✅ shrink text AFTER cards are rendered
     requestAnimationFrame(() => {
       document
         .querySelectorAll(".fit-text")
         .forEach((el) => shrinkTextToFit(el, { minPx: 10 }));
-
       document
         .querySelectorAll(".fit-text-urdu")
         .forEach((el) => shrinkTextToFit(el, { minPx: 12 }));
     });
   }
 
-  // Create a card element
   function createCard(primaryText, secondaryText, type, pairIndex) {
     const card = document.createElement("div");
     card.className = "card aspect-square";
@@ -258,11 +231,9 @@ console.log("==================================");
       class="card-front flex items-center justify-center"
       style="background: ${frontBg};"
     >
-    <span class="text-3xl font-bold text-gray-800">?</span>
-
+      <span class="text-3xl font-bold text-gray-800">?</span>
     </div>
-    
-    
+
     <div class="card-back ${
       type === "english" ? "english-card" : "urdu-card"
     } p-3 flex flex-col items-center justify-center text-center">
@@ -270,34 +241,28 @@ console.log("==================================");
         type === "english"
           ? `
           <div class="card-image-box">
-          <img src="${secondaryText}" alt="${primaryText}" />
-        </div>
-        
-    
-            <div class="w-full h-10 flex items-center justify-center">
-              <span class="font-bold text-gray-800 fit-text">
-                ${primaryText}
-              </span>
-            </div>
+            <img src="${secondaryText}" alt="${primaryText}" />
+          </div>
+          <div class="w-full h-10 flex items-center justify-center">
+            <span class="font-bold text-gray-800 fit-text">
+              ${primaryText}
+            </span>
+          </div>
           `
           : `
-            <div class="w-full h-8 flex items-center justify-center">
-              <span class="font-bold fit-text">
-                ${primaryText}
-              </span>
-            </div>
-    
-            <div class="w-full h-12 flex items-center justify-center">
-              <span class="fit-text-urdu">
-                ${secondaryText}
-              </span>
-            </div>
+          <div class="w-full h-8 flex items-center justify-center">
+            <span class="font-bold fit-text">
+              ${primaryText}
+            </span>
+          </div>
+          <div class="w-full h-12 flex items-center justify-center">
+            <span class="fit-text-urdu">
+              ${secondaryText}
+            </span>
+          </div>
           `
       }
     </div>
-
-    
-
   </div>
 `;
 
@@ -305,7 +270,6 @@ console.log("==================================");
     return card;
   }
 
-  // Flip a card
   function flipCard(card) {
     if (
       !canFlip ||
@@ -315,9 +279,8 @@ console.log("==================================");
       return;
     }
 
-    // 🔊 play flip sound
     try {
-      cardFlipSound.currentTime = 0; // allow rapid clicks
+      cardFlipSound.currentTime = 0;
       cardFlipSound.play();
     } catch {}
 
@@ -330,7 +293,6 @@ console.log("==================================");
     }
   }
 
-  // Check if the flipped cards match
   function checkForMatch() {
     const [card1, card2] = flippedCards;
     const isMatch =
@@ -339,7 +301,6 @@ console.log("==================================");
 
     if (isMatch) {
       setTimeout(() => {
-        // 🔊 play success sound
         try {
           correctSound.currentTime = 0;
           correctSound.play();
@@ -357,9 +318,7 @@ console.log("==================================");
         canFlip = true;
 
         if (matchedPairs === currentPairs.length) {
-          setTimeout(() => {
-            showWinMessage();
-          }, 1000);
+          setTimeout(() => showWinMessage(), 1000);
         }
       }, 500);
     } else {
@@ -372,86 +331,56 @@ console.log("==================================");
     }
   }
 
-  // Update progress bar
   function updateProgress() {
     const progressPercentage = (matchedPairs / currentPairs.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
     progressText.textContent = `${matchedPairs}/${currentPairs.length} Pairs`;
   }
 
-  // Show win message
   function showWinMessage() {
     winMessage.classList.remove("hidden");
     createWinConfetti();
   }
 
-  // Create confetti effect for matched cards
   function createConfetti(card) {
     const rect = card.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-
-    const colors = [
-      "#FF9AA2",
-      "#FFB7B2",
-      "#FFDAC1",
-      "#E2F0CB",
-      "#B5EAD7",
-      "#C7CEEA",
-    ];
+    const colors = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA"];
 
     for (let i = 0; i < 20; i++) {
       const confetti = document.createElement("div");
       confetti.className = "confetti";
       confetti.style.left = `${centerX}px`;
       confetti.style.top = `${centerY}px`;
-      confetti.style.backgroundColor =
-        colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
       confetti.style.width = `${5 + Math.random() * 10}px`;
       confetti.style.height = `${5 + Math.random() * 10}px`;
       confetti.style.animationDelay = `${Math.random() * 0.5}s`;
-
       document.body.appendChild(confetti);
-
-      setTimeout(() => {
-        confetti.remove();
-      }, 3000);
+      setTimeout(() => confetti.remove(), 3000);
     }
   }
 
-  // Create confetti for win celebration
   function createWinConfetti() {
-    const colors = [
-      "#FF9AA2",
-      "#FFB7B2",
-      "#FFDAC1",
-      "#E2F0CB",
-      "#B5EAD7",
-      "#C7CEEA",
-    ];
+    const colors = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA"];
 
     for (let i = 0; i < 100; i++) {
       const confetti = document.createElement("div");
       confetti.className = "confetti";
       confetti.style.left = `${Math.random() * window.innerWidth}px`;
       confetti.style.top = "0px";
-      confetti.style.backgroundColor =
-        colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
       confetti.style.width = `${5 + Math.random() * 10}px`;
       confetti.style.height = `${5 + Math.random() * 10}px`;
       confetti.style.animationDelay = `${Math.random() * 2}s`;
-
       document.body.appendChild(confetti);
-
-      setTimeout(() => {
-        confetti.remove();
-      }, 5000);
+      setTimeout(() => confetti.remove(), 5000);
     }
   }
 
-  // Shuffle array (Fisher-Yates algorithm)
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -460,9 +389,6 @@ console.log("==================================");
     return array;
   }
 
-  // Play again button
   playAgainBtn.addEventListener("click", initGame);
-
-  // Initialize the game
   initGame();
 });
