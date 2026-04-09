@@ -32,7 +32,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kahani Korner | Ramadan Hungama</title>
+    <title>Kahani Korner | Eid Ka Chaand</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -40,11 +40,11 @@
       rel="stylesheet" />
     <link rel="stylesheet" href="common.css" />
 
-    <base href="/qr/tkt/2026/0226bef/activities/" />
+    <base href="/qr/tkt/2026/0326mar/activities/" />
 
     <style>
       .book-placeholder {
-        background-image: url("/qr/tkt/2026/0226bef/assets/images/bookcover.png");
+        background-image: url("/qr/tkt/2026/0326mar/assets/images/bookcover.png");
       }
     </style>
   </head>
@@ -59,7 +59,7 @@
       </a>
     </header>
 
-    <h1>Ramadan Hungama</h1>
+    <h1>Eid Ka Chaand</h1>
 
     <div class="container">
       <div class="book-placeholder"></div>
@@ -76,66 +76,153 @@
 
     <script>
       // One master word list for this specific story/activity bundle
+
       const STORY_WORDS = [
-        "muskurahat",
-        "maheena",
-        "tayari",
-        "roti",
-        "khushboo",
-        "daura",
-        "ami",
-        "mubarak",
-        "dadi",
-        "dada",
-        "dua",
-        "chacha",
-        "dastarkhwan",
-        "ailan",
-        "hansna",
-        "achanak",
-        "khabar",
-        "aag",
-        "khamoshi",
-        "parosi",
-        "kaam",
-        "ghabrana",
-        "pakarna",
-        "madad",
-        "khajoor",
-        "pani",
-        "saath",
-        "aansoo",
-        "shukriya",
-        "dil",
+        "chaand",
+        "raat",
+        "gali",
+        "roshni",
+        "log",
+        "dekhna",
+        "sawaal",
+        "nazar",
+        "aana",
+        "khara",
+        "door",
+        "bacha",
+        "kehna",
+        "mohalla",
+        "khushi",
+        "goonjana",
+        "andar",
+        "shuru",
+        "jora",
+        "bistar",
+        "rakhna",
+
+        "mehndi",
+        "lagana",
+        "baithna",
+        "kamra",
+        "phailna",
+
+        "zyada",
+        "eidi",
+        "jama",
+        "fakhr",
+        "kal",
+        "der",
+        "jaagna",
+        "kapra",
+        "istri",
+        "joota",
+
+        "latkana",
+        "sona",
+        "mithas",
+        "bharna",
+
+        "sheer khurma",
+        "banana",
+        "badam",
+        "pista",
+        "tairna",
+        "pehanna",
+        "namaaz",
+        "lena",
+        "dena",
+        "pehle",
+        "salaam",
+        "beta",
+        "haath",
+        "note",
+        "aankh",
+        "chamakna",
+        "chamak",
+        "rishtadar",
+        "dost",
+        "mithai",
+        "sunai dena",
+        "saamne",
+        "jana",
+
+        "dilchasp",
+        "aakhri",
+
+        "saans",
+        "rokna",
+        "maarna",
+        "gaind",
+
+        "uchhalna",
+        "patakha",
+        "khoobsurat",
+        "zaroori",
+
+        "shaam",
         "shehar",
-        "azan",
-        "wapas",
-        "khush",
-        "pura",
+        "aasmaan",
+        "achaanak",
         "awaaz",
-        "roza",
-        "pyara"
+        "hawa",
+        "chhat",
+        "poochna",
+        "thanda",
+        "khushboo",
+        "mubarak",
+        "muskurana",
+        "ghar",
+        "jaldi",
+        "tayari",
+        "naya",
+        "baat",
+        "hansna",
+        "saaf",
+        "subah",
+        "din",
+        "upar",
+        "baad",
+        "wapas",
+        "kaam",
+        "dada",
+        "ami",
+        "chacha",
+        "poora",
+        "rang barangi",
+        "sochna",
+        "cheekhna",
+        "khelna",
+        "jeetna",
+        "chalna",
+        "chaar",
+        "saath",
       ];
 
       const wordsParam = encodeURIComponent(STORY_WORDS.join(","));
 
-      document.getElementById("readaloud-link").href =
-        `/qr/assets/html/thekahanitimes.html?words=${wordsParam}`;
+      document.getElementById(
+        "readaloud-link"
+      ).href = `thekahanitimes.html?words=${wordsParam}`;
 
-      document.getElementById("flashcards-link").href =
-        `/qr/assets/html/flashcards.html?words=${wordsParam}`;
+      document.getElementById(
+        "flashcards-link"
+      ).href = `/qr/assets/html/flashcards.html?words=${wordsParam}`;
 
-      document.getElementById("matching-link").href =
-        `/qr/assets/html/matching.html?words=${wordsParam}`;
+      document.getElementById(
+        "matching-link"
+      ).href = `/qr/assets/html/matching.html?words=${wordsParam}`;
 
-      document.getElementById("riddles-link").href =
-        `/qr/assets/html/riddles.html?words=${wordsParam}`;
+      document.getElementById(
+        "riddles-link"
+      ).href = `/qr/assets/html/riddles.html?words=${wordsParam}`;
 
-      document.getElementById("memory-link").href =
-        `/qr/assets/html/memory.html?words=${wordsParam}`;
+      document.getElementById(
+        "memory-link"
+      ).href = `/qr/assets/html/memory.html?words=${wordsParam}`;
 
-      document.getElementById("wordsearch-link").href =
-        `/qr/assets/html/wordsearch.html?words=${wordsParam}`;
+      document.getElementById(
+        "wordsearch-link"
+      ).href = `/qr/assets/html/wordsearch.html?words=${wordsParam}`;
     </script>
 
     <script>
