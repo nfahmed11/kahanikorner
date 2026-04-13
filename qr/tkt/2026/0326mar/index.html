@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <!-- Microsoft Analytics tag to track analytics  -->
+    <!-- Microsoft Analytics tag to track analytics -->
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -17,7 +17,7 @@
       })(window, document, "clarity", "script", "tp6dow982y");
     </script>
 
-    <!-- Google tag to track analytics (gtag.js) -->
+    <!-- Google tag -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
@@ -32,21 +32,13 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kahani Korner | Eid Ka Chaand</title>
+    <title id="page-title">Kahani Korner Story</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" href="common.css" />
-
-    <base href="/qr/tkt/2026/0326mar/activities/" />
-
-    <style>
-      .book-placeholder {
-        background-image: url("/qr/tkt/2026/0326mar/assets/images/bookcover.png");
-      }
-    </style>
+    <link rel="stylesheet" href="./common.css" />
   </head>
 
   <body>
@@ -59,174 +51,181 @@
       </a>
     </header>
 
-    <h1>Eid Ka Chaand</h1>
+    <h1 id="story-title"></h1>
 
     <div class="container">
-      <div class="book-placeholder"></div>
+      <div id="book-cover" class="book-placeholder"></div>
 
-      <div class="button-container">
-        <a id="readaloud-link" href="#" class="button">Read Aloud</a>
-        <a id="flashcards-link" href="#" class="button">Flashcards</a>
-        <a id="matching-link" href="#" class="button">Picture Match</a>
-        <a id="riddles-link" href="#" class="button">Riddles</a>
-        <a id="memory-link" href="#" class="button">Memory Game</a>
-        <a id="wordsearch-link" href="#" class="button">Word Search</a>
+      <div class="story-settings">
+        <label for="level-select">Choose word level:</label>
+        <select id="level-select"></select>
+        <p id="level-summary" class="level-summary"></p>
       </div>
+
+      <div class="button-container" id="button-container"></div>
     </div>
 
     <script>
-      // One master word list for this specific story/activity bundle
+      window.STORY_HOME_CONFIG = {
+        slug: "eid-ka-chaand",
+        title: "Eid Ka Chaand",
+        coverImage: "./assets/images/bookcover.png",
+        readAloudHref: "./activities/thekahanitimes.html",
 
-      const STORY_WORDS = [
-        "chaand",
-        "raat",
-        "gali",
-        "roshni",
-        "log",
-        "dekhna",
-        "sawaal",
-        "nazar",
-        "aana",
-        "khara",
-        "door",
-        "bacha",
-        "kehna",
-        "mohalla",
-        "khushi",
-        "goonjana",
-        "andar",
-        "shuru",
-        "jora",
-        "bistar",
-        "rakhna",
+        orderedWords: [
+          "chaand",
+          "raat",
+          "gali",
+          "roshni",
+          "log",
+          "bacha",
+          "mohalla",
+          "jora",
+          "bistar",
+          "mehndi",
+          "kamra",
+          "kapra",
+          "joota",
+          "sheer khurma",
+          "badam",
+          "pista",
+          "beta",
+          "haath",
+          "aankh",
+          "rishtadar",
+          "dost",
+          "mithai",
+          "gaind",
+          "patakha",
+          "ghar",
+          "chhat",
+          "shehar",
+          "aasmaan",
+          "hawa",
+          "khushboo",
+          "dada",
+          "ami",
+          "chacha",
+          "eidi",
+          "jama",
+          "namaaz",
+          "dekhna",
+          "aana",
+          "jana",
+          "chalna",
+          "baithna",
+          "khelna",
+          "jeetna",
+          "sona",
+          "tairna",
+          "pehanna",
+          "lena",
+          "dena",
+          "rakhna",
+          "lagana",
+          "uchhalna",
+          "latkana",
+          "bharna",
+          "jaagna",
+          "hansna",
+          "khush",
+          "zyada",
+          "thanda",
+          "saaf",
+          "naya",
+          "poora",
+          "rang barangi",
+          "khoobsurat",
+          "zaroori",
+          "dilchasp",
+          "aakhri",
+          "andar",
+          "saamne",
+          "upar",
+          "baad",
+          "pehle",
+          "wapas",
+          "saath",
+          "door",
+          "khara",
+          "sunai dena",
+          "sochna",
+          "poochna",
+          "kehna",
+          "rokna",
+          "maarna",
+          "cheekhna",
+          "goonjana",
+          "chamakna",
+          "muskurana",
+          "fakhr",
+          "sawaal",
+          "nazar",
+          "mithas",
+          "tayari",
+          "awaaz",
+          "achaanak",
+          "jaldi",
+          "kaam",
+          "baat",
+          "der",
+          "shuru",
+          "saans",
+          "chamak",
+          "shaam",
+          "subah",
+          "din",
+          "mubarak",
+          "chaar",
+        ],
 
-        "mehndi",
-        "lagana",
-        "baithna",
-        "kamra",
-        "phailna",
+        totalLevels: 5,
+        defaultLevel: 1,
 
-        "zyada",
-        "eidi",
-        "jama",
-        "fakhr",
-        "kal",
-        "der",
-        "jaagna",
-        "kapra",
-        "istri",
-        "joota",
-
-        "latkana",
-        "sona",
-        "mithas",
-        "bharna",
-
-        "sheer khurma",
-        "banana",
-        "badam",
-        "pista",
-        "tairna",
-        "pehanna",
-        "namaaz",
-        "lena",
-        "dena",
-        "pehle",
-        "salaam",
-        "beta",
-        "haath",
-        "note",
-        "aankh",
-        "chamakna",
-        "chamak",
-        "rishtadar",
-        "dost",
-        "mithai",
-        "sunai dena",
-        "saamne",
-        "jana",
-
-        "dilchasp",
-        "aakhri",
-
-        "saans",
-        "rokna",
-        "maarna",
-        "gaind",
-
-        "uchhalna",
-        "patakha",
-        "khoobsurat",
-        "zaroori",
-
-        "shaam",
-        "shehar",
-        "aasmaan",
-        "achaanak",
-        "awaaz",
-        "hawa",
-        "chhat",
-        "poochna",
-        "thanda",
-        "khushboo",
-        "mubarak",
-        "muskurana",
-        "ghar",
-        "jaldi",
-        "tayari",
-        "naya",
-        "baat",
-        "hansna",
-        "saaf",
-        "subah",
-        "din",
-        "upar",
-        "baad",
-        "wapas",
-        "kaam",
-        "dada",
-        "ami",
-        "chacha",
-        "poora",
-        "rang barangi",
-        "sochna",
-        "cheekhna",
-        "khelna",
-        "jeetna",
-        "chalna",
-        "chaar",
-        "saath",
-      ];
-
-      const wordsParam = encodeURIComponent(STORY_WORDS.join(","));
-
-      document.getElementById(
-        "readaloud-link"
-      ).href = `thekahanitimes.html?words=${wordsParam}`;
-
-      document.getElementById(
-        "flashcards-link"
-      ).href = `/qr/assets/html/flashcards.html?words=${wordsParam}`;
-
-      document.getElementById(
-        "matching-link"
-      ).href = `/qr/assets/html/matching.html?words=${wordsParam}`;
-
-      document.getElementById(
-        "riddles-link"
-      ).href = `/qr/assets/html/riddles.html?words=${wordsParam}`;
-
-      document.getElementById(
-        "memory-link"
-      ).href = `/qr/assets/html/memory.html?words=${wordsParam}`;
-
-      document.getElementById(
-        "wordsearch-link"
-      ).href = `/qr/assets/html/wordsearch.html?words=${wordsParam}`;
+        activities: [
+          {
+            id: "readaloud",
+            label: "Read Aloud",
+            href: "./activities/thekahanitimes.html",
+            useWordsParam: true,
+          },
+          {
+            id: "flashcards",
+            label: "Flashcards",
+            href: "/qr/assets/html/flashcards.html",
+            useWordsParam: true,
+          },
+          {
+            id: "matching",
+            label: "Picture Match",
+            href: "/qr/assets/html/matching.html",
+            useWordsParam: true,
+          },
+          {
+            id: "riddles",
+            label: "Riddles",
+            href: "/qr/assets/html/riddles.html",
+            useWordsParam: true,
+          },
+          {
+            id: "memory",
+            label: "Memory Game",
+            href: "/qr/assets/html/memory.html",
+            useWordsParam: true,
+          },
+          {
+            id: "wordsearch",
+            label: "Word Search",
+            href: "/qr/assets/html/wordsearch.html",
+            useWordsParam: true,
+          },
+        ],
+      };
     </script>
 
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
     <script>
-      // pink heart images from Icons8
       const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
 
       for (let i = 0; i < 15; i++) {

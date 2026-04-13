@@ -1,2307 +1,5758 @@
 export const vocab = [
   {
+    id: "aag",
     word: {
-      romanUrdu: "ghar",
-      urdu: "گھر",
-      english: "home",
-    },
-    image: "/qr/assets/images/ghar.png",
-    riddles: {
-      easy: {
-        english:
-          "I have a door, a roof, and space,\nYou sleep and eat in my warm place!",
-        romanUrdu:
-          "Darwaza, chhat, aur jagah saari,\nSona, khana — yahin hoti hai tayyari!",
-        urdu: "دروازہ، چھت، اور جگہ ساری،\nسونا، کھانا — یہی ہوتی ہے تیاری!",
-      },
-      medium: {
-        english:
-          "I keep you safe both night and day,\nWith family inside, come what may.",
-        romanUrdu:
-          "Din ho ya raat, rakhoon tumhein mehfooz,\nAndar ho family — hoon main bohot khoobsurat mehsoos!",
-        urdu: "دن ہو یا رات، رکھوں تمہیں محفوظ،\nاندر ہو فیملی — ہوں میں بہت خوبصورت محسوس!",
-      },
-      hard: {
-        english:
-          "I’m not just walls or bricks alone,\nI’m love and warmth — where hearts have grown.",
-        romanUrdu:
-          "Sirf eent ya deewar nahi hoon main,\nMohabbat aur sukoon hoon — jahan dil bas jaaen!",
-        urdu: "صرف اینٹ یا دیوار نہیں ہوں میں،\nمحبت اور سکون ہوں — جہاں دل بس جائیں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "peela",
-      urdu: "پیلا",
-      english: "yellow",
-    },
-    image: "/qr/assets/images/peela.png",
-    riddles: {
-      easy: {
-        english:
-          "I’m bright like the sun up high,\nA happy color that catches the eye!",
-        romanUrdu:
-          "Sooraj ki tarah chamakta hoon main,\nKhush rang hoon, har aankh ki pehchaan main!",
-        urdu: "سورج کی طرح چمکتا ہوں میں،\nخوش رنگ ہوں، ہر آنکھ کی پہچان میں!",
-      },
-      medium: {
-        english:
-          "I color lemons, stars, and light,\nI make the day feel warm and bright.",
-        romanUrdu:
-          "Nimbu, sitaaray, roshni ko rang doon,\nDin ko banaa doon garam aur roshan hoon!",
-        urdu: "نِمبو، ستارے، روشنی کو رنگ دوں،\nدن کو بنا دوں گرم اور روشن ہوں!",
-      },
-      hard: {
-        english:
-          "I shine without making any sound,\nA cheerful hue seen all around.",
-        romanUrdu:
-          "Bina awaaz ke chamak jaaun main,\nKhushi ka rang hoon — har jagah paaya jaaun main!",
-        urdu: "بِنا آواز کے چمک جاؤں میں،\nخوشی کا رنگ ہوں — ہر جگہ پایا جاؤں میں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "laal",
-      urdu: "لال",
-      english: "red",
-    },
-    image: "/qr/assets/images/laal.png",
-    riddles: {
-      easy: {
-        english:
-          "I’m the color of roses bright,\nI stand out bold, a vivid sight!",
-        romanUrdu:
-          "Gulaab jaisa rang hoon main,\nTez aur numayaan, sab ki pehchaan main!",
-        urdu: "گلاب جیسا رنگ ہوں میں،\nتیز اور نمایاں، سب کی پہچان میں!",
-      },
-      medium: {
-        english:
-          "I paint apples, flags, and fire,\nStrong and bold — I never tire.",
-        romanUrdu:
-          "Seb, parcham, aur aag ko rang doon,\nMazboot aur gehra rang hoon, kabhi na thakoon!",
-        urdu: "سیب، پرچم، اور آگ کو رنگ دوں،\nمضبوط اور گہرا رنگ ہوں، کبھی نہ تھکوں!",
-      },
-      hard: {
-        english:
-          "I show love, anger, and might,\nA powerful shade seen day and night.",
-        romanUrdu:
-          "Mohabbat, ghussa, aur taqat dikhaoon,\nTaakatwar rang hoon — din raat nazar aaun!",
-        urdu: "محبت، غصہ، اور طاقت دکھاؤں،\nطاقتور رنگ ہوں — دن رات نظر آؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "narangi",
-      urdu: "نارنگی",
-      english: "orange",
-    },
-    image: "/qr/assets/images/narangi.png",
-    riddles: {
-      english:
-        "Between red and yellow, I brightly stay,\nSeen in the sky at close of day!",
-      romanUrdu:
-        "Laal aur peelay ke darmiyaan rahoon,\nDin ke aakhir aasmaan mein chamkoon!",
-      urdu: "لال اور پیلے کے درمیان رہوں،\nدن کے آخر آسمان میں چمکوں!",
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "neela",
-      urdu: "نیلا",
-      english: "blue",
-    },
-    image: "/qr/assets/images/neela.png",
-    riddles: {
-      easy: {
-        english:
-          "I’m the color of the sky so wide,\nLook up above — I spread outside!",
-        romanUrdu:
-          "Aasmaan ka rang hoon main, door tak chhaa jaaun,\nUpar dekho — har taraf nazar aaun!",
-        urdu: "آسمان کا رنگ ہوں میں، دور تک چھا جاؤں،\nاوپر دیکھو — ہر طرف نظر آؤں!",
-      },
-      medium: {
-        english:
-          "I fill the oceans deep and wide,\nCool and calm as waves collide.",
-        romanUrdu:
-          "Samandar ko bhar doon gehra aur wasee,\nThanda aur pur-sukoon — lehron jaisa sahi!",
-        urdu: "سمندر کو بھر دوں گہرا اور وسیع،\nٹھنڈا اور پرسکون — لہروں جیسا صحیح!",
-      },
-      hard: {
-        english:
-          "I bring a calm that feels so true,\nA peaceful shade — quiet and blue.",
-        romanUrdu:
-          "Dil ko sukoon ka ehsaas dilaaun,\nKhamosh aur thanda rang hoon — neela kehlaaun!",
-        urdu: "دل کو سکون کا احساس دلاؤں،\nخاموش اور ٹھنڈا رنگ ہوں — نیلا کہلاؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "sheesha",
-      urdu: "شیشہ",
-      english: "glass",
-    },
-    image: "/qr/assets/images/sheesha.png",
-    riddles: {
-      easy: {
-        english:
-          "I’m clear and shiny, smooth to see,\nLook right through — that’s me!",
-        romanUrdu:
-          "Saaf aur chamakta hoon main,\nAar paar dekha jaaun — yahi hoon main!",
-        urdu: "صاف اور چمکتا ہوں میں،\nآر پار دیکھا جاؤں — یہی ہوں میں!",
-      },
-      medium: {
-        english:
-          "I’m in windows and mirrors too,\nI show the world and reflect you.",
-        romanUrdu:
-          "Khirkion aur aainon mein milta hoon,\nDuniya dikhaata hoon aur tumhein bhi dikhaata hoon!",
-        urdu: "کھڑکیوں اور آئینوں میں ملتا ہوں،\nدنیا دکھاتا ہوں اور تمہیں بھی دکھاتا ہوں!",
-      },
-      hard: {
-        english:
-          "I can break, though I look strong,\nHandle with care — don’t get it wrong.",
-        romanUrdu:
-          "Mazboot lagoon magar toot jaaun,\nAhista haath lagao — warna bikhar jaaun!",
-        urdu: "مضبوط لگوں مگر ٹوٹ جاؤں،\nآہستہ ہاتھ لگاؤ — ورنہ بکھر جاؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "sarak",
-      urdu: "سڑک",
-      english: "road",
-    },
-    image: "/qr/assets/images/sarak.png",
-    riddles: {
-      easy: {
-        english: "Cars and buses move on me,\nI take you places — can you see?",
-        romanUrdu:
-          "Gaariyaan aur busain mujh par chalti hain,\nTumhein jagah jagah le jaati hain!",
-        urdu: "گاڑیاں اور بسیں مجھ پر چلتی ہیں،\nتمہیں جگہ جگہ لے جاتی ہیں!",
-      },
-      medium: {
-        english:
-          "I stretch ahead both far and wide,\nWalk or drive — I guide your ride.",
-        romanUrdu:
-          "Aagay peechay door tak phail jaaun,\nChalo ya chalao — raasta dikhaaun!",
-        urdu: "آگے پیچھے دور تک پھیل جاؤں،\nچلو یا چلاؤ — راستہ دکھاؤں!",
-      },
-      hard: {
-        english:
-          "I connect places near and far,\nWithout me travel wouldn’t go far.",
-        romanUrdu:
-          "Qareeb aur door ki jagah jor doon,\nMere baghair safar adhoora chhor doon!",
-        urdu: "قریب اور دور کی جگہ جوڑ دوں،\nمیرے بغیر سفر ادھورا چھوڑ دوں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "awaaz",
-      urdu: "آواز",
-      english: "sound",
-    },
-    image: "/qr/assets/images/awaaz.png",
-    riddles: {
-      easy: {
-        english:
-          "You hear me when someone speaks,\nI reach your ears — loud or meek.",
-        romanUrdu:
-          "Jab koi bolay, mujhe suno,\nTez hoon ya halki — kaanon tak pohnchoon!",
-        urdu: "جب کوئی بولے، مجھے سنو،\nتیز ہوں یا ہلکی — کانوں تک پہنچوں!",
-      },
-      medium: {
-        english:
-          "I come from music, bells, and cheer,\nSometimes far, sometimes near.",
-        romanUrdu:
-          "Gaane, ghanti, aur hansi se aaun,\nKabhi door se, kabhi paas se sunaaun!",
-        urdu: "گانے، گھنٹی، اور ہنسی سے آؤں،\nکبھی دور سے، کبھی پاس سے سناؤں!",
-      },
-      hard: {
-        english:
-          "You can’t see me, but I’m around,\nI travel through air — I’m sound.",
-        romanUrdu:
-          "Mujhe dekha na jaa sakay magar hoon paas,\nHawa ke zariye safar karoon — awaaz hoon khaas!",
-        urdu: "مجھے دیکھا نہ جا سکے مگر ہوں پاس،\nہوا کے ذریعے سفر کروں — آواز ہوں خاص!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "dhoop",
-      urdu: "دھوپ",
-      english: "sunlight",
-    },
-    image: "/qr/assets/images/dhoop.png",
-    riddles: {
-      easy: {
-        english: "I come from the sun up high,\nWarm and bright in the sky.",
-        romanUrdu:
-          "Sooraj se aaun upar se main,\nGaram aur roshan — mehsoos hoon main!",
-        urdu: "سورج سے آؤں اوپر سے میں،\nگرم اور روشن — محسوس ہوں میں!",
-      },
-      medium: {
-        english: "I help plants grow each day,\nChasing cold and dark away.",
-        romanUrdu:
-          "Paudon ko barhne mein madad doon,\nSardi aur andhera door kar doon!",
-        urdu: "پودوں کو بڑھنے میں مدد دوں،\nسردی اور اندھیرا دور کر دوں!",
-      },
-      hard: {
-        english:
-          "I can’t be held, but I’m felt,\nOn skin I rest — warm and gentle.",
-        romanUrdu:
-          "Pakra na jaaun magar mehsoos hoon,\nJild par paroon — naram aur garam hoon!",
-        urdu: "پکڑا نہ جاؤں مگر محسوس ہوں،\nجلد پر پڑوں — نرم اور گرم ہوں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "barish",
-      urdu: "بارش",
-      english: "rain",
-    },
-    image: "/qr/assets/images/barish.png",
-    riddles: {
-      easy: {
-        english:
-          "I fall from clouds up in the sky,\nTap tap tap — as I pass by.",
-        romanUrdu:
-          "Baadalon se neeche girta hoon main,\nTap tap tap — zameen par milta hoon main!",
-        urdu: "بادلوں سے نیچے گرتا ہوں میں،\nٹپ ٹپ ٹپ — زمین پر ملتا ہوں میں!",
-      },
-      medium: {
-        english:
-          "I water plants and cool the air,\nAfter the heat, I’m always there.",
-        romanUrdu:
-          "Paudon ko pani doon, hawa ko thanda karoon,\nGarmi ke baad aaun — sukoon bharoon!",
-        urdu: "پودوں کو پانی دوں، ہوا کو ٹھنڈا کروں،\nگرمی کے بعد آؤں — سکون بھروں!",
-      },
-      hard: {
-        english:
-          "Sometimes gentle, sometimes loud,\nI sing as I fall from cloud to cloud.",
-        romanUrdu:
-          "Kabhi halki, kabhi tez ho jaaun,\nBaadal se zameen tak geet sunaaun!",
-        urdu: "کبھی ہلکی، کبھی تیز ہو جاؤں،\nبادل سے زمین تک گیت سناؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "dil",
-      urdu: "دل",
-      english: "heart",
-    },
-    image: "/qr/assets/images/dil.png",
-    riddles: {
-      easy: {
-        english:
-          "I beat inside you day and night,\nKeeping you alive — that’s right!",
-        romanUrdu:
-          "Din raat andar dharakta hoon main,\nTumhein zinda rakhta hoon main!",
-        urdu: "دن رات اندر دھڑکتا ہوں میں،\nتمہیں زندہ رکھتا ہوں میں!",
-      },
-      medium: {
-        english: "I feel happy, sad, or shy,\nEmotions live where I lie.",
-        romanUrdu:
-          "Khushi, gham, ya sharm mehsoos karoon,\nEhsaas sab mere andar basoon!",
-        urdu: "خوشی، غم، یا شرم محسوس کروں،\nاحساس سب میرے اندر بسوں!",
-      },
-      hard: {
-        english:
-          "I’m not just flesh or beat alone,\nI hold feelings deep and known.",
-        romanUrdu:
-          "Sirf dharkan ya gosht nahi hoon main,\nGehre jazbaat sambhaalta hoon main!",
-        urdu: "صرف دھڑکن یا گوشت نہیں ہوں میں،\nگہرے جذبات سنبھالتا ہوں میں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "yaad",
-      urdu: "یاد",
-      english: "memory",
-    },
-    image: "/qr/assets/images/yaad.png",
-    riddles: {
-      easy: {
-        english: "I help you remember fun and play,\nThings from yesterday.",
-        romanUrdu:
-          "Mazaydaar lamhay yaad dilaoon,\nKal ki baatein phir se laoon!",
-        urdu: "مزے دار لمحے یاد دلاؤں،\nکل کی باتیں پھر سے لاؤں!",
-      },
-      medium: {
-        english:
-          "I stay with you though time goes by,\nIn your thoughts, I quietly lie.",
-        romanUrdu:
-          "Waqt guzray magar saath rahoon,\nSochon mein chup chaap basoon!",
-        urdu: "وقت گزرے مگر ساتھ رہوں،\nسوچوں میں چپ چاپ بسوں!",
-      },
-      hard: {
-        english:
-          "You can’t touch me, see, or hear,\nBut I return when you feel near.",
-        romanUrdu:
-          "Na chhoo sakay, na dekha jaaun,\nEhsaas aaye to wapas aaun!",
-        urdu: "نہ چھوا جا سکے، نہ دیکھا جاؤں،\nاحساس آئے تو واپس آؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "jandaar",
-      urdu: "جاندار",
-      english: "lively",
-    },
-    image: "/qr/assets/images/jandaar.png",
-    riddles: {
-      easy: {
-        english:
-          "I jump and move with lots of cheer,\nFull of life — I’m never still here!",
-        romanUrdu:
-          "Zor se hiloon aur khushi dikhaoon,\nZindagi se bhara hoon — jandaar kehlaaun!",
-        urdu: "زور سے ہلوں اور خوشی دکھاؤں،\nزندگی سے بھرا ہوں — جاندار کہلاؤں!",
-      },
-      medium: {
-        english:
-          "I dance, I laugh, I shine so bright,\nEnergy fills me day and night.",
-        romanUrdu:
-          "Naachoon, hansoon, chamakta rahoon,\nTaaqat aur jaan se bhara rahoon!",
-        urdu: "ناچوں، ہنسوں، چمکتا رہوں،\nطاقت اور جان سے بھرا رہوں!",
-      },
-      hard: {
-        english:
-          "You can feel my energy when I’m near,\nAlive and active — always clear.",
-        romanUrdu:
-          "Qareeb aao to meri taqat mehsoos ho,\nZinda aur chaalak — har pal hosh ho!",
-        urdu: "قریب آؤ تو میری طاقت محسوس ہو،\nزندہ اور چالاک — ہر پل ہوش ہو!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "khushboo",
-      urdu: "خوشبو",
-      english: "scent",
-    },
-    image: "/qr/assets/images/khushboo.png",
-    riddles: {
-      easy: {
-        english:
-          "I smell sweet and float in air,\nClose your eyes — I’m there!",
-        romanUrdu:
-          "Meethi si mehak hoon hawa mein,\nAankhein band karo — paas hoon main!",
-        urdu: "میٹھی سی مہک ہوں ہوا میں،\nآنکھیں بند کرو — پاس ہوں میں!",
-      },
-      medium: {
-        english:
-          "From flowers, food, and rain I rise,\nI reach your nose — a sweet surprise.",
-        romanUrdu:
-          "Phool, khana, ya barish se aaun,\nNaak tak pohnchoon — khushi laaun!",
-        urdu: "پھول، کھانا، یا بارش سے آؤں،\nناک تک پہنچوں — خوشی لاؤں!",
-      },
-      hard: {
-        english:
-          "You can’t see me, yet I stay,\nI travel through air in my own way.",
-        romanUrdu:
-          "Na dekha jaaun magar mehsoos hoon,\nHawa ke saath chaloon — khushboo hoon!",
-        urdu: "نہ دیکھا جاؤں مگر محسوس ہوں،\nہوا کے ساتھ چلوں — خوشبو ہوں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "samandar",
-      urdu: "سمندر",
-      english: "ocean",
-    },
-    image: "/qr/assets/images/samandar.png",
-    riddles: {
-      easy: {
-        english:
-          "I’m big and blue and full of waves,\nFish swim in my watery caves.",
-        romanUrdu:
-          "Bara aur neela hoon, lehron se bhara,\nMachhliyaan rehti hain — paani ka ghar mera!",
-        urdu: "بڑا اور نیلا ہوں، لہروں سے بھرا،\nمچھلیاں رہتی ہیں — پانی کا گھر میرا!",
-      },
-      medium: {
-        english:
-          "I stretch so far, you can’t see the end,\nShips and boats on me depend.",
-        romanUrdu:
-          "Itna door tak phaila hoon main,\nKashtiyaan aur jahaaz chalain mujh mein!",
-        urdu: "اتنا دور تک پھیلا ہوں میں،\nکشتیاں اور جہاز چلیں مجھ میں!",
-      },
-      hard: {
-        english:
-          "Deep and wide, I hide much more,\nSecrets rest on my ocean floor.",
-        romanUrdu:
-          "Gehra aur wasee hoon, raaz chhupaaon,\nNeeche bohot kuchh chupke basaaoon!",
-        urdu: "گہرا اور وسیع ہوں، راز چھپاؤں،\nنیچے بہت کچھ چپکے بساؤں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "sukoon",
-      urdu: "سکون",
-      english: "peace",
-    },
-    image: "/qr/assets/images/sukoon.png",
-    riddles: {
-      easy: {
-        english:
-          "I make you feel calm and still,\nA gentle quiet — a lovely thrill.",
-        romanUrdu:
-          "Dil ko thandak doon, zehan ko aaraam,\nNaram si khamoshi — hoon sukoon ka naam!",
-        urdu: "دل کو ٹھنڈک دوں، ذہن کو آرام،\nنرم سی خاموشی — ہوں سکون کا نام!",
-      },
-      medium: {
-        english:
-          "I come when noise fades away,\nIn quiet moments, I like to stay.",
-        romanUrdu:
-          "Jab shor kam ho jaaye to aaun,\nKhamosh lamhon mein bas jaaun!",
-        urdu: "جب شور کم ہو جائے تو آؤں،\nخاموش لمحوں میں بس جاؤں!",
-      },
-      hard: {
-        english:
-          "You can’t buy me or hold me tight,\nI live inside — calm and light.",
-        romanUrdu:
-          "Na khareeda jaaun, na pakra jaaun,\nAndar hi basoon — sukoon kehlaaun!",
-        urdu: "نہ خریدا جاؤں، نہ پکڑا جاؤں،\nاندر ہی بسوں — سکون کہلاؤں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "chalti",
-      urdu: "چلتی",
-      english: "moving",
-    },
-    image: "/qr/assets/images/chalti.png",
-    riddles: {
-      easy: {
-        english:
-          "I don’t stay still, I go along,\nStep by step — moving strong!",
-        romanUrdu:
-          "Rukti nahi hoon, aagay barhti jaaun,\nQadam ba qadam — chalti jaaun!",
-        urdu: "رکتی نہیں ہوں، آگے بڑھتی جاؤں،\nقدم بہ قدم — چلتی جاؤں!",
-      },
-      medium: {
-        english:
-          "Cars, people, rivers too,\nWhen they move — that’s me and you.",
-        romanUrdu:
-          "Gaari, insaan, darya bhi chalain,\nJab harkat ho — mujhe pehchaanain!",
-        urdu: "گاڑی، انسان، دریا بھی چلیں،\nجب حرکت ہو — مجھے پہچانیں!",
-      },
-      hard: {
-        english:
-          "I show progress, change, and flow,\nAlways going — never slow.",
-        romanUrdu:
-          "Tabdeeli aur rawaani dikhaoon,\nHamesha aagay barhoon — na ruko jaaun!",
-        urdu: "تبدیلی اور روانی دکھاؤں،\nہمیشہ آگے بڑھوں — نہ رکوں جاؤں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "kheton",
-      urdu: "کھیتوں",
-      english: "fields",
-    },
-    image: "/qr/assets/images/kheton.png",
-    riddles: {
-      easy: {
-        english: "Plants and crops grow in me,\nWide open land — can you see?",
-        romanUrdu:
-          "Faslain aur pauday mujh mein ugain,\nKhula sa maidaan hoon — kheton kahlaaun!",
-        urdu: "فصلیں اور پودے مجھ میں اگیں،\nکھلا سا میدان ہوں — کھیتوں کہلاؤں!",
-      },
-      medium: {
-        english: "Farmers work here day by day,\nGrowing food along the way.",
-        romanUrdu:
-          "Kisaan yahan mehnat karta jaaye,\nKhaana ugaa kar ghar tak laaye!",
-        urdu: "کسان یہاں محنت کرتا جائے،\nکھانا اگا کر گھر تک لائے!",
-      },
-      hard: {
-        english:
-          "From soil and sun, I help things grow,\nLife begins where seeds are sown.",
-        romanUrdu:
-          "Mitti aur dhoop se zindagi banaaun,\nBeej jahan boye jaayen — wahi se ugaaun!",
-        urdu: "مٹی اور دھوپ سے زندگی بناؤں،\nبیج جہاں بوئے جائیں — وہیں سے اگاؤں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "khush",
-      urdu: "خوشی",
-      english: "happy",
-    },
-    image: "/qr/assets/images/khush.png",
-    riddles: {
-      easy: {
-        english:
-          "I make you smile and laugh all day,\nA bright good feeling that comes your way!",
-        romanUrdu:
-          "Muskurahat laaun, hansa doon main,\nAchha sa ehsaas hoon — khushi hoon main!",
-        urdu: "مسکراہٹ لاؤں، ہنسا دوں میں،\nاچھا سا احساس ہوں — خوشی ہوں میں!",
-      },
-      medium: {
-        english:
-          "I come when good things happen to you,\nIn fun and play, I grow anew.",
-        romanUrdu:
-          "Achhi baat ho to main aa jaaun,\nKhel aur hansi mein barhti jaaun!",
-        urdu: "اچھی بات ہو تو میں آ جاؤں،\nکھیل اور ہنسی میں بڑھتی جاؤں!",
-      },
-      hard: {
-        english: "You can’t see me, yet I stay,\nIn your heart, I find my way.",
-        romanUrdu:
-          "Na dekhi jaaun magar mehsoos hoon,\nDil ke andar bas jaaun — khushi hoon!",
-        urdu: "نہ دیکھی جاؤں مگر محسوس ہوں،\nدل کے اندر بس جاؤں — خوشی ہوں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "zaika",
-      urdu: "ذائقہ",
-      english: "flavor",
-    },
-    image: "/qr/assets/images/zaika.png",
-    riddles: {
-      easy: {
-        english:
-          "I tell your tongue what food tastes like,\nSweet or salty — I decide!",
-        romanUrdu:
-          "Zubaan ko bataaun khanay ka haal,\nMeetha ya namkeen — hoon main zaika kamaal!",
-        urdu: "زبان کو بتاؤں کھانے کا حال،\nمیٹھا یا نمکین — ہوں میں ذائقہ کمال!",
-      },
-      medium: {
-        english:
-          "I live in spices, fruits, and more,\nEvery bite makes you ask for more.",
-        romanUrdu:
-          "Masalon, phalon mein bas jaaun,\nHar niwala kha kar tumhein lubhaaun!",
-        urdu: "مصالحوں، پھلوں میں بس جاؤں،\nہر نوالہ کھا کر تمہیں لبھاؤں!",
-      },
-      hard: {
-        english:
-          "You can’t see me, but I’m inside,\nI make food loved far and wide.",
-        romanUrdu:
-          "Na nazar aaun magar mehsoos hoon,\nKhanay ko lazeez banaa doon — zaika hoon!",
-        urdu: "نہ نظر آؤں مگر محسوس ہوں،\nکھانے کو لذیذ بنا دوں — ذائقہ ہوں!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "gulabi",
-      urdu: "گلابی",
-      english: "pink",
-    },
-    image: "/qr/assets/images/gulabi.png",
-    riddles: {
-      easy: {
-        english:
-          "I’m soft and light, a gentle hue,\nRoses wear me — pretty too!",
-        romanUrdu:
-          "Halka sa rang hoon, pyara sa,\nGulaabon ka rang — gulabi sa!",
-        urdu: "ہلکا سا رنگ ہوں، پیارا سا،\nگلابوں کا رنگ — گلابی سا!",
-      },
-      medium: {
-        english:
-          "I mix red and white just right,\nSweet and calm — a lovely sight.",
-        romanUrdu:
-          "Laal aur safed ko milaaoon,\nNaram aur meetha rang banaaun!",
-        urdu: "لال اور سفید کو ملاؤں،\nنرم اور میٹھا رنگ بناؤں!",
-      },
-      hard: {
-        english:
-          "I show love in a gentle way,\nSoft and warm — not loud or gray.",
-        romanUrdu:
-          "Narmi se mohabbat dikhaaun,\nGaram aur pyara rang — gulabi kehlaaun!",
-        urdu: "نرمی سے محبت دکھاؤں،\nگرم اور پیارا رنگ — گلابی کہلاؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "sunheri",
-      urdu: "سنہری",
-      english: "golden",
-    },
-    image: "/qr/assets/images/sunheri.png",
-    riddles: {
-      easy: {
-        english:
-          "I glow with a warm, shiny light,\nLike treasure that looks so bright.",
-        romanUrdu:
-          "Garam si chamak ke saath jhalkoon,\nQeemti si roshni ban kar damkoon.",
-        urdu: "گرم سی چمک کے ساتھ جھلکوں،\nقیمتی سی روشنی بن کر دمکوں۔",
-      },
-      medium: {
-        english:
-          "I appear when the day slows down,\nSoft warm light spreads around.",
-        romanUrdu:
-          "Jab din dheema ho jaaye to nazar aaun,\nNaram garam roshni ban kar chhaa jaaun.",
-        urdu: "جب دن دھیمہ ہو جائے تو نظر آؤں،\nنرم گرم روشنی بن کر چھا جاؤں۔",
-      },
-      hard: {
-        english:
-          "I look rich, but I’m not something you hold,\nA glowing shade that feels like gold.",
-        romanUrdu:
-          "Ameer sa lagoon magar cheez na ban sakoon,\nChamakta sa rang hoon jo dil ko bha sakoon.",
-        urdu: "امیر سا لگوں مگر چیز نہ بن سکوں،\nچمکتا سا رنگ ہوں جو دل کو بھا سکوں۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "surmai",
-      urdu: "سرمئی",
-      english: "gray",
-    },
-    image: "/qr/assets/images/surmai.png",
-    riddles: {
-      easy: {
-        english:
-          "I sit between light and dark,\nSoft and quiet, leaving a mark.",
-        romanUrdu:
-          "Ujalay aur andheray ke beech hoon main,\nHalka sa aur khamosh sa hoon main.",
-        urdu: "اجالے اور اندھیرے کے بیچ ہوں میں،\nہلکا سا اور خاموش سا ہوں میں۔",
-      },
-      medium: {
-        english: "Cloudy skies wear my tone,\nCalm days feel like home.",
-        romanUrdu:
-          "Baadal bhari fiza mein chhaa jaaun,\nSukoon bhare dinon mein saath nibhaaun.",
-        urdu: "بادل بھری فضا میں چھا جاؤں،\nسکون بھرے دنوں میں ساتھ نبھاؤں۔",
-      },
-      hard: {
-        english:
-          "I don’t shout or stand apart,\nI quietly blend, calm at heart.",
-        romanUrdu:
-          "Na chamkoon aur na alag nazar aaun,\nChup chaap mil jaaun aur sukoon laaun.",
-        urdu: "نہ چمکوں اور نہ الگ نظر آؤں،\nچپ چاپ مل جاؤں اور سکون لاؤں۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "roshan",
-      urdu: "روشن",
-      english: "bright",
-    },
-    image: "/qr/assets/images/roshan.png",
-    riddles: {
-      easy: {
-        english:
-          "I help you see both far and near,\nDarkness fades when I appear.",
-        romanUrdu:
-          "Qareeb aur door sab dikhaaun,\nAndhera bhaag jaaye jab aaun.",
-        urdu: "قریب اور دور سب دکھاؤں،\nاندھیرا بھاگ جائے جب آؤں۔",
-      },
-      medium: {
-        english:
-          "I come from lamps and from the sun,\nMaking everything clear and done.",
-        romanUrdu: "Chiraagh aur sooraj se aaun,\nHar cheez ko saaf banaaun.",
-        urdu: "چراغ اور سورج سے آؤں،\nہر چیز کو صاف بناؤں۔",
-      },
-      hard: {
-        english:
-          "I bring clarity to thoughts and sight,\nNot just seeing, but insight.",
-        romanUrdu:
-          "Soch aur nazar ko saaf kar jaaun,\nSamajh ka naya raasta dikhaaun.",
-        urdu: "سوچ اور نظر کو صاف کر جاؤں،\nسمجھ کا نیا راستہ دکھاؤں۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "jagah",
-      urdu: "جگہ",
-      english: "place",
-    },
-    image: "/qr/assets/images/jagah.png",
-    riddles: {
-      easy: {
-        english:
-          "You can sit or stand right here,\nA spot that feels both far and near.",
-        romanUrdu:
-          "Yahin baitho ya yahin kharay ho,\nDoor ho ya paas yahin ho.",
-        urdu: "یہیں بیٹھو یا یہیں کھڑے ہو،\nدور ہو یا پاس یہیں ہو۔",
-      },
-      medium: {
-        english:
-          "Homes and parks and rooms you know,\nWhere people come and go.",
-        romanUrdu:
-          "Ghar, park aur kamray ginaay jaaen,\nJahan log jaaen aur wapas aaen.",
-        urdu: "گھر، پارک اور کمرے گنے جائیں،\nجہاں لوگ جائیں اور واپس آئیں۔",
-      },
-      hard: {
-        english: "I hold moments old and new,\nStories live where I do.",
-        romanUrdu:
-          "Lamhe mujhmein aa kar reh jaaen,\nKal aur aaj dono bas jaaen.",
-        urdu: "لمحے مجھ میں آ کر رہ جائیں،\nکل اور آج دونوں بس جائیں۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "akela",
-      urdu: "اکیلا",
-      english: "alone",
-    },
-    image: "/qr/assets/images/akela.png",
-    riddles: {
-      easy: {
-        english: "When no one else is near,\nBeing by yourself feels clear.",
-        romanUrdu: "Jab koi paas na ho saath,\nKhud ke saath rehna ho khaas.",
-        urdu: "جب کوئی پاس نہ ہو ساتھ،\nخود کے ساتھ رہنا ہو خاص۔",
-      },
-      medium: {
-        english:
-          "Quiet moments come your way,\nSometimes calm, sometimes gray.",
-        romanUrdu:
-          "Khamoshi saath le kar aaun,\nKabhi sukoon kabhi udaasi laaun.",
-        urdu: "خاموشی ساتھ لے کر آؤں،\nکبھی سکون کبھی اداسی لاؤں۔",
-      },
-      hard: {
-        english:
-          "It doesn’t always mean you’re sad,\nSometimes space can feel quite glad.",
-        romanUrdu:
-          "Zaroori nahi ke gham hi ho,\nKabhi khud ke liye waqt bhi ho.",
-        urdu: "ضروری نہیں کہ غم ہی ہو،\nکبھی خود کے لیے وقت بھی ہو۔",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "badalna",
-      urdu: "بدلنا",
-      english: "to change",
-    },
-    image: "/qr/assets/images/badalna.png",
-    riddles: {
-      easy: {
-        english:
-          "I make things different than before,\nNot the same as they once were.",
-        romanUrdu: "Cheez pehle jaisi na rahe,\nNayi soorat saamne aa jaaye.",
-        urdu: "چیز پہلے جیسی نہ رہے،\nنئی صورت سامنے آ جائے۔",
-      },
-      medium: {
-        english:
-          "From old to new, I shift the way,\nWhat was before won’t always stay.",
-        romanUrdu:
-          "Purani haalat chhor kar aage barhoon,\nJo tha pehle, woh baqi na rahoon.",
-        urdu: "پرانی حالت چھوڑ کر آگے بڑھوں،\nجو تھا پہلے، وہ باقی نہ رہوں۔",
-      },
-      hard: {
-        english:
-          "I bring movement in time and thought,\nGrowth begins with what I’ve brought.",
-        romanUrdu:
-          "Waqt aur soch mein harkat laaun,\nTaraqqi ka raasta yahin se banaaun.",
-        urdu: "وقت اور سوچ میں حرکت لاؤں،\nترقی کا راستہ یہی سے بناؤں۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "batana",
-      urdu: "بتانا",
-      english: "to tell",
-    },
-    image: "/qr/assets/images/batana.png",
-    riddles: {
-      easy: {
-        english:
-          "I share ideas with words and sound,\nSo others know what I’ve found.",
-        romanUrdu: "Lafzon ke zariye baat kahoon,\nDoosron ko khabar doon.",
-        urdu: "لفظوں کے ذریعے بات کہوں،\nدوسروں کو خبر دوں۔",
-      },
-      medium: {
-        english:
-          "I pass along what’s in my mind,\nSo you can know what’s left behind.",
-        romanUrdu:
-          "Jo zehan mein ho woh aage pahunchaoon,\nSaamne walay ko samjhaaun.",
-        urdu: "جو ذہن میں ہو وہ آگے پہنچاؤں،\nسامنے والے کو سمجھاؤں۔",
-      },
-      hard: {
-        english:
-          "I turn thoughts into spoken truth,\nConnecting hearts from old to youth.",
-        romanUrdu:
-          "Sochon ko awaaz mein badloon,\nDilon ke darmiyaan rishta jor doon.",
-        urdu: "سوچوں کو آواز میں بدلوں،\nدلوں کے درمیان رشتہ جوڑ دوں۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "poocha",
-      urdu: "پوچھا",
-      english: "asked",
-    },
-    image: "/qr/assets/images/poocha.png",
-    riddles: {
-      easy: {
-        english: "I wanted to know, so I spoke,\nWaiting to hear — no joke.",
-        romanUrdu: "Jaan’ne ki khaatir baat ki,\nJawaab ke liye ruka raha.",
-        urdu: "جاننے کی خاطر بات کی،\nجواب کے لیے رکا رہا۔",
-      },
-      medium: {
-        english:
-          "A question came from my mind,\nHoping an answer I would find.",
-        romanUrdu:
-          "Zehan se sawaal nikal kar aaya,\nJawaab ki umeed dil mein laaya.",
-        urdu: "ذہن سے سوال نکل کر آیا،\nجواب کی امید دل میں لایا۔",
-      },
-      hard: {
-        english: "Curiosity led the way,\nSeeking truth in what you say.",
-        romanUrdu:
-          "Tajassus ne aage barhne ko kaha,\nSach ki talaash mein alfaaz chune.",
-        urdu: "تجسس نے آگے بڑھنے کو کہا،\nسچ کی تلاش میں الفاظ چنے۔",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "ehsas",
-      urdu: "احساس",
-      english: "realize",
-    },
-    image: "/qr/assets/images/ehsas.png",
-    riddles: {
-      easy: {
-        english:
-          "Something feels clear inside,\nYou suddenly know what’s right.",
-        romanUrdu: "Dil ke andar baat saaf ho jaaye,\nAchanak samajh aa jaaye.",
-        urdu: "دل کے اندر بات صاف ہو جائے،\nاچانک سمجھ آ جائے۔",
-      },
-      medium: {
-        english:
-          "You feel it without being told,\nA quiet knowing starts to unfold.",
-        romanUrdu: "Bina bataye dil ko khabar ho,\nKhamoshi mein baat asar ho.",
-        urdu: "بِنا بتائے دل کو خبر ہو،\nخاموشی میں بات اثر ہو۔",
-      },
-      hard: {
-        english:
-          "Awareness rises deep inside,\nA truth you feel — not see or hide.",
-        romanUrdu: "Andar gehra hosh jaag jaaye,\nSach ko mehsoos kiya jaaye.",
-        urdu: "اندر گہرا ہوش جاگ جائے،\nسچ کو محسوس کیا جائے۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "ajnabi",
-      urdu: "اجنبی",
-      english: "stranger",
-    },
-    image: "/qr/assets/images/ajnabi.png",
-    riddles: {
-      easy: {
-        english: "Someone new you’ve never met,\nA face you don’t know yet.",
-        romanUrdu: "Naya chehra saamne aaye,\nPehchaan abhi na ban paaye.",
-        urdu: "نیا چہرہ سامنے آئے،\nپہچان ابھی نہ بن پائے۔",
-      },
-      medium: {
-        english:
-          "They walk by, unknown to you,\nNo shared stories, nothing true.",
-        romanUrdu:
-          "Raaste mein milay magar jaan na ho,\nKoi rishta ya pehchaan na ho.",
-        urdu: "راستے میں ملے مگر جان نہ ہو،\nکوئی رشتہ یا پہچان نہ ہو۔",
-      },
-      hard: {
-        english: "Without a bond or history,\nJust a presence briefly seen.",
-        romanUrdu:
-          "Bina taalluq, bina maazi ke,\nSirf aik maujoodgi lamhay ke liye.",
-        urdu: "بِنا تعلق، بِنا ماضی کے،\nصرف ایک موجودگی لمحے کے لیے۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "samajh",
-      urdu: "سمجھ",
-      english: "understand",
-    },
-    image: "/qr/assets/images/samajh.png",
-    riddles: {
-      easy: {
-        english:
-          "You know what something means,\nThe idea feels clear and clean.",
-        romanUrdu:
-          "Baat ka matlab saaf ho jaaye,\nZehan mein tasveer ban jaaye.",
-        urdu: "بات کا مطلب صاف ہو جائے،\nذہن میں تصویر بن جائے۔",
-      },
-      medium: {
-        english: "When confusion goes away,\nKnowing finds its way.",
-        romanUrdu: "Jab uljhan door ho jaaye,\nBaat dil ko lag jaaye.",
-        urdu: "جب الجھن دور ہو جائے،\nبات دل کو لگ جائے۔",
-      },
-      hard: {
-        english: "Meaning settles deep within,\nA quiet clarity begins.",
-        romanUrdu: "Ma‘ni andar tak utar jaaye,\nSoch ko thehraao mil jaaye.",
-        urdu: "معنی اندر تک اُتر جائے،\nسوچ کو ٹھہراؤ مل جائے۔",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "shayad",
-      urdu: "شاید",
-      english: "maybe",
-    },
-    image: "/qr/assets/images/shayad.png",
-    riddles: {
-      easy: {
-        english:
-          "Not yes, not no — somewhere between,\nYou’re not fully sure what it means.",
-        romanUrdu:
-          "Na poori haan ho, na poori na,\nBeech ka khayaal dil mein aa jaaye.",
-        urdu: "نہ پوری ہاں ہو، نہ پوری نہ،\nبیچ کا خیال دل میں آ جائے۔",
-      },
-      medium: {
-        english:
-          "You think it could be one way or another,\nNothing decided, one or the other.",
-        romanUrdu:
-          "Soch ho idhar udhar ghoomti rahe,\nKoi faisla abhi na ban paaye.",
-        urdu: "سوچ ہو ادھر اُدھر گھومتی رہے،\nکوئی فیصلہ ابھی نہ بن پائے۔",
-      },
-      hard: {
-        english:
-          "Uncertainty rests inside your mind,\nAn answer waits — undefined.",
-        romanUrdu:
-          "Zehan mein ghair-yakeeni bas jaaye,\nJawaab abhi adhoora reh jaaye.",
-        urdu: "ذہن میں غیر یقینی بس جائے،\nجواب ابھی ادھورا رہ جائے۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "oonchay",
-      urdu: "اونچے",
-      english: "high",
-    },
-    image: "/qr/assets/images/oonchay.png",
-    riddles: {
-      easy: {
-        english: "Far above the ground you see,\nUp in the air — tall it be.",
-        romanUrdu: "Zameen se bohot upar ho,\nHawa ke qareeb ja kar ho.",
-        urdu: "زمین سے بہت اوپر ہو،\nہوا کے قریب جا کر ہو۔",
-      },
-      medium: {
-        english:
-          "Mountains and towers reach the sky,\nLooking down as clouds pass by.",
-        romanUrdu:
-          "Pahaad aur burj aasmaan chhooen,\nNeeche dekhen, baadal beh jaaen.",
-        urdu: "پہاڑ اور برج آسمان چھوئیں،\nنیچے دیکھیں، بادل بہہ جائیں۔",
-      },
-      hard: {
-        english:
-          "Height gives a wider view to see,\nThe world looks small from where you be.",
-        romanUrdu: "Bulandi se nazar phail jaaye,\nDuniya chhoti si lag jaaye.",
-        urdu: "بلندی سے نظر پھیل جائے،\nدنیا چھوٹی سی لگ جائے۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "cheekh",
-      urdu: "چیخ",
-      english: "scream",
-    },
-    image: "/qr/assets/images/cheekh.png",
-    riddles: {
-      easy: {
-        english:
-          "A loud sound bursts from fear or pain,\nEveryone hears it again and again.",
-        romanUrdu:
-          "Darr ya dard se tez awaaz niklay,\nSab ke kaanon tak pohanch jaaye.",
-        urdu: "ڈر یا درد سے تیز آواز نکلے،\nسب کے کانوں تک پہنچ جائے۔",
-      },
-      medium: {
-        english:
-          "When surprise or danger appears,\nA sharp sound fills all ears.",
-        romanUrdu: "Hairani ya khatra saamne aaye,\nTez si awaaz phail jaaye.",
-        urdu: "حیرانی یا خطرہ سامنے آئے،\nتیز سی آواز پھیل جائے۔",
-      },
-      hard: {
-        english:
-          "Strong emotion breaks the air,\nA sudden sound you cannot bear.",
-        romanUrdu:
-          "Shadeed jazbaat hawa cheer jaaen,\nAchanak awaaz har simt chhaa jaaye.",
-        urdu: "شدید جذبات ہوا چیر جائیں،\nاچانک آواز ہر سمت چھا جائے۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "rang",
-      urdu: "رنگ",
-      english: "color",
-    },
-    image: "/qr/assets/images/rang.png",
-    riddles: {
-      easy: {
-        english:
-          "I make things bright, I make them fun,\nRed, blue, yellow — I’m in every one!",
-        romanUrdu:
-          "Cheezon ko chamkaaun, karta hoon fun,\nLaal, neela, peela — har jagah main hoon!",
-        urdu: "چیزوں کو چمکاؤں، کرتا ہوں فن،\nلال، نیلا، پیلا — ہر جگہ میں ہوں!",
-      },
-      medium: {
-        english:
-          "I paint the world both near and far,\nWithout me things look plain — who am I, yaaar?",
-        romanUrdu:
-          "Duniya ko sajaaun, qareeb ho ya door,\nMere baghair sab lagey be-noor — kaun hoon main zaroor?",
-        urdu: "دنیا کو سجاؤں، قریب ہو یا دور،\nمیرے بغیر سب لگے بے نور — کون ہوں میں ضرور؟",
-      },
-      hard: {
-        english:
-          "I change how things look, both dull and bright,\nSeen by the eyes, but not held tight.",
-        romanUrdu:
-          "Shakal badloon, pheeka ya chamakdaar,\nAankhon se dekha jaaun, haath se na pakra jaaun yaar!",
-        urdu: "شکل بدلوں، پھیکا یا چمکدار،\nآنکھوں سے دیکھا جاؤں، ہاتھ سے نہ پکڑا جاؤں!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "gaari",
-      urdu: "گاڑی",
-      english: "car",
-    },
-    image: "../images/gaari.png",
-    riddles: {
-      easy: {
-        english:
-          "I have four wheels and go vroom-vroom,\nI take you places, zoom-zoom-zoom!",
-        romanUrdu:
-          "Mere chaar pahiye, vroom-vroom ka kaam,\nMain le jaaun tumhein, bina kisi thaam!",
-        urdu: "میرے چار پہیے، کرتا ہوں زوم زوم،\nلے جاؤں تمہیں، جیسے خوشبو خوشبو!",
-      },
-      medium: {
-        english:
-          "I follow roads both near and far,\nWith a steering wheel, I’m called a ___?",
-        romanUrdu:
-          "Raaste chuno, chalayin yaar,\nSteering wheel ke saath, naam hai ___?",
-        urdu: "راستے چنوں، چلے میں پیار،\nاسٹیئرنگ کے ساتھ، کہلاؤں ___؟",
-      },
-      hard: {
-        english:
-          "I carry dreams and honk with glee,\nA moving box — what could I be?",
-        romanUrdu:
-          "Sapne le jaaun, horn bajaaun,\nChalti dabbi hoon, kya main kehlaaun?",
-        urdu: "سپنے لے جاؤں، ہارن بجاؤں،\nچلتی ڈبہ ہوں، کیا کہلاؤں؟",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "piyay",
-      urdu: "پئیے",
-      english: "tires",
-    },
-    image: "../images/piyay.png",
-    riddles: {
-      easy: {
-        english:
-          "I help the car go fast and far,\nRound and round on every car!",
-        romanUrdu:
-          "Main madad doon gaari ko bhaagna,\nGol gol hoon, gaari ka saathi paaya jaana!",
-        urdu: "میں مدد دوں گاڑی کو بھاگنا،\nگول گول ہوں، گاڑی کا ساتھی پایا جانا!",
-      },
-      medium: {
-        english:
-          "I roll on roads both near and wide,\nWithout me, cars can’t take a ride.",
-        romanUrdu:
-          "Main chaltoon sadkon par door aur paas,\nBina mere, gaari ruk jaaye khaas.",
-        urdu: "میں چلتا ہوں سڑکوں پر دور اور پاس،\nبِنا میرے، گاڑی رُک جائے خاص۔",
-      },
-      hard: {
-        english:
-          "Black and round, I spin with might,\nCar's silent shoes through day and night.",
-        romanUrdu:
-          "Kaala hoon, gol hoon, ghoomta hoon zor se,\nDin raat chuppi chaal meri raahon pe bore se.",
-        urdu: "کالا ہوں، گول ہوں، گھومتا ہوں زور سے،\nدن رات چپ چاپ میری راہوں پہ بور سے۔",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "chaabi",
-      urdu: "چابی",
-      english: "key",
-    },
-    image: "../images/chaabi.png",
-    riddles: {
-      easy: {
-        english:
-          "I open doors and start your car,\nI'm small and shiny, never far!",
-        romanUrdu:
-          "Darwaze kholoon, gaari chalaoon,\nChhoti si cheez hoon, main sab kuch karaoon!",
-        urdu: "دروازے کھولوں، گاڑی چلاؤں،\nچھوٹی سی چیز ہوں، میں سب کچھ کراؤں!",
-      },
-      medium: {
-        english: "Put me in and give a twist,\nWithout me, the ride is missed!",
-        romanUrdu:
-          "Mujhe lagao, ghoomao zara,\nBina mere, na chale safar ka safina!",
-        urdu: "مجھے لگاؤ، گھماؤ ذرا،\nبِنا میرے، نہ چلے سفر کا سفینہ!",
-      },
-      hard: {
-        english:
-          "I'm not a voice, but I unlock sound,\nHidden in pockets, yet always found.",
-        romanUrdu:
-          "Awaz nahi, par awaazon ka raaz hoon,\nChhupi rehti hoon, par har waqt saath hoon.",
-        urdu: "آواز نہیں، پر آوازوں کا راز ہوں،\nچھپی رہتی ہوں، پر ہر وقت ساتھ ہوں۔",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "aagai",
-      urdu: "آگے",
-      english: "forward",
-    },
-    image: "../images/aagai.png",
-    riddles: {
-      easy: {
-        english:
-          "When we move, we go this way,\nOne big step to start the day!",
-        romanUrdu:
-          "Jab chalte hain, is taraf jaate,\nSubha subha kadam badhaate!",
-        urdu: "جب چلتے ہیں، اِس طرف جاتے،\nصبح صبح قدم بڑھاتے!",
-      },
-      medium: {
-        english:
-          "Not left or right, not back behind,\nKeep on going — see what you find!",
-        romanUrdu:
-          "Na daayn, na baayn, na peechay jaana,\nSidha chalo, kuch naya paana!",
-        urdu: "نہ دائیں، نہ بائیں، نہ پیچھے جانا،\nسیدھا چلو، کچھ نیا پانا!",
-      },
-      hard: {
-        english:
-          "It’s the path of dreams and light,\nA step ahead feels just right.",
-        romanUrdu:
-          "Yehi hai raasta roshni ka nishaan,\nEk kadam aagay, khwab ka jahan.",
-        urdu: "یہی ہے راستہ روشنی کا نشان،\nایک قدم آگے، خواب کا جہان۔",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "peechai",
-      urdu: "پیچھے",
-      english: "backwards",
-    },
-    image: "../images/peechai.png",
-    riddles: {
-      easy: {
-        english:
-          "If you trip or take a fall,\nYou might be walking toward the wall!",
-        romanUrdu: "Gir jao agar ya peeche chalo,\nDiwaar ki taraf jaane lago!",
-        urdu: "گر جاؤ اگر یا پیچھے چلو،\nدیوار کی طرف جانے لگو!",
-      },
-      medium: {
-        english:
-          "Not ahead, but in reverse,\nSometimes silly, sometimes worse!",
-        romanUrdu: "Aagay nahi, ulta rukh ho,\nKabhi mazaaq, kabhi dukh ho!",
-        urdu: "آگے نہیں، اُلٹا رُخ ہو،\nکبھی مذاق، کبھی دُکھ ہو!",
-      },
-      hard: {
-        english:
-          "The past is here, the future hides,\nWalk this way when courage slides.",
-        romanUrdu:
-          "Maazi saamne, mustaqbil gum,\nJab hosla chhute, chalte hum chum!",
-        urdu: "ماضی سامنے، مستقبل گم،\nجب حوصلہ چھوٹے، چلتے ہم چُپ!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "daeyn",
-      urdu: "دائیں",
-      english: "right",
-    },
-    image: "../images/daeyn.png",
-    riddles: {
-      easy: {
-        english:
-          "This is the side I like to choose,\nI write with it and never lose!",
-        romanUrdu:
-          "Yeh woh taraf hai jo pasand hai meri,\nLikhta hoon is se, har jeet hai meri!",
-        urdu: "یہ وہ طرف ہے جو پسند ہے میری،\nلکھتا ہوں اِس سے، ہر جیت ہے میری!",
-      },
-      medium: {
-        english:
-          "The hand I use to draw and eat,\nIt helps me run on steady feet.",
-        romanUrdu:
-          "Yeh haath jismein chammach pakroon,\nDaudoon bhi toh is se takraoon!",
-        urdu: "یہ ہاتھ جس میں چمچ پکڑوں،\nدوڑوں بھی تو اِس سے ٹکراؤں!",
-      },
-      hard: {
-        english:
-          "It’s not the left, it’s not behind,\nThis steady path clears up the mind.",
-        romanUrdu:
-          "Na baayn hai, na peechay ka safar,\nYeh raasta saaf, soch ho behtar!",
-        urdu: "نہ بائیں ہے، نہ پیچھے کا سفر،\nیہ راستہ صاف، سوچ ہو بہتر!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "baeyn",
-      urdu: "بائیں",
-      english: "left",
-    },
-    image: "../images/baeyn.png",
-    riddles: {
-      easy: {
-        english:
-          "This hand helps you eat or draw,\nIt’s not the right — it’s full of awe!",
-        romanUrdu:
-          "Ye haath khane ya likhne mein aaye,\nDaeyn nahi, par kaam mein aaye!",
-        urdu: "یہ ہاتھ کھانے یا لکھنے میں آئے،\nدائیں نہیں، پر کام میں آئے!",
-      },
-      medium: {
-        english:
-          "Take a turn and follow the quest,\nGo this way — it might be best!",
-        romanUrdu:
-          "Mod lo baeyn, agar ho zaroori,\nYehi rasta ho ho akl se bhari!",
-        urdu: "موڑ لو بائیں، اگر ہو ضروری،\nیہی راستہ ہو ہو عقل سے بھری!",
-      },
-      hard: {
-        english:
-          "Not always wrong, just not the right,\nStill full of wonder, charm, and light.",
-        romanUrdu:
-          "Galat nahi, bas daeyn ka ulta,\nPhir bhi hai roshan, chamak se bhara!",
-        urdu: "غلط نہیں، بس دائیں کا اُلٹا،\nپھر بھی ہے روشن، چمک سے بھرا!",
-      },
-    },
-  },
-  {
-    word: {
-      romanUrdu: "aik",
-      urdu: "ایک",
-      english: "one",
-    },
-    image: "../images/aik.png",
-    riddles: {
-      easy: {
-        english:
-          "When you begin to count and play,\nI’m what you always say today!",
-        romanUrdu: "Ginti shuru ho jaaye jab,\nSabse pehle naam lein sab!",
-        urdu: "گنتی شروع ہو جائے جب،\nسب سے پہلے نام لیں سب!",
-      },
-      medium: {
-        english: "I stand alone, but that’s okay,\nThe very start of any day.",
-        romanUrdu:
-          "Akele khara, par kamzor nahi,\nHar din ki shuruat ho mujh se sahi!",
-        urdu: "اکیلا کھڑا، پر کمزور نہیں،\nہر دن کی شروعات ہو مجھ سے صحیح!",
-      },
-      hard: {
-        english: "No pairs or twins walk with me,\nStill I shine in harmony.",
-        romanUrdu:
-          "Na joda ho, na koi saathi,\nPhir bhi hoon main sabse khaas baat hi!",
-        urdu: "نہ جوڑا ہو، نہ کوئی ساتھی،\nپھر بھی ہوں میں سب سے خاص بات ہی!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "do",
-      urdu: "دو",
-      english: "two",
-    },
-    image: "../images/do.png",
-    riddles: {
-      easy: {
-        english:
-          "Clap your hands and stomp your feet,\nThey come in pairs and work so neat!",
-        romanUrdu:
-          "Taali bajao, paon bhi maaro,\nJor mein chalte hain, zara pyaar se haaro!",
-        urdu: "تالی بجاؤ، پاؤں بھی مارو،\nجوڑ میں چلتے ہیں، ذرا پیار سے ہارو!",
-      },
-      medium: {
-        english:
-          "Eyes to see and ears to hear,\nThey help you sense what’s far and near.",
-        romanUrdu:
-          "Aankhein dekhein, kaan sunayein,\nYeh cheezein har pal kaam aayein!",
-        urdu: "آنکھیں دیکھیں، کان سنائیں،\nیہ چیزیں ہر پل کام آئیں!",
-      },
-      hard: {
-        english:
-          "Side by side, they always stay,\nIn perfect sync, they work and play.",
-        romanUrdu:
-          "Saath chalein har din har raat,\nMil ke banayein har kaam asaan baat!",
-        urdu: "ساتھ چلیں ہر دن ہر رات،\nمل کے بنائیں ہر کام آسان بات!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "theen",
-      urdu: "تین",
-      english: "three",
-    },
-    image: "../images/theen.png",
-    riddles: {
-      easy: {
-        english:
-          "How many lights do drivers see?\nRed, yellow, green — count with me!",
-        romanUrdu: "Chalti gaari dekhe kya?\nLaal, peela, sabz chamak raha!",
-        urdu: "چلتی گاڑی دیکھے کیا؟\nلال، پیلا، سبز چمک رہا!",
-      },
-      medium: {
-        english:
-          "Ice cream scoops stacked in a line,\nOne more than two — now that’s fine!",
-        romanUrdu:
-          "Kulfi ki parat ho ek se zyada,\nThandi thandi, meethi zyada!",
-        urdu: "قلفی کی پرت ہو ایک سے زیادہ،\nٹھنڈی ٹھنڈی، میٹھی زیادہ!",
-      },
-      hard: {
-        english:
-          "A shape with sides both sharp and neat,\nTikona stands on balanced feet.",
-        romanUrdu:
-          "Tikona hai jo na jhuke kabhi,\nHar kona ho bilkul sabhi jaisa hi.",
-        urdu: "تکونا ہے جو نہ جھکے کبھی،\nہر کونا ہو بالکل سبھی جیسا ہی۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "chaar",
-      urdu: "چار",
-      english: "four",
-    },
-    image: "../images/chaar.png",
-    riddles: {
-      easy: {
-        english:
-          "A car moves fast without a sound,\nIts round shoes spin on the ground.",
-        romanUrdu:
-          "Gaari chale bina kisi shor ke,\nUs ke jootein ghoomein zameen pe zor se.",
-        urdu: "گاڑی چلے بغیر کسی شور کے،\nاس کے جوتے گھومیں زمین پہ زور سے۔",
-      },
-      medium: {
-        english:
-          "Table stands firm and doesn’t fall,\nLegs beneath it, strong and tall.",
-        romanUrdu:
-          "Mez hile na, mazboot bane,\nUske neeche taangon ka sahara chhupa rahe.",
-        urdu: "میز ہلے نہ، مضبوط بنے،\nاس کے نیچے ٹانگوں کا سہارا چھپا رہے۔",
-      },
-      hard: {
-        english:
-          "Each season brings its special cheer,\nThey take turns to fill the year.",
-        romanUrdu: "Har mausam aaye apni baari,\nSaal bhar mein poori yaari.",
-        urdu: "ہر موسم آئے اپنی باری،\nسال بھر میں پوری یاری۔",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "paanch",
-      urdu: "پانچ",
-      english: "five",
-    },
-    image: "../images/paanch.png",
-    riddles: {
-      easy: {
-        english:
-          "Wiggle your fingers, give a high clap,\nThey're all on one hand — fancy that!",
-        romanUrdu:
-          "Ungliyaan hilaao, taali bajao,\nEk haath mein jitni, gino aur gao!",
-        urdu: "انگلیاں ہلاؤ، تالی بجاؤ،\nایک ہاتھ میں جتنی، گنو اور گاؤ!",
-      },
-      medium: {
-        english:
-          "Starfish points and toes that bend,\nThis number’s found on each small end!",
-        romanUrdu:
-          "Sitaray ke konein, paon ki baat,\nYeh ginti milegi tumhein har raat!",
-        urdu: "ستارے کے کونے، پاؤں کی بات،\nیہ گنتی ملے گی تمہیں ہر رات!",
-      },
-      hard: {
-        english:
-          "On one strong hand they like to stay,\nA team of helpers, night and day.",
-        romanUrdu:
-          "Ek haath ke dost, madadgaar sab,\nDin raat ka kaam, bina shikayat kab!",
-        urdu: "ایک ہاتھ کے دوست، مددگار سب،\nدن رات کا کام، بِنا شکایت کب!",
-      },
-    },
-  },
-
-  {
-    word: {
-      romanUrdu: "subah",
-      urdu: "صبح",
-      english: "morning",
-    },
-    image: "/qr/assets/images/subah.png",
-    riddles: {
-      english:
-        "The sun wakes up and starts to shine,\nA brand new start, a hopeful sign!",
-      romanUrdu: "Sooraj nikla, roshni chhayi,\nNaya safar, nayi kamaai!",
-      urdu: "سورج نکلا، روشنی چھائی،\nنیا سفر، نئی کمائی!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: "jaldi",
-      urdu: "جلدی",
-      english: "quickly / early",
-    },
-    image: "/qr/assets/images/jaldi.png",
-    riddles: {
-      english:
-        "No time to wait, no time to stay,\nYou move fast and rush away!",
-      romanUrdu: "Der na karo, waqt hai bhaari,\nTezi se kaam, baat hai saari!",
-      urdu: "دیر نہ کرو، وقت ہے بھاری،\nتیزی سے کام، بات ہے ساری!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: "din",
-      urdu: "دن",
-      english: "day",
-    },
-    image: "/qr/assets/images/din.png",
-    riddles: {
-      english:
-        "The sky is bright, the sun is high,\nWork and play as hours go by!",
-      romanUrdu: "Roshni chhayi, kaam bhi hua,\nKhel aur mehnat, sab kuch hua!",
-      urdu: "روشنی چھائی، کام بھی ہوا،\nکھیل اور محنت، سب کچھ ہوا!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: "lagbhag",
-      urdu: "لگ بھگ",
-      english: "about",
-    },
-    image: "/qr/assets/images/lagbhag.png",
-    riddles: {
-      english:
-        "Not quite there, but very near,\nJust a little more, it’s clear!",
-      romanUrdu:
-        "Poora nahin, par qareeb hi sahi,\nBas thora sa aur, samjhi gayi!",
-      urdu: "پورا نہیں، پر قریب ہی سہی،\nبس تھوڑا سا اور، سمجھی گئی!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: "pachees",
-      urdu: "پچیس",
-      english: "twenty five",
-    },
-    image: "/qr/assets/images/pachees.png",
-    riddles: {
-      english:
-        "Two hands full and five more too,\nA counting stop for me and you!",
-      romanUrdu: "Do dafa das, phir paanch mila,\nGin kar dekho, jawab bana!",
-      urdu: "دو دفعہ دس، پھر پانچ ملا،\nگن کر دیکھو، جواب بنا!",
-    },
-  },
-  {
-    word: { romanUrdu: "saalon", urdu: "سالوں", english: "years" },
-    image: "/qr/assets/images/saalon.png",
-    riddles: {
-      english:
-        "Time goes on, both slow and fast,\nMoments gather from the past!",
-      romanUrdu: "Waqt guzarta rehta jaaye,\nYaadein mil kar bojh banaaye!",
-      urdu: "وقت گزرتا رہتا جائے،\nیادیں مل کر بوجھ بنائیں!",
-    },
-  },
-  {
-    word: { romanUrdu: "shehar", urdu: "شہر", english: "city" },
-    image: "/qr/assets/images/shehar.png",
-    riddles: {
-      english:
-        "Busy roads and lights so bright,\nHomes and markets day and night!",
-      romanUrdu:
-        "Gali, bazaar, roshni bhari,\nZindagi yahan hai bhaari bhaari!",
-      urdu: "گلی، بازار، روشنی بھری،\nزندگی یہاں ہے بھاری بھاری!",
-    },
-  },
-  {
-    word: { romanUrdu: "phir", urdu: "پھر سے", english: "again" },
-    image: "/qr/assets/images/phir.png",
-    riddles: {
-      english:
-        "Once is done, but not the end,\nYou do it once more, my friend!",
-      romanUrdu: "Kaam hua, par ruka nahin,\nDobara karna mushkil nahin!",
-      urdu: "کام ہوا، پر رکا نہیں،\nدوبارہ کرنا مشکل نہیں!",
-    },
-  },
-  {
-    word: { romanUrdu: "khirki", urdu: "کھڑکی", english: "window" },
-    image: "/qr/assets/images/khirki.png",
-    riddles: {
-      english:
-        "I let in light and show the view,\nGlass and frames — you know it’s true!",
-      romanUrdu: "Roshni aaye, bahar dikhaaye,\nSheeshe se duniya nazar aaye!",
-      urdu: "روشنی آئے، باہر دکھائے،\nشیشے سے دنیا نظر آئے!",
-    },
-  },
-  {
-    word: { romanUrdu: "bahar", urdu: "باہر", english: "outside" },
-    image: "/qr/assets/images/bahar.png",
-    riddles: {
-      english: "Not inside, but past the door,\nStep ahead to see some more!",
-      romanUrdu: "Andar nahin, dar se aagay,\nKhuli hawa aur raaste bhaagay!",
-      urdu: "اندر نہیں، در سے آگے،\nکھلی ہوا اور راستے بھاگے!",
-    },
-  },
-  {
-    word: { romanUrdu: "saaf", urdu: "صاف", english: "clean" },
-    image: "/qr/assets/images/saaf.png",
-    riddles: {
-      english:
-        "No dirt, no mess, it shines so bright,\nEverything looks fresh and right!",
-      romanUrdu: "Mail nahin, chamak hai saari,\nCheez lage pyaari pyaari!",
-      urdu: "میل نہیں، چمک ہے ساری،\nچیز لگے پیاری پیاری!",
-    },
-  },
-  {
-    word: { romanUrdu: "halki", urdu: "ہلکی", english: "light (soft)" },
-    image: "/qr/assets/images/halki.png",
-    riddles: {
-      english:
-        "Not too strong, not too tight,\nSoft and gentle feels just right!",
-      romanUrdu: "Zyada nahin, dheemi si baat,\nNarmi ho bas, yahi hai baat!",
-      urdu: "زیادہ نہیں، دھیمی سی بات،\nنرمی ہو بس، یہی ہے بات!",
-    },
-  },
-  {
-    word: { romanUrdu: "hawa", urdu: "ہوا", english: "wind" },
-    image: "/qr/assets/images/hawa.png",
-    riddles: {
-      english:
-        "You can’t see me, but I move trees,\nI cool you down and make you freeze!",
-      romanUrdu: "Dikhti nahin, par mehsoos ho,\nPatay hilen jab paas ho!",
-      urdu: "دکھتی نہیں، پر محسوس ہو،\nپتے ہلیں جب پاس ہو!",
-    },
-  },
-  {
-    word: { romanUrdu: "mausam", urdu: "موسم", english: "weather" },
-    image: "/qr/assets/images/mausam.png",
-    riddles: {
-      english:
-        "Sometimes hot and sometimes cold,\nRain or sun — the tale is told!",
-      romanUrdu: "Kabhi garmi, kabhi barsaat,\nTabdeel hoti rehti baat!",
-      urdu: "کبھی گرمی، کبھی برسات،\nتبدیل ہوتی رہتی بات!",
-    },
-  },
-  {
-    word: { romanUrdu: "acha", urdu: "اچھا", english: "good" },
-    image: "/qr/assets/images/acha.png",
-    riddles: {
-      english:
-        "Makes you smile and feel just right,\nEverything turns warm and bright!",
-      romanUrdu: "Dil khush ho, chehra chamkay,\nHar cheez ka rang badlay!",
-      urdu: "دل خوش ہو، چہرہ چمکے،\nہر چیز کا رنگ بدلے!",
-    },
-  },
-  {
-    word: { romanUrdu: "qameez", urdu: "قمیض", english: "shirt" },
-    image: "/qr/assets/images/qameez.png",
-    riddles: {
-      english:
-        "You wear me on your upper side,\nWith buttons neat, I sit with pride!",
-      romanUrdu: "Upar pehni jaane wali cheez,\nSajti hoon main roz azeez!",
-      urdu: "اوپر پہنی جانے والی چیز،\nسجتی ہوں میں روز عزیز!",
-    },
-  },
-
-  {
-    word: { romanUrdu: "khaas", urdu: "خاص", english: "special" },
-    image: "/qr/assets/images/khaas.png",
-    riddles: {
-      english:
-        "Not like the rest, one of a kind,\nHeld close deep in your mind!",
-      romanUrdu: "Sab se alag, apni hi baat,\nDil ke qareeb, pyari si yaad!",
-      urdu: "سب سے الگ، اپنی ہی بات،\nدل کے قریب، پیاری سی یاد!",
-    },
-  },
-
-  {
-    word: { romanUrdu: "pata", urdu: "پتا", english: "know" },
-    image: "/qr/assets/images/pata.png",
-    riddles: {
-      english:
-        "When answers come and doubts all go,\nYour mind says yes — now you know!",
-      romanUrdu: "Jab sawal ka mile jawaab,\nSamajh aaye har ek khwaab!",
-      urdu: "جب سوال کا ملے جواب،\nسمجھ آئے ہر ایک خواب!",
-    },
-  },
-  {
-    word: { romanUrdu: "patang", urdu: "پتنگ", english: "kite" },
-    image: "/qr/assets/images/patang.png",
-    riddles: {
-      english:
-        "Up in the sky on a windy day,\nWith string below, I dance and sway!",
-      romanUrdu: "Upar urti dor ke saath,\nHawa mein karti apni baat!",
-      urdu: "اوپر اڑتی ڈور کے ساتھ،\nہوا میں کرتی اپنی بات!",
-    },
-  },
-  {
-    word: { romanUrdu: "urana", urdu: "اڑانا", english: "to fly" },
-    image: "/qr/assets/images/urana.png",
-    riddles: {
-      english:
-        "To lift it high into the air,\nWith hands below and eyes that stare!",
-      romanUrdu: "Upar bhejna, hawa mein chhorna,\nNazron se bas usay dekhna!",
-      urdu: "اوپر بھیجنا، ہوا میں چھوڑنا،\nنظروں سے بس اسے دیکھنا!",
-    },
-  },
-  {
-    word: { romanUrdu: "chhat", urdu: "چھت", english: "roof" },
-    image: "/qr/assets/images/chhat.png",
-    riddles: {
-      english:
-        "Above your head, safe and wide,\nFrom rain and sun, I always hide!",
-      romanUrdu:
-        "Sar ke upar rehti hoon main,\nDhoop aur paani se bachaoon main!",
-      urdu: "سر کے اوپر رہتی ہوں میں،\nدھوپ اور پانی سے بچاؤں میں!",
-    },
-  },
-  {
-    word: { romanUrdu: "shor", urdu: "شور", english: "noise" },
-    image: "/qr/assets/images/shor.png",
-    riddles: {
-      english: "Loud and busy, hard to rest,\nMany sounds all do their best!",
-      romanUrdu: "Awaazein zyada, chain na aaye,\nKaanon ko bas yeh sataaye!",
-      urdu: "آوازیں زیادہ، چین نہ آئے،\nکانوں کو بس یہ ستائے!",
-    },
-  },
-  {
-    word: { romanUrdu: "hansna", urdu: "ہنسنا", english: "to laugh" },
-    image: "/qr/assets/images/hansna.png",
-    riddles: {
-      english:
-        "Ha ha sounds and joyful cheer,\nA happy moment, loud and clear!",
-      romanUrdu: "Khushi mein niklay ha ha ha,\nDil se aaye yeh awaaz sada!",
-      urdu: "خوشی میں نکلے ہا ہا ہا،\nدل سے آئے یہ آواز سدا!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: "baad",
-      urdu: "بعد",
-      english: "after",
-    },
-    image: "/qr/assets/images/baad.png",
-    riddles: {
-      english:
-        "One thing ends, another begins,\nThis comes next when one thing finishes!",
-      romanUrdu:
-        "Ek kaam khatam, doosra aaye,\nYeh tab hota hai jab pehla jaaye!",
-      urdu: "ایک کام ختم، دوسرا آئے،\nیہ تب ہوتا ہے جب پہلا جائے!",
-    },
-  },
-  {
-    word: { romanUrdu: "baatein", urdu: "باتیں", english: "talk / words" },
-    image: "/qr/assets/images/baatein.png",
-    riddles: {
-      english:
-        "Sounds we share both me and you,\nWe speak them daily, old or new!",
-      romanUrdu: "Munh se niklein alfaaz kayi,\nRoz hi hum yeh karte bhai!",
-      urdu: "منہ سے نکلیں الفاظ کئی،\nروز ہی ہم یہ کرتے بھائی!",
-    },
-  },
-  {
-    word: { romanUrdu: "rang barangi", urdu: "رنگ برنگی", english: "colorful" },
-    image: "/qr/assets/images/rangbarangi.png",
-    riddles: {
-      english:
-        "Many bright shades all mixed as one,\nRed, blue, yellow — so much fun!",
-      romanUrdu:
-        "Kai rang mil kar chamak dikhaaye,\nAankhon ko yeh bohat lubhaaye!",
-      urdu: "کئی رنگ مل کر چمک دکھائیں،\nآنکھوں کو یہ بہت لبھائیں!",
-    },
-  },
-  {
-    word: { romanUrdu: "kabhi", urdu: "کبھی", english: "sometimes" },
-    image: "/qr/assets/images/kabhi.png",
-    riddles: {
-      english:
-        "Not always now, not every day,\nIt happens once, then goes away!",
-      romanUrdu:
-        "Har waqt nahin, bas aik dafa,\nPhir na ho, yeh baat alag safa!",
-      urdu: "ہر وقت نہیں، بس ایک دفعہ،\nپھر نہ ہو، یہ بات الگ صفحہ!",
-    },
-  },
-  {
-    word: { romanUrdu: "tez", urdu: "تیز", english: "fast" },
-    image: "/qr/assets/images/tez.png",
-    riddles: {
-      english:
-        "No time to wait, I rush ahead,\nLike racing feet or words you said!",
-      romanUrdu:
-        "Rukna mushkil, bhaagti raah,\nPal mein pohanch jaaye manzil chaah!",
-      urdu: "رکنا مشکل، بھاگتی راہ،\nپل میں پہنچ جائے منزل چاہ!",
-    },
-  },
-
-  {
-    word: { romanUrdu: "upar", urdu: "اوپر", english: "up" },
-    image: "/qr/assets/images/upar.png",
-    riddles: {
-      english: "Not below, but in the sky,\nLift your head and look up high!",
-      romanUrdu: "Neeche nahin, sar ko uthao,\nJahan par badal nazar aao!",
-      urdu: "نیچے نہیں، سر کو اٹھاؤ،\nجہاں پر بادل نظر آؤ!",
-    },
-  },
-  {
-    word: { romanUrdu: "sochna", urdu: "سوچنا", english: "to think" },
-    image: "/qr/assets/images/sochna.png",
-    riddles: {
-      english: "Ideas form inside your head,\nQuiet work that’s never said!",
-      romanUrdu: "Dimagh ke andar kaam chale,\nKhamoshi mein raaste khulay!",
-      urdu: "دماغ کے اندر کام چلے،\nخاموشی میں راستے کھلے!",
-    },
-  },
-  {
-    word: { romanUrdu: "bachpan", urdu: "بچپن", english: "childhood" },
-    image: "/qr/assets/images/bachpan.png",
-    riddles: {
-      english: "Days of play and tiny shoes,\nSweet old times we never lose!",
-      romanUrdu:
-        "Khel kood aur choti baatein,\nWoh din yaadon mein bas jaatein!",
-      urdu: "کھیل کود اور چھوٹی باتیں،\nوہ دن یادوں میں بس جاتے ہیں!",
-    },
-  },
-  {
-    word: { romanUrdu: "ahista", urdu: "آہستہ", english: "slowly" },
-    image: "/qr/assets/images/ahista.png",
-    riddles: {
-      english:
-        "Soft small steps, no need to race,\nMove with care, a gentle pace!",
-      romanUrdu: "Na bhaago tum, dheere chalo,\nNarmi se bas aage badho!",
-      urdu: "نہ بھاگو تم، دھیرے چلو،\nنرمی سے بس آگے بڑھو!",
-    },
-  },
-  {
-    word: { romanUrdu: "dor", urdu: "ڈور", english: "string" },
-    image: "/qr/assets/images/dor.png",
-    riddles: {
-      english:
-        "Thin and long, held in your hand,\nIt keeps things tied just as planned!",
-      romanUrdu:
-        "Patli si cheez jo bandhay saath,\nHaath mein pakar ke rakho saath!",
-      urdu: "پتلی سی چیز جو باندھے ساتھ،\nہاتھ میں پکڑ کے رکھو ساتھ!",
-    },
-  },
-  {
-    word: { romanUrdu: "achanak", urdu: "اچانک", english: "suddenly" },
-    image: "/qr/assets/images/achanak.png",
-    riddles: {
-      english:
-        "No warning sign, no time to plan,\nIt just appears — quicker than can!",
-      romanUrdu:
-        "Bina khabar, pal bhar mein,\nSab kuch badlay aik hi lamhay mein!",
-      urdu: "بینا خبر، پل بھر میں،\nسب کچھ بدلے ایک ہی لمحے میں!",
-    },
-  },
-  {
-    word: { romanUrdu: "kat", urdu: "کٹ", english: "cut" },
-    image: "/qr/assets/images/kat.png",
-    riddles: {
-      english:
-        "Split in two, no longer one,\nSharp tools make this quickly done!",
-      romanUrdu: "Aik cheez do mein toot jaaye,\nTez cheez jab usay lag jaaye!",
-      urdu: "ایک چیز دو میں ٹوٹ جائے،\nتیز چیز جب اسے لگ جائے!",
-    },
-  },
-  {
-    word: { romanUrdu: "ghoomna", urdu: "گھومنا", english: "spin" },
-    image: "/qr/assets/images/ghoomna.png",
-    riddles: {
-      english: "Round and round, I never stay,\nI move in circles all the way!",
-      romanUrdu: "Gol gol phirna, rukna nahin,\nChakkar lagana mushkil nahin!",
-      urdu: "گول گول پھرنا، رکنا نہیں،\nچکر لگانا مشکل نہیں!",
-    },
-  },
-
-  {
-    word: { romanUrdu: "neeche", urdu: "نیچے", english: "down" },
-    image: "/qr/assets/images/neeche.png",
-    riddles: {
-      english:
-        "Not above, but toward the ground,\nLook beneath to have it found!",
-      romanUrdu: "Upar nahin, zameen ke paas,\nWahin mile jo ho khaas!",
-      urdu: "اوپر نہیں، زمین کے پاس،\nوہیں ملے جو ہو خاص!",
-    },
-  },
-  {
-    word: { romanUrdu: "udaas", urdu: "اداس", english: "sad" },
-    image: "/qr/assets/images/udaas.png",
-    riddles: {
-      english: "Smiles are gone, eyes feel low,\nA heavy heart begins to show!",
-      romanUrdu: "Hansi chali, dil bhari baat,\nChehra bole bina alfaaz!",
-      urdu: "ہنسی چلی، دل بھری بات،\nچہرہ بولے بنا الفاظ!",
-    },
-  },
-  {
-    word: { romanUrdu: "khamoshi", urdu: "خاموش", english: "silent" },
-    image: "/qr/assets/images/khamoshi.png",
-    riddles: {
-      english:
-        "No sound at all, not even a peep,\nThe world feels calm, quiet and deep!",
-      romanUrdu: "Awaaz na ho, sab ruk jaaye,\nSukoon ka lamha paas aaye!",
-      urdu: "آواز نہ ہو، سب رک جائے،\nسکون کا لمحہ پاس آئے!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: "paas",
-      urdu: "پاس",
-      english: "near",
-    },
-    image: "/qr/assets/images/paas.png",
-    riddles: {
-      english:
-        "Not far away, just one small step,\nSo close you almost haven’t left!",
-      romanUrdu: "Zyada faasla bilkul nahin,\nBas aik qadam, aur kuch nahin!",
-      urdu: "زیادہ فاصلہ بالکل نہیں،\nبس ایک قدم، اور کچھ نہیں!",
-    },
-  },
-  {
-    word: { romanUrdu: "nayi", urdu: "نئی", english: "new" },
-    image: "/qr/assets/images/nayi.png",
-    riddles: {
-      english:
-        "Just made today, not from before,\nFresh and unused, ready for more!",
-      romanUrdu: "Pehle kabhi istemaal na hui,\nBilkul taaza cheez hai hui!",
-      urdu: "پہلے کبھی استعمال نہ ہوئی،\nبالکل تازہ چیز ہے ہوئی!",
-    },
-  },
-  {
-    word: { romanUrdu: "jeet", urdu: "جیت", english: "win" },
-    image: "/qr/assets/images/jeet.png",
-    riddles: {
-      english:
-        "When effort pays and hope feels bright,\nYou stand proud at the end of the fight.",
-      romanUrdu:
-        "Mehnat rang laaye aur hausla barqarar rahe,\nAakhir mein khushi saath khari rahe.",
-      urdu: "جب محنت رنگ لائے اور حوصلہ قائم رہے،\nآخر میں خوشی ساتھ کھڑی رہے۔",
-    },
-  },
-
-  {
-    word: { romanUrdu: "haar", urdu: "ہار", english: "lose" },
-    image: "/qr/assets/images/haar.png",
-    riddles: {
-      english:
-        "No prize today, but try once more,\nLearning comes from missing score!",
-      romanUrdu:
-        "Inaam na mile, par seekh zaroor,\nKoshish se milta hai phir suroor!",
-      urdu: "انعام نہ ملے، پر سیکھ ضرور،\nکوشش سے ملتا ہے پھر سرور!",
-    },
-  },
-  {
-    word: { romanUrdu: "khel", urdu: "کھیل", english: "game" },
-    image: "/qr/assets/images/khel.png",
-    riddles: {
-      english:
-        "Rules and fun with moves to make,\nRun, jump, score — for joy’s own sake!",
-      romanUrdu: "Qawaneen ke saath maza aaye,\nDaud, uchhal, sab ko bhaaye!",
-      urdu: "قوانین کے ساتھ مزہ آئے،\nدوڑ، اچھل، سب کو بھائے!",
-    },
-  },
-  {
-    word: { romanUrdu: "hissa", urdu: "حصہ", english: "part" },
-    image: "/qr/assets/images/hissa.png",
-    riddles: {
-      english:
-        "Not the whole, just one small piece,\nTogether joined, the rest won’t cease!",
-      romanUrdu: "Poora nahin, bas aik tukra,\nMil kar banay sab ka naqsha!",
-      urdu: "پورا نہیں، بس ایک ٹکڑا،\nمل کر بنے سب کا نقشہ!",
-    },
-  },
-  {
-    word: { romanUrdu: "shaam", urdu: "شام", english: "evening" },
-    image: "/qr/assets/images/shaam.png",
-    riddles: {
-      english:
-        "Sun goes low, the sky turns gold,\nDay grows quiet, soft and old!",
-      romanUrdu:
-        "Sooraj jhukay, rang badlay,\nDin dheere dheere chup ho jaaye!",
-      urdu: "سورج جھکے، رنگ بدلے،\nدن دھیرے دھیرے چپ ہو جائے!",
-    },
-  },
-  {
-    word: { romanUrdu: "thand", urdu: "ٹھنڈی", english: "cold" },
-    image: "/qr/assets/images/thand.png",
-    riddles: {
-      english:
-        "You wrap up tight and breathe out air,\nWinter chills are everywhere!",
-      romanUrdu: "Kapray pehno, saans dikhaai,\nSardi ne apni baat sunaai!",
-      urdu: "کپڑے پہنو، سانس دکھائی،\nسردی نے اپنی بات سنائی!",
-    },
-  },
-
-  {
-    word: { romanUrdu: "seekhna", urdu: "سیکھنا", english: "to learn" },
-    image: "/qr/assets/images/seekhna.png",
-    riddles: {
-      english:
-        "You grow each time you try and fail,\nNew ideas fill your trail!",
-      romanUrdu:
-        "Koshish se samajh badhti jaaye,\nDimagh mein raaste khul jaaye!",
-      urdu: "کوشش سے سمجھ بڑھتی جائے،\nدماغ میں راستے کھل جائے!",
-    },
-  },
-
-  {
-    word: { romanUrdu: "manayi", urdu: "منائی", english: "celebrated" },
-    image: "/qr/assets/images/manayi.png",
-    riddles: {
-      english:
-        "With smiles and cheers, a happy scene,\nA special day with joy between!",
-      romanUrdu:
-        "Khushi ke naare, hansi ka shor,\nKhaas din aaye, dil ho sarshaar!",
-      urdu: "خوشی کے نعرے، ہنسی کا شور،\nخاص دن آئے، دل ہو سرشار!",
-    },
-  },
-  {
-    word: { romanUrdu: "aasmaan", urdu: "آسمان", english: "sky" },
-    image: "/qr/assets/images/aasmaan.png",
-    riddles: {
-      english:
-        "Blue by day, with stars at night,\nAbove us all, a massive sight!",
-      romanUrdu: "Din mein neela, raat sitaaray,\nSar ke upar, sab ko pyaaray!",
-      urdu: "دن میں نیلا، رات ستارے،\nسر کے اوپر، سب کو پیارے!",
-    },
-  },
-  {
-    word: { romanUrdu: ["maheena"], urdu: "مہینہ", english: "month" },
-    image: "/qr/assets/images/maheena.png",
-    riddles: {
-      english: "Thirty days go passing by,\nTime moves fast, oh my oh my!",
-      romanUrdu: "Tees din yun beet jaayein,\nWaqt ke par lag jaayein!",
-      urdu: "تیس دن یوں بیت جائیں،\nوقت کے پر لگ جائیں!",
-    },
-  },
-  {
-    word: { romanUrdu: ["tayari"], urdu: "تیاری", english: "preparation" },
-    image: "/qr/assets/images/tayari.png",
-    riddles: {
-      english: "Before we start, we get set,\nReady, steady — no regret!",
-      romanUrdu: "Shuru se pehle sab taiyaar,\nPhir ho kaam asaan aur pyaar!",
-      urdu: "شروع سے پہلے سب تیار،\nپھر ہو کام آسان اور پیار!",
-    },
-  },
-  {
-    word: { romanUrdu: ["roti"], urdu: "روٹی", english: "bread" },
-    image: "/qr/assets/images/roti.png",
-    riddles: {
-      english:
-        "Round and warm upon your plate,\nWith curry beside — it tastes so great!",
-      romanUrdu:
-        "Gol aur garam thali mein aaye,\nSalan ke saath mazaa badhaaye!",
-      urdu: "گول اور گرم تھالی میں آئے،\nسالن کے ساتھ مزہ بڑھائے!",
-    },
-  },
-  {
-    word: { romanUrdu: ["daura"], urdu: "دوڑ", english: "run" },
-    image: "/qr/assets/images/daura.png",
-    riddles: {
-      english: "Feet move fast, zoom zoom zoom,\nRace ahead across the room!",
-      romanUrdu: "Paon tez bhagein jhoom jhoom,\nSab se aage pohochay boom!",
-      urdu: "پاؤں تیز بھاگیں جھوم جھوم،\nسب سے آگے پہنچے بوم!",
-    },
-  },
-  {
-    word: { romanUrdu: ["ami"], urdu: "امی", english: "mother" },
-    image: "/qr/assets/images/ami.png",
-    riddles: {
-      english: "Gentle hug and loving care,\nAlways there and always fair!",
-      romanUrdu:
-        "Pyaar bhari baahon ka ghera,\nHar mushkil mein sab se pehla sahara!",
-      urdu: "پیار بھری بانہوں کا گھیرہ،\nہر مشکل میں سب سے پہلا سہارا!",
-    },
-  },
-  {
-    word: { romanUrdu: ["mubarak"], urdu: "مبارک", english: "blessed" },
-    image: "/qr/assets/images/mubarak.png",
-    riddles: {
-      english:
-        "A happy wish on special days,\nFull of joy and thankful praise!",
-      romanUrdu: "Khushi ka paighaam sunaye,\nHar din ko barkat dilaye!",
-      urdu: "خوشی کا پیغام سنائے،\nہر دن کو برکت دلائے!",
-    },
-  },
-
-  {
-    word: { romanUrdu: ["dadi"], urdu: "دادی", english: "grandmother" },
-    image: "/qr/assets/images/dadi.png",
-    riddles: {
-      english: "Stories told in loving tone,\nWarmest hugs I’ve ever known!",
-      romanUrdu: "Kahaniyaan jo pyaar sunaye,\nGodi mein sukoon dilaye!",
-      urdu: "کہانیاں جو پیار سنائے،\nگودی میں سکون دلائے!",
-    },
-  },
-  {
-    word: { romanUrdu: ["dada"], urdu: "دادا", english: "grandfather" },
-    image: "/qr/assets/images/dada.png",
-    riddles: {
-      english: "Wise and kind with silver hair,\nGuiding us with gentle care!",
-      romanUrdu: "Safed baal aur dil se pyare,\nRehnuma hum sab ke sahare!",
-      urdu: "سفید بال اور دل سے پیارے،\nرہنما ہم سب کے سہارے!",
-    },
-  },
-  {
-    word: { romanUrdu: ["dua"], urdu: "دعا", english: "prayer" },
-    image: "/qr/assets/images/dua.png",
-    riddles: {
-      english:
-        "Hands raised high, eyes closed tight,\nWhispered hope both day and night!",
-      romanUrdu: "Haath utha kar maangein pyaar,\nDil se nikle dua har baar!",
-      urdu: "ہاتھ اٹھا کر مانگیں پیار،\nدل سے نکلے دعا ہر بار!",
-    },
-  },
-  {
-    word: { romanUrdu: ["chacha"], urdu: "چچا", english: "uncle" },
-    image: "/qr/assets/images/chacha.png",
-    riddles: {
-      english: "Fun and laughter every day,\nPlays with us in every way!",
-      romanUrdu: "Hansi mazaak aur pyari baat,\nHar din laaye khushi ki raat!",
-      urdu: "ہنسی مذاق اور پیاری بات،\nہر دن لائے خوشی کی رات!",
-    },
-  },
-  {
-    word: {
-      romanUrdu: ["dastarkhwan"],
-      urdu: "دسترخوان",
-      english: "tablecloth",
-    },
-    image: "/qr/assets/images/dastarkhwan.png",
-    riddles: {
-      english: "Spread it wide before we eat,\nFamily gathers — what a treat!",
-      romanUrdu: "Khaane se pehle bichha jaye,\nSab ko saath bitha jaye!",
-      urdu: "کھانے سے پہلے بچھا جائے،\nسب کو ساتھ بٹھا جائے!",
-    },
-  },
-  {
-    word: { romanUrdu: ["ailan"], urdu: "اعلان", english: "announcement" },
-    image: "/qr/assets/images/ailan.png",
-    riddles: {
-      english:
-        "Hear the news, come gather near,\nSomething important you must hear!",
-      romanUrdu:
-        "Sab ko bulaye zor se awaaz,\nSuno zaroor — hai khaas yeh baat!",
-      urdu: "سب کو بلائے زور سے آواز،\nسنو ضرور — ہے خاص یہ بات!",
-    },
-  },
-  {
-    word: { romanUrdu: ["khabar"], urdu: "خبر", english: "news" },
-    image: "/qr/assets/images/khabar.png",
-    riddles: {
-      english:
-        "Something happened — what, where, when?\nLet’s find out and tell again!",
-      romanUrdu: "Kya hua aur kab hua?\nSab ko bataye yeh zaroor hua!",
-      urdu: "کیا ہوا اور کب ہوا؟\nسب کو بتائے یہ ضرور ہوا!",
-    },
-  },
-  {
-    word: { romanUrdu: ["aag"], urdu: "آگ", english: "fire" },
+      baseRomanUrdu: "aag",
+      baseUrdu: "آگ",
+      english: "fire",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
     image: "/qr/assets/images/aag.png",
     riddles: {
-      english:
-        "Bright and hot with dancing flame,\nUse with care — it’s not a game!",
-      romanUrdu: "Garam sholay cham cham cham,\nSambhal kar rehna har dam!",
-      urdu: "گرم شولے چم چم چم،\nسنبھل کر رہنا ہر دم!",
-    },
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
   },
   {
-    word: { romanUrdu: ["parosi"], urdu: "پڑوسی", english: "neighbor" },
-    image: "/qr/assets/images/parosi.png",
+    id: "aagai",
+    word: {
+      baseRomanUrdu: "aagai",
+      baseUrdu: "آگے",
+      english: "forward",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/aagai.png",
     riddles: {
-      english: "Lives nearby, just next door,\nFriendly smile we can’t ignore!",
-      romanUrdu: "Ghar ke paas rehta hai,\nHansi khushi se milta hai!",
-      urdu: "گھر کے پاس رہتا ہے،\nہنسی خوشی سے ملتا ہے!",
-    },
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
   },
   {
-    word: { romanUrdu: ["kaam"], urdu: "کام", english: "work" },
-    image: "/qr/assets/images/kaam.png",
+    id: "aakhri",
+    word: {
+      baseRomanUrdu: "aakhri",
+      baseUrdu: "آخری",
+      english: "last",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/aakhri.png",
     riddles: {
-      english:
-        "Something to do, big or small,\nFinish it well, give it your all!",
-      romanUrdu: "Chhota ho ya bada ho kaam,\nMehnat se milta hai inaam!",
-      urdu: "چھوٹا ہو یا بڑا ہو کام،\nمحنت سے ملتا ہے انعام!",
-    },
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
   },
   {
-    word: { romanUrdu: ["ghabrana"], urdu: "گھبرانا", english: "to worry" },
-    image: "/qr/assets/images/ghabrana.png",
+    id: "aana",
+    word: {
+      baseRomanUrdu: "aana",
+      baseUrdu: "آنا",
+      english: "come",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "aaya",
+        urdu: "آیا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "aayi",
+        urdu: "آئی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "aaye",
+        urdu: "آئے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "aa gaya",
+        urdu: "آ گیا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "aa gayi",
+        urdu: "آ گئی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "aa gaye",
+        urdu: "آ گئے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/aana.png",
     riddles: {
-      english:
-        "Heart beats fast, you feel unsure,\nTake a breath — you’ll feel secure!",
-      romanUrdu: "Dil dhadke tez kabhi kabhi,\nSabr karo sab theek abhi!",
-      urdu: "دل دھڑکے تیز کبھی کبھی،\nصبر کرو سب ٹھیک ابھی!",
-    },
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
   },
   {
-    word: { romanUrdu: ["pakarna"], urdu: "پکڑنا", english: "to hold" },
-    image: "/qr/assets/images/pakarna.png",
+    id: "aankh",
+    word: {
+      baseRomanUrdu: "aankh",
+      baseUrdu: "آنکھ",
+      english: "eye",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "aankhen",
+        urdu: "آنکھیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "aankhon",
+        urdu: "آنکھوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/aankh.png",
     riddles: {
-      english: "Grip it tight, don’t let go,\nHands together, steady so!",
-      romanUrdu: "Mazboot haath se thaam lo,\nGirne na do, sambhaal lo!",
-      urdu: "مضبوط ہاتھ سے تھام لو،\nگرنے نہ دو، سنبھال لو!",
-    },
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
   },
   {
-    word: { romanUrdu: ["madad"], urdu: "مدد", english: "help" },
-    image: "/qr/assets/images/madad.png",
-    riddles: {
-      english:
-        "When someone needs a caring hand,\nBe there to help and understand!",
-      romanUrdu: "Jab koi mushkil mein aaye,\nMadad ko haath barhaye!",
-      urdu: "جب کوئی مشکل میں آئے،\nمدد کو ہاتھ بڑھائے!",
+    id: "aansoo",
+    word: {
+      baseRomanUrdu: "aansoo",
+      baseUrdu: "آنسو",
+      english: "tears",
+      pos: "noun"
     },
-  },
-  {
-    word: { romanUrdu: ["khajoor"], urdu: "کھجور", english: "dates" },
-    image: "/qr/assets/images/khajoor.png",
-    riddles: {
-      english: "Sweet and soft, brown and small,\nRamadan treat loved by all!",
-      romanUrdu: "Meethi si chhoti si cheez,\nRoza kholay badi azeez!",
-      urdu: "میٹھی سی چھوٹی سی چیز،\nروزہ کھولے بڑی عزیز!",
+    grammar: {
+      baseGender: null
     },
-  },
-  {
-    word: { romanUrdu: ["pani"], urdu: "پانی", english: "water" },
-    image: "/qr/assets/images/pani.png",
-    riddles: {
-      english:
-        "Clear and cool, we drink each day,\nKeeps us strong in every way!",
-      romanUrdu:
-        "Saaf aur thanda har din peeyein,\nSehat ke liye zaroori jeeyein!",
-      urdu: "صاف اور ٹھنڈا ہر دن پئیں،\nصحت کے لیے ضروری جئیں!",
-    },
-  },
-  {
-    word: { romanUrdu: ["saath"], urdu: "ساتھ", english: "together" },
-    image: "/qr/assets/images/saath.png",
-    riddles: {
-      english:
-        "Side by side we laugh and play,\nBetter when we’re all one way!",
-      romanUrdu:
-        "Mil kar hansi mil kar khel,\nSaath ho to sab kuchh asaan hai bhai!",
-      urdu: "مل کر ہنسی مل کر کھیل،\nساتھ ہو تو سب کچھ آسان ہے بھئی!",
-    },
-  },
-  {
-    word: { romanUrdu: ["aansoo"], urdu: "آنسو", english: "tears" },
+    variants: [
+    ],
     image: "/qr/assets/images/aansoo.png",
     riddles: {
-      english: "When we’re sad, they gently fall,\nTiny drops that say it all!",
-      romanUrdu:
-        "Dukh mein aankh se gir jaayein,\nChhote qatre dil samjhaayein!",
-      urdu: "دکھ میں آنکھ سے گر جائیں،\nچھوٹے قطرے دل سمجھائیں!",
-    },
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
   },
   {
-    word: { romanUrdu: ["shukriya"], urdu: "شکریہ", english: "thanks" },
-    image: "/qr/assets/images/shukriya.png",
+    id: "aasmaan",
+    word: {
+      baseRomanUrdu: "aasmaan",
+      baseUrdu: "آسمان",
+      english: "sky",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/aasmaan.png",
     riddles: {
-      english:
-        "A little word both kind and sweet,\nMakes good manners feel complete!",
-      romanUrdu: "Chhota lafz magar hai pyara,\nAdaab ka hai yeh sahara!",
-      urdu: "چھوٹا لفظ مگر ہے پیارا،\nآداب کا ہے یہ سہارا!",
-    },
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
   },
   {
-    word: { romanUrdu: ["azan"], urdu: "اذان", english: "call to prayer" },
+    id: "acha",
+    word: {
+      baseRomanUrdu: "acha",
+      baseUrdu: "اچھا",
+      english: "good",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "achi",
+        urdu: "اچھی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "achay",
+        urdu: "اچھے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/acha.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "achaanak",
+    word: {
+      baseRomanUrdu: "achaanak",
+      baseUrdu: "اچانک",
+      english: "suddenly",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/achaanak.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "ahista",
+    word: {
+      baseRomanUrdu: "ahista",
+      baseUrdu: "آہستہ",
+      english: "slowly",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/ahista.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "aik",
+    word: {
+      baseRomanUrdu: "aik",
+      baseUrdu: "ایک",
+      english: "one",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/aik.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "ailan",
+    word: {
+      baseRomanUrdu: "ailan",
+      baseUrdu: "اعلان",
+      english: "announcement",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "alanat",
+        urdu: "اعلانات",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/ailan.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "ajnabi",
+    word: {
+      baseRomanUrdu: "ajnabi",
+      baseUrdu: "اجنبی",
+      english: "stranger",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/ajnabi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "akela",
+    word: {
+      baseRomanUrdu: "akela",
+      baseUrdu: "اکیلا",
+      english: "alone",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "akeli",
+        urdu: "اکیلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "akelay",
+        urdu: "اکیلے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/akela.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "ami",
+    word: {
+      baseRomanUrdu: "ami",
+      baseUrdu: "امی",
+      english: "mother",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/ami.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "andar",
+    word: {
+      baseRomanUrdu: "andar",
+      baseUrdu: "اندر",
+      english: "inside",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/andar.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "awaaz",
+    word: {
+      baseRomanUrdu: "awaaz",
+      baseUrdu: "آواز",
+      english: "sound",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "awaazen",
+        urdu: "آوازیں",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "awaazon",
+        urdu: "آوازوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/awaaz.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "azan",
+    word: {
+      baseRomanUrdu: "azan",
+      baseUrdu: "اذان",
+      english: "call",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "azanin",
+        urdu: "اذانیں",
+        gender: "feminine",
+        number: "plural"
+      }
+    ],
     image: "/qr/assets/images/azan.png",
     riddles: {
-      english: "A beautiful voice fills the air,\nCalling us all to prayer!",
-      romanUrdu: "Khoobsurat awaaz bulaye,\nNamaz ke liye sab ko bulaye!",
-      urdu: "خوبصورت آواز بلائے،\nنماز کے لیے سب کو بلائے!",
-    },
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
   },
   {
-    word: { romanUrdu: ["wapas"], urdu: "واپس", english: "return" },
-    image: "/qr/assets/images/wapas.png",
-    riddles: {
-      english: "You go away, then come again,\nBack you travel now and then!",
-      romanUrdu: "Door ja kar phir aa jao,\nWapas ghar ka raasta pao!",
-      urdu: "دور جا کر پھر آ جاؤ،\nواپس گھر کا راستہ پاؤ!",
-    },
-  },
-  {
-    word: { romanUrdu: ["pura"], urdu: "پورا", english: "whole" },
-    image: "/qr/assets/images/pura.png",
-    riddles: {
-      english:
-        "Nothing missing, full and round,\nAll together, safe and sound!",
-      romanUrdu: "Kuchh na baqi sab hai saath,\nPura ho to khush har baat!",
-      urdu: "کچھ نہ باقی سب ہے ساتھ،\nپورا ہو تو خوش ہر بات!",
-    },
-  },
-  {
-    word: { romanUrdu: ["roza"], urdu: "روزہ", english: "fast" },
-    image: "/qr/assets/images/roza.png",
-    riddles: {
-      english:
-        "From dawn till sunset, we don’t eat,\nPatient hearts make it complete!",
-      romanUrdu:
-        "Subah se shaam tak sabr karein,\nRoza rakh kar khushiyan bharein!",
-      urdu: "صبح سے شام تک صبر کریں،\nروزہ رکھ کر خوشیاں بھریں!",
-    },
-  },
-  {
-    word: { romanUrdu: ["pyara"], urdu: "پیارا", english: "love" },
-    image: "/qr/assets/images/pyara.png",
-    riddles: {
-      english:
-        "Warm and kind inside your heart,\nBrings us close, never apart!",
-      romanUrdu: "Dil mein rehta naram sa ehsaas,\nPyara lafz jo kare paas!",
-      urdu: "دل میں رہتا نرم سا احساس،\nپیارا لفظ جو کرے پاس!",
-    },
-  },
-
-  {
+    id: "baad",
     word: {
-      romanUrdu: ["muskurana", "muskurahat"],
-      urdu: "مسکرانا",
-      english: "to smile",
+      baseRomanUrdu: "baad",
+      baseUrdu: "بعد",
+      english: "after",
+      pos: "adverb"
     },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/baad.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "baat",
+    word: {
+      baseRomanUrdu: "baat",
+      baseUrdu: "بات",
+      english: "talk",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "baatein",
+        urdu: "باتیں",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "baaton",
+        urdu: "باتوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/baat.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "bacha",
+    word: {
+      baseRomanUrdu: "bacha",
+      baseUrdu: "بچہ",
+      english: "child",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "bachi",
+        urdu: "بچی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bachay",
+        urdu: "بچے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "bachon",
+        urdu: "بچوں",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "bachiyan",
+        urdu: "بچیاں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/bacha.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "bachpan",
+    word: {
+      baseRomanUrdu: "bachpan",
+      baseUrdu: "بچپن",
+      english: "childhood",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/bachpan.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "badalna",
+    word: {
+      baseRomanUrdu: "badalna",
+      baseUrdu: "بدلنا",
+      english: "change",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "bdla",
+        urdu: "بدلا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bdli",
+        urdu: "بدلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bdle",
+        urdu: "بدلے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/badalna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "badam",
+    word: {
+      baseRomanUrdu: "badam",
+      baseUrdu: "بادام",
+      english: "almond",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/badam.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "baeyn",
+    word: {
+      baseRomanUrdu: "baeyn",
+      baseUrdu: "بائیں",
+      english: "left",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/baeyn.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "bahar",
+    word: {
+      baseRomanUrdu: "bahar",
+      baseUrdu: "باہر",
+      english: "outside",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/bahar.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "baithna",
+    word: {
+      baseRomanUrdu: "baithna",
+      baseUrdu: "بیٹھنا",
+      english: "sit",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "bitha",
+        urdu: "بیٹھا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bithi",
+        urdu: "بیٹھی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bithe",
+        urdu: "بیٹھے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "baith gayin",
+        urdu: "بیٹھ گئیں",
+        gender: "feminine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/baithna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "banana",
+    word: {
+      baseRomanUrdu: "banana",
+      baseUrdu: "بنانا",
+      english: "make",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "bnaia",
+        urdu: "بنایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bnaii",
+        urdu: "بنائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bnaie",
+        urdu: "بنائے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/banana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "barish",
+    word: {
+      baseRomanUrdu: "barish",
+      baseUrdu: "بارش",
+      english: "rain",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "baarishein",
+        urdu: "بارشیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "baarishon",
+        urdu: "بارشوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/barish.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "batana",
+    word: {
+      baseRomanUrdu: "batana",
+      baseUrdu: "بتانا",
+      english: "tell",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "btaia",
+        urdu: "بتایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "btaii",
+        urdu: "بتائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "btaie",
+        urdu: "بتائے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/batana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "beta",
+    word: {
+      baseRomanUrdu: "beta",
+      baseUrdu: "بیٹا",
+      english: "son",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "beti",
+        urdu: "بیٹی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "betay",
+        urdu: "بیٹے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "beton",
+        urdu: "بیٹوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/beta.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "bharna",
+    word: {
+      baseRomanUrdu: "bharna",
+      baseUrdu: "بھرنا",
+      english: "fill",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "bhara",
+        urdu: "بھرا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bhari",
+        urdu: "بھری",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "bharay",
+        urdu: "بھرے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "bhar gaya",
+        urdu: "بھر گیا",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/bharna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "bistar",
+    word: {
+      baseRomanUrdu: "bistar",
+      baseUrdu: "بستر",
+      english: "bed",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "bstron",
+        urdu: "بستروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/bistar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "chaabi",
+    word: {
+      baseRomanUrdu: "chaabi",
+      baseUrdu: "چابی",
+      english: "key",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "chaabiyan",
+        urdu: "چابیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chaabiyon",
+        urdu: "چابیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/chaabi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "chaand",
+    word: {
+      baseRomanUrdu: "chaand",
+      baseUrdu: "چاند",
+      english: "moon",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/chaand.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "chaar",
+    word: {
+      baseRomanUrdu: "chaar",
+      baseUrdu: "چار",
+      english: "four",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/chaar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "chacha",
+    word: {
+      baseRomanUrdu: "chacha",
+      baseUrdu: "چاچا",
+      english: "uncle",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "chache",
+        urdu: "چاچے",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/chacha.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "chalna",
+    word: {
+      baseRomanUrdu: "chalna",
+      baseUrdu: "چلنا",
+      english: "move",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "chala",
+        urdu: "چلا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chali",
+        urdu: "چلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chalay",
+        urdu: "چلے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "chalta",
+        urdu: "چلتا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chalti",
+        urdu: "چلتی",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/chalna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "chamakna",
+    word: {
+      baseRomanUrdu: "chamakna",
+      baseUrdu: "چمکنا",
+      english: "shine",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "chamak",
+        urdu: "چمک",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chmka",
+        urdu: "چمکا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chmki",
+        urdu: "چمکی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chmke",
+        urdu: "چمکے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "chamkeela",
+        urdu: "چمکیلا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chamkeeli",
+        urdu: "چمکیلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "chamkeelay",
+        urdu: "چمکیلے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/chamakna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "cheekhna",
+    word: {
+      baseRomanUrdu: "cheekhna",
+      baseUrdu: "چیخنا",
+      english: "scream",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "cheekha",
+        urdu: "چیخا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "cheekhi",
+        urdu: "چیخی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "cheekh",
+        urdu: "چیخ",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "cheekhay",
+        urdu: "چیخے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/cheekhna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "chhat",
+    word: {
+      baseRomanUrdu: "chhat",
+      baseUrdu: "چھت",
+      english: "rooftop",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "chhatein",
+        urdu: "چھتیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "chhaton",
+        urdu: "چھتوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/chhat.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dada",
+    word: {
+      baseRomanUrdu: "dada",
+      baseUrdu: "دادا",
+      english: "grandfather",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "dade",
+        urdu: "دادے",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/dada.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dadi",
+    word: {
+      baseRomanUrdu: "dadi",
+      baseUrdu: "دادی",
+      english: "grandmother",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "dadian",
+        urdu: "دادیاں",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/dadi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "daeyn",
+    word: {
+      baseRomanUrdu: "daeyn",
+      baseUrdu: "دائیں",
+      english: "right",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/daeyn.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dastarkhan",
+    word: {
+      baseRomanUrdu: "dastarkhan",
+      baseUrdu: "دسترخوان",
+      english: "tablecloth",
+      pos: "phrase"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/dastarkhan.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "daurna",
+    word: {
+      baseRomanUrdu: "daurna",
+      baseUrdu: "دوڑنا",
+      english: "run",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "daura",
+        urdu: "دوڑا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "dauri",
+        urdu: "دوڑی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "dauray",
+        urdu: "دوڑے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/daurna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "dekhna",
+    word: {
+      baseRomanUrdu: "dekhna",
+      baseUrdu: "دیکھنا",
+      english: "see",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "dikha",
+        urdu: "دیکھا",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "dikhi",
+        urdu: "دیکھی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "dikhe",
+        urdu: "دیکھے",
+        gender: "feminine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/dekhna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "dena",
+    word: {
+      baseRomanUrdu: "dena",
+      baseUrdu: "دینا",
+      english: "give",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "dia",
+        urdu: "دیا",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "di",
+        urdu: "دی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "die",
+        urdu: "دیے",
+        gender: "feminine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/dena.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "der",
+    word: {
+      baseRomanUrdu: "der",
+      baseUrdu: "دیر",
+      english: "late",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/der.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dhoop",
+    word: {
+      baseRomanUrdu: "dhoop",
+      baseUrdu: "دھوپ",
+      english: "sunlight",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/dhoop.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dil",
+    word: {
+      baseRomanUrdu: "dil",
+      baseUrdu: "دل",
+      english: "heart",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "dlon",
+        urdu: "دلوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/dil.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dilchasp",
+    word: {
+      baseRomanUrdu: "dilchasp",
+      baseUrdu: "دلچسپ",
+      english: "interesting",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/dilchasp.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "din",
+    word: {
+      baseRomanUrdu: "din",
+      baseUrdu: "دن",
+      english: "day",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "dnon",
+        urdu: "دنوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/din.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "do",
+    word: {
+      baseRomanUrdu: "do",
+      baseUrdu: "دو",
+      english: "two",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/do.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "door",
+    word: {
+      baseRomanUrdu: "door",
+      baseUrdu: "دور",
+      english: "far",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/door.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "dor",
+    word: {
+      baseRomanUrdu: "dor",
+      baseUrdu: "ڈور",
+      english: "string",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "dorin",
+        urdu: "ڈوریں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "doron",
+        urdu: "ڈوروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/dor.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dost",
+    word: {
+      baseRomanUrdu: "dost",
+      baseUrdu: "دوست",
+      english: "friend",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "doston",
+        urdu: "دوستوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/dost.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "dua",
+    word: {
+      baseRomanUrdu: "dua",
+      baseUrdu: "دعا",
+      english: "prayer",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "duaein",
+        urdu: "دعائیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "duaon",
+        urdu: "دعاؤں",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/dua.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "ehsas",
+    word: {
+      baseRomanUrdu: "ehsas",
+      baseUrdu: "احساس",
+      english: "feeling",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/ehsas.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "eidi",
+    word: {
+      baseRomanUrdu: "eidi",
+      baseUrdu: "عیدی",
+      english: "money",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "idian",
+        urdu: "عیدیاں",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/eidi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "fakhr",
+    word: {
+      baseRomanUrdu: "fakhr",
+      baseUrdu: "فخر",
+      english: "pride",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/fakhr.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "gaari",
+    word: {
+      baseRomanUrdu: "gaari",
+      baseUrdu: "گاڑی",
+      english: "car",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "gaariyan",
+        urdu: "گاڑیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "gaariyon",
+        urdu: "گاڑیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/gaari.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "gaind",
+    word: {
+      baseRomanUrdu: "gaind",
+      baseUrdu: "گیند",
+      english: "ball",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "gindin",
+        urdu: "گیندیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "gindon",
+        urdu: "گیندوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/gaind.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "gali",
+    word: {
+      baseRomanUrdu: "gali",
+      baseUrdu: "گلی",
+      english: "street",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "galiyan",
+        urdu: "گلیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "galiyon",
+        urdu: "گلیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/gali.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "ghabrana",
+    word: {
+      baseRomanUrdu: "ghabrana",
+      baseUrdu: "گھبرانا",
+      english: "worry",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "ghbraia",
+        urdu: "گھبرایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "ghbraii",
+        urdu: "گھبرائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "ghbraie",
+        urdu: "گھبرائے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/ghabrana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "ghar",
+    word: {
+      baseRomanUrdu: "ghar",
+      baseUrdu: "گھر",
+      english: "home",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "ghron",
+        urdu: "گھروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/ghar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "ghoomna",
+    word: {
+      baseRomanUrdu: "ghoomna",
+      baseUrdu: "گھومنا",
+      english: "spin",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "ghoma",
+        urdu: "گھوما",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "ghomi",
+        urdu: "گھومی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "ghome",
+        urdu: "گھومے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/ghoomna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "goonjana",
+    word: {
+      baseRomanUrdu: "goonjana",
+      baseUrdu: "گونجنا",
+      english: "echo",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "gonja",
+        urdu: "گونجا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "gonji",
+        urdu: "گونجی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "goonj utha",
+        urdu: "گونج اٹھا",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/goonjana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "gulabi",
+    word: {
+      baseRomanUrdu: "gulabi",
+      baseUrdu: "گلابی",
+      english: "pink",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/gulabi.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "haar",
+    word: {
+      baseRomanUrdu: "haar",
+      baseUrdu: "ہار",
+      english: "loss",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "haarna",
+        urdu: "ہارنا",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/haar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "haath",
+    word: {
+      baseRomanUrdu: "haath",
+      baseUrdu: "ہاتھ",
+      english: "hand",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "hathon",
+        urdu: "ہاتھوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/haath.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "halka",
+    word: {
+      baseRomanUrdu: "halka",
+      baseUrdu: "ہلکا",
+      english: "light",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "halki",
+        urdu: "ہلکی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "halkay",
+        urdu: "ہلکے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/halka.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "hansna",
+    word: {
+      baseRomanUrdu: "hansna",
+      baseUrdu: "ہنسنا",
+      english: "laugh",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "hnsa",
+        urdu: "ہنسا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "hansi",
+        urdu: "ہنسی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "hnse",
+        urdu: "ہنسے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/hansna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "hawa",
+    word: {
+      baseRomanUrdu: "hawa",
+      baseUrdu: "ہوا",
+      english: "wind",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "hawaein",
+        urdu: "ہوائیں",
+        gender: "feminine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/hawa.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "hissa",
+    word: {
+      baseRomanUrdu: "hissa",
+      baseUrdu: "حصہ",
+      english: "part",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "hissay",
+        urdu: "حصے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "hisson",
+        urdu: "حصوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/hissa.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "istri",
+    word: {
+      baseRomanUrdu: "istri",
+      baseUrdu: "استری",
+      english: "iron",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "istriyan",
+        urdu: "استریاں",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/istri.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "jaagna",
+    word: {
+      baseRomanUrdu: "jaagna",
+      baseUrdu: "جاگنا",
+      english: "awaken",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "jaga",
+        urdu: "جاگا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "jagi",
+        urdu: "جاگی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "jage",
+        urdu: "جاگے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "jaagte",
+        urdu: "جاگتے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/jaagna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "jagah",
+    word: {
+      baseRomanUrdu: "jagah",
+      baseUrdu: "جگہ",
+      english: "place",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "jagahein",
+        urdu: "جگہیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "jagahon",
+        urdu: "جگہوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/jagah.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "jaldi",
+    word: {
+      baseRomanUrdu: "jaldi",
+      baseUrdu: "جلدی",
+      english: "quickly",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/jaldi.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "jama",
+    word: {
+      baseRomanUrdu: "jama",
+      baseUrdu: "جمع",
+      english: "gather",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "jama karungi",
+        urdu: "جمع کروں گی",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "jama ho gaye",
+        urdu: "جمع ہو گئے",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/jama.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "jana",
+    word: {
+      baseRomanUrdu: "jana",
+      baseUrdu: "جانا",
+      english: "go",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "gia",
+        urdu: "گیا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "gii",
+        urdu: "گئی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "gie",
+        urdu: "گئے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/jana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "jandaar",
+    word: {
+      baseRomanUrdu: "jandaar",
+      baseUrdu: "جاندار",
+      english: "lively",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/jandaar.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "jeetna",
+    word: {
+      baseRomanUrdu: "jeetna",
+      baseUrdu: "جیتنا",
+      english: "win",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "jita",
+        urdu: "جیتا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "jiti",
+        urdu: "جیتی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "jite",
+        urdu: "جیتے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "jit",
+        urdu: "جیت",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "jeet gaya",
+        urdu: "جیت گیا",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/jeetna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "joota",
+    word: {
+      baseRomanUrdu: "joota",
+      baseUrdu: "جوتا",
+      english: "shoe",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "jote",
+        urdu: "جوتے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "jooton",
+        urdu: "جوتوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/joota.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "jora",
+    word: {
+      baseRomanUrdu: "jora",
+      baseUrdu: "جوڑا",
+      english: "outfit",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "jore",
+        urdu: "جوڑے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "joron",
+        urdu: "جوڑوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/jora.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "kaam",
+    word: {
+      baseRomanUrdu: "kaam",
+      baseUrdu: "کام",
+      english: "work",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "kamon",
+        urdu: "کاموں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/kaam.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "kabhi",
+    word: {
+      baseRomanUrdu: "kabhi",
+      baseUrdu: "کبھی",
+      english: "sometimes",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/kabhi.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "kal",
+    word: {
+      baseRomanUrdu: "kal",
+      baseUrdu: "کل",
+      english: "tomorrow",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/kal.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "kamra",
+    word: {
+      baseRomanUrdu: "kamra",
+      baseUrdu: "کمرہ",
+      english: "room",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "kmre",
+        urdu: "کمرے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "kamron",
+        urdu: "کمروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/kamra.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "kapra",
+    word: {
+      baseRomanUrdu: "kapra",
+      baseUrdu: "کپڑا",
+      english: "clothes",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "kpre",
+        urdu: "کپڑے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "kapron",
+        urdu: "کپڑوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/kapra.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "kat",
+    word: {
+      baseRomanUrdu: "kat",
+      baseUrdu: "کٹ",
+      english: "cut",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/kat.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "kehna",
+    word: {
+      baseRomanUrdu: "kehna",
+      baseUrdu: "کہنا",
+      english: "say",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "kha",
+        urdu: "کہا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khi",
+        urdu: "کہی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khe",
+        urdu: "کہے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/kehna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "khaas",
+    word: {
+      baseRomanUrdu: "khaas",
+      baseUrdu: "خاص",
+      english: "special",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/khaas.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "khabar",
+    word: {
+      baseRomanUrdu: "khabar",
+      baseUrdu: "خبر",
+      english: "news",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "khabrein",
+        urdu: "خبریں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "khabron",
+        urdu: "خبروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khabar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "khajoor",
+    word: {
+      baseRomanUrdu: "khajoor",
+      baseUrdu: "کھجور",
+      english: "dates",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "khajooren",
+        urdu: "کھجوریں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "khajooron",
+        urdu: "کھجوروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khajoor.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "khamosh",
+    word: {
+      baseRomanUrdu: "khamosh",
+      baseUrdu: "خاموش",
+      english: "quiet",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/khamosh.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "khara",
+    word: {
+      baseRomanUrdu: "khara",
+      baseUrdu: "کھڑا",
+      english: "standing",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "khri",
+        urdu: "کھڑی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khre",
+        urdu: "کھڑے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khara.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "khel",
+    word: {
+      baseRomanUrdu: "khel",
+      baseUrdu: "کھیل",
+      english: "game",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "khelna",
+        urdu: "کھیلنا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khila",
+        urdu: "کھیلا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khili",
+        urdu: "کھیلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khile",
+        urdu: "کھیلے",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khel.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "khet",
+    word: {
+      baseRomanUrdu: "khet",
+      baseUrdu: "کھیت",
+      english: "field",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "khiton",
+        urdu: "کھیتوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khet.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "khirki",
+    word: {
+      baseRomanUrdu: "khirki",
+      baseUrdu: "کھڑکی",
+      english: "window",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "khirkiyan",
+        urdu: "کھڑکیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khirkiyon",
+        urdu: "کھڑکیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khirki.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "khoobsurat",
+    word: {
+      baseRomanUrdu: "khoobsurat",
+      baseUrdu: "خوبصورت",
+      english: "beautiful",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/khoobsurat.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "khush",
+    word: {
+      baseRomanUrdu: "khush",
+      baseUrdu: "خوش",
+      english: "happy",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/khush.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "khushboo",
+    word: {
+      baseRomanUrdu: "khushboo",
+      baseUrdu: "خوشبو",
+      english: "scent",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/khushboo.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "khushi",
+    word: {
+      baseRomanUrdu: "khushi",
+      baseUrdu: "خوشی",
+      english: "happiness",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "khushiyan",
+        urdu: "خوشیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "khushiyon",
+        urdu: "خوشیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/khushi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "laal",
+    word: {
+      baseRomanUrdu: "laal",
+      baseUrdu: "لال",
+      english: "red",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/laal.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "lagana",
+    word: {
+      baseRomanUrdu: "lagana",
+      baseUrdu: "لگانا",
+      english: "apply",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "lgaia",
+        urdu: "لگایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "lgaii",
+        urdu: "لگائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "lgaie",
+        urdu: "لگائے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "laganay",
+        urdu: "لگانے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/lagana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "lagbhag",
+    word: {
+      baseRomanUrdu: "lagbhag",
+      baseUrdu: "لگ بھگ",
+      english: "about",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/lagbhag.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "latkana",
+    word: {
+      baseRomanUrdu: "latkana",
+      baseUrdu: "لٹکانا",
+      english: "hang",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "ltkaia",
+        urdu: "لٹکایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "ltkaii",
+        urdu: "لٹکائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "ltkaie",
+        urdu: "لٹکائے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/latkana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "lena",
+    word: {
+      baseRomanUrdu: "lena",
+      baseUrdu: "لینا",
+      english: "take",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "lia",
+        urdu: "لیا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "li",
+        urdu: "لی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "lie",
+        urdu: "لیے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/lena.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "log",
+    word: {
+      baseRomanUrdu: "log",
+      baseUrdu: "لوگ",
+      english: "people",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "logon",
+        urdu: "لوگوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/log.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "maarna",
+    word: {
+      baseRomanUrdu: "maarna",
+      baseUrdu: "مارنا",
+      english: "hit",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "mara",
+        urdu: "مارا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "mari",
+        urdu: "ماری",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "mare",
+        urdu: "مارے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "maaro",
+        urdu: "مارو",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/maarna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "madad",
+    word: {
+      baseRomanUrdu: "madad",
+      baseUrdu: "مدد",
+      english: "help",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/madad.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "maheena",
+    word: {
+      baseRomanUrdu: "maheena",
+      baseUrdu: "مہینہ",
+      english: "month",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "maheenay",
+        urdu: "مہینے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "maheenon",
+        urdu: "مہینوں",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/maheena.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "manana",
+    word: {
+      baseRomanUrdu: "manana",
+      baseUrdu: "منانا",
+      english: "celebrate",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "mnaia",
+        urdu: "منایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "mnaii",
+        urdu: "منائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "mnaie",
+        urdu: "منائے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/manana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "mausam",
+    word: {
+      baseRomanUrdu: "mausam",
+      baseUrdu: "موسم",
+      english: "weather",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/mausam.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "mehndi",
+    word: {
+      baseRomanUrdu: "mehndi",
+      baseUrdu: "مہندی",
+      english: "henna",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/mehndi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "mithai",
+    word: {
+      baseRomanUrdu: "mithai",
+      baseUrdu: "مٹھائی",
+      english: "sweets",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "mithaiyan",
+        urdu: "مٹھائیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "mithaiyon",
+        urdu: "مٹھائیوں",
+        gender: "feminine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/mithai.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "mithas",
+    word: {
+      baseRomanUrdu: "mithas",
+      baseUrdu: "مٹھاس",
+      english: "sweetness",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/mithas.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "mohalla",
+    word: {
+      baseRomanUrdu: "mohalla",
+      baseUrdu: "محلہ",
+      english: "neighborhood",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "mohallay",
+        urdu: "محلے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "mohallon",
+        urdu: "محلوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/mohalla.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "mubarak",
+    word: {
+      baseRomanUrdu: "mubarak",
+      baseUrdu: "مبارک",
+      english: "blessed",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "mbark bad",
+        urdu: "مبارک باد",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/mubarak.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "muskurana",
+    word: {
+      baseRomanUrdu: "muskurana",
+      baseUrdu: "مسکرانا",
+      english: "smile",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "muskuraya",
+        urdu: "مسکرایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "muskurayi",
+        urdu: "مسکرائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "muskura",
+        urdu: "مسکرا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "muskura di",
+        urdu: "مسکرا دی",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
     image: "/qr/assets/images/muskurana.png",
     riddles: {
-      english:
-        "Lips turn up, eyes shine bright,\nA silent laugh, a gentle sight!",
-      romanUrdu: "Hont upar, aankhon mein noor,\nKhamoshi mein khushi ka door!",
-      urdu: "ہونٹ اوپر، آنکھوں میں نور،\nخاموشی میں خوشی کا دور!",
-    },
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
   },
+  {
+    id: "namaaz",
+    word: {
+      baseRomanUrdu: "namaaz",
+      baseUrdu: "نماز",
+      english: "prayer",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "namaazein",
+        urdu: "نمازیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "namaazon",
+        urdu: "نمازوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/namaaz.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "narangi",
+    word: {
+      baseRomanUrdu: "narangi",
+      baseUrdu: "نارنگی",
+      english: "orange",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "narangiyan",
+        urdu: "نارنگیاں",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/narangi.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "naya",
+    word: {
+      baseRomanUrdu: "naya",
+      baseUrdu: "نیا",
+      english: "new",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "nii",
+        urdu: "نئی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "nie",
+        urdu: "نئے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/naya.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "nazar",
+    word: {
+      baseRomanUrdu: "nazar",
+      baseUrdu: "نظر",
+      english: "sight",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "nazrein",
+        urdu: "نظریں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "nazron",
+        urdu: "نظروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/nazar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "neeche",
+    word: {
+      baseRomanUrdu: "neeche",
+      baseUrdu: "نیچے",
+      english: "down",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/neeche.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "neela",
+    word: {
+      baseRomanUrdu: "neela",
+      baseUrdu: "نیلا",
+      english: "blue",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "neeli",
+        urdu: "نیلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "neelay",
+        urdu: "نیلے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/neela.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "note",
+    word: {
+      baseRomanUrdu: "note",
+      baseUrdu: "نوٹ",
+      english: "bill",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "noton",
+        urdu: "نوٹوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/note.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "ooncha",
+    word: {
+      baseRomanUrdu: "ooncha",
+      baseUrdu: "اونچا",
+      english: "high",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "oonchi",
+        urdu: "اونچی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "oonchay",
+        urdu: "اونچے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/ooncha.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "paanch",
+    word: {
+      baseRomanUrdu: "paanch",
+      baseUrdu: "پانچ",
+      english: "five",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/paanch.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "paas",
+    word: {
+      baseRomanUrdu: "paas",
+      baseUrdu: "پاس",
+      english: "near",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/paas.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "pachees",
+    word: {
+      baseRomanUrdu: "pachees",
+      baseUrdu: "پچیس",
+      english: "twenty-five",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/pachees.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "pakarna",
+    word: {
+      baseRomanUrdu: "pakarna",
+      baseUrdu: "پکڑنا",
+      english: "hold",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "pakra",
+        urdu: "پکڑا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "pakri",
+        urdu: "پکڑی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "pakray",
+        urdu: "پکڑے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/pakarna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "pani",
+    word: {
+      baseRomanUrdu: "pani",
+      baseUrdu: "پانی",
+      english: "water",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/pani.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "parosi",
+    word: {
+      baseRomanUrdu: "parosi",
+      baseUrdu: "پڑوسی",
+      english: "neighbor",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "parosan",
+        urdu: "پڑوسن",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "parosiyon",
+        urdu: "پڑوسیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/parosi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "pata",
+    word: {
+      baseRomanUrdu: "pata",
+      baseUrdu: "پتہ",
+      english: "know",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "pte",
+        urdu: "پتے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "pton",
+        urdu: "پتوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/pata.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "patakha",
+    word: {
+      baseRomanUrdu: "patakha",
+      baseUrdu: "پٹاخا",
+      english: "firecracker",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "patakhay",
+        urdu: "پٹاخے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "patakhon",
+        urdu: "پٹاخوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/patakha.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "patang",
+    word: {
+      baseRomanUrdu: "patang",
+      baseUrdu: "پتنگ",
+      english: "kite",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "patangein",
+        urdu: "پتنگیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "patangon",
+        urdu: "پتنگوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/patang.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "peechai",
+    word: {
+      baseRomanUrdu: "peechai",
+      baseUrdu: "پیچھے",
+      english: "backwards",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/peechai.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "peela",
+    word: {
+      baseRomanUrdu: "peela",
+      baseUrdu: "پیلا",
+      english: "yellow",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "peeli",
+        urdu: "پیلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "peelay",
+        urdu: "پیلے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/peela.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "pehanna",
+    word: {
+      baseRomanUrdu: "pehanna",
+      baseUrdu: "پہننا",
+      english: "wear",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "phna",
+        urdu: "پہنا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "phni",
+        urdu: "پہنی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "phne",
+        urdu: "پہنے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/pehanna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "pehle",
+    word: {
+      baseRomanUrdu: "pehle",
+      baseUrdu: "پہلے",
+      english: "first",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/pehle.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "phailna",
+    word: {
+      baseRomanUrdu: "phailna",
+      baseUrdu: "پھیلنا",
+      english: "spread",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "phaila",
+        urdu: "پھیلا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "phaili",
+        urdu: "پھیلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "phailay",
+        urdu: "پھیلے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "phail gayi",
+        urdu: "پھیل گئی",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/phailna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "phir",
+    word: {
+      baseRomanUrdu: "phir",
+      baseUrdu: "پھر",
+      english: "again",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/phir.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "pista",
+    word: {
+      baseRomanUrdu: "pista",
+      baseUrdu: "پستہ",
+      english: "pistachio",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "pste",
+        urdu: "پستے",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/pista.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "piyay",
+    word: {
+      baseRomanUrdu: "piyay",
+      baseUrdu: "پئیے",
+      english: "tires",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/piyay.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "poochna",
+    word: {
+      baseRomanUrdu: "poochna",
+      baseUrdu: "پوچھنا",
+      english: "ask",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "poocha",
+        urdu: "پوچھا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "poochi",
+        urdu: "پوچھی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "poochay",
+        urdu: "پوچھے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/poochna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "poora",
+    word: {
+      baseRomanUrdu: "poora",
+      baseUrdu: "پورا",
+      english: "whole",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "pori",
+        urdu: "پوری",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "pore",
+        urdu: "پورے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/poora.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "pyara",
+    word: {
+      baseRomanUrdu: "pyara",
+      baseUrdu: "پیارا",
+      english: "beloved",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "piari",
+        urdu: "پیاری",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "piare",
+        urdu: "پیارے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/pyara.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "qameez",
+    word: {
+      baseRomanUrdu: "qameez",
+      baseUrdu: "قمیض",
+      english: "shirt",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "qameezein",
+        urdu: "قمیضیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "qameezon",
+        urdu: "قمیضوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/qameez.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "raat",
+    word: {
+      baseRomanUrdu: "raat",
+      baseUrdu: "رات",
+      english: "night",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "raatein",
+        urdu: "راتیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "raaton",
+        urdu: "راتوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/raat.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "rakhna",
+    word: {
+      baseRomanUrdu: "rakhna",
+      baseUrdu: "رکھنا",
+      english: "place",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "rkha",
+        urdu: "رکھا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "rkhi",
+        urdu: "رکھی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "rkhe",
+        urdu: "رکھے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "rakh diya",
+        urdu: "رکھ دیا",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/rakhna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "rang",
+    word: {
+      baseRomanUrdu: "rang",
+      baseUrdu: "رنگ",
+      english: "color",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "rangon",
+        urdu: "رنگوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/rang.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "rang-barangi",
+    word: {
+      baseRomanUrdu: "rang barangi",
+      baseUrdu: "رنگ برنگی",
+      english: "colorful",
+      pos: "phrase"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/rang-barangi.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "rishtadar",
+    word: {
+      baseRomanUrdu: "rishtadar",
+      baseUrdu: "رشتہ دار",
+      english: "relative",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "rshth daron",
+        urdu: "رشتہ داروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/rishtadar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "rokna",
+    word: {
+      baseRomanUrdu: "rokna",
+      baseUrdu: "روکنا",
+      english: "stop",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "roka",
+        urdu: "روکا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "roki",
+        urdu: "روکی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "roke",
+        urdu: "روکے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "rok kar",
+        urdu: "روک کر",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/rokna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "roshan",
+    word: {
+      baseRomanUrdu: "roshan",
+      baseUrdu: "روشن",
+      english: "bright",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/roshan.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "roshni",
+    word: {
+      baseRomanUrdu: "roshni",
+      baseUrdu: "روشنی",
+      english: "light",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "roshnian",
+        urdu: "روشنیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "roshniyon",
+        urdu: "روشنیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/roshni.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "roti",
+    word: {
+      baseRomanUrdu: "roti",
+      baseUrdu: "روٹی",
+      english: "bread",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "rotiyan",
+        urdu: "روٹیاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "rotiyon",
+        urdu: "روٹیوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/roti.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "roza",
+    word: {
+      baseRomanUrdu: "roza",
+      baseUrdu: "روزہ",
+      english: "fast",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "rozay",
+        urdu: "روزے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "rozon",
+        urdu: "روزوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/roza.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "saaf",
+    word: {
+      baseRomanUrdu: "saaf",
+      baseUrdu: "صاف",
+      english: "clean",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/saaf.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "saal",
+    word: {
+      baseRomanUrdu: "saal",
+      baseUrdu: "سال",
+      english: "year",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "saalon",
+        urdu: "سالوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/saal.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "saamne",
+    word: {
+      baseRomanUrdu: "saamne",
+      baseUrdu: "سامنے",
+      english: "front",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/saamne.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "saans",
+    word: {
+      baseRomanUrdu: "saans",
+      baseUrdu: "سانس",
+      english: "breath",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "saansein",
+        urdu: "سانسیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "saanson",
+        urdu: "سانسوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/saans.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "saath",
+    word: {
+      baseRomanUrdu: "saath",
+      baseUrdu: "ساتھ",
+      english: "with",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/saath.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "salaam",
+    word: {
+      baseRomanUrdu: "salaam",
+      baseUrdu: "سلام",
+      english: "greeting",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/salaam.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "samajh",
+    word: {
+      baseRomanUrdu: "samajh",
+      baseUrdu: "سمجھ",
+      english: "understand",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/samajh.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "samandar",
+    word: {
+      baseRomanUrdu: "samandar",
+      baseUrdu: "سمندر",
+      english: "ocean",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "smndron",
+        urdu: "سمندروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/samandar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sarak",
+    word: {
+      baseRomanUrdu: "sarak",
+      baseUrdu: "سڑک",
+      english: "road",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "sarken",
+        urdu: "سڑکیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "sarkon",
+        urdu: "سڑکوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/sarak.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sawaal",
+    word: {
+      baseRomanUrdu: "sawaal",
+      baseUrdu: "سوال",
+      english: "question",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "sawalat",
+        urdu: "سوالات",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "sawalon",
+        urdu: "سوالوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/sawaal.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "seekhna",
+    word: {
+      baseRomanUrdu: "seekhna",
+      baseUrdu: "سیکھنا",
+      english: "learn",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "sikha",
+        urdu: "سیکھا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "sikhi",
+        urdu: "سیکھی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "sikhe",
+        urdu: "سیکھے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/seekhna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "shaam",
+    word: {
+      baseRomanUrdu: "shaam",
+      baseUrdu: "شام",
+      english: "evening",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "shaamein",
+        urdu: "شامیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "shaamon",
+        urdu: "شاموں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/shaam.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "shayad",
+    word: {
+      baseRomanUrdu: "shayad",
+      baseUrdu: "شاید",
+      english: "maybe",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/shayad.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "sheer-khurma",
+    word: {
+      baseRomanUrdu: "sheer khurma",
+      baseUrdu: "شیر خرما",
+      english: "dessert",
+      pos: "phrase"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/sheer-khurma.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sheesha",
+    word: {
+      baseRomanUrdu: "sheesha",
+      baseUrdu: "شیشہ",
+      english: "glass",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "sheeshay",
+        urdu: "شیشے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "sheeshon",
+        urdu: "شیشوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/sheesha.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "shehar",
+    word: {
+      baseRomanUrdu: "shehar",
+      baseUrdu: "شہر",
+      english: "city",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "shehron",
+        urdu: "شہروں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/shehar.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "shor",
+    word: {
+      baseRomanUrdu: "shor",
+      baseUrdu: "شور",
+      english: "noise",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/shor.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "shukriya",
+    word: {
+      baseRomanUrdu: "shukriya",
+      baseUrdu: "شکریہ",
+      english: "thanks",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/shukriya.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "shuru",
+    word: {
+      baseRomanUrdu: "shuru",
+      baseUrdu: "شروع",
+      english: "begin",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/shuru.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sochna",
+    word: {
+      baseRomanUrdu: "sochna",
+      baseUrdu: "سوچنا",
+      english: "think",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "socha",
+        urdu: "سوچا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "sochi",
+        urdu: "سوچی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "soche",
+        urdu: "سوچے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/sochna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "sona",
+    word: {
+      baseRomanUrdu: "sona",
+      baseUrdu: "سونا",
+      english: "sleep",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "soia",
+        urdu: "سویا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "soyi",
+        urdu: "سوئی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "soye",
+        urdu: "سوئے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "so gayi",
+        urdu: "سو گئی",
+        gender: "feminine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/sona.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "subah",
+    word: {
+      baseRomanUrdu: "subah",
+      baseUrdu: "صبح",
+      english: "morning",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/subah.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sukoon",
+    word: {
+      baseRomanUrdu: "sukoon",
+      baseUrdu: "سکون",
+      english: "peace",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/sukoon.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sunai-dena",
+    word: {
+      baseRomanUrdu: "sunai dena",
+      baseUrdu: "سنائی دینا",
+      english: "audible",
+      pos: "phrase"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/sunai-dena.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "sunheri",
+    word: {
+      baseRomanUrdu: "sunheri",
+      baseUrdu: "سنہری",
+      english: "golden",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/sunheri.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "surmai",
+    word: {
+      baseRomanUrdu: "surmai",
+      baseUrdu: "سرمئی",
+      english: "gray",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/surmai.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "tairna",
+    word: {
+      baseRomanUrdu: "tairna",
+      baseUrdu: "تیرنا",
+      english: "float",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "tira",
+        urdu: "تیرا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "tiri",
+        urdu: "تیری",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "tire",
+        urdu: "تیرے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/tairna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "tayari",
+    word: {
+      baseRomanUrdu: "tayari",
+      baseUrdu: "تیاری",
+      english: "preparation",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "tayariyan",
+        urdu: "تیاریاں",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "tayariyon",
+        urdu: "تیاریوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/tayari.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "tez",
+    word: {
+      baseRomanUrdu: "tez",
+      baseUrdu: "تیز",
+      english: "fast",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/tez.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "thand",
+    word: {
+      baseRomanUrdu: "thand",
+      baseUrdu: "ٹھنڈ",
+      english: "cold",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "thanda",
+        urdu: "ٹھنڈا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "thandi",
+        urdu: "ٹھنڈی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "thanday",
+        urdu: "ٹھنڈے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/thand.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "theen",
+    word: {
+      baseRomanUrdu: "theen",
+      baseUrdu: "تین",
+      english: "three",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/theen.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "uchhalna",
+    word: {
+      baseRomanUrdu: "uchhalna",
+      baseUrdu: "اچھلنا",
+      english: "jump",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "achhla",
+        urdu: "اچھلا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "uchhli",
+        urdu: "اچھلی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "uchhlay",
+        urdu: "اچھلے",
+        gender: "masculine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "uchhal paray",
+        urdu: "اچھل پڑے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/uchhalna.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "udaas",
+    word: {
+      baseRomanUrdu: "udaas",
+      baseUrdu: "اُداس",
+      english: "sad",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/udaas.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "upar",
+    word: {
+      baseRomanUrdu: "upar",
+      baseUrdu: "اوپر",
+      english: "above",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/upar.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "urana",
+    word: {
+      baseRomanUrdu: "urana",
+      baseUrdu: "اُڑانا",
+      english: "fly",
+      pos: "verb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+      {
+        romanUrdu: "uraya",
+        urdu: "اُڑایا",
+        gender: "masculine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "urayi",
+        urdu: "اُڑائی",
+        gender: "feminine",
+        number: "singular"
+      },
+      {
+        romanUrdu: "uraye",
+        urdu: "اُڑائے",
+        gender: "masculine",
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/urana.png",
+    riddles: {
+      english: "This is an action you can do each day,\nWith body or words in your own small way!",
+      romanUrdu: "Roz ke kaamon mein yeh amal dikhai de,\nHar din zindagi mein is ki jhalak milay!",
+      urdu: "روز کے کاموں میں یہ عمل دکھائی دے،\nہر دن زندگی میں اس کی جھلک ملے!"
+    }
+  },
+  {
+    id: "wapas",
+    word: {
+      baseRomanUrdu: "wapas",
+      baseUrdu: "واپس",
+      english: "return",
+      pos: "adverb"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/wapas.png",
+    riddles: {
+      english: "This helps tell when, where, or how things go,\nA handy little word that helps you know!",
+      romanUrdu: "Yeh bataye kaam kab ya kahan ho,\nChhota sa lafz jo baat asaan kare!",
+      urdu: "یہ بتائے کام کب یا کہاں ہو،\nچھوٹا سا لفظ جو بات آسان کرے!"
+    }
+  },
+  {
+    id: "yaad",
+    word: {
+      baseRomanUrdu: "yaad",
+      baseUrdu: "یاد",
+      english: "memory",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "feminine"
+    },
+    variants: [
+      {
+        romanUrdu: "yaadein",
+        urdu: "یادیں",
+        gender: "feminine",
+        number: "plural"
+      },
+      {
+        romanUrdu: "yaadgaar",
+        urdu: "یادگار",
+        gender: "masculine",
+        number: "singular"
+      }
+    ],
+    image: "/qr/assets/images/yaad.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "zaika",
+    word: {
+      baseRomanUrdu: "zaika",
+      baseUrdu: "ذائقہ",
+      english: "flavor",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: "masculine"
+    },
+    variants: [
+      {
+        romanUrdu: "zaiqay",
+        urdu: "ذائقے",
+        gender: null,
+        number: "plural"
+      },
+      {
+        romanUrdu: "zaiqon",
+        urdu: "ذائقوں",
+        gender: null,
+        number: "plural"
+      }
+    ],
+    image: "/qr/assets/images/zaika.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  },
+  {
+    id: "zaroori",
+    word: {
+      baseRomanUrdu: "zaroori",
+      baseUrdu: "ضروری",
+      english: "necessary",
+      pos: "adjective"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/zaroori.png",
+    riddles: {
+      english: "This tells how something looks or feels to you,\nA helpful little word for describing too!",
+      romanUrdu: "Yeh bataye cheez kaisi nazar aaye,\nChhota sa lafz jo haal samjhaye!",
+      urdu: "یہ بتائے چیز کیسی نظر آئے،\nچھوٹا سا لفظ جو حال سمجھائے!"
+    }
+  },
+  {
+    id: "zyada",
+    word: {
+      baseRomanUrdu: "zyada",
+      baseUrdu: "زیادہ",
+      english: "more",
+      pos: "noun"
+    },
+    grammar: {
+      baseGender: null
+    },
+    variants: [
+    ],
+    image: "/qr/assets/images/zyada.png",
+    riddles: {
+      english: "You may notice this in stories or every day,\nIt has its own little name and way!",
+      romanUrdu: "Roz ki zindagi mein is ka kaam nazar aaye,\nApna sa naam aur apni pehchaan bataye!",
+      urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!"
+    }
+  }
 ];
+
+export function buildVariantLookup(words) {
+  const lookup = {};
+
+  words.forEach((entry) => {
+    lookup[entry.word.baseRomanUrdu] = {
+      id: entry.id,
+      type: "base",
+      matchedRomanUrdu: entry.word.baseRomanUrdu,
+      matchedUrdu: entry.word.baseUrdu,
+      baseRomanUrdu: entry.word.baseRomanUrdu,
+      baseUrdu: entry.word.baseUrdu,
+      english: entry.word.english,
+      pos: entry.word.pos,
+      gender: entry.grammar?.baseGender ?? null,
+      number: null,
+      image: entry.image
+    };
+
+    entry.variants.forEach((variant) => {
+      lookup[variant.romanUrdu] = {
+        id: entry.id,
+        type: "variant",
+        matchedRomanUrdu: variant.romanUrdu,
+        matchedUrdu: variant.urdu,
+        baseRomanUrdu: entry.word.baseRomanUrdu,
+        baseUrdu: entry.word.baseUrdu,
+        english: entry.word.english,
+        pos: entry.word.pos,
+        gender: variant.gender ?? null,
+        number: variant.number ?? null,
+        image: entry.image
+      };
+    });
+  });
+
+  return lookup;
+}
+
+export const variantLookup = buildVariantLookup(vocab);

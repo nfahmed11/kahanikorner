@@ -198,3 +198,39 @@ body {
     font-size: 0.85rem;
   }
 }
+
+.story-settings {
+  margin: 20px auto 30px;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid var(--hookers-green);
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.story-settings label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--feldgrau);
+  margin-bottom: 8px;
+}
+
+.story-settings select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 2px solid var(--ash-gray);
+  background: var(--white);
+  color: var(--feldgrau);
+  font-family: "Grandstander", sans-serif;
+  font-size: 1rem;
+}
+
+.level-summary {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  color: var(--hookers-green);
+  line-height: 1.4;
+}

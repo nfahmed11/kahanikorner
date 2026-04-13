@@ -1,24 +1,34 @@
 // ✅ Import vocab
 import { vocab as originalVocab } from "./vocab.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Read window.ALLOWED_WORDS here, not at module load time
+document.addEventListener("DOMContentLoaded", async () => {
   const ALLOWED_WORDS = window.ALLOWED_WORDS;
 
   const PASTEL_FRONTS = [
-    "#FFDEE9", // pink
-    "#DFF7E3", // mint
-    "#DDEBFF", // baby blue
-    "#FFF2CC", // butter
-    "#EBD9FF", // lavender
-    "#FFD9E8", // rose
-    "#D9FFF7", // aqua
-    "#FDE2D4", // peach
-    "#E2F0CB", // light green
-    "#C7CEEA", // periwinkle
+    "#FFDEE9",
+    "#DFF7E3",
+    "#DDEBFF",
+    "#FFF2CC",
+    "#EBD9FF",
+    "#FFD9E8",
+    "#D9FFF7",
+    "#FDE2D4",
+    "#E2F0CB",
+    "#C7CEEA",
   ];
 
-  // deterministic per-card color (so it stays consistent)
+  const LEVEL_CONFIG = {
+    1: { pairs: 6, useImages: true },
+    2: { pairs: 10, useImages: true },
+    3: { pairs: 14, useImages: true },
+    4: { pairs: 18, useImages: false },
+    5: { pairs: 22, useImages: false },
+  };
+
+  const DEFAULT_LEVEL = 3;
+  const MIN_LEVEL = 1;
+  const MAX_LEVEL = 5;
+
   function getFrontColor(pairIndex, type) {
     const offset = type === "english" ? 0 : 1;
     return PASTEL_FRONTS[(pairIndex * 2 + offset) % PASTEL_FRONTS.length];
@@ -43,16 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const done = document.getElementById("settings-done");
 
   function openPop() {
+    if (!pop || !btn) return;
     pop.classList.remove("hidden");
     btn.setAttribute("aria-expanded", "true");
   }
+
   function closePop() {
+    if (!pop || !btn) return;
     pop.classList.add("hidden");
     btn.setAttribute("aria-expanded", "false");
   }
 
   btn?.addEventListener("click", () => {
-    const isOpen = !pop.classList.contains("hidden");
+    const isOpen = !pop?.classList.contains("hidden");
     isOpen ? closePop() : openPop();
   });
 
@@ -72,74 +85,114 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ✅ Safety checks
+  // --------------------
+  // Safety checks
+  // --------------------
   if (!(ALLOWED_WORDS instanceof Set)) {
     console.error(
       "[memory-game] window.ALLOWED_WORDS is missing or not a Set. " +
-        "Make sure the ?words= param is in the URL and the HTML script block runs before memory.js"
+        "Make sure the ?words= param is in the URL and the HTML script block runs before memory.js",
     );
   }
 
   if (!Array.isArray(originalVocab)) {
     console.error(
       "[memory-game] originalVocab is NOT an array. Import/path issue?",
-      originalVocab
+      originalVocab,
     );
   }
 
+  if (
+    !gameBoard ||
+    !progressBar ||
+    !progressText ||
+    !winMessage ||
+    !playAgainBtn
+  ) {
+    console.error("[memory-game] Missing required DOM elements.");
+    return;
+  }
+
+  // --------------------
+  // Helpers for NEW vocab schema
+  // --------------------
   function getRomanForms(card) {
-    const v = card?.word?.romanUrdu;
-    if (!v) return [];
-    return Array.isArray(v) ? v : [v];
+    if (!card) return [];
+
+    const forms = [];
+
+    if (card.word?.baseRomanUrdu) {
+      forms.push(card.word.baseRomanUrdu);
+    }
+
+    if (Array.isArray(card.variants)) {
+      card.variants.forEach((variant) => {
+        if (variant?.romanUrdu) forms.push(variant.romanUrdu);
+      });
+    }
+
+    return [...new Set(forms)];
+  }
+
+  function getBaseRoman(card) {
+    return card?.word?.baseRomanUrdu || "";
+  }
+
+  function getUrdu(card) {
+    return card?.word?.baseUrdu || "";
+  }
+
+  function getEnglish(card) {
+    return card?.word?.english || "";
   }
 
   function matchesAllowed(card) {
+    if (!(ALLOWED_WORDS instanceof Set)) return false;
     const forms = getRomanForms(card);
     return forms.some((w) => ALLOWED_WORDS.has(w));
   }
 
   function displayRoman(card) {
     const forms = getRomanForms(card);
-    const matched = forms.find((w) => ALLOWED_WORDS.has(w));
-    return matched || forms[0] || "";
+    const matched = forms.find((w) => ALLOWED_WORDS?.has(w));
+    return matched || getBaseRoman(card) || "";
   }
 
-  // ✅ Filter vocab using ALLOWED_WORDS
-  const safeVocab = Array.isArray(originalVocab) ? originalVocab : [];
-  const vocabWords = new Set(safeVocab.flatMap((c) => getRomanForms(c)));
-  const filteredVocab = safeVocab.filter(matchesAllowed);
-
-  // ----------------------------
-  // 🔥 DEBUG LOGGING (on load)
-  // ----------------------------
-  console.log("========== MEMORY DEBUG ==========");
-  console.log("[memory-game] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
-  console.log("[memory-game] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-  console.log("[memory-game] Total vocab roman forms available:", vocabWords.size);
-
-  const loaded = filteredVocab.map((c) => displayRoman(c));
-  console.log("[memory-game] Total words loaded into deck:", filteredVocab.length);
-  console.log("[memory-game] Loaded words:", loaded);
-
-  const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
-  if (missingWords.length) {
-    console.warn("[memory-game] ❌ Words NOT found in vocab.js:", missingWords);
-  } else {
-    console.log("[memory-game] ✅ All ALLOWED_WORDS found in vocab.js");
+  function hasImagePath(card) {
+    return !!(card?.image && typeof card.image === "string");
   }
-  console.log("==================================");
 
-  // Prepare vocabularyPairs from filtered vocab
-  const vocabularyPairs = filteredVocab.map((item) => ({
-    english: { word: item.word.english, image: item.image },
-    urdu: { romanUrdu: displayRoman(item), urduWord: item.word.urdu },
-  }));
+  function imageLoads(src) {
+    return new Promise((resolve) => {
+      if (!src) {
+        resolve(false);
+        return;
+      }
+
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+  }
+
+  function shuffleArray(array) {
+    const copy = [...array];
+
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+
+    return copy;
+  }
 
   function shrinkTextToFit(el, { minPx = 10, stepPx = 1 } = {}) {
     if (!el) return;
     const style = window.getComputedStyle(el);
     let size = parseFloat(style.fontSize);
     if (!Number.isFinite(size)) return;
+
     while (
       size > minPx &&
       (el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth)
@@ -149,75 +202,96 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // --------------------
+  // Build filtered vocab pools
+  // --------------------
+  const safeVocab = Array.isArray(originalVocab) ? originalVocab : [];
+  const vocabWords = new Set(safeVocab.flatMap((c) => getRomanForms(c)));
+  const allowedVocab = safeVocab.filter(matchesAllowed);
+
+  const imageCheckResults = await Promise.all(
+    allowedVocab.map(async (card) => ({
+      card,
+      ok: hasImagePath(card) && (await imageLoads(card.image)),
+    })),
+  );
+
+  const imageReadyVocab = imageCheckResults
+    .filter((result) => result.ok)
+    .map((result) => result.card);
+
+  const skippedBrokenImageWords = imageCheckResults
+    .filter((result) => !result.ok)
+    .map((result) => displayRoman(result.card));
+
+  const missingWords =
+    ALLOWED_WORDS instanceof Set
+      ? [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w))
+      : [];
+
+  console.group("[memory-game] vocab summary");
+  console.log(
+    "Allowed words requested:",
+    ALLOWED_WORDS ? [...ALLOWED_WORDS] : [],
+  );
+  console.log("Allowed vocab count:", allowedVocab.length);
+  console.log("Image-ready vocab count:", imageReadyVocab.length);
+  if (missingWords.length) {
+    console.warn("Words not found in vocab.js:", missingWords);
+  }
+  if (skippedBrokenImageWords.length) {
+    console.warn(
+      "Words skipped due to missing/broken images:",
+      skippedBrokenImageWords,
+    );
+  }
+  console.groupEnd();
+
   let cards = [];
   let flippedCards = [];
   let matchedPairs = 0;
   let canFlip = true;
-  let difficultyLevel = 5;
+  let difficultyLevel = DEFAULT_LEVEL;
   let currentPairs = [];
 
   if (difficultySlider) {
-    difficultyLevel = Number(difficultySlider.value || 5);
-    if (difficultyLabel)
+    difficultySlider.min = String(MIN_LEVEL);
+    difficultySlider.max = String(MAX_LEVEL);
+    difficultySlider.step = "1";
+    difficultySlider.value = String(DEFAULT_LEVEL);
+
+    difficultyLevel = DEFAULT_LEVEL;
+
+    if (difficultyLabel) {
       difficultyLabel.textContent = `Level ${difficultyLevel}`;
+    }
 
     difficultySlider.addEventListener("input", () => {
-      difficultyLevel = Number(difficultySlider.value);
-      if (difficultyLabel)
+      const sliderValue = Number(difficultySlider.value);
+      difficultyLevel = Math.min(MAX_LEVEL, Math.max(MIN_LEVEL, sliderValue));
+
+      if (difficultyLabel) {
         difficultyLabel.textContent = `Level ${difficultyLevel}`;
+      }
+
       initGame();
     });
   }
 
-  function initGame() {
-    gameBoard.innerHTML = "";
-    cards = [];
-    flippedCards = [];
-    matchedPairs = 0;
-    canFlip = true;
-    winMessage.classList.add("hidden");
-
-    const total = vocabularyPairs.length;
-    const ratio = difficultyLevel / 10;
-    const count = Math.min(total, Math.max(1, Math.ceil(total * ratio)));
-
-    currentPairs = vocabularyPairs.slice(0, count);
-
-    progressBar.style.width = "0%";
-    progressText.textContent = `0/${currentPairs.length} Pairs`;
-
-    currentPairs.forEach((pair, index) => {
-      const englishCard = createCard(
-        pair.english.word,
-        pair.english.image,
-        "english",
-        index
-      );
-      cards.push(englishCard);
-
-      const urduCard = createCard(
-        pair.urdu.romanUrdu,
-        pair.urdu.urduWord,
-        "urdu",
-        index
-      );
-      cards.push(urduCard);
-    });
-
-    shuffleArray(cards);
-    cards.forEach((card) => gameBoard.appendChild(card));
-
-    requestAnimationFrame(() => {
-      document
-        .querySelectorAll(".fit-text")
-        .forEach((el) => shrinkTextToFit(el, { minPx: 10 }));
-      document
-        .querySelectorAll(".fit-text-urdu")
-        .forEach((el) => shrinkTextToFit(el, { minPx: 12 }));
-    });
+  function buildVocabularyPairs(sourceVocab, useImages) {
+    return sourceVocab.map((item) => ({
+      english: {
+        word: getEnglish(item),
+        image: useImages ? item.image : null,
+      },
+      urdu: {
+        romanUrdu: displayRoman(item),
+        urduWord: getUrdu(item),
+      },
+    }));
   }
 
-  function createCard(primaryText, secondaryText, type, pairIndex) {
+  function createCard(primaryText, secondaryText, type, pairIndex, useImages) {
     const card = document.createElement("div");
     card.className = "card aspect-square";
     card.dataset.pairIndex = pairIndex;
@@ -226,48 +300,147 @@ document.addEventListener("DOMContentLoaded", () => {
     const frontBg = getFrontColor(pairIndex, type);
 
     card.innerHTML = `
-  <div class="card-inner w-full h-full">
-    <div
-      class="card-front flex items-center justify-center"
-      style="background: ${frontBg};"
-    >
-      <span class="text-3xl font-bold text-gray-800">?</span>
-    </div>
+      <div class="card-inner w-full h-full">
+        <div
+          class="card-front flex items-center justify-center"
+          style="background: ${frontBg};"
+        >
+          <span class="text-3xl font-bold text-gray-800">?</span>
+        </div>
 
-    <div class="card-back ${
-      type === "english" ? "english-card" : "urdu-card"
-    } p-3 flex flex-col items-center justify-center text-center">
-      ${
-        type === "english"
-          ? `
-          <div class="card-image-box">
-            <img src="${secondaryText}" alt="${primaryText}" />
-          </div>
-          <div class="w-full h-10 flex items-center justify-center">
-            <span class="font-bold text-gray-800 fit-text">
-              ${primaryText}
-            </span>
-          </div>
-          `
-          : `
-          <div class="w-full h-8 flex items-center justify-center">
-            <span class="font-bold fit-text">
-              ${primaryText}
-            </span>
-          </div>
-          <div class="w-full h-12 flex items-center justify-center">
-            <span class="fit-text-urdu">
-              ${secondaryText}
-            </span>
-          </div>
-          `
-      }
-    </div>
-  </div>
-`;
+        <div class="card-back ${
+          type === "english" ? "english-card" : "urdu-card"
+        } p-3 flex flex-col items-center justify-center text-center">
+          ${
+            type === "english"
+              ? useImages
+                ? `
+                  <div class="card-image-box">
+                    <img src="${secondaryText}" alt="${primaryText}" />
+                  </div>
+                  <div class="w-full h-10 flex items-center justify-center">
+                    <span class="font-bold text-gray-800 fit-text">
+                      ${primaryText}
+                    </span>
+                  </div>
+                `
+                : `
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="font-bold text-gray-800 fit-text">
+                      ${primaryText}
+                    </span>
+                  </div>
+                `
+              : `
+                <div class="w-full h-8 flex items-center justify-center">
+                  <span class="font-bold fit-text">
+                    ${primaryText}
+                  </span>
+                </div>
+                <div class="w-full h-12 flex items-center justify-center">
+                  <span class="fit-text-urdu">
+                    ${secondaryText}
+                  </span>
+                </div>
+              `
+          }
+        </div>
+      </div>
+    `;
 
     card.addEventListener("click", () => flipCard(card));
     return card;
+  }
+
+  function initGame() {
+    gameBoard.innerHTML = "";
+    cards = [];
+    flippedCards = [];
+    matchedPairs = 0;
+    canFlip = true;
+    currentPairs = [];
+    winMessage.classList.add("hidden");
+    progressBar.style.width = "0%";
+
+    const levelSettings = LEVEL_CONFIG[difficultyLevel] || LEVEL_CONFIG[DEFAULT_LEVEL];
+    const { pairs: requestedPairs, useImages } = levelSettings;
+
+    const sourcePool = useImages ? imageReadyVocab : allowedVocab;
+    const shuffledPool = shuffleArray(sourcePool);
+    const actualPairCount = Math.min(requestedPairs, shuffledPool.length);
+
+    if (!sourcePool.length || actualPairCount === 0) {
+      gameBoard.innerHTML = `
+        <div class="text-center p-4">
+          ${
+            useImages
+              ? "No image-backed words available for this level."
+              : "No words loaded for this level."
+          }
+        </div>
+      `;
+      progressText.textContent = "0/0 Pairs";
+      console.warn(
+        `[memory-game] Level ${difficultyLevel}: no usable words available.`,
+      );
+      return;
+    }
+
+    if (actualPairCount < requestedPairs) {
+      console.warn(
+        `[memory-game] Level ${difficultyLevel}: requested ${requestedPairs} pairs but only ${actualPairCount} usable pairs were available.`,
+      );
+    }
+
+    currentPairs = buildVocabularyPairs(
+      shuffledPool.slice(0, actualPairCount),
+      useImages,
+    );
+
+    progressText.textContent = `0/${currentPairs.length} Pairs`;
+
+    currentPairs.forEach((pair, index) => {
+      const englishCard = createCard(
+        pair.english.word,
+        pair.english.image,
+        "english",
+        index,
+        useImages,
+      );
+      cards.push(englishCard);
+
+      const urduCard = createCard(
+        pair.urdu.romanUrdu,
+        pair.urdu.urduWord,
+        "urdu",
+        index,
+        useImages,
+      );
+      cards.push(urduCard);
+    });
+
+    const shuffledCards = shuffleArray(cards);
+    shuffledCards.forEach((card) => gameBoard.appendChild(card));
+
+    console.group(`[memory-game] Level ${difficultyLevel}`);
+    console.log("Mode:", useImages ? "images" : "text-only");
+    console.log("Requested pairs:", requestedPairs);
+    console.log("Actual pairs used:", actualPairCount);
+    console.log(
+      "Words used:",
+      currentPairs.map((pair) => pair.urdu.romanUrdu),
+    );
+    console.groupEnd();
+
+    requestAnimationFrame(() => {
+      document
+        .querySelectorAll(".fit-text")
+        .forEach((el) => shrinkTextToFit(el, { minPx: 10 }));
+
+      document
+        .querySelectorAll(".fit-text-urdu")
+        .forEach((el) => shrinkTextToFit(el, { minPx: 12 }));
+    });
   }
 
   function flipCard(card) {
@@ -281,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       cardFlipSound.currentTime = 0;
-      cardFlipSound.play();
+      cardFlipSound.play().catch(() => {});
     } catch {}
 
     card.classList.add("flipped");
@@ -295,6 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function checkForMatch() {
     const [card1, card2] = flippedCards;
+
     const isMatch =
       card1.dataset.pairIndex === card2.dataset.pairIndex &&
       card1.dataset.type !== card2.dataset.type;
@@ -303,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         try {
           correctSound.currentTime = 0;
-          correctSound.play();
+          correctSound.play().catch(() => {});
         } catch {}
 
         card1.classList.add("match-animation");
@@ -332,7 +506,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateProgress() {
-    const progressPercentage = (matchedPairs / currentPairs.length) * 100;
+    const progressPercentage =
+      currentPairs.length > 0 ? (matchedPairs / currentPairs.length) * 100 : 0;
     progressBar.style.width = `${progressPercentage}%`;
     progressText.textContent = `${matchedPairs}/${currentPairs.length} Pairs`;
   }
@@ -346,14 +521,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const rect = card.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const colors = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA"];
+    const colors = [
+      "#FF9AA2",
+      "#FFB7B2",
+      "#FFDAC1",
+      "#E2F0CB",
+      "#B5EAD7",
+      "#C7CEEA",
+    ];
 
     for (let i = 0; i < 20; i++) {
       const confetti = document.createElement("div");
       confetti.className = "confetti";
       confetti.style.left = `${centerX}px`;
       confetti.style.top = `${centerY}px`;
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.backgroundColor =
+        colors[Math.floor(Math.random() * colors.length)];
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
       confetti.style.width = `${5 + Math.random() * 10}px`;
       confetti.style.height = `${5 + Math.random() * 10}px`;
@@ -364,14 +547,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createWinConfetti() {
-    const colors = ["#FF9AA2", "#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA"];
+    const colors = [
+      "#FF9AA2",
+      "#FFB7B2",
+      "#FFDAC1",
+      "#E2F0CB",
+      "#B5EAD7",
+      "#C7CEEA",
+    ];
 
     for (let i = 0; i < 100; i++) {
       const confetti = document.createElement("div");
       confetti.className = "confetti";
       confetti.style.left = `${Math.random() * window.innerWidth}px`;
       confetti.style.top = "0px";
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.backgroundColor =
+        colors[Math.floor(Math.random() * colors.length)];
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
       confetti.style.width = `${5 + Math.random() * 10}px`;
       confetti.style.height = `${5 + Math.random() * 10}px`;
@@ -379,14 +570,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.appendChild(confetti);
       setTimeout(() => confetti.remove(), 5000);
     }
-  }
-
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
   }
 
   playAgainBtn.addEventListener("click", initGame);

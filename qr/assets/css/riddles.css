@@ -18,11 +18,10 @@
   --blue-soft: rgba(106, 168, 255, 0.18);
 
   --paper: rgba(255, 255, 255, 0.78);
-  --paper-strong: rgba(255, 255, 255, 0.92);
+
   --border: rgba(31, 31, 31, 0.12);
 
-  --good: #22c55e;
-  --bad: #ef4444;
+
 
   /* Spacing */
   --s1: 4px;
@@ -46,10 +45,11 @@
   --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 
   /* Typography */
-  --font-ui: Grandstander, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+  --font-ui:
+    Grandstander, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-body:
+    "Authentic Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial,
     sans-serif;
-  --font-body: "Authentic Sans", system-ui, -apple-system, Segoe UI, Roboto,
-    Arial, sans-serif;
   --font-urdu: "Noto Nastaliq Urdu", serif;
 
   --fs2: 14px;
@@ -67,8 +67,8 @@
   --t-slow: 520ms;
   --e-out: cubic-bezier(0.2, 0.9, 0.2, 1);
 
-  --focus: 0 0 0 3px rgba(40, 215, 183, 0.55),
-    0 0 0 7px rgba(255, 224, 102, 0.45);
+  --focus:
+    0 0 0 3px rgba(40, 215, 183, 0.55), 0 0 0 7px rgba(255, 224, 102, 0.45);
 }
 
 *,
@@ -89,7 +89,8 @@ body {
   line-height: 1.35;
   overflow-x: hidden;
 
-  background: radial-gradient(
+  background:
+    radial-gradient(
       1100px 700px at 10% 10%,
       var(--yellow-soft),
       transparent 55%
@@ -179,7 +180,8 @@ input[type="text"] {
   border: 1px solid var(--border);
   box-shadow: var(--sh-inset), var(--sh-glow);
 
-  transition: transform var(--t-fast) var(--e-out),
+  transition:
+    transform var(--t-fast) var(--e-out),
     background var(--t-fast) var(--e-out);
 }
 
@@ -262,13 +264,15 @@ input[type="text"] {
 .header-title__text.is-in {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity var(--t-med) var(--e-out),
+  transition:
+    opacity var(--t-med) var(--e-out),
     transform var(--t-med) var(--e-out);
 }
 .header-title__text.is-out {
   opacity: 0;
   transform: translateY(-6px);
-  transition: opacity var(--t-med) var(--e-out),
+  transition:
+    opacity var(--t-med) var(--e-out),
     transform var(--t-med) var(--e-out);
 }
 
@@ -296,7 +300,8 @@ input[type="text"] {
   border: 1px solid rgba(31, 31, 31, 0.14);
   box-shadow: var(--sh-inset), var(--sh-glow);
 
-  transition: transform var(--t-fast) var(--e-out),
+  transition:
+    transform var(--t-fast) var(--e-out),
     filter var(--t-fast) var(--e-out);
 }
 
@@ -467,7 +472,8 @@ input[type="text"] {
   font-size: var(--fs4);
   text-align: center;
 
-  transition: transform var(--t-fast) var(--e-out),
+  transition:
+    transform var(--t-fast) var(--e-out),
     box-shadow var(--t-fast) var(--e-out),
     border-color var(--t-fast) var(--e-out);
 }
@@ -492,11 +498,114 @@ input[type="text"] {
   gap: var(--s2);
 }
 
-.hard-actions {
+
+.hard-hints-stack {
   width: min(520px, 100%);
   display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.hint-card {
+  width: 100%;
+  max-width: 240px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.hint-card__label {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.hint-card__image {
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 224, 102, 0.18),
+    rgba(40, 215, 183, 0.14)
+  );
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  padding: 10px;
+}
+
+.hint-card--level-1 {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 215, 183, 0.12),
+    rgba(255, 255, 255, 0.9)
+  );
+}
+
+.hint-chip {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  font-weight: 700;
+}
+
+.hint-chip--level-2 {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 215, 183, 0.16),
+    rgba(106, 168, 255, 0.1)
+  );
+}
+
+.hint-chip--level-3 {
+  background: linear-gradient(
+    135deg,
+    rgba(106, 168, 255, 0.16),
+    rgba(255, 111, 177, 0.12)
+  );
+}
+
+.hint-chip--level-4 {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 111, 177, 0.18),
+    rgba(255, 224, 102, 0.16)
+  );
+}
+
+.hard-actions {
+  width: min(640px, 100%);
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--s2);
+  gap: 12px;
+}
+
+.hard-actions #hard-submit-btn,
+.hard-actions #hard-yes-btn {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+  .hard-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hard-actions #hard-submit-btn,
+  .hard-actions #hard-yes-btn {
+    grid-column: auto;
+  }
+
+  .hard-actions .btn {
+    width: 100%;
+  }
 }
 
 /* Buttons */
@@ -513,8 +622,10 @@ input[type="text"] {
   background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--sh-inset), var(--sh-glow);
 
-  transition: transform var(--t-fast) var(--e-out),
-    box-shadow var(--t-fast) var(--e-out), filter var(--t-fast) var(--e-out);
+  transition:
+    transform var(--t-fast) var(--e-out),
+    box-shadow var(--t-fast) var(--e-out),
+    filter var(--t-fast) var(--e-out);
 }
 
 .btn:hover {
@@ -533,6 +644,48 @@ input[type="text"] {
     rgba(255, 224, 102, 0.98),
     rgba(255, 111, 177, 0.42)
   );
+}
+
+/* Hard mode action buttons */
+.hard-actions .btn {
+  min-height: 54px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal;
+}
+
+.btn--check {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 224, 102, 0.98),
+    rgba(255, 111, 177, 0.42)
+  );
+  border: 1px solid rgba(31, 31, 31, 0.14);
+  box-shadow:
+    0 10px 20px rgba(255, 111, 177, 0.16),
+    var(--sh-inset);
+}
+
+.btn--hint {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 215, 183, 0.2),
+    rgba(106, 168, 255, 0.16)
+  );
+  border: 1px solid rgba(40, 215, 183, 0.28);
+}
+
+.btn--reveal {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px dashed rgba(239, 68, 68, 0.38);
+  color: rgba(120, 25, 25, 0.95);
+}
+
+.btn--reveal:hover {
+  background: rgba(239, 68, 68, 0.06);
 }
 
 .btn:disabled {
@@ -561,8 +714,10 @@ input[type="text"] {
   justify-items: center;
   text-align: center;
 
-  transition: transform var(--t-fast) var(--e-out),
-    box-shadow var(--t-fast) var(--e-out), filter var(--t-fast) var(--e-out),
+  transition:
+    transform var(--t-fast) var(--e-out),
+    box-shadow var(--t-fast) var(--e-out),
+    filter var(--t-fast) var(--e-out),
     border-color var(--t-fast) var(--e-out);
 }
 

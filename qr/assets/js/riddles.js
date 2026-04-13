@@ -1,10 +1,10 @@
-// riddles.js (FULL UPDATED)
-// ✅ Centered UI (CSS-driven)
-// ✅ Header wraps on small screens (CSS) so title can drop to its own line
-// ✅ More "pop": correct option highlight + status pop/shake animations
-// ✅ Dropzone removed
-// ✅ SINGLE status line: uses ONLY #status-instruction (status-message removed)
+// riddles.js (UPDATED FOR NEW vocab.js SCHEMA)
 
+import { vocab as originalVocab } from "./vocab.js";
+
+// --------------------
+// Header title rotation
+// --------------------
 function startHeaderTitleRotation() {
   const el = document.getElementById("header-title");
   if (!el) return;
@@ -35,9 +35,11 @@ function startHeaderTitleRotation() {
 }
 
 console.log("[riddle] script loaded");
-
-// ✅ import your vocab file
-import { vocab as originalVocab } from "./vocab.js";
+console.log(
+  "[riddle] vocab loaded?",
+  Array.isArray(originalVocab),
+  originalVocab?.length,
+);
 
 // --------------------
 // State + Deck
@@ -46,7 +48,7 @@ let deck = [];
 let currentCard = null;
 
 // difficulty slider values: 0=Easy, 1=Medium, 2=Hard
-let difficultyValue = 2; // default HARD
+let difficultyValue = 2;
 let currentDifficulty = "Hard";
 
 // --------------------
@@ -81,91 +83,48 @@ function launchConfetti() {
 }
 
 // --------------------
-// Utils
+// Helpers for NEW vocab.js schema
 // --------------------
-function shuffleArray(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
 function getRomanForms(card) {
-  const v = card?.word?.romanUrdu;
-  if (!v) return [];
-  return Array.isArray(v) ? v : [v];
-}
+  if (!card) return [];
 
-function resetDeck() {
-  // Read window.ALLOWED_WORDS here, not at module load time
-  const ALLOWED_WORDS = window.ALLOWED_WORDS;
+  const forms = [];
 
-  if (!Array.isArray(originalVocab)) {
-    console.error("[riddle] vocab import failed or not array", originalVocab);
-    deck = [];
-    return;
+  if (card.word?.baseRomanUrdu) {
+    forms.push(card.word.baseRomanUrdu);
   }
 
-  if (!(ALLOWED_WORDS instanceof Set)) {
-    console.error("[riddle] window.ALLOWED_WORDS is not a Set. Make sure the ?words= param is in the URL.");
-    deck = [];
-    return;
+  if (Array.isArray(card.variants)) {
+    card.variants.forEach((variant) => {
+      if (variant?.romanUrdu) forms.push(variant.romanUrdu);
+    });
   }
 
-  // ✅ Build lookup of ALL vocab roman forms
-  const vocabWords = new Set(
-    originalVocab.flatMap((card) => getRomanForms(card))
-  );
-
-  // ✅ Filter deck correctly (supports arrays)
-  deck = originalVocab.filter((card) =>
-    getRomanForms(card).some((form) => ALLOWED_WORDS.has(form))
-  );
-
-  // ----------------------------
-  // 🔥 LOGGING SECTION
-  // ----------------------------
-  console.log("========== RIDDLE DEBUG ==========");
-  console.log("Total ALLOWED_WORDS:", ALLOWED_WORDS.size);
-  console.log("ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-  console.log("Total vocab words available:", vocabWords.size);
-  console.log("Total words loaded into deck:", deck.length);
-  console.log(
-    "Loaded words:",
-    deck.map((card) => getRomanForms(card)[0])
-  );
-
-  const missing = [...ALLOWED_WORDS].filter((word) => !vocabWords.has(word));
-  if (missing.length) {
-    console.warn("❌ Words NOT found in vocab.js:", missing);
-  } else {
-    console.log("✅ All ALLOWED_WORDS found in vocab.js");
-  }
-  console.log("==================================");
+  return [...new Set(forms)];
 }
 
-function sliderValueToDifficulty(v) {
-  const n = Number(v);
-  if (n <= 0) return "Easy";
-  if (n === 1) return "Medium";
-  return "Hard";
+function getBaseRoman(card) {
+  return card?.word?.baseRomanUrdu || "";
 }
 
-function getOptionCountForDifficulty(diff) {
-  if (diff === "Easy") return 3;
-  if (diff === "Medium") return 5;
-  return 10; // not used for Hard (typed)
+function getUrdu(card) {
+  return card?.word?.baseUrdu || "";
 }
 
-// --------------------
-// Hard Mode: normalization + fuzzy match
-// --------------------
+function getEnglish(card) {
+  return card?.word?.english || "";
+}
+
+function displayRoman(card) {
+  const forms = getRomanForms(card);
+  const matched = forms.find((w) => window.ALLOWED_WORDS?.has(w));
+  return matched || getBaseRoman(card) || "";
+}
+
 function normalizeRomanUrdu(input) {
   if (!input) return "";
   let s = String(input).trim().toLowerCase();
 
-  // collapse repeated vowels
   s = s
     .replace(/a{2,}/g, "a")
     .replace(/e{2,}/g, "i")
@@ -173,7 +132,6 @@ function normalizeRomanUrdu(input) {
     .replace(/o{2,}/g, "u")
     .replace(/u{2,}/g, "u");
 
-  // normalize spacing
   s = s.replace(/\s+/g, " ").trim();
   return s;
 }
@@ -195,12 +153,15 @@ function levenshtein(a, b) {
   for (let i = 1; i <= m; i++) {
     curr[0] = i;
     const si = s.charCodeAt(i - 1);
+
     for (let j = 1; j <= n; j++) {
       const cost = si === t.charCodeAt(j - 1) ? 0 : 1;
       curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
     }
+
     for (let j = 0; j <= n; j++) prev[j] = curr[j];
   }
+
   return prev[n];
 }
 
@@ -209,21 +170,86 @@ function getDistanceThreshold(normalizedCorrect) {
   return len <= 5 ? 1 : 2;
 }
 
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function sliderValueToDifficulty(v) {
+  const n = Number(v);
+  if (n <= 0) return "Easy";
+  if (n === 1) return "Medium";
+  return "Hard";
+}
+
+function getOptionCountForDifficulty(diff) {
+  if (diff === "Easy") return 3;
+  if (diff === "Medium") return 5;
+  return 10;
+}
+
+// --------------------
+// Deck setup
+// --------------------
+function resetDeck() {
+  const ALLOWED_WORDS = window.ALLOWED_WORDS;
+
+  if (!Array.isArray(originalVocab)) {
+    console.error("[riddle] vocab import failed or not array", originalVocab);
+    deck = [];
+    return;
+  }
+
+  if (!(ALLOWED_WORDS instanceof Set)) {
+    console.error(
+      "[riddle] window.ALLOWED_WORDS is not a Set. Make sure the ?words= param is in the URL.",
+    );
+    deck = [];
+    return;
+  }
+
+  const vocabWords = new Set(
+    originalVocab.flatMap((card) => getRomanForms(card)),
+  );
+
+  deck = originalVocab.filter((card) =>
+    getRomanForms(card).some((form) => ALLOWED_WORDS.has(form)),
+  );
+
+  console.log("========== RIDDLE DEBUG ==========");
+  console.log("Total ALLOWED_WORDS:", ALLOWED_WORDS.size);
+  console.log("ALLOWED_WORDS:", [...ALLOWED_WORDS]);
+  console.log("Total vocab roman forms available:", vocabWords.size);
+  console.log("Total words loaded into deck:", deck.length);
+  console.log(
+    "Loaded words:",
+    deck.map((card) => displayRoman(card)),
+  );
+
+  const missing = [...ALLOWED_WORDS].filter((word) => !vocabWords.has(word));
+  if (missing.length) {
+    console.warn("❌ Words NOT found in vocab.js:", missing);
+  } else {
+    console.log("✅ All ALLOWED_WORDS found in vocab.js");
+  }
+  console.log("==================================");
+}
+
 // --------------------
 // DOM + UI
 // --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Core DOM
   const riddlesContainer = document.getElementById("riddle-container");
   const wordOptions = document.getElementById("word-options");
 
-  // Status + answer area
   const statusCard = document.getElementById("status");
-  // ✅ single line (keep this ID in HTML). status-message is removed.
   const statusLine = document.getElementById("status-instruction");
   const answerArea = document.getElementById("answer-area");
 
-  // Settings DOM
   const settingsDropdown = document.getElementById("settings-dropdown");
   const settingsToggle = document.getElementById("settings-toggle");
   const arrow = document.getElementById("settings-arrow");
@@ -231,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsModal = document.getElementById("settings-modal");
   const settingsModalBody = document.getElementById("settings-modal-body");
   const settingsModalBackdrop = document.getElementById(
-    "settings-modal-backdrop"
+    "settings-modal-backdrop",
   );
   const settingsModalClose = document.getElementById("settings-modal-close");
   const settingsModalDone = document.getElementById("settings-modal-done");
@@ -249,16 +275,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   startHeaderTitleRotation();
+  resetDeck();
 
-  // ✅ Single status API
   function setStatus(text, tone = "neutral") {
     if (statusLine) statusLine.textContent = text || "";
 
     if (!statusCard) return;
     statusCard.classList.remove("is-good", "is-bad");
-
-    // Force restart animation if same class applied repeatedly
-    // eslint-disable-next-line no-unused-expressions
     statusCard.offsetHeight;
 
     if (tone === "good") statusCard.classList.add("is-good");
@@ -271,11 +294,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!show) answerArea.innerHTML = "";
   }
 
-  // Init deck — read window.ALLOWED_WORDS now that DOM is ready
-  resetDeck();
   if (!deck.length) {
+    if (wordOptions) wordOptions.style.display = "none";
+    if (riddlesContainer) {
+      riddlesContainer.innerHTML = "<p>No words loaded (deck is empty)</p>";
+    }
     setStatus("No words loaded (deck is empty)", "bad");
-    wordOptions.style.display = "none";
     return;
   }
 
@@ -349,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------
   function getSelectedLanguages() {
     return Object.keys(languageCheckboxes).filter(
-      (k) => languageCheckboxes[k]?.checked
+      (k) => languageCheckboxes[k]?.checked,
     );
   }
 
@@ -373,6 +397,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderRiddle(card) {
     const r = card?.riddles;
     const langs = getSelectedLanguages();
+
+    if (!riddlesContainer) return false;
 
     riddlesContainer.innerHTML = "";
 
@@ -411,23 +437,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getRandomIncorrectCards(count, correctCard) {
-    const pool = deck.filter(
-      (c) =>
-        c?.word?.romanUrdu && c.word.romanUrdu !== correctCard?.word?.romanUrdu
-    );
-    shuffleArray(pool);
-    return pool.slice(0, count);
+    const pool = deck.filter((c) => c?.id && c.id !== correctCard?.id);
+    return shuffleArray(pool).slice(0, count);
   }
 
   // --------------------
-  // Answer UI (MCQ or Hard typed)
+  // Answer UI
   // --------------------
   function renderAnswerUIForCurrentCard() {
-    if (!currentCard?.word) return;
+    if (!currentCard?.word || !wordOptions) return;
 
     showAnswerArea(false);
 
     if (currentDifficulty === "Hard") {
+      wordOptions.style.display = "none";
+      wordOptions.innerHTML = "";
       setStatus("Type your answer in Roman Urdu");
       renderHardModeUI();
       return;
@@ -438,6 +462,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderMultipleChoiceUI() {
+    if (!wordOptions || !currentCard) return;
+
     wordOptions.style.display = "grid";
     wordOptions.innerHTML = "";
 
@@ -450,22 +476,28 @@ document.addEventListener("DOMContentLoaded", () => {
     let locked = false;
 
     options.forEach((card) => {
-      const romanUrdu = card.word?.romanUrdu ?? "";
-      const urdu = card.word?.urdu ?? "";
-      const image = card.image ?? "";
+      const romanUrdu = displayRoman(card);
+      const urdu = getUrdu(card);
+      const image = card.image || "/qr/assets/images/noimage.png";
 
       const el = document.createElement("div");
       el.className = "word";
+
       el.innerHTML = `
-        <p class="roman-text">${romanUrdu}</p>
-        <img src="${image}" alt="${romanUrdu}" class="option-image" />
-        <p class="urdu-text">${urdu}</p>
-      `;
+    <p class="roman-text">${romanUrdu}</p>
+    <img 
+      src="${image}" 
+      alt="${romanUrdu}" 
+      class="option-image"
+     onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+    />
+    <p class="urdu-text">${urdu}</p>
+  `;
 
       el.addEventListener("click", () => {
         if (locked) return;
 
-        const isCorrect = card.word?.romanUrdu === correct.word?.romanUrdu;
+        const isCorrect = card.id === correct.id;
 
         if (isCorrect) {
           locked = true;
@@ -493,223 +525,295 @@ document.addEventListener("DOMContentLoaded", () => {
       wordOptions.appendChild(el);
     });
   }
+function renderHardModeUI() {
+  if (!answerArea || !currentCard) return;
 
-  function renderHardModeUI() {
-    let hintShown = false;
+  wordOptions.style.display = "none";
+  wordOptions.innerHTML = "";
 
-    wordOptions.style.display = "none";
-    wordOptions.innerHTML = "";
+  showAnswerArea(true);
 
-    showAnswerArea(true);
+  const correctRoman = getBaseRoman(currentCard);
+  const englishWord = getEnglish(currentCard);
+  const image = currentCard?.image ?? "";
 
-    const correctRoman = currentCard?.word?.romanUrdu ?? "";
-    const image = currentCard?.image ?? "";
+  const normalizedCorrect = normalizeRomanUrdu(correctRoman);
+  const threshold = getDistanceThreshold(normalizedCorrect);
 
-    const normalizedCorrect = normalizeRomanUrdu(correctRoman);
-    const threshold = getDistanceThreshold(normalizedCorrect);
+  const hintSteps = [
+    image
+      ? {
+          key: "image",
+          label: "Image",
+        }
+      : null,
+    {
+      key: "firstLetter",
+      label: "First letter",
+    },
+    {
+      key: "firstTwoLetters",
+      label: "First 2 letters",
+    },
+    englishWord
+      ? {
+          key: "english",
+          label: "English",
+        }
+      : null,
+  ].filter(Boolean);
 
+  let revealedHintCount = 0;
+
+  answerArea.innerHTML = `
+    <div class="hard-wrap">
+      <input
+        id="hard-answer-input"
+        class="hard-input"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        placeholder="Type your answer in Roman Urdu"
+      />
+
+      <div id="hard-feedback" class="hard-feedback"></div>
+      <div id="hard-hint-area" class="hard-hint-area"></div>
+
+      <div id="hard-actions" class="hard-actions">
+        <button id="hard-submit-btn" class="btn btn--check" type="button">Check</button>
+        <button id="hard-progress-hint-btn" class="btn btn--hint" type="button">Get Hint</button>
+        <button id="hard-reveal-btn" class="btn btn--reveal" type="button">Reveal Answer</button>
+      </div>
+    </div>
+  `;
+
+  const input = document.getElementById("hard-answer-input");
+  const feedback = document.getElementById("hard-feedback");
+  const hintArea = document.getElementById("hard-hint-area");
+  const submitBtn = document.getElementById("hard-submit-btn");
+  const progressHintBtn = document.getElementById("hard-progress-hint-btn");
+  const revealBtn = document.getElementById("hard-reveal-btn");
+
+  function setHardMessage(msg) {
+    if (feedback) feedback.textContent = msg || "";
+  }
+
+  function renderHintArea() {
+    if (!hintArea) return;
+
+    const visibleHints = hintSteps.slice(0, revealedHintCount);
+    const hints = visibleHints.map((hint) => {
+      if (hint.key === "image") {
+        return `
+          <div class="hint-card hint-card--level-1">
+            <div class="hint-card__label">Image</div>
+            <img
+              src="${image || "/qr/assets/images/noimage.png"}"
+              onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+              alt="hint image"
+              class="hint-card__image"
+            />
+          </div>
+        `;
+      }
+
+      if (hint.key === "firstLetter") {
+        return `
+          <div class="hint-chip hint-chip--level-2">
+            <strong>First letter:</strong> ${correctRoman.charAt(0) || "-"}
+          </div>
+        `;
+      }
+
+      if (hint.key === "firstTwoLetters") {
+        return `
+          <div class="hint-chip hint-chip--level-3">
+            <strong>First 2 letters:</strong> ${correctRoman.slice(0, 2) || "-"}
+          </div>
+        `;
+      }
+
+      if (hint.key === "english") {
+        return `
+          <div class="hint-chip hint-chip--level-4">
+            <strong>English:</strong> ${englishWord || "-"}
+          </div>
+        `;
+      }
+
+      return "";
+    });
+
+    hintArea.innerHTML = `
+      <div class="hard-hints-stack">
+        ${hints.join("")}
+      </div>
+    `;
+  }
+
+  function updateHintButtonLabel() {
+    if (!progressHintBtn) return;
+
+    if (revealedHintCount >= hintSteps.length) {
+      progressHintBtn.textContent = "No More Hints";
+      progressHintBtn.disabled = true;
+      return;
+    }
+
+    const nextHint = hintSteps[revealedHintCount];
+    progressHintBtn.textContent = `Get ${nextHint.label} Hint`;
+  }
+
+  function revealNextHint() {
+    if (revealedHintCount >= hintSteps.length) {
+      setHardMessage("No more hints left 🙂");
+      setStatus("All hints used");
+      updateHintButtonLabel();
+      return;
+    }
+
+    revealedHintCount += 1;
+    renderHintArea();
+    updateHintButtonLabel();
+
+    const unlocked = hintSteps[revealedHintCount - 1];
+    setHardMessage(`${unlocked.label} hint added 🙂`);
+    setStatus(`Hint unlocked: ${unlocked.label} 👀`);
+  }
+
+  function revealFinal() {
+    setStatus("All good — ready for the next one?");
     answerArea.innerHTML = `
-      <div class="hard-wrap">
-        <input
-          id="hard-answer-input"
-          class="hard-input"
-          type="text"
-          inputmode="text"
-          autocomplete="off"
-          autocapitalize="none"
-          spellcheck="false"
-          placeholder="Type your answer in Roman Urdu"
-        />
-
-        <div id="hard-feedback" class="hard-feedback"></div>
-        <div id="hard-hint-area" class="hard-hint-area"></div>
-
-        <div id="hard-actions" class="hard-actions">
-          <button id="hard-submit-btn" class="btn" type="button">Check</button>
-          <button id="hard-hint-btn" class="btn" type="button">${
-            image ? "Hint" : "Reveal Answer"
-          }</button>
+      <div style="display:grid; gap:12px; place-items:center; width:100%;">
+        <div style="font-weight:900; font-size:20px; letter-spacing:0.2px; text-align:center;">
+          ${correctRoman}
         </div>
+        <button id="hard-next-btn" class="btn btn--primary" type="button">
+          Next riddle
+        </button>
       </div>
     `;
 
-    const input = document.getElementById("hard-answer-input");
-    const feedback = document.getElementById("hard-feedback");
-    const actions = document.getElementById("hard-actions");
-    const hintArea = document.getElementById("hard-hint-area");
-    const submitBtn = document.getElementById("hard-submit-btn");
-    const hintBtn = document.getElementById("hard-hint-btn");
-
-    function setHardMessage(msg) {
-      if (feedback) feedback.textContent = msg || "";
-    }
-
-    function revealFinal() {
-      setStatus("All good — ready for the next one?");
-
-      answerArea.innerHTML = `
-        <div style="display:grid; gap:12px; place-items:center; width:100%;">
-          <div style="font-weight:900; font-size:20px; letter-spacing:0.2px; text-align:center;">
-            ${correctRoman}
-          </div>
-          <button id="hard-next-btn" class="btn btn--primary" type="button">
-            Next riddle
-          </button>
-        </div>
-      `;
-
-      document
-        .getElementById("hard-next-btn")
-        ?.addEventListener("click", () => {
-          updateRiddle();
-        });
-    }
-
-    function handleHintOrReveal() {
-      if (!image) {
-        revealFinal();
-        return;
-      }
-
-      if (!hintShown) {
-        hintShown = true;
-
-        if (hintArea) {
-          hintArea.innerHTML = `
-            <div style="display:grid; gap:8px; place-items:center; padding-top:6px;">
-              <img
-                src="${image}"
-                alt="hint image"
-                style="
-                  width:76px;
-                  height:76px;
-                  object-fit:contain;
-                  border-radius:16px;
-                  background: linear-gradient(135deg, rgba(255,224,102,0.22), rgba(40,215,183,0.16));
-                  padding:10px;
-                  border: 1px solid rgba(31,31,31,0.10);
-                "
-              />
-            </div>
-          `;
-        }
-
-        if (hintBtn) hintBtn.textContent = "Reveal Answer";
-        setHardMessage("Here's a hint 🙂");
-        setStatus("Hint unlocked 👀");
-        return;
-      }
-
-      revealFinal();
-    }
-
-    function resetButtons() {
-      if (!actions) return;
-
-      actions.innerHTML = `
-        <button id="hard-submit-btn" class="btn" type="button">Check</button>
-        <button id="hard-hint-btn" class="btn" type="button">${
-          image ? (hintShown ? "Reveal Answer" : "Hint") : "Reveal Answer"
-        }</button>
-      `;
-
-      document
-        .getElementById("hard-submit-btn")
-        ?.addEventListener("click", handleSubmit);
-
-      document
-        .getElementById("hard-hint-btn")
-        ?.addEventListener("click", handleHintOrReveal);
-    }
-
-    function showSuggestionFlow() {
-      if (!actions) return;
-
-      actions.innerHTML = `
-        <button id="hard-yes-btn" class="btn btn--primary" type="button">Yes</button>
-        <button id="hard-tryagain-btn" class="btn" type="button">Try again</button>
-        <button id="hard-hint-btn" class="btn" type="button">${
-          image ? (hintShown ? "Reveal Answer" : "Hint") : "Reveal Answer"
-        }</button>
-      `;
-
-      document.getElementById("hard-yes-btn")?.addEventListener("click", () => {
-        setHardMessage("Nice ✅");
-        setStatus("Nice ✅", "good");
-        playSound(correctSound);
-        launchConfetti();
-        setTimeout(() => updateRiddle(), 900);
-      });
-
-      document
-        .getElementById("hard-tryagain-btn")
-        ?.addEventListener("click", () => {
-          setHardMessage("No worries — try once more 🙂");
-          setStatus("Type your answer in Roman Urdu");
-          resetButtons();
-          input?.focus();
-          input?.select();
-        });
-
-      document
-        .getElementById("hard-hint-btn")
-        ?.addEventListener("click", handleHintOrReveal);
-    }
-
-    function handleSubmit() {
-      const typed = input?.value ?? "";
-      const normalizedTyped = normalizeRomanUrdu(typed);
-
-      if (!normalizedTyped) {
-        setHardMessage("Type a Roman Urdu answer above 🙂");
-        setStatus("Type an answer above 🙂", "bad");
-        input?.focus();
-        return;
-      }
-
-      if (normalizedTyped === normalizedCorrect) {
-        setHardMessage("Nice ✅");
-        setStatus("Nice ✅", "good");
-        playSound(correctSound);
-        launchConfetti();
-        setTimeout(() => updateRiddle(), 900);
-        return;
-      }
-
-      const dist = levenshtein(normalizedTyped, normalizedCorrect);
-
-      if (dist <= threshold) {
-        setHardMessage(`Did you mean: ${correctRoman}?`);
-        setStatus("Close! Confirm below 👇");
-        showSuggestionFlow();
-        return;
-      }
-
-      setHardMessage("Almost — take another guess 🙂");
-      setStatus("Almost — try again 🙂", "bad");
-      playSound(incorrectSound);
-      input?.focus();
-      input?.select();
-    }
-
-    submitBtn?.addEventListener("click", handleSubmit);
-    hintBtn?.addEventListener("click", handleHintOrReveal);
-
-    input?.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        handleSubmit();
-      }
+    document.getElementById("hard-next-btn")?.addEventListener("click", () => {
+      updateRiddle();
     });
-
-    setTimeout(() => input?.focus(), 0);
   }
 
+  function resetButtons() {
+    const actions = document.getElementById("hard-actions");
+    if (!actions) return;
+
+    actions.innerHTML = `
+      <button id="hard-submit-btn" class="btn btn--check" type="button">Check</button>
+      <button id="hard-progress-hint-btn" class="btn btn--hint" type="button">Get Hint</button>
+      <button id="hard-reveal-btn" class="btn btn--reveal" type="button">Reveal Answer</button>
+    `;
+
+    const newSubmitBtn = document.getElementById("hard-submit-btn");
+    const newProgressHintBtn = document.getElementById("hard-progress-hint-btn");
+    const newRevealBtn = document.getElementById("hard-reveal-btn");
+
+    newSubmitBtn?.addEventListener("click", handleSubmit);
+    newProgressHintBtn?.addEventListener("click", revealNextHint);
+    newRevealBtn?.addEventListener("click", revealFinal);
+
+    updateHintButtonLabel();
+  }
+
+  function showSuggestionFlow() {
+    const actions = document.getElementById("hard-actions");
+    if (!actions) return;
+
+    actions.innerHTML = `
+      <button id="hard-yes-btn" class="btn btn--primary" type="button">Yes</button>
+      <button id="hard-tryagain-btn" class="btn" type="button">Try again</button>
+      <button id="hard-progress-hint-btn" class="btn btn--hint" type="button">Get Hint</button>
+      <button id="hard-reveal-btn" class="btn btn--reveal" type="button">Reveal Answer</button>
+    `;
+
+    document.getElementById("hard-yes-btn")?.addEventListener("click", () => {
+      setHardMessage("Nice ✅");
+      setStatus("Nice ✅", "good");
+      playSound(correctSound);
+      launchConfetti();
+      setTimeout(() => updateRiddle(), 900);
+    });
+
+    document.getElementById("hard-tryagain-btn")?.addEventListener("click", () => {
+      setHardMessage("No worries — try once more 🙂");
+      setStatus("Type your answer in Roman Urdu");
+      resetButtons();
+      input?.focus();
+      input?.select();
+    });
+
+    document.getElementById("hard-progress-hint-btn")?.addEventListener("click", revealNextHint);
+    document.getElementById("hard-reveal-btn")?.addEventListener("click", revealFinal);
+
+    updateHintButtonLabel();
+  }
+
+  function handleSubmit() {
+    const typed = input?.value ?? "";
+    const normalizedTyped = normalizeRomanUrdu(typed);
+
+    if (!normalizedTyped) {
+      setHardMessage("Type a Roman Urdu answer above 🙂");
+      setStatus("Type an answer above 🙂", "bad");
+      input?.focus();
+      return;
+    }
+
+    if (normalizedTyped === normalizedCorrect) {
+      setHardMessage("Nice ✅");
+      setStatus("Nice ✅", "good");
+      playSound(correctSound);
+      launchConfetti();
+      setTimeout(() => updateRiddle(), 900);
+      return;
+    }
+
+    const dist = levenshtein(normalizedTyped, normalizedCorrect);
+
+    if (dist <= threshold) {
+      setHardMessage(`Did you mean: ${correctRoman}?`);
+      setStatus("Close! Confirm below 👇");
+      showSuggestionFlow();
+      return;
+    }
+
+    setHardMessage("Almost — take another guess 🙂");
+    setStatus("Almost — try again 🙂", "bad");
+    playSound(incorrectSound);
+    input?.focus();
+    input?.select();
+  }
+
+  submitBtn?.addEventListener("click", handleSubmit);
+  progressHintBtn?.addEventListener("click", revealNextHint);
+  revealBtn?.addEventListener("click", revealFinal);
+
+  input?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    }
+  });
+
+  updateHintButtonLabel();
+  setTimeout(() => input?.focus(), 0);
+}
+
   // --------------------
-  // Update riddle (selects a new one)
+  // Update riddle
   // --------------------
   function updateRiddle() {
     const langs = getSelectedLanguages();
+
+    if (!riddlesContainer || !wordOptions) return;
+
     if (!langs.length) {
       riddlesContainer.innerHTML =
         "<p>Please select at least one language.</p>";
@@ -751,8 +855,6 @@ document.addEventListener("DOMContentLoaded", () => {
     currentDifficulty = sliderValueToDifficulty(difficultyValue);
 
     if (difficultyLabel) difficultyLabel.textContent = currentDifficulty;
-
-    // Difficulty change does NOT change the riddle; only answer UI.
     renderAnswerUIForCurrentCard();
   }
 
@@ -764,11 +866,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   Object.values(languageCheckboxes).forEach((cb) => {
-    cb.addEventListener("change", () => {
+    cb?.addEventListener("change", () => {
       updateRiddle();
     });
   });
 
-  // Start game
   updateRiddle();
 });

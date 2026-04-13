@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Microsoft Analytics tag to track analytics  -->
@@ -114,13 +114,13 @@
         "pura",
         "awaaz",
         "roza",
-        "pyara"
+        "pyara",
       ];
 
       const wordsParam = encodeURIComponent(STORY_WORDS.join(","));
 
       document.getElementById("readaloud-link").href =
-        `/qr/assets/html/thekahanitimes.html?words=${wordsParam}`;
+        `thekahanitimes.html?words=${wordsParam}`;
 
       document.getElementById("flashcards-link").href =
         `/qr/assets/html/flashcards.html?words=${wordsParam}`;

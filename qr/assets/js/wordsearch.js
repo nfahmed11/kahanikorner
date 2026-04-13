@@ -1,6 +1,10 @@
 // word-search.js (type="module")
+// ✅ Uses new vocab.js schema:
+// word.baseRomanUrdu
+// word.baseUrdu
+// word.english
+// variants[]
 
-// ✅ Use vocab.js (NOT riddles)
 import { vocab as originalVocab } from "./vocab.js";
 
 /* ===================== Config ===================== */
@@ -12,12 +16,12 @@ const DIRS = {
 };
 
 const DIFFICULTY = [
-  { label: "Level 1", rows: 8,  cols: 8,  dirs: ["H"],                  density: 0.3  },
-  { label: "Level 2", rows: 9,  cols: 9,  dirs: ["H", "V"],             density: 0.45 },
-  { label: "Level 3", rows: 10, cols: 10, dirs: ["H", "V", "DR"],       density: 0.6  },
+  { label: "Level 1", rows: 8, cols: 8, dirs: ["H"], density: 0.3 },
+  { label: "Level 2", rows: 9, cols: 9, dirs: ["H", "V"], density: 0.45 },
+  { label: "Level 3", rows: 10, cols: 10, dirs: ["H", "V", "DR"], density: 0.6 },
   { label: "Level 4", rows: 11, cols: 11, dirs: ["H", "V", "DR", "DL"], density: 0.75 },
-  { label: "Level 5", rows: 12, cols: 12, dirs: ["H", "V", "DR", "DL"], density: 0.9  },
-  { label: "Level 6", rows: 13, cols: 13, dirs: ["H", "V", "DR", "DL"], density: 1.0  },
+  { label: "Level 5", rows: 12, cols: 12, dirs: ["H", "V", "DR", "DL"], density: 0.9 },
+  { label: "Level 6", rows: 13, cols: 13, dirs: ["H", "V", "DR", "DL"], density: 1.0 },
 ];
 
 const MAX_ATTEMPTS = 2500;
@@ -27,12 +31,33 @@ const letters = "abcdefghijklmnopqrstuvwxyz";
 
 /* ===================== Helpers ===================== */
 function getRomanForms(item) {
-  const v = item?.word?.romanUrdu;
-  if (!v) return [];
-  return Array.isArray(v) ? v : [v];
+  if (!item) return [];
+
+  const forms = [];
+
+  if (item.word?.baseRomanUrdu) {
+    forms.push(String(item.word.baseRomanUrdu).trim());
+  }
+
+  if (Array.isArray(item.variants)) {
+    item.variants.forEach((variant) => {
+      if (variant?.romanUrdu) {
+        forms.push(String(variant.romanUrdu).trim());
+      }
+    });
+  }
+
+  return [...new Set(forms.filter(Boolean))];
 }
 
-// ✅ Build WORDS lazily — called inside init() after window.ALLOWED_WORDS is set
+function getBaseRoman(item) {
+  return item?.word?.baseRomanUrdu ? String(item.word.baseRomanUrdu).trim() : "";
+}
+
+function getEnglish(item) {
+  return item?.word?.english ? String(item.word.english).trim() : "";
+}
+
 function buildWords() {
   const ALLOWED_WORDS = window.ALLOWED_WORDS;
   const ALLOWED_WORDS_LOWER =
@@ -40,34 +65,43 @@ function buildWords() {
       ? new Set([...ALLOWED_WORDS].map((w) => String(w).trim().toLowerCase()))
       : null;
 
-  const words = (Array.isArray(originalVocab) ? originalVocab : [])
-    .filter((item) => item?.word?.english && getRomanForms(item).length)
+  const source = Array.isArray(originalVocab) ? originalVocab : [];
+
+  const words = source
+    .filter((item) => getEnglish(item) && getRomanForms(item).length)
     .flatMap((item) => {
-      const en = String(item.word.english).trim();
-      return getRomanForms(item).map((ru) => ({ en, ru: String(ru).trim() }));
+      const en = getEnglish(item);
+      return getRomanForms(item).map((ru) => ({
+        en,
+        ru: String(ru).trim(),
+      }));
     })
     .filter((w) => {
       if (!ALLOWED_WORDS_LOWER) return true;
       return ALLOWED_WORDS_LOWER.has(w.ru.toLowerCase());
     });
 
-  // ----------------------------
-  // 🔥 DEBUG LOGGING
-  // ----------------------------
   console.log("========== WORD SEARCH DEBUG ==========");
   const allowedCount = ALLOWED_WORDS instanceof Set ? ALLOWED_WORDS.size : 0;
   console.log("[word-search] Total ALLOWED_WORDS:", allowedCount);
-  console.log("[word-search] ALLOWED_WORDS:", ALLOWED_WORDS instanceof Set ? [...ALLOWED_WORDS] : ALLOWED_WORDS);
+  console.log(
+    "[word-search] ALLOWED_WORDS:",
+    ALLOWED_WORDS instanceof Set ? [...ALLOWED_WORDS] : ALLOWED_WORDS
+  );
 
   const vocabRoman = new Set(
-    (Array.isArray(originalVocab) ? originalVocab : [])
+    source
       .flatMap((item) => getRomanForms(item))
       .map((w) => String(w).trim().toLowerCase())
       .filter(Boolean)
   );
+
   console.log("[word-search] Total vocab roman forms available:", vocabRoman.size);
   console.log("[word-search] Total words loaded into WORDS:", words.length);
-  console.log("[word-search] Loaded romanUrdu:", words.map((w) => w.ru.toLowerCase()));
+  console.log(
+    "[word-search] Loaded romanUrdu:",
+    words.map((w) => w.ru.toLowerCase())
+  );
 
   if (ALLOWED_WORDS_LOWER) {
     const missing = [...ALLOWED_WORDS_LOWER].filter((w) => !vocabRoman.has(w));
@@ -82,7 +116,7 @@ function buildWords() {
   return words;
 }
 
-// WORDS populated in init() after DOM/URL params are ready
+// WORDS populated in init()
 let WORDS = [];
 
 /* ===================== State ===================== */
@@ -124,7 +158,9 @@ const fmtTime = (s) => {
 };
 
 function updateRangeFill(el) {
-  const min = +el.min, max = +el.max, val = +el.value;
+  const min = +el.min;
+  const max = +el.max;
+  const val = +el.value;
   el.style.setProperty("--p", ((val - min) / (max - min)) * 100 + "%");
 }
 
@@ -137,7 +173,9 @@ const levelRange = document.getElementById("levelRange");
 const levelLabel = document.getElementById("levelLabel");
 
 const densityRange = document.getElementById("densityRange");
-if (densityRange) densityRange.closest(".slider-group")?.setAttribute("hidden", "true");
+if (densityRange) {
+  densityRange.closest(".slider-group")?.setAttribute("hidden", "true");
+}
 
 function syncDifficultyUI() {
   if (!levelRange || !levelLabel) return;
@@ -173,11 +211,13 @@ if (levelRange) {
 function startTimer() {
   state.t0 = Date.now();
   stopTimer();
+
   const timeEl = qs("#time");
   if (!state.timerOn) {
     if (timeEl) timeEl.textContent = "0:00";
     return;
   }
+
   state.tId = setInterval(() => {
     const sec = Math.floor((Date.now() - state.t0) / 1000);
     const t = qs("#time");
@@ -186,7 +226,10 @@ function startTimer() {
 }
 
 function stopTimer() {
-  if (state.tId) { clearInterval(state.tId); state.tId = null; }
+  if (state.tId) {
+    clearInterval(state.tId);
+    state.tId = null;
+  }
 }
 
 function addPenalty(seconds = 10) {
@@ -200,8 +243,11 @@ function inBoundsSize(r, c, rows, cols) {
 
 function canPlaceSize(grid, word, r, c, dir, rows, cols, allowOverlap = true) {
   for (let i = 0; i < word.length; i++) {
-    const rr = r + dir.dy * i, cc = c + dir.dx * i;
+    const rr = r + dir.dy * i;
+    const cc = c + dir.dx * i;
+
     if (!inBoundsSize(rr, cc, rows, cols)) return false;
+
     const cell = grid[rr][cc];
     if (cell) {
       if (!allowOverlap) return false;
@@ -214,7 +260,8 @@ function canPlaceSize(grid, word, r, c, dir, rows, cols, allowOverlap = true) {
 function placeWordSize(grid, word, r, c, dir) {
   const cells = [];
   for (let i = 0; i < word.length; i++) {
-    const rr = r + dir.dy * i, cc = c + dir.dx * i;
+    const rr = r + dir.dy * i;
+    const cc = c + dir.dx * i;
     grid[rr][cc] = word[i];
     cells.push({ r: rr, c: cc });
   }
@@ -226,6 +273,7 @@ function layoutWordsForSize(rawPairs, rows, cols, allowOverlap, dirs) {
     Array.from({ length: cols }, () => null)
   );
   const placed = [];
+
   const pairs = [...rawPairs].sort(
     (a, b) => norm(b.target).length - norm(a.target).length
   );
@@ -233,11 +281,14 @@ function layoutWordsForSize(rawPairs, rows, cols, allowOverlap, dirs) {
   for (const p of pairs) {
     const target = norm(p.target);
     if (!target || target.length < 2) continue;
+
     let ok = false;
 
     for (let attempts = 0; attempts < MAX_ATTEMPTS && !ok; attempts++) {
       const dir = choice(dirs);
-      const r = rand(rows), c = rand(cols);
+      const r = rand(rows);
+      const c = rand(cols);
+
       if (canPlaceSize(grid, target, r, c, dir, rows, cols, allowOverlap)) {
         const cells = placeWordSize(grid, target, r, c, dir);
         placed.push({ id: p.id, text: target, clue: p.clue, color: p.color, cells });
@@ -299,31 +350,36 @@ function buildPuzzle() {
   const chosen = shuffle([...WORDS]).slice(0, Math.min(N, WORDS.length));
 
   const pairs = chosen.map((w, idx) => {
-    const show = state.clueSide === "en" ? w.ru : w.en;
+    const target = state.clueSide === "en" ? w.ru : w.en;
     const clue = state.clueSide === "en" ? w.en : w.ru;
     const color = PALETTE[idx % PALETTE.length];
-    return { id: idx + "_" + Date.now(), clue, target: show, color };
+    return { id: `${idx}_${Date.now()}`, clue, target, color };
   });
 
   const dirs = getAllowedDirs();
-  const tryLayout = (r, c, overlap = false) => layoutWordsForSize(pairs, r, c, overlap, dirs);
+  const tryLayout = (r, c, overlap = false) =>
+    layoutWordsForSize(pairs, r, c, overlap, dirs);
 
   let res = tryLayout(state.rows, state.cols, false);
   if (!res.success) res = tryLayout(state.rows, state.cols, true);
 
   let grew = 0;
   const MAX_GROW = 8;
+
   while (!res.success && grew < MAX_GROW) {
     grew++;
     const newRows = state.rows + grew;
     const newCols = state.cols + grew;
     res = layoutWordsForSize(pairs, newRows, newCols, true, dirs);
-    if (res.success) { state.rows = newRows; state.cols = newCols; }
+    if (res.success) {
+      state.rows = newRows;
+      state.cols = newCols;
+    }
   }
 
   if (!res.success) {
     console.error("[word-search] Could not generate puzzle even after expanding board.");
-    alert("Too many/long words for this setup. Try a lower level (difficulty).");
+    alert("Too many or long words for this setup. Try a lower level.");
     return;
   }
 
@@ -342,12 +398,14 @@ function buildPuzzle() {
 
   const legendClues = qs("#legendClues");
   const legendGrid = qs("#legendGrid");
+
   if (legendClues) {
     legendClues.innerHTML =
       state.clueSide === "en"
         ? '<span class="pill">Clues: English</span>'
         : '<span class="pill">Clues: Roman Urdu</span>';
   }
+
   if (legendGrid) {
     legendGrid.innerHTML =
       state.clueSide === "en"
@@ -362,6 +420,7 @@ function buildPuzzle() {
 function renderClues() {
   const ul = qs("#clues");
   if (!ul) return;
+
   ul.innerHTML = "";
 
   for (const w of state.wordsPlaced) {
@@ -385,7 +444,11 @@ function renderClues() {
     leftWrap.append(dot, label);
 
     li.append(leftWrap);
-    li.addEventListener("click", (ev) => { ev.stopPropagation(); flashFirstCell(w.id); });
+    li.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      flashFirstCell(w.id);
+    });
+
     ul.appendChild(li);
   }
 }
@@ -406,9 +469,11 @@ function applySlidesPerView() {
 function scrollNextClue() {
   const ul = qs("#clues");
   if (!ul) return;
+
   const amount = Math.round((ul.clientWidth / slidesPerView) * 0.95);
   const maxScroll = ul.scrollWidth - ul.clientWidth;
   const currentScroll = ul.scrollLeft;
+
   if (currentScroll + amount >= maxScroll - 5) {
     ul.scrollTo({ left: 0, behavior: "smooth" });
   } else {
@@ -423,7 +488,10 @@ function startClueAuto() {
 }
 
 function stopClueAuto() {
-  if (autoScrollId) { clearInterval(autoScrollId); autoScrollId = null; }
+  if (autoScrollId) {
+    clearInterval(autoScrollId);
+    autoScrollId = null;
+  }
 }
 
 function setCarouselPaused(p) {
@@ -432,20 +500,35 @@ function setCarouselPaused(p) {
   else startClueAuto();
 }
 
-function onCluesClickToggle() { if (window.innerWidth > 768) return; setCarouselPaused(!carouselPaused); }
-function onCluesPointerDown() { if (window.innerWidth > 768) return; setCarouselPaused(true); }
-function onCluesWheel() { if (window.innerWidth > 768) return; setCarouselPaused(true); }
+function onCluesClickToggle() {
+  if (window.innerWidth > 768) return;
+  setCarouselPaused(!carouselPaused);
+}
+
+function onCluesPointerDown() {
+  if (window.innerWidth > 768) return;
+  setCarouselPaused(true);
+}
+
+function onCluesWheel() {
+  if (window.innerWidth > 768) return;
+  setCarouselPaused(true);
+}
 
 function setupClueCarousel() {
   const ul = qs("#clues");
   if (!ul) return;
+
   applySlidesPerView();
+
   ul.removeEventListener("click", onCluesClickToggle);
   ul.removeEventListener("pointerdown", onCluesPointerDown);
   ul.removeEventListener("wheel", onCluesWheel);
+
   ul.addEventListener("click", onCluesClickToggle);
   ul.addEventListener("pointerdown", onCluesPointerDown, { passive: true });
   ul.addEventListener("wheel", onCluesWheel, { passive: true });
+
   if (window.innerWidth <= 768) setCarouselPaused(false);
   else setCarouselPaused(true);
 }
@@ -454,6 +537,7 @@ function setupClueCarousel() {
 function renderGrid() {
   const g = qs("#grid");
   if (!g) return;
+
   g.innerHTML = "";
 
   const panel = g.closest(".panel");
@@ -465,7 +549,8 @@ function renderGrid() {
 
   const gs = getComputedStyle(g);
   const gap = parseFloat(gs.gap) || 4;
-  const paddingX = (parseFloat(gs.paddingLeft) || 0) + (parseFloat(gs.paddingRight) || 0);
+  const paddingX =
+    (parseFloat(gs.paddingLeft) || 0) + (parseFloat(gs.paddingRight) || 0);
   const borderX = 6;
 
   const cellsBand = panelInnerWidth - paddingX - borderX - gap * (state.cols - 1);
@@ -478,7 +563,8 @@ function renderGrid() {
     for (let c = 0; c < state.cols; c++) {
       const d = document.createElement("div");
       d.className = "cell";
-      d.style.width = d.style.height = `${cell}px`;
+      d.style.width = `${cell}px`;
+      d.style.height = `${cell}px`;
       d.style.fontSize = `${Math.max(12, Math.floor(cell * 0.52))}px`;
       d.style.lineHeight = "1";
       d.dataset.r = r;
@@ -491,7 +577,9 @@ function renderGrid() {
     }
   }
 
-  g.addEventListener("pointerleave", () => state.isDragging && clearSelection());
+  g.addEventListener("pointerleave", () => {
+    if (state.isDragging) clearSelection();
+  });
 }
 
 /* ===================== Interaction ===================== */
@@ -509,6 +597,7 @@ function onStart(ev) {
   ev.preventDefault();
   const cell = cellAt(ev);
   if (!cell) return;
+
   state.isDragging = true;
   state.selection = [cell];
   state.startCell = cell;
@@ -518,6 +607,7 @@ function onStart(ev) {
 
 function onMove(ev) {
   if (!state.isDragging) return;
+
   const elAtPoint = document.elementFromPoint(ev.clientX, ev.clientY);
   const cellEl = elAtPoint && elAtPoint.closest(".cell");
   if (!cellEl) return;
@@ -525,12 +615,16 @@ function onMove(ev) {
   const cell = { el: cellEl, r: +cellEl.dataset.r, c: +cellEl.dataset.c };
   const a = state.startCell;
   const b = cell;
-  const dr = b.r - a.r, dc = b.c - a.c;
-  const adR = Math.abs(dr), adC = Math.abs(dc);
+
+  const dr = b.r - a.r;
+  const dc = b.c - a.c;
+  const adR = Math.abs(dr);
+  const adC = Math.abs(dc);
 
   if (!(adR === 0 || adC === 0 || adR === adC)) return;
 
-  const stepR = Math.sign(dr), stepC = Math.sign(dc);
+  const stepR = Math.sign(dr);
+  const stepC = Math.sign(dc);
   const len = Math.max(adR, adC);
   const path = [];
 
@@ -564,12 +658,19 @@ function onCancel() {
 }
 
 function markSelected() {
-  qsa(".cell").forEach((el) => (el.dataset.sel = "0"));
-  for (const s of state.selection) s.el.dataset.sel = "1";
+  qsa(".cell").forEach((el) => {
+    el.dataset.sel = "0";
+  });
+
+  for (const s of state.selection) {
+    s.el.dataset.sel = "1";
+  }
 }
 
 function clearSelection() {
-  qsa(".cell").forEach((el) => (el.dataset.sel = "0"));
+  qsa(".cell").forEach((el) => {
+    el.dataset.sel = "0";
+  });
   state.selection = [];
   state.startCell = null;
 }
@@ -577,14 +678,20 @@ function clearSelection() {
 function moveClueToEnd(wordId) {
   const li = document.querySelector(`.clue[data-id="${wordId}"]`);
   if (!li || !li.parentElement) return;
+
   const parent = li.parentElement;
 
-  if (window.innerWidth <= 768) { parent.appendChild(li); return; }
+  if (window.innerWidth <= 768) {
+    parent.appendChild(li);
+    return;
+  }
 
   const allItems = [...parent.children];
   const firstRects = new Map();
   allItems.forEach((item) => firstRects.set(item, item.getBoundingClientRect()));
+
   parent.appendChild(li);
+
   const lastRects = new Map();
   allItems.forEach((item) => lastRects.set(item, item.getBoundingClientRect()));
 
@@ -593,26 +700,33 @@ function moveClueToEnd(wordId) {
     const last = lastRects.get(item);
     const dx = first.left - last.left;
     const dy = first.top - last.top;
+
     if (dx !== 0 || dy !== 0) {
       item.style.transform = `translate(${dx}px, ${dy}px)`;
       item.style.transition = "none";
       item.offsetHeight;
       item.style.transition = "transform 0.5s ease";
       item.style.transform = "translate(0, 0)";
-      item.addEventListener("transitionend", () => {
-        item.style.transform = "";
-        item.style.transition = "";
-      }, { once: true });
+      item.addEventListener(
+        "transitionend",
+        () => {
+          item.style.transform = "";
+          item.style.transition = "";
+        },
+        { once: true }
+      );
     }
   });
 }
 
 function checkSelection() {
   if (state.selection.length < 2) return;
+
   const lettersSel = state.selection.map((s) => state.grid[s.r][s.c]).join("");
   const hit = state.wordsPlaced.find(
     (w) => !state.found.has(w.id) && lettersSel === w.text
   );
+
   if (!hit) return;
 
   state.found.add(hit.id);
@@ -640,11 +754,14 @@ function checkSelection() {
 
   if (state.found.size === state.wordsPlaced.length) {
     stopTimer();
+
     const winModal = qs("#winModal");
     if (winModal) winModal.classList.add("show");
+
     const finalTime = qs("#finalTime");
     const finalWords = qs("#finalWords");
     const timeEl = qs("#time");
+
     if (finalTime && timeEl) finalTime.textContent = timeEl.textContent;
     if (finalWords) finalWords.textContent = String(state.found.size);
   }
@@ -653,6 +770,7 @@ function checkSelection() {
 function flashFirstCell(wordId) {
   const w = state.wordsPlaced.find((x) => x.id === wordId);
   if (!w) return;
+
   const first = w.cells[0];
   const el = document.querySelector(`.cell[data-r="${first.r}"][data-c="${first.c}"]`);
   if (el) {
@@ -667,6 +785,7 @@ const menuToggle = qs("#menuToggle");
 
 function setMenu(open) {
   if (!toolbar || !menuToggle) return;
+
   if (open) {
     toolbar.classList.add("open");
     toolbar.classList.remove("collapsed");
@@ -691,22 +810,36 @@ const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
 function closeIfOutside(e) {
   if (!isMobile()) return;
-  if (!toolbar.classList.contains("open")) return;
+  if (!toolbar?.classList.contains("open")) return;
+
   const clickedInsideToolbar = toolbar.contains(e.target);
-  const clickedToggle = menuToggle.contains(e.target);
+  const clickedToggle = menuToggle?.contains(e.target);
+
   if (clickedInsideToolbar || clickedToggle) return;
   setMenu(false);
 }
+
 document.addEventListener("click", closeIfOutside);
 
 let lastY = window.scrollY;
-window.addEventListener("scroll", () => {
-  if (!isMobile()) { lastY = window.scrollY; return; }
-  const y = window.scrollY;
-  const scrolledDown = y > lastY + 10;
-  lastY = y;
-  if (scrolledDown && toolbar.classList.contains("open")) setMenu(false);
-}, { passive: true });
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!isMobile()) {
+      lastY = window.scrollY;
+      return;
+    }
+
+    const y = window.scrollY;
+    const scrolledDown = y > lastY + 10;
+    lastY = y;
+
+    if (scrolledDown && toolbar?.classList.contains("open")) {
+      setMenu(false);
+    }
+  },
+  { passive: true }
+);
 
 /* ===================== Mobile status bar relocation ===================== */
 function relocateStats() {
@@ -714,6 +847,7 @@ function relocateStats() {
   const statusBar = qs("#statusBar");
   const stats = qs(".stats");
   if (!stats || !toolbar || !statusBar) return;
+
   if (window.innerWidth <= 768) {
     if (!statusBar.contains(stats)) statusBar.appendChild(stats);
   } else {
@@ -734,8 +868,9 @@ const hintBtn = qs("#hintBtn");
 if (hintBtn) {
   hintBtn.addEventListener("click", () => {
     addPenalty(10);
-    for (const w of state.wordsPlaced)
+    for (const w of state.wordsPlaced) {
       if (!state.found.has(w.id)) flashFirstCell(w.id);
+    }
   });
 }
 
@@ -746,18 +881,26 @@ if (toggleTimerBtn) {
     const wasOn = state.timerOn;
     state.timerOn = !state.timerOn;
     e.target.textContent = `Timer: ${state.timerOn ? "On" : "Off"}`;
+
     if (!wasOn && state.timerOn) buildPuzzle();
     else startTimer();
   });
 }
 
 const playAgainBtn = qs("#playAgain");
-if (playAgainBtn)
-  playAgainBtn.addEventListener("click", () => (qs("#winModal").classList.remove("show"), buildPuzzle()));
+if (playAgainBtn) {
+  playAgainBtn.addEventListener("click", () => {
+    qs("#winModal")?.classList.remove("show");
+    buildPuzzle();
+  });
+}
 
 const closeModalBtn = qs("#closeModal");
-if (closeModalBtn)
-  closeModalBtn.addEventListener("click", () => qs("#winModal").classList.remove("show"));
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => {
+    qs("#winModal")?.classList.remove("show");
+  });
+}
 
 /* ===================== Clue chooser popover ===================== */
 const clueBtn = qs("#clueBtn");
@@ -765,10 +908,16 @@ const clueMenu = qs("#clueMenu");
 
 function updateClueUI() {
   if (!clueMenu || !clueBtn) return;
-  const modeText = state.clueSide === "en" ? "English → Roman Urdu" : "Roman Urdu → English";
+
+  const modeText =
+    state.clueSide === "en"
+      ? "English → Roman Urdu"
+      : "Roman Urdu → English";
+
   clueMenu.querySelectorAll('[role="menuitemradio"]').forEach((b) => {
     b.setAttribute("aria-checked", b.dataset.side === state.clueSide ? "true" : "false");
   });
+
   clueBtn.setAttribute("aria-label", `Clues (${modeText})`);
   clueBtn.setAttribute("title", `Clues — ${modeText}`);
 }
@@ -781,6 +930,7 @@ function setClueSide(side) {
 
 function toggleClueMenu(open) {
   if (!clueMenu || !clueBtn) return;
+
   if (open) {
     clueMenu.hidden = false;
     clueBtn.setAttribute("aria-expanded", "true");
@@ -791,7 +941,11 @@ function toggleClueMenu(open) {
   }
 }
 
-if (clueBtn) clueBtn.addEventListener("click", () => { toggleClueMenu(clueMenu.hidden); });
+if (clueBtn) {
+  clueBtn.addEventListener("click", () => {
+    toggleClueMenu(clueMenu.hidden);
+  });
+}
 
 if (clueMenu) {
   clueMenu.addEventListener("click", (e) => {
@@ -800,11 +954,13 @@ if (clueMenu) {
     setClueSide(item.dataset.side);
     toggleClueMenu(false);
   });
+
   document.addEventListener("click", (e) => {
     if (clueMenu.hidden) return;
     if (e.target === clueBtn || clueMenu.contains(e.target)) return;
     toggleClueMenu(false);
   });
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") toggleClueMenu(false);
   });
@@ -823,16 +979,17 @@ const bumpHeader = () => {
   if (!h) return;
   h.classList.toggle("scrolled", window.scrollY > 2);
 };
+
 window.addEventListener("scroll", bumpHeader, { passive: true });
 bumpHeader();
 
 /* ===================== Init ===================== */
 (function init() {
-  // ✅ Build WORDS here — window.ALLOWED_WORDS is guaranteed to be set by now
   WORDS = buildWords();
 
-  if (window.innerWidth <= 768) setMenu(false);
-  else if (menuToggle) {
+  if (window.innerWidth <= 768) {
+    setMenu(false);
+  } else if (menuToggle && toolbar) {
     toolbar.classList.remove("collapsed", "open");
     menuToggle.textContent = "☰";
     menuToggle.setAttribute("aria-expanded", "false");
@@ -840,6 +997,7 @@ bumpHeader();
 
   relocateStats();
   window.addEventListener("resize", relocateStats);
+  window.addEventListener("resize", applySlidesPerView);
 
   syncDifficultyUI();
   selectDifficulty(0);
