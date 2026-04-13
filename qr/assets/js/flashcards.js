@@ -1,17 +1,27 @@
-import { vocab as originalVocab } from "./vocab.js";
+import {
+  buildDeck,
+  getCardColor,
+  getImageSrc,
+  getUrdu,
+  getEnglish,
+  displayRoman,
+  audio,
+  setupMenu,
+  renderHintBlock,
+  attachHintListeners,
+  removeHintBlock,
+} from "./flashcard-utils.js";
 
 // --------------------
 // State
 // --------------------
 let currentIndex = 0;
 let deck = [];
-let isQuizMode = false;
 let isEnglishToUrdu = false;
-let correctAnswers = 0;
 let showImage = false;
 
 // --------------------
-// DOM Lookups
+// DOM
 // --------------------
 const flashcard = document.getElementById("flashcard");
 const flashcardFront = document.getElementById("flashcard-front");
@@ -20,141 +30,35 @@ const progressFill = document.querySelector(".progress-fill");
 const progressText = document.getElementById("progress-text");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
-const shuffleBtn = document.getElementById("shuffle-btn");
-const quizBtn = document.getElementById("quiz-btn");
 const toggleLangBtn = document.getElementById("toggle-lang");
 const navButtons = document.getElementById("nav-buttons");
 const toggleImageBtn = document.getElementById("toggle-image");
-const shuffleButton = document.getElementById("shuffle-btn");
+const menuToggle = document.getElementById("menu-toggle");
+const menuDropdown = document.getElementById("menu-dropdown");
 
-// Hard fail if DOM is missing
-const missing = [];
-if (!flashcard) missing.push("flashcard");
-if (!flashcardFront) missing.push("flashcard-front");
-if (!flashcardBack) missing.push("flashcard-back");
-if (!progressFill) missing.push(".progress-fill");
-if (!progressText) missing.push("progress-text");
-if (!prevBtn) missing.push("prev-btn");
-if (!nextBtn) missing.push("next-btn");
-if (!shuffleBtn) missing.push("shuffle-btn");
-if (!quizBtn) missing.push("quiz-btn");
-if (!toggleLangBtn) missing.push("toggle-lang");
-if (!navButtons) missing.push("nav-buttons");
-if (!toggleImageBtn) missing.push("toggle-image");
+// --------------------
+// Menu
+// --------------------
+const { closeMenu } = setupMenu(menuToggle, menuDropdown);
 
-if (missing.length) {
-  console.error("[flashcards] Missing DOM elements:", missing);
-  throw new Error(
-    "Flashcards init failed: missing DOM elements: " + missing.join(", "),
-  );
+// --------------------
+// Card color
+// --------------------
+function applyCardColor(index) {
+  const color = getCardColor(index);
+  flashcardFront.style.setProperty("--card-color", color);
+  flashcardBack.style.setProperty("--card-color", color);
 }
 
 // --------------------
-// Audio
+// Menu label updates
 // --------------------
-const sparkleSound = new Audio("/qr/assets/audio/sparkle.mp3");
-const correctSound = new Audio("/qr/assets/audio/success.wav");
-const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
-const cardFlipSound = new Audio("/qr/assets/audio/cardflip.mp3");
-
-// --------------------
-// Data helpers for NEW vocab schema
-// --------------------
-
-function getImageSrc(card) {
-  return card?.image || "/qr/assets/images/noimage.png";
-}
-
-function getRomanForms(card) {
-  if (!card) return [];
-
-  const forms = [];
-
-  if (card.word?.baseRomanUrdu) {
-    forms.push(card.word.baseRomanUrdu);
-  }
-
-  if (Array.isArray(card.variants)) {
-    card.variants.forEach((variant) => {
-      if (variant?.romanUrdu) forms.push(variant.romanUrdu);
-    });
-  }
-
-  return [...new Set(forms)];
-}
-
-function primaryRoman(card) {
-  return card?.word?.baseRomanUrdu || "";
-}
-
-function getUrdu(card) {
-  return card?.word?.baseUrdu || "";
-}
-
-function getEnglish(card) {
-  return card?.word?.english || "";
-}
-
-function matchesAllowed(card) {
-  const forms = getRomanForms(card);
-  return forms.some((w) => ALLOWED_WORDS.has(w));
-}
-
-function displayRoman(card) {
-  const forms = getRomanForms(card);
-
-  // Prefer the exact form that appears in ALLOWED_WORDS
-  const matched = forms.find((w) => ALLOWED_WORDS.has(w));
-  return matched || card?.word?.baseRomanUrdu || "";
-}
-
-// --------------------
-// Deck setup
-// --------------------
-function resetDeck({ shuffle = false } = {}) {
-  if (!Array.isArray(originalVocab)) {
-    console.error(
-      "[flashcards] vocab import failed: originalVocab is not an array",
-      originalVocab,
-    );
-    deck = [];
-    return;
-  }
-
-  // Build lookup set of all available roman forms:
-  // base word + variants
-  const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
-
-  // Precompute missing allowed words
-  const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
-
-  // Filter deck to allowed words
-  deck = originalVocab.filter(matchesAllowed);
-
-  // ----------------------------
-  // Debug logging
-  // ----------------------------
-  console.log("========== FLASHCARDS DEBUG ==========");
-  console.log("[flashcards] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
-  console.log("[flashcards] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-  console.log(
-    "[flashcards] Total vocab roman forms available:",
-    vocabWords.size,
-  );
-
-  const loaded = deck.map((card) => displayRoman(card));
-  console.log("[flashcards] Total words loaded into deck:", deck.length);
-  console.log("[flashcards] Loaded words:", loaded);
-
-  if (missingWords.length) {
-    console.warn("[flashcards] ❌ Words NOT found in vocab.js:", missingWords);
-  } else {
-    console.log("[flashcards] ✅ All ALLOWED_WORDS found in vocab.js");
-  }
-
-  console.log("======================================");
-
-  if (shuffle) deck.sort(() => Math.random() - 0.5);
+function updateMenuStates() {
+  const langLabel = document.getElementById("toggle-lang-label");
+  const imgLabel = document.getElementById("toggle-image-label");
+  if (langLabel) langLabel.textContent = isEnglishToUrdu ? "Urdu → English" : "English → Urdu";
+  if (imgLabel) imgLabel.textContent = showImage ? "Hide Image" : "Show Image";
+  toggleImageBtn.classList.toggle("active", showImage);
 }
 
 // --------------------
@@ -162,361 +66,97 @@ function resetDeck({ shuffle = false } = {}) {
 // --------------------
 toggleImageBtn.addEventListener("click", () => {
   showImage = !showImage;
-  toggleImageBtn.textContent = showImage ? "Hide Image" : "Show Image";
+  updateMenuStates();
   updateFlashcard(currentIndex);
+  closeMenu();
 });
 
 toggleLangBtn.addEventListener("click", () => {
   isEnglishToUrdu = !isEnglishToUrdu;
-  toggleLangBtn.textContent = isEnglishToUrdu
-    ? "Urdu → English"
-    : "English → Urdu";
+  updateMenuStates();
   flashcard.classList.remove("flipped");
   updateFlashcard(currentIndex);
+  closeMenu();
 });
 
 // --------------------
-// Effects
-// --------------------
-function createSparkle(x, y) {
-  const sparkle = document.createElement("div");
-  sparkle.classList.add("sparkle");
-  sparkle.style.left = `${x}px`;
-  sparkle.style.top = `${y}px`;
-  document.body.appendChild(sparkle);
-  setTimeout(() => sparkle.remove(), 1000);
-}
-
-function triggerSparkles(centerX, centerY) {
-  sparkleSound.currentTime = 0;
-  sparkleSound.play().catch(() => {});
-
-  for (let i = 0; i < 10; i++) {
-    const x = centerX + (Math.random() * 60 - 30);
-    const y = centerY + (Math.random() * 30 - 15);
-    createSparkle(x, y);
-  }
-}
-
-function launchConfetti() {
-  const confettiContainer = document.createElement("div");
-  confettiContainer.classList.add("confetti-container");
-  confettiContainer.style.position = "fixed";
-  confettiContainer.style.top = "0";
-  confettiContainer.style.left = "0";
-  confettiContainer.style.width = "100%";
-  confettiContainer.style.height = "100%";
-  confettiContainer.style.pointerEvents = "none";
-  confettiContainer.style.zIndex = "9999";
-
-  for (let i = 0; i < 30; i++) {
-    const confetti = document.createElement("div");
-    confetti.style.position = "absolute";
-    confetti.style.width = "10px";
-    confetti.style.height = "10px";
-    confetti.style.borderRadius = "50%";
-    confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
-    confetti.style.top = "0";
-    confetti.style.left = `${Math.random() * 100}%`;
-    confetti.style.animation = `fall ${2 + Math.random() * 2}s ease-out`;
-    confettiContainer.appendChild(confetti);
-  }
-
-  document.body.appendChild(confettiContainer);
-  setTimeout(() => confettiContainer.remove(), 4000);
-}
-
-// --------------------
-// Quiz Complete Card
-// --------------------
-function showQuizCompleteCard() {
-  flashcardFront.innerHTML = `
-    <div class="quiz-complete-card">
-      <h2 class="text-3xl font-bold text-green-700 kid-title mb-4">🎉 Quiz Complete!</h2>
-      <p class="text-lg text-green-800 mb-6">You got ${correctAnswers} out of ${deck.length} correct!</p>
-      <div class="flex justify-center gap-4">
-        <button id="try-again" class="btn bg-white border-4 border-green-400 text-green-600 px-6 py-2 rounded-full text-lg shadow-sm">Try Again</button>
-        <button id="exit-quiz" class="btn bg-green-600 text-white px-6 py-2 rounded-full text-lg shadow-sm">Exit Quiz Mode</button>
-      </div>
-    </div>`;
-  flashcardBack.innerHTML = "";
-
-  const tryAgain = document.getElementById("try-again");
-  const exitQuiz = document.getElementById("exit-quiz");
-
-  tryAgain?.addEventListener("click", () => {
-    resetDeck({ shuffle: true });
-    currentIndex = 0;
-    correctAnswers = 0;
-    updateFlashcard(currentIndex);
-  });
-
-  exitQuiz?.addEventListener("click", () => {
-    isQuizMode = false;
-    correctAnswers = 0;
-    currentIndex = 0;
-
-    resetDeck({ shuffle: false });
-
-    quizBtn.textContent = "Quiz Mode";
-    toggleLangBtn.style.display = "inline-block";
-    toggleImageBtn.style.display = "inline-block";
-    shuffleButton.style.display = "inline-block";
-    navButtons.style.display = "flex";
-
-    flashcard.classList.remove("flipped");
-    updateFlashcard(currentIndex);
-  });
-}
-
-// --------------------
-// Hint block
-// --------------------
-function renderHintBlock(card, side = "front") {
-  if (side !== "front") return "";
-
-  if (showImage) {
-    return `
-      <div class="absolute top-2 right-2 flex flex-col items-center space-y-1 scale-75 z-10">
-        <img src="${getImageSrc(card)}"
-onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';" alt="Word Image" class="w-24 h-24 md:w-28 md:h-28 object-contain" />
-      </div>`;
-  }
-
-  return `
-    <button id="hint-btn" class="absolute top-2 right-2 scale-90 z-10 w-32 h-32 flex flex-col items-center space-y-1">
-      <div class="relative w-full h-full">
-        <img class="filler-image w-full h-full object-contain absolute top-0 left-0"
-             src="https://cdn-icons-png.flaticon.com/512/427/427735.png" alt="Hint Icon" />
-        <img class="hint-image w-full h-full object-contain absolute top-0 left-0"
-             style="opacity: 0;" src="${getImageSrc(card)}"
-onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';" alt="Word Image" />
-      </div>
-      <span class="text-xs font-semibold text-yellow-600 bg-white border border-yellow-400 px-2 py-1 rounded-full shadow-sm">
-        Hint
-      </span>
-    </button>`;
-}
-
-function removeHintBlock() {
-  document.querySelectorAll(".top-2.right-2").forEach((el) => el.remove());
-}
-
-function attachHintListeners() {
-  document.querySelectorAll("#hint-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      const cardSection = e.target.closest(".flashcard-front, .flashcard-back");
-      if (!cardSection) return;
-
-      const hintImg = cardSection.querySelector(".hint-image");
-      const fillerImg = cardSection.querySelector(".filler-image");
-      if (!hintImg || !fillerImg) return;
-
-      fillerImg.style.opacity = "0";
-      hintImg.style.opacity = "1";
-
-      const rect = hintImg.getBoundingClientRect();
-      triggerSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
-
-      setTimeout(() => {
-        hintImg.style.opacity = "0";
-        fillerImg.style.opacity = "1";
-      }, 3000);
-    });
-  });
-}
-
-// --------------------
-// Core render
+// Core render (review only)
 // --------------------
 function updateFlashcard(index) {
   const card = deck[index];
+  const totalCards = ALLOWED_WORDS.size || deck.length;
 
   if (!deck.length) {
-    console.error("[flashcards] deck is empty");
     flashcardFront.innerHTML =
-      '<div class="text-center text-white">Deck is empty</div>';
+      '<div class="card-inner"><div class="text-center text-gray-500">Deck is empty</div></div>';
     flashcardBack.innerHTML = "";
     return;
   }
 
-  progressFill.style.width = `${((index + 1) / deck.length) * 100}%`;
-  progressText.textContent = `${index + 1}/${deck.length}`;
+  applyCardColor(index);
+  progressFill.style.width = `${((index + 1) / totalCards) * 100}%`;
+  progressText.textContent = `${index + 1}/${totalCards}`;
 
   if (!card || !card.word || !getEnglish(card)) {
     flashcardFront.innerHTML =
-      '<div class="text-center text-white">No card data</div>';
+      '<div class="card-inner"><div class="text-center text-gray-500">No card data</div></div>';
     flashcardBack.innerHTML = "";
     return;
   }
 
-  const urduLabelClass = "text-fuchsia-500";
-  const urduFontClass = "text-fuchsia-600";
-  const englishLabelClass = "text-green";
-  const englishFontClass = "text-green";
-  const urduGradient = "linear-gradient(135deg, #fbc2eb, #a6c1ee)";
-  const englishGradient = "linear-gradient(135deg, #90f7ec, #3296cc)";
-
-  if (isQuizMode) {
-    navButtons.style.display = "none";
-    flashcard.classList.remove("flipped");
-
-    flashcardFront.style.background = isEnglishToUrdu
-      ? englishGradient
-      : urduGradient;
-    flashcardBack.style.background = "";
-
-    const options = [...deck]
-      .filter((c) => getEnglish(c) !== getEnglish(card))
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 2)
-      .concat(card)
-      .sort(() => Math.random() - 0.5);
-
-    flashcardFront.innerHTML = `
-      <div class="relative w-full h-full flex flex-col justify-center text-center gap-4 px-4">
-        <div class="text-sm ${
-          isEnglishToUrdu ? englishLabelClass : urduLabelClass
-        } text-center mt-2">
-          ${isEnglishToUrdu ? "English" : "Urdu"}
-        </div>
-
-        <div class="flex-grow flex flex-col justify-center items-center text-center gap-3">
-          ${
-            isEnglishToUrdu
-              ? `<div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${getEnglish(
-                  card,
-                )}</div>`
-              : `<div class="text-3xl md:text-5xl font-bold text-lightpurple break-words">${displayRoman(
-                  card,
-                )}</div>
-              <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${getUrdu(
-                card,
-              )}</div>`
-          }
-        </div>
-
-        <div class="text-purple-600 text-center mt-3 mb-3">What does this mean?</div>
-
-        <div class="flex flex-col items-center mb-4">
-          ${options
-            .map((item) => {
-              const isCorrect = getEnglish(item) === getEnglish(card);
-              const label = isEnglishToUrdu
-                ? `${getUrdu(item)} (${displayRoman(item)})`
-                : getEnglish(item);
-
-              return `<button class="quiz-option btn w-3/4 max-w-xs my-1 border border-purple-300 text-purple-700 bg-white py-1 rounded-full" data-correct="${isCorrect}">${label}</button>`;
-            })
-            .join("")}
-        </div>
-
-        ${renderHintBlock(card)}
-      </div>`;
-
-    flashcardBack.innerHTML = "";
-
-    document.querySelectorAll(".quiz-option").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const isCorrect = e.target.getAttribute("data-correct") === "true";
-
-        document.querySelectorAll(".quiz-option").forEach((opt) => {
-          opt.disabled = true;
-          opt.classList.add("opacity-50", "cursor-not-allowed");
-        });
-
-        if (isCorrect) {
-          correctSound.currentTime = 0;
-          correctSound.play().catch(() => {});
-          launchConfetti();
-          e.target.classList.add("border-green-400", "text-green-600");
-          correctAnswers++;
-        } else {
-          incorrectSound.currentTime = 0;
-          incorrectSound.play().catch(() => {});
-          e.target.classList.add("border-red-400", "text-red-600", "shake");
-          setTimeout(() => e.target.classList.remove("shake"), 400);
-        }
-
-        setTimeout(() => {
-          if (currentIndex < deck.length - 1) {
-            currentIndex++;
-            updateFlashcard(currentIndex);
-          } else {
-            showQuizCompleteCard();
-          }
-        }, 1500);
-      });
-    });
-
-    attachHintListeners();
-    return;
-  }
-
-  navButtons.style.display = "flex";
+  navButtons.style.display = "";
   flashcard.classList.remove("flipped");
-  flashcardFront.style.background = isEnglishToUrdu
-    ? englishGradient
-    : urduGradient;
-  flashcardBack.style.background = isEnglishToUrdu
-    ? urduGradient
-    : englishGradient;
 
   if (isEnglishToUrdu) {
     flashcardFront.innerHTML = `
-      <div class="relative w-full h-full flex flex-col justify-between">
-        ${renderHintBlock(card, "front")}
-        <div class="text-sm ${englishLabelClass} text-center mt-2">English</div>
-        <div class="flex-grow flex justify-center items-center">
-          <div class="text-4xl md:text-6xl font-bold ${englishFontClass} text-center break-words">${getEnglish(
-            card,
-          )}</div>
+      <div class="card-inner">
+        <div class="relative w-full h-full flex flex-col justify-between">
+          ${renderHintBlock(card, { showImage })}
+          <div class="text-center mt-2"><span class="lang-badge lang-badge--english">English</span></div>
+          <div class="flex-grow flex justify-center items-center">
+            <div class="text-4xl md:text-6xl font-bold word-english text-center break-words">${getEnglish(card)}</div>
+          </div>
+          <div class="card-prompt text-center mb-4">Tap card for Urdu</div>
         </div>
-        <div class="text-sm ${englishLabelClass} text-center mb-4">Click card for Urdu</div>
       </div>`;
 
     flashcardBack.innerHTML = `
-      <div class="relative w-full h-full flex flex-col justify-between">
-        <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
-        <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-          <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(
-            card,
-          )}</div>
-          <div><img src="${
-            card.image
-          }" alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
-          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${getUrdu(
-            card,
-          )}</div>
+      <div class="card-inner">
+        <div class="relative w-full h-full flex flex-col justify-between">
+          <div class="text-center mt-2"><span class="lang-badge lang-badge--urdu">Urdu</span></div>
+          <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
+            <div class="text-4xl md:text-6xl font-bold word-roman break-words">${displayRoman(card)}</div>
+            <div><img src="${getImageSrc(card)}"
+                 onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+                 alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
+            <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu word-urdu break-words">${getUrdu(card)}</div>
+          </div>
         </div>
       </div>`;
   } else {
     flashcardFront.innerHTML = `
-      <div class="relative w-full h-full flex flex-col justify-between">
-        ${renderHintBlock(card, "front")}
-        <div class="text-sm ${urduLabelClass} text-center mt-2">Urdu</div>
-        <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-          <div class="text-4xl md:text-6xl font-bold text-lightpurple break-words">${displayRoman(
-            card,
-          )}</div>
-          <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu ${urduFontClass} break-words">${getUrdu(
-            card,
-          )}</div>
+      <div class="card-inner">
+        <div class="relative w-full h-full flex flex-col justify-between">
+          ${renderHintBlock(card, { showImage })}
+          <div class="text-center mt-2"><span class="lang-badge lang-badge--urdu">Urdu</span></div>
+          <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
+            <div class="text-4xl md:text-6xl font-bold word-roman break-words">${displayRoman(card)}</div>
+            <div class="text-4xl md:text-6xl font-bold noto-nastaliq-urdu word-urdu break-words">${getUrdu(card)}</div>
+          </div>
+          <div class="card-prompt text-center mb-4">Tap card for English</div>
         </div>
-        <div class="text-sm ${urduLabelClass} text-center mb-4">Click card for English</div>
       </div>`;
 
     flashcardBack.innerHTML = `
-      <div class="relative w-full h-full flex flex-col justify-between">
-        <div class="text-sm ${englishLabelClass} text-center mt-2">English</div>
-        <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
-          <div><img src="${getImageSrc(card)}"
-onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';" alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
-          <div class="text-6xl font-bold ${englishFontClass} text-center">${getEnglish(
-            card,
-          )}</div>
+      <div class="card-inner">
+        <div class="relative w-full h-full flex flex-col justify-between">
+          <div class="text-center mt-2"><span class="lang-badge lang-badge--english">English</span></div>
+          <div class="flex-grow flex flex-col justify-center items-center text-center gap-8">
+            <div><img src="${getImageSrc(card)}"
+                 onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+                 alt="Word Image" class="w-28 h-28 md:w-28 md:h-28 object-contain" /></div>
+            <div class="text-6xl font-bold word-english text-center">${getEnglish(card)}</div>
+          </div>
         </div>
       </div>`;
   }
@@ -525,18 +165,14 @@ onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';" alt="Word
 }
 
 // --------------------
-// More listeners
+// Listeners
 // --------------------
 flashcard.addEventListener("click", (e) => {
-  if (isQuizMode || e.target.closest("#hint-btn")) return;
-
+  if (e.target.closest("#hint-btn")) return;
   removeHintBlock();
-
-  cardFlipSound.currentTime = 0;
-  cardFlipSound.play().catch(() => {});
-
+  audio.cardFlip.currentTime = 0;
+  audio.cardFlip.play().catch(() => {});
   const isNowFlipped = flashcard.classList.toggle("flipped");
-
   if (!isNowFlipped) {
     setTimeout(() => updateFlashcard(currentIndex), 500);
   }
@@ -557,39 +193,13 @@ nextBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (isQuizMode) return;
   if (e.key === "ArrowRight") nextBtn.click();
   if (e.key === "ArrowLeft") prevBtn.click();
-});
-
-shuffleBtn.addEventListener("click", () => {
-  resetDeck({ shuffle: true });
-  currentIndex = 0;
-  updateFlashcard(currentIndex);
-});
-
-quizBtn.addEventListener("click", () => {
-  isQuizMode = !isQuizMode;
-  quizBtn.textContent = isQuizMode ? "Exit Quiz Mode" : "Quiz Mode";
-
-  toggleLangBtn.style.display = isQuizMode ? "none" : "inline-block";
-  shuffleButton.style.display = isQuizMode ? "none" : "inline-block";
-  toggleImageBtn.style.display = isQuizMode ? "none" : "inline-block";
-
-  if (isQuizMode) {
-    resetDeck({ shuffle: true });
-    currentIndex = 0;
-    correctAnswers = 0;
-  } else {
-    resetDeck({ shuffle: false });
-    currentIndex = 0;
-  }
-
-  updateFlashcard(currentIndex);
 });
 
 // --------------------
 // Init
 // --------------------
-resetDeck({ shuffle: false });
+deck = buildDeck({ shuffle: true });
+updateMenuStates();
 updateFlashcard(currentIndex);

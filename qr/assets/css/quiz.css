@@ -1,0 +1,159 @@
+/* ========== QUIZ — funky overrides on top of flashcards.css ========== */
+
+/* Vibrant animated background */
+body {
+  background: linear-gradient(135deg, #6c5ce7, #fd79a8, #fdcb6e);
+  background-size: 400% 400%;
+  animation: quizBgShift 12s ease infinite;
+}
+
+@keyframes quizBgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header pops on vibrant bg */
+.app-title {
+  font-size: 1.5rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.menu-toggle {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Quiz cards don't flip */
+.flashcard {
+  cursor: default;
+}
+
+/* Glow on card face */
+.flashcard-front,
+.flashcard-back {
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.25),
+    0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Zigzag border on all 4 sides ---------- */
+.card-inner {
+  border-radius: 0;
+  --zig: 14px;
+  -webkit-mask-image:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg),
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg),
+    conic-gradient(from 45deg at left, #0000, #000 1deg 89deg, #0000 90deg),
+    conic-gradient(from -135deg at right, #0000, #000 1deg 89deg, #0000 90deg),
+    linear-gradient(#000 0 0);
+  -webkit-mask-size:
+    var(--zig) var(--zig),
+    var(--zig) var(--zig),
+    var(--zig) var(--zig),
+    var(--zig) var(--zig),
+    calc(100% - var(--zig)) calc(100% - var(--zig));
+  -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat;
+  -webkit-mask-position: top, bottom, left, right, center;
+  -webkit-mask-composite: source-over;
+  mask-image:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg),
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg),
+    conic-gradient(from 45deg at left, #0000, #000 1deg 89deg, #0000 90deg),
+    conic-gradient(from -135deg at right, #0000, #000 1deg 89deg, #0000 90deg),
+    linear-gradient(#000 0 0);
+  mask-size:
+    var(--zig) var(--zig),
+    var(--zig) var(--zig),
+    var(--zig) var(--zig),
+    var(--zig) var(--zig),
+    calc(100% - var(--zig)) calc(100% - var(--zig));
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat;
+  mask-position: top, bottom, left, right, center;
+  mask-composite: add;
+}
+
+/* ---------- Score badge in header ---------- */
+.score-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.score-badge svg {
+  color: #fdcb6e;
+  flex-shrink: 0;
+}
+
+/* ---------- Quiz option buttons ---------- */
+.quiz-option {
+  background: #fff !important;
+  border: 3px solid #e0daf5 !important;
+  border-radius: 14px !important;
+  padding: 0.55rem 1rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #4a3d8f !important;
+  transition: all 0.2s ease !important;
+  width: 88% !important;
+  max-width: 340px !important;
+  margin: 0.3rem 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: #a29bfe !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1) !important;
+}
+
+.quiz-option:active:not(:disabled) {
+  transform: translateY(0) !important;
+}
+
+.quiz-option.border-green-400 {
+  background: #d4edda !important;
+  border-color: #48c774 !important;
+  color: #1e7e34 !important;
+}
+
+.quiz-option.border-red-400 {
+  background: #f8d7da !important;
+  border-color: #f14668 !important;
+  color: #bd2130 !important;
+}
+
+/* ---------- Question label ---------- */
+.quiz-question-label {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #6c5ce7;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Quiz complete card ---------- */
+.quiz-complete-card {
+  background: linear-gradient(135deg, #d0f0c0, #a3e4b8);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}

@@ -19,22 +19,31 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Urdu-English Flashcards</title>
+    <title>Urdu-English Quiz</title>
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- App CSS -->
+    <!-- Shared CSS + quiz overrides -->
     <link rel="stylesheet" href="/qr/assets/css/flashcards.css" />
+    <link rel="stylesheet" href="/qr/assets/css/quiz.css" />
   </head>
 
   <body>
     <div class="app-wrapper">
       <!-- Header -->
       <header class="app-header">
-        <h1 class="app-title kid-title">Flashcards</h1>
+        <h1 class="app-title kid-title">Quiz</h1>
 
         <div class="header-right">
+          <!-- Live score -->
+          <div class="score-badge kid-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span id="score-display">0</span>
+          </div>
+
           <div class="progress-section">
             <div class="progress-bar">
               <div class="progress-fill" style="width: 0%"></div>
@@ -64,22 +73,14 @@
             <span class="menu-item-label" id="toggle-lang-label">English → Urdu</span>
           </button>
 
-          <button id="toggle-image" class="menu-item" type="button">
-            <svg class="menu-item-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg>
-            <span class="menu-item-label" id="toggle-image-label">Show Image</span>
-          </button>
-
           <div class="menu-divider"></div>
 
-          <a id="quiz-link" class="menu-item" href="#">
+          <a id="flashcards-link" class="menu-item" href="#">
             <svg class="menu-item-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <line x1="2" y1="10" x2="22" y2="10"></line>
             </svg>
-            <span class="menu-item-label">Quiz Mode</span>
+            <span class="menu-item-label">Back to Flashcards</span>
           </a>
         </div>
       </header>
@@ -92,16 +93,6 @@
             <div class="flashcard-back" id="flashcard-back"></div>
           </div>
         </div>
-
-        <!-- Nav arrows -->
-        <div class="nav-arrows" id="nav-buttons">
-          <button id="prev-btn" class="arrow-btn" type="button" aria-label="Previous card">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button id="next-btn" class="arrow-btn" type="button" aria-label="Next card">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
-          </button>
-        </div>
       </main>
     </div>
 
@@ -111,7 +102,7 @@
         const params = new URLSearchParams(location.search);
         const raw = params.get("words");
         if (!raw) {
-          console.warn("[flashcards] No ?words= param found in URL. Deck will be empty.");
+          console.warn("[quiz] No ?words= param found in URL. Deck will be empty.");
           window.ALLOWED_WORDS = new Set();
           return;
         }
@@ -119,15 +110,15 @@
           raw.split(",").map((w) => w.trim()).filter(Boolean)
         );
 
-        // Set quiz link href to pass words along
-        const quizLink = document.getElementById("quiz-link");
-        if (quizLink) {
-          quizLink.href = `/qr/assets/html/quiz.html?words=${raw}`;
+        // Set flashcards link href to pass words along
+        const link = document.getElementById("flashcards-link");
+        if (link) {
+          link.href = `/qr/assets/html/flashcards.html?words=${raw}`;
         }
       })();
     </script>
 
     <!-- App JS (module) -->
-    <script type="module" src="/qr/assets/js/flashcards.js"></script>
+    <script type="module" src="/qr/assets/js/quiz.js"></script>
   </body>
 </html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kahani Korner - Word to Picture Match</title>
+  <link rel="stylesheet" href="/qr/assets/css/allcards.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-header">
+      <h1>Word to Picture Match</h1>
+      <p class="subtitle">Read the Urdu word and tap the matching picture.</p>
+    </header>
+
+    <main class="game-container">
+      <!-- HOME SCREEN -->
+      <section id="homeScreen" class="screen active">
+        <div class="card home-card">
+          <h2>Let’s Play</h2>
+          <p class="home-text">
+            Practice Urdu by reading the word and choosing the correct image.
+          </p>
+
+          <div class="difficulty-section">
+            <label for="difficultySelect">Choose Difficulty</label>
+            <select id="difficultySelect" class="difficulty-select">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+
+          <div class="home-actions">
+            <button id="startBtn" class="btn btn-primary">Play</button>
+            <button id="howToPlayBtn" class="btn btn-secondary">How to Play</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW TO PLAY SCREEN -->
+      <section id="howToPlayScreen" class="screen">
+        <div class="card">
+          <h2>How to Play</h2>
+          <div class="instructions">
+            <p>1. Read the Urdu word on the screen.</p>
+            <p>2. Look at the pictures carefully.</p>
+            <p>3. Tap the image that matches the word.</p>
+            <p>4. Finish all 10 words to see your score.</p>
+          </div>
+
+          <div class="difficulty-explainer">
+            <h3>Difficulty Levels</h3>
+            <p><strong>Easy:</strong> 2 choices</p>
+            <p><strong>Medium:</strong> 4 choices</p>
+            <p><strong>Hard:</strong> 6 choices, Urdu first, Roman Urdu hidden until hint</p>
+          </div>
+
+          <div class="screen-actions">
+            <button id="backHomeBtn" class="btn btn-primary">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAME SCREEN -->
+      <section id="gameScreen" class="screen">
+        <div class="game-topbar">
+          <button id="backToMenuBtn" class="icon-btn" aria-label="Back to menu">←</button>
+
+          <div class="topbar-stats">
+            <div class="stat-pill">
+              <span class="stat-label">Word</span>
+              <span id="progressText" class="stat-value">1 / 10</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-label">Score</span>
+              <span id="scoreText" class="stat-value">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card prompt-card">
+          <div class="prompt-meta">
+            <span id="difficultyBadge" class="difficulty-badge">Medium</span>
+          </div>
+
+          <div class="word-display">
+            <div id="urduWord" class="urdu-word">ذائقہ</div>
+            <div id="romanUrduWord" class="roman-urdu-word">zaika</div>
+            <div id="englishHint" class="english-hint hidden">flavor</div>
+          </div>
+
+          <div class="hint-actions">
+            <button id="showRomanBtn" class="btn btn-secondary hidden">Show Roman Urdu</button>
+            <button id="showEnglishBtn" class="btn btn-secondary">Show English</button>
+          </div>
+
+          <div id="feedbackText" class="feedback-text"></div>
+        </div>
+
+        <div id="choicesGrid" class="choices-grid"></div>
+      </section>
+
+      <!-- RESULTS SCREEN -->
+      <section id="resultsScreen" class="screen">
+        <div class="card results-card">
+          <h2>Great Job!</h2>
+
+          <div class="results-stats">
+            <div class="result-box">
+              <span class="result-label">Score</span>
+              <span id="finalScore" class="result-value">0</span>
+            </div>
+            <div class="result-box">
+              <span class="result-label">Accuracy</span>
+              <span id="accuracyText" class="result-value">0%</span>
+            </div>
+            <div class="result-box">
+              <span class="result-label">Correct</span>
+              <span id="correctCountText" class="result-value">0</span>
+            </div>
+          </div>
+
+          <div class="missed-section">
+            <h3>Words to Practice</h3>
+            <div id="missedWordsList" class="missed-words-list">
+              <p class="empty-missed">No missed words. Shabash!</p>
+            </div>
+          </div>
+
+          <div class="screen-actions">
+            <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
+            <button id="resultsHomeBtn" class="btn btn-secondary">Home</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/qr/assets/css/allcards.js"></script>
+</body>
+</html>

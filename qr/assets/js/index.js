@@ -116,6 +116,15 @@ function renderButtons() {
     }
 
     buttonContainerEl.appendChild(link);
+
+    // Add Quiz button right after the Flashcards button
+    if (activity.label === "Flashcards") {
+      const quizLink = document.createElement("a");
+      quizLink.className = "button";
+      quizLink.textContent = "Quiz";
+      quizLink.href = `/qr/assets/html/quiz.html?words=${wordsParam}`;
+      buttonContainerEl.appendChild(quizLink);
+    }
   });
 }
 
