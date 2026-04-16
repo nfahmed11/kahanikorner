@@ -1,0 +1,497 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+
+/* ---------- Palette ---------- */
+:root {
+  --bg: #fef5f0;
+  --surface: #ffffff;
+  --coral: #ff6b6b;
+  --coral-soft: #ffe0e0;
+  --mint: #2ec4b6;
+  --mint-soft: #d6f5f0;
+  --purple: #7c5cbf;
+  --purple-soft: #ede7f6;
+  --amber: #f59e0b;
+  --amber-soft: #fef3c7;
+  --correct: #22c55e;
+  --correct-soft: #dcfce7;
+  --wrong: #ef4444;
+  --wrong-soft: #fee2e2;
+  --text: #1e1e2e;
+  --text-muted: #8e8ea0;
+  --border: #f0e6e0;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+body {
+  font-family: "Fredoka", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.noto-nastaliq-urdu {
+  font-family: "Noto Nastaliq Urdu", serif;
+}
+
+/* ---------- Screens ---------- */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.screen.hidden { display: none; }
+
+/* ---------- Start screen ---------- */
+.screen--start {
+  background: linear-gradient(160deg, #fef5f0, #ede7f6, #d6f5f0);
+}
+
+.start-card {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  max-width: 340px;
+  width: 100%;
+}
+
+.start-icon {
+  color: var(--purple);
+  margin-bottom: 1rem;
+}
+
+.start-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--coral), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
+}
+
+.start-sub {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+/* Mode picker pills */
+.mode-picker {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  background: #f0e6e0;
+  border-radius: 14px;
+  padding: 4px;
+}
+
+.mode-btn {
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mode-btn.active {
+  background: var(--surface);
+  color: var(--purple);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.start-best {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+}
+
+/* Play button */
+.btn {
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 0.9rem 2.5rem;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn--play {
+  background: linear-gradient(135deg, var(--coral), var(--purple));
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(124, 92, 191, 0.25);
+}
+
+.btn--play:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(124, 92, 191, 0.3);
+}
+
+.btn--play:active {
+  transform: translateY(0);
+}
+
+/* ---------- Game screen ---------- */
+.screen--game {
+  flex-direction: column;
+  background: var(--bg);
+  z-index: 5;
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.hud-timer,
+.hud-combo,
+.hud-level {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.hud-icon { flex-shrink: 0; }
+
+.hud-timer {
+  background: var(--coral-soft);
+  color: var(--coral);
+}
+
+.hud-timer.danger {
+  animation: timerPulse 0.5s ease infinite alternate;
+}
+
+@keyframes timerPulse {
+  from { background: var(--wrong-soft); }
+  to { background: var(--wrong); color: #fff; }
+}
+
+.hud-level {
+  background: var(--purple-soft);
+  color: var(--purple);
+  font-size: 0.75rem;
+}
+
+.hud-combo {
+  background: var(--amber-soft);
+  color: var(--amber);
+  transition: all 0.2s;
+}
+
+.hud-combo.fire {
+  background: linear-gradient(135deg, var(--amber), var(--coral));
+  color: #fff;
+  animation: comboPop 0.3s ease;
+}
+
+@keyframes comboPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Score bar ---------- */
+.score-bar {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--purple);
+  padding: 0.1rem 0;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ---------- Prompt ---------- */
+.prompt {
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.prompt-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.prompt-word {
+  display: block;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  min-height: 2.5rem;
+  line-height: 1.3;
+}
+
+.prompt-word.urdu-text {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  direction: rtl;
+  min-height: 3rem;
+}
+
+.prompt.pop {
+  animation: promptPop 0.25s ease;
+}
+
+@keyframes promptPop {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- Grid ---------- */
+.grid {
+  flex: 1;
+  display: grid;
+  gap: 8px;
+  padding: 0.5rem 0.75rem;
+  align-content: center;
+  min-height: 0;
+}
+
+/* Dynamic columns set by JS via --cols */
+.grid {
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+}
+
+/* ---------- Grid cell ---------- */
+.cell {
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 3px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cell img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.15s;
+}
+
+.cell:active:not(.locked) {
+  transform: scale(0.95);
+}
+
+.cell:hover:not(.locked) {
+  border-color: var(--purple);
+  box-shadow: 0 4px 14px rgba(124, 92, 191, 0.12);
+}
+
+/* Correct */
+.cell.correct {
+  border-color: var(--correct);
+  background: var(--correct-soft);
+  animation: cellCorrect 0.4s ease;
+}
+
+.cell.correct img {
+  transform: scale(1.05);
+}
+
+@keyframes cellCorrect {
+  0% { transform: scale(0.92); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* Wrong */
+.cell.wrong {
+  border-color: var(--wrong);
+  background: var(--wrong-soft);
+  animation: cellShake 0.35s ease;
+}
+
+@keyframes cellShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* Reveal correct after wrong tap */
+.cell.reveal {
+  border-color: var(--correct);
+  border-width: 4px;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.3);
+}
+
+.cell.locked {
+  pointer-events: none;
+}
+
+/* ---------- Floating +score text ---------- */
+.float-score {
+  position: fixed;
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 100;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+.float-score.plus { color: var(--correct); }
+.float-score.minus { color: var(--wrong); }
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
+}
+
+/* ---------- End screen ---------- */
+.screen--end {
+  background: linear-gradient(160deg, #fef5f0, #ede7f6, #d6f5f0);
+}
+
+.end-card {
+  text-align: center;
+  padding: 2rem;
+  max-width: 360px;
+  width: 100%;
+}
+
+.end-emoji { font-size: 3.5rem; margin-bottom: 0.5rem; }
+
+.end-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 1.25rem;
+}
+
+.end-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.end-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.end-stat-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.end-stat-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.end-highscore {
+  font-size: 0.85rem;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  min-height: 1.2em;
+}
+
+/* ---------- Particles ---------- */
+.particle-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleFly 0.6s ease-out forwards;
+}
+
+@keyframes particleFly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+/* ---------- Level-up flash ---------- */
+.level-flash {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--surface);
+  padding: 0.6rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(124, 92, 191, 0.2);
+  z-index: 150;
+  animation: levelFlashAnim 1s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes levelFlashAnim {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  20% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 380px) {
+  .grid { gap: 6px; padding: 0.4rem 0.5rem; }
+  .cell { border-radius: 12px; }
+  .prompt-word { font-size: 1.3rem; }
+}
+
+@media (min-width: 600px) {
+  .grid { max-width: 480px; margin: 0 auto; }
+}

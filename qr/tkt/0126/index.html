@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <!-- Microsoft Analytics tag to track analytics  -->
+    <!-- Microsoft Analytics tag to track analytics -->
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -17,7 +17,7 @@
       })(window, document, "clarity", "script", "tp6dow982y");
     </script>
 
-    <!-- Google tag to track analytics (gtag.js) -->
+    <!-- Google tag -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
@@ -32,18 +32,13 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kahani Korner | Basant Ki Masti</title>
+    <title id="page-title">Kahani Korner Story</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" href="common.css" />
-    <base href="/qr/tkt/0126/activities/" />
-    <style>
-      .book-placeholder {
-        background-image: url("/qr/tkt/0126/assets/images/bookcover.png");
-      }
-    </style>
+    <link rel="stylesheet" href="/qr/assets/css/index.css" />
   </head>
 
   <body>
@@ -56,111 +51,141 @@
       </a>
     </header>
 
-    <h1>Basant Ki Masti</h1>
+    <h1 id="story-title"></h1>
 
     <div class="container">
-      <div class="book-placeholder"></div>
+      <div id="book-cover" class="book-placeholder"></div>
 
-      <div class="button-container">
-        <a href="thekahanitimes.html" class="button">Read Aloud</a>
-        <a href="#" id="flashcards-link" class="button">Flashcards</a>
-        <a href="#" id="matching-link" class="button">Picture Match</a>
-        <a href="#" id="riddles-link" class="button">Riddles</a>
-        <a href="#" id="memory-link" class="button">Memory Game</a>
-        <a href="#" id="wordsearch-link" class="button">Word Search</a>
-      </div>
+      <div class="level-picker" id="level-picker"></div>
+
+      <div class="button-container" id="button-container"></div>
     </div>
+
+    <script>
+      window.STORY_HOME_CONFIG = {
+        slug: "basant-ki-masti",
+        title: "Basant Ki Masti",
+        coverImage: "./assets/images/bookcover.png",
+        readAloudHref: "./activities/thekahanitimes.html",
+
+        orderedWords: [
+          "subah",
+          "jaldi",
+          "din",
+          "lagbhag",
+          "pachees",
+          "saalon",
+          "baad",
+          "shehar",
+          "phir",
+          "manayi",
+          "khirki",
+          "bahar",
+          "aasmaan",
+          "saaf",
+          "dhoop",
+          "halki",
+          "hawa",
+          "mausam",
+          "acha",
+          "peela",
+          "qameez",
+          "khush",
+          "khaas",
+          "muskurana",
+          "pata",
+          "patang",
+          "urana",
+          "chhat",
+          "shor",
+          "hansna",
+          "baatein",
+          "rang barangi",
+          "kabhi",
+          "tez",
+          "upar",
+          "sochna",
+          "bachpan",
+          "paas",
+          "ahista",
+          "dor",
+          "achanak",
+          "kat",
+          "ghoomna",
+          "neeche",
+          "udaas",
+          "khamosh",
+          "nayi",
+          "jeet",
+          "haar",
+          "khel",
+          "hissa",
+          "shaam",
+          "thand",
+          "narangi",
+          "gulabi",
+          "seekhna",
+        ],
+
+        totalLevels: 5,
+        defaultLevel: 1,
+
+        activities: [
+          {
+            id: "readaloud",
+            label: "Audio",
+            href: "./activities/thekahanitimes.html",
+            useWordsParam: true,
+          },
+          {
+            id: "flashcards",
+            label: "Flashcards",
+            href: "/qr/assets/html/flashcards.html",
+            useWordsParam: true,
+          },
+          {
+            id: "matching",
+            label: "Picture Match",
+            href: "/qr/assets/html/matching.html",
+            useWordsParam: true,
+          },
+          {
+            id: "riddles",
+            label: "Riddles",
+            href: "/qr/assets/html/riddles.html",
+            useWordsParam: true,
+          },
+          {
+            id: "memory",
+            label: "Memory Game",
+            href: "/qr/assets/html/memory.html",
+            useWordsParam: true,
+          },
+          {
+            id: "wordsearch",
+            label: "Word Search",
+            href: "/qr/assets/html/wordsearch.html",
+            useWordsParam: true,
+          },
+        ],
+      };
+    </script>
+
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
+    <script>
+      const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+      for (let i = 0; i < 15; i++) {
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.classList.add("heart");
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDelay = Math.random() * 10 + "s";
+        icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+        icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+        document.body.appendChild(icon);
+      }
+    </script>
   </body>
-
-  <script>
-    // ─── Story vocab ───────────────────────────────────────────────
-    // Single source of truth for ALL activities.
-    // Edit this list and every game updates automatically.
-    window.STORY_WORDS = [
-      "subah",
-      "jaldi",
-      "din",
-      "lagbhag",
-      "pachees",
-      "saalon",
-      "baad",
-      "shehar",
-      "phir",
-      "manayi",
-      "khirki",
-      "bahar",
-      "aasmaan",
-      "saaf",
-      "dhoop",
-      "halki",
-      "hawa",
-      "mausam",
-      "acha",
-      "peela",
-      "qameez",
-      "khush",
-      "khaas",
-      "muskurana",
-      "pata",
-      "patang",
-      "urana",
-      "chhat",
-      "shor",
-      "hansna",
-      "baatein",
-      "rang barangi",
-      "kabhi",
-      "tez",
-      "upar",
-      "sochna",
-      "bachpan",
-      "paas",
-      "ahista",
-      "dor",
-      "achanak",
-      "kat",
-      "ghoomna",
-      "neeche",
-      "udaas",
-      "khamosh",
-      "nayi",
-      "jeet",
-      "haar",
-      "khel",
-      "hissa",
-      "shaam",
-      "thand",
-      "narangi",
-      "gulabi",
-      "seekhna",
-    ];
-
-    // ─── Build activity URLs from STORY_WORDS ──────────────────────
-    const wordParam = encodeURIComponent(window.STORY_WORDS.join(","));
-    const base = location.origin + "/qr/assets/html/";
-
-    document.getElementById("flashcards-link").href =
-      base + "flashcards.html?words=" + wordParam;
-    document.getElementById("matching-link").href =
-      base + "matching.html?words=" + wordParam;
-    document.getElementById("memory-link").href =
-      base + "memory.html?words=" + wordParam;
-    document.getElementById("riddles-link").href =
-      base + "riddles.html?words=" + wordParam;
-    document.getElementById("wordsearch-link").href =
-      base + "wordsearch.html?words=" + wordParam;
-
-    // ─── Floating hearts ───────────────────────────────────────────
-    const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
-    for (let i = 0; i < 15; i++) {
-      const icon = document.createElement("img");
-      icon.src = iconSrc;
-      icon.classList.add("heart");
-      icon.style.left = Math.random() * 100 + "vw";
-      icon.style.animationDelay = Math.random() * 10 + "s";
-      icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
-      icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
-      document.body.appendChild(icon);
-    }
-  </script>
 </html>

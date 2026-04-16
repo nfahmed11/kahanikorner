@@ -296,7 +296,14 @@ main{
   overflow: hidden;
   text-align:left;
 }
-.clue.found{opacity:.75; text-decoration:line-through}
+.clue.found{opacity:.85}
+.clue .answer-reveal{
+  display:none; font-size:12px; font-weight:800; color:#1e293b;
+  text-decoration:none; margin-left:6px; opacity:0;
+  background:#ffffffcc; padding:2px 8px; border-radius:999px;
+  transition:opacity .3s ease;
+}
+.clue.found .answer-reveal{display:inline; opacity:1}
 .legend{color:#64748b; font-size:12px; margin-bottom:8px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
 .dot{width:12px; height:12px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px #e5e7eb; display:inline-block}
 
@@ -367,12 +374,40 @@ main{
 }
 
 
+/* Urdu script cells */
+.urdu-cell{
+  font-family:"Noto Nastaliq Urdu","Baloo 2",cursive;
+  text-transform:none;
+  direction:ltr;
+}
+.urdu-grid{
+  direction:ltr;
+}
+
 .cell:hover{outline:2px solid #e0f2fe;}
-.cell[data-sel="1"]{background:#f1f5f9}
+.cell[data-sel="1"]{background:#00BBF944; transform:scale(1.08); z-index:1}
 .cell[data-word="1"]{background:#dbeafe}
 .cell[data-found="1"]{background:#dbeafe; color:#0b0f19}
 .cell.pop{animation:pop .28s ease}
 @keyframes pop{50%{transform:scale(1.12)} 100%{transform:none}}
+
+/* entrance stagger */
+.cell.entrance{
+  opacity:0; transform:scale(.7);
+  animation:cellIn .3s ease forwards;
+}
+@keyframes cellIn{to{opacity:1; transform:scale(1)}}
+
+/* confetti */
+.confetti-piece{
+  position:fixed; width:10px; height:10px; border-radius:2px;
+  z-index:100; pointer-events:none;
+  animation:confettiFall 1.4s ease-out forwards;
+}
+@keyframes confettiFall{
+  0%{opacity:1; transform:translateY(0) rotate(0deg) scale(1)}
+  100%{opacity:0; transform:translateY(90vh) rotate(720deg) scale(.4)}
+}
 
 .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.18); padding:20px}
 .modal.show{display:grid}
@@ -642,8 +677,11 @@ button.primary{ background:#00BBF9; border-color:#00BBF9; color:#fff; }
 .clue-btn.primary:focus{ outline:none; box-shadow:0 0 0 3px rgba(0,187,249,.35); }
 .clue-btn.primary:active{ transform:translateY(1px); }
 
+.clue-chooser{
+  position:static;
+}
 .clue-menu{
-  position:absolute; top:calc(100% + 8px); left:0;
+  position:fixed;
   min-width: 240px;
   background:#fff; border:1px solid #eaeef7;
   border-radius:14px; padding:6px;

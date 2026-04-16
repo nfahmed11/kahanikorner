@@ -1,358 +1,290 @@
-// ✅ import your BIG vocab file
 import { vocab as originalVocab } from "./vocab.js";
 
-console.log(
-  "[tasveer] vocab loaded?",
-  Array.isArray(originalVocab),
-  originalVocab?.length,
-);
-
 // --------------------
-// Helpers for NEW vocab schema
+// Vocab helpers
 // --------------------
-
-
-function hasImagePath(card) {
-  return !!(card?.image && typeof card.image === "string");
-}
-
-function imageLoads(src) {
-  return new Promise((resolve) => {
-    if (!src) {
-      resolve(false);
-      return;
-    }
-
-    const img = new Image();
-
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-
-    img.src = src;
-  });
-}
-
-
-function getImageSrc(card) {
-  return card?.image || "/qr/assets/images/noimage.png";
-}
-
-function hasValidImage(card) {
-  return (
-    card?.image &&
-    typeof card.image === "string" &&
-    !card.image.includes("noimage")
-  );
-}
-
 function getRomanForms(card) {
   if (!card) return [];
-
   const forms = [];
-
-  // base word
-  if (card.word?.baseRomanUrdu) {
-    forms.push(card.word.baseRomanUrdu);
-  }
-
-  // all variants
+  if (card.word?.baseRomanUrdu) forms.push(card.word.baseRomanUrdu);
   if (Array.isArray(card.variants)) {
-    card.variants.forEach((variant) => {
-      if (variant?.romanUrdu) forms.push(variant.romanUrdu);
-    });
+    card.variants.forEach((v) => { if (v?.romanUrdu) forms.push(v.romanUrdu); });
   }
-
   return [...new Set(forms)];
 }
 
-function getBaseRoman(card) {
-  return card?.word?.baseRomanUrdu || "";
-}
-
-function getUrdu(card) {
-  return card?.word?.baseUrdu || "";
-}
-
-function getEnglish(card) {
-  return card?.word?.english || "";
-}
-
-function matchesAllowed(card) {
-  const forms = getRomanForms(card);
-  return forms.some((w) => window.ALLOWED_WORDS?.has(w));
-}
+function getUrdu(card) { return card?.word?.baseUrdu || ""; }
+function getEnglish(card) { return card?.word?.english || ""; }
 
 function displayRoman(card) {
   const forms = getRomanForms(card);
   const matched = forms.find((w) => window.ALLOWED_WORDS?.has(w));
-  return matched || getBaseRoman(card) || "";
+  return matched || card?.word?.baseRomanUrdu || "";
 }
 
-let deck = [];
+function matchesAllowed(card) {
+  return getRomanForms(card).some((w) => window.ALLOWED_WORDS?.has(w));
+}
 
-async function resetDeck() {
-  const ALLOWED_WORDS = window.ALLOWED_WORDS;
+function imageLoads(src) {
+  return new Promise((resolve) => {
+    if (!src) return resolve(false);
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+}
 
-  if (!(ALLOWED_WORDS instanceof Set)) {
-    console.error(
-      "[tasveer] window.ALLOWED_WORDS is missing or not a Set. " +
-        "Make sure the ?words= param is in the URL and the HTML script block runs before matching.js",
-    );
-    deck = [];
-    return;
-  }
+// --------------------
+// Audio
+// --------------------
+const correctSound = new Audio("/qr/assets/audio/success.wav");
+const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
 
-  if (!Array.isArray(originalVocab)) {
-    console.error(
-      "[tasveer] vocab import failed or not an array",
-      originalVocab,
-    );
-    deck = [];
-    return;
-  }
+// --------------------
+// Build deck (only cards with working images)
+// --------------------
+async function buildDeck() {
+  if (!Array.isArray(originalVocab)) return [];
 
-  const vocabWords = new Set(originalVocab.flatMap((c) => getRomanForms(c)));
+  const allowed = originalVocab.filter(matchesAllowed);
 
-  const allowedCards = originalVocab.filter(matchesAllowed);
-
-  const imageCheckResults = await Promise.all(
-    allowedCards.map(async (card) => {
-      const ok = hasImagePath(card) && (await imageLoads(card.image));
+  const results = await Promise.all(
+    allowed.map(async (card) => {
+      const ok = card?.image && typeof card.image === "string" &&
+        !card.image.includes("noimage") && (await imageLoads(card.image));
       return { card, ok };
-    }),
+    })
   );
 
-  deck = imageCheckResults
-    .filter((result) => result.ok)
-    .map((result) => result.card);
+  const deck = results.filter((r) => r.ok).map((r) => r.card);
 
-  const loaded = deck.map((card) => displayRoman(card));
-  const missingWords = [...ALLOWED_WORDS].filter((w) => !vocabWords.has(w));
-  const skippedNoImage = imageCheckResults
-    .filter((result) => !result.ok)
-    .map((result) => displayRoman(result.card));
-
-  console.log("========== TASVEER DEBUG ==========");
-  console.log("[tasveer] Total ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0);
-  console.log("[tasveer] ALLOWED_WORDS:", [...ALLOWED_WORDS]);
-  console.log("[tasveer] Total vocab roman forms available:", vocabWords.size);
-  console.log("[tasveer] Total words loaded into deck:", deck.length);
-  console.log("[tasveer] Loaded words:", loaded);
-
-  if (missingWords.length) {
-    console.warn("[tasveer] ❌ Words NOT found in vocab.js:", missingWords);
-  } else {
-    console.log("[tasveer] ✅ All ALLOWED_WORDS found in vocab.js");
-  }
-
-  if (skippedNoImage.length) {
-    console.warn(
-      "[tasveer] ❌ Skipped words with missing/broken images:",
-      skippedNoImage,
-    );
-  }
-
-  console.log("===================================");
-
-  if (deck.length === 0) {
-    console.warn("[tasveer] deck empty after filtering.");
-    console.warn(
-      "[tasveer] sample vocab baseRomanUrdu:",
-      originalVocab.slice(0, 20).map((v) => v.word?.baseRomanUrdu),
-    );
-  }
+  console.log(`[match] Deck: ${deck.length} cards with valid images`);
+  return deck;
 }
 
-function launchConfetti() {
-  const confettiContainer = document.createElement("div");
-  confettiContainer.className = "confetti-container";
+// --------------------
+// Particle burst effect
+// --------------------
+function burstParticles(x, y) {
+  const container = document.createElement("div");
+  container.className = "particle-burst";
+  container.style.left = `${x}px`;
+  container.style.top = `${y}px`;
 
-  for (let i = 0; i < 40; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = `${Math.random() * 100}%`;
-    c.style.width = `${6 + Math.random() * 8}px`;
-    c.style.height = `${6 + Math.random() * 8}px`;
-    c.style.animationDuration = `${1.4 + Math.random() * 1.2}s`;
-    c.style.animationDelay = `${Math.random() * 0.2}s`;
-    c.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
-    confettiContainer.appendChild(c);
+  const colors = ["#e91e90", "#00c9b7", "#84cc16", "#f472b6", "#38bdf8", "#fbbf24"];
+
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    const angle = (Math.PI * 2 * i) / 14;
+    const dist = 40 + Math.random() * 50;
+    p.style.setProperty("--tx", `${Math.cos(angle) * dist}px`);
+    p.style.setProperty("--ty", `${Math.sin(angle) * dist}px`);
+    p.style.background = colors[i % colors.length];
+    container.appendChild(p);
   }
 
-  document.body.appendChild(confettiContainer);
-  setTimeout(() => confettiContainer.remove(), 2500);
+  document.body.appendChild(container);
+  setTimeout(() => container.remove(), 800);
 }
 
+// --------------------
+// Streak flash bar
+// --------------------
+function showStreakFlash() {
+  const bar = document.createElement("div");
+  bar.className = "streak-flash";
+  document.body.appendChild(bar);
+  setTimeout(() => bar.remove(), 700);
+}
+
+// --------------------
+// Game
+// --------------------
 document.addEventListener("DOMContentLoaded", async () => {
-  const correctSound = new Audio("/qr/assets/audio/success.wav");
-  const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
-
+  const imageCard = document.getElementById("image-card");
   const targetImage = document.getElementById("target-image");
-  const wordOptions = document.getElementById("word-options");
-  const dropZone = document.getElementById("drop-zone");
+  const answersEl = document.getElementById("answers");
+  const feedbackEl = document.getElementById("feedback");
+  const progressText = document.getElementById("progress-text");
+  const streakText = document.getElementById("streak-text");
+  const completeModal = document.getElementById("complete-modal");
+  const modalEmoji = document.getElementById("modal-emoji");
+  const modalTitle = document.getElementById("modal-title");
+  const modalStat = document.getElementById("modal-stat");
+  const playAgainBtn = document.getElementById("play-again-btn");
 
-  const timerDisplay = document.getElementById("timer");
-  const scoreDisplay = document.getElementById("score");
-  const timerToggle = document.getElementById("timer-toggle");
-  const gameStatus = document.getElementById("game-status");
-  const timerStatusLabel = document.getElementById("timer-status-label");
-
-  if (!targetImage || !wordOptions || !dropZone) {
-    console.error("[tasveer] Missing required DOM elements.");
-    return;
-  }
-
-  await resetDeck();
+  const deck = await buildDeck();
 
   if (!deck.length) {
-    dropZone.textContent = "No words loaded (deck is empty)";
+    const game = document.querySelector(".game");
+    game.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">📸</div>
+        <p>No pictures available for these words yet.</p>
+      </div>`;
     return;
   }
 
-  let timer = 60;
-  let score = 0;
-  let gameInterval;
+  // Shuffle and create a finite round
+  let round = [];
+  let roundIndex = 0;
+  let streak = 0;
+  let bestStreak = 0;
+  let correctCount = 0;
 
-  function startGame() {
-    score = 0;
-    scoreDisplay.textContent = `Score: ${score}`;
-
-    timer = 60;
-    timerDisplay.textContent = `Time: ${timer}s`;
-    timerDisplay.classList.remove("flash-red");
-
-    clearInterval(gameInterval);
-    gameInterval = setInterval(() => {
-      if (timer > 0) {
-        timer--;
-        timerDisplay.textContent = `Time: ${timer}s`;
-
-        if (timer <= 5) {
-          timerDisplay.classList.add("flash-red");
-        } else {
-          timerDisplay.classList.remove("flash-red");
-        }
-      } else {
-        clearInterval(gameInterval);
-        const finalScore = document.getElementById("final-score");
-        const gameOverModal = document.getElementById("game-over-modal");
-
-        if (finalScore) finalScore.textContent = score;
-        if (gameOverModal) gameOverModal.classList.remove("hidden");
-      }
-    }, 1000);
+  function newRound() {
+    round = [...deck].sort(() => Math.random() - 0.5);
+    roundIndex = 0;
+    streak = 0;
+    correctCount = 0;
+    updateStats();
   }
 
-  function loadNewWord() {
-    if (!deck.length) {
-      dropZone.textContent = "No words loaded";
+  function updateStats() {
+    progressText.textContent = `${Math.min(roundIndex + 1, round.length)}/${round.length}`;
+    streakText.textContent = streak;
+  }
+
+  function showFeedback(text, type) {
+    feedbackEl.textContent = text;
+    feedbackEl.className = `feedback feedback--${type}`;
+    setTimeout(() => { feedbackEl.className = "feedback hidden"; }, 1200);
+  }
+
+  // Encouraging phrases
+  const correctPhrases = ["Shabash!", "Wah wah!", "Zabardast!", "Sahi jawab!", "Bohat acha!"];
+  const wrongPhrases = ["Koi baat nahi!", "Agla try!", "Dobara koshish!"];
+
+  function loadCard() {
+    if (roundIndex >= round.length) {
+      showComplete();
       return;
     }
 
-    dropZone.innerHTML = "Choose the correct word!";
-    dropZone.classList.remove("correct", "incorrect", "answered");
-    wordOptions.innerHTML = "";
+    const card = round[roundIndex];
+    updateStats();
 
-    const correctCard = deck[Math.floor(Math.random() * deck.length)];
-    const correctUrdu = getUrdu(correctCard);
+    // Reset states
+    imageCard.className = "image-card";
+    feedbackEl.className = "feedback hidden";
+    answersEl.innerHTML = "";
 
-    targetImage.src = correctCard.image;
-    targetImage.setAttribute("data-correct-urdu", correctUrdu);
+    // Set image
+    targetImage.src = card.image;
 
-    const wrongChoices = deck
+    // Build options: 1 correct + 2 wrong
+    const correctUrdu = getUrdu(card);
+    const wrongs = deck
       .filter((c) => getUrdu(c) !== correctUrdu)
-      .sort(() => 0.5 - Math.random())
+      .sort(() => Math.random() - 0.5)
       .slice(0, 2);
 
-    const options = [...wrongChoices, correctCard].sort(
-      () => 0.5 - Math.random(),
-    );
+    const options = [...wrongs, card].sort(() => Math.random() - 0.5);
 
-    options.forEach((card) => {
-      const cardUrdu = getUrdu(card);
+    options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.className = "answer-btn";
+      btn.type = "button";
+      const optUrdu = getUrdu(opt);
+      const isCorrect = optUrdu === correctUrdu;
 
-      const wordDiv = document.createElement("div");
-      wordDiv.classList.add("word");
-      wordDiv.setAttribute("data-urdu", cardUrdu);
+      btn.innerHTML = `
+        <span class="roman">${displayRoman(opt)}</span>
+        <span class="sep">|</span>
+        <span class="urdu">${optUrdu}</span>`;
 
-      wordDiv.innerHTML = `
-        <div class="roman">${displayRoman(card)}</div>
-        <div class="urdu">${cardUrdu}</div>
-      `;
-
-      wordDiv.addEventListener("click", () => {
-        if (dropZone.classList.contains("answered")) return;
-
-        const correctUrduValue = targetImage.getAttribute("data-correct-urdu");
-
-        document.querySelectorAll(".word").forEach((btn) => {
-          btn.style.pointerEvents = "none";
-          btn.style.opacity = "0.6";
-        });
-
-        dropZone.classList.add("answered");
-
-        if (cardUrdu === correctUrduValue) {
-          dropZone.innerHTML = `
-            <div class="roman">${displayRoman(card)}</div>
-            <div class="urdu">${cardUrdu}</div>
-          `;
-          dropZone.classList.add("correct");
-
-          correctSound.currentTime = 0;
-          correctSound.play().catch(() => {});
-          launchConfetti();
-
-          if (timerToggle?.checked) {
-            score++;
-            scoreDisplay.textContent = `Score: ${score}`;
-          }
-        } else {
-          dropZone.classList.add("incorrect");
-
-          incorrectSound.currentTime = 0;
-          incorrectSound.play().catch(() => {});
-
-          const correctOption = [...document.querySelectorAll(".word")].find(
-            (btn) => btn.getAttribute("data-urdu") === correctUrduValue,
-          );
-
-          if (correctOption) {
-            correctOption.style.border = "2px solid var(--correct)";
-            correctOption.style.background =
-              "linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2))";
-            correctOption.style.boxShadow = "0 0 10px rgba(16, 185, 129, 0.5)";
-          }
-        }
-
-        setTimeout(() => {
-          document
-            .querySelectorAll(".word")
-            .forEach((btn) => btn.removeAttribute("style"));
-          loadNewWord();
-        }, 1500);
-      });
-
-      wordOptions.appendChild(wordDiv);
+      btn.addEventListener("click", (e) => handleAnswer(e, btn, isCorrect, correctUrdu));
+      answersEl.appendChild(btn);
     });
   }
 
-  loadNewWord();
+  function handleAnswer(e, clickedBtn, isCorrect, correctUrdu) {
+    // Disable all buttons
+    const allBtns = answersEl.querySelectorAll(".answer-btn");
+    allBtns.forEach((b) => { b.disabled = true; });
 
-  timerToggle?.addEventListener("change", () => {
-    clearInterval(gameInterval);
+    if (isCorrect) {
+      // Correct!
+      clickedBtn.classList.add("correct");
+      imageCard.classList.add("correct");
 
-    if (timerToggle.checked) {
-      if (timerStatusLabel) timerStatusLabel.textContent = "Timer ON";
-      if (gameStatus) gameStatus.classList.remove("hidden");
-      startGame();
+      correctSound.currentTime = 0;
+      correctSound.play().catch(() => {});
+
+      // Particles from the clicked button
+      const rect = clickedBtn.getBoundingClientRect();
+      burstParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+      streak++;
+      correctCount++;
+      if (streak > bestStreak) bestStreak = streak;
+
+      // Streak milestones
+      if (streak > 0 && streak % 3 === 0) {
+        showStreakFlash();
+        showFeedback(`🔥 ${streak} streak!`, "correct");
+      } else {
+        const phrase = correctPhrases[Math.floor(Math.random() * correctPhrases.length)];
+        showFeedback(phrase, "correct");
+      }
     } else {
-      if (timerStatusLabel) timerStatusLabel.textContent = "Timer OFF";
-      if (gameStatus) gameStatus.classList.add("hidden");
+      // Wrong
+      clickedBtn.classList.add("wrong");
+      imageCard.classList.add("wrong");
+
+      incorrectSound.currentTime = 0;
+      incorrectSound.play().catch(() => {});
+
+      // Reveal the correct answer
+      allBtns.forEach((b) => {
+        const btnUrdu = b.querySelector(".urdu")?.textContent;
+        if (btnUrdu === correctUrdu) {
+          b.classList.add("reveal");
+        }
+      });
+
+      streak = 0;
+
+      const phrase = wrongPhrases[Math.floor(Math.random() * wrongPhrases.length)];
+      showFeedback(phrase, "wrong");
     }
+
+    updateStats();
+
+    // Next card after delay
+    setTimeout(() => {
+      roundIndex++;
+      loadCard();
+    }, 1600);
+  }
+
+  function showComplete() {
+    const total = round.length;
+    const pct = Math.round((correctCount / total) * 100);
+
+    let emoji = "🎉";
+    let title = "Kamaal kar diya!";
+    if (pct < 50) { emoji = "💪"; title = "Acha try!"; }
+    else if (pct < 80) { emoji = "⭐"; title = "Bohat acha!"; }
+    else if (pct < 100) { emoji = "🌟"; title = "Laajawab!"; }
+
+    modalEmoji.textContent = emoji;
+    modalTitle.textContent = title;
+    modalStat.textContent = `${correctCount}/${total} correct — Best streak: ${bestStreak}`;
+
+    completeModal.classList.remove("hidden");
+  }
+
+  playAgainBtn.addEventListener("click", () => {
+    completeModal.classList.add("hidden");
+    newRound();
+    loadCard();
   });
 
-  document.getElementById("restart-button")?.addEventListener("click", () => {
-    location.reload();
-  });
+  // Start
+  newRound();
+  loadCard();
 });

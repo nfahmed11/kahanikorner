@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+        t = l.createElement(r); t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Speed Grid</title>
+    <link rel="stylesheet" href="/qr/assets/css/speedgrid.css" />
+  </head>
+
+  <body>
+    <!-- START SCREEN -->
+    <div id="screen-start" class="screen screen--start">
+      <div class="start-card">
+        <div class="start-icon">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <h1 class="start-title">Speed Grid</h1>
+        <p class="start-sub">Tap the matching picture — fast!</p>
+
+        <div class="mode-picker">
+          <button class="mode-btn active" id="mode-roman" type="button">Roman Only</button>
+          <button class="mode-btn" id="mode-mixed" type="button">Roman + Urdu</button>
+        </div>
+
+        <div class="start-best" id="start-best"></div>
+        <button class="btn btn--play" id="btn-play">Play</button>
+      </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="screen-game" class="screen screen--game hidden">
+      <!-- HUD -->
+      <div class="hud">
+        <div class="hud-timer" id="hud-timer">
+          <svg class="hud-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="timer-text">60</span>
+        </div>
+        <div class="hud-level" id="hud-level">Level 1</div>
+        <div class="hud-combo" id="hud-combo">
+          <span id="combo-text">x1</span>
+        </div>
+      </div>
+
+      <!-- Score -->
+      <div class="score-bar">
+        <span id="score-text">0</span>
+      </div>
+
+      <!-- Prompt -->
+      <div class="prompt" id="prompt">
+        <span class="prompt-label">Find</span>
+        <span class="prompt-word" id="prompt-word"></span>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <!-- END SCREEN -->
+    <div id="screen-end" class="screen screen--end hidden">
+      <div class="end-card">
+        <div class="end-emoji" id="end-emoji">🎉</div>
+        <h2 class="end-title" id="end-title">Nice!</h2>
+        <div class="end-stats">
+          <div class="end-stat">
+            <span class="end-stat-val" id="end-score">0</span>
+            <span class="end-stat-label">Score</span>
+          </div>
+          <div class="end-stat">
+            <span class="end-stat-val" id="end-best-combo">0</span>
+            <span class="end-stat-label">Best Combo</span>
+          </div>
+          <div class="end-stat">
+            <span class="end-stat-val" id="end-correct">0</span>
+            <span class="end-stat-label">Correct</span>
+          </div>
+        </div>
+        <div class="end-highscore" id="end-highscore"></div>
+        <button class="btn btn--play" id="btn-retry">Play Again</button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get("words");
+        if (!raw) { window.ALLOWED_WORDS = new Set(); return; }
+        window.ALLOWED_WORDS = new Set(raw.split(",").map((w) => w.trim()).filter(Boolean));
+      })();
+    </script>
+    <script type="module" src="/qr/assets/js/speedgrid.js"></script>
+  </body>
+</html>

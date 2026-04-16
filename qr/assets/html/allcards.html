@@ -1,142 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kahani Korner - Word to Picture Match</title>
-  <link rel="stylesheet" href="/qr/assets/css/allcards.css" />
-</head>
-<body>
-  <div class="app-shell">
-    <header class="top-header">
-      <h1>Word to Picture Match</h1>
-      <p class="subtitle">Read the Urdu word and tap the matching picture.</p>
+  <head>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Cards | Kahani Korner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Grandstander:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/allcards.css" />
+  </head>
+
+  <body>
+    <!-- ====== Hero header ====== -->
+    <header class="hero">
+      <div class="hero-inner">
+        <button type="button" class="back-btn" id="back-btn" aria-label="Back to story">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <div class="hero-text">
+          <h1 class="hero-title">All Cards</h1>
+          <p class="hero-subtitle">Tap cards to flip and explore vocabulary from this story</p>
+        </div>
+      </div>
     </header>
 
-    <main class="game-container">
-      <!-- HOME SCREEN -->
-      <section id="homeScreen" class="screen active">
-        <div class="card home-card">
-          <h2>Let’s Play</h2>
-          <p class="home-text">
-            Practice Urdu by reading the word and choosing the correct image.
-          </p>
+    <!-- ====== Controls toolbar ====== -->
+    <section class="toolbar" aria-label="Card controls">
+      <!-- Primary row: search + direction + sort + filter toggle -->
+      <div class="toolbar-primary">
+        <div class="search-wrap">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search words..."
+            aria-label="Search vocabulary cards"
+            autocomplete="off" />
+          <button type="button" id="search-clear" class="search-clear hidden" aria-label="Clear search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
 
-          <div class="difficulty-section">
-            <label for="difficultySelect">Choose Difficulty</label>
-            <select id="difficultySelect" class="difficulty-select">
-              <option value="easy">Easy</option>
-              <option value="medium" selected>Medium</option>
-              <option value="hard">Hard</option>
+        <div class="toolbar-controls">
+          <div class="chip-group" role="group" aria-label="Language direction">
+            <button type="button" class="chip active" data-direction="urdu-english" aria-pressed="true">Urdu &rarr; Eng</button>
+            <button type="button" class="chip" data-direction="english-urdu" aria-pressed="false">Eng &rarr; Urdu</button>
+          </div>
+
+          <label class="select-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5h10"/><path d="M11 9h7"/><path d="M11 13h4"/><path d="M3 17l3 3 3-3"/><path d="M6 18V4"/></svg>
+            <select id="sort-select" aria-label="Sort cards">
+              <option value="default">Default</option>
+              <option value="az-english">A-Z English</option>
+              <option value="az-roman">A-Z Roman Urdu</option>
+              <option value="unknown-first">Unknown First</option>
+              <option value="known-first">Known First</option>
             </select>
-          </div>
+          </label>
 
-          <div class="home-actions">
-            <button id="startBtn" class="btn btn-primary">Play</button>
-            <button id="howToPlayBtn" class="btn btn-secondary">How to Play</button>
-          </div>
+          <button type="button" class="chip chip--toggle-filters" id="toggle-filters-btn" aria-expanded="false" aria-controls="filter-panel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/><circle cx="6" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>
+            <span id="filters-label">Filters</span>
+            <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
         </div>
-      </section>
+      </div>
 
-      <!-- HOW TO PLAY SCREEN -->
-      <section id="howToPlayScreen" class="screen">
-        <div class="card">
-          <h2>How to Play</h2>
-          <div class="instructions">
-            <p>1. Read the Urdu word on the screen.</p>
-            <p>2. Look at the pictures carefully.</p>
-            <p>3. Tap the image that matches the word.</p>
-            <p>4. Finish all 10 words to see your score.</p>
-          </div>
-
-          <div class="difficulty-explainer">
-            <h3>Difficulty Levels</h3>
-            <p><strong>Easy:</strong> 2 choices</p>
-            <p><strong>Medium:</strong> 4 choices</p>
-            <p><strong>Hard:</strong> 6 choices, Urdu first, Roman Urdu hidden until hint</p>
-          </div>
-
-          <div class="screen-actions">
-            <button id="backHomeBtn" class="btn btn-primary">Back</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- GAME SCREEN -->
-      <section id="gameScreen" class="screen">
-        <div class="game-topbar">
-          <button id="backToMenuBtn" class="icon-btn" aria-label="Back to menu">←</button>
-
-          <div class="topbar-stats">
-            <div class="stat-pill">
-              <span class="stat-label">Word</span>
-              <span id="progressText" class="stat-value">1 / 10</span>
-            </div>
-            <div class="stat-pill">
-              <span class="stat-label">Score</span>
-              <span id="scoreText" class="stat-value">0</span>
-            </div>
+      <!-- Expandable filter panel -->
+      <div class="filter-panel" id="filter-panel" hidden>
+        <div class="filter-section">
+          <span class="filter-section-label">Show</span>
+          <div class="chip-group" role="group" aria-label="Display mode">
+            <button type="button" class="chip active" data-display="both" aria-pressed="true">Both</button>
+            <button type="button" class="chip" data-display="image" aria-pressed="false">Image</button>
+            <button type="button" class="chip" data-display="word" aria-pressed="false">Word</button>
           </div>
         </div>
 
-        <div class="card prompt-card">
-          <div class="prompt-meta">
-            <span id="difficultyBadge" class="difficulty-badge">Medium</span>
-          </div>
-
-          <div class="word-display">
-            <div id="urduWord" class="urdu-word">ذائقہ</div>
-            <div id="romanUrduWord" class="roman-urdu-word">zaika</div>
-            <div id="englishHint" class="english-hint hidden">flavor</div>
-          </div>
-
-          <div class="hint-actions">
-            <button id="showRomanBtn" class="btn btn-secondary hidden">Show Roman Urdu</button>
-            <button id="showEnglishBtn" class="btn btn-secondary">Show English</button>
-          </div>
-
-          <div id="feedbackText" class="feedback-text"></div>
-        </div>
-
-        <div id="choicesGrid" class="choices-grid"></div>
-      </section>
-
-      <!-- RESULTS SCREEN -->
-      <section id="resultsScreen" class="screen">
-        <div class="card results-card">
-          <h2>Great Job!</h2>
-
-          <div class="results-stats">
-            <div class="result-box">
-              <span class="result-label">Score</span>
-              <span id="finalScore" class="result-value">0</span>
-            </div>
-            <div class="result-box">
-              <span class="result-label">Accuracy</span>
-              <span id="accuracyText" class="result-value">0%</span>
-            </div>
-            <div class="result-box">
-              <span class="result-label">Correct</span>
-              <span id="correctCountText" class="result-value">0</span>
-            </div>
-          </div>
-
-          <div class="missed-section">
-            <h3>Words to Practice</h3>
-            <div id="missedWordsList" class="missed-words-list">
-              <p class="empty-missed">No missed words. Shabash!</p>
-            </div>
-          </div>
-
-          <div class="screen-actions">
-            <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
-            <button id="resultsHomeBtn" class="btn btn-secondary">Home</button>
+        <div class="filter-section">
+          <span class="filter-section-label">Filter</span>
+          <div class="chip-group" role="group" aria-label="Filters">
+            <button type="button" class="chip chip--filter" data-filter="verbs" aria-pressed="false">Verbs</button>
+            <button type="button" class="chip chip--filter" data-filter="new-only" aria-pressed="false">New Only</button>
           </div>
         </div>
-      </section>
-    </main>
-  </div>
 
-  <script type="module" src="/qr/assets/css/allcards.js"></script>
-</body>
+        <div class="filter-section">
+          <span class="filter-section-label">Density</span>
+          <div class="chip-group" role="group" aria-label="Card density">
+            <button type="button" class="chip active" data-density="comfortable" aria-pressed="true">Comfortable</button>
+            <button type="button" class="chip" data-density="compact" aria-pressed="false">Compact</button>
+          </div>
+        </div>
+
+        <button type="button" class="chip chip--reset" id="reset-view-btn" aria-label="Reset all view settings">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Reset View
+        </button>
+      </div>
+    </section>
+
+    <!-- ====== Card tabs + counter ====== -->
+    <section class="card-tabs-bar" aria-label="Card filter tabs">
+      <div class="card-tabs" role="tablist">
+        <button type="button" class="card-tab active" data-tab="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="card-tab card-tab--known" data-tab="known" role="tab" aria-selected="false">Known</button>
+        <button type="button" class="card-tab card-tab--new" data-tab="new" role="tab" aria-selected="false">New</button>
+      </div>
+      <span class="card-count" id="card-count">0/0</span>
+    </section>
+
+    <!-- ====== Cards grid ====== -->
+    <main class="cards-grid" id="cards-grid" aria-label="Vocabulary cards"></main>
+
+    <!-- ====== Empty state: no story vocab ====== -->
+    <div class="empty-state" id="empty-no-story" hidden>
+      <div class="empty-illustration">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+      </div>
+      <h2 class="empty-title">No Story Vocabulary Found</h2>
+      <p class="empty-desc">Open <strong>All Cards</strong> from a story page to explore its vocabulary.</p>
+      <div class="empty-actions">
+        <button type="button" class="btn btn--primary" id="retry-btn">Try Again</button>
+        <button type="button" class="btn btn--secondary" id="empty-back-btn">Back to Story</button>
+      </div>
+    </div>
+
+    <!-- ====== Empty state: no results from filter/search ====== -->
+    <div class="empty-state" id="empty-no-results" hidden>
+      <div class="empty-illustration">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+      </div>
+      <h2 class="empty-title">No Cards Match</h2>
+      <p class="empty-desc">Try adjusting your search or filters.</p>
+      <button type="button" class="btn btn--primary" id="reset-filters-btn">Reset Filters</button>
+    </div>
+
+    <script type="module" src="/qr/assets/js/allcards.js"></script>
+  </body>
 </html>

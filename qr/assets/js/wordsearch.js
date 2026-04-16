@@ -25,9 +25,10 @@ const DIFFICULTY = [
 ];
 
 const MAX_ATTEMPTS = 2500;
-const PALETTE = ["#9B5DE5", "#F15BB5", "#FEE440", "#00BBF9", "#00F5D4"];
+const PALETTE = ["#9B5DE5", "#F15BB5", "#FF9F43", "#6C5CE7", "#2ED573"];
 const MAX_CELL_PX = 34;
 const letters = "abcdefghijklmnopqrstuvwxyz";
+const urduLetters = "ابپتٹثجچحخدڈذرڑزژسشصضطظعغفقکگلمنوہھیے";
 
 /* ===================== Helpers ===================== */
 function getRomanForms(item) {
@@ -58,6 +59,10 @@ function getEnglish(item) {
   return item?.word?.english ? String(item.word.english).trim() : "";
 }
 
+function getUrdu(item) {
+  return item?.word?.baseUrdu ? String(item.word.baseUrdu).trim() : "";
+}
+
 function buildWords() {
   const ALLOWED_WORDS = window.ALLOWED_WORDS;
   const ALLOWED_WORDS_LOWER =
@@ -71,9 +76,11 @@ function buildWords() {
     .filter((item) => getEnglish(item) && getRomanForms(item).length)
     .flatMap((item) => {
       const en = getEnglish(item);
+      const ur = getUrdu(item);
       return getRomanForms(item).map((ru) => ({
         en,
         ru: String(ru).trim(),
+        ur,
       }));
     })
     .filter((w) => {
@@ -143,7 +150,7 @@ const qs = (s) => document.querySelector(s);
 const qsa = (s) => [...document.querySelectorAll(s)];
 const rand = (n) => Math.floor(Math.random() * n);
 const choice = (arr) => arr[rand(arr.length)];
-const norm = (s) => (s || "").toLowerCase().replace(/[^a-z]/g, "");
+const norm = (s) => (s || "").toLowerCase().replace(/[^a-z\u0600-\u06FF\u0750-\u077F]/g, "");
 const shuffle = (a) => {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -165,6 +172,13 @@ function updateRangeFill(el) {
 }
 
 function getAllowedDirs() {
+  if (state.clueSide === "ur") {
+    // Mirror x-axis so horizontal words read right-to-left
+    return state.allowedDirs.map((k) => {
+      const d = DIRS[k];
+      return { dx: -d.dx, dy: d.dy };
+    });
+  }
   return state.allowedDirs.map((k) => DIRS[k]);
 }
 
@@ -183,7 +197,8 @@ function syncDifficultyUI() {
   levelRange.max = String(DIFFICULTY.length - 1);
   levelRange.step = "1";
   levelRange.value = String(state.difficultyIdx);
-  levelLabel.textContent = DIFFICULTY[state.difficultyIdx].label;
+  const wordCount = computeWordCountForCurrentDifficulty();
+  levelLabel.textContent = `${DIFFICULTY[state.difficultyIdx].label} · ${wordCount} words`;
   updateRangeFill(levelRange);
   levelRange.setAttribute("aria-label", "Difficulty (Level 1 → Level 6)");
 }
@@ -202,7 +217,6 @@ if (levelRange) {
   levelRange.addEventListener("input", (e) => {
     updateRangeFill(e.target);
     const idx = +e.target.value;
-    if (levelLabel) levelLabel.textContent = DIFFICULTY[idx]?.label ?? "Level";
     selectDifficulty(idx);
   });
 }
@@ -316,7 +330,8 @@ function layoutWordsForSize(rawPairs, rows, cols, allowOverlap, dirs) {
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      if (!grid[r][c]) grid[r][c] = letters[rand(letters.length)];
+      const fill = state.clueSide === "ur" ? urduLetters : letters;
+      if (!grid[r][c]) grid[r][c] = fill[rand(fill.length)];
     }
   }
 
@@ -349,12 +364,23 @@ function buildPuzzle() {
   const N = computeWordCountForCurrentDifficulty();
   const chosen = shuffle([...WORDS]).slice(0, Math.min(N, WORDS.length));
 
-  const pairs = chosen.map((w, idx) => {
-    const target = state.clueSide === "en" ? w.ru : w.en;
-    const clue = state.clueSide === "en" ? w.en : w.ru;
-    const color = PALETTE[idx % PALETTE.length];
-    return { id: `${idx}_${Date.now()}`, clue, target, color };
-  });
+  const pairs = chosen
+    .filter((w) => state.clueSide !== "ur" || w.ur)
+    .map((w, idx) => {
+      let target, clue;
+      if (state.clueSide === "ur") {
+        target = w.ur;
+        clue = w.en;
+      } else if (state.clueSide === "en") {
+        target = w.ru;
+        clue = w.en;
+      } else {
+        target = w.en;
+        clue = w.ru;
+      }
+      const color = PALETTE[idx % PALETTE.length];
+      return { id: `${idx}_${Date.now()}`, clue, target, color };
+    });
 
   const dirs = getAllowedDirs();
   const tryLayout = (r, c, overlap = false) =>
@@ -399,18 +425,14 @@ function buildPuzzle() {
   const legendClues = qs("#legendClues");
   const legendGrid = qs("#legendGrid");
 
-  if (legendClues) {
-    legendClues.innerHTML =
-      state.clueSide === "en"
-        ? '<span class="pill">Clues: English</span>'
-        : '<span class="pill">Clues: Roman Urdu</span>';
-  }
+  const clueLabels = { en: "English", ru: "Roman Urdu", ur: "English" };
+  const gridLabels = { en: "Roman Urdu", ru: "English", ur: "اردو" };
 
+  if (legendClues) {
+    legendClues.innerHTML = `<span class="pill">Clues: ${clueLabels[state.clueSide]}</span>`;
+  }
   if (legendGrid) {
-    legendGrid.innerHTML =
-      state.clueSide === "en"
-        ? '<span class="pill">Find: Roman Urdu</span>'
-        : '<span class="pill">Find: English</span>';
+    legendGrid.innerHTML = `<span class="pill">Find: ${gridLabels[state.clueSide]}</span>`;
   }
 
   startTimer();
@@ -438,10 +460,14 @@ function renderClues() {
     label.style.marginLeft = "6px";
     label.setAttribute("data-role", "label");
 
+    const answer = document.createElement("span");
+    answer.className = "answer-reveal";
+    answer.textContent = `→ ${w.text}`;
+
     const leftWrap = document.createElement("span");
     leftWrap.style.display = "inline-flex";
     leftWrap.style.alignItems = "center";
-    leftWrap.append(dot, label);
+    leftWrap.append(dot, label, answer);
 
     li.append(leftWrap);
     li.addEventListener("click", (ev) => {
@@ -453,9 +479,7 @@ function renderClues() {
   }
 }
 
-/* ===================== Mobile Clue Carousel ===================== */
-let autoScrollId = null;
-let carouselPaused = false;
+/* ===================== Mobile Clue Carousel (manual swipe only) ===================== */
 let slidesPerView = 2;
 
 function applySlidesPerView() {
@@ -466,71 +490,10 @@ function applySlidesPerView() {
   ul.style.setProperty("--slides", String(slidesPerView));
 }
 
-function scrollNextClue() {
-  const ul = qs("#clues");
-  if (!ul) return;
-
-  const amount = Math.round((ul.clientWidth / slidesPerView) * 0.95);
-  const maxScroll = ul.scrollWidth - ul.clientWidth;
-  const currentScroll = ul.scrollLeft;
-
-  if (currentScroll + amount >= maxScroll - 5) {
-    ul.scrollTo({ left: 0, behavior: "smooth" });
-  } else {
-    ul.scrollBy({ left: amount, behavior: "smooth" });
-  }
-}
-
-function startClueAuto() {
-  if (window.innerWidth > 768) return;
-  stopClueAuto();
-  autoScrollId = setInterval(scrollNextClue, 2200);
-}
-
-function stopClueAuto() {
-  if (autoScrollId) {
-    clearInterval(autoScrollId);
-    autoScrollId = null;
-  }
-}
-
-function setCarouselPaused(p) {
-  carouselPaused = p;
-  if (p) stopClueAuto();
-  else startClueAuto();
-}
-
-function onCluesClickToggle() {
-  if (window.innerWidth > 768) return;
-  setCarouselPaused(!carouselPaused);
-}
-
-function onCluesPointerDown() {
-  if (window.innerWidth > 768) return;
-  setCarouselPaused(true);
-}
-
-function onCluesWheel() {
-  if (window.innerWidth > 768) return;
-  setCarouselPaused(true);
-}
-
 function setupClueCarousel() {
   const ul = qs("#clues");
   if (!ul) return;
-
   applySlidesPerView();
-
-  ul.removeEventListener("click", onCluesClickToggle);
-  ul.removeEventListener("pointerdown", onCluesPointerDown);
-  ul.removeEventListener("wheel", onCluesWheel);
-
-  ul.addEventListener("click", onCluesClickToggle);
-  ul.addEventListener("pointerdown", onCluesPointerDown, { passive: true });
-  ul.addEventListener("wheel", onCluesWheel, { passive: true });
-
-  if (window.innerWidth <= 768) setCarouselPaused(false);
-  else setCarouselPaused(true);
 }
 
 /* ===================== Render Grid ===================== */
@@ -553,23 +516,30 @@ function renderGrid() {
     (parseFloat(gs.paddingLeft) || 0) + (parseFloat(gs.paddingRight) || 0);
   const borderX = 6;
 
+  const isUrdu = state.clueSide === "ur";
+  const maxCell = isUrdu ? 42 : MAX_CELL_PX;
   const cellsBand = panelInnerWidth - paddingX - borderX - gap * (state.cols - 1);
-  const cell = Math.min(MAX_CELL_PX, Math.max(24, Math.floor(cellsBand / state.cols)));
+  const cell = Math.min(maxCell, Math.max(26, Math.floor(cellsBand / state.cols)));
 
   g.style.gridTemplateColumns = `repeat(${state.cols}, ${cell}px)`;
   g.style.gridAutoRows = `${cell}px`;
+  g.classList.toggle("urdu-grid", isUrdu);
 
   for (let r = 0; r < state.rows; r++) {
     for (let c = 0; c < state.cols; c++) {
       const d = document.createElement("div");
-      d.className = "cell";
+      d.className = "cell" + (isUrdu ? " urdu-cell" : "");
       d.style.width = `${cell}px`;
       d.style.height = `${cell}px`;
-      d.style.fontSize = `${Math.max(12, Math.floor(cell * 0.52))}px`;
+      d.style.fontSize = isUrdu
+        ? `${Math.max(11, Math.floor(cell * 0.4))}px`
+        : `${Math.max(12, Math.floor(cell * 0.52))}px`;
       d.style.lineHeight = "1";
       d.dataset.r = r;
       d.dataset.c = c;
       d.textContent = state.grid[r][c];
+      d.classList.add("entrance");
+      d.style.animationDelay = `${(r * state.cols + c) * 8}ms`;
       d.addEventListener("pointerdown", onStart);
       d.addEventListener("pointerenter", onMove);
       d.addEventListener("pointerup", onEnd);
@@ -754,6 +724,7 @@ function checkSelection() {
 
   if (state.found.size === state.wordsPlaced.length) {
     stopTimer();
+    launchConfetti();
 
     const winModal = qs("#winModal");
     if (winModal) winModal.classList.add("show");
@@ -769,13 +740,34 @@ function checkSelection() {
 
 function flashFirstCell(wordId) {
   const w = state.wordsPlaced.find((x) => x.id === wordId);
-  if (!w) return;
+  if (!w || w.cells.length < 1) return;
 
-  const first = w.cells[0];
-  const el = document.querySelector(`.cell[data-r="${first.r}"][data-c="${first.c}"]`);
-  if (el) {
-    el.classList.add("hint-flash");
-    setTimeout(() => el.classList.remove("hint-flash"), 1600);
+  const cellsToFlash = w.cells.slice(0, 2);
+  cellsToFlash.forEach((cell) => {
+    const el = document.querySelector(`.cell[data-r="${cell.r}"][data-c="${cell.c}"]`);
+    if (el) {
+      el.classList.add("hint-flash");
+      el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      setTimeout(() => el.classList.remove("hint-flash"), 1600);
+    }
+  });
+}
+
+/* ===================== Confetti ===================== */
+function launchConfetti() {
+  const colors = ["#9B5DE5", "#F15BB5", "#FF9F43", "#6C5CE7", "#2ED573"];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement("div");
+    el.className = "confetti-piece";
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.left = `${Math.random() * 100}vw`;
+    el.style.top = `${-10 - Math.random() * 20}px`;
+    el.style.width = `${6 + Math.random() * 8}px`;
+    el.style.height = `${6 + Math.random() * 8}px`;
+    el.style.animationDelay = `${Math.random() * 0.5}s`;
+    el.style.animationDuration = `${1 + Math.random() * 1}s`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2500);
   }
 }
 
@@ -876,15 +868,7 @@ if (hintBtn) {
 
 const toggleTimerBtn = qs("#toggleTimer");
 if (toggleTimerBtn) {
-  toggleTimerBtn.addEventListener("click", (e) => {
-    state.userTimerOverridden = true;
-    const wasOn = state.timerOn;
-    state.timerOn = !state.timerOn;
-    e.target.textContent = `Timer: ${state.timerOn ? "On" : "Off"}`;
-
-    if (!wasOn && state.timerOn) buildPuzzle();
-    else startTimer();
-  });
+  toggleTimerBtn.style.display = "none";
 }
 
 const playAgainBtn = qs("#playAgain");
@@ -909,10 +893,12 @@ const clueMenu = qs("#clueMenu");
 function updateClueUI() {
   if (!clueMenu || !clueBtn) return;
 
-  const modeText =
-    state.clueSide === "en"
-      ? "English → Roman Urdu"
-      : "Roman Urdu → English";
+  const modeTexts = {
+    en: "English → Roman Urdu",
+    ru: "Roman Urdu → English",
+    ur: "English → اردو",
+  };
+  const modeText = modeTexts[state.clueSide] || modeTexts.en;
 
   clueMenu.querySelectorAll('[role="menuitemradio"]').forEach((b) => {
     b.setAttribute("aria-checked", b.dataset.side === state.clueSide ? "true" : "false");
@@ -934,6 +920,10 @@ function toggleClueMenu(open) {
   if (open) {
     clueMenu.hidden = false;
     clueBtn.setAttribute("aria-expanded", "true");
+    // Position the fixed menu relative to the button
+    const rect = clueBtn.getBoundingClientRect();
+    clueMenu.style.top = `${rect.bottom + 8}px`;
+    clueMenu.style.left = `${Math.max(8, rect.left)}px`;
     clueMenu.querySelector(`[data-side="${state.clueSide}"]`)?.focus();
   } else {
     clueMenu.hidden = true;

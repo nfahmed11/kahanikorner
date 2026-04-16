@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Microsoft Analytics tag to track analytics  -->
+    <!-- Microsoft Clarity -->
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -17,98 +17,65 @@
       })(window, document, "clarity", "script", "tp6dow982y");
     </script>
 
-    <!-- Google tag to track analytics (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-N97Z02BGG4");
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Matching Game</title>
+    <title>Picture Match</title>
 
     <link rel="stylesheet" href="/qr/assets/css/matching.css" />
   </head>
 
   <body>
-    <div class="top-bar">
-      <div class="title">
-        <div class="roman">TASVEER SE PEHCHAAN</div>
-        <div class="urdu">تصویر سے پہچان</div>
-        <div class="english">Guess the Picture</div>
-      </div>
-
-      <div class="timer-container">
-        <div class="timer-toggle-wrapper">
-          <span id="timer-status-label">Timer OFF</span>
-          <label class="switch">
-            <input type="checkbox" id="timer-toggle" />
-            <span class="slider"></span>
-          </label>
+    <!-- Header bar -->
+    <header class="header">
+      <h1 class="header-title">Picture Match</h1>
+      <div class="header-stats">
+        <div class="stat-pill stat-pill--progress">
+          <span id="progress-text">0/0</span>
         </div>
-
-        <div class="game-status hidden" id="game-status">
-          <div id="timer">Time: 60s</div>
-          <div id="score">Score: 0</div>
+        <div class="stat-pill stat-pill--streak" id="streak-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span id="streak-text">0</span>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="container">
-      <div class="game-area">
-        <div class="image-container">
-          <img
-            id="target-image"
-            src=""
-            alt="Target Image"
-            class="target-image" />
-        </div>
-
-        <div class="drop-zone" id="drop-zone">Select An Answer</div>
-
-        <div class="word-options" id="word-options">
-          <!-- Words will be inserted dynamically -->
-        </div>
+    <!-- Game area -->
+    <main class="game">
+      <!-- Image card -->
+      <div class="image-card" id="image-card">
+        <img id="target-image" src="" alt="Guess this word" class="image-card-img" />
       </div>
-    </div>
 
-    <!-- Custom Game Over Modal -->
-    <div id="game-over-modal" class="modal hidden">
-      <div class="modal-content">
-        <h2>⏰ Time's Up!</h2>
-        <p>Your final score is: <span id="final-score">0</span></p>
-        <button id="restart-button">Play Again!</button>
+      <!-- Feedback overlay (shows on answer) -->
+      <div class="feedback" id="feedback"></div>
+
+      <!-- Answer buttons -->
+      <div class="answers" id="answers"></div>
+    </main>
+
+    <!-- Game complete modal -->
+    <div class="modal-backdrop hidden" id="complete-modal">
+      <div class="modal-card">
+        <div class="modal-emoji" id="modal-emoji">🎉</div>
+        <h2 class="modal-title" id="modal-title">Nice work!</h2>
+        <p class="modal-stat" id="modal-stat"></p>
+        <div class="modal-actions">
+          <button class="modal-btn modal-btn--primary" id="play-again-btn">Play Again</button>
+        </div>
       </div>
     </div>
 
     <script>
-      // Read ALLOWED_WORDS from the ?words= query param set by the story's index.html
       (function () {
         const params = new URLSearchParams(location.search);
         const raw = params.get("words");
         if (!raw) {
-          console.warn(
-            "[matching] No ?words= param found in URL. Deck will be empty."
-          );
           window.ALLOWED_WORDS = new Set();
           return;
         }
         window.ALLOWED_WORDS = new Set(
-          raw
-            .split(",")
-            .map((w) => w.trim())
-            .filter(Boolean)
+          raw.split(",").map((w) => w.trim()).filter(Boolean)
         );
-        console.log("[matching] ALLOWED_WORDS loaded from URL:", [
-          ...window.ALLOWED_WORDS,
-        ]);
       })();
     </script>
 

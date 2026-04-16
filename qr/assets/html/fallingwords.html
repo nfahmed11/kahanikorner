@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+        t = l.createElement(r); t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#87ceeb" />
+    <title>Falling Words — Kahani Korner</title>
+    <link rel="stylesheet" href="/qr/assets/css/fallingwords.css" />
+  </head>
+
+  <body id="app-body" class="theme-sky">
+
+    <!-- ═══════════════════════════════════════
+         MENU SCREEN
+    ════════════════════════════════════════ -->
+    <div id="screen-menu" class="screen screen-menu active">
+
+
+
+      <div class="menu-scroll-inner">
+        <!-- Logo / Title -->
+        <div class="menu-logo">
+          <div class="logo-bounce" id="logo-icon"><!-- SVG injected by JS --></div>
+          <h1 class="game-title">Falling Words</h1>
+          <p class="game-tagline">Catch the right word before it lands!</p>
+        </div>
+
+        <!-- Options panel -->
+        <div class="menu-panel">
+
+          <!-- Translation Mode -->
+          <div class="option-group">
+            <label class="option-label" for="mode-select">Translation Mode</label>
+            <div class="select-wrap">
+              <select id="mode-select" class="game-select">
+                <option value="en-ro">English → Roman Urdu</option>
+                <option value="ro-en">Roman Urdu → English</option>
+                <option value="ro-ur">Roman Urdu → Urdu Script</option>
+                <option value="ur-ro">Urdu Script → Roman Urdu</option>
+                <option value="en-ur">English → Urdu Script</option>
+                <option value="ur-en">Urdu Script → English</option>
+              </select>
+              <span class="select-arrow">▾</span>
+            </div>
+          </div>
+
+          <!-- Difficulty -->
+          <div class="option-group">
+            <label class="option-label">Difficulty</label>
+            <div class="btn-row" id="diff-group" role="group" aria-label="Difficulty">
+              <button class="pill-btn active" data-diff="easy">Easy</button>
+              <button class="pill-btn" data-diff="medium">Medium</button>
+              <button class="pill-btn" data-diff="hard">Hard</button>
+            </div>
+          </div>
+
+          <!-- Theme -->
+          <div class="option-group">
+            <label class="option-label">Theme</label>
+            <div class="theme-row" id="theme-group" role="group" aria-label="Theme">
+              <button class="theme-chip active" data-theme="sky" title="Sky Clouds">
+                <span class="tc-icon"><!-- SVG injected by JS --></span>
+                <span class="tc-name">Sky</span>
+              </button>
+              <button class="theme-chip" data-theme="candy" title="Candy Pop">
+                <span class="tc-icon"><!-- SVG injected by JS --></span>
+                <span class="tc-name">Candy</span>
+              </button>
+              <button class="theme-chip" data-theme="jungle" title="Jungle Leaves">
+                <span class="tc-icon"><!-- SVG injected by JS --></span>
+                <span class="tc-name">Jungle</span>
+              </button>
+              <button class="theme-chip" data-theme="stars" title="Stars at Night">
+                <span class="tc-icon"><!-- SVG injected by JS --></span>
+                <span class="tc-name">Stars</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Instructions -->
+          <div class="instr-card">
+            <p>Tap the <strong>correct falling word</strong> before it hits the bottom!</p>
+            <p>Miss 3 or tap wrong — hearts disappear!</p>
+          </div>
+
+          <!-- Start -->
+          <button id="start-btn" class="start-btn">
+            <span>Play!</span>
+            <span class="start-icon" id="start-icon"><!-- SVG injected by JS --></span>
+          </button>
+
+          <!-- Best Score -->
+          <div class="menu-best">
+            <span class="mb-trophy" id="mb-trophy-icon" style="width:22px;height:22px;display:inline-flex;vertical-align:middle;margin-right:4px;"><!-- SVG injected by JS --></span>
+            <span class="mb-label">Best Score:</span>
+            <span class="mb-val" id="menu-best-val">0</span>
+          </div>
+
+        </div><!-- /menu-panel -->
+      </div><!-- /menu-scroll-inner -->
+    </div><!-- /screen-menu -->
+
+
+    <!-- ═══════════════════════════════════════
+         COUNTDOWN SCREEN
+    ════════════════════════════════════════ -->
+    <div id="screen-countdown" class="screen screen-countdown">
+      <div class="cd-ring"></div>
+      <div class="cd-number" id="cd-number">3</div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         GAME SCREEN
+    ════════════════════════════════════════ -->
+    <div id="screen-game" class="screen screen-game">
+
+      <!-- HUD bar -->
+      <div class="hud" id="game-hud">
+        <div class="hud-left">
+          <div class="hud-stat">
+            <span class="hud-lbl">Score</span>
+            <span class="hud-val accent" id="hud-score">0</span>
+          </div>
+          <div class="hud-sep"></div>
+          <div class="hud-stat">
+            <span class="hud-lbl">Lv</span>
+            <span class="hud-val" id="hud-level">1</span>
+          </div>
+        </div>
+
+        <div class="hud-mid">
+          <span class="streak-badge" id="streak-badge"></span>
+        </div>
+
+        <div class="hud-right">
+          <div class="lives-row" id="lives-row" aria-label="Lives"></div>
+          <button class="pause-btn" id="pause-btn" aria-label="Pause">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <rect x="5" y="3" width="5" height="18" rx="1"/>
+              <rect x="14" y="3" width="5" height="18" rx="1"/>
+            </svg>
+          </button>
+        </div>
+      </div><!-- /hud -->
+
+      <!-- Prompt area (stays fixed) -->
+      <div class="prompt-wrap" id="prompt-wrap">
+        <div class="prompt-dir" id="prompt-dir">Find the translation:</div>
+        <div class="prompt-word" id="prompt-word">—</div>
+      </div>
+
+      <!-- Falling zone -->
+      <div class="fall-zone" id="fall-zone" aria-live="polite" aria-label="Falling answers"></div>
+
+    </div><!-- /screen-game -->
+
+
+    <!-- ═══════════════════════════════════════
+         PAUSE OVERLAY
+    ════════════════════════════════════════ -->
+    <div id="ov-pause" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Game paused">
+      <div class="ov-card">
+        <div class="ov-emoji">⏸️</div>
+        <h2 class="ov-title">Paused</h2>
+        <div class="ov-btns">
+          <button class="ov-btn primary" id="btn-resume">Resume</button>
+          <button class="ov-btn secondary" id="btn-p-restart">Restart</button>
+          <button class="ov-btn ghost" id="btn-p-menu">Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         GAME OVER OVERLAY
+    ════════════════════════════════════════ -->
+    <div id="ov-gameover" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Game over">
+      <div class="ov-card">
+        <div class="ov-emoji" id="go-emoji">😢</div>
+        <h2 class="ov-title">Game Over!</h2>
+
+        <div class="go-stats">
+          <div class="go-row">
+            <span class="go-lbl">Score</span>
+            <span class="go-val accent" id="go-score">0</span>
+          </div>
+          <div class="go-row">
+            <span class="go-lbl">Words Caught</span>
+            <span class="go-val" id="go-caught">0</span>
+          </div>
+          <div class="go-row">
+            <span class="go-lbl">Rounds Played</span>
+            <span class="go-val" id="go-rounds">0</span>
+          </div>
+          <div class="go-row">
+            <span class="go-lbl">Best Score</span>
+            <span class="go-val gold" id="go-best">0</span>
+          </div>
+        </div>
+
+        <div class="new-best hidden" id="new-best">🏆 New Best Score!</div>
+
+        <div class="ov-btns">
+          <button class="ov-btn primary" id="btn-go-restart">Play Again</button>
+          <button class="ov-btn ghost" id="btn-go-menu">Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Score pop container (floating +10 effects) -->
+    <div id="score-pops" aria-hidden="true"></div>
+
+    <!-- Parse ?words= URL param into window.ALLOWED_WORDS before the module loads -->
+    <script>
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get("words");
+        if (!raw) { window.ALLOWED_WORDS = new Set(); return; }
+        window.ALLOWED_WORDS = new Set(raw.split(",").map((w) => w.trim()).filter(Boolean));
+      })();
+    </script>
+    <script type="module" src="/qr/assets/js/fallingwords.js"></script>
+  </body>
+</html>
