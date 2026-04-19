@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+        t = l.createElement(r); t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date()); gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Sorter | Kahani Korner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;600;700;900&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/wordsort.css" />
+  </head>
+
+  <body class="theme-sky">
+
+    <!-- ═══════════════════════════════════════════ MENU SCREEN -->
+    <div id="screen-menu" class="screen screen--active">
+
+      <header class="menu-header">
+        <a href="javascript:history.back()" class="back-btn" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <div class="menu-brand">
+          <span class="menu-brand-icon" aria-hidden="true">🔤</span>
+          <div>
+            <h1 class="menu-title">Word Sorter</h1>
+            <p class="menu-sub">Sort, Learn &amp; Discover Urdu Patterns</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="menu-body">
+
+        <!-- Mode selector -->
+        <section class="menu-section">
+          <h2 class="menu-section-title">Choose a Mode</h2>
+          <div class="mode-grid" id="mode-grid">
+            <button class="mode-card mode-card--active" data-mode="gender" aria-pressed="true">
+              <span class="mode-icon">♂♀</span>
+              <span class="mode-name">Gender Sort</span>
+              <span class="mode-desc">Masculine or Feminine?</span>
+            </button>
+            <button class="mode-card" data-mode="pos" aria-pressed="false">
+              <span class="mode-icon">📚</span>
+              <span class="mode-name">Word Types</span>
+              <span class="mode-desc">Noun, Verb, Adjective…</span>
+            </button>
+            <button class="mode-card" data-mode="number" aria-pressed="false">
+              <span class="mode-icon">1→∞</span>
+              <span class="mode-name">Singular &amp; Plural</span>
+              <span class="mode-desc">One or many?</span>
+            </button>
+            <button class="mode-card" data-mode="script" aria-pressed="false">
+              <span class="mode-icon">اA</span>
+              <span class="mode-name">Script Match</span>
+              <span class="mode-desc">Which script is it?</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Difficulty -->
+        <section class="menu-section">
+          <h2 class="menu-section-title">Difficulty</h2>
+          <div class="diff-row" id="diff-row">
+            <button class="diff-pill" data-level="1" aria-pressed="false"><span class="diff-num">1</span><span class="diff-lbl">Easy</span></button>
+            <button class="diff-pill" data-level="2" aria-pressed="false"><span class="diff-num">2</span><span class="diff-lbl">Light</span></button>
+            <button class="diff-pill diff-pill--active" data-level="3" aria-pressed="true"><span class="diff-num">3</span><span class="diff-lbl">Medium</span></button>
+            <button class="diff-pill" data-level="4" aria-pressed="false"><span class="diff-num">4</span><span class="diff-lbl">Hard</span></button>
+            <button class="diff-pill" data-level="5" aria-pressed="false"><span class="diff-num">5</span><span class="diff-lbl">Expert</span></button>
+          </div>
+        </section>
+
+        <!-- Display options -->
+        <section class="menu-section">
+          <h2 class="menu-section-title">Card Display</h2>
+          <div class="display-grid" id="display-grid">
+            <button class="display-opt" data-display="roman" aria-pressed="false">Roman Urdu</button>
+            <button class="display-opt" data-display="urdu" aria-pressed="false" lang="ur">اردو</button>
+            <button class="display-opt" data-display="english" aria-pressed="false">English</button>
+            <button class="display-opt display-opt--active" data-display="roman+english" aria-pressed="true">Roman + English</button>
+            <button class="display-opt" data-display="roman+urdu" aria-pressed="false">Roman + اردو</button>
+            <button class="display-opt" data-display="all" aria-pressed="false">Show All</button>
+          </div>
+        </section>
+
+        <!-- Theme -->
+        <section class="menu-section">
+          <h2 class="menu-section-title">Theme</h2>
+          <div class="theme-row" id="theme-row">
+            <button class="theme-swatch theme-swatch--active" data-theme="sky" aria-label="Sky theme" title="Sky">☁️</button>
+            <button class="theme-swatch" data-theme="jungle" aria-label="Jungle theme" title="Jungle">🌿</button>
+            <button class="theme-swatch" data-theme="classroom" aria-label="Classroom theme" title="Classroom">🎒</button>
+            <button class="theme-swatch" data-theme="space" aria-label="Space theme" title="Space">🚀</button>
+            <button class="theme-swatch" data-theme="candy" aria-label="Candy theme" title="Candy">🍬</button>
+          </div>
+        </section>
+
+        <button id="btn-start" class="btn-start">Let's Sort! →</button>
+
+      </div>
+    </div><!-- /screen-menu -->
+
+
+    <!-- ═══════════════════════════════════════════ GAME SCREEN -->
+    <div id="screen-game" class="screen">
+
+      <!-- HUD -->
+      <header class="hud" role="banner">
+        <div class="hud-left">
+          <button id="btn-menu" class="hud-icon-btn" aria-label="Back to menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <span class="hud-mode" id="hud-mode">Gender Sort</span>
+        </div>
+        <div class="hud-center">
+          <div class="hud-score-block">
+            <span class="hud-score" id="hud-score">0</span>
+            <span class="hud-score-lbl">pts</span>
+          </div>
+          <div class="hud-streak-block" id="hud-streak-block">
+            <span class="hud-streak-fire" aria-hidden="true">🔥</span>
+            <span class="hud-streak" id="hud-streak">0</span>
+          </div>
+        </div>
+        <div class="hud-right">
+          <span class="hud-progress-lbl" id="hud-progress-lbl">0/0</span>
+          <div class="hud-progress-track" aria-hidden="true">
+            <div class="hud-progress-bar" id="hud-progress-bar" style="width:0%"></div>
+          </div>
+          <div id="hud-timer" class="hud-timer hidden" aria-live="polite">
+            ⏱ <span id="hud-timer-val">60</span>s
+          </div>
+        </div>
+      </header>
+
+      <!-- Play area -->
+      <main class="game-area" id="game-area">
+        <div class="bins-row" id="bins-row" role="group" aria-label="Sorting bins"></div>
+        <div class="cards-pool" id="cards-pool" role="group" aria-label="Word cards to sort"></div>
+      </main>
+
+      <!-- Hint -->
+      <button id="btn-hint" class="btn-hint" aria-label="Show a hint">💡 Hint</button>
+
+    </div><!-- /screen-game -->
+
+
+    <!-- ═══════════════════════════════════════════ ROUND END OVERLAY -->
+    <div id="overlay-round-end" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+      <div class="overlay-card">
+        <div class="overlay-emoji" id="overlay-emoji" aria-hidden="true">🎉</div>
+        <h2 class="overlay-title" id="overlay-title">Round Complete!</h2>
+        <p class="overlay-sub" id="overlay-sub">Nice work!</p>
+
+        <div class="round-stats" aria-label="Round summary">
+          <div class="round-stat">
+            <span class="round-stat-val" id="stat-correct">0</span>
+            <span class="round-stat-lbl">Correct</span>
+          </div>
+          <div class="round-stat">
+            <span class="round-stat-val" id="stat-wrong">0</span>
+            <span class="round-stat-lbl">Retried</span>
+          </div>
+          <div class="round-stat">
+            <span class="round-stat-val" id="stat-pts">0</span>
+            <span class="round-stat-lbl">Points</span>
+          </div>
+        </div>
+
+        <div class="insights-panel" id="insights-panel">
+          <div class="insights-title">💡 Pattern Spotlight</div>
+          <div class="insights-body" id="insights-body"></div>
+        </div>
+
+        <div class="overlay-actions">
+          <button id="btn-next-round" class="btn-primary">Play Again →</button>
+          <button id="btn-change-mode" class="btn-secondary">Change Mode</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════ EMPTY STATE OVERLAY -->
+    <div id="overlay-empty" class="overlay hidden" role="dialog" aria-modal="true">
+      <div class="overlay-card">
+        <div class="overlay-emoji" aria-hidden="true">🤔</div>
+        <h2 class="overlay-title">Not Enough Data</h2>
+        <p class="overlay-sub" id="empty-msg">This story doesn't have enough words for this mode yet.</p>
+        <button id="btn-empty-back" class="btn-primary">Try Another Mode</button>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════ FEEDBACK TOAST -->
+    <div id="feedback-toast" class="feedback-toast" aria-live="assertive" aria-atomic="true"></div>
+
+
+    <!-- ═══════════════════════════════════════════ CONFETTI -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+
+    <!-- ═══════════════════════════════════════════ BOOTSTRAP ALLOWED_WORDS -->
+    <script>
+      (function () {
+        var params = new URLSearchParams(location.search);
+        var raw = params.get("words");
+        if (!raw) {
+          // ─────────────────────────────────────────────────────────────────
+          // STORY VOCAB HOOK
+          // If your index.html structure changes, update this section.
+          // Currently words come from the ?words= URL param set by index.js
+          // using the story's orderedWords list sliced by level.
+          // If you expose the word list another way (e.g. window.STORY_WORDS),
+          // replace the URL-param logic here with your own source.
+          // ─────────────────────────────────────────────────────────────────
+          window.ALLOWED_WORDS = new Set();
+          console.warn("[wordsort] No ?words= param. Full vocab will be used.");
+          return;
+        }
+        window.ALLOWED_WORDS = new Set(
+          raw.split(",").map(function (w) { return w.trim(); }).filter(Boolean)
+        );
+      })();
+    </script>
+
+    <script type="module" src="/qr/assets/js/wordsort.js"></script>
+
+  </body>
+</html>

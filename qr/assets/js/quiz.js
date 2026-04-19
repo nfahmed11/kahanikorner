@@ -1,4 +1,4 @@
-import { vocab as originalVocab } from "./vocab.js";
+import { vocab as originalVocab } from "./mastervocab.js";
 
 // --------------------
 // Card border colors (cycles per card)
@@ -72,7 +72,7 @@ function buildDeck({ shuffle = false } = {}) {
   console.log("[deck] ALLOWED_WORDS:", ALLOWED_WORDS?.size ?? 0, [...ALLOWED_WORDS]);
   console.log("[deck] Loaded:", deck.length, deck.map((c) => displayRoman(c)));
   if (missingWords.length) {
-    console.warn("[deck] Missing from vocab.js:", missingWords);
+    console.warn("[deck] Missing from mastervocab.js:", missingWords);
   }
   console.log("================================");
 

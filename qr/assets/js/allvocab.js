@@ -6,14 +6,14 @@
  * filtered from the master vocab list.
  */
 
-import { vocab } from "./vocab.js";
+import { vocab } from "./mastervocab.js";
 
 // ============================================================
 // HOW THE STORY PAGE SHOULD SAVE CURRENT STORY VOCAB
 // ============================================================
 //
 // In your story's index.html (or index.js), add this before
-// linking to allcards.html:
+// linking to allvocab.html:
 //
 //   // Option A — save orderedWords (array of romanUrdu IDs):
 //   sessionStorage.setItem(
@@ -22,9 +22,9 @@ import { vocab } from "./vocab.js";
 //   );
 //
 //   // Then link to All Cards (the activity button):
-//   // href="/qr/assets/html/allcards.html"
+//   // href="/qr/assets/html/allvocab.html"
 //
-// The allcards page also supports ?words= query param
+// The allvocab page also supports ?words= query param
 // (same format as other games: ?words=chaand,raat,gali,...).
 // If both exist, ?words= takes priority.
 // ============================================================
@@ -33,11 +33,11 @@ import { vocab } from "./vocab.js";
 
 const STORAGE_KEYS = {
   storyVocab: "kk_current_story_vocab",
-  known: "kk_allcards_known",
-  displayMode: "kk_allcards_displayMode",
-  direction: "kk_allcards_direction",
-  sort: "kk_allcards_sort",
-  density: "kk_allcards_density",
+  known: "kk_allvocab_known",
+  displayMode: "kk_allvocab_displayMode",
+  direction: "kk_allvocab_direction",
+  sort: "kk_allvocab_sort",
+  density: "kk_allvocab_density",
 };
 
 const $ = (sel) => document.querySelector(sel);

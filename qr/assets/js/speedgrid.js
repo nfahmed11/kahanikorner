@@ -1,4 +1,4 @@
-import { vocab as originalVocab } from "./vocab.js";
+import { vocab as originalVocab } from "./mastervocab.js";
 
 // ==========================================================
 // SPEED GRID — fast-paced image recognition game

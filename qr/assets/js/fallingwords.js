@@ -4,7 +4,7 @@
 //  Vanilla JS · ES Modules · No frameworks
 // ═══════════════════════════════════════════════════
 
-import { vocab as masterVocab } from "./vocab.js";
+import { vocab as masterVocab } from "./mastervocab.js";
 
 // ═══════════════════════════════════════════════════
 //  CONFIGURATION — easy to tweak

@@ -73,13 +73,20 @@ function renderLevelPills() {
   const pillsContainer = document.getElementById("level-pills");
 
   for (let level = 1; level <= totalLevels; level++) {
-    const wordsAtLevel = getWordsForLevel(config.orderedWords, level, totalLevels);
+    const wordsAtLevel = getWordsForLevel(
+      config.orderedWords,
+      level,
+      totalLevels,
+    );
     const pill = document.createElement("button");
     pill.className = `level-pill${level === currentLevel ? " active" : ""}`;
     pill.type = "button";
     pill.innerHTML = `${level}`;
     pill.setAttribute("data-level", level);
-    pill.setAttribute("aria-label", `Level ${level} — ${wordsAtLevel.length} words`);
+    pill.setAttribute(
+      "aria-label",
+      `Level ${level} — ${wordsAtLevel.length} words`,
+    );
 
     pill.addEventListener("click", () => {
       currentLevel = level;
@@ -106,7 +113,7 @@ function updateLevelSummary(level, totalWords) {
   const activeWords = getWordsForLevel(
     config.orderedWords,
     level,
-    config.totalLevels ?? 5
+    config.totalLevels ?? 5,
   );
 
   const summaryEl = document.getElementById("level-summary");
@@ -134,9 +141,11 @@ const ACTIVITY_ICONS = {
   // Rabbit — speed grid
   speedgrid: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/></svg>`,
   // Layers — all cards
-  allcards: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>`,
+  allvocab: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>`,
   // Falling arrow — falling words game
   fallingwords: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m6 16 6 6 6-6"/><rect x="2" y="4" width="6" height="4" rx="1"/><rect x="9" y="2" width="6" height="4" rx="1"/><rect x="16" y="5" width="6" height="4" rx="1"/></svg>`,
+  // Sort arrows — word sorter
+  wordsort: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/><path d="m17 3 3 3-3 3"/><path d="m7 21-3-3 3-3"/></svg>`,
 };
 
 function renderButtons() {
@@ -145,7 +154,7 @@ function renderButtons() {
   const activeWords = getWordsForLevel(
     config.orderedWords,
     level,
-    config.totalLevels ?? 5
+    config.totalLevels ?? 5,
   );
 
   const wordsParam = buildWordsParam(activeWords);
@@ -171,9 +180,9 @@ function renderButtons() {
     // Add All Cards button right after Read Aloud
     if (activity.id === "readaloud") {
       const acLink = document.createElement("a");
-      acLink.className = "button button--allcards";
-      acLink.innerHTML = `${ACTIVITY_ICONS.allcards}<span>All Cards</span>`;
-      acLink.href = `/qr/assets/html/allcards.html?words=${wordsParam}`;
+      acLink.className = "button button--allvocab";
+      acLink.innerHTML = `${ACTIVITY_ICONS.allvocab}<span>All Cards</span>`;
+      acLink.href = `/qr/assets/html/allvocab.html?words=${wordsParam}`;
       buttonContainerEl.appendChild(acLink);
     }
 
@@ -200,6 +209,14 @@ function renderButtons() {
       fwLink.innerHTML = `${ACTIVITY_ICONS.fallingwords}<span>Falling Words</span>`;
       fwLink.href = `/qr/assets/html/fallingwords.html?words=${wordsParam}`;
       buttonContainerEl.appendChild(fwLink);
+
+      // Add Word Sorter button after Falling Words
+
+      // const wsLink = document.createElement("a");
+      // wsLink.className = "button button--wordsort";
+      // wsLink.innerHTML = `${ACTIVITY_ICONS.wordsort}<span>Word Sorter</span>`;
+      // wsLink.href = `/qr/assets/html/wordsort.html?words=${wordsParam}`;
+      // buttonContainerEl.appendChild(wsLink);
     }
   });
 }

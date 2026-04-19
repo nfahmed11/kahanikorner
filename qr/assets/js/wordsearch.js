@@ -1,11 +1,11 @@
 // word-search.js (type="module")
-// ✅ Uses new vocab.js schema:
+// ✅ Uses new mastervocab.js schema:
 // word.baseRomanUrdu
 // word.baseUrdu
 // word.english
 // variants[]
 
-import { vocab as originalVocab } from "./vocab.js";
+import { vocab as originalVocab } from "./mastervocab.js";
 
 /* ===================== Config ===================== */
 const DIRS = {
@@ -113,9 +113,9 @@ function buildWords() {
   if (ALLOWED_WORDS_LOWER) {
     const missing = [...ALLOWED_WORDS_LOWER].filter((w) => !vocabRoman.has(w));
     if (missing.length) {
-      console.warn("[word-search] ❌ Words NOT found in vocab.js:", missing);
+      console.warn("[word-search] ❌ Words NOT found in mastervocab.js:", missing);
     } else {
-      console.log("[word-search] ✅ All allowed words exist in vocab.js");
+      console.log("[word-search] ✅ All allowed words exist in mastervocab.js");
     }
   }
   console.log("======================================");
@@ -352,7 +352,7 @@ function computeWordCountForCurrentDifficulty() {
 function buildPuzzle() {
   if (WORDS.length === 0) {
     console.error("[word-search] No WORDS available after filtering by window.ALLOWED_WORDS.");
-    alert("No allowed words found. Check window.ALLOWED_WORDS and vocab.js romanUrdu values.");
+    alert("No allowed words found. Check window.ALLOWED_WORDS and mastervocab.js romanUrdu values.");
     return;
   }
 

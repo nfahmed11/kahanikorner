@@ -1,5 +1,5 @@
 // ✅ Import vocab
-import { vocab as originalVocab } from "./vocab.js";
+import { vocab as originalVocab } from "./mastervocab.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const ALLOWED_WORDS = window.ALLOWED_WORDS;
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log("Allowed vocab count:", allowedVocab.length);
   console.log("Image-ready vocab count:", imageReadyVocab.length);
   if (missingWords.length) {
-    console.warn("Words not found in vocab.js:", missingWords);
+    console.warn("Words not found in mastervocab.js:", missingWords);
   }
   if (skippedBrokenImageWords.length) {
     console.warn(

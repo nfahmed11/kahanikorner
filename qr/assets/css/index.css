@@ -293,18 +293,22 @@ h1 {
   background: linear-gradient(135deg, #fb923c, #ef4444);
 }
 
-.button--allcards {
+.button--wordsort {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+}
+
+.button--allvocab {
   background: var(--white);
   color: var(--purple);
   border: 3px solid var(--purple-light);
   box-shadow: 0 4px 14px rgba(124, 92, 191, 0.1);
 }
 
-.button--allcards svg {
+.button--allvocab svg {
   color: var(--purple);
 }
 
-.button--allcards:hover {
+.button--allvocab:hover {
   background: linear-gradient(135deg, rgba(167, 139, 250, 0.08), rgba(244, 114, 182, 0.08));
   border-color: var(--purple);
   box-shadow: 0 8px 24px rgba(124, 92, 191, 0.18);
