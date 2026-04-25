@@ -176,6 +176,16 @@ function filterMasterVocab(ids) {
     if (entry && !seen.has(entry.id)) {
       seen.add(entry.id);
       result.push(entry);
+    } else if (!entry && !seen.has(key)) {
+      // Word not in mastervocab — show as a text-only fallback card
+      seen.add(key);
+      result.push({
+        id,
+        word: { baseRomanUrdu: id, baseUrdu: "", english: "", pos: "" },
+        grammar: {},
+        variants: [],
+        image: null,
+      });
     }
   }
   return result;

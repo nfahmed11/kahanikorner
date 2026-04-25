@@ -1,0 +1,21 @@
+{
+  "name": "kahani-korner-fillblank-ai",
+  "version": "1.0.0",
+  "description": "AI-powered Urdu fill-in-the-blank vocabulary game (Kahani Korner)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "openai": "^4.52.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

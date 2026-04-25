@@ -57,13 +57,17 @@ body {
 /* ---------- Start screen ---------- */
 .screen--start {
   background: linear-gradient(160deg, #fef5f0, #ede7f6, #d6f5f0);
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: max(2rem, 8vh) 1rem 2rem;
 }
 
 .start-card {
   text-align: center;
-  padding: 2.5rem 2rem;
+  padding: 0 1rem;
   max-width: 340px;
   width: 100%;
+  margin: 0 auto;
 }
 
 .start-icon {
@@ -85,7 +89,7 @@ body {
   color: var(--text-muted);
   font-size: 1.05rem;
   font-weight: 500;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 /* Mode picker pills */
@@ -103,7 +107,7 @@ body {
   font-family: "Fredoka", sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.1rem;
   border: none;
   border-radius: 11px;
   background: transparent;
@@ -264,6 +268,25 @@ body {
   font-size: clamp(1.6rem, 5vw, 2.2rem);
   direction: rtl;
   min-height: 3rem;
+}
+
+/* Mixed mode: roman on top, urdu below */
+.prompt-roman {
+  display: block;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.prompt-urdu {
+  display: block;
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  direction: rtl;
+  color: var(--purple);
+  line-height: 1.4;
+  margin-top: 2px;
 }
 
 .prompt.pop {

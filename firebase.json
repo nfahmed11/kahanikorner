@@ -10,6 +10,10 @@
       {
         "source": "/create-checkout-session",
         "function": "createCheckoutSession"
+      },
+      {
+        "source": "/api/generate-sentence",
+        "function": "generateSentence"
       }
     ]
   },

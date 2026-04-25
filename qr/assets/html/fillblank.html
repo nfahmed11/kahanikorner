@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fill in the Blank — Kahani Korner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/qr/assets/css/fillblank.css" />
+  </head>
+
+  <body>
+    <div id="confetti-container" aria-hidden="true"></div>
+    <div class="settings-overlay" id="settings-overlay" aria-hidden="true"></div>
+
+    <div class="app-shell">
+
+      <!-- HEADER -->
+      <header class="app-header">
+        <div class="header-left">
+          <span class="app-logo" aria-hidden="true">✦</span>
+          <h1 class="app-title">Fill in the Blank</h1>
+        </div>
+        <div class="header-right">
+          <div class="score-pill" aria-label="Score">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span id="score-correct">0</span>
+            <span class="score-sep">/</span>
+            <span id="score-total">0</span>
+          </div>
+          <div class="streak-badge" id="streak-badge" aria-live="polite"></div>
+          <button class="icon-btn" id="settings-btn" type="button" aria-label="Open settings" aria-controls="settings-panel" aria-expanded="false">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- MAIN -->
+      <main class="app-main">
+
+        <div class="progress-wrap">
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Accuracy">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <span class="progress-label" id="progress-label">0 / 0</span>
+        </div>
+
+        <article class="game-card" id="game-card" aria-live="polite" aria-label="Current question">
+
+          <!-- Loading -->
+          <div class="card-state card-loading" id="state-loading" hidden>
+            <div class="spinner" aria-label="Loading question…"></div>
+            <p class="loading-text">Generating your sentence…</p>
+          </div>
+
+          <!-- Error -->
+          <div class="card-state card-error" id="state-error" hidden>
+            <div class="error-icon" aria-hidden="true">⚠️</div>
+            <p class="error-msg" id="error-msg">Something went wrong. Please try again.</p>
+            <button class="btn btn-primary" id="error-retry-btn" type="button">Try Again</button>
+          </div>
+
+          <!-- Question -->
+          <div class="card-state card-question" id="state-question">
+
+            <div class="card-meta">
+              <span class="difficulty-badge" id="difficulty-badge" data-difficulty="easy">Easy</span>
+              <span class="word-hint" id="word-hint"></span>
+            </div>
+
+            <section class="sentence-area" aria-label="Sentence">
+              <div class="sentence-row" id="row-urdu">
+                <span class="sentence-label">Urdu</span>
+                <p class="sentence-text urdu" id="sentence-urdu" dir="rtl" lang="ur"></p>
+              </div>
+              <div class="sentence-row" id="row-roman">
+                <span class="sentence-label">Roman Urdu</span>
+                <p class="sentence-text" id="sentence-roman"></p>
+              </div>
+              <div class="sentence-row" id="row-english">
+                <span class="sentence-label">English</span>
+                <p class="sentence-text italic" id="sentence-english"></p>
+              </div>
+            </section>
+
+            <div class="feedback-area" id="feedback-area" role="status" aria-live="polite"></div>
+
+            <section class="wordbank-section" aria-label="Word bank">
+              <p class="wordbank-label">Choose the missing word</p>
+              <div class="word-bank" id="word-bank" role="group" aria-label="Answer options"></div>
+            </section>
+
+            <div class="card-footer">
+              <button class="btn btn-ghost" id="reveal-btn" type="button" hidden>Show answer</button>
+              <button class="btn btn-primary btn-next" id="next-btn" type="button" hidden>
+                Next
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </article>
+      </main>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <aside class="settings-panel" id="settings-panel" role="dialog" aria-modal="true" aria-label="Game settings">
+      <div class="settings-header">
+        <h2 class="settings-title">Settings</h2>
+        <button class="icon-btn" id="settings-close" type="button" aria-label="Close settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="settings-group">
+        <span class="settings-group-label">Difficulty</span>
+        <div class="pill-group" role="group" aria-label="Difficulty">
+          <button class="pill difficulty-pill" data-value="easy"   type="button">Easy</button>
+          <button class="pill difficulty-pill" data-value="medium" type="button">Medium</button>
+          <button class="pill difficulty-pill" data-value="hard"   type="button">Hard</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <span class="settings-group-label">Word Bank Script</span>
+        <div class="pill-group" role="group" aria-label="Word bank script">
+          <button class="pill script-pill" data-value="roman" type="button">Roman Urdu</button>
+          <button class="pill script-pill urdu" data-value="urdu" type="button" lang="ur" dir="rtl">اردو</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <span class="settings-group-label">Show in Sentence</span>
+        <div class="toggle-row">
+          <span class="toggle-label">Urdu script</span>
+          <button class="toggle-btn" id="toggle-urdu" type="button" role="switch" aria-checked="true" aria-label="Show Urdu script"></button>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Roman Urdu</span>
+          <button class="toggle-btn" id="toggle-roman" type="button" role="switch" aria-checked="true" aria-label="Show Roman Urdu"></button>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">English translation</span>
+          <button class="toggle-btn" id="toggle-english" type="button" role="switch" aria-checked="false" aria-label="Show English translation"></button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <span class="settings-group-label">Game Options</span>
+        <div class="toggle-row">
+          <span class="toggle-label">Sound effects</span>
+          <button class="toggle-btn" id="toggle-sound" type="button" role="switch" aria-checked="true" aria-label="Sound effects"></button>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Auto-advance on correct</span>
+          <button class="toggle-btn" id="toggle-autonext" type="button" role="switch" aria-checked="false" aria-label="Auto-advance on correct answer"></button>
+        </div>
+      </div>
+    </aside>
+
+    <!--
+      Reads ?words= URL param → window.ALLOWED_WORDS
+      Same pattern as flashcards, quiz, and all other KK games.
+    -->
+    <script>
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get("words");
+
+        window.ALLOWED_WORDS = raw
+          ? new Set(raw.split(",").map((w) => w.trim()).filter(Boolean))
+          : new Set();
+
+        if (!raw) console.warn("[fillblank] No ?words= param — using full vocab.");
+
+        // Settings panel open/close (before module loads to avoid flash)
+        const settingsBtn     = document.getElementById("settings-btn");
+        const settingsPanel   = document.getElementById("settings-panel");
+        const settingsOverlay = document.getElementById("settings-overlay");
+        const settingsClose   = document.getElementById("settings-close");
+
+        function openPanel()  {
+          settingsPanel.classList.add("open");
+          settingsOverlay.classList.add("open");
+          settingsBtn.setAttribute("aria-expanded", "true");
+        }
+        function closePanel() {
+          settingsPanel.classList.remove("open");
+          settingsOverlay.classList.remove("open");
+          settingsBtn.setAttribute("aria-expanded", "false");
+        }
+
+        settingsBtn?.addEventListener("click", () =>
+          settingsPanel.classList.contains("open") ? closePanel() : openPanel()
+        );
+        settingsClose?.addEventListener("click", closePanel);
+        settingsOverlay?.addEventListener("click", closePanel);
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePanel(); });
+      })();
+    </script>
+
+    <!-- fillblank.js lives in /qr/assets/js/ alongside mastervocab.js -->
+    <script type="module" src="/qr/assets/js/fillblank.js"></script>
+  </body>
+</html>

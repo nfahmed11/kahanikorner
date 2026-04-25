@@ -16,12 +16,12 @@ const DIRS = {
 };
 
 const DIFFICULTY = [
-  { label: "Level 1", rows: 8, cols: 8, dirs: ["H"], density: 0.3 },
-  { label: "Level 2", rows: 9, cols: 9, dirs: ["H", "V"], density: 0.45 },
-  { label: "Level 3", rows: 10, cols: 10, dirs: ["H", "V", "DR"], density: 0.6 },
-  { label: "Level 4", rows: 11, cols: 11, dirs: ["H", "V", "DR", "DL"], density: 0.75 },
-  { label: "Level 5", rows: 12, cols: 12, dirs: ["H", "V", "DR", "DL"], density: 0.9 },
-  { label: "Level 6", rows: 13, cols: 13, dirs: ["H", "V", "DR", "DL"], density: 1.0 },
+  { label: "Level 1", rows: 8,  cols: 8,  dirs: ["H"],                     words: 6  },
+  { label: "Level 2", rows: 9,  cols: 9,  dirs: ["H", "V"],                words: 8  },
+  { label: "Level 3", rows: 10, cols: 10, dirs: ["H", "V", "DR"],          words: 10 },
+  { label: "Level 4", rows: 11, cols: 11, dirs: ["H", "V", "DR", "DL"],    words: 12 },
+  { label: "Level 5", rows: 12, cols: 12, dirs: ["H", "V", "DR", "DL"],    words: 16 },
+  { label: "Level 6", rows: 13, cols: 13, dirs: ["H", "V", "DR", "DL"],    words: 20 },
 ];
 
 const MAX_ATTEMPTS = 2500;
@@ -341,11 +341,7 @@ function layoutWordsForSize(rawPairs, rows, cols, allowOverlap, dirs) {
 /* ===================== Word count from density ===================== */
 function computeWordCountForCurrentDifficulty() {
   const D = DIFFICULTY[state.difficultyIdx];
-  const area = D.rows * D.cols;
-  const avgLen = 6;
-  const maxByArea = Math.max(6, Math.floor(area / (avgLen + 2)));
-  const N = Math.floor(maxByArea * D.density);
-  return Math.min(WORDS.length, Math.max(6, N));
+  return Math.min(WORDS.length, D.words);
 }
 
 /* ===================== Build Puzzle ===================== */

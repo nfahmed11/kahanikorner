@@ -130,10 +130,17 @@ const LEVELS_ROMAN = [
 ];
 
 const LEVELS_MIXED = [
-  { gridSize: 4, cols: 2, promptTypes: ["roman"] },
+  { gridSize: 4, cols: 2, promptTypes: ["roman", "urdu"] },
   { gridSize: 6, cols: 3, promptTypes: ["roman", "urdu"] },
   { gridSize: 9, cols: 3, promptTypes: ["roman", "urdu"] },
   { gridSize: 12, cols: 4, promptTypes: ["roman", "urdu"] },
+];
+
+const LEVELS_URDU = [
+  { gridSize: 4, cols: 2, promptTypes: ["urdu"] },
+  { gridSize: 6, cols: 3, promptTypes: ["urdu"] },
+  { gridSize: 9, cols: 3, promptTypes: ["urdu"] },
+  { gridSize: 12, cols: 4, promptTypes: ["urdu"] },
 ];
 
 let LEVELS = LEVELS_ROMAN;
@@ -226,18 +233,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   const btnPlay = document.getElementById("btn-play");
   const modeRomanBtn = document.getElementById("mode-roman");
   const modeMixedBtn = document.getElementById("mode-mixed");
+  const modeUrduBtn = document.getElementById("mode-urdu");
 
   // Mode toggle
+  function setMode(active) {
+    [modeRomanBtn, modeMixedBtn, modeUrduBtn].forEach((b) => b.classList.remove("active"));
+    active.classList.add("active");
+  }
+
   modeRomanBtn.addEventListener("click", () => {
     LEVELS = LEVELS_ROMAN;
-    modeRomanBtn.classList.add("active");
-    modeMixedBtn.classList.remove("active");
+    setMode(modeRomanBtn);
   });
 
   modeMixedBtn.addEventListener("click", () => {
     LEVELS = LEVELS_MIXED;
-    modeMixedBtn.classList.add("active");
-    modeRomanBtn.classList.remove("active");
+    setMode(modeMixedBtn);
+  });
+
+  modeUrduBtn.addEventListener("click", () => {
+    LEVELS = LEVELS_URDU;
+    setMode(modeUrduBtn);
   });
 
   // HUD
@@ -365,21 +381,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Pick prompt type
     const promptTypes = level.promptTypes;
-    const pType = promptTypes[Math.floor(Math.random() * promptTypes.length)];
+    const isMixed = promptTypes.includes("roman") && promptTypes.includes("urdu");
 
-    let word;
-    if (pType === "urdu") {
-      word = target.word?.baseUrdu || displayRoman(target);
-      promptWord.className = "prompt-word urdu-text";
-    } else if (pType === "english") {
-      word = target.word?.english || displayRoman(target);
+    if (isMixed) {
+      const roman = displayRoman(target);
+      const urdu = target.word?.baseUrdu || "";
       promptWord.className = "prompt-word";
+      promptWord.innerHTML = `<span class="prompt-roman">${roman}</span>${urdu ? `<span class="prompt-urdu urdu-text">${urdu}</span>` : ""}`;
     } else {
-      word = displayRoman(target);
-      promptWord.className = "prompt-word";
+      const pType = promptTypes[0];
+      let word;
+      if (pType === "urdu") {
+        word = target.word?.baseUrdu || displayRoman(target);
+        promptWord.className = "prompt-word urdu-text";
+      } else if (pType === "english") {
+        word = target.word?.english || displayRoman(target);
+        promptWord.className = "prompt-word";
+      } else {
+        word = displayRoman(target);
+        promptWord.className = "prompt-word";
+      }
+      promptWord.textContent = word;
     }
-
-    promptWord.textContent = word;
     promptEl.classList.remove("pop");
     void promptEl.offsetWidth; // force reflow
     promptEl.classList.add("pop");

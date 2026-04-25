@@ -126,8 +126,13 @@ h1 {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* ---------- Level pill tabs ---------- */
@@ -146,6 +151,7 @@ h1 {
 
 .level-pills {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
   margin-bottom: 8px;
@@ -212,22 +218,62 @@ h1 {
   }
 }
 
-/* ---------- Activity buttons ---------- */
+/* ---------- Activity sections ---------- */
 .button-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 14px;
+  display: block;
   margin: 20px 0;
   padding: 0;
 }
 
+.activity-section {
+  margin-bottom: 28px;
+}
+
+.activity-section__heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: "Grandstander", cursive;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--purple);
+  text-align: left;
+
+  margin: 0 0 12px 4px;
+  -webkit-text-fill-color: initial;
+  background: none;
+}
+
+.activity-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------- Activity buttons ---------- */
 .button {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 20px 12px;
+  gap: 6px;
+  padding: 20px 12px 16px;
   border-radius: 20px;
   text-decoration: none;
   font-size: 0.9rem;
@@ -245,6 +291,18 @@ h1 {
   height: 36px;
   flex-shrink: 0;
   opacity: 0.9;
+}
+
+.button__label {
+  line-height: 1.2;
+}
+
+.button__helper {
+  font-size: 0.68rem;
+  font-weight: 500;
+  opacity: 0.82;
+  line-height: 1.3;
+  text-align: center;
 }
 
 .button:hover {
@@ -297,38 +355,51 @@ h1 {
   background: linear-gradient(135deg, #8b5cf6, #3b82f6);
 }
 
-.button--allvocab {
-  background: var(--white);
-  color: var(--purple);
-  border: 3px solid var(--purple-light);
-  box-shadow: 0 4px 14px rgba(124, 92, 191, 0.1);
+.button--allvocabcards {
+  background: linear-gradient(135deg, #a4d8ff, #c3b6ff);
+  color: #2d1f6e;
 }
 
-.button--allvocab svg {
-  color: var(--purple);
+.button--allvocabcards svg {
+  opacity: 0.85;
 }
 
-.button--allvocab:hover {
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.08), rgba(244, 114, 182, 0.08));
-  border-color: var(--purple);
-  box-shadow: 0 8px 24px rgba(124, 92, 191, 0.18);
+.button--allstory {
+  background: linear-gradient(135deg, #b8f0d8, #7dd3c0);
+  color: #1a4a3a;
+}
+
+.button--allstory svg {
+  opacity: 0.85;
+}
+
+.button--fillblank {
+  background: linear-gradient(135deg, #ffd76a, #ffb347);
 }
 
 @media (max-width: 500px) {
-  .button-container {
+  .activity-section__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
+  .activity-section__heading {
+    font-size: 0.9rem;
+  }
+
   .button {
     min-height: 110px;
-    padding: 16px 10px;
+    padding: 16px 10px 12px;
     font-size: 0.85rem;
   }
 
   .button svg {
     width: 30px;
     height: 30px;
+  }
+
+  .button__helper {
+    font-size: 0.63rem;
   }
 }
 
