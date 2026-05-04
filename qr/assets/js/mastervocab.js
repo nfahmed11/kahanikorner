@@ -7,9 +7,7 @@ export const vocab = [
       english: "fire",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/aag.png",
     riddles: {
@@ -28,9 +26,7 @@ export const vocab = [
       english: "forward",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/aagai.png",
     riddles: {
@@ -49,9 +45,7 @@ export const vocab = [
       english: "last",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/aakhri.png",
     riddles: {
@@ -70,9 +64,7 @@ export const vocab = [
       english: "come",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "aaya",
@@ -86,12 +78,7 @@ export const vocab = [
         gender: "feminine",
         number: "singular",
       },
-      {
-        romanUrdu: "aaye",
-        urdu: "آئے",
-        gender: "masculine",
-        number: "plural",
-      },
+      { romanUrdu: "aaye", urdu: "آئے", gender: "masculine", number: "plural" },
       {
         romanUrdu: "aa gaya",
         urdu: "آ گیا",
@@ -128,9 +115,7 @@ export const vocab = [
       english: "eye",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "aankhen",
@@ -138,12 +123,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "aankhon",
-        urdu: "آنکھوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "aankhon", urdu: "آنکھوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/aankh.png",
     riddles: {
@@ -162,9 +142,7 @@ export const vocab = [
       english: "tears",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/aansoo.png",
     riddles: {
@@ -183,9 +161,7 @@ export const vocab = [
       english: "sky",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/aasmaan.png",
     riddles: {
@@ -204,9 +180,7 @@ export const vocab = [
       english: "good",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "achi",
@@ -238,9 +212,7 @@ export const vocab = [
       english: "suddenly",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/achaanak.png",
     riddles: {
@@ -259,9 +231,7 @@ export const vocab = [
       english: "slowly",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/ahista.png",
     riddles: {
@@ -280,9 +250,7 @@ export const vocab = [
       english: "one",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/aik.png",
     riddles: {
@@ -301,16 +269,9 @@ export const vocab = [
       english: "announcement",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "alanat",
-        urdu: "اعلانات",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "alanat", urdu: "اعلانات", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/ailan.png",
     riddles: {
@@ -329,9 +290,7 @@ export const vocab = [
       english: "stranger",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/ajnabi.png",
     riddles: {
@@ -350,9 +309,7 @@ export const vocab = [
       english: "alone",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "akeli",
@@ -384,9 +341,7 @@ export const vocab = [
       english: "mother",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/ami.png",
     riddles: {
@@ -405,9 +360,7 @@ export const vocab = [
       english: "inside",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/andar.png",
     riddles: {
@@ -426,22 +379,10 @@ export const vocab = [
       english: "sound",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
-      {
-        romanUrdu: "awaazen",
-        urdu: "آوازیں",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "awaazon",
-        urdu: "آوازوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "awaazen", urdu: "آوازیں", gender: null, number: "plural" },
+      { romanUrdu: "awaazon", urdu: "آوازوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/awaaz.png",
     riddles: {
@@ -460,9 +401,7 @@ export const vocab = [
       english: "call",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "azanin",
@@ -488,9 +427,7 @@ export const vocab = [
       english: "after",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/baad.png",
     riddles: {
@@ -509,22 +446,10 @@ export const vocab = [
       english: "talk",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
-      {
-        romanUrdu: "baatein",
-        urdu: "باتیں",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "baaton",
-        urdu: "باتوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "baatein", urdu: "باتیں", gender: null, number: "plural" },
+      { romanUrdu: "baaton", urdu: "باتوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/baat.png",
     riddles: {
@@ -543,9 +468,7 @@ export const vocab = [
       english: "child",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "bachi",
@@ -559,18 +482,8 @@ export const vocab = [
         gender: "masculine",
         number: "plural",
       },
-      {
-        romanUrdu: "bachon",
-        urdu: "بچوں",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "bachiyan",
-        urdu: "بچیاں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "bachon", urdu: "بچوں", gender: null, number: "plural" },
+      { romanUrdu: "bachiyan", urdu: "بچیاں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/bacha.png",
     riddles: {
@@ -589,9 +502,7 @@ export const vocab = [
       english: "childhood",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/bachpan.png",
     riddles: {
@@ -610,9 +521,7 @@ export const vocab = [
       english: "change",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "bdla",
@@ -650,9 +559,7 @@ export const vocab = [
       english: "almond",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/badam.png",
     riddles: {
@@ -671,9 +578,7 @@ export const vocab = [
       english: "left",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/baeyn.png",
     riddles: {
@@ -692,9 +597,7 @@ export const vocab = [
       english: "outside",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/bahar.png",
     riddles: {
@@ -713,9 +616,7 @@ export const vocab = [
       english: "sit",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "bitha",
@@ -759,9 +660,7 @@ export const vocab = [
       english: "make",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "bnaia",
@@ -799,9 +698,7 @@ export const vocab = [
       english: "rain",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "baarishein",
@@ -833,24 +730,22 @@ export const vocab = [
       english: "tell",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
-        romanUrdu: "btaia",
+        romanUrdu: "bataya",
         urdu: "بتایا",
         gender: "masculine",
         number: "singular",
       },
       {
-        romanUrdu: "btaii",
+        romanUrdu: "bataii",
         urdu: "بتائی",
         gender: "feminine",
         number: "singular",
       },
       {
-        romanUrdu: "btaie",
+        romanUrdu: "bataye",
         urdu: "بتائے",
         gender: "masculine",
         number: "plural",
@@ -873,9 +768,7 @@ export const vocab = [
       english: "son",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "beti",
@@ -889,12 +782,7 @@ export const vocab = [
         gender: "masculine",
         number: "plural",
       },
-      {
-        romanUrdu: "beton",
-        urdu: "بیٹوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "beton", urdu: "بیٹوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/beta.png",
     riddles: {
@@ -913,9 +801,7 @@ export const vocab = [
       english: "fill",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "bhara",
@@ -959,16 +845,9 @@ export const vocab = [
       english: "bed",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "bstron",
-        urdu: "بستروں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "bstron", urdu: "بستروں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/bistar.png",
     riddles: {
@@ -987,9 +866,7 @@ export const vocab = [
       english: "key",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "chaabiyan",
@@ -1021,9 +898,7 @@ export const vocab = [
       english: "moon",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/chaand.png",
     riddles: {
@@ -1042,9 +917,7 @@ export const vocab = [
       english: "four",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/chaar.png",
     riddles: {
@@ -1063,16 +936,9 @@ export const vocab = [
       english: "uncle",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "chache",
-        urdu: "چاچے",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "chache", urdu: "چاچے", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/chacha.png",
     riddles: {
@@ -1091,9 +957,7 @@ export const vocab = [
       english: "move",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "chala",
@@ -1143,9 +1007,7 @@ export const vocab = [
       english: "shine",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "chamak",
@@ -1207,9 +1069,7 @@ export const vocab = [
       english: "scream",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "cheekha",
@@ -1253,9 +1113,7 @@ export const vocab = [
       english: "rooftop",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "chhatein",
@@ -1263,12 +1121,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "chhaton",
-        urdu: "چھتوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "chhaton", urdu: "چھتوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/chhat.png",
     riddles: {
@@ -1287,16 +1140,9 @@ export const vocab = [
       english: "grandfather",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "dade",
-        urdu: "دادے",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "dade", urdu: "دادے", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/dada.png",
     riddles: {
@@ -1315,9 +1161,7 @@ export const vocab = [
       english: "grandmother",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "dadian",
@@ -1343,9 +1187,7 @@ export const vocab = [
       english: "right",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/daeyn.png",
     riddles: {
@@ -1364,9 +1206,7 @@ export const vocab = [
       english: "tablecloth",
       pos: "phrase",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/dastarkhan.png",
     riddles: {
@@ -1385,9 +1225,7 @@ export const vocab = [
       english: "run",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "daura",
@@ -1425,9 +1263,7 @@ export const vocab = [
       english: "see",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "dikha",
@@ -1465,28 +1301,11 @@ export const vocab = [
       english: "give",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
-      {
-        romanUrdu: "dia",
-        urdu: "دیا",
-        gender: "feminine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "di",
-        urdu: "دی",
-        gender: "feminine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "die",
-        urdu: "دیے",
-        gender: "feminine",
-        number: "plural",
-      },
+      { romanUrdu: "dia", urdu: "دیا", gender: "feminine", number: "singular" },
+      { romanUrdu: "di", urdu: "دی", gender: "feminine", number: "singular" },
+      { romanUrdu: "die", urdu: "دیے", gender: "feminine", number: "plural" },
     ],
     image: "/qr/assets/images/dena.png",
     riddles: {
@@ -1505,9 +1324,7 @@ export const vocab = [
       english: "late",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/der.png",
     riddles: {
@@ -1526,9 +1343,7 @@ export const vocab = [
       english: "sunlight",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/dhoop.png",
     riddles: {
@@ -1547,16 +1362,9 @@ export const vocab = [
       english: "heart",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "dlon",
-        urdu: "دلوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "dlon", urdu: "دلوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/dil.png",
     riddles: {
@@ -1575,9 +1383,7 @@ export const vocab = [
       english: "interesting",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/dilchasp.png",
     riddles: {
@@ -1590,22 +1396,10 @@ export const vocab = [
   },
   {
     id: "din",
-    word: {
-      baseRomanUrdu: "din",
-      baseUrdu: "دن",
-      english: "day",
-      pos: "noun",
-    },
-    grammar: {
-      baseGender: "masculine",
-    },
+    word: { baseRomanUrdu: "din", baseUrdu: "دن", english: "day", pos: "noun" },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "dnon",
-        urdu: "دنوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "dnon", urdu: "دنوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/din.png",
     riddles: {
@@ -1618,15 +1412,8 @@ export const vocab = [
   },
   {
     id: "do",
-    word: {
-      baseRomanUrdu: "do",
-      baseUrdu: "دو",
-      english: "two",
-      pos: "noun",
-    },
-    grammar: {
-      baseGender: null,
-    },
+    word: { baseRomanUrdu: "do", baseUrdu: "دو", english: "two", pos: "noun" },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/do.png",
     riddles: {
@@ -1645,9 +1432,7 @@ export const vocab = [
       english: "far",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/door.png",
     riddles: {
@@ -1666,9 +1451,7 @@ export const vocab = [
       english: "string",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "dorin",
@@ -1676,12 +1459,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "doron",
-        urdu: "ڈوروں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "doron", urdu: "ڈوروں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/dor.png",
     riddles: {
@@ -1700,16 +1478,9 @@ export const vocab = [
       english: "friend",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
-      {
-        romanUrdu: "doston",
-        urdu: "دوستوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "doston", urdu: "دوستوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/dost.png",
     riddles: {
@@ -1728,9 +1499,7 @@ export const vocab = [
       english: "prayer",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "duaein",
@@ -1762,9 +1531,7 @@ export const vocab = [
       english: "feeling",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/ehsas.png",
     riddles: {
@@ -1783,9 +1550,7 @@ export const vocab = [
       english: "money",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "idian",
@@ -1811,9 +1576,7 @@ export const vocab = [
       english: "pride",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/fakhr.png",
     riddles: {
@@ -1832,9 +1595,7 @@ export const vocab = [
       english: "car",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "gaariyan",
@@ -1842,12 +1603,7 @@ export const vocab = [
         gender: "feminine",
         number: "singular",
       },
-      {
-        romanUrdu: "gaariyon",
-        urdu: "گاڑیوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "gaariyon", urdu: "گاڑیوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/gaari.png",
     riddles: {
@@ -1866,9 +1622,7 @@ export const vocab = [
       english: "ball",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "gindin",
@@ -1876,12 +1630,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "gindon",
-        urdu: "گیندوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "gindon", urdu: "گیندوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/gaind.png",
     riddles: {
@@ -1900,9 +1649,7 @@ export const vocab = [
       english: "street",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "galiyan",
@@ -1910,12 +1657,7 @@ export const vocab = [
         gender: "feminine",
         number: "singular",
       },
-      {
-        romanUrdu: "galiyon",
-        urdu: "گلیوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "galiyon", urdu: "گلیوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/gali.png",
     riddles: {
@@ -1934,9 +1676,7 @@ export const vocab = [
       english: "worry",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "ghbraia",
@@ -1974,16 +1714,9 @@ export const vocab = [
       english: "home",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "ghron",
-        urdu: "گھروں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "ghron", urdu: "گھروں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/ghar.png",
     riddles: {
@@ -2002,9 +1735,7 @@ export const vocab = [
       english: "spin",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "ghoma",
@@ -2042,9 +1773,7 @@ export const vocab = [
       english: "echo",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "gonja",
@@ -2082,9 +1811,7 @@ export const vocab = [
       english: "pink",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/gulabi.png",
     riddles: {
@@ -2103,9 +1830,7 @@ export const vocab = [
       english: "loss",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "haarna",
@@ -2131,16 +1856,9 @@ export const vocab = [
       english: "hand",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "hathon",
-        urdu: "ہاتھوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "hathon", urdu: "ہاتھوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/haath.png",
     riddles: {
@@ -2159,9 +1877,7 @@ export const vocab = [
       english: "light",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "halki",
@@ -2193,9 +1909,7 @@ export const vocab = [
       english: "laugh",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "hnsa",
@@ -2233,9 +1947,7 @@ export const vocab = [
       english: "wind",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "hawaein",
@@ -2261,22 +1973,10 @@ export const vocab = [
       english: "part",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "hissay",
-        urdu: "حصے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "hisson",
-        urdu: "حصوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "hissay", urdu: "حصے", gender: null, number: "plural" },
+      { romanUrdu: "hisson", urdu: "حصوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/hissa.png",
     riddles: {
@@ -2295,9 +1995,7 @@ export const vocab = [
       english: "iron",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "istriyan",
@@ -2323,9 +2021,7 @@ export const vocab = [
       english: "awaken",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "jaga",
@@ -2369,9 +2065,7 @@ export const vocab = [
       english: "place",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "jagahein",
@@ -2379,12 +2073,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "jagahon",
-        urdu: "جگہوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "jagahon", urdu: "جگہوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/jagah.png",
     riddles: {
@@ -2403,9 +2092,7 @@ export const vocab = [
       english: "quickly",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/jaldi.png",
     riddles: {
@@ -2424,9 +2111,7 @@ export const vocab = [
       english: "gather",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "jama karungi",
@@ -2458,9 +2143,7 @@ export const vocab = [
       english: "go",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "gia",
@@ -2468,18 +2151,8 @@ export const vocab = [
         gender: "masculine",
         number: "singular",
       },
-      {
-        romanUrdu: "gii",
-        urdu: "گئی",
-        gender: "feminine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "gie",
-        urdu: "گئے",
-        gender: "masculine",
-        number: "plural",
-      },
+      { romanUrdu: "gii", urdu: "گئی", gender: "feminine", number: "singular" },
+      { romanUrdu: "gie", urdu: "گئے", gender: "masculine", number: "plural" },
     ],
     image: "/qr/assets/images/jana.png",
     riddles: {
@@ -2498,9 +2171,7 @@ export const vocab = [
       english: "lively",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/jandaar.png",
     riddles: {
@@ -2519,9 +2190,7 @@ export const vocab = [
       english: "win",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "jita",
@@ -2571,22 +2240,10 @@ export const vocab = [
       english: "shoe",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "jote",
-        urdu: "جوتے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "jooton",
-        urdu: "جوتوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "jote", urdu: "جوتے", gender: null, number: "plural" },
+      { romanUrdu: "jooton", urdu: "جوتوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/joota.png",
     riddles: {
@@ -2605,22 +2262,10 @@ export const vocab = [
       english: "outfit",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "jore",
-        urdu: "جوڑے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "joron",
-        urdu: "جوڑوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "jore", urdu: "جوڑے", gender: null, number: "plural" },
+      { romanUrdu: "joron", urdu: "جوڑوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/jora.png",
     riddles: {
@@ -2639,16 +2284,9 @@ export const vocab = [
       english: "work",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "kamon",
-        urdu: "کاموں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "kamon", urdu: "کاموں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/kaam.png",
     riddles: {
@@ -2667,9 +2305,7 @@ export const vocab = [
       english: "sometimes",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/kabhi.png",
     riddles: {
@@ -2688,9 +2324,7 @@ export const vocab = [
       english: "tomorrow",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/kal.png",
     riddles: {
@@ -2709,22 +2343,10 @@ export const vocab = [
       english: "room",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "kmre",
-        urdu: "کمرے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "kamron",
-        urdu: "کمروں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "kmre", urdu: "کمرے", gender: null, number: "plural" },
+      { romanUrdu: "kamron", urdu: "کمروں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/kamra.png",
     riddles: {
@@ -2743,22 +2365,10 @@ export const vocab = [
       english: "clothes",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "kpre",
-        urdu: "کپڑے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "kapron",
-        urdu: "کپڑوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "kpre", urdu: "کپڑے", gender: null, number: "plural" },
+      { romanUrdu: "kapron", urdu: "کپڑوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/kapra.png",
     riddles: {
@@ -2771,15 +2381,8 @@ export const vocab = [
   },
   {
     id: "kat",
-    word: {
-      baseRomanUrdu: "kat",
-      baseUrdu: "کٹ",
-      english: "cut",
-      pos: "noun",
-    },
-    grammar: {
-      baseGender: null,
-    },
+    word: { baseRomanUrdu: "kat", baseUrdu: "کٹ", english: "cut", pos: "noun" },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/kat.png",
     riddles: {
@@ -2798,9 +2401,7 @@ export const vocab = [
       english: "say",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "kha",
@@ -2808,18 +2409,8 @@ export const vocab = [
         gender: "masculine",
         number: "singular",
       },
-      {
-        romanUrdu: "khi",
-        urdu: "کہی",
-        gender: "feminine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "khe",
-        urdu: "کہے",
-        gender: "masculine",
-        number: "plural",
-      },
+      { romanUrdu: "khi", urdu: "کہی", gender: "feminine", number: "singular" },
+      { romanUrdu: "khe", urdu: "کہے", gender: "masculine", number: "plural" },
     ],
     image: "/qr/assets/images/kehna.png",
     riddles: {
@@ -2838,9 +2429,7 @@ export const vocab = [
       english: "special",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/khaas.png",
     riddles: {
@@ -2859,9 +2448,7 @@ export const vocab = [
       english: "news",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "khabrein",
@@ -2869,12 +2456,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "khabron",
-        urdu: "خبروں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "khabron", urdu: "خبروں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/khabar.png",
     riddles: {
@@ -2893,9 +2475,7 @@ export const vocab = [
       english: "dates",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "khajooren",
@@ -2927,9 +2507,7 @@ export const vocab = [
       english: "quiet",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/khamosh.png",
     riddles: {
@@ -2948,9 +2526,7 @@ export const vocab = [
       english: "standing",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "khri",
@@ -2982,9 +2558,7 @@ export const vocab = [
       english: "game",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "khelna",
@@ -3004,12 +2578,7 @@ export const vocab = [
         gender: "feminine",
         number: "singular",
       },
-      {
-        romanUrdu: "khile",
-        urdu: "کھیلے",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "khile", urdu: "کھیلے", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/khel.png",
     riddles: {
@@ -3028,16 +2597,9 @@ export const vocab = [
       english: "field",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "khiton",
-        urdu: "کھیتوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "khiton", urdu: "کھیتوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/khet.png",
     riddles: {
@@ -3056,9 +2618,7 @@ export const vocab = [
       english: "window",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "khirkiyan",
@@ -3090,9 +2650,7 @@ export const vocab = [
       english: "beautiful",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/khoobsurat.png",
     riddles: {
@@ -3111,9 +2669,7 @@ export const vocab = [
       english: "happy",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/khush.png",
     riddles: {
@@ -3132,9 +2688,7 @@ export const vocab = [
       english: "scent",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/khushboo.png",
     riddles: {
@@ -3153,9 +2707,7 @@ export const vocab = [
       english: "happiness",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "khushiyan",
@@ -3187,9 +2739,7 @@ export const vocab = [
       english: "red",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/laal.png",
     riddles: {
@@ -3208,9 +2758,7 @@ export const vocab = [
       english: "apply",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "lgaia",
@@ -3254,9 +2802,7 @@ export const vocab = [
       english: "about",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/lagbhag.png",
     riddles: {
@@ -3275,9 +2821,7 @@ export const vocab = [
       english: "hang",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "ltkaia",
@@ -3315,9 +2859,7 @@ export const vocab = [
       english: "take",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "lia",
@@ -3325,18 +2867,8 @@ export const vocab = [
         gender: "masculine",
         number: "singular",
       },
-      {
-        romanUrdu: "li",
-        urdu: "لی",
-        gender: "feminine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "lie",
-        urdu: "لیے",
-        gender: "masculine",
-        number: "plural",
-      },
+      { romanUrdu: "li", urdu: "لی", gender: "feminine", number: "singular" },
+      { romanUrdu: "lie", urdu: "لیے", gender: "masculine", number: "plural" },
     ],
     image: "/qr/assets/images/lena.png",
     riddles: {
@@ -3355,16 +2887,9 @@ export const vocab = [
       english: "people",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
-      {
-        romanUrdu: "logon",
-        urdu: "لوگوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "logon", urdu: "لوگوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/log.png",
     riddles: {
@@ -3383,9 +2908,7 @@ export const vocab = [
       english: "hit",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "mara",
@@ -3429,9 +2952,7 @@ export const vocab = [
       english: "help",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/madad.png",
     riddles: {
@@ -3450,9 +2971,7 @@ export const vocab = [
       english: "month",
       pos: "verb",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "maheenay",
@@ -3484,9 +3003,7 @@ export const vocab = [
       english: "celebrate",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "mnaia",
@@ -3524,9 +3041,7 @@ export const vocab = [
       english: "weather",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/mausam.png",
     riddles: {
@@ -3545,9 +3060,7 @@ export const vocab = [
       english: "henna",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/mehndi.png",
     riddles: {
@@ -3566,9 +3079,7 @@ export const vocab = [
       english: "sweets",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "mithaiyan",
@@ -3600,9 +3111,7 @@ export const vocab = [
       english: "sweetness",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [],
     image: "/qr/assets/images/mithas.png",
     riddles: {
@@ -3621,22 +3130,10 @@ export const vocab = [
       english: "neighborhood",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "mohallay",
-        urdu: "محلے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "mohallon",
-        urdu: "محلوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "mohallay", urdu: "محلے", gender: null, number: "plural" },
+      { romanUrdu: "mohallon", urdu: "محلوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/mohalla.png",
     riddles: {
@@ -3655,9 +3152,7 @@ export const vocab = [
       english: "blessed",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "mbark bad",
@@ -3683,9 +3178,7 @@ export const vocab = [
       english: "smile",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "muskuraya",
@@ -3729,9 +3222,7 @@ export const vocab = [
       english: "prayer",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "namaazein",
@@ -3739,12 +3230,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "namaazon",
-        urdu: "نمازوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "namaazon", urdu: "نمازوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/namaaz.png",
     riddles: {
@@ -3763,9 +3249,7 @@ export const vocab = [
       english: "orange",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "narangiyan",
@@ -3791,22 +3275,10 @@ export const vocab = [
       english: "new",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "nii",
-        urdu: "نئی",
-        gender: "feminine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "nie",
-        urdu: "نئے",
-        gender: "masculine",
-        number: "plural",
-      },
+      { romanUrdu: "nii", urdu: "نئی", gender: "feminine", number: "singular" },
+      { romanUrdu: "nie", urdu: "نئے", gender: "masculine", number: "plural" },
     ],
     image: "/qr/assets/images/naya.png",
     riddles: {
@@ -3825,9 +3297,7 @@ export const vocab = [
       english: "sight",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "nazrein",
@@ -3835,12 +3305,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "nazron",
-        urdu: "نظروں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "nazron", urdu: "نظروں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/nazar.png",
     riddles: {
@@ -3859,9 +3324,7 @@ export const vocab = [
       english: "down",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/neeche.png",
     riddles: {
@@ -3880,9 +3343,7 @@ export const vocab = [
       english: "blue",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "neeli",
@@ -3914,16 +3375,9 @@ export const vocab = [
       english: "bill",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "noton",
-        urdu: "نوٹوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "noton", urdu: "نوٹوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/note.png",
     riddles: {
@@ -3942,9 +3396,7 @@ export const vocab = [
       english: "high",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "oonchi",
@@ -3976,9 +3428,7 @@ export const vocab = [
       english: "five",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/paanch.png",
     riddles: {
@@ -3997,9 +3447,7 @@ export const vocab = [
       english: "near",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/paas.png",
     riddles: {
@@ -4018,9 +3466,7 @@ export const vocab = [
       english: "twenty-five",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/pachees.png",
     riddles: {
@@ -4039,9 +3485,7 @@ export const vocab = [
       english: "hold",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "pakra",
@@ -4079,9 +3523,7 @@ export const vocab = [
       english: "water",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/pani.png",
     riddles: {
@@ -4100,9 +3542,7 @@ export const vocab = [
       english: "neighbor",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "parosan",
@@ -4134,22 +3574,10 @@ export const vocab = [
       english: "know",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "pte",
-        urdu: "پتے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "pton",
-        urdu: "پتوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "pte", urdu: "پتے", gender: null, number: "plural" },
+      { romanUrdu: "pton", urdu: "پتوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/pata.png",
     riddles: {
@@ -4168,22 +3596,10 @@ export const vocab = [
       english: "firecracker",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "patakhay",
-        urdu: "پٹاخے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "patakhon",
-        urdu: "پٹاخوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "patakhay", urdu: "پٹاخے", gender: null, number: "plural" },
+      { romanUrdu: "patakhon", urdu: "پٹاخوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/patakha.png",
     riddles: {
@@ -4202,9 +3618,7 @@ export const vocab = [
       english: "kite",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "patangein",
@@ -4212,12 +3626,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "patangon",
-        urdu: "پتنگوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "patangon", urdu: "پتنگوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/patang.png",
     riddles: {
@@ -4236,9 +3645,7 @@ export const vocab = [
       english: "backwards",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/peechai.png",
     riddles: {
@@ -4257,9 +3664,7 @@ export const vocab = [
       english: "yellow",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "peeli",
@@ -4291,9 +3696,7 @@ export const vocab = [
       english: "wear",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "phna",
@@ -4331,9 +3734,7 @@ export const vocab = [
       english: "first",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/pehle.png",
     riddles: {
@@ -4352,9 +3753,7 @@ export const vocab = [
       english: "spread",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "phaila",
@@ -4398,9 +3797,7 @@ export const vocab = [
       english: "again",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/phir.png",
     riddles: {
@@ -4419,16 +3816,9 @@ export const vocab = [
       english: "pistachio",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
-      {
-        romanUrdu: "pste",
-        urdu: "پستے",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "pste", urdu: "پستے", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/pista.png",
     riddles: {
@@ -4447,9 +3837,7 @@ export const vocab = [
       english: "tires",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [],
     image: "/qr/assets/images/piyay.png",
     riddles: {
@@ -4468,9 +3856,7 @@ export const vocab = [
       english: "ask",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "poocha",
@@ -4508,9 +3894,7 @@ export const vocab = [
       english: "whole",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "pori",
@@ -4542,9 +3926,7 @@ export const vocab = [
       english: "beloved",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
       {
         romanUrdu: "piari",
@@ -4576,9 +3958,7 @@ export const vocab = [
       english: "shirt",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "qameezein",
@@ -4586,12 +3966,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "qameezon",
-        urdu: "قمیضوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "qameezon", urdu: "قمیضوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/qameez.png",
     riddles: {
@@ -4610,9 +3985,7 @@ export const vocab = [
       english: "night",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "raatein",
@@ -4620,12 +3993,7 @@ export const vocab = [
         gender: "feminine",
         number: "plural",
       },
-      {
-        romanUrdu: "raaton",
-        urdu: "راتوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "raaton", urdu: "راتوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/raat.png",
     riddles: {
@@ -4644,9 +4012,7 @@ export const vocab = [
       english: "place",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "rkha",
@@ -4690,16 +4056,9 @@ export const vocab = [
       english: "color",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "rangon",
-        urdu: "رنگوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "rangon", urdu: "رنگوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/rang.png",
     riddles: {
@@ -4710,8 +4069,7 @@ export const vocab = [
       urdu: "روز کی زندگی میں اس کا کام نظر آئے،\nاپنا سا نام اور اپنی پہچان بتائے!",
     },
   },
- 
-  
+
   {
     id: "thand",
     word: {
@@ -4720,9 +4078,7 @@ export const vocab = [
       english: "cold",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "thanda",
@@ -4760,9 +4116,7 @@ export const vocab = [
       english: "three",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/theen.png",
     riddles: {
@@ -4781,9 +4135,7 @@ export const vocab = [
       english: "jump",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "achhla",
@@ -4827,9 +4179,7 @@ export const vocab = [
       english: "sad",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/udaas.png",
     riddles: {
@@ -4848,9 +4198,7 @@ export const vocab = [
       english: "above",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/upar.png",
     riddles: {
@@ -4869,9 +4217,7 @@ export const vocab = [
       english: "fly",
       pos: "verb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [
       {
         romanUrdu: "uraya",
@@ -4909,9 +4255,7 @@ export const vocab = [
       english: "return",
       pos: "adverb",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/wapas.png",
     riddles: {
@@ -4930,9 +4274,7 @@ export const vocab = [
       english: "memory",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "feminine",
-    },
+    grammar: { baseGender: "feminine" },
     variants: [
       {
         romanUrdu: "yaadein",
@@ -4964,22 +4306,10 @@ export const vocab = [
       english: "flavor",
       pos: "noun",
     },
-    grammar: {
-      baseGender: "masculine",
-    },
+    grammar: { baseGender: "masculine" },
     variants: [
-      {
-        romanUrdu: "zaiqay",
-        urdu: "ذائقے",
-        gender: null,
-        number: "plural",
-      },
-      {
-        romanUrdu: "zaiqon",
-        urdu: "ذائقوں",
-        gender: null,
-        number: "plural",
-      },
+      { romanUrdu: "zaiqay", urdu: "ذائقے", gender: null, number: "plural" },
+      { romanUrdu: "zaiqon", urdu: "ذائقوں", gender: null, number: "plural" },
     ],
     image: "/qr/assets/images/zaika.png",
     riddles: {
@@ -4998,9 +4328,7 @@ export const vocab = [
       english: "necessary",
       pos: "adjective",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/zaroori.png",
     riddles: {
@@ -5019,9 +4347,7 @@ export const vocab = [
       english: "more",
       pos: "noun",
     },
-    grammar: {
-      baseGender: null,
-    },
+    grammar: { baseGender: null },
     variants: [],
     image: "/qr/assets/images/zyada.png",
     riddles: {
@@ -5030,6 +4356,575 @@ export const vocab = [
       romanUrdu:
         "Thoda ho to aur mangwaye,\nZyada ho to khushi badh jaye,\nKaunsa lafz quantity bataye?",
       urdu: "تھوڑا ہو تو اور منگوائے،\nبہت ہو تو خوشی بڑھ جائے،\nبتاؤ کون سا لفظ مقدار بڑھائے؟",
+    },
+  },
+
+  {
+    id: "hawa",
+    word: {
+      baseRomanUrdu: "hawa",
+      baseUrdu: "ہوا",
+      english: "breeze",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/hawa.png",
+    riddles: {
+      english:
+        "I move the trees but can't be seen,\nSoft and cool and often clean.",
+      romanUrdu: "Na dikhu phir bhi chalti jaun,\nThandi thandi sab ko bhau!",
+      urdu: "نظر نہ آؤں مگر چلتی جاؤں،\nٹھنڈی ہو کر سب کو بھاؤں!",
+    },
+  },
+  {
+    id: "badal",
+    word: {
+      baseRomanUrdu: "badal",
+      baseUrdu: "بادل",
+      english: "clouds",
+      pos: "noun",
+    },
+    grammar: { baseGender: "masculine" },
+    variants: [],
+    image: "/qr/assets/images/badal.png",
+    riddles: {
+      english: "Floating high up in the sky,\nSoft and white as they pass by!",
+      romanUrdu: "Aasmaan mein tairte jayein,\nSafed rang sab ko bhayein!",
+      urdu: "آسمان میں تیرتے جائیں،\nسفید رنگ سب کو بھائیں!",
+    },
+  },
+  {
+    id: "boond",
+    word: {
+      baseRomanUrdu: "boond",
+      baseUrdu: "بوند",
+      english: "drop",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/boond.png",
+    riddles: {
+      english:
+        "Tiny and small, I fall from the sky,\nMany of me and the ground gets wet nearby!",
+      romanUrdu: "Choti si hoon girti jaun,\nZameen ko geela kar jaun!",
+      urdu: "چھوٹی سی ہوں گرتی جاؤں،\nزمین کو گیلا کر جاؤں!",
+    },
+  },
+  {
+    id: "baarish",
+    word: {
+      baseRomanUrdu: "baarish",
+      baseUrdu: "بارش",
+      english: "rain",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/baarish.png",
+    riddles: {
+      english: "Many drops fall from the sky,\nMaking puddles as they fly!",
+      romanUrdu: "Boonden mil kar girti jayein,\nPani pani sab ho jaye!",
+      urdu: "بوندیں مل کر گرتی جائیں،\nپانی پانی سب ہو جائے!",
+    },
+  },
+  {
+    id: "barsaat",
+    word: {
+      baseRomanUrdu: "barsaat",
+      baseUrdu: "برسات",
+      english: "rainfall",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/barsaat.png",
+    riddles: {
+      english:
+        "Season comes with clouds and rain,\nCooling heat again and again!",
+      romanUrdu: "Badal aaye pani laaye,\nGarmi sab door bhagaye!",
+      urdu: "بادل آئیں پانی لائیں،\nگرمی سب دور بھگائیں!",
+    },
+  },
+  {
+    id: "khushboo",
+    word: {
+      baseRomanUrdu: "khushboo",
+      baseUrdu: "خوشبو",
+      english: "fragrance",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/khushboo.png",
+    riddles: {
+      english:
+        "I cannot be seen but I smell so sweet,\nFlowers and food make me a treat!",
+      romanUrdu: "Na dikhu par mehsoos hoon,\nPhoolon se main khaas hoon!",
+      urdu: "نظر نہ آؤں مگر محسوس ہوں،\nپھولوں سے میں خاص ہوں!",
+    },
+  },
+  {
+    id: "mehak",
+    word: {
+      baseRomanUrdu: "mehak",
+      baseUrdu: "مہک",
+      english: "scent",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/mehak.png",
+    riddles: {
+      english: "After rain I fill the air,\nFresh and earthy everywhere!",
+      romanUrdu: "Barish ke baad mehsoos ho jaun,\nMitti ki yaad dilau!",
+      urdu: "بارش کے بعد محسوس ہو جاؤں،\nمٹی کی یاد دلاؤں!",
+    },
+  },
+  {
+    id: "bhaagna",
+    word: {
+      baseRomanUrdu: "bhaagna",
+      baseUrdu: "بھاگنا",
+      english: "run",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [
+      {
+        romanUrdu: "bhaaga",
+        urdu: "بھاگا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "bhaagi",
+        urdu: "بھاگی",
+        gender: "feminine",
+        number: "singular",
+      },
+    ],
+    image: "/qr/assets/images/bhaagna.png",
+    riddles: {
+      english: "Fast feet moving here and there,\nChasing fun without a care!",
+      romanUrdu:
+        "Tez tez pair chalayein,\nKhel mein sab ko peeche chhor jayein!",
+      urdu: "تیز تیز پیر چلائیں،\nکھیل میں سب کو پیچھے چھوڑ جائیں!",
+    },
+  },
+  {
+    id: "hansna",
+    word: {
+      baseRomanUrdu: "hansna",
+      baseUrdu: "ہنسنا",
+      english: "laugh",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [
+      {
+        romanUrdu: "hansa",
+        urdu: "ہنسا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "hansi",
+        urdu: "ہنسی",
+        gender: "feminine",
+        number: "singular",
+      },
+    ],
+    image: "/qr/assets/images/hansna.png",
+    riddles: {
+      english:
+        "When you're happy, what do you do?\nGiggles and smiles come out of you!",
+      romanUrdu: "Khushi aaye chehra chamke,\nDil halka ho jaye jhatke!",
+      urdu: "خوشی آئے چہرہ چمکے،\nدل ہلکا ہو جائے جھٹکے!",
+    },
+  },
+  {
+    id: "cheekhna",
+    word: {
+      baseRomanUrdu: "cheekhna",
+      baseUrdu: "چیخنا",
+      english: "shout",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [
+      {
+        romanUrdu: "cheekha",
+        urdu: "چیخا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "cheekhi",
+        urdu: "چیخی",
+        gender: "feminine",
+        number: "singular",
+      },
+    ],
+    image: "/qr/assets/images/cheekhna.png",
+    riddles: {
+      english:
+        "Loud and strong, my voice goes far,\nYou can hear me near or far!",
+      romanUrdu: "Zor se bolun door tak jaun,\nSab ko apni taraf bulaun!",
+      urdu: "زور سے بولوں دور تک جاؤں،\nسب کو اپنی طرف بلاؤں!",
+    },
+  },
+  {
+    id: "phisalna",
+    word: {
+      baseRomanUrdu: "phisalna",
+      baseUrdu: "پھسلنا",
+      english: "slip",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/phisalna.png",
+    riddles: {
+      english: "Wet ground makes me lose my feet,\nOops I fall, not so neat!",
+      romanUrdu: "Geeli zameen pe pair phisalun,\nGir kar phir se sambhalun!",
+      urdu: "گیلی زمین پہ پیر پھسلوں،\nگر کر پھر سے سنبھلوں!",
+    },
+  },
+  {
+    id: "dhulna",
+    word: {
+      baseRomanUrdu: "dhulna",
+      baseUrdu: "دھلنا",
+      english: "wash",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/dhulna.png",
+    riddles: {
+      english:
+        "Water comes and makes things bright,\nDirt goes away out of sight!",
+      romanUrdu: "Pani aaye saaf banaye,\nMail sab door bhagaye!",
+      urdu: "پانی آئے صاف بنائے،\nمیل سب دور بھگائے!",
+    },
+  },
+  {
+    id: "dheere",
+    word: {
+      baseRomanUrdu: "dheere",
+      baseUrdu: "دھیرے",
+      english: "slowly",
+      pos: "adverb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/dheere.png",
+    riddles: {
+      english: "Not too fast, I take my time,\nMoving soft in gentle rhyme!",
+      romanUrdu: "Aaram se main chalti jaun,\nTezi se kabhi na bhaagun!",
+      urdu: "آرام سے میں چلتی جاؤں،\nتیزی سے کبھی نہ بھاگوں!",
+    },
+  },
+  {
+    id: "achanak",
+    word: {
+      baseRomanUrdu: "achanak",
+      baseUrdu: "اچانک",
+      english: "suddenly",
+      pos: "adverb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/achanak.png",
+    riddles: {
+      english: "Out of nowhere I appear,\nQuick surprise that makes you cheer!",
+      romanUrdu: "Bin bataye aa jaun,\nSab ko hairan kar jaun!",
+      urdu: "بن بتائے آ جاؤں،\nسب کو حیران کر جاؤں!",
+    },
+  },
+  {
+    id: "aapas",
+    word: {
+      baseRomanUrdu: "aapas",
+      baseUrdu: "آپس",
+      english: "mutual",
+      pos: "pronoun",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/aapas.png",
+    riddles: {
+      english:
+        "When two or more are all together,\nSharing things with one another!",
+      romanUrdu: "Sab mil kar saath nibhaayein,\nMil jul kar pyar badhayein!",
+      urdu: "سب مل کر ساتھ نبھائیں،\nمل جل کر پیار بڑھائیں!",
+    },
+  },
+  {
+    id: "baatcheet",
+    word: {
+      baseRomanUrdu: "baat cheet",
+      baseUrdu: "بات چیت",
+      english: "conversation",
+      pos: "phrase",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/baatcheet.png",
+    riddles: {
+      english:
+        "You and I both speak and share,\nWords go back and forth with care!",
+      romanUrdu: "Tum bolo main bhi bolun,\nMil kar alfaaz badlun!",
+      urdu: "تم بولو میں بھی بولوں،\nمل کر الفاظ بدلوں!",
+    },
+  },
+  {
+    id: "awaaz",
+    word: {
+      baseRomanUrdu: "awaaz",
+      baseUrdu: "آواز",
+      english: "sound",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/awaaz.png",
+    riddles: {
+      english: "You can hear me loud or low,\nFrom every place I come and go!",
+      romanUrdu: "Kabhi zor se kabhi halki,\nHar jaga main chalti!",
+      urdu: "کبھی زور سے کبھی ہلکی،\nہر جگہ میں چلتی!",
+    },
+  },
+  {
+    id: "manana",
+    word: {
+      baseRomanUrdu: "manana",
+      baseUrdu: "منانا",
+      english: "persuade",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/manana.png",
+    riddles: {
+      english:
+        "When someone feels upset or sad,\nYou bring a smile and make them glad!",
+      romanUrdu: "Roothay ko hansna sikhaun,\nPyar se dil halka karau!",
+      urdu: "روٹھے کو ہنسنا سکھاؤں،\nپیار سے دل ہلکا کراؤں!",
+    },
+  },
+  {
+    id: "maan",
+    word: {
+      baseRomanUrdu: "maan",
+      baseUrdu: "مان",
+      english: "agree",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/maan.png",
+    riddles: {
+      english:
+        "When you say yes and feel it's right,\nYou accept with heart so light!",
+      romanUrdu: "Haan keh kar dil khush ho jaye,\nSahi baat ko apnaye!",
+      urdu: "ہاں کہہ کر دل خوش ہو جائے،\nصحیح بات کو اپنائے!",
+    },
+  },
+  {
+    id: "jeetna",
+    word: {
+      baseRomanUrdu: "jeetna",
+      baseUrdu: "جیتنا",
+      english: "win",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/jeetna.png",
+    riddles: {
+      english: "In a game I come out on top,\nHappy cheers just never stop!",
+      romanUrdu: "Khel mein sab se aage jaun,\nKhushi se muskurau!",
+      urdu: "کھیل میں سب سے آگے جاؤں،\nخوشی سے مسکراؤں!",
+    },
+  },
+  {
+    id: "rokna",
+    word: {
+      baseRomanUrdu: "rokna",
+      baseUrdu: "روکنا",
+      english: "stop",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/rokna.png",
+    riddles: {
+      english:
+        "When something needs to end right now,\nI make it pause somehow!",
+      romanUrdu: "Chalti cheez ko thaharau,\nAage barhne se bachau!",
+      urdu: "چلتی چیز کو ٹھہراؤں،\nآگے بڑھنے سے بچاؤں!",
+    },
+  },
+  {
+    id: "sochna",
+    word: {
+      baseRomanUrdu: "sochna",
+      baseUrdu: "سوچنا",
+      english: "think",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/sochna.png",
+    riddles: {
+      english: "Inside your mind I quietly stay,\nHelping you decide each day!",
+      romanUrdu: "Dimagh mein main kaam karun,\nHar sawal ka jawab dhundun!",
+      urdu: "دماغ میں میں کام کروں،\nہر سوال کا جواب ڈھونڈوں!",
+    },
+  },
+  {
+    id: "barhana",
+    word: {
+      baseRomanUrdu: "barhana",
+      baseUrdu: "بڑھانا",
+      english: "increase",
+      pos: "verb",
+    },
+    grammar: { baseGender: null },
+    variants: [],
+    image: "/qr/assets/images/barhana.png",
+    riddles: {
+      english:
+        "When something grows and gets more big,\nI help it rise and not stay small!",
+      romanUrdu: "Choti cheez ko bari banaun,\nHar cheez ko aage le jaun!",
+      urdu: "چھوٹی چیز کو بڑی بناؤں،\nہر چیز کو آگے لے جاؤں!",
+    },
+  },
+  {
+    id: "khabrein",
+    word: {
+      baseRomanUrdu: "khabrein",
+      baseUrdu: "خبریں",
+      english: "news",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/khabrein.png",
+    riddles: {
+      english: "Stories from places far and near,\nTold to everyone to hear!",
+      romanUrdu: "Duniya ki baatein sunau,\nHar jagah ki baat bataun!",
+      urdu: "دنیا کی باتیں سناؤں،\nہر جگہ کی بات بتاؤں!",
+    },
+  },
+  {
+    id: "larai",
+    word: {
+      baseRomanUrdu: "larai",
+      baseUrdu: "لڑائی",
+      english: "fight",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/larai.png",
+    riddles: {
+      english:
+        "When people argue loud and strong,\nThings can quickly go all wrong!",
+      romanUrdu: "Lafz tez aur gussa aaye,\nLog aapas mein jhagra kar jayein!",
+      urdu: "لفظ تیز اور غصہ آئے،\nلوگ آپس میں جھگڑا کر جائیں!",
+    },
+  },
+  {
+    id: "gussa",
+    word: {
+      baseRomanUrdu: "gussa",
+      baseUrdu: "غصہ",
+      english: "anger",
+      pos: "noun",
+    },
+    grammar: { baseGender: "masculine" },
+    variants: [],
+    image: "/qr/assets/images/gussa.png",
+    riddles: {
+      english:
+        "A hot feeling inside your chest,\nIt makes you shout, not feel your best!",
+      romanUrdu: "Dil mein aag si jalti jaye,\nChehra tez ho jaye!",
+      urdu: "دل میں آگ سی جلتی جائے،\nچہرہ تیز ہو جائے!",
+    },
+  },
+  {
+    id: "hal",
+    word: {
+      baseRomanUrdu: "hal",
+      baseUrdu: "حل",
+      english: "solution",
+      pos: "noun",
+    },
+    grammar: { baseGender: "masculine" },
+    variants: [],
+    image: "/qr/assets/images/hal.png",
+    riddles: {
+      english:
+        "When there's a problem big or small,\nSomething fixes it once and for all!",
+      romanUrdu: "Mushkil aaye sulajh jaye,\nSab kuch theek ho jaye!",
+      urdu: "مشکل آئے سلجھ جائے،\nسب کچھ ٹھیک ہو جائے!",
+    },
+  },
+  {
+    id: "faisla",
+    word: {
+      baseRomanUrdu: "faisla",
+      baseUrdu: "فیصلہ",
+      english: "decision",
+      pos: "noun",
+    },
+    grammar: { baseGender: "masculine" },
+    variants: [],
+    image: "/qr/assets/images/faisla.png",
+    riddles: {
+      english:
+        "Choosing one path out of two,\nMaking up your mind is what you do!",
+      romanUrdu: "Do raaston mein ek chuno,\nSoch samajh kar raasta lo!",
+      urdu: "دو راستوں میں ایک چنو،\nسوچ سمجھ کر راستہ لو!",
+    },
+  },
+  {
+    id: "madad",
+    word: {
+      baseRomanUrdu: "madad",
+      baseUrdu: "مدد",
+      english: "help",
+      pos: "noun",
+    },
+    grammar: { baseGender: "feminine" },
+    variants: [],
+    image: "/qr/assets/images/madad.png",
+    riddles: {
+      english:
+        "When someone needs a hand or care,\nYou step in and show you're there!",
+      romanUrdu: "Mushkil mein saath nibhaun,\nHar kisi ka saath dun!",
+      urdu: "مشکل میں ساتھ نبھاؤں،\nہر کسی کا ساتھ دوں!",
+    },
+  },
+  {
+    id: "sukoon",
+    word: {
+      baseRomanUrdu: "sukoon",
+      baseUrdu: "سکون",
+      english: "peace",
+      pos: "noun",
+    },
+    grammar: { baseGender: "masculine" },
+    variants: [],
+    image: "/qr/assets/images/sukoon.png",
+    riddles: {
+      english: "Calm and quiet, soft and light,\nEverything feels just right!",
+      romanUrdu: "Dil ko chain aur aaram mile,\nHar cheez bilkul theek lage!",
+      urdu: "دل کو چین اور آرام ملے،\nہر چیز بالکل ٹھیک لگے!",
     },
   },
 ];

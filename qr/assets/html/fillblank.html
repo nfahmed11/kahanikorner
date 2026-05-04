@@ -32,9 +32,9 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
-            <span id="score-correct">0</span>
-            <span class="score-sep">/</span>
-            <span id="score-total">0</span>
+            <span class="score-pill-label">Score:</span>
+            <span id="score-points">0</span>
+            <span class="score-pill-unit">pts</span>
           </div>
           <div class="streak-badge" id="streak-badge" aria-live="polite"></div>
           <button class="icon-btn" id="settings-btn" type="button" aria-label="Open settings" aria-controls="settings-panel" aria-expanded="false">
@@ -50,10 +50,11 @@
       <main class="app-main">
 
         <div class="progress-wrap">
-          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Accuracy">
+          <span class="progress-prefix">Sentence:</span>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Word progress">
             <div class="progress-fill" id="progress-fill"></div>
           </div>
-          <span class="progress-label" id="progress-label">0 / 0</span>
+          <span class="progress-label" id="progress-label">0 / —</span>
         </div>
 
         <article class="game-card" id="game-card" aria-live="polite" aria-label="Current question">
@@ -88,7 +89,7 @@
                 <span class="sentence-label">Roman Urdu</span>
                 <p class="sentence-text" id="sentence-roman"></p>
               </div>
-              <div class="sentence-row" id="row-english">
+              <div class="sentence-row" id="row-english" hidden>
                 <span class="sentence-label">English</span>
                 <p class="sentence-text italic" id="sentence-english"></p>
               </div>
@@ -137,26 +138,12 @@
       </div>
 
       <div class="settings-group">
-        <span class="settings-group-label">Word Bank Script</span>
-        <div class="pill-group" role="group" aria-label="Word bank script">
-          <button class="pill script-pill" data-value="roman" type="button">Roman Urdu</button>
-          <button class="pill script-pill urdu" data-value="urdu" type="button" lang="ur" dir="rtl">اردو</button>
-        </div>
-      </div>
-
-      <div class="settings-group">
-        <span class="settings-group-label">Show in Sentence</span>
-        <div class="toggle-row">
-          <span class="toggle-label">Urdu script</span>
-          <button class="toggle-btn" id="toggle-urdu" type="button" role="switch" aria-checked="true" aria-label="Show Urdu script"></button>
-        </div>
-        <div class="toggle-row">
-          <span class="toggle-label">Roman Urdu</span>
-          <button class="toggle-btn" id="toggle-roman" type="button" role="switch" aria-checked="true" aria-label="Show Roman Urdu"></button>
-        </div>
-        <div class="toggle-row">
-          <span class="toggle-label">English translation</span>
-          <button class="toggle-btn" id="toggle-english" type="button" role="switch" aria-checked="false" aria-label="Show English translation"></button>
+        <span class="settings-group-label">Scripts</span>
+        <p class="settings-group-desc">Shown in the sentence and word bank</p>
+        <div class="pill-group" role="group" aria-label="Scripts to show" aria-multiselectable="true">
+          <button class="pill script-pill active" data-script="roman"   type="button" aria-pressed="true">Roman Urdu</button>
+          <button class="pill script-pill active urdu" data-script="urdu" type="button" aria-pressed="true" lang="ur" dir="rtl">اردو</button>
+          <button class="pill script-pill"        data-script="english" type="button" aria-pressed="false">English</button>
         </div>
       </div>
 
@@ -165,10 +152,6 @@
         <div class="toggle-row">
           <span class="toggle-label">Sound effects</span>
           <button class="toggle-btn" id="toggle-sound" type="button" role="switch" aria-checked="true" aria-label="Sound effects"></button>
-        </div>
-        <div class="toggle-row">
-          <span class="toggle-label">Auto-advance on correct</span>
-          <button class="toggle-btn" id="toggle-autonext" type="button" role="switch" aria-checked="false" aria-label="Auto-advance on correct answer"></button>
         </div>
       </div>
     </aside>
@@ -215,6 +198,6 @@
     </script>
 
     <!-- fillblank.js lives in /qr/assets/js/ alongside mastervocab.js -->
-    <script type="module" src="/qr/assets/js/fillblank.js"></script>
+    <script type="module" src="/qr/assets/js/fillblank.js?v=2"></script>
   </body>
 </html>

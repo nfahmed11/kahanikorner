@@ -30,13 +30,11 @@ const REVEAL_AFTER   = 3;   // show "show answer" after N wrong attempts
 // ─────────────────────────────────────────────────────────────
 
 const DEFAULT_SETTINGS = {
-  difficulty:     "easy",
-  wordBankScript: "roman",  // "roman" | "urdu"
-  showUrdu:       true,
-  showRoman:      true,
-  showEnglish:    false,
-  soundEnabled:   true,
-  autoNext:       false,
+  difficulty:   "easy",
+  showUrdu:     true,
+  showRoman:    true,
+  showEnglish:  false,
+  soundEnabled: true,
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -83,22 +81,24 @@ const SFX = (() => {
 // STATE
 // ─────────────────────────────────────────────────────────────
 
-let settings   = { ...DEFAULT_SETTINGS };
-let pool       = [];
-let usedIds    = [];
-let currentQ   = null;
-let answered   = false;
-let wrongCount = 0;
-let score      = { correct: 0, total: 0 };
-let streak     = 0;
+let settings      = { ...DEFAULT_SETTINGS };
+let pool          = [];
+let usedIds       = [];
+let currentQ      = null;
+let answered      = false;
+let wrongCount    = 0;
+let points        = 0;
+let streak        = 0;
+let nextQWordId   = null;   // word id reserved by cancelPrefetch cleanup
+let sentenceCache = {};     // wordId → Promise<question> for bulk pre-generation
+let cacheAbort    = false;  // set true to cancel an in-progress bulk generation
 
 // ─────────────────────────────────────────────────────────────
 // DOM REFERENCES
 // ─────────────────────────────────────────────────────────────
 
 const dom = {
-  scoreCorrect:    q("#score-correct"),
-  scoreTotal:      q("#score-total"),
+  scorePoints:     q("#score-points"),
   streakBadge:     q("#streak-badge"),
   progressFill:    q("#progress-fill"),
   progressLabel:   q("#progress-label"),
@@ -137,6 +137,11 @@ function loadSettings() {
     const stored = JSON.parse(localStorage.getItem(SETTINGS_KEY));
     if (stored) settings = { ...DEFAULT_SETTINGS, ...stored };
   } catch (_) {}
+  // Guard: stale localStorage must never hide all scripts
+  if (!settings.showRoman && !settings.showUrdu && !settings.showEnglish) {
+    settings.showRoman = true;
+    settings.showUrdu  = true;
+  }
 }
 
 function saveSettings() {
@@ -147,14 +152,14 @@ function applySettings() {
   qAll(".difficulty-pill").forEach((p) =>
     p.classList.toggle("active", p.dataset.value === settings.difficulty)
   );
-  qAll(".script-pill").forEach((p) =>
-    p.classList.toggle("active", p.dataset.value === settings.wordBankScript)
-  );
-  setToggle("toggle-urdu",     settings.showUrdu);
-  setToggle("toggle-roman",    settings.showRoman);
-  setToggle("toggle-english",  settings.showEnglish);
-  setToggle("toggle-sound",    settings.soundEnabled);
-  setToggle("toggle-autonext", settings.autoNext);
+  qAll(".script-pill").forEach((p) => {
+    const on = p.dataset.script === "roman"   ? settings.showRoman
+             : p.dataset.script === "urdu"    ? settings.showUrdu
+             : settings.showEnglish;
+    p.classList.toggle("active", on);
+    p.setAttribute("aria-pressed", String(on));
+  });
+  setToggle("toggle-sound", settings.soundEnabled);
   applySentenceVisibility();
 }
 
@@ -254,26 +259,57 @@ async function fetchSentence(wordObj, difficulty) {
 // WORD BANK BUILDER
 // ─────────────────────────────────────────────────────────────
 
+// Returns true if two Roman Urdu words look too similar to be fair distractors.
+function tooSimilar(a, b) {
+  if (!a || !b) return false;
+  const x = a.toLowerCase().replace(/[^a-z]/g, "");
+  const y = b.toLowerCase().replace(/[^a-z]/g, "");
+  if (x === y) return true;
+  // One is a prefix of the other (e.g. "kitab" / "kitabchi")
+  if (x.startsWith(y) || y.startsWith(x)) return true;
+  // Share the same first 3 characters (e.g. "ghar" / "ghanta")
+  if (x.length >= 3 && y.length >= 3 && x.slice(0, 3) === y.slice(0, 3)) return true;
+  return false;
+}
+
 function buildWordBank(targetWordObj, sentence) {
   const correctChip = {
-    display:   settings.wordBankScript === "urdu" ? sentence.answerUrdu : sentence.answerRoman,
     roman:     sentence.answerRoman,
     urdu:      sentence.answerUrdu,
+    english:   sentence.answerEnglish || "",
     isCorrect: true,
   };
 
-  const distractors = pool
-    .filter((w) => w.id !== targetWordObj.id)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, WORD_BANK_SIZE - 1)
-    .map((w) => ({
-      display:   settings.wordBankScript === "urdu"
-        ? (w.word.baseUrdu      || w.word.baseRomanUrdu)
-        : (w.word.baseRomanUrdu || w.word.baseUrdu),
-      roman:     w.word.baseRomanUrdu,
-      urdu:      w.word.baseUrdu,
-      isCorrect: false,
-    }));
+  const correctRoman = sentence.answerRoman;
+  const targetPos    = targetWordObj.word?.pos;
+
+  const candidates = pool.filter((w) => w.id !== targetWordObj.id);
+
+  // Tier 1 — different POS and clearly different spelling (best distractors)
+  const tier1 = candidates.filter(
+    (w) => w.word?.pos !== targetPos && !tooSimilar(w.word.baseRomanUrdu, correctRoman)
+  );
+  // Tier 2 — different spelling but same POS (still acceptable)
+  const tier2 = candidates.filter(
+    (w) => w.word?.pos === targetPos && !tooSimilar(w.word.baseRomanUrdu, correctRoman)
+  );
+  // Tier 3 — anything that isn't the exact correct word (last resort)
+  const tier3 = candidates.filter(
+    (w) => tooSimilar(w.word.baseRomanUrdu, correctRoman)
+  );
+
+  const ordered = [
+    ...tier1.sort(() => Math.random() - 0.5),
+    ...tier2.sort(() => Math.random() - 0.5),
+    ...tier3.sort(() => Math.random() - 0.5),
+  ];
+
+  const distractors = ordered.slice(0, WORD_BANK_SIZE - 1).map((w) => ({
+    roman:     w.word.baseRomanUrdu,
+    urdu:      w.word.baseUrdu || "",
+    english:   w.word.english  || "",
+    isCorrect: false,
+  }));
 
   return [...distractors, correctChip].sort(() => Math.random() - 0.5);
 }
@@ -306,10 +342,11 @@ function renderQuestion({ wordObj, sentence, wordBank }) {
 
   dom.sentenceUrdu.textContent    = sentence.urduBlank;
   dom.sentenceRoman.textContent   = sentence.romanBlank;
-  dom.sentenceEnglish.textContent = sentence.englishTranslation;
+  dom.sentenceEnglish.textContent = sentence.englishBlank || sentence.englishTranslation;
 
   dom.sentenceUrdu.classList.remove("revealed");
   dom.sentenceRoman.classList.remove("revealed");
+  dom.sentenceEnglish.classList.remove("revealed");
 
   applySentenceVisibility();
   renderWordBank(wordBank);
@@ -322,11 +359,34 @@ function renderQuestion({ wordObj, sentence, wordBank }) {
 
 function renderWordBank(wordBank) {
   dom.wordBank.innerHTML = "";
+  const activeCount = [settings.showRoman, settings.showUrdu, settings.showEnglish].filter(Boolean).length;
+  const stacked = activeCount > 1;
+
   wordBank.forEach((chip) => {
     const btn = document.createElement("button");
-    btn.type        = "button";
-    btn.className   = "word-chip" + (settings.wordBankScript === "urdu" ? " urdu" : "");
-    btn.textContent = chip.display;
+    btn.type           = "button";
+    btn.className      = "word-chip" + (stacked ? " word-chip--stacked" : "");
+    btn.dataset.roman  = chip.roman;   // used for correct-answer identification
+
+    if (settings.showRoman && chip.roman) {
+      const span = document.createElement("span");
+      span.className   = "chip-roman";
+      span.textContent = chip.roman;
+      btn.appendChild(span);
+    }
+    if (settings.showUrdu && chip.urdu) {
+      const span = document.createElement("span");
+      span.className   = "chip-urdu";
+      span.textContent = chip.urdu;
+      btn.appendChild(span);
+    }
+    if (settings.showEnglish && chip.english) {
+      const span = document.createElement("span");
+      span.className   = "chip-english";
+      span.textContent = chip.english;
+      btn.appendChild(span);
+    }
+
     btn.addEventListener("click", () => handleAnswer(chip, btn));
     dom.wordBank.appendChild(btn);
   });
@@ -341,6 +401,10 @@ function revealSentence(sentence) {
     dom.sentenceRoman.textContent = sentence.romanFull;
     dom.sentenceRoman.classList.add("revealed");
   }
+  if (settings.showEnglish) {
+    dom.sentenceEnglish.textContent = sentence.englishTranslation;
+    dom.sentenceEnglish.classList.add("revealed");
+  }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -354,15 +418,16 @@ function handleAnswer(chip, btnEl) {
 
   if (chip.isCorrect) {
     answered = true;
-    score.correct++;
-    score.total++;
+    // 3 pts on first try, 2 on second, 1 on third or beyond
+    const earned = wrongCount === 0 ? 3 : wrongCount === 1 ? 2 : 1;
+    points += earned;
     streak++;
     wrongCount = 0;
 
     btnEl.classList.add("chip--correct");
     allChips.forEach((b) => { b.disabled = true; });
 
-    showFeedback("correct");
+    showFeedback("correct", earned);
     revealSentence(currentQ.sentence);
     dom.nextBtn.hidden   = false;
     dom.revealBtn.hidden = true;
@@ -370,18 +435,16 @@ function handleAnswer(chip, btnEl) {
     updateScoreboard();
     if (settings.soundEnabled) SFX.play("correct");
     launchConfetti();
-    if (settings.autoNext) setTimeout(loadNextQuestion, 1700);
+    setTimeout(loadNextQuestion, 1700);
 
   } else {
     wrongCount++;
-    score.total++;
     streak = 0;
 
     btnEl.classList.add("chip--wrong");
     btnEl.disabled = true;
 
     showFeedback("incorrect");
-    updateScoreboard();
     if (settings.soundEnabled) SFX.play("incorrect");
     if (wrongCount >= REVEAL_AFTER) dom.revealBtn.hidden = false;
   }
@@ -393,9 +456,13 @@ function handleAnswer(chip, btnEl) {
 // FEEDBACK
 // ─────────────────────────────────────────────────────────────
 
-function showFeedback(type) {
+function showFeedback(type, earned) {
   const msgs = FEEDBACK[type] || [];
-  dom.feedbackArea.textContent = msgs[Math.floor(Math.random() * msgs.length)] || "";
+  let text = msgs[Math.floor(Math.random() * msgs.length)] || "";
+  if (type === "correct" && earned !== undefined) {
+    text += ` +${earned} pt${earned !== 1 ? "s" : ""}`;
+  }
+  dom.feedbackArea.textContent = text;
   dom.feedbackArea.className   = `feedback-area feedback--${type}`;
 }
 
@@ -409,14 +476,16 @@ function clearFeedback() {
 // ─────────────────────────────────────────────────────────────
 
 function updateScoreboard() {
-  dom.scoreCorrect.textContent  = score.correct;
-  dom.scoreTotal.textContent    = score.total;
-  dom.progressLabel.textContent = `${score.correct} / ${score.total}`;
+  dom.scorePoints.textContent = points;
+}
 
-  const pct = score.total > 0
-    ? Math.round((score.correct / score.total) * 100) : 0;
+function updateWordProgress() {
+  const shown = usedIds.length;
+  const total = pool.length;
+  const pct   = total > 0 ? Math.round((shown / total) * 100) : 0;
   dom.progressFill.style.width = `${pct}%`;
   dom.progressFill.parentElement.setAttribute("aria-valuenow", pct);
+  dom.progressLabel.textContent = `${shown} / ${total}`;
 }
 
 function updateStreak() {
@@ -447,6 +516,59 @@ function launchConfetti() {
 }
 
 // ─────────────────────────────────────────────────────────────
+// SENTENCE CACHE
+// On page load (and on difficulty/reset), all sentences for the
+// current pool are generated in the background with a concurrency
+// limit so we don't hammer the API.  loadNextQuestion pulls from
+// the cache and is instant for every sentence after the first.
+// ─────────────────────────────────────────────────────────────
+
+function cancelPrefetch() {
+  if (nextQWordId !== null) {
+    usedIds = usedIds.filter((id) => id !== nextQWordId);
+    nextQWordId = null;
+  }
+}
+
+// Discard the cache and signal any running bulk generation to stop.
+function clearCache() {
+  cacheAbort    = true;          // running loop checks this flag each iteration
+  sentenceCache = {};
+  cancelPrefetch();
+  // Allow a new generation to start after this tick
+  setTimeout(() => { cacheAbort = false; }, 0);
+}
+
+// Start generating sentences for every word in the pool, CONCURRENCY at a time.
+// Words that are already in the cache are skipped.
+async function warmCache(difficulty) {
+  const CONCURRENCY = 3;
+  const words = [...pool];      // snapshot — pool won't change during this run
+
+  // Work through the pool in batches of CONCURRENCY
+  for (let i = 0; i < words.length; i += CONCURRENCY) {
+    if (cacheAbort) return;     // difficulty changed / reset — bail out
+
+    const batch = words.slice(i, i + CONCURRENCY);
+    await Promise.all(
+      batch.map((wordObj) => {
+        if (sentenceCache[wordObj.id]) return;   // already cached
+        sentenceCache[wordObj.id] = buildQuestion(wordObj, difficulty)
+          .catch(() => null);                     // failure → null, will live-fetch
+      })
+    );
+  }
+  console.log(`[fillblank] Cache warm — ${Object.keys(sentenceCache).length} sentences ready.`);
+}
+
+// Kick off background generation (non-blocking).
+function startCacheWarm() {
+  clearCache();
+  warmCache(settings.difficulty);  // runs async in background, no await
+}
+
+
+// ─────────────────────────────────────────────────────────────
 // QUESTION LOADER
 // ─────────────────────────────────────────────────────────────
 
@@ -455,21 +577,33 @@ async function loadNextQuestion() {
   currentQ = null;
   showState("loading");
 
-  const wordObj = pickWord();
-  if (!wordObj) {
-    dom.errorMsg.textContent = "No vocabulary words found. Check the ?words= URL parameter.";
-    showState("error");
-    return;
-  }
-
   try {
-    currentQ = await buildQuestion(wordObj, settings.difficulty);
+    const wordObj = pickWord();
+    if (!wordObj) throw new Error("No vocabulary words found. Check the ?words= URL parameter.");
+
+    let q = null;
+
+    // 1. Try the cache first
+    if (sentenceCache[wordObj.id]) {
+      q = await sentenceCache[wordObj.id];
+      delete sentenceCache[wordObj.id];   // consume — cache entries are one-use
+    }
+
+    // 2. Cache miss or failed entry — live fetch
+    if (!q) {
+      console.log(`[fillblank] Cache miss for "${wordObj.word.baseRomanUrdu}" — fetching live.`);
+      q = await buildQuestion(wordObj, settings.difficulty);
+    }
+
+    currentQ = q;
     renderQuestion(currentQ);
     showState("question");
+    updateWordProgress();
   } catch (err) {
     console.error("[fillblank] Question load failed:", err);
     dom.errorMsg.textContent = err.message || "Could not generate a sentence. Please try again.";
     showState("error");
+    cancelPrefetch();
   }
 }
 
@@ -477,40 +611,64 @@ async function loadNextQuestion() {
 // SETTINGS EVENTS
 // ─────────────────────────────────────────────────────────────
 
+function resetGame() {
+  points     = 0;
+  streak     = 0;
+  wrongCount = 0;
+  answered   = false;
+  usedIds    = [];
+  currentQ   = null;
+  updateScoreboard();
+  updateWordProgress();
+  startCacheWarm();
+}
+
+function closeSettingsPanel() {
+  document.getElementById("settings-panel")?.classList.remove("open");
+  document.getElementById("settings-overlay")?.classList.remove("open");
+  document.getElementById("settings-btn")?.setAttribute("aria-expanded", "false");
+}
+
 function bindSettingsEvents() {
   qAll(".difficulty-pill").forEach((pill) => {
     pill.addEventListener("click", () => {
       settings.difficulty = pill.dataset.value;
+      cancelPrefetch();
       saveSettings();
       applySettings();
+      resetGame();
+      closeSettingsPanel();
+      loadNextQuestion();
     });
   });
 
-  qAll(".script-pill").forEach((pill) => {
-    pill.addEventListener("click", () => {
-      settings.wordBankScript = pill.dataset.value;
-      saveSettings();
-      applySettings();
-      if (currentQ) renderWordBank(currentQ.wordBank);
-    });
+  // Event delegation — one listener on the panel catches all script pills
+  document.getElementById("settings-panel")?.addEventListener("click", (e) => {
+    const pill = e.target.closest(".script-pill");
+    if (!pill) return;
+
+    const script = pill.dataset.script;
+    if (script === "roman")   settings.showRoman   = !settings.showRoman;
+    if (script === "urdu")    settings.showUrdu    = !settings.showUrdu;
+    if (script === "english") settings.showEnglish = !settings.showEnglish;
+
+    // Always keep at least one script active
+    if (!settings.showRoman && !settings.showUrdu && !settings.showEnglish) {
+      settings.showRoman = true;
+    }
+
+    saveSettings();
+    applySettings();
+    if (currentQ) {
+      renderWordBank(currentQ.wordBank);
+      if (answered) revealSentence(currentQ.sentence);
+    }
   });
 
-  [
-    ["toggle-urdu",     "showUrdu"],
-    ["toggle-roman",    "showRoman"],
-    ["toggle-english",  "showEnglish"],
-    ["toggle-sound",    "soundEnabled"],
-    ["toggle-autonext", "autoNext"],
-  ].forEach(([id, key]) => {
-    document.getElementById(id)?.addEventListener("click", () => {
-      settings[key] = !settings[key];
-      saveSettings();
-      applySettings();
-      if (["showUrdu","showRoman","showEnglish"].includes(key)) {
-        applySentenceVisibility();
-        if (answered && currentQ) revealSentence(currentQ.sentence);
-      }
-    });
+  document.getElementById("toggle-sound")?.addEventListener("click", () => {
+    settings.soundEnabled = !settings.soundEnabled;
+    saveSettings();
+    applySettings();
   });
 }
 
@@ -550,6 +708,8 @@ function init() {
   bindKeyboard();
   applySettings();
   updateScoreboard();
+  updateWordProgress();
+  startCacheWarm();   // begin generating all sentences in the background
 
   dom.nextBtn?.addEventListener("click", loadNextQuestion);
   dom.errorRetry?.addEventListener("click", loadNextQuestion);
@@ -560,12 +720,9 @@ function init() {
     dom.revealBtn.hidden = true;
 
     qAll(".word-chip").forEach((btn) => {
-      const isCorrect = btn.textContent === (
-        settings.wordBankScript === "urdu"
-          ? currentQ.sentence.answerUrdu
-          : currentQ.sentence.answerRoman
-      );
-      if (isCorrect) btn.classList.add("chip--correct");
+      if (btn.dataset.roman === currentQ.sentence.answerRoman) {
+        btn.classList.add("chip--correct");
+      }
       btn.disabled = true;
     });
 
