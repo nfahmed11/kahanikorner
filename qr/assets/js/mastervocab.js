@@ -4399,7 +4399,7 @@ export const vocab = [
     word: {
       baseRomanUrdu: "boond",
       baseUrdu: "بوند",
-      english: "drop",
+      english: "raindrop",
       pos: "noun",
     },
     grammar: { baseGender: "feminine" },
@@ -4834,21 +4834,21 @@ export const vocab = [
     riddles: {
       english:
         "When people argue loud and strong,\nThings can quickly go all wrong!",
-      romanUrdu: "Lafz tez aur gussa aaye,\nLog aapas mein jhagra kar jayein!",
+      romanUrdu: "Lafz tez aur ghussa aaye,\nLog aapas mein jhagra kar jayein!",
       urdu: "لفظ تیز اور غصہ آئے،\nلوگ آپس میں جھگڑا کر جائیں!",
     },
   },
   {
-    id: "gussa",
+    id: "ghussa",
     word: {
-      baseRomanUrdu: "gussa",
+      baseRomanUrdu: "ghussa",
       baseUrdu: "غصہ",
       english: "anger",
       pos: "noun",
     },
     grammar: { baseGender: "masculine" },
     variants: [],
-    image: "/qr/assets/images/gussa.png",
+    image: "/qr/assets/images/ghussa.png",
     riddles: {
       english:
         "A hot feeling inside your chest,\nIt makes you shout, not feel your best!",
