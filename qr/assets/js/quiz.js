@@ -366,11 +366,11 @@ function updateQuizCard(index) {
 
   flashcard.classList.remove("flipped");
 
-  // Build 3 answer options (1 correct + 2 wrong)
-  const options = [...deck]
+  // Build 4 answer options (1 correct + 3 wrong from full mastervocab)
+  const options = [...originalVocab]
     .filter((c) => getEnglish(c) !== getEnglish(card))
     .sort(() => Math.random() - 0.5)
-    .slice(0, 2)
+    .slice(0, 3)
     .concat(card)
     .sort(() => Math.random() - 0.5);
 

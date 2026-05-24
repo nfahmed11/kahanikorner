@@ -157,3 +157,62 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
+/* ---------- Cap card height on large screens (desktop / tablet) ---------- */
+/* Keeps the card a portrait flashcard shape instead of a tall slab */
+.flashcard-container {
+  max-height: min(100%, 680px);
+}
+
+/* ---------- Small portrait screens — tighten 4 options so they fit ---------- */
+@media (orientation: portrait) and (max-height: 680px) {
+  .quiz-option {
+    padding: 0.38rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    margin: 0.15rem 0 !important;
+  }
+}
+
+/* ---------- Very narrow header (< 360px) — prevent crowding ---------- */
+@media (max-width: 360px) {
+  .progress-label {
+    display: none;
+  }
+  .progress-bar {
+    width: 60px;
+  }
+}
+
+/* ---------- Landscape phones — force card to stay portrait ---------- */
+/* Constrains width to be less than the available height so the card
+   never flips to a landscape rectangle */
+@media (orientation: landscape) and (max-height: 500px) {
+  .flashcard-container {
+    max-width: calc(100vh - 110px);
+    max-height: min(100%, calc(100vh - 110px));
+  }
+
+  .word-english,
+  .word-roman,
+  .word-urdu {
+    font-size: 1.2rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .card-question {
+    font-size: 0.75rem;
+  }
+
+  .lang-badge {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .quiz-option {
+    padding: 0.28rem 0.6rem !important;
+    font-size: 0.78rem !important;
+    margin: 0.08rem 0 !important;
+    border-width: 2px !important;
+    border-radius: 10px !important;
+  }
+}

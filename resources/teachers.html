@@ -22,25 +22,104 @@
 </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kahani Korner Cartoons</title>
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Teacher Videos — Kahani Korner</title>
+    <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css">   
-
-<style>
-     
-    </style>
+  <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
+    <style></style>
   </head>
   <body>
-          <header>
-      <a href="https://kahanikorner.com/">
-        <img src="/assets/images/resources/logo.png" alt="Kahani Korner Logo" class="logo" />
-      </a> 
+    <!-- Top Promo Bar -->
+    <div class="topbar">
+      <div class="topbar__inner">
+        <div class="topbar__track">
+          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="https://kahanikorner.com" class="brand">
+          <picture>
+            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+          </picture>
+        </a>
+        <nav class="nav">
+          <a href="/products.html">Shop</a>
+          <a href="/subscribe.html">Subscribe</a>
+          <a href="/resources/resources.html" class="nav-active">Resources</a>
+          <a href="/#faq">Help</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
+          </button>
+        </div>
+      </div>
     </header>
+    <div class="header-spacer" aria-hidden="true"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
+      <nav class="mobile-menu">
+        <div class="mobile-menu__header">
+          <span class="mobile-menu__brand">
+            <picture>
+              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+            </picture>
+          </span>
+          <button class="mobile-menu__close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <ul class="mobile-menu__links">
+          <li><a href="/products.html">Shop</a></li>
+          <li><a href="/subscribe.html">Subscribe</a></li>
+          <li><a href="/resources/resources.html" class="nav-active">Resources</a></li>
+          <li><a href="/#faq">Help</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay hidden">
+      <div class="cart-sidebar">
+        <div class="cart-header">
+          <h2>Your Cart</h2>
+          <button id="close-cart" class="close-btn" aria-label="Close cart">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="cart-items" class="cart-items">
+          <div class="empty-cart-msg">Your cart is empty.</div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total</span>
+            <span id="cart-total-amount">$0.00</span>
+          </div>
+          <button id="checkout-btn" class="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </div>
 
     <div class="container">
     <h1>Teacher Videos</h1>
@@ -57,9 +136,20 @@
     </div>
 
     <div class="grid"></div>
+    </div><!-- close .container -->
 
-     <div class="footer">
-      Rooted in culture, topped with sweetness, made for little hearts.
+    <footer class="footer">
+      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
+        </picture>
+      </a>
+
+      <p class="footer-tagline">
+        Rooted in culture, topped with sweetness, made for little hearts.
+      </p>
+
       <div class="social-icons">
         <a
           href="https://www.instagram.com/kahani.korner/"
@@ -86,11 +176,34 @@
             alt="TikTok" />
         </a>
       </div>
-    </div>
-  </div>
+
+      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
+    </footer>
   
 <script>
-// Page load animation
+  const mobileToggle = document.getElementById("mobile-toggle");
+  const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+  function openMobileMenu() {
+    if (!mobileMenuOverlay) return;
+    mobileMenuOverlay.classList.remove("hidden");
+    requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
+  }
+  function closeMobileMenu() {
+    if (!mobileMenuOverlay) return;
+    mobileMenuOverlay.classList.remove("open");
+    setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
+  }
+  if (mobileToggle && mobileMenuOverlay) {
+    mobileToggle.addEventListener("click", openMobileMenu);
+    mobileMenuOverlay.addEventListener("click", (e) => {
+      if (e.target === mobileMenuOverlay) closeMobileMenu();
+    });
+    const closeBtn = mobileMenuOverlay.querySelector(".mobile-menu__close");
+    const menuLinks = mobileMenuOverlay.querySelectorAll(".mobile-menu__links a");
+    if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
+    menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
+  }
+
   window.addEventListener("load", () => {
         document.body.classList.add("loaded");
 
@@ -196,7 +309,7 @@
       thumbnail.style.display = "block";
 
       const playButton = document.createElement("div");
-      playButton.innerHTML = "▶️";
+      playButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="36" height="36" style="display:block;filter:drop-shadow(0 0 6px rgba(0,0,0,0.5))"><path d="M8 5v14l11-7z"/></svg>';
       playButton.style.position = "absolute";
       playButton.style.top = "50%";
       playButton.style.left = "50%";
@@ -263,6 +376,6 @@ for (let i = 0; i < 15; i++) {
 
   });
 </script>
-
+    <script src="/assets/cart.js"></script>
 </body>
 </html>

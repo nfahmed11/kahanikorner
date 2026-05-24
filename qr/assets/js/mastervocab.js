@@ -4360,24 +4360,6 @@ export const vocab = [
   },
 
   {
-    id: "hawa",
-    word: {
-      baseRomanUrdu: "hawa",
-      baseUrdu: "ہوا",
-      english: "breeze",
-      pos: "noun",
-    },
-    grammar: { baseGender: "feminine" },
-    variants: [],
-    image: "/qr/assets/images/hawa.png",
-    riddles: {
-      english:
-        "I move the trees but can't be seen,\nSoft and cool and often clean.",
-      romanUrdu: "Na dikhu phir bhi chalti jaun,\nThandi thandi sab ko bhau!",
-      urdu: "نظر نہ آؤں مگر چلتی جاؤں،\nٹھنڈی ہو کر سب کو بھاؤں!",
-    },
-  },
-  {
     id: "badal",
     word: {
       baseRomanUrdu: "badal",
@@ -4448,24 +4430,6 @@ export const vocab = [
     },
   },
   {
-    id: "khushboo",
-    word: {
-      baseRomanUrdu: "khushboo",
-      baseUrdu: "خوشبو",
-      english: "fragrance",
-      pos: "noun",
-    },
-    grammar: { baseGender: "feminine" },
-    variants: [],
-    image: "/qr/assets/images/khushboo.png",
-    riddles: {
-      english:
-        "I cannot be seen but I smell so sweet,\nFlowers and food make me a treat!",
-      romanUrdu: "Na dikhu par mehsoos hoon,\nPhoolon se main khaas hoon!",
-      urdu: "نظر نہ آؤں مگر محسوس ہوں،\nپھولوں سے میں خاص ہوں!",
-    },
-  },
-  {
     id: "mehak",
     word: {
       baseRomanUrdu: "mehak",
@@ -4511,68 +4475,6 @@ export const vocab = [
       romanUrdu:
         "Tez tez pair chalayein,\nKhel mein sab ko peeche chhor jayein!",
       urdu: "تیز تیز پیر چلائیں،\nکھیل میں سب کو پیچھے چھوڑ جائیں!",
-    },
-  },
-  {
-    id: "hansna",
-    word: {
-      baseRomanUrdu: "hansna",
-      baseUrdu: "ہنسنا",
-      english: "laugh",
-      pos: "verb",
-    },
-    grammar: { baseGender: null },
-    variants: [
-      {
-        romanUrdu: "hansa",
-        urdu: "ہنسا",
-        gender: "masculine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "hansi",
-        urdu: "ہنسی",
-        gender: "feminine",
-        number: "singular",
-      },
-    ],
-    image: "/qr/assets/images/hansna.png",
-    riddles: {
-      english:
-        "When you're happy, what do you do?\nGiggles and smiles come out of you!",
-      romanUrdu: "Khushi aaye chehra chamke,\nDil halka ho jaye jhatke!",
-      urdu: "خوشی آئے چہرہ چمکے،\nدل ہلکا ہو جائے جھٹکے!",
-    },
-  },
-  {
-    id: "cheekhna",
-    word: {
-      baseRomanUrdu: "cheekhna",
-      baseUrdu: "چیخنا",
-      english: "shout",
-      pos: "verb",
-    },
-    grammar: { baseGender: null },
-    variants: [
-      {
-        romanUrdu: "cheekha",
-        urdu: "چیخا",
-        gender: "masculine",
-        number: "singular",
-      },
-      {
-        romanUrdu: "cheekhi",
-        urdu: "چیخی",
-        gender: "feminine",
-        number: "singular",
-      },
-    ],
-    image: "/qr/assets/images/cheekhna.png",
-    riddles: {
-      english:
-        "Loud and strong, my voice goes far,\nYou can hear me near or far!",
-      romanUrdu: "Zor se bolun door tak jaun,\nSab ko apni taraf bulaun!",
-      urdu: "زور سے بولوں دور تک جاؤں،\nسب کو اپنی طرف بلاؤں!",
     },
   },
   {
@@ -4681,41 +4583,6 @@ export const vocab = [
     },
   },
   {
-    id: "awaaz",
-    word: {
-      baseRomanUrdu: "awaaz",
-      baseUrdu: "آواز",
-      english: "sound",
-      pos: "noun",
-    },
-    grammar: { baseGender: "feminine" },
-    variants: [],
-    image: "/qr/assets/images/awaaz.png",
-    riddles: {
-      english: "You can hear me loud or low,\nFrom every place I come and go!",
-      romanUrdu: "Kabhi zor se kabhi halki,\nHar jaga main chalti!",
-      urdu: "کبھی زور سے کبھی ہلکی،\nہر جگہ میں چلتی!",
-    },
-  },
-  {
-    id: "manana",
-    word: {
-      baseRomanUrdu: "manana",
-      baseUrdu: "منانا",
-      english: "persuade",
-      pos: "verb",
-    },
-    grammar: { baseGender: null },
-    variants: [],
-    image: "/qr/assets/images/manana.png",
-    riddles: {
-      english:
-        "When someone feels upset or sad,\nYou bring a smile and make them glad!",
-      romanUrdu: "Roothay ko hansna sikhaun,\nPyar se dil halka karau!",
-      urdu: "روٹھے کو ہنسنا سکھاؤں،\nپیار سے دل ہلکا کراؤں!",
-    },
-  },
-  {
     id: "maan",
     word: {
       baseRomanUrdu: "maan",
@@ -4731,23 +4598,6 @@ export const vocab = [
         "When you say yes and feel it's right,\nYou accept with heart so light!",
       romanUrdu: "Haan keh kar dil khush ho jaye,\nSahi baat ko apnaye!",
       urdu: "ہاں کہہ کر دل خوش ہو جائے،\nصحیح بات کو اپنائے!",
-    },
-  },
-  {
-    id: "jeetna",
-    word: {
-      baseRomanUrdu: "jeetna",
-      baseUrdu: "جیتنا",
-      english: "win",
-      pos: "verb",
-    },
-    grammar: { baseGender: null },
-    variants: [],
-    image: "/qr/assets/images/jeetna.png",
-    riddles: {
-      english: "In a game I come out on top,\nHappy cheers just never stop!",
-      romanUrdu: "Khel mein sab se aage jaun,\nKhushi se muskurau!",
-      urdu: "کھیل میں سب سے آگے جاؤں،\nخوشی سے مسکراؤں!",
     },
   },
   {
@@ -4890,24 +4740,6 @@ export const vocab = [
         "Choosing one path out of two,\nMaking up your mind is what you do!",
       romanUrdu: "Do raaston mein ek chuno,\nSoch samajh kar raasta lo!",
       urdu: "دو راستوں میں ایک چنو،\nسوچ سمجھ کر راستہ لو!",
-    },
-  },
-  {
-    id: "madad",
-    word: {
-      baseRomanUrdu: "madad",
-      baseUrdu: "مدد",
-      english: "help",
-      pos: "noun",
-    },
-    grammar: { baseGender: "feminine" },
-    variants: [],
-    image: "/qr/assets/images/madad.png",
-    riddles: {
-      english:
-        "When someone needs a hand or care,\nYou step in and show you're there!",
-      romanUrdu: "Mushkil mein saath nibhaun,\nHar kisi ka saath dun!",
-      urdu: "مشکل میں ساتھ نبھاؤں،\nہر کسی کا ساتھ دوں!",
     },
   },
   {

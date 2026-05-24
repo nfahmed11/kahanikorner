@@ -32,7 +32,15 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kahani Korner — Shop</title>
+    <title>Shop — Kahani Korner</title>
+    <link rel="icon" href="/assets/images/homepage/logo2.png" type="image/png" />
+    <meta name="description" content="Browse Kahani Korner's collection of Urdu-English children's books, stickers, and cultural keepsakes — crafted for little hearts." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kahanikorner.com/products.html" />
+    <meta property="og:title" content="Shop — Kahani Korner" />
+    <meta property="og:description" content="Browse Kahani Korner's collection of Urdu-English children's books, stickers, and cultural keepsakes — crafted for little hearts." />
+    <meta property="og:image" content="https://kahanikorner.com/assets/images/homepage/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Font Awesome Icons -->
     <link
@@ -800,20 +808,109 @@
       /* --- PRODUCT GRID --- */
       .product-grid {
         display: grid;
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
         padding-bottom: 4rem;
       }
 
-      @media (min-width: 640px) {
+      /* Section dividers inside the product grid */
+      .grid-section-header {
+        grid-column: 1 / -1;
+        padding: 0.5rem 0 0.75rem;
+        border-bottom: 2px dashed var(--ash-grey);
+        margin-top: 0.5rem;
+      }
+      .grid-section-header:first-child {
+        margin-top: 0;
+      }
+      .grid-section-header h2 {
+        font-family: "Grandstander", cursive;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-shadow: none;
+        margin: 0 0 0.2rem;
+      }
+      .grid-section-header p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0;
+      }
+
+
+      @media (min-width: 768px) {
         .product-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1.5rem;
         }
       }
 
       @media (min-width: 1024px) {
         .product-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 2rem;
+        }
+      }
+
+      /* Compact card layout on small screens (2-col) */
+      @media (max-width: 767px) {
+        .product-card {
+          border-radius: 0.75rem;
+        }
+        .product-image-container {
+          aspect-ratio: 1;
+          padding: 0;
+          height: auto;
+          min-height: unset;
+          max-height: unset;
+        }
+        .product-image-container img {
+          object-fit: cover;
+          border-radius: 0;
+          max-width: none;
+        }
+        .product-info {
+          padding: 0;
+        }
+        .product-header {
+          flex-direction: column;
+          gap: 0.15rem;
+          align-items: flex-start;
+          margin-bottom: 0.35rem;
+        }
+        .product-header h3 {
+          font-size: 0.72rem;
+          line-height: 1.2;
+        }
+        .price {
+          font-size: 0.7rem;
+          padding: 0.1rem 0.35rem;
+        }
+        .product-actions {
+          flex-direction: row;
+          gap: 0.3rem;
+          margin-top: 0.3rem;
+        }
+        .btn-label {
+          display: none;
+        }
+        .add-to-cart-btn,
+        .buy-now-btn {
+          flex: 1;
+          padding: 0.55rem;
+          border-radius: 0.6rem;
+          gap: 0;
+          font-size: 0;
+          box-shadow: 0 3px 0 var(--rosy-taupe);
+        }
+        .buy-now-btn {
+          box-shadow: 0 3px 0 var(--deep-teal);
+        }
+        .grid-section-header h2 {
+          font-size: 1rem;
+        }
+        .grid-section-header p {
+          font-size: 0.75rem;
         }
       }
 
@@ -838,14 +935,17 @@
         aspect-ratio: 1;
         overflow: hidden;
         background: var(--soft-blush);
-        padding: 1.25rem;
+        padding: 0;
+        border-radius: var(--radius-lg);
+        border: 1.5px solid var(--ash-grey);
+        margin: 10px;
       }
 
       .product-image-container img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        border-radius: var(--radius-md);
+        object-fit: cover;
+        border-radius: 0;
         transition: transform 0.5s;
         mix-blend-mode: multiply;
       }
@@ -856,7 +956,7 @@
       }
 
       .product-info {
-        padding: 1.5rem;
+        padding: 0.75rem;
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -890,7 +990,8 @@
       .product-actions {
         display: flex;
         gap: 0.5rem;
-        margin-top: 0.75rem;
+        margin-top: auto;
+        padding-top: 0.5rem;
       }
 
       .add-to-cart-btn {
@@ -953,6 +1054,14 @@
       .buy-now-btn:active {
         transform: translateY(0);
         box-shadow: 0 0 0 var(--deep-teal);
+      }
+
+      .add-to-cart-btn:disabled,
+      .buy-now-btn:disabled {
+        opacity: 0.38;
+        cursor: not-allowed;
+        pointer-events: none;
+        box-shadow: none;
       }
 
       /* --- PRODUCT DETAIL VIEW --- */
@@ -1026,6 +1135,7 @@
         justify-content: center;
         padding: 2rem;
         width: 100%;
+        position: relative;
       }
 
       .detail-image-wrapper img {
@@ -1034,38 +1144,63 @@
         object-fit: contain;
         mix-blend-mode: multiply;
         filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
-        transition: opacity 0.3s ease;
+        transition: opacity 0.2s ease;
       }
 
-      .detail-thumbnails {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 0.75rem;
-      }
-
-      .thumbnail {
-        aspect-ratio: 1;
-        border-radius: 1rem;
-        background: var(--white-smoke);
+      .gallery-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.92);
         border: 2px solid var(--ash-grey);
-        overflow: hidden;
+        border-radius: 50%;
+        width: 2.4rem;
+        height: 2.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        padding: 0.4rem;
+        z-index: 2;
+        font-size: 0.85rem;
+        color: var(--granite);
         transition: all 0.2s;
       }
 
-      .thumbnail:hover,
-      .thumbnail.active {
+      .gallery-arrow:hover {
+        background: var(--deep-teal);
+        color: #fff;
         border-color: var(--deep-teal);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 0 var(--deep-teal);
       }
 
-      .thumbnail img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        mix-blend-mode: multiply;
+      .gallery-arrow.hidden { display: none; }
+
+      .gallery-prev { left: 0.6rem; }
+      .gallery-next { right: 0.6rem; }
+
+      .detail-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+      }
+
+      .detail-dots.hidden { display: none; }
+
+      .detail-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--ash-grey);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+
+      .detail-dot.active {
+        background: var(--deep-teal);
+        transform: scale(1.35);
       }
 
       .detail-info {
@@ -1241,6 +1376,19 @@
           padding: 6rem 1.5rem 3.5rem;
         }
       }
+
+      .brand-logo {
+        height: 32px;
+        width: auto;
+        display: block;
+      }
+
+      .footer-brand-logo {
+        height: 40px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+      }
     </style>
   </head>
   <body>
@@ -1248,15 +1396,15 @@
     <div class="topbar">
       <div class="topbar__inner">
         <div class="topbar__track">
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
@@ -1272,16 +1420,18 @@
         </button>
 
         <a href="https://kahanikorner.com" class="brand">
-          <i class="fa-solid fa-book-open-reader brand-icon"></i>
-          Kahani Korner
+          <picture>
+            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+          </picture>
         </a>
 
         <nav class="nav">
-          <a href="products.html">Shop</a>
+          <a href="products.html" class="nav-active">Shop</a>
           <a href="subscribe.html">Subscribe</a>
           <a href="/resources/resources.html">Resources</a>
-          <a href="index.html">Help</a>
-          <a href="index.html">Contact</a>
+          <a href="index.html#faq">Help</a>
+          <a href="index.html#contact">Contact</a>
         </nav>
 
         <button class="cart-btn-landing" id="cart-btn">
@@ -1318,8 +1468,10 @@
       <nav class="mobile-menu">
         <div class="mobile-menu__header">
           <span class="mobile-menu__brand">
-            <i class="fa-solid fa-book-open-reader"></i>
-            Kahani Korner
+            <picture>
+              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+            </picture>
           </span>
           <button class="mobile-menu__close" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
@@ -1327,11 +1479,11 @@
         </div>
 
         <ul class="mobile-menu__links">
-          <li><a href="products.html">Shop</a></li>
+          <li><a href="products.html" class="nav-active">Shop</a></li>
           <li><a href="subscribe.html">Subscribe</a></li>
           <li><a href="/resources/resources.html">Resources</a></li>
-          <li><a href="/index.html">Help</a></li>
-          <li><a href="/index.html">Contact</a></li>
+          <li><a href="/index.html#faq">Help</a></li>
+          <li><a href="/index.html#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -1366,7 +1518,8 @@
                 <div class="custom-option selected" data-value="all">
                   All Collections
                 </div>
-                <div class="custom-option" data-value="books">Books</div>
+                <div class="custom-option" data-value="books">Individual Books</div>
+                <div class="custom-option" data-value="bundle">Bundle</div>
                 <div class="custom-option" data-value="stickers">Stickers</div>
               </div>
             </div>
@@ -1384,9 +1537,15 @@
           <div class="detail-container">
             <div class="detail-gallery">
               <div class="detail-image-wrapper">
+                <button class="gallery-arrow gallery-prev" onclick="navigateGallery(-1)" aria-label="Previous image">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
                 <img id="detail-image" src="" alt="Product Image" />
+                <button class="gallery-arrow gallery-next" onclick="navigateGallery(1)" aria-label="Next image">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
               </div>
-              <div id="detail-thumbnails" class="detail-thumbnails"></div>
+              <div id="detail-dots" class="detail-dots"></div>
             </div>
             <div class="detail-info">
               <h1 id="detail-title">Product Title</h1>
@@ -1434,57 +1593,16 @@
       </div>
     </div>
 
-    <!-- Simple FAQ + Contact anchors -->
-    <section class="section contact-section" id="contact">
-      <div
-        class="section__inner"
-        style="max-width: 800px; margin: 0 auto; text-align: center">
-        <span
-          class="feature-tag"
-          style="
-            display: inline-block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--rosy-taupe);
-            margin-bottom: 0.5rem;
-          "
-          >Get in Touch</span
-        >
-        <h2 class="section__title" style="text-align: center">
-          Questions, Collabs, or Salaam?
-        </h2>
-        <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1rem">
-          Have a question about shipping, subscriptions, or gifts? Email us
-          anytime — we’re a tiny team but we read every message.
-        </p>
-        <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1rem">
-          Drop us a note at
-          <a
-            href="mailto:admin@kahanikorner.com"
-            style="
-              font-weight: 700;
-              text-decoration: underline;
-              text-decoration-color: var(--cotton-rose);
-            "
-            >admin@kahanikorner.com</a
-          >
-          and we’ll get back to you soon.
-        </p>
-      </div>
-    </section>
+    <div id="contact"></div>
 
     <!-- Footer -->
     <footer class="footer">
-      <div
-        class="brand"
-        style="
-          justify-content: center;
-          color: var(--white);
-          margin-bottom: 1rem;
-        ">
-        <i class="fa-solid fa-book-open-reader"></i> Kahani Korner
-      </div>
+      <a href="https://kahanikorner.com" class="brand" style="justify-content:center;margin-bottom:1rem;">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
+        </picture>
+      </a>
       <p class="footer-tagline">
         Rooted in culture, topped with sweetness, made for little hearts.
       </p>
@@ -1516,144 +1634,12 @@
         </a>
       </div>
 
-      <p>&copy; 2025 Kahani Korner. All rights reserved.</p>
+      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
     </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="/assets/cart.js"></script>
 
-    <script>
-      // ---------------------------------------------------------------
-      // cart.js (inlined) — shared cart logic
-      // ---------------------------------------------------------------
-      const CART_KEY = "kahani_cart";
-      let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
-
-      function saveCart() {
-        localStorage.setItem(CART_KEY, JSON.stringify(cart));
-      }
-      function getCartTotalItems() {
-        return cart.reduce((sum, item) => sum + item.quantity, 0);
-      }
-      function getCartTotalPrice() {
-        return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      }
-      function buildStripePayload(cartItems) {
-        return { line_items: cartItems.map((item) => ({ price: item.id, quantity: item.quantity })) };
-      }
-
-      window.addToCart = function (product) {
-        const existing = cart.find((item) => item.id === product.id);
-        if (existing) existing.quantity += 1;
-        else cart.push({ ...product, quantity: 1 });
-        saveCart();
-        updateCartUI();
-        openCart();
-      };
-      window.removeFromCart = function (productId) {
-        cart = cart.filter((item) => item.id !== productId);
-        saveCart();
-        updateCartUI();
-      };
-      window.updateQuantity = function (productId, delta) {
-        const item = cart.find((item) => item.id === productId);
-        if (!item) return;
-        item.quantity += delta;
-        if (item.quantity <= 0) window.removeFromCart(productId);
-        else { saveCart(); updateCartUI(); }
-      };
-
-      function updateCartUI() {
-        const cartBadge    = document.getElementById("cart-badge");
-        const cartTotal    = document.getElementById("cart-total-amount");
-        const cartItemsBox = document.getElementById("cart-items");
-
-        if (cartBadge) {
-          const totalItems = getCartTotalItems();
-          cartBadge.textContent = totalItems;
-          cartBadge.classList.toggle("hidden", totalItems === 0);
-        }
-        if (cartTotal) cartTotal.textContent = `$${getCartTotalPrice().toFixed(2)}`;
-        if (cartItemsBox) {
-          if (cart.length === 0) {
-            cartItemsBox.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
-          } else {
-            cartItemsBox.innerHTML = cart.map((item) => `
-              <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}">
-                <div class="cart-item-details">
-                  <h4>${item.name}</h4>
-                  <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                  <div class="cart-controls">
-                    <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-                    <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
-                  </div>
-                </div>
-              </div>`).join("");
-          }
-        }
-      }
-
-      function openCart() {
-        const cartOverlay = document.getElementById("cart-overlay");
-        if (!cartOverlay) return;
-        cartOverlay.classList.remove("hidden");
-        setTimeout(() => cartOverlay.classList.add("open"), 10);
-      }
-      window.openCart = openCart;
-
-      function closeCart() {
-        const cartOverlay = document.getElementById("cart-overlay");
-        if (!cartOverlay) return;
-        cartOverlay.classList.remove("open");
-        setTimeout(() => cartOverlay.classList.add("hidden"), 300);
-      }
-      window.closeCart = closeCart;
-
-      async function handleCheckout() {
-        const checkoutBtn = document.getElementById("checkout-btn");
-        if (!checkoutBtn || cart.length === 0) return;
-        const { line_items } = buildStripePayload(cart);
-        const originalText = checkoutBtn.innerText;
-        checkoutBtn.innerText = "Redirecting to Stripe...";
-        checkoutBtn.disabled = true;
-        try {
-          const response = await fetch("/create-checkout-session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: line_items }),
-          });
-          if (!response.ok) throw new Error("Bad response");
-          const data = await response.json();
-          window.location.href = data.url;
-        } catch (err) {
-          console.error("Checkout error:", err);
-          alert("Unexpected error. Please try again.");
-          checkoutBtn.innerText = originalText;
-          checkoutBtn.disabled = false;
-        }
-      }
-
-      function initCart() {
-        updateCartUI();
-        const cartBtn      = document.getElementById("cart-btn");
-        const closeCartBtn = document.getElementById("close-cart");
-        const cartOverlay  = document.getElementById("cart-overlay");
-        const checkoutBtn  = document.getElementById("checkout-btn");
-
-        if (cartBtn)      cartBtn.addEventListener("click", openCart);
-        if (closeCartBtn) closeCartBtn.addEventListener("click", closeCart);
-        if (cartOverlay)  cartOverlay.addEventListener("click", (e) => { if (e.target === cartOverlay) closeCart(); });
-        if (checkoutBtn)  checkoutBtn.addEventListener("click", handleCheckout);
-
-        window.addEventListener("storage", (e) => {
-          if (e.key === CART_KEY) { cart = JSON.parse(e.newValue) || []; updateCartUI(); }
-        });
-      }
-
-      document.addEventListener("DOMContentLoaded", initCart);
-    </script>
 
     <script>
       // ---------------------------------------------------------------
@@ -1662,15 +1648,16 @@
 
       // --- PRODUCT DATA ---
       const products = [
+        // ── SECTION: BUNDLE ──────────────────────────────────────────────
         {
           id: "price_1SYLwPP4FFhr5UNAc6JmV0iR",
-          name: "All things Kahani Bundle",
+          name: "All Things Kahani Bundle",
           price: 62.0,
           checkoutUrl: "https://buy.stripe.com/dRm3cx1k6dGddbt1JJ0Fi07",
           description:
             "The All Things Kahani Bundle brings together all four story sets — each one packed with a beautiful storybook, an activity book, stickers, sequencing cards, and bilingual flashcards. Every set also includes a scannable QR code that unlocks read-aloud videos, vocabulary-building games, and bonus learning activities. Designed to spark joy, connection, and language growth, this bundle turns Urdu learning into a playful, immersive experience the whole family can enjoy.",
           image: "./assets/images/products/books/books.png",
-          category: "books",
+          category: "bundle",
           features: [
             "Includes all 4 complete Kahani story sets — each with a storybook, activity book, stickers, sequencing cards, and bilingual flashcards.",
             "Every set comes with a QR code linking to read-alouds, digital games, and vocabulary-enhancing activities.",
@@ -1684,6 +1671,137 @@
             "./assets/images/products/books/books2.png",
           ],
         },
+
+        // ── SECTION: INDIVIDUAL BOOKS ────────────────────────────────────
+        {
+          id: "abbu-laye-motor-car",
+          name: "Abbu Laye Motor Car",
+          price: null,
+          // TODO: Replace with Stripe checkout URL when individual book is listed
+          checkoutUrl: null,
+          description:
+            "Abbu is coming home — and he's brought a brand-new motor car! A playful counting story in Urdu and English that makes little readers squeal with excitement.",
+          // TODO: Replace with dedicated Abbu Laye Motor Car book cover image
+          image: "./assets/images/products/books/books2.png",
+          category: "books",
+          features: [
+            "Bilingual Urdu–English picture book.",
+            "Fun counting concept woven into the story.",
+            "QR code included for read-aloud audio & digital activities.",
+            "Vibrant full-colour illustrations throughout.",
+            "Suitable for ages 2–8.",
+          ],
+          images: ["./assets/images/products/books/books2.png"],
+        },
+        {
+          id: "dada-jee-ka-khet",
+          name: "Dada Jee Ka Khet",
+          price: null,
+          // TODO: Replace with Stripe checkout URL when individual book is listed
+          checkoutUrl: null,
+          description:
+            "Visit Dada Jee's farm and meet all the animals in this warm bilingual picture book — a beautiful bridge between generations and languages.",
+          image: "./qr/assets/images/dada.png",
+          category: "books",
+          features: [
+            "Bilingual Urdu–English picture book.",
+            "Introduces farm animals and their Urdu names.",
+            "QR code included for digital games and activities.",
+            "Beautiful full-colour illustrations.",
+            "Suitable for ages 2–8.",
+          ],
+          images: ["./qr/assets/images/dada.png"],
+        },
+        {
+          id: "chuchu-chacha",
+          name: "Chuchu Chacha",
+          price: null,
+          // TODO: Replace with Stripe checkout URL when individual book is listed
+          checkoutUrl: null,
+          description:
+            "There's a wedding at Chuchu Chacha's! Join the celebration in this joyful story about family, food, and festivities — told in Urdu and English.",
+          image: "./qr/bb/chuchuchacha-qnvvv2/images/bookcover.png",
+          category: "books",
+          features: [
+            "Bilingual Urdu–English picture book.",
+            "Celebrates desi family culture and celebrations.",
+            "QR code included for bonus digital activities.",
+            "Beautiful full-colour illustrations.",
+            "Suitable for ages 2–8.",
+          ],
+          images: ["./qr/bb/chuchuchacha-qnvvv2/images/bookcover.png"],
+        },
+        {
+          id: "aaloo-miyan",
+          name: "Aaloo Miyan",
+          price: null,
+          // TODO: Replace with Stripe checkout URL when individual book is listed
+          checkoutUrl: null,
+          description:
+            "Meet Aaloo Miyan — the cheeky, loveable potato who teaches Urdu words through big laughs and even bigger adventures. A fan favourite!",
+          image: "./qr/bb/aaloomiyan-kis2uo/images/bookcover.png",
+          category: "books",
+          features: [
+            "Bilingual Urdu–English picture book.",
+            "Introduces Urdu vocabulary through a beloved character.",
+            "QR code included for read-along activities.",
+            "Beautiful full-colour illustrations.",
+            "Suitable for ages 2–8.",
+          ],
+          images: ["./qr/bb/aaloomiyan-kis2uo/images/bookcover.png"],
+        },
+
+        // ── SECTION: STICKERS & EXTRAS ───────────────────────────────────
+        {
+          id: "oopsie-stickers",
+          name: "Oopsie Stickers",
+          price: 6.67,
+          // TODO: Replace with Stripe checkout URL when Oopsie Stickers is listed
+          checkoutUrl: null,
+          description:
+            "These \"Oopsie\" stickers have slight imperfections that may include: discoloration or printer error, lamination error or stickers cut unevenly or off center. Most of these imperfections are barely noticeable, and just the result of me being a crazy perfectionist! If you want a cheap alternative to my stickers or just a fun surprise, this is the perfect option! If you have any further questions, shoot me a message! :)",
+          image: "./assets/images/products/stickers/oopsies/oopsies.png",
+          category: "stickers",
+          features: [
+            "Assortment of 5 individual stickers — a fun surprise mix!",
+            "Slight imperfections: minor discoloration, printer error, or uneven cuts.",
+            "Most imperfections are barely noticeable.",
+            "A budget-friendly alternative to our full stickers.",
+            "Perfect for journaling, gifting, or collecting.",
+          ],
+          images: ["./assets/images/products/stickers/oopsies/oopsies.png"],
+        },
+        {
+          id: "pakistani-mango-sticker-set",
+          name: "Pakistani Mango Stickers",
+          price: 15.99,
+          // TODO: Replace with Stripe checkout URL when listed
+          checkoutUrl: null,
+          description:
+            "Celebrate mango season the Pakistani way with our Pakistani Mango Sticker Set — a playful 9-piece holographic sticker collection inspired by aam season, desi nostalgia, summer treats, and the sweetest mango puns. This set includes a mix of vintage Pakistani mango stamp designs, cute mango characters, fruity wordplay, and summer favorites like mango lassi, mango juice, and mango kulfi. Each sticker has a fun holographic finish, giving the designs a shiny, eye-catching look that makes them perfect for decorating notebooks, laptops, water bottles, planners, lunch boxes, journals, gifts, and more. From Sindhri, Chaunsa, Anwar Ratol, and Dusehri stamp-style stickers to playful phrases like \"Aam-igos Forever,\" \"You're aam-azing,\" \"You're cool, but aam KUL-fi,\" and \"Aam-oré,\" this set is made for mango lovers, Pakistani families, Urdu learners, kids, teachers, and anyone who knows that mango season is basically a holiday.",
+          image: "./assets/images/products/stickers/mango/mango-all.png",
+          category: "stickers",
+          features: [
+            "9-piece holographic die-cut sticker set.",
+            "Designs include: mango stamps (Sindhri, Chaunsa, Anwar Ratol, Dusehri), mango lassi, mango juice box, mango kulfi, cute mango characters, and desi puns.",
+            "Playful phrases: \"Aam-igos Forever,\" \"You're aam-azing,\" \"You're cool, but aam KUL-fi,\" \"Aam-oré.\"",
+            "Holographic finish — shiny and eye-catching.",
+            "Perfect for laptops, notebooks, water bottles, planners, journals, lunch boxes, Eid gifts, and kids' crafts.",
+          ],
+          images: [
+            "./assets/images/products/stickers/mango/mango-all.png",
+            "./assets/images/products/stickers/mango/mango1.png",
+            "./assets/images/products/stickers/mango/mango2.png",
+            "./assets/images/products/stickers/mango/mango3.png",
+            "./assets/images/products/stickers/mango/mango4.png",
+            "./assets/images/products/stickers/mango/mango5.png",
+            "./assets/images/products/stickers/mango/mango6.png",
+            "./assets/images/products/stickers/mango/mango8.png",
+            "./assets/images/products/stickers/mango/mango9.png",
+            "./assets/images/products/stickers/mango/mango10.png",
+            "./assets/images/products/stickers/mango/kulfi.png",
+          ],
+        },
         {
           id: "price_1T04U7P4FFhr5UNAKUJMkOt5",
           name: "Stickers",
@@ -1691,7 +1809,7 @@
           checkoutUrl: "https://buy.stripe.com/9B6cN73se1Xv2wP0FF0Fi0d",
           description:
             "Holographic little pieces of Pakistan, wherever you are. Our Pakistani Nostalgia Diaspora Stickers are inspired by the everyday sights, sounds, and sayings we grew up with — made for Pakistanis raising memories far from home.",
-          image: "./assets/images/products/stickers/stickers.png",
+          image: "./assets/images/products/stickers/15pack/stickers.png",
           category: "stickers",
           features: [
             "Inspired by Pakistani street life & childhood nostalgia.",
@@ -1700,7 +1818,15 @@
             "Durable & long-lasting (great for laptops, journals, water bottles)",
             "Perfect for journaling, gifts, or memory-keeping.",
           ],
-          images: ["./assets/images/products/stickers/stickers.png"],
+          images: [
+            "./assets/images/products/stickers/15pack/stickers.png",
+            "./assets/images/products/stickers/15pack/falooda.png",
+            "./assets/images/products/stickers/15pack/gol.png",
+            "./assets/images/products/stickers/15pack/khussay.png",
+            "./assets/images/products/stickers/15pack/pakola.png",
+            "./assets/images/products/stickers/15pack/rooh.png",
+            "./assets/images/products/stickers/15pack/rupee.png",
+          ],
         },
       ];
 
@@ -1779,12 +1905,18 @@
           });
         }
 
-        // Detail "Buy Now" → direct Stripe link
+        // Detail "Buy Now" → Stripe link, or email-to-order if no Stripe link yet
         if (detailBuyNowBtn) {
           detailBuyNowBtn.addEventListener("click", () => {
             const product = products.find((p) => p.id === currentProductId);
-            if (!product || !product.checkoutUrl) return;
-            window.location.href = product.checkoutUrl;
+            if (!product) return;
+            if (product.checkoutUrl) {
+              window.location.href = product.checkoutUrl;
+            } else {
+              window.location.href =
+                `mailto:admin@kahanikorner.com?subject=Order: ${encodeURIComponent(product.name)}` +
+                `&body=Hi%2C%20I'd%20like%20to%20order%20${encodeURIComponent(product.name)}.%20Please%20let%20me%20know%20availability%20and%20pricing.`;
+            }
           });
         }
 
@@ -1823,79 +1955,147 @@
       }
 
       // --- PRODUCT RENDERING ---
+      function renderProductCard(product) {
+        const priceLabel = product.price !== null
+          ? `<span class="price">$${product.price.toFixed(2)}</span>`
+          : `<span class="price" style="font-size:0.8rem;padding:0.2rem 0.5rem;">Email to Order</span>`;
+
+        const cartSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>`;
+        const boltSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+
+        const actionButtons = product.checkoutUrl
+          ? `<button class="add-to-cart-btn"
+                onclick="event.stopPropagation(); addToCartWithFeedback(this, '${product.id}')">
+                ${cartSvg}<span class="btn-label">Add</span>
+              </button>
+              <button class="buy-now-btn"
+                onclick="event.stopPropagation(); window.location.href='${product.checkoutUrl}';">
+                ${boltSvg}<span class="btn-label">Buy Now</span>
+              </button>`
+          : `<button class="add-to-cart-btn" disabled onclick="event.stopPropagation()">
+               ${cartSvg}<span class="btn-label">Add</span>
+             </button>
+             <button class="buy-now-btn" disabled onclick="event.stopPropagation()">
+               ${boltSvg}<span class="btn-label">Buy Now</span>
+             </button>`;
+
+        return `
+          <article class="product-card" onclick="openProductDetails('${product.id}')">
+            <div class="product-image-container">
+              <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="product-info">
+              <div class="product-header">
+                <h3>${product.name}</h3>
+                ${priceLabel}
+              </div>
+              <div class="product-actions">
+                ${actionButtons}
+              </div>
+            </div>
+          </article>`;
+      }
+
+      function renderSection(title, subtitle, items) {
+        if (!items.length) return "";
+        return `
+          <div class="grid-section-header">
+            <h2>${title}</h2>
+            ${subtitle ? `<p>${subtitle}</p>` : ""}
+          </div>
+          ${items.map(renderProductCard).join("")}`;
+      }
+
       function renderProducts() {
         if (!productGrid) return;
 
-        const filtered =
-          currentCategory === "all"
-            ? products
-            : products.filter((p) => p.category === currentCategory);
+        if (currentCategory === "all") {
+          const bundle  = products.filter((p) => p.category === "bundle");
+          const books   = products.filter((p) => p.category === "books");
+          const stickers = products.filter((p) => p.category === "stickers");
 
-        productGrid.innerHTML = filtered
-          .map(
-            (product) => `
-            <article class="product-card" onclick="openProductDetails('${product.id}')">
-              <div class="product-image-container">
-                <img src="${product.image}" alt="${product.name}">
-              </div>
-              <div class="product-info">
-                <div class="product-header">
-                  <h3>${product.name}</h3>
-                  <span class="price">$${product.price.toFixed(2)}</span>
-                </div>
-                <div class="product-actions">
-                  <button class="add-to-cart-btn"
-                    onclick="event.stopPropagation(); addToCartWithFeedback(this, '${product.id}')">
-                    <i class="fa-solid fa-cart-plus"></i> Add
-                  </button>
-                  <button class="buy-now-btn"
-                    onclick="event.stopPropagation(); window.location.href='${product.checkoutUrl}';">
-                    Buy Now
-                  </button>
-                </div>
-              </div>
-            </article>
-          `
-          )
-          .join("");
+          productGrid.innerHTML =
+            renderSection("⭐ Best Value Bundle", "All 4 books + activities in one box", bundle) +
+            renderSection("📚 Individual Books", "Browse individual titles — email us to order", books) +
+            renderSection("🎨 Stickers & Extras", null, stickers);
+        } else {
+          const filtered = products.filter((p) => p.category === currentCategory);
+          productGrid.innerHTML = filtered.map(renderProductCard).join("");
+        }
       }
 
       // --- DETAIL VIEW ---
+      let galleryImages = [];
+      let galleryIndex  = 0;
+      let touchStartX   = 0;
+
+      function renderGallery() {
+        const single = galleryImages.length <= 1;
+        detailImage.src = galleryImages[galleryIndex] || "";
+
+        const prevBtn = document.querySelector(".gallery-prev");
+        const nextBtn = document.querySelector(".gallery-next");
+        if (prevBtn) prevBtn.classList.toggle("hidden", single);
+        if (nextBtn) nextBtn.classList.toggle("hidden", single);
+
+        const dotsEl = document.getElementById("detail-dots");
+        if (dotsEl) {
+          dotsEl.classList.toggle("hidden", single);
+          dotsEl.innerHTML = galleryImages
+            .map((_, i) => `<button class="detail-dot${i === galleryIndex ? " active" : ""}" onclick="goToGalleryImage(${i})" aria-label="Image ${i + 1}"></button>`)
+            .join("");
+        }
+      }
+
+      window.navigateGallery = (dir) => {
+        galleryIndex = (galleryIndex + dir + galleryImages.length) % galleryImages.length;
+        detailImage.style.opacity = "0.7";
+        setTimeout(() => { detailImage.style.opacity = "1"; }, 150);
+        renderGallery();
+      };
+
+      window.goToGalleryImage = (index) => {
+        galleryIndex = index;
+        detailImage.style.opacity = "0.7";
+        setTimeout(() => { detailImage.style.opacity = "1"; }, 150);
+        renderGallery();
+      };
+
       window.openProductDetails = (productId) => {
         const product = products.find((p) => p.id === productId);
         if (!product || !productDetailView) return;
 
         currentProductId = productId;
+        galleryImages    = (product.images && product.images.length > 0) ? product.images : [product.image];
+        galleryIndex     = 0;
 
-        detailImage.src              = product.image;
-        detailTitle.textContent      = product.name;
-        detailPrice.textContent      = `$${product.price.toFixed(2)}`;
+        detailTitle.textContent       = product.name;
+        detailPrice.textContent       = product.price !== null ? `$${product.price.toFixed(2)}` : "Price on request";
         detailDescription.textContent = product.description;
 
-        const thumbnailsContainer = document.getElementById("detail-thumbnails");
-        if (product.images && product.images.length > 0) {
-          thumbnailsContainer.innerHTML = product.images
-            .slice(0, 5)
-            .map(
-              (img, index) => `
-              <div class="thumbnail ${index === 0 ? "active" : ""}"
-                   onmouseover="updateMainImage('${img}', this)">
-                <img src="${img}" alt="View ${index + 1}">
-              </div>
-            `
-            )
-            .join("");
-        } else {
-          thumbnailsContainer.innerHTML = "";
+        if (detailAddToCartBtn) {
+          detailAddToCartBtn.disabled = !product.checkoutUrl;
+        }
+        if (detailBuyNowBtn) {
+          detailBuyNowBtn.textContent = "Buy Now";
+          detailBuyNowBtn.disabled = !product.checkoutUrl;
         }
 
+        renderGallery();
+
         if (product.features) {
-          detailFeatures.innerHTML = product.features
-            .map((f) => `<li>${f}</li>`)
-            .join("");
+          detailFeatures.innerHTML = product.features.map((f) => `<li>${f}</li>`).join("");
         } else {
           detailFeatures.innerHTML = "";
         }
+
+        // Touch swipe on the image wrapper
+        const wrapper = document.querySelector(".detail-image-wrapper");
+        wrapper.ontouchstart = (e) => { touchStartX = e.changedTouches[0].clientX; };
+        wrapper.ontouchend   = (e) => {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(dx) > 40) navigateGallery(dx < 0 ? 1 : -1);
+        };
 
         if (shopHeroSection)   shopHeroSection.classList.add("hidden");
         if (filterContainerEl) filterContainerEl.classList.add("hidden");
@@ -1903,19 +2103,6 @@
         productGrid.classList.add("hidden");
         productDetailView.classList.remove("hidden");
         window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-
-      window.updateMainImage = (src, thumbnailElement) => {
-        const mainImage = document.getElementById("detail-image");
-        mainImage.style.opacity = "0.8";
-        setTimeout(() => {
-          mainImage.src         = src;
-          mainImage.style.opacity = "1";
-        }, 150);
-        document
-          .querySelectorAll(".thumbnail")
-          .forEach((t) => t.classList.remove("active"));
-        thumbnailElement.classList.add("active");
       };
 
       function closeProductDetails() {

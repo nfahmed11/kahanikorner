@@ -32,7 +32,15 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kahani Korner — Shop</title>
+    <title>Subscribe — Kahani Korner</title>
+    <link rel="icon" href="/assets/images/homepage/logo2.png" type="image/png" />
+    <meta name="description" content="Subscribe to The Kahani Times — a monthly Urdu-English snail mail package of stories, art, and cultural treasures for kids." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kahanikorner.com/subscribe.html" />
+    <meta property="og:title" content="Subscribe — Kahani Korner" />
+    <meta property="og:description" content="Subscribe to The Kahani Times — a monthly Urdu-English snail mail package of stories, art, and cultural treasures for kids." />
+    <meta property="og:image" content="https://kahanikorner.com/assets/images/homepage/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Font Awesome Icons -->
     <link
@@ -945,6 +953,43 @@
         box-shadow: 0 0 0 var(--deep-teal);
       }
 
+      /* Pricing breakdown shown on the card before the buttons */
+      .subscribe-pricing {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0.75rem 0 0;
+        flex-wrap: wrap;
+      }
+      .subscribe-pricing-item {
+        flex: 1;
+        min-width: 120px;
+        background: var(--white-smoke);
+        border: 1.5px solid var(--ash-grey);
+        border-radius: 0.85rem;
+        padding: 0.55rem 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1rem;
+      }
+      .subscribe-pricing-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+      }
+      .subscribe-pricing-value {
+        font-family: "Grandstander", cursive;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--deep-teal);
+      }
+      .subscribe-pricing-note {
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
       /* NEW: stacked subscribe buttons (USA + Intl) */
       .subscribe-btns {
         display: flex;
@@ -1329,6 +1374,19 @@
           padding: 6rem 1.5rem 3.5rem;
         }
       }
+
+      .brand-logo {
+        height: 32px;
+        width: auto;
+        display: block;
+      }
+
+      .footer-brand-logo {
+        height: 40px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+      }
     </style>
   </head>
 
@@ -1337,15 +1395,15 @@
     <div class="topbar">
       <div class="topbar__inner">
         <div class="topbar__track">
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
@@ -1361,16 +1419,18 @@
         </button>
 
         <a href="https://kahanikorner.com" class="brand">
-          <i class="fa-solid fa-book-open-reader brand-icon"></i>
-          Kahani Korner
+          <picture>
+            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+          </picture>
         </a>
 
         <nav class="nav">
           <a href="products.html">Shop</a>
-          <a href="subscribe.html">Subscribe</a>
+          <a href="subscribe.html" class="nav-active">Subscribe</a>
           <a href="/resources/resources.html">Resources</a>
-          <a href="#faq">Help</a>
-          <a href="#contact">Contact</a>
+          <a href="index.html#faq">Help</a>
+          <a href="index.html#contact">Contact</a>
         </nav>
 
         <button class="cart-btn-landing" id="cart-btn">
@@ -1407,8 +1467,10 @@
       <nav class="mobile-menu">
         <div class="mobile-menu__header">
           <span class="mobile-menu__brand">
-            <i class="fa-solid fa-book-open-reader"></i>
-            Kahani Korner
+            <picture>
+              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+            </picture>
           </span>
           <button class="mobile-menu__close" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
@@ -1417,10 +1479,10 @@
 
         <ul class="mobile-menu__links">
           <li><a href="products.html">Shop</a></li>
-          <li><a href="subscribe.html">Subscribe</a></li>
+          <li><a href="subscribe.html" class="nav-active">Subscribe</a></li>
           <li><a href="/resources/resources.html">Resources</a></li>
-          <li><a href="#faq">Help</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html#faq">Help</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -1493,13 +1555,13 @@
                 <button
                   id="detail-subscribe-usa-btn"
                   class="add-to-cart-btn large-btn">
-                  USA Subscription
+                  USA · $9.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button
                   id="detail-subscribe-intl-btn"
                   class="add-to-cart-btn large-btn">
-                  International Subscription
+                  Intl · $11.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
 
@@ -1508,18 +1570,20 @@
                 <div id="detail-features" class="detail-feature-sections"></div>
               </div>
 
-              <!-- ✅ TWO SUBSCRIBE BUTTONS on detail view -->
+              <!-- Subscribe buttons repeated below the features box for convenience -->
               <div class="subscribe-btns">
                 <button
-                  id="detail-subscribe-usa-btn"
-                  class="add-to-cart-btn large-btn">
-                  USA Subscription
+                  id="detail-subscribe-usa-btn-2"
+                  class="add-to-cart-btn large-btn"
+                  onclick="window.location.href='https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08'">
+                  USA · $9.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button
-                  id="detail-subscribe-intl-btn"
-                  class="add-to-cart-btn large-btn">
-                  International Subscription
+                  id="detail-subscribe-intl-btn-2"
+                  class="add-to-cart-btn large-btn"
+                  onclick="window.location.href='https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a'">
+                  Intl · $11.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
 
@@ -1553,58 +1617,16 @@
       </div>
     </div>
 
-    <!-- Simple FAQ + Contact anchors to satisfy nav links -->
-
-    <section class="section contact-section" id="contact">
-      <div
-        class="section__inner"
-        style="max-width: 800px; margin: 0 auto; text-align: center">
-        <span
-          class="feature-tag"
-          style="
-            display: inline-block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--rosy-taupe);
-            margin-bottom: 0.5rem;
-          "
-          >Get in Touch</span
-        >
-        <h2 class="section__title" style="text-align: center">
-          Questions, Collabs, or Salaam?
-        </h2>
-        <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1rem">
-          Have a question about shipping, subscriptions, or gifts? Email us
-          anytime — we’re a tiny team but we read every message.
-        </p>
-        <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1rem">
-          Drop us a note at
-          <a
-            href="mailto:admin@kahanikorner.com"
-            style="
-              font-weight: 700;
-              text-decoration: underline;
-              text-decoration-color: var(--cotton-rose);
-            "
-            >admin@kahanikorner.com</a
-          >
-          and we’ll get back to you soon.
-        </p>
-      </div>
-    </section>
+    <div id="contact"></div>
 
     <!-- Footer (same vibe as landing) -->
     <footer class="footer">
-      <div
-        class="brand"
-        style="
-          justify-content: center;
-          color: var(--white);
-          margin-bottom: 1rem;
-        ">
-        <i class="fa-solid fa-book-open-reader"></i> Kahani Korner
-      </div>
+      <a href="https://kahanikorner.com" class="brand" style="justify-content:center;margin-bottom:1rem;">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
+        </picture>
+      </a>
       <p class="footer-tagline">
         Rooted in culture, topped with sweetness, made for little hearts.
       </p>
@@ -1636,7 +1658,7 @@
         </a>
       </div>
 
-      <p>&copy; 2025 Kahani Korner. All rights reserved.</p>
+      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
     </footer>
 
     <script>
@@ -1657,7 +1679,9 @@
       const product = {
         id: "kahani-times",
         name: "The Kahani Times Subscription",
-        priceDisplay: "$9.99 / $11.99",
+        priceDisplay: "From $9.99/mo",
+        priceUSA: "$9.99/mo",
+        priceIntl: "$11.99/mo",
         description:
           "For those who treasure stories, color, and connection — The Kahani Times revives the charm of old-school storytelling. Each month’s envelope feels like a keepsake from gentler times: printed paper, nostalgic items, and the quiet thrill of opening real mail. Inside are stories, art, and small surprises that make learning Urdu feel natural and joyful — like the way our parents once learned, slowly and beautifully, over a warm cup of chai.",
         image: "/assets/images/products/subscribe/feb.png",
@@ -1851,7 +1875,7 @@
         });
       }
 
-      // --- PRODUCT RENDERING (SINGLE CARD + 2 SUBSCRIBE BUTTONS) ---
+      // --- PRODUCT RENDERING (SINGLE CARD + LABELED PRICING + 2 SUBSCRIBE BUTTONS) ---
       function renderProducts() {
         if (!productGrid) return;
 
@@ -1863,18 +1887,32 @@
             <div class="product-info">
               <div class="product-header">
                 <h3>${product.name}</h3>
-                <span class="price">${product.priceDisplay}</span>
+                <span class="price" style="font-size:0.85rem;">Monthly</span>
+              </div>
+
+              <!-- Labeled pricing — visible before any scrolling -->
+              <div class="subscribe-pricing">
+                <div class="subscribe-pricing-item">
+                  <span class="subscribe-pricing-label">USA</span>
+                  <span class="subscribe-pricing-value">${product.priceUSA}</span>
+                  <span class="subscribe-pricing-note">Free shipping</span>
+                </div>
+                <div class="subscribe-pricing-item">
+                  <span class="subscribe-pricing-label">International</span>
+                  <span class="subscribe-pricing-value">${product.priceIntl}</span>
+                  <span class="subscribe-pricing-note">Ships worldwide</span>
+                </div>
               </div>
 
               <div class="subscribe-btns">
                 <button class="add-to-cart-btn"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_USA}'">
-                  USA Subscription <i class="fa-solid fa-arrow-right"></i>
+                  USA · ${product.priceUSA} <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button class="add-to-cart-btn"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_INTL}'">
-                  International Subscription <i class="fa-solid fa-arrow-right"></i>
+                  Intl · ${product.priceIntl} <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -1946,7 +1984,13 @@
 
         detailImage.src = product.image;
         detailTitle.textContent = product.name;
-        detailPrice.textContent = product.priceDisplay;
+        // Show labeled prices in the detail view
+        detailPrice.innerHTML = `
+          <span style="font-size:1rem;font-weight:600;color:var(--muted);display:block;margin-bottom:0.3rem;transform:none;">
+            USA: <strong style="color:var(--deep-teal);">${product.priceUSA}</strong>
+            &nbsp;·&nbsp;
+            International: <strong style="color:var(--deep-teal);">${product.priceIntl}</strong>
+          </span>`;
         detailDescription.textContent = product.description;
 
         const thumbnailsContainer =

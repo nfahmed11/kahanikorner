@@ -295,7 +295,7 @@ font-family: "Open Sans", sans-serif;        background: linear-gradient(to bott
     <div class="grid"></div>
 
      <div class="footer">
-      Rooted in culture, topped with sweetness, made for little hearts 💕📖
+      Rooted in culture, topped with sweetness, made for little hearts
       <div class="social-icons">
         <a
           href="https://www.instagram.com/kahani.korner/"
@@ -382,7 +382,7 @@ font-family: "Open Sans", sans-serif;        background: linear-gradient(to bott
 
         // Play Button Overlay
         const playButton = document.createElement("div");
-        playButton.innerHTML = "▶️";
+        playButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="36" height="36" style="display:block;filter:drop-shadow(0 0 6px rgba(0,0,0,0.5))"><path d="M8 5v14l11-7z"/></svg>';
         playButton.style.position = "absolute";
         playButton.style.top = "50%";
         playButton.style.left = "50%";
@@ -435,18 +435,20 @@ font-family: "Open Sans", sans-serif;        background: linear-gradient(to bott
         document.body.classList.add("loaded");
 
         // floating hearts
-        const icons = ["❤"];
+        const heartSVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
         for (let i = 0; i < 15; i++) {
           const icon = document.createElement("div");
           icon.classList.add("heart");
-          icon.style.position = "fixed"; // ← KEY CHANGE
+          icon.style.position = "fixed";
           icon.style.left = Math.random() * 100 + "vw";
-          icon.style.bottom = `${Math.random() * 10}px`; // optional
+          icon.style.bottom = `${Math.random() * 10}px`;
           icon.style.animationDelay = Math.random() * 10 + "s";
-          icon.style.fontSize = (1 + Math.random()).toFixed(2) + "rem";
+          const size = (16 + Math.random() * 12).toFixed(0) + "px";
+          icon.style.width = size;
+          icon.style.height = size;
           icon.style.animationDuration =
             (6 + Math.random() * 4).toFixed(2) + "s";
-          icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+          icon.innerHTML = heartSVG;
           document.body.appendChild(icon);
         }
       });

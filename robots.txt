@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /qr/
+
+Sitemap: https://kahanikorner.com/sitemap.xml

@@ -33,6 +33,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Kahani Korner</title>
+    <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
+    <meta name="description" content="Explore enchanting Urdu–English books, stickers, flashcards, and monthly subscription boxes designed to preserve culture and foster connection in bilingual homes." />
+    <meta property="og:title" content="Kahani Korner — One Story, Two Languages, Endless Memories" />
+    <meta property="og:description" content="Explore enchanting Urdu–English books, stickers, flashcards, and monthly subscription boxes designed to preserve culture and foster connection in bilingual homes." />
+    <meta property="og:image" content="https://kahanikorner.com/assets/images/homepage/fam.png" />
+    <meta property="og:url" content="https://kahanikorner.com" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Font Awesome Icons -->
     <link
@@ -46,7 +54,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet" />
     <link rel="preload" as="image" href="/assets/images/homepage/fam.png" />
 
@@ -712,7 +720,7 @@
         border-radius: 0 0 28px 28px;
         overflow: hidden;
         box-shadow: 0 32px 60px rgba(223, 225, 229, 0.35);
-        margin-bottom: 4rem;
+        margin-bottom: 1rem;
         display: flex;
       }
 
@@ -847,7 +855,7 @@
       .starter {
         width: 100%;
         background: var(--white);
-        padding: 4rem 2rem;
+        padding: 2.5rem 2rem 4rem;
       }
 
       .split {
@@ -1519,6 +1527,93 @@
         background: var(--soft-blush);
       }
 
+      /* Contact form */
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .contact-form label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--granite);
+        margin-bottom: 0.15rem;
+        display: block;
+      }
+      .contact-form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 0.7rem 0.9rem;
+        border: 2px solid var(--ash-grey);
+        border-radius: 0.85rem;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.92rem;
+        color: var(--granite);
+        background: #fff;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        resize: vertical;
+      }
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: var(--deep-teal);
+        box-shadow: 0 0 0 3px rgba(104, 125, 112, 0.12);
+      }
+      .contact-form input.error,
+      .contact-form textarea.error {
+        border-color: var(--danger);
+      }
+      .contact-form textarea {
+        min-height: 110px;
+      }
+      .contact-form-submit {
+        align-self: flex-start;
+        padding: 0.8rem 1.5rem;
+        background: var(--granite);
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        font-family: "Grandstander", cursive;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+        box-shadow: 0 4px 0 var(--deep-teal);
+      }
+      .contact-form-submit:hover {
+        background: var(--deep-teal);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--deep-teal);
+      }
+      .contact-form-submit:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--deep-teal);
+      }
+      .contact-form-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0.5rem 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+      .contact-form-divider::before,
+      .contact-form-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--ash-grey);
+      }
+
       .contact-container {
         max-width: 1000px;
         margin: 0 auto;
@@ -1655,6 +1750,81 @@
         }
       }
 
+      /* --- EMAIL CAPTURE --- */
+      .email-section {
+        background: linear-gradient(135deg, var(--mint), var(--soft-blush));
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+
+      .email-section__title {
+        font-family: "Grandstander", cursive;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        color: var(--granite);
+        margin: 0 0 0.5rem;
+      }
+
+      .email-section__sub {
+        color: var(--deep-teal);
+        font-size: 0.95rem;
+        margin: 0 0 1.75rem;
+        max-width: 480px;
+        margin-inline: auto;
+      }
+
+      .email-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: center;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .email-form input[type="email"] {
+        flex: 1 1 220px;
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--ash-grey);
+        border-radius: var(--radius-pill);
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.95rem;
+        color: var(--granite);
+        background: #fff;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .email-form input[type="email"]:focus {
+        border-color: var(--deep-teal);
+      }
+
+      .email-form button {
+        padding: 0.75rem 1.75rem;
+        background: var(--granite);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-pill);
+        font-family: "Grandstander", cursive;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+        white-space: nowrap;
+      }
+
+      .email-form button:hover {
+        background: var(--deep-teal);
+        transform: translateY(-2px);
+      }
+
+      .email-form__note {
+        font-size: 0.75rem;
+        color: var(--deep-teal);
+        margin-top: 0.5rem;
+        width: 100%;
+        text-align: center;
+      }
+
       /* --- FOOTER --- */
       .footer {
         background: var(--granite);
@@ -1694,6 +1864,54 @@
         opacity: 1;
         transform: translateY(-2px);
       }
+
+      /* Initials avatar for reviews */
+      .review-avatar-initials {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid var(--white);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--granite);
+        flex-shrink: 0;
+        letter-spacing: 0.03em;
+      }
+
+      /* Story card — space between multiple paragraphs */
+      .story-card p + p {
+        margin-top: 1rem;
+      }
+
+      /* Active nav link */
+      .nav a.nav-active {
+        font-weight: 700;
+        position: relative;
+      }
+      .nav a.nav-active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--granite);
+        border-radius: 999px;
+      }
+
+      /* Footer brand logo */
+      .footer-brand-logo {
+        height: 36px;
+        width: auto;
+        display: block;
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+      }
     </style>
   </head>
 
@@ -1702,15 +1920,15 @@
     <div class="topbar">
       <div class="topbar__inner">
         <div class="topbar__track">
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
-          <span>Pre-Order Books Now</span>
+          <span>Shop Now</span>
           <span>•</span>
           <span>Free Shipping on All US Orders</span>
           <span>•</span>
@@ -1726,11 +1944,14 @@
         </button>
 
         <a href="https://kahanikorner.com" class="brand" aria-label="Kahani Korner Home">
-          <img
-            src="/assets/images/homepage/logo.png"
-            alt="Kahani Korner"
-            class="brand-logo"
-          />
+          <picture>
+            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+            <img
+              src="/assets/images/homepage/logo.png"
+              alt="Kahani Korner"
+              class="brand-logo"
+            />
+          </picture>
         </a>
 
         <nav class="nav">
@@ -1777,11 +1998,14 @@
       <nav class="mobile-menu">
         <div class="mobile-menu__header">
           <a href="https://kahanikorner.com" class="mobile-menu__brand" aria-label="Kahani Korner Home">
-            <img
-              src="/assets/images/homepage/logo.png"
-              alt="Kahani Korner"
-              style="height: 34px; width: auto; display: block"
-            />
+            <picture>
+              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+              <img
+                src="/assets/images/homepage/logo.png"
+                alt="Kahani Korner"
+                style="height: 34px; width: auto; display: block"
+              />
+            </picture>
           </a>
           <button class="mobile-menu__close" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
@@ -1811,8 +2035,8 @@
             foster connection, and make little hearts love to read.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="products.html">Shop</a>
-            <a class="btn btn--ghost" href="subscribe.html">Subscribe</a>
+            <a class="btn btn--primary" href="products.html">Shop Books</a>
+            <a class="btn btn--ghost" href="subscribe.html">Start Subscription</a>
           </div>
         </div>
       </div>
@@ -2055,16 +2279,21 @@
             Kahani Korner was born at 3 a.m. during sleepless baby night shifts,
             when a quiet realization hit me harder than the exhaustion. The only
             person I spoke Urdu with was my mom, and unless I started now, Urdu
-            would end with me in my bloodline. At least my parents’ generation
-            had a village. They had people around them who carried the language,
-            even if it was passed down irregularly. My kids do not have that.
-            Their village speaks English. Many have forgotten Urdu, and others
-            are simply uncomfortable using it. I knew I needed to build
-            villagers to supplement the Urdu I was trying to give my kids on my
-            own. That is how Kahani Korner came to life. All the resources in
-            one place. Books, games, music, cartoons, movies, and worksheets
-            that make Urdu feel natural, cozy, and part of everyday family life,
-            one little kahani at a time.
+            would end with me in my bloodline.
+          </p>
+          <p>
+            At least my parents’ generation had a village. They had people
+            around them who carried the language, even if it was passed down
+            irregularly. My kids do not have that. Their village speaks English.
+            Many have forgotten Urdu, and others are simply uncomfortable using
+            it.
+          </p>
+          <p>
+            I knew I needed to build villagers to supplement the Urdu I was
+            trying to give my kids on my own. That is how Kahani Korner came to
+            life — all the resources in one place. Books, games, music, cartoons,
+            movies, and worksheets that make Urdu feel natural, cozy, and part of
+            everyday family life, one little kahani at a time.
           </p>
         </div>
       </div>
@@ -2087,10 +2316,7 @@
             <!-- SET 1 -->
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#c9dcce;">SA</div>
                 <div class="review-author">
                   <h4>Sarah Ahmed</h4>
                   <span>London, UK</span>
@@ -2104,10 +2330,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#f3dedd;">OK</div>
                 <div class="review-author">
                   <h4>Omar Khan</h4>
                   <span>Toronto, CA</span>
@@ -2122,10 +2345,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#ffc4c3;">FZ</div>
                 <div class="review-author">
                   <h4>Fatima Z.</h4>
                   <span>Chicago, USA</span>
@@ -2138,10 +2358,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#b0c3b7;">AM</div>
                 <div class="review-author">
                   <h4>Ayesha Malik</h4>
                   <span>Sydney, AU</span>
@@ -2155,10 +2372,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#e8c5c5;">IS</div>
                 <div class="review-author">
                   <h4>Imran &amp; Sana</h4>
                   <span>Houston, USA</span>
@@ -2172,10 +2386,7 @@
             <!-- SET 2 DUPLICATE -->
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#c9dcce;">SA</div>
                 <div class="review-author">
                   <h4>Sarah Ahmed</h4>
                   <span>London, UK</span>
@@ -2189,10 +2400,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#f3dedd;">OK</div>
                 <div class="review-author">
                   <h4>Omar Khan</h4>
                   <span>Toronto, CA</span>
@@ -2207,10 +2415,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#ffc4c3;">FZ</div>
                 <div class="review-author">
                   <h4>Fatima Z.</h4>
                   <span>Chicago, USA</span>
@@ -2223,10 +2428,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#b0c3b7;">AM</div>
                 <div class="review-author">
                   <h4>Ayesha Malik</h4>
                   <span>Sydney, AU</span>
@@ -2240,10 +2442,7 @@
 
             <div class="review-card">
               <div class="review-header">
-                <img
-                  src="/assets/images/homepage/user.png"
-                  alt="Reviewer"
-                  class="review-avatar" />
+                <div class="review-avatar-initials" style="background:#e8c5c5;">IS</div>
                 <div class="review-author">
                   <h4>Imran &amp; Sana</h4>
                   <span>Houston, USA</span>
@@ -2274,7 +2473,7 @@
             </summary>
 
             <div class="faq-group__body">
-              <details class="faq-item" open>
+              <details class="faq-item">
                 <summary>What is The Kahani Times?</summary>
                 <p>
                   The Kahani Times is our monthly snail mail subscription: a
@@ -2300,13 +2499,13 @@
                   <strong>Subscribe on 20th or before:</strong> first mail ships
                   <strong>end of THAT month.</strong><br /><br />
                   <strong>Example:</strong> Subscribe <strong>Dec 18</strong> →
-                  Subscribtion Starts <strong>December</strong> → ships
+                  Subscription Starts <strong>December</strong> → ships
                   <strong>end of December</strong> → arrives
                   <strong>early January</strong>. <br /><br />
                   <strong>Subscribe after the 20th:</strong> your subscription
                   starts the <strong>following month</strong>. <br /><br />
                   <strong>Example:</strong> Subscribe <strong>Dec 21</strong> →
-                  Subscribtion Starts <strong>January</strong> → ships
+                  Subscription Starts <strong>January</strong> → ships
                   <strong>end of January</strong> → arrives
                   <strong>early February</strong>.
                 </p>
@@ -2407,19 +2606,64 @@
     <section class="contact-section" id="contact">
       <div class="contact-container">
         <div class="contact-content">
-          <span class="feature-tag">Get in Touch</span>
+          <span class="feature-tag">Questions, Collabs, or Salaam?</span>
           <h2
             style="
               color: var(--granite);
               text-shadow: none;
               font-size: var(--h2);
             ">
-            Contact Us
+            Come say hi — we love hearing from you
           </h2>
           <p class="contact-note">
-            Have a quick question or want to grab a virtual chai and chat? Send
-            us a message — we usually respond within 1–2 business days.
+            Shipping questions, gift ideas, collab dreams, or just want to say
+            السلام عليكم? Drop us a note below and we'll get back to you soon.
           </p>
+
+          <!-- Contact Form
+               TODO: Connect the action to a real backend endpoint (e.g. a Firebase Function,
+               Netlify Function, or Formspree form ID) when available.
+               Currently falls back to a pre-filled mailto link on submit.
+          -->
+          <form
+            id="contact-form"
+            class="contact-form"
+            novalidate
+            onsubmit="handleContactSubmit(event)">
+            <div class="contact-form-row">
+              <label for="contact-name">Name</label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                placeholder="Your name"
+                required
+                autocomplete="name" />
+            </div>
+            <div class="contact-form-row">
+              <label for="contact-email">Email</label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="your@email.com"
+                required
+                autocomplete="email" />
+            </div>
+            <div class="contact-form-row">
+              <label for="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="What's on your mind?"
+                required></textarea>
+            </div>
+            <button type="submit" class="contact-form-submit">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+
+          <div class="contact-form-divider">or reach us directly</div>
 
           <div class="contact-actions">
             <a href="mailto:admin@kahanikorner.com" class="contact-link">
@@ -2436,17 +2680,25 @@
       </div>
     </section>
 
+    <!-- EMAIL CAPTURE -->
+    <section class="email-section" aria-labelledby="email-heading">
+      <h2 class="email-section__title" id="email-heading">Stay in the loop <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="0.9em" height="0.9em" style="vertical-align:middle;margin-left:0.2em"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></h2>
+      <p class="email-section__sub">New stories, resources, and surprise drops — straight to your inbox. No spam, ever.</p>
+      <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleEmailSubmit(event)">
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address" />
+        <button type="submit">Subscribe</button>
+        <p class="email-form__note">Unsubscribe anytime. We respect your inbox.</p>
+      </form>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
-      <div
-        class="brand"
-        style="
-          justify-content: center;
-          color: var(--white);
-          margin-bottom: 1rem;
-        ">
-        <i class="fa-solid fa-book-open-reader"></i> Kahani Korner
-      </div>
+      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
+        </picture>
+      </a>
 
       <p class="footer-tagline">
         Rooted in culture, topped with sweetness, made for little hearts.
@@ -2479,7 +2731,7 @@
         </a>
       </div>
 
-      <p>&copy; 2025 Kahani Korner. All rights reserved.</p>
+      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
     </footer>
 
     <script>
@@ -2679,5 +2931,54 @@
     </script>
 
     <script src="/assets/cart.js"></script>
+    <script>
+      // --- CONTACT FORM ---
+      // TODO: Replace the mailto fallback below with a real POST to your backend
+      // endpoint (Firebase Function, Netlify Function, or Formspree) when ready.
+      function handleContactSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const nameEl    = form.querySelector("#contact-name");
+        const emailEl   = form.querySelector("#contact-email");
+        const messageEl = form.querySelector("#contact-message");
+        let valid = true;
+
+        [nameEl, emailEl, messageEl].forEach((el) => el.classList.remove("error"));
+
+        if (!nameEl.value.trim()) { nameEl.classList.add("error"); valid = false; }
+        if (!emailEl.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+          emailEl.classList.add("error"); valid = false;
+        }
+        if (!messageEl.value.trim()) { messageEl.classList.add("error"); valid = false; }
+        if (!valid) return;
+
+        const subject = encodeURIComponent("Message from " + nameEl.value.trim());
+        const body    = encodeURIComponent(
+          "Name: " + nameEl.value.trim() +
+          "\nEmail: " + emailEl.value.trim() +
+          "\n\nMessage:\n" + messageEl.value.trim()
+        );
+        window.location.href = "mailto:admin@kahanikorner.com?subject=" + subject + "&body=" + body;
+      }
+
+      function handleEmailSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.querySelector('input[type="email"]').value;
+        fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ email }),
+        })
+          .then((r) => {
+            if (r.ok) {
+              form.innerHTML = '<p style="color:var(--granite);font-weight:700;">Thanks! You\'re on the list!</p>';
+            } else {
+              alert("Something went wrong. Please try again.");
+            }
+          })
+          .catch(() => alert("Something went wrong. Please try again."));
+      }
+    </script>
   </body>
 </html>
