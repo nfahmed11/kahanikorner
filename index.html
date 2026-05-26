@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Microsoft Analytics tag to track analytics  -->
@@ -32,25 +32,33 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kahani Korner</title>
-    <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
-    <meta name="description" content="Explore enchanting Urdu–English books, stickers, flashcards, and monthly subscription boxes designed to preserve culture and foster connection in bilingual homes." />
-    <meta property="og:title" content="Kahani Korner — One Story, Two Languages, Endless Memories" />
-    <meta property="og:description" content="Explore enchanting Urdu–English books, stickers, flashcards, and monthly subscription boxes designed to preserve culture and foster connection in bilingual homes." />
-    <meta property="og:image" content="https://kahanikorner.com/assets/images/homepage/fam.png" />
+    <title>Kahani Korner — Your Complete Urdu Learning Hub</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/homepage/logo2.png" />
+    <meta
+      name="description"
+      content="Everything your family needs to make Urdu part of everyday life — free resources, bilingual books, stickers, games, and monthly snail mail." />
+    <meta
+      property="og:title"
+      content="Kahani Korner — Your Complete Urdu Learning Hub" />
+    <meta
+      property="og:description"
+      content="Free resources, bilingual books, games, and monthly snail mail. Start free. Build your child's Urdu world at your own pace." />
+    <meta
+      property="og:image"
+      content="https://kahanikorner.com/assets/images/homepage/fam.png" />
     <meta property="og:url" content="https://kahanikorner.com" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Font Awesome Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -59,7 +67,97 @@
     <link rel="preload" as="image" href="/assets/images/homepage/fam.png" />
 
     <style>
-      /* Floating hearts (kept) */
+      /* ============================================================
+         THEME VARIABLES
+         ============================================================ */
+      :root {
+        --granite: #4a594a;
+        --deep-teal: #687d70;
+        --ash-grey: #b0c3b7;
+        --white-smoke: #f3f1f0;
+        --soft-blush: #f3dedd;
+        --cotton-rose: #ffc4c3;
+        --rosy-taupe: #d49797;
+        --mint: #c9dcce;
+        --black: #1c2524;
+        --white: #ffffff;
+        --green: #b0c3b7;
+        --radius-lg: 24px;
+        --radius-md: 16px;
+        --radius-pill: 999px;
+        --radius: 1.5rem;
+        --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
+        --shadow-hover: 0 22px 50px rgba(74, 89, 74, 0.25);
+        --card-bg: #ffffff;
+        --danger: #ef4444;
+        --muted: #5c6b68;
+        --h2: clamp(1.85rem, 3.6vw, 2.3rem);
+        --h3: 1.15rem;
+        --topbar-h: 15px;
+        --header-top-gap: 1.75rem;
+        --header-h: 74px;
+      }
+
+      /* ============================================================
+         RESET & BASE
+         ============================================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Open Sans", system-ui, sans-serif;
+        color: var(--granite);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        background: var(--white-smoke);
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+
+      h1 {
+        font-family: "Grandstander", cursive;
+        font-weight: 700;
+        line-height: 1.1;
+        margin: 0 0 16px;
+      }
+      h2 {
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+        line-height: 1.15;
+        margin: 0 0 1rem;
+        font-size: var(--h2);
+        color: var(--white-smoke);
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
+      }
+      h3,
+      h4 {
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 0 0 0.75rem;
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      /* Floating hearts */
       .heart {
         position: fixed;
         bottom: -40px;
@@ -83,114 +181,21 @@
         }
       }
 
-      /* --- THEME VARIABLES --- */
-      :root {
-        --granite: #4a594a;
-        --deep-teal: #687d70;
-        --ash-grey: #b0c3b7;
-        --white-smoke: #f3f1f0;
-        --soft-blush: #f3dedd; /* ✅ lightest pink in palette */
-        --cotton-rose: #ffc4c3;
-        --rosy-taupe: #d49797;
-        --black: #1c2524;
-        --white: #ffffff;
-
-        --green: #b0c3b7;
-        --mint: #c9dcce;
-
-        --radius-lg: 24px;
-        --radius-md: 16px;
-        --radius-pill: 999px;
-        --radius: 1.5rem;
-
-        --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
-        --shadow-hover: 0 22px 50px rgba(74, 89, 74, 0.25);
-
-        --card-bg: #ffffff;
-        --danger: #ef4444;
-        --muted: #5c6b68;
-
-        /* ✅ consistent header scale */
-        --h2: clamp(1.85rem, 3.6vw, 2.3rem);
-        --h3: 1.15rem;
-      }
-
-      /* --- RESET & BASE --- */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Open Sans", system-ui, sans-serif;
-        color: var(--granite);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      button {
-        font-family: inherit;
-        cursor: pointer;
-      }
-
-      /* ✅ global heading system (fix hierarchy + consistency) */
-      h1 {
-        font-family: "Grandstander", cursive;
-        font-weight: 700;
-        line-height: 1.1;
-        margin: 0 0 16px;
-      }
-
-      h2 {
-        font-family: "Grandstander", cursive;
-        font-weight: 800;
-        line-height: 1.15;
-        margin: 0 0 1rem;
-        font-size: var(--h2);
-        color: var(--white-smoke);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
-      }
-
-      h3,
-      h4 {
-        font-family: "Grandstander", cursive;
-        font-weight: 800;
-        line-height: 1.2;
-        margin: 0 0 0.75rem;
-      }
-
-      .hidden {
-        display: none !important;
-      }
-
-      /* --- GENERIC SECTION LAYOUT --- */
+      /* ============================================================
+         SECTION LAYOUT
+         ============================================================ */
       .section {
         padding: 4rem 2rem;
       }
-
       .section__inner {
         max-width: 1200px;
         margin: 0 auto;
       }
-
-      /* ✅ unified section title (applies to: Everything a Bundle, Why, Our Story, Community Love, FAQ) */
       .section__title {
         font-size: var(--h2);
         margin-bottom: 1.25rem;
         text-align: center;
       }
-
       .section__subtitle {
         max-width: 680px;
         margin: 0 auto 1.75rem;
@@ -200,34 +205,32 @@
         line-height: 1.65;
       }
 
-      /* TOP PROMO BAR */
+      /* ============================================================
+         TOP PROMO BAR
+         ============================================================ */
       .topbar {
         background: var(--green);
-        color: #ffffff;
+        color: #fff;
         font-size: 13px;
         font-weight: 500;
         overflow: hidden;
         white-space: nowrap;
       }
-
       .topbar__inner {
         display: flex;
         align-items: center;
         width: 100%;
       }
-
       .topbar__track {
         display: inline-block;
         padding-left: 100%;
         animation: marquee 22s linear infinite;
       }
-
       .topbar__track span {
         display: inline-block;
         padding-right: 50px;
         opacity: 0.9;
       }
-
       @keyframes marquee {
         0% {
           transform: translateX(0);
@@ -237,12 +240,9 @@
         }
       }
 
-      :root {
-        --topbar-h: 15px;
-        --header-top-gap: 1.75rem;
-        --header-h: 74px;
-      }
-
+      /* ============================================================
+         HEADER & NAV
+         ============================================================ */
       .header {
         position: fixed;
         top: calc(var(--topbar-h) + var(--header-top-gap));
@@ -257,7 +257,6 @@
         border-radius: 999px;
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
       }
-
       .header__inner {
         display: flex;
         align-items: center;
@@ -265,65 +264,55 @@
         gap: 1rem;
         width: 100%;
       }
-
       .header-spacer {
         height: calc(
           var(--topbar-h) + var(--header-top-gap) + var(--header-h) + 1rem
         );
       }
 
-      /* Brand logo swap */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;              /* no gap since it's just the logo now */
-}
-
-.brand-logo {
-  height: 44px;        /* tweak if needed */
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
-
-/* slightly smaller on mobile */
-@media (max-width: 768px) {
-  .brand-logo {
-    height: 34px;
-  }
-}
-
       .brand {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 12px;
-        font-family: "Grandstander", cursive;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--granite);
+        gap: 0;
       }
-
-      .brand-icon {
-        font-size: 1.8rem;
-        color: var(--rosy-taupe);
+      .brand-logo {
+        height: 44px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
+      @media (max-width: 768px) {
+        .brand-logo {
+          height: 34px;
+        }
       }
 
       .nav {
         display: flex;
         align-items: center;
-        gap: 40px;
+        gap: 32px;
         font-weight: 300;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
       }
-
       .nav a:hover {
         color: var(--soft-blush);
         font-weight: 700;
-        transform: scale(1.05);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+      }
+      .nav a.nav-active {
+        font-weight: 700;
+        position: relative;
+      }
+      .nav a.nav-active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--granite);
+        border-radius: 999px;
       }
 
       .mobile-toggle {
@@ -340,32 +329,26 @@
           display: grid !important;
           grid-template-columns: 1fr auto 1fr;
           align-items: center;
-          width: 100%;
         }
-
         .mobile-toggle {
           display: block !important;
           grid-column: 1;
           justify-self: start;
         }
-
         .brand {
           grid-column: 2;
           justify-self: center;
-          margin-right: 0;
-          font-size: 1rem;
         }
-
         .cart-btn-landing {
           grid-column: 3;
           justify-self: end;
         }
-
         .nav {
           display: none !important;
         }
       }
 
+      /* Mobile menu overlay */
       .mobile-menu-overlay {
         position: fixed;
         inset: 0;
@@ -376,12 +359,10 @@
         pointer-events: none;
         transition: opacity 0.3s ease;
       }
-
       .mobile-menu-overlay.open {
         opacity: 1;
         pointer-events: auto;
       }
-
       .mobile-menu {
         position: absolute;
         top: 0;
@@ -399,18 +380,15 @@
         transform: translateX(100%);
         transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
       }
-
       .mobile-menu-overlay.open .mobile-menu {
         transform: translateX(0);
       }
-
       .mobile-menu__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 1.25rem;
       }
-
       .mobile-menu__brand {
         display: inline-flex;
         align-items: center;
@@ -419,11 +397,6 @@
         font-weight: 700;
         color: var(--granite);
       }
-
-      .mobile-menu__brand i {
-        color: var(--rosy-taupe);
-      }
-
       .mobile-menu__close {
         background: var(--soft-blush);
         border: 2px solid var(--granite);
@@ -436,14 +409,11 @@
         font-size: 1.25rem;
         color: var(--granite);
         cursor: pointer;
-        transition: background 0.2s ease, transform 0.1s ease;
+        transition: background 0.2s;
       }
-
       .mobile-menu__close:hover {
         background: var(--cotton-rose);
-        transform: translateY(-1px);
       }
-
       .mobile-menu__links {
         list-style: none;
         padding: 0;
@@ -452,7 +422,6 @@
         flex-direction: column;
         gap: 0.75rem;
       }
-
       .mobile-menu__links li a {
         display: block;
         padding: 0.75rem 0.25rem;
@@ -462,25 +431,24 @@
         font-weight: 500;
         color: var(--granite);
         border-bottom: 1px dashed var(--white-smoke);
-        transition: color 0.2s ease, transform 0.1s ease;
+        transition:
+          color 0.2s,
+          transform 0.1s;
       }
-
       .mobile-menu__links li:last-child a {
         border-bottom: none;
       }
-
       .mobile-menu__links li a:hover {
         color: var(--cotton-rose);
         transform: translateX(3px);
       }
-
       @media (min-width: 769px) {
         .mobile-menu-overlay {
           display: none;
         }
       }
 
-      /* Cart Button */
+      /* Cart button */
       .cart-btn-landing {
         background: var(--mint);
         border: 1px solid var(--granite);
@@ -492,22 +460,16 @@
         align-items: center;
         justify-content: center;
         color: var(--granite);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         cursor: pointer;
         font-size: 1rem;
       }
-
       .cart-btn-landing:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 0 var(--granite);
-        background: var(--ash-grey);
       }
-
-      .cart-btn-landing:active {
-        transform: translateY(0);
-        box-shadow: 0 0 0 var(--granite);
-      }
-
       .cart-badge-landing {
         position: absolute;
         top: -0.25rem;
@@ -525,21 +487,19 @@
         border: 2px solid var(--white-smoke);
       }
 
-      /* --- CART OVERLAY --- */
+      /* Cart overlay */
       .cart-overlay {
         position: fixed;
         inset: 0;
         background: rgba(74, 89, 74, 0.2);
-        z-index: 100;
+        z-index: 200;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s;
         backdrop-filter: blur(4px);
       }
-
       .cart-overlay.open {
         opacity: 1;
       }
-
       .cart-sidebar {
         position: absolute;
         top: 1rem;
@@ -556,11 +516,9 @@
         flex-direction: column;
         overflow: hidden;
       }
-
       .cart-overlay.open .cart-sidebar {
         transform: translateX(0);
       }
-
       .cart-header {
         padding: 1.5rem;
         border-bottom: 2px dashed var(--ash-grey);
@@ -569,7 +527,6 @@
         align-items: center;
         background: var(--white-smoke);
       }
-
       .close-btn {
         background: var(--soft-blush);
         border: none;
@@ -584,123 +541,75 @@
         justify-content: center;
         transition: background 0.2s;
       }
-
       .close-btn:hover {
         background: var(--cotton-rose);
       }
-
       .cart-items {
         flex: 1;
         overflow-y: auto;
         padding: 1.5rem;
       }
-
       .cart-item {
         display: flex;
         gap: 1rem;
-        margin-bottom: 1.5rem;
-        background: var(--white-smoke);
-        padding: 1rem;
-        border-radius: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--white-smoke);
       }
-
-      .cart-item img {
-        width: 4rem;
-        height: 4rem;
-        border-radius: 0.75rem;
+      .cart-item__img {
+        width: 60px;
+        height: 60px;
         object-fit: cover;
-        background: white;
+        border-radius: 8px;
       }
-
-      .cart-item-details {
+      .cart-item__info {
         flex: 1;
       }
-
-      .cart-item-details h4 {
-        font-size: 1rem;
-        margin-bottom: 0.25rem;
-        color: var(--granite);
-        text-shadow: none;
-      }
-
-      .cart-item-price {
+      .cart-item__name {
         font-weight: 700;
-        color: var(--rosy-taupe);
-        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
       }
-
-      .cart-controls {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .qty-btn {
-        width: 1.75rem;
-        height: 1.75rem;
-        border: 2px solid var(--ash-grey);
-        background: white;
-        border-radius: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        color: var(--granite);
-      }
-
-      .qty-btn:hover {
-        border-color: var(--deep-teal);
+      .cart-item__price {
         color: var(--deep-teal);
+        font-size: 0.85rem;
       }
-
-      .remove-btn {
-        margin-left: auto;
+      .cart-item__remove {
         background: none;
         border: none;
-        color: var(--danger);
-        font-size: 0.75rem;
-        font-weight: 500;
+        color: var(--rosy-taupe);
+        font-size: 1.1rem;
         cursor: pointer;
       }
-
       .cart-footer {
-        padding: 1.5rem;
+        padding: 1.25rem 1.5rem;
         border-top: 2px dashed var(--ash-grey);
         background: var(--white-smoke);
       }
-
       .cart-total {
         display: flex;
         justify-content: space-between;
-        font-size: 1.5rem;
         font-weight: 700;
-        color: var(--granite);
         margin-bottom: 1rem;
       }
-
       .checkout-btn {
         width: 100%;
-        padding: 1.25rem;
+        padding: 0.9rem;
         background: var(--granite);
-        color: white;
+        color: #fff;
         border: none;
-        border-radius: 1rem;
-        font-size: 1.125rem;
+        border-radius: 999px;
+        font-family: "Grandstander", cursive;
         font-weight: 700;
-        transition: transform 0.2s, box-shadow 0.2s;
+        font-size: 1rem;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
         box-shadow: 0 4px 0 var(--deep-teal);
       }
-
       .checkout-btn:hover {
+        background: var(--deep-teal);
         transform: translateY(-2px);
-        box-shadow: 0 6px 0 var(--deep-teal);
       }
-
-      .checkout-btn:active {
-        transform: translateY(0);
-        box-shadow: 0 0 0 var(--deep-teal);
-      }
-
       .empty-cart-msg {
         text-align: center;
         color: var(--deep-teal);
@@ -708,95 +617,9 @@
         font-style: italic;
       }
 
-      /* --- HERO SECTION --- */
-      .hero {
-        position: relative;
-        color: #ffffff;
-      }
-
-      .hero__bg {
-        position: relative;
-        min-height: 80vh;
-        border-radius: 0 0 28px 28px;
-        overflow: hidden;
-        box-shadow: 0 32px 60px rgba(223, 225, 229, 0.35);
-        margin-bottom: 1rem;
-        display: flex;
-      }
-
-      .hero__bg-image {
-        position: absolute;
-        top: -20px;
-        left: -20px;
-        right: -20px;
-        bottom: -40px;
-        background-image: linear-gradient(
-            120deg,
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.25)
-          ),
-          url("/assets/images/homepage/fam.png");
-        background-size: cover;
-        background-position: center top;
-        will-change: transform;
-      }
-
-      @media (max-width: 768px) {
-        .hero__bg {
-          min-height: 420px;
-        }
-
-        .hero__bg-image {
-          top: -10px;
-          bottom: -20px;
-          left: 0;
-          right: 0;
-          background-position: center top;
-        }
-      }
-
-      .hero__inner {
-        position: relative;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 120px 2rem 88px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-      }
-
-      .hero__heading {
-        font-family: "Grandstander", cursive;
-        font-weight: 700;
-        font-size: clamp(32px, 5vw, 54px);
-        line-height: 1.1;
-        margin: 0 0 16px;
-        max-width: 560px;
-        color: var(--white-smoke);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
-      }
-
-      .hero__sub {
-        max-width: 540px;
-        font-size: 16px;
-        line-height: 1.6;
-        opacity: 0.96;
-        margin-bottom: 24px;
-        color: var(--white-smoke);
-        text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5),
-          1px -1px 0 rgba(0, 0, 0, 0.5), -1px 1px 0 rgba(0, 0, 0, 0.5),
-          1px 1px 0 rgba(0, 0, 0, 0.5);
-      }
-
-      .hero__actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-
+      /* ============================================================
+         BUTTONS
+         ============================================================ */
       .btn {
         display: inline-flex;
         align-items: center;
@@ -810,104 +633,441 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         cursor: pointer;
-        transition: transform 0.08s ease, box-shadow 0.08s ease,
-          background 0.15s ease;
+        transition:
+          transform 0.08s,
+          box-shadow 0.08s,
+          background 0.15s;
         text-decoration: none;
       }
-
       .btn--primary {
+        background: var(--granite);
+        color: white;
+        border: 2px solid var(--granite);
+        box-shadow: 0 4px 0 var(--deep-teal);
+      }
+      .btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--deep-teal);
+        background: var(--deep-teal);
+      }
+      .btn--primary:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--deep-teal);
+      }
+      .btn--outline {
+        background: transparent;
+        color: var(--granite);
+        border: 2px solid var(--granite);
+        box-shadow: 0 4px 0 var(--ash-grey);
+      }
+      .btn--outline:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--ash-grey);
+        background: var(--white-smoke);
+      }
+      .btn--outline:active {
+        transform: translateY(0);
+      }
+      .btn--ghost {
         background: var(--mint);
         color: var(--granite);
         border: 2px solid var(--granite);
         box-shadow: 0 4px 0 var(--deep-teal);
       }
-
-      .btn--primary:hover {
+      .btn--ghost:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 0 var(--deep-teal);
         background: #d7e5db;
       }
-
-      .btn--primary:active {
-        transform: translateY(0);
-        box-shadow: 0 0 0 var(--deep-teal);
-      }
-
-      .btn--ghost {
-        background: var(--granite);
-        border: 1px solid var(--granite);
-        color: white;
-        box-shadow: 0 4px 0 var(--deep-teal);
-      }
-
-      .btn--ghost:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 0 var(--deep-teal);
-        background: var(--deep-teal);
-      }
-
       .btn--ghost:active {
         transform: translateY(0);
-        box-shadow: 0 0 0 var(--deep-teal);
       }
 
-      /* STARTER PACK SPLIT SECTION */
+      /* ============================================================
+         1. HERO SECTION
+         ============================================================ */
+      .hero {
+        position: relative;
+        color: #fff;
+      }
+      .hero__bg {
+        position: relative;
+        min-height: 82vh;
+        border-radius: 0 0 28px 28px;
+        overflow: hidden;
+        box-shadow: 0 32px 60px rgba(223, 225, 229, 0.35);
+        margin-bottom: 1rem;
+        display: flex;
+      }
+      .hero__bg-image {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -40px;
+        background-image:
+          linear-gradient(120deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.28)),
+          url("/assets/images/homepage/fam.png");
+        background-size: cover;
+        background-position: center top;
+        will-change: transform;
+      }
+      @media (max-width: 768px) {
+        .hero__bg {
+          min-height: 480px;
+        }
+        .hero__bg-image {
+          top: -10px;
+          bottom: -20px;
+          left: 0;
+          right: 0;
+        }
+        .hero__inner {
+          padding: calc(
+              var(--topbar-h) + var(--header-top-gap) + var(--header-h) + 1.5rem
+            )
+            1.5rem 3rem;
+        }
+      }
+      .hero__inner {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: calc(
+            var(--topbar-h) + var(--header-top-gap) + var(--header-h) + 2.5rem
+          )
+          2rem 3.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .hero__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        background: rgba(201, 220, 206, 0.25);
+        border: 1px solid rgba(201, 220, 206, 0.5);
+        color: var(--mint);
+        padding: 0.3rem 0.85rem;
+        border-radius: 999px;
+        margin-bottom: 1.1rem;
+      }
+      .hero__heading {
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+        font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+        line-height: 1.1;
+        margin: 0 0 1rem;
+        max-width: 680px;
+        color: var(--white-smoke);
+        text-shadow:
+          -1px -1px 0 rgba(0, 0, 0, 0.4),
+          1px -1px 0 rgba(0, 0, 0, 0.4),
+          -1px 1px 0 rgba(0, 0, 0, 0.4),
+          1px 1px 0 rgba(0, 0, 0, 0.4);
+      }
+      .hero__sub {
+        max-width: 560px;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        opacity: 0.95;
+        margin-bottom: 2rem;
+        color: var(--white-smoke);
+        text-shadow:
+          -1px -1px 0 rgba(0, 0, 0, 0.45),
+          1px -1px 0 rgba(0, 0, 0, 0.45),
+          -1px 1px 0 rgba(0, 0, 0, 0.45),
+          1px 1px 0 rgba(0, 0, 0, 0.45);
+      }
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      /* ============================================================
+         2. TRUST STRIP
+         ============================================================ */
+      .trust-strip {
+        background: var(--granite);
+        padding: 0.85rem 2rem;
+        text-align: center;
+      }
+      .trust-strip p {
+        margin: 0;
+        color: var(--mint);
+        font-family: "Grandstander", cursive;
+        font-size: clamp(0.85rem, 2vw, 1rem);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .trust-strip p span {
+        color: var(--cotton-rose);
+        margin: 0 0.5rem;
+        font-size: 0.7em;
+        vertical-align: middle;
+      }
+
+      /* ============================================================
+         3. JOURNEY SECTION — "Start Your Urdu Journey Here"
+         ============================================================ */
+      .journey-section {
+        background: var(--white);
+        padding: 4.5rem 2rem;
+      }
+      .journey-section .section__title {
+        color: var(--granite);
+        text-shadow: none;
+      }
+      .journey-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+      }
+      @media (max-width: 1024px) {
+        .journey-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 560px) {
+        .journey-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.85rem;
+        }
+      }
+      @media (max-width: 360px) {
+        .journey-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+
+      .journey-card {
+        background: var(--white-smoke);
+        border: 2px solid var(--ash-grey);
+        border-radius: var(--radius-lg);
+        padding: 2rem 1.75rem 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transition:
+          transform 0.22s,
+          box-shadow 0.22s,
+          border-color 0.22s;
+      }
+      .journey-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--rosy-taupe);
+      }
+      .journey-card__icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+        flex-shrink: 0;
+      }
+      @media (max-width: 560px) {
+        .journey-card {
+          padding: 1.25rem 0.9rem 1rem;
+          gap: 0.45rem;
+          border-radius: 16px;
+        }
+        .journey-card__icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1.15rem;
+          border-radius: 10px;
+          margin-bottom: 0;
+        }
+        .journey-card h3 {
+          font-size: 0.95rem;
+        }
+        .journey-card p {
+          font-size: 0.8rem;
+        }
+      }
+      .journey-card__icon--green {
+        background: var(--mint);
+        color: var(--granite);
+      }
+      .journey-card__icon--blush {
+        background: var(--soft-blush);
+        color: var(--rosy-taupe);
+      }
+      .journey-card__icon--teal {
+        background: #d5e7dc;
+        color: var(--deep-teal);
+      }
+      .journey-card__icon--rose {
+        background: var(--cotton-rose);
+        color: var(--granite);
+      }
+      .journey-card__label {
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--rosy-taupe);
+        margin: 0;
+      }
+      .journey-card h3 {
+        font-family: "Grandstander", cursive;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-shadow: none;
+        margin: 0;
+      }
+      .journey-card p {
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+        flex: 1;
+      }
+      .journey-card__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-weight: 800;
+        font-size: 0.88rem;
+        color: var(--deep-teal);
+        margin-top: 0.5rem;
+        transition: gap 0.18s;
+      }
+      .journey-card__cta:hover {
+        gap: 0.65rem;
+      }
+      .journey-card:first-child {
+        border-color: var(--deep-teal);
+      }
+      .journey-free-panel {
+        margin-top: 2.5rem;
+        background: var(--mint);
+        border-radius: var(--radius-lg);
+        padding: 2rem 2rem 2.25rem;
+        text-align: center;
+      }
+      .journey-free-panel__heading {
+        font-family: "Grandstander", cursive;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--granite);
+        margin: 0 0 0.6rem;
+        text-shadow: none;
+      }
+      .journey-free-panel__body {
+        font-size: 0.95rem;
+        color: var(--granite);
+        opacity: 0.85;
+        max-width: 620px;
+        margin: 0 auto 1.5rem;
+        line-height: 1.65;
+      }
+      .journey-free-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        justify-content: center;
+        margin-bottom: 1.75rem;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .journey-free-panel__cta {
+        display: inline-flex;
+      }
+
+      /* ============================================================
+         4. FREE RESOURCES SECTION (moved high)
+         ============================================================ */
+      .free-hub-section {
+        background: var(--mint);
+        padding: 4.5rem 2rem;
+      }
+      .free-hub-section .section__title {
+        color: var(--granite);
+        text-shadow: none;
+      }
+      .free-hub-section .section__subtitle {
+        color: var(--granite);
+        opacity: 0.85;
+      }
+      .free-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        justify-content: center;
+        margin: 1.75rem auto 2.25rem;
+        max-width: 560px;
+      }
+      .free-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 1.2rem;
+        border-radius: var(--radius-pill);
+        background: #fff;
+        color: var(--granite);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1.5px solid rgba(74, 89, 74, 0.2);
+        box-shadow: 0 2px 8px rgba(74, 89, 74, 0.08);
+        transition:
+          background 0.18s,
+          border-color 0.18s,
+          transform 0.15s,
+          box-shadow 0.18s;
+      }
+      .free-chip:hover {
+        background: var(--soft-blush);
+        border-color: var(--rosy-taupe);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(212, 151, 151, 0.25);
+      }
+      .free-hub-cta {
+        display: flex;
+        justify-content: center;
+      }
+
+      /* ============================================================
+         5. BUNDLE / VIDEO SECTION
+         ============================================================ */
       .starter {
         width: 100%;
         background: var(--white);
         padding: 2.5rem 2rem 4rem;
       }
-
       .split {
         display: grid;
         grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
         gap: 40px;
         align-items: center;
       }
-
       @media (max-width: 880px) {
         .split {
           grid-template-columns: 1fr;
         }
       }
-
-      .starter-media {
-        position: relative;
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: var(--shadow-soft);
-        background: #000;
-      }
-
-      .starter-video {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%;
-      }
-
-      .starter-video iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      .starter-video__overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.25);
-        pointer-events: none;
-      }
-
       .split--pink {
         background: var(--soft-blush);
         border-radius: 28px;
         padding: 34px 32px;
         box-shadow: var(--shadow-soft);
       }
-
-      /* ✅ keep this as h2 hierarchy, not a random larger size */
       .split__title {
         margin: 0 0 10px;
         font-size: var(--h2);
@@ -916,63 +1076,152 @@
         font-family: "Grandstander", cursive;
         font-weight: 900;
       }
-
       .split__text {
         margin: 0 0 18px;
         color: var(--muted);
         line-height: 1.6;
         font-size: 1rem;
       }
+      .starter-media {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        background: #000;
+      }
+      .starter-video {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+      }
+      .starter-video iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .starter-video__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.25);
+        pointer-events: none;
+      }
 
-      /* --- FEATURE CARDS --- */
+      /* ============================================================
+         STATS STRIP
+         ============================================================ */
+      .stats-strip {
+        background: var(--soft-blush);
+        border-top: 1px solid var(--cotton-rose);
+        border-bottom: 1px solid var(--cotton-rose);
+        padding: 2.25rem 1.5rem;
+      }
+      .stats-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0;
+      }
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        padding: 0.75rem 1.75rem;
+        flex: 1 1 180px;
+        min-width: 0;
+        text-align: center;
+      }
+      .stat-number {
+        font-family: "Grandstander", cursive;
+        font-size: clamp(1.05rem, 2.2vw, 1.55rem);
+        font-weight: 800;
+        color: var(--granite);
+        line-height: 1.25;
+        word-break: break-word;
+      }
+      .stat-label {
+        font-size: 0.76rem;
+        color: var(--deep-teal);
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        line-height: 1.4;
+      }
+      .stat-divider {
+        width: 1px;
+        background: var(--cotton-rose);
+        flex-shrink: 0;
+        align-self: stretch;
+        margin: 0.5rem 0;
+      }
+      @media (max-width: 768px) {
+        .stat-divider {
+          display: none;
+        }
+        .stat-item {
+          flex: 1 1 calc(50% - 2rem);
+          padding: 0.85rem 1rem;
+        }
+      }
+      @media (max-width: 360px) {
+        .stat-item {
+          flex: 1 1 100%;
+          padding: 0.75rem 1rem;
+        }
+      }
+
+      /* ============================================================
+         6. FEATURE / PRODUCT CARDS
+         ============================================================ */
       .features {
         max-width: 1200px;
         margin: 0 auto;
         padding: 4rem 2rem;
       }
-
       .features-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
       }
-
       .feature-card {
         background: var(--white);
         border-radius: var(--radius-lg);
         overflow: hidden;
         box-shadow: var(--shadow-soft);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
         border: 2px solid var(--ash-grey);
       }
-
       .feature-card:hover {
         transform: translateY(-8px);
         box-shadow: var(--shadow-hover);
         border-color: var(--rosy-taupe);
       }
-
       .feature-card__img-wrapper {
         height: 280px;
         overflow: hidden;
         position: relative;
       }
-
       .feature-card__img-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
+        transition: transform 0.5s;
       }
-
       .feature-card:hover .feature-card__img-wrapper img {
         transform: scale(1.05);
       }
-
       .feature-card__content {
         padding: 2rem;
       }
-
       .feature-tag {
         display: inline-block;
         font-size: 0.8rem;
@@ -982,7 +1231,6 @@
         color: var(--rosy-taupe);
         margin-bottom: 0.8rem;
       }
-
       .card-link {
         display: inline-flex;
         align-items: center;
@@ -991,7 +1239,6 @@
         color: var(--deep-teal);
         margin-top: 1rem;
       }
-
       .card-link i {
         transition: transform 0.2s;
       }
@@ -999,17 +1246,17 @@
         transform: translateX(4px);
       }
 
-      /* --- WHY KAHANI KORNER SECTION --- */
+      /* ============================================================
+         WHY KAHANI KORNER
+         ============================================================ */
       .why {
         background: var(--green);
       }
-
       .why-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.75rem;
       }
-
       .why-card {
         background: var(--white-smoke);
         border-radius: var(--radius-lg);
@@ -1019,35 +1266,32 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        transition: transform 0.25s ease, box-shadow 0.25s ease,
-          border-color 0.25s ease;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
       }
-
       .why-card:hover {
         transform: translateY(-6px);
         box-shadow: var(--shadow-hover);
         border-color: var(--rosy-taupe);
       }
-
       .why-card__icon {
         font-size: 2rem;
         margin-bottom: 0.5rem;
       }
-
       .why-card h3 {
         font-size: var(--h3);
         margin: 0 0 0.35rem;
         color: var(--granite);
         text-shadow: none;
       }
-
       .why-card p {
         margin: 0;
         color: var(--muted);
         font-size: 0.95rem;
         line-height: 1.6;
       }
-
       .why-mobile {
         display: none;
       }
@@ -1059,19 +1303,16 @@
         .why-grid {
           display: none;
         }
-
         .why-mobile {
           display: block;
           margin-top: 2rem;
         }
-
         .why-mobile-grid {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 1rem;
           justify-items: center;
         }
-
         .why-float {
           width: 80px;
           height: 80px;
@@ -1088,10 +1329,12 @@
           font-size: 1.6rem;
           cursor: pointer;
           animation: whyFloat 4.5s ease-in-out infinite alternate;
-          transition: transform 0.2s ease, box-shadow 0.2s ease,
-            border-color 0.2s ease, background-color 0.2s ease;
+          transition:
+            transform 0.2s,
+            box-shadow 0.2s,
+            border-color 0.2s,
+            background-color 0.2s;
         }
-
         .why-float-label {
           font-size: 0.7rem;
           line-height: 1.2;
@@ -1099,7 +1342,6 @@
           font-weight: 600;
         }
       }
-
       .why-float:nth-child(2) {
         animation-duration: 5s;
       }
@@ -1121,7 +1363,6 @@
       .why-float:nth-child(8) {
         animation-duration: 4.9s;
       }
-
       @keyframes whyFloat {
         0% {
           margin-top: 0;
@@ -1130,16 +1371,41 @@
           margin-top: 6px;
         }
       }
-
-      .why-float:hover,
-      .why-float.active {
+      .why-hint {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--granite);
+        opacity: 0.7;
+        margin: 0 0 0.75rem;
+        letter-spacing: 0.02em;
+        display: none;
+      }
+      @media (max-width: 768px) {
+        .why-hint {
+          display: block;
+        }
+      }
+      .why-float:hover {
         background: var(--soft-blush);
         border-color: var(--rosy-taupe);
-        box-shadow: 0 0 0 2px var(--cotton-rose),
-          0 0 18px rgba(212, 151, 151, 0.7);
-        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 6px 16px rgba(212, 151, 151, 0.4);
+        transform: translateY(-3px) scale(1.05);
+        animation-play-state: paused;
       }
-
+      .why-float.active {
+        background: var(--cotton-rose);
+        border-color: var(--rosy-taupe);
+        border-width: 2.5px;
+        box-shadow:
+          0 0 0 3px var(--soft-blush),
+          0 6px 18px rgba(212, 151, 151, 0.5);
+        transform: translateY(-4px) scale(1.08);
+        animation-play-state: paused;
+      }
+      .why-float:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 3px;
+      }
       .why-mobile-card {
         margin-top: 1.75rem;
         background: var(--white);
@@ -1152,17 +1418,18 @@
         transform: translateY(8px);
         padding: 0 1.4rem;
         position: relative;
-        transition: max-height 0.35s ease, opacity 0.3s ease,
-          transform 0.3s ease, padding 0.3s ease;
+        transition:
+          max-height 0.35s,
+          opacity 0.3s,
+          transform 0.3s,
+          padding 0.3s;
       }
-
       .why-mobile-card.open {
         max-height: 260px;
         opacity: 1;
         transform: translateY(0);
         padding: 1.2rem 1.4rem 1.6rem;
       }
-
       #why-mobile-close {
         position: absolute;
         top: 8px;
@@ -1174,14 +1441,12 @@
         color: var(--granite);
         cursor: pointer;
       }
-
       #why-mobile-title {
         margin: 0 1.2rem 0.4rem 0;
         color: var(--granite);
         text-shadow: none;
         font-size: 1.05rem;
       }
-
       #why-mobile-text {
         margin: 0;
         color: var(--muted);
@@ -1189,11 +1454,12 @@
         line-height: 1.6;
       }
 
-      /* --- OUR STORY (UPDATED + responsive shrink to 0.7rem) --- */
+      /* ============================================================
+         OUR STORY
+         ============================================================ */
       .story-section .section__title {
         text-align: center;
       }
-
       .story-card {
         max-width: 780px;
         margin: 0 auto;
@@ -1204,7 +1470,6 @@
         box-shadow: 0 14px 36px rgba(74, 89, 74, 0.18);
         position: relative;
       }
-
       .story-card::before {
         content: "A note from the founder";
         position: absolute;
@@ -1219,78 +1484,112 @@
         font-weight: 800;
         color: var(--granite);
       }
-
       .story-card p {
         margin: 0;
         text-align: center;
         color: var(--muted);
         line-height: 1.7;
-        /* ✅ shrinks smoothly down to 0.7rem at smallest screens */
         font-size: clamp(0.7rem, 2.7vw, 1rem);
       }
+      .story-card p + p {
+        margin-top: 1rem;
+      }
 
-      /* --- COMMUNITY LOVE (UPDATED background = lightest pink) --- */
+      /* ============================================================
+         COMMUNITY LOVE
+         ============================================================ */
       .reviews-section {
         max-width: none;
         margin: 0 auto;
         text-align: center;
-        background: var(--soft-blush); /* ✅ lightest pink */
+        background: var(--soft-blush);
         padding: 4rem 2rem;
       }
-
       .reviews-section .section__inner {
         max-width: 1200px;
         margin: 0 auto;
       }
-
-      .marquee-container {
-        width: 100%;
+      .reviews-carousel {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 1.25rem 0 0.5rem;
+      }
+      .reviews-viewport {
+        flex: 1;
         overflow: hidden;
-        padding: 1.25rem 0;
         position: relative;
       }
-
-      .marquee-container::before,
-      .marquee-container::after {
+      .reviews-viewport::before,
+      .reviews-viewport::after {
         content: "";
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 80px;
+        width: 50px;
         z-index: 2;
         pointer-events: none;
       }
-
-      .marquee-container::before {
+      .reviews-viewport::before {
         left: 0;
         background: linear-gradient(to right, var(--soft-blush), transparent);
       }
-
-      .marquee-container::after {
+      .reviews-viewport::after {
         right: 0;
         background: linear-gradient(to left, var(--soft-blush), transparent);
       }
-
-      .marquee-track {
+      .reviews-track {
         display: flex;
-        gap: 2rem;
-        width: max-content;
-        animation: reviews-scroll 45s linear infinite;
+        gap: 1.5rem;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
       }
-
-      .marquee-track:hover {
-        animation-play-state: paused;
+      .rev-arrow {
+        flex-shrink: 0;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        border: 2px solid var(--ash-grey);
+        background: white;
+        color: var(--granite);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
-
-      @keyframes reviews-scroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
+      .rev-arrow:hover {
+        background: var(--deep-teal);
+        color: white;
+        border-color: var(--deep-teal);
       }
-
+      .rev-arrow:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 2px;
+      }
+      .reviews-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.45rem;
+        margin-top: 1rem;
+      }
+      .rev-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--ash-grey);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.2s;
+      }
+      .rev-dot.active {
+        background: var(--rosy-taupe);
+        transform: scale(1.35);
+      }
       .review-card {
         background: var(--granite);
         padding: 1.75rem;
@@ -1301,7 +1600,6 @@
         width: 300px;
         flex-shrink: 0;
       }
-
       .review-card::before {
         content: "\f10d";
         font-family: "Font Awesome 6 Free";
@@ -1312,30 +1610,34 @@
         font-size: 1.6rem;
         color: var(--cotton-rose);
       }
-
       .review-header {
         display: flex;
         align-items: center;
         gap: 0.75rem;
         margin-bottom: 1rem;
       }
-
-      .review-avatar {
+      .review-avatar-initials {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        object-fit: cover;
         border: 3px solid var(--white);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--granite);
+        flex-shrink: 0;
+        letter-spacing: 0.03em;
       }
-
       .review-author h4 {
         margin: 0;
         font-size: 1.1rem;
         color: var(--white-smoke);
         text-shadow: none;
       }
-
       .review-author span {
         font-size: 0.85rem;
         color: var(--mint);
@@ -1343,7 +1645,6 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
       }
-
       .review-text {
         font-size: 0.95rem;
         color: var(--card-bg);
@@ -1352,28 +1653,23 @@
         margin: 0;
       }
 
-      /* =========================
-   FAQ (TIDY NESTED DETAILS)
-   ========================= */
-
+      /* ============================================================
+         FAQ
+         ============================================================ */
       .faq-section {
         padding: 4rem 2rem;
         background: var(--white-smoke);
       }
-
       .faq-section .section__title {
         color: var(--granite);
         text-shadow: none;
       }
-
       .faq-container {
         max-width: 860px;
         margin: 0 auto;
         display: grid;
         gap: 1rem;
       }
-
-      /* --- GROUP (Category) --- */
       .faq-group {
         border-radius: var(--radius-lg);
         border: 2px solid rgba(176, 195, 183, 0.85);
@@ -1381,16 +1677,14 @@
         overflow: hidden;
         box-shadow: var(--shadow-soft);
       }
-
       .faq-group__summary {
         padding: 1.1rem 1.25rem;
         cursor: pointer;
         list-style: none;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         gap: 12px;
-
         background: linear-gradient(
           180deg,
           rgba(176, 195, 183, 0.55),
@@ -1398,41 +1692,30 @@
         );
         color: var(--granite);
         font-weight: 900;
+        text-align: center;
       }
-
       .faq-group__summary::-webkit-details-marker {
         display: none;
       }
-
-      /* Right-side chevron for group */
       .faq-group__summary::after {
-        content: "\f078"; /* fa-chevron-down */
+        content: "\f078";
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
         font-size: 0.95rem;
         color: var(--deep-teal);
-        transition: transform 0.25s ease;
+        transition: transform 0.45s ease;
       }
-
       .faq-group[open] .faq-group__summary::after {
         transform: rotate(180deg);
       }
-
       .faq-group__hint {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: rgba(28, 37, 36, 0.7);
-        letter-spacing: 0.02em;
-        text-transform: none;
+        display: none;
       }
-
       .faq-group__body {
         padding: 0.75rem 0.75rem 0.9rem;
         background: var(--white);
         border-top: 1px solid rgba(176, 195, 183, 0.45);
       }
-
-      /* --- INNER FAQ ITEMS (Questions) --- */
       .faq-group__body .faq-item {
         margin: 0;
         border: 1px solid rgba(176, 195, 183, 0.55);
@@ -1440,16 +1723,12 @@
         background: #fff;
         overflow: hidden;
       }
-
       .faq-group__body .faq-item + .faq-item {
         margin-top: 0.65rem;
       }
-
       .faq-group__body .faq-item:hover {
-        border-color: rgba(104, 125, 112, 0.9); /* deep teal */
+        border-color: rgba(104, 125, 112, 0.9);
       }
-
-      /* Make inner summary clean + aligned */
       .faq-group__body .faq-item summary {
         padding: 0.95rem 1rem;
         cursor: pointer;
@@ -1458,31 +1737,24 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-
         font-weight: 850;
         color: var(--granite);
         background: rgba(243, 241, 240, 0.85);
       }
-
       .faq-group__body .faq-item summary::-webkit-details-marker {
         display: none;
       }
-
-      /* Inner plus icon */
       .faq-group__body .faq-item summary::after {
         content: "+";
         font-size: 1.35rem;
         line-height: 1;
         color: var(--deep-teal);
         font-weight: 900;
-        transition: transform 0.25s ease;
+        transition: transform 0.45s ease;
       }
-
       .faq-group__body .faq-item[open] summary::after {
         transform: rotate(45deg);
       }
-
-      /* Inner answer area */
       .faq-group__body .faq-item p {
         margin: 0;
         padding: 0 1rem 1rem;
@@ -1491,18 +1763,63 @@
         line-height: 1.7;
         border-top: 1px solid rgba(176, 195, 183, 0.35);
       }
-
-      /* Slight emphasis when open */
       .faq-group__body .faq-item[open] {
         box-shadow: 0 10px 24px rgba(74, 89, 74, 0.1);
         border-color: rgba(104, 125, 112, 0.9);
       }
-
       .faq-group__body .faq-item[open] summary {
-        background: rgba(201, 220, 206, 0.7); /* mint-ish */
+        background: rgba(201, 220, 206, 0.7);
       }
 
-      /* Mobile tightening */
+      /* FAQ open/close animations */
+      @keyframes faq-open {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes faq-close {
+        from { opacity: 1; transform: translateY(0); }
+        to   { opacity: 0; transform: translateY(-6px); }
+      }
+      .faq-group__body .faq-item[open]:not(.faq-closing) > p {
+        animation: faq-open 0.4s ease forwards;
+      }
+      .faq-group[open]:not(.faq-closing) > .faq-group__body {
+        animation: faq-open 0.4s ease forwards;
+      }
+      .faq-group__body .faq-item.faq-closing > p {
+        animation: faq-close 0.35s ease forwards;
+      }
+      .faq-group.faq-closing > .faq-group__body {
+        animation: faq-close 0.35s ease forwards;
+      }
+      .faq-shipping-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.5rem 0 0.75rem;
+        font-size: 0.88rem;
+      }
+      .faq-shipping-table th,
+      .faq-shipping-table td {
+        padding: 0.55rem 0.75rem;
+        text-align: left;
+        border: 1px solid var(--ash-grey);
+        vertical-align: top;
+        line-height: 1.5;
+      }
+      .faq-shipping-table th {
+        background: var(--mint);
+        color: var(--granite);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .faq-shipping-table tbody tr:nth-child(even) {
+        background: var(--white-smoke);
+      }
+      .faq-shipping-table em {
+        color: var(--deep-teal);
+        font-style: normal;
+        font-size: 0.82rem;
+      }
       @media (max-width: 480px) {
         .faq-group__summary {
           padding: 1rem 1.05rem;
@@ -1521,13 +1838,43 @@
         }
       }
 
-      /* --- CONTACT SECTION --- */
+      /* ============================================================
+         CONTACT SECTION
+         ============================================================ */
       .contact-section {
         padding: 5rem 2rem;
         background: var(--soft-blush);
       }
-
-      /* Contact form */
+      .contact-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        border: 2px solid rgba(176, 195, 183, 0.75);
+      }
+      .contact-content {
+        padding: 3rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+      }
+      .contact-content h2 {
+        margin-bottom: 0.75rem;
+        color: var(--granite);
+        text-shadow: none;
+      }
+      .contact-note {
+        font-family: "Open Sans", system-ui, sans-serif;
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin: 0 0 1.25rem;
+        text-shadow: none;
+      }
       .contact-form {
         display: flex;
         flex-direction: column;
@@ -1560,7 +1907,9 @@
         color: var(--granite);
         background: #fff;
         outline: none;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
         resize: vertical;
       }
       .contact-form input:focus,
@@ -1586,17 +1935,16 @@
         font-size: 0.9rem;
         font-weight: 700;
         cursor: pointer;
-        transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.15s;
         box-shadow: 0 4px 0 var(--deep-teal);
       }
       .contact-form-submit:hover {
         background: var(--deep-teal);
         transform: translateY(-2px);
         box-shadow: 0 6px 0 var(--deep-teal);
-      }
-      .contact-form-submit:active {
-        transform: translateY(0);
-        box-shadow: 0 0 0 var(--deep-teal);
       }
       .contact-form-divider {
         display: flex;
@@ -1613,54 +1961,12 @@
         height: 1px;
         background: var(--ash-grey);
       }
-
-      .contact-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow-soft);
-        display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        border: 2px solid rgba(176, 195, 183, 0.75);
-      }
-
-      .contact-content {
-        padding: 3rem 2.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left;
-      }
-
-      .contact-content h2 {
-        margin-bottom: 0.75rem;
-        color: var(--granite);
-        text-shadow: none;
-      }
-
-      .contact-note {
-        font-family: "Open Sans", system-ui, sans-serif;
-        font-size: 1.05rem;
-        color: var(--muted);
-        margin: 0 0 1.25rem;
-        text-shadow: none;
-      }
-
-      .contact-meta {
-        font-size: 0.95rem;
-        color: var(--muted);
-        margin: 0;
-      }
-
       .contact-actions {
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
         margin-top: 1.25rem;
       }
-
       .contact-link {
         display: inline-flex;
         align-items: center;
@@ -1673,97 +1979,58 @@
         border: 2px solid var(--granite);
         background: var(--mint);
         box-shadow: 0 4px 0 var(--deep-teal);
-        transition: transform 0.15s ease, box-shadow 0.15s ease,
-          background 0.15s ease;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s,
+          background 0.15s;
         width: fit-content;
       }
-
       .contact-link:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 0 var(--deep-teal);
         background: #d7e5db;
       }
-
-      .contact-link:active {
-        transform: translateY(0);
-        box-shadow: 0 0 0 var(--deep-teal);
-      }
-
-      .contact-secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 800;
-        color: white;
-        padding: 0.8rem 1rem;
-        border-radius: 999px;
-        background: var(--granite);
-        border: 2px solid var(--granite);
-        box-shadow: 0 4px 0 var(--deep-teal);
-        transition: transform 0.15s ease, box-shadow 0.15s ease,
-          background 0.15s ease;
-      }
-
-      .contact-secondary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 0 var(--deep-teal);
-        background: var(--deep-teal);
-      }
-
-      .contact-secondary:active {
-        transform: translateY(0);
-        box-shadow: 0 0 0 var(--deep-teal);
-      }
-
       .contact-image {
         position: relative;
         background: var(--rosy-taupe);
       }
-
       .contact-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-
       @media (max-width: 768px) {
         .contact-section {
           padding: 3.25rem 1.25rem;
         }
-
         .contact-container {
           grid-template-columns: 1fr;
         }
-
         .contact-content {
           padding: 2rem 1.5rem;
         }
-
         .contact-image {
           height: 220px;
         }
-      }
-
-      @media (max-width: 480px) {
-        .story-card {
-          padding: 1.75rem 1.5rem 2rem;
+        .contact-actions {
+          justify-content: center;
         }
       }
 
-      /* --- EMAIL CAPTURE --- */
+      /* ============================================================
+         EMAIL CAPTURE
+         ============================================================ */
       .email-section {
         background: linear-gradient(135deg, var(--mint), var(--soft-blush));
         padding: 4rem 2rem;
         text-align: center;
       }
-
       .email-section__title {
         font-family: "Grandstander", cursive;
         font-size: clamp(1.5rem, 4vw, 2rem);
         color: var(--granite);
         margin: 0 0 0.5rem;
       }
-
       .email-section__sub {
         color: var(--deep-teal);
         font-size: 0.95rem;
@@ -1771,7 +2038,6 @@
         max-width: 480px;
         margin-inline: auto;
       }
-
       .email-form {
         display: flex;
         flex-wrap: wrap;
@@ -1780,7 +2046,6 @@
         max-width: 500px;
         margin: 0 auto;
       }
-
       .email-form input[type="email"] {
         flex: 1 1 220px;
         padding: 0.75rem 1rem;
@@ -1793,11 +2058,9 @@
         outline: none;
         transition: border-color 0.2s;
       }
-
       .email-form input[type="email"]:focus {
         border-color: var(--deep-teal);
       }
-
       .email-form button {
         padding: 0.75rem 1.75rem;
         background: var(--granite);
@@ -1808,15 +2071,15 @@
         font-size: 0.95rem;
         font-weight: 700;
         cursor: pointer;
-        transition: background 0.2s, transform 0.15s;
+        transition:
+          background 0.2s,
+          transform 0.15s;
         white-space: nowrap;
       }
-
       .email-form button:hover {
         background: var(--deep-teal);
         transform: translateY(-2px);
       }
-
       .email-form__note {
         font-size: 0.75rem;
         color: var(--deep-teal);
@@ -1825,86 +2088,79 @@
         text-align: center;
       }
 
-      /* --- FOOTER --- */
+      /* ============================================================
+         FOOTER
+         ============================================================ */
       .footer {
         background: var(--granite);
         color: var(--ash-grey);
-        padding: 4rem 2rem;
-        text-align: center;
+        padding: 4rem 2rem 2rem;
       }
-
+      .footer-top {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid rgba(176, 195, 183, 0.25);
+      }
+      .footer-brand-col {
+        display: flex;
+        flex-direction: column;
+      }
       .footer-tagline {
-        margin: 0 0 1rem;
-        font-size: 0.95rem;
+        margin: 0;
+        font-size: 0.92rem;
         color: var(--white-smoke);
+        line-height: 1.6;
       }
-
+      .footer-links-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+      .footer-link-group__title {
+        font-family: "Grandstander", cursive;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--ash-grey);
+        margin: 0 0 0.75rem;
+      }
+      .footer-link-group ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .footer-link-group ul li a {
+        font-size: 0.88rem;
+        color: var(--white-smoke);
+        font-weight: 500;
+        text-decoration: none;
+        opacity: 0.85;
+        transition: opacity 0.18s;
+      }
+      .footer-link-group ul li a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+      .footer-bottom {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding-top: 1.5rem;
+        text-align: center;
+        font-size: 0.82rem;
+        color: var(--ash-grey);
+      }
       .footer a {
         color: var(--white);
         font-weight: 700;
       }
-
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 1.25rem;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .social-icons img {
-        width: 26px;
-        height: 26px;
-        filter: invert(1);
-        opacity: 0.85;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .social-icons a:hover img {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-
-      /* Initials avatar for reviews */
-      .review-avatar-initials {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 3px solid var(--white);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Grandstander", cursive;
-        font-weight: 700;
-        font-size: 0.85rem;
-        color: var(--granite);
-        flex-shrink: 0;
-        letter-spacing: 0.03em;
-      }
-
-      /* Story card — space between multiple paragraphs */
-      .story-card p + p {
-        margin-top: 1rem;
-      }
-
-      /* Active nav link */
-      .nav a.nav-active {
-        font-weight: 700;
-        position: relative;
-      }
-      .nav a.nav-active::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--granite);
-        border-radius: 999px;
-      }
-
-      /* Footer brand logo */
       .footer-brand-logo {
         height: 36px;
         width: auto;
@@ -1912,71 +2168,94 @@
         filter: brightness(0) invert(1);
         opacity: 0.9;
       }
+      .social-icons {
+        display: flex;
+        gap: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .social-icons img {
+        width: 26px;
+        height: 26px;
+        filter: invert(1);
+        opacity: 0.85;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
+      .social-icons a:hover img {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+      @media (max-width: 900px) {
+        .footer-top {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-links-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
     </style>
   </head>
 
   <body>
-    <!-- Top Promo Bar -->
+    <!-- ======================== TOP PROMO BAR ======================== -->
     <div class="topbar">
       <div class="topbar__inner">
         <div class="topbar__track">
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
+          <span>Free Urdu Resources</span><span>•</span
+          ><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Free Urdu Resources</span><span>•</span
+          ><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Free Urdu Resources</span><span>•</span
+          ><span>Free Shipping on All US Orders</span><span>•</span>
         </div>
       </div>
     </div>
 
-    <!-- Header -->
+    <!-- ======================== HEADER ======================== -->
     <header class="header">
       <div class="header__inner">
         <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
           <i class="fa-solid fa-bars"></i>
         </button>
-
-        <a href="https://kahanikorner.com" class="brand" aria-label="Kahani Korner Home">
+        <a
+          href="https://kahanikorner.com"
+          class="brand"
+          aria-label="Kahani Korner Home">
           <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+            <source
+              media="(max-width: 768px)"
+              srcset="/assets/images/homepage/logo2.png" />
             <img
               src="/assets/images/homepage/logo.png"
               alt="Kahani Korner"
-              class="brand-logo"
-            />
+              class="brand-logo" />
           </picture>
         </a>
-
-        <nav class="nav">
-          <a href="products.html">Shop</a>
-          <a href="subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html">Resources</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="/products.html">Shop</a>
+          <a href="/subscribe.html">Subscribe</a>
+          <a href="/resources/resources.html">Free Resources</a>
           <a href="#faq">Help</a>
           <a href="#contact">Contact</a>
         </nav>
-
-        <button class="cart-btn-landing" id="cart-btn">
+        <button class="cart-btn-landing" id="cart-btn" aria-label="Open cart">
           <i class="fa-solid fa-cart-shopping"></i>
           <span class="cart-badge-landing hidden" id="cart-badge">0</span>
         </button>
       </div>
     </header>
 
-    <!-- Cart Overlay -->
+    <!-- ======================== CART OVERLAY ======================== -->
     <div id="cart-overlay" class="cart-overlay hidden">
       <div class="cart-sidebar">
         <div class="cart-header">
           <h2 style="color: var(--granite); text-shadow: none; margin: 0">
             Your Cart
           </h2>
-          <button id="close-cart" class="close-btn">
+          <button id="close-cart" class="close-btn" aria-label="Close cart">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -1985,112 +2264,282 @@
         </div>
         <div class="cart-footer">
           <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
+            <span>Total</span><span id="cart-total-amount">$0.00</span>
           </div>
           <button id="checkout-btn" class="checkout-btn">Checkout</button>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
+    <!-- ======================== MOBILE MENU ======================== -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
+      <nav class="mobile-menu" aria-label="Mobile navigation">
         <div class="mobile-menu__header">
-          <a href="https://kahanikorner.com" class="mobile-menu__brand" aria-label="Kahani Korner Home">
+          <a
+            href="https://kahanikorner.com"
+            class="mobile-menu__brand"
+            aria-label="Kahani Korner Home">
             <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
+              <source
+                media="(max-width: 768px)"
+                srcset="/assets/images/homepage/logo2.png" />
               <img
                 src="/assets/images/homepage/logo.png"
                 alt="Kahani Korner"
-                style="height: 34px; width: auto; display: block"
-              />
+                style="height: 34px; width: auto; display: block" />
             </picture>
           </a>
           <button class="mobile-menu__close" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-
         <ul class="mobile-menu__links">
-          <li><a href="products.html">Shop</a></li>
-          <li><a href="subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html">Resources</a></li>
+          <li><a href="/products.html">Shop</a></li>
+          <li><a href="/subscribe.html">Subscribe</a></li>
+          <li><a href="/resources/resources.html">Free Resources</a></li>
           <li><a href="#faq">Help</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
 
-    <!-- Hero Section -->
+    <!-- ============================================================
+         1. HERO
+         ============================================================ -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero__bg">
         <div class="hero__bg-image"></div>
         <div class="hero__inner">
+          <p class="hero__eyebrow">
+            <i class="fa-solid fa-star"></i> Urdu &bull; Roman Urdu &bull;
+            English
+          </p>
           <h1 id="hero-heading" class="hero__heading">
-            One Story,<br />Two Languages,<br />Endless Memories
+            Everything You Need to Make&nbsp;Urdu Part of Everyday&nbsp;Life
           </h1>
           <p class="hero__sub">
-            Explore enchanting Urdu–English books designed to preserve culture,
-            foster connection, and make little hearts love to read.
+            Learning Urdu doesn't have to be expensive. Start with our free
+            resources, then build your child's Urdu world with books, games,
+            stickers, and monthly activities.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="products.html">Shop Books</a>
-            <a class="btn btn--ghost" href="subscribe.html">Start Subscription</a>
+            <a class="btn btn--ghost" href="/resources/resources.html">
+              <i class="fa-solid fa-book-open"></i> Explore Free Resources
+            </a>
+            <a class="btn btn--primary" href="/products.html">
+              Shop Books &amp; More
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EVERYTHING A BUNDLE INCLUDES -->
-    <section class="starter" id="bundle">
+    <!-- ============================================================
+         2. TRUST STRIP
+         ============================================================ -->
+    <div class="trust-strip" role="banner" aria-label="Our promise">
+      <p>
+  Start simple <span>✦</span> Build slowly <span>✦</span> Watch the Urdu Grow
+</p>
+    </div>
+
+    <!-- ============================================================
+         3. "START YOUR URDU JOURNEY HERE" — 4 CARDS
+         ============================================================ -->
+    <section class="journey-section section" aria-labelledby="journey-heading">
       <div class="section__inner">
-        <div class="split split--pink">
-          <div>
-            <h2 class="split__title">Everything A Bundle Includes</h2>
-            <p class="split__text">
-              Kahani Korner isn’t just a book — it’s a toolkit for language
-              learning. Stories, stickers, flashcards, and digital games make
-              Urdu fun, even if you don’t speak it yourself.
+        <h2
+          class="section__title"
+          id="journey-heading"
+          style="color: var(--granite); text-shadow: none">
+          Start Your Urdu Journey Here
+        </h2>
+        <p class="section__subtitle">
+          Every family's Urdu journey looks different. Start with free tools,
+          stories, printables, games, or monthly activities — whatever fits your
+          home best.
+        </p>
+
+        <div class="journey-grid">
+          <!-- Card 1: Free Resources -->
+          <div class="journey-card">
+            <div
+              class="journey-card__icon journey-card__icon--green"
+              aria-hidden="true">
+              <i class="fa-solid fa-gift"></i>
+            </div>
+            <p class="journey-card__label">100% Free</p>
+            <h3>Free Urdu Resources</h3>
+            <p>
+              Songs, cartoons, printables, parent guides, and helpful Urdu tools
+              — all gathered in one place.
             </p>
-            <a class="btn btn--primary" href="products.html">Shop Now</a>
+            <a href="/resources/resources.html" class="journey-card__cta">
+              Browse Free Tools <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
 
-          <div class="starter-media">
-            <div class="starter-video">
-              <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/PonnXQJ7Jnk?si=zZA2s23n6UVxf21D"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen></iframe>
-              <div class="starter-video__overlay"></div>
+          <!-- Card 2: Books -->
+          <div class="journey-card">
+            <div
+              class="journey-card__icon journey-card__icon--blush"
+              aria-hidden="true">
+              <i class="fa-solid fa-book"></i>
             </div>
+            <p class="journey-card__label">Bilingual Books</p>
+            <h3>Urdu / Roman Urdu / English Books</h3>
+            <p>
+              Beautiful bilingual stories made for cozy reading, vocabulary
+              building, and cultural connection.
+            </p>
+            <a href="/products.html" class="journey-card__cta">
+              Shop Books <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
+
+          <!-- Card 3: Subscription -->
+          <div class="journey-card">
+            <div
+              class="journey-card__icon journey-card__icon--teal"
+              aria-hidden="true">
+              <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <p class="journey-card__label">Monthly Snail Mail</p>
+            <h3>The Kahani Times</h3>
+            <p>
+              Stickers, activities, mini stories, and playful Urdu surprises
+              delivered to your door each month.
+            </p>
+            <a href="/subscribe.html" class="journey-card__cta">
+              Join the Club <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Card 4: Digital Games -->
+          <div class="journey-card">
+            <div
+              class="journey-card__icon journey-card__icon--rose"
+              aria-hidden="true">
+              <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <p class="journey-card__label">Interactive</p>
+            <h3>Digital Games</h3>
+            <p>
+              Interactive games that turn Urdu vocabulary into something kids
+              can tap, match, repeat, and remember.
+            </p>
+            <a href="/resources/resources.html" class="journey-card__cta">
+              Play &amp; Practice <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="journey-free-panel">
+          <h3 class="journey-free-panel__heading">
+            Start Free with Our Urdu Resource Library
+          </h3>
+          <p class="journey-free-panel__body">
+            Songs, cartoons, printables, games, flashcards, parent guides, and
+            teacher tools — gathered in one place to make Urdu easier to teach
+            and more fun to learn.
+          </p>
+          <div class="journey-free-chips" role="list">
+            <a href="/resources/songs.html" class="free-chip" role="listitem"
+              ><i class="fa-solid fa-music"></i> Songs</a
+            >
+            <a href="/resources/cartoons.html" class="free-chip" role="listitem"
+              ><i class="fa-solid fa-tv"></i> Cartoons</a
+            >
+            <a href="/resources/vlogs.html" class="free-chip" role="listitem"
+              ><i class="fa-solid fa-video"></i> Vlogs</a
+            >
+            <a href="/resources/teachers.html" class="free-chip" role="listitem"
+              ><i class="fa-solid fa-chalkboard-user"></i> Teachers</a
+            >
+            <a
+              href="/resources/printables.html"
+              class="free-chip"
+              role="listitem"
+              ><i class="fa-solid fa-print"></i> Printables</a
+            >
+            <a
+              href="/resources/parentguide.html"
+              class="free-chip"
+              role="listitem"
+              ><i class="fa-solid fa-heart"></i> Parent Guide</a
+            >
+            <a
+              href="/resources/resources.html"
+              class="free-chip"
+              role="listitem"
+              ><i class="fa-solid fa-gamepad"></i> Games</a
+            >
+            <a
+              href="/resources/resources.html"
+              class="free-chip"
+              role="listitem"
+              ><i class="fa-solid fa-layer-group"></i> Flashcards</a
+            >
+          </div>
+          <a
+            href="/resources/resources.html"
+            class="btn btn--primary journey-free-panel__cta">
+            Browse the Free Library <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Feature Cards -->
-    <section class="features">
+    <!-- ============================================================
+         STATS STRIP
+         ============================================================ -->
+    <section class="stats-strip" aria-label="By the numbers">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <span class="stat-number">500+ Families</span>
+          <span class="stat-label">Supporting Urdu at home</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">100+ Free Resources</span>
+          <span class="stat-label"
+            >Songs, cartoons, printables &amp; guides</span
+          >
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">Urdu + Roman Urdu + English</span>
+          <span class="stat-label">Made for every learning level</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">Monthly Learning Kits</span>
+          <span class="stat-label"
+            >Stories, stickers, games &amp; activities</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. BOOKS + SUBSCRIPTION CARDS
+         ============================================================ -->
+    <section class="features" aria-label="Our products">
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-card__img-wrapper">
             <img
               src="/assets/images/products/books/books.png"
-              alt="Urdu–English picture books spread out on a rug" />
+              alt="Urdu–English bilingual picture books spread on a rug" />
           </div>
           <div class="feature-card__content">
             <span class="feature-tag">Bilingual Books</span>
-            <h3>Build Your Library</h3>
+            <h3>Build Your Urdu Library</h3>
             <p>
-              Beautifully illustrated stories in Urdu & English to spark
-              imagination.
+              Cozy Urdu-English stories your child can read, hear, repeat, and
+              remember. Urdu script, Roman Urdu, and English — all in one book.
             </p>
-            <a href="products.html" class="card-link"
+            <a href="/products.html" class="card-link"
               >Shop Books <i class="fa-solid fa-arrow-right"></i
             ></a>
           </div>
@@ -2100,40 +2549,105 @@
           <div class="feature-card__img-wrapper">
             <img
               src="/assets/images/products/subscribe/jan.png"
-              alt="Language activity kit with flashcards and stickers on a table" />
+              alt="Kahani Times snail mail subscription pack with stickers and activities" />
           </div>
           <div class="feature-card__content">
             <span class="feature-tag">Monthly Fun Snail Mail</span>
             <h3>The Kahani Times Subscription</h3>
             <p>
-              Get stickers, activities, and new stories delivered to your door
-              every month.
+              A playful Urdu-English snail mail pack with stickers, activities,
+              mini stories, and learning surprises delivered every month.
             </p>
-            <a href="subscribe.html" class="card-link"
+            <a href="/subscribe.html" class="card-link"
               >Join the Club <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__img-wrapper">
+            <img
+              src="/assets/images/products/stickers/mango/mango-all.png"
+              alt="Pakistani-inspired holographic sticker sets — mango season collection" />
+          </div>
+          <div class="feature-card__content">
+            <span class="feature-tag">Cultural Stickers</span>
+            <h3>Pakistani-Inspired Sticker Sets</h3>
+            <p>
+              Holographic sticker sets rooted in South Asian culture — mango
+              season, desi nostalgia, and Urdu wordplay your whole family will
+              love.
+            </p>
+            <a href="/products.html" class="card-link"
+              >Shop Stickers <i class="fa-solid fa-arrow-right"></i
             ></a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHY KAHANI KORNER -->
-    <section class="section why" id="why">
+    <!-- ============================================================
+         5. BUNDLE / VIDEO SECTION
+         ============================================================ -->
+    <section class="starter" id="bundle">
       <div class="section__inner">
-        <h2 class="section__title">Why Kahani Korner?</h2>
+        <div class="split split--pink">
+          <div>
+            <h2 class="split__title">
+              Turn One Story Into a Full Learning Adventure
+            </h2>
+            <p class="split__text">
+              A book is just the beginning. Each bundle turns one story into a
+              playful Urdu-learning experience your child can read, touch, play,
+              and remember. Stories, stickers, flashcards, and digital games
+              make Urdu fun — even if you don't speak it yourself.
+            </p>
+            <a class="btn btn--primary" href="/products.html">
+              See What's Inside <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="starter-media">
+            <div class="starter-video">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/PonnXQJ7Jnk?si=zZA2s23n6UVxf21D"
+                title="YouTube video player — What's inside a Kahani Korner bundle"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+              <div class="starter-video__overlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHY KAHANI KORNER
+         ============================================================ -->
+    <section class="section why" id="why" aria-labelledby="why-heading">
+      <div class="section__inner">
+        <h2 class="section__title" id="why-heading">Why Kahani Korner?</h2>
 
         <div class="why-grid">
           <article class="why-card">
-            <div class="why-card__icon">
-              <i class="fa-solid fa-leaf"></i>
-            </div>
+            <div class="why-card__icon"><i class="fa-solid fa-leaf"></i></div>
             <h3>Preserving Cultural Identity</h3>
             <p>
               Pass on Pakistani heritage and language proudly, through stories
               kids actually ask for.
             </p>
           </article>
-
           <article class="why-card">
             <div class="why-card__icon">
               <i class="fa-solid fa-people-group"></i>
@@ -2144,18 +2658,14 @@
               speaks the same language.
             </p>
           </article>
-
           <article class="why-card">
-            <div class="why-card__icon">
-              <i class="fa-solid fa-brain"></i>
-            </div>
+            <div class="why-card__icon"><i class="fa-solid fa-brain"></i></div>
             <h3>Bilingual Skill Development</h3>
             <p>
               Gentle exposure across both scripts builds confidence,
               recognition, and real-world vocabulary.
             </p>
           </article>
-
           <article class="why-card">
             <div class="why-card__icon">
               <i class="fa-solid fa-chart-line"></i>
@@ -2163,10 +2673,9 @@
             <h3>Adaptable to Different Ages</h3>
             <p>
               From toddlers to early readers, activities stretch to match your
-              child’s stage.
+              child's stage.
             </p>
           </article>
-
           <article class="why-card">
             <div class="why-card__icon">
               <i class="fa-solid fa-envelope-open-text"></i>
@@ -2177,29 +2686,26 @@
               many play sessions.
             </p>
           </article>
-
           <article class="why-card">
             <div class="why-card__icon">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
             </div>
             <h3>Story-First Magic</h3>
             <p>
-              Kids ask to read again — and again — because the fun doesn’t stop
-              at “The End.”
+              Kids ask to read again — and again — because the fun doesn't stop
+              at "The End."
             </p>
           </article>
-
           <article class="why-card">
             <div class="why-card__icon">
               <i class="fa-solid fa-book-open"></i>
             </div>
             <h3>Parent-Friendly Resources</h3>
             <p>
-              You don’t need to be fluent in Urdu — English, Roman Urdu, and
+              You don't need to be fluent in Urdu — English, Roman Urdu, and
               built-in prompts make it easy for everyone.
             </p>
           </article>
-
           <article class="why-card">
             <div class="why-card__icon">
               <i class="fa-solid fa-house-chimney"></i>
@@ -2212,49 +2718,85 @@
           </article>
         </div>
 
-        <!-- MOBILE FLOATING ICON MODE -->
-        <div class="why-mobile-grid">
-          <button class="why-float" data-card="identity">
-            <i class="fa-solid fa-leaf"></i>
-            <span class="why-float-label">Identity</span>
+        <!-- Mobile floating icon mode -->
+        <p class="why-hint">Tap each card to learn more ✨</p>
+        <div
+          class="why-mobile-grid"
+          role="tablist"
+          aria-label="Why Kahani Korner">
+          <button
+            class="why-float"
+            data-card="identity"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-leaf"></i
+            ><span class="why-float-label">Identity</span>
           </button>
-
-          <button class="why-float" data-card="families">
-            <i class="fa-solid fa-people-group"></i>
-            <span class="why-float-label">Families</span>
+          <button
+            class="why-float"
+            data-card="families"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-people-group"></i
+            ><span class="why-float-label">Families</span>
           </button>
-
-          <button class="why-float" data-card="skills">
-            <i class="fa-solid fa-brain"></i>
-            <span class="why-float-label">Skills</span>
+          <button
+            class="why-float"
+            data-card="skills"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-brain"></i
+            ><span class="why-float-label">Skills</span>
           </button>
-
-          <button class="why-float" data-card="ages">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="why-float-label">Ages</span>
+          <button
+            class="why-float"
+            data-card="ages"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-chart-line"></i
+            ><span class="why-float-label">Ages</span>
           </button>
-
-          <button class="why-float" data-card="value">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span class="why-float-label">Value</span>
+          <button
+            class="why-float"
+            data-card="value"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-envelope-open-text"></i
+            ><span class="why-float-label">Value</span>
           </button>
-
-          <button class="why-float" data-card="magic">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span class="why-float-label">Magic</span>
+          <button
+            class="why-float"
+            data-card="magic"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-wand-magic-sparkles"></i
+            ><span class="why-float-label">Magic</span>
           </button>
-
-          <button class="why-float" data-card="parents">
-            <i class="fa-solid fa-book-open"></i>
-            <span class="why-float-label">Parents</span>
+          <button
+            class="why-float"
+            data-card="parents"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-book-open"></i
+            ><span class="why-float-label">Parents</span>
           </button>
-
-          <button class="why-float" data-card="home">
-            <i class="fa-solid fa-house-chimney"></i>
-            <span class="why-float-label">Home</span>
+          <button
+            class="why-float"
+            data-card="home"
+            role="tab"
+            aria-selected="false"
+            aria-controls="why-mobile-card">
+            <i class="fa-solid fa-house-chimney"></i
+            ><span class="why-float-label">Home</span>
           </button>
         </div>
-
         <div class="why-mobile">
           <div id="why-mobile-card" class="why-mobile-card">
             <button id="why-mobile-close" aria-label="Close details">×</button>
@@ -2265,15 +2807,17 @@
       </div>
     </section>
 
-    <!-- OUR STORY -->
-    <section class="section story-section">
+    <!-- ============================================================
+         OUR STORY
+         ============================================================ -->
+    <section class="section story-section" aria-labelledby="story-heading">
       <div class="section__inner">
         <h2
           class="section__title"
+          id="story-heading"
           style="color: var(--granite); text-shadow: none">
           Our Story
         </h2>
-
         <div class="story-card">
           <p>
             Kahani Korner was born at 3 a.m. during sleepless baby night shifts,
@@ -2282,7 +2826,7 @@
             would end with me in my bloodline.
           </p>
           <p>
-            At least my parents’ generation had a village. They had people
+            At least my parents' generation had a village. They had people
             around them who carried the language, even if it was passed down
             irregularly. My kids do not have that. Their village speaks English.
             Many have forgotten Urdu, and others are simply uncomfortable using
@@ -2291,198 +2835,153 @@
           <p>
             I knew I needed to build villagers to supplement the Urdu I was
             trying to give my kids on my own. That is how Kahani Korner came to
-            life — all the resources in one place. Books, games, music, cartoons,
-            movies, and worksheets that make Urdu feel natural, cozy, and part of
-            everyday family life, one little kahani at a time.
+            life — all the resources in one place. Books, games, music,
+            cartoons, movies, and worksheets that make Urdu feel natural, cozy,
+            and part of everyday family life, one little kahani at a time.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- COMMUNITY LOVE -->
-    <section class="reviews-section">
+    <!-- ============================================================
+         COMMUNITY LOVE
+         ============================================================ -->
+    <section class="reviews-section" aria-labelledby="reviews-heading">
       <div class="section__inner">
         <h2
           class="section__title"
+          id="reviews-heading"
           style="color: var(--granite); text-shadow: none">
           Community Love
         </h2>
         <p class="section__subtitle" style="margin-bottom: 1.25rem">
           Why families around the world are falling in love with Kahani Korner.
         </p>
-
-        <div class="marquee-container">
-          <div class="marquee-track">
-            <!-- SET 1 -->
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#c9dcce;">SA</div>
-                <div class="review-author">
-                  <h4>Sarah Ahmed</h4>
-                  <span>London, UK</span>
+        <div class="reviews-carousel" aria-label="Community testimonials">
+          <button class="rev-arrow rev-prev" aria-label="Previous testimonial">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="reviews-viewport">
+            <div class="reviews-track" id="reviews-track">
+              <div class="review-card">
+                <div class="review-header">
+                  <div
+                    class="review-avatar-initials"
+                    style="background: #c9dcce">
+                    SA
+                  </div>
+                  <div class="review-author">
+                    <h4>Sarah Ahmed</h4>
+                    <span>London, UK</span>
+                  </div>
                 </div>
+                <p class="review-text">
+                  "Finally, resources that make teaching Urdu fun! My kids
+                  actually ask to do their 'Kahani time' now."
+                </p>
               </div>
-              <p class="review-text">
-                "Finally, resources that make teaching Urdu fun! My kids
-                actually ask to do their 'Kahani time' now."
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#f3dedd;">OK</div>
-                <div class="review-author">
-                  <h4>Omar Khan</h4>
-                  <span>Toronto, CA</span>
+              <div class="review-card">
+                <div class="review-header">
+                  <div
+                    class="review-avatar-initials"
+                    style="background: #f3dedd">
+                    OK
+                  </div>
+                  <div class="review-author">
+                    <h4>Omar Khan</h4>
+                    <span>Toronto, CA</span>
+                  </div>
                 </div>
+                <p class="review-text">
+                  "The illustrations are stunning and the stories are so
+                  relatable. It's amazing to see my daughter connect with her
+                  heritage."
+                </p>
               </div>
-              <p class="review-text">
-                "The illustrations are stunning and the stories are so
-                relatable. It's amazing to see my daughter connect with her
-                heritage."
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#ffc4c3;">FZ</div>
-                <div class="review-author">
-                  <h4>Fatima Z.</h4>
-                  <span>Chicago, USA</span>
+              <div class="review-card">
+                <div class="review-header">
+                  <div
+                    class="review-avatar-initials"
+                    style="background: #ffc4c3">
+                    FZ
+                  </div>
+                  <div class="review-author">
+                    <h4>Fatima Z.</h4>
+                    <span>Chicago, USA</span>
+                  </div>
                 </div>
+                <p class="review-text">
+                  "A must-have for any bilingual home. Highly recommend!"
+                </p>
               </div>
-              <p class="review-text">
-                "A must-have for any bilingual home. Highly recommend!"
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#b0c3b7;">AM</div>
-                <div class="review-author">
-                  <h4>Ayesha Malik</h4>
-                  <span>Sydney, AU</span>
+              <div class="review-card">
+                <div class="review-header">
+                  <div
+                    class="review-avatar-initials"
+                    style="background: #b0c3b7">
+                    AM
+                  </div>
+                  <div class="review-author">
+                    <h4>Ayesha Malik</h4>
+                    <span>Sydney, AU</span>
+                  </div>
                 </div>
+                <p class="review-text">
+                  "We read one Kahani Korner story every night. It's become our
+                  favorite family ritual."
+                </p>
               </div>
-              <p class="review-text">
-                "We read one Kahani Korner story every night. It’s become our
-                favorite family ritual."
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#e8c5c5;">IS</div>
-                <div class="review-author">
-                  <h4>Imran &amp; Sana</h4>
-                  <span>Houston, USA</span>
+              <div class="review-card">
+                <div class="review-header">
+                  <div
+                    class="review-avatar-initials"
+                    style="background: #e8c5c5">
+                    IS
+                  </div>
+                  <div class="review-author">
+                    <h4>Imran &amp; Sana</h4>
+                    <span>Houston, USA</span>
+                  </div>
                 </div>
+                <p class="review-text">
+                  "Nostalgic for us and fresh for our kids at the same time."
+                </p>
               </div>
-              <p class="review-text">
-                "Nostalgic for us and fresh for our kids at the same time."
-              </p>
-            </div>
-
-            <!-- SET 2 DUPLICATE -->
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#c9dcce;">SA</div>
-                <div class="review-author">
-                  <h4>Sarah Ahmed</h4>
-                  <span>London, UK</span>
-                </div>
-              </div>
-              <p class="review-text">
-                "Finally, resources that make teaching Urdu fun! My kids
-                actually ask to do their 'Kahani time' now."
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#f3dedd;">OK</div>
-                <div class="review-author">
-                  <h4>Omar Khan</h4>
-                  <span>Toronto, CA</span>
-                </div>
-              </div>
-              <p class="review-text">
-                "The illustrations are stunning and the stories are so
-                relatable. It's amazing to see my daughter connect with her
-                heritage."
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#ffc4c3;">FZ</div>
-                <div class="review-author">
-                  <h4>Fatima Z.</h4>
-                  <span>Chicago, USA</span>
-                </div>
-              </div>
-              <p class="review-text">
-                "A must-have for any bilingual home. Highly recommend!"
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#b0c3b7;">AM</div>
-                <div class="review-author">
-                  <h4>Ayesha Malik</h4>
-                  <span>Sydney, AU</span>
-                </div>
-              </div>
-              <p class="review-text">
-                "We read one Kahani Korner story every night. It’s become our
-                favorite family ritual."
-              </p>
-            </div>
-
-            <div class="review-card">
-              <div class="review-header">
-                <div class="review-avatar-initials" style="background:#e8c5c5;">IS</div>
-                <div class="review-author">
-                  <h4>Imran &amp; Sana</h4>
-                  <span>Houston, USA</span>
-                </div>
-              </div>
-              <p class="review-text">
-                "Nostalgic for us and fresh for our kids at the same time."
-              </p>
             </div>
           </div>
+          <button class="rev-arrow rev-next" aria-label="Next testimonial">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+        <div class="reviews-dots" id="reviews-dots"></div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <!-- FAQ -->
-    <section class="faq-section" id="faq">
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
       <div class="section__inner">
-        <h2 class="section__title">Frequently Asked Questions</h2>
+        <h2 class="section__title" id="faq-heading">
+          Frequently Asked Questions
+        </h2>
         <p class="section__subtitle">Got questions? We've got answers.</p>
-
         <div class="faq-container">
-          <!-- SUBSCRIPTIONS GROUP -->
-          <details class="faq-group" open>
+          <details class="faq-group">
             <summary class="faq-group__summary">
-              <span>Subscriptions</span>
-              <span class="faq-group__hint">The Kahani Times</span>
+              <span>Subscriptions</span
+              ><span class="faq-group__hint">The Kahani Times</span>
             </summary>
-
             <div class="faq-group__body">
               <details class="faq-item">
                 <summary>What is The Kahani Times?</summary>
                 <p>
                   The Kahani Times is our monthly snail mail subscription: a
-                  themed bundle with a bilingual “akhbar” (newspaper-style
+                  themed bundle with a bilingual "akhbar" (newspaper-style
                   story/activity), stickers, and hands-on activities designed to
                   make culture and language feel cozy at home.
                 </p>
               </details>
-
               <details class="faq-item">
                 <summary>What comes in the subscription mail?</summary>
                 <p>
@@ -2491,26 +2990,35 @@
                   surprise extras.
                 </p>
               </details>
-
               <details class="faq-item">
                 <summary>When will I receive my first snail mail?</summary>
-                <p>
-                  Cutoff is the <strong>20th</strong>. <br /><br />
-                  <strong>Subscribe on 20th or before:</strong> first mail ships
-                  <strong>end of THAT month.</strong><br /><br />
-                  <strong>Example:</strong> Subscribe <strong>Dec 18</strong> →
-                  Subscription Starts <strong>December</strong> → ships
-                  <strong>end of December</strong> → arrives
-                  <strong>early January</strong>. <br /><br />
-                  <strong>Subscribe after the 20th:</strong> your subscription
-                  starts the <strong>following month</strong>. <br /><br />
-                  <strong>Example:</strong> Subscribe <strong>Dec 21</strong> →
-                  Subscription Starts <strong>January</strong> → ships
-                  <strong>end of January</strong> → arrives
-                  <strong>early February</strong>.
-                </p>
+                <p>Cutoff is the <strong>20th of each month</strong>.</p>
+                <table class="faq-shipping-table">
+                  <thead>
+                    <tr>
+                      <th>Subscribe by</th>
+                      <th>First mail ships</th>
+                      <th>Expected arrival</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>On or before the 20th<br /><em>(e.g. Dec 18)</em></td>
+                      <td>End of that month<br /><em>(end of December)</em></td>
+                      <td>Early next month<br /><em>(early January)</em></td>
+                    </tr>
+                    <tr>
+                      <td>After the 20th<br /><em>(e.g. Dec 21)</em></td>
+                      <td>
+                        End of following month<br /><em>(end of January)</em>
+                      </td>
+                      <td>
+                        Early two months out<br /><em>(early February)</em>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </details>
-
               <details class="faq-item">
                 <summary>Can I cancel or pause my subscription?</summary>
                 <p>
@@ -2519,31 +3027,26 @@
                   final mail.
                 </p>
               </details>
-
               <details class="faq-item">
                 <summary>Can I gift a subscription?</summary>
                 <p>
-                  Yes! If you’d like a gift note included, contact us after
-                  ordering and we’ll help.
+                  Yes! If you'd like a gift note included, contact us after
+                  ordering and we'll help.
                 </p>
               </details>
-
               <details class="faq-item">
                 <summary>
                   What if my mail arrives damaged or goes missing?
                 </summary>
-                <p>Contact us and we’ll make it right.</p>
+                <p>Contact us and we'll make it right.</p>
               </details>
             </div>
           </details>
-
-          <!-- BOOKS + LANGUAGE GROUP -->
           <details class="faq-group">
             <summary class="faq-group__summary">
-              <span>Books &amp; Language</span>
-              <span class="faq-group__hint">Ages, Urdu, Audio</span>
+              <span>Books &amp; Language</span
+              ><span class="faq-group__hint">Ages, Urdu, Audio</span>
             </summary>
-
             <div class="faq-group__body">
               <details class="faq-item" open>
                 <summary>What age range are the resources for?</summary>
@@ -2553,7 +3056,6 @@
                   stories, activities, and snail mail.
                 </p>
               </details>
-
               <details class="faq-item">
                 <summary>Do I need to know Urdu to use these?</summary>
                 <p>
@@ -2565,14 +3067,11 @@
               </details>
             </div>
           </details>
-
-          <!-- SHIPPING GROUP -->
           <details class="faq-group">
             <summary class="faq-group__summary">
-              <span>Shipping</span>
-              <span class="faq-group__hint">Worldwide + Free US</span>
+              <span>Shipping</span
+              ><span class="faq-group__hint">Worldwide + Free US</span>
             </summary>
-
             <div class="faq-group__body">
               <details class="faq-item" open>
                 <summary>Where do you ship?</summary>
@@ -2583,14 +3082,10 @@
               </details>
             </div>
           </details>
-
-          <!-- OTHER GROUP -->
           <details class="faq-group">
             <summary class="faq-group__summary">
-              <span>Other</span>
-              <span class="faq-group__hint">Bulk Orders</span>
+              <span>Other</span><span class="faq-group__hint">Bulk Orders</span>
             </summary>
-
             <div class="faq-group__body">
               <details class="faq-item" open>
                 <summary>Can I buy in bulk for my classroom?</summary>
@@ -2602,12 +3097,18 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="contact-section" id="contact">
+    <!-- ============================================================
+         CONTACT
+         ============================================================ -->
+    <section
+      class="contact-section"
+      id="contact"
+      aria-labelledby="contact-heading">
       <div class="contact-container">
         <div class="contact-content">
           <span class="feature-tag">Questions, Collabs, or Salaam?</span>
           <h2
+            id="contact-heading"
             style="
               color: var(--granite);
               text-shadow: none;
@@ -2619,12 +3120,6 @@
             Shipping questions, gift ideas, collab dreams, or just want to say
             السلام عليكم? Drop us a note below and we'll get back to you soon.
           </p>
-
-          <!-- Contact Form
-               TODO: Connect the action to a real backend endpoint (e.g. a Firebase Function,
-               Netlify Function, or Formspree form ID) when available.
-               Currently falls back to a pre-filled mailto link on submit.
-          -->
           <form
             id="contact-form"
             class="contact-form"
@@ -2662,80 +3157,159 @@
               <i class="fa-solid fa-paper-plane"></i> Send Message
             </button>
           </form>
-
           <div class="contact-form-divider">or reach us directly</div>
-
           <div class="contact-actions">
-            <a href="mailto:admin@kahanikorner.com" class="contact-link">
-              <i class="fa-solid fa-envelope"></i> admin@kahanikorner.com
-            </a>
+            <a href="mailto:admin@kahanikorner.com" class="contact-link"
+              ><i class="fa-solid fa-envelope"></i> admin@kahanikorner.com</a
+            >
           </div>
         </div>
-
         <div class="contact-image">
           <img
             src="/assets/images/homepage/contact.png"
-            alt="Vintage Phone Aesthetic" />
+            alt="Vintage phone illustration" />
         </div>
       </div>
     </section>
 
-    <!-- EMAIL CAPTURE -->
+    <!-- ============================================================
+         EMAIL CAPTURE
+         ============================================================ -->
     <section class="email-section" aria-labelledby="email-heading">
-      <h2 class="email-section__title" id="email-heading">Stay in the loop <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="0.9em" height="0.9em" style="vertical-align:middle;margin-left:0.2em"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></h2>
-      <p class="email-section__sub">New stories, resources, and surprise drops — straight to your inbox. No spam, ever.</p>
-      <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleEmailSubmit(event)">
-        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address" />
+      <h2 class="email-section__title" id="email-heading">
+        Stay in the loop
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="0.9em"
+          height="0.9em"
+          style="vertical-align: middle; margin-left: 0.2em">
+          <path
+            d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+        </svg>
+      </h2>
+      <p class="email-section__sub">
+        New stories, resources, and surprise drops — straight to your inbox. No
+        spam, ever.
+      </p>
+      <form
+        class="email-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+        onsubmit="handleEmailSubmit(event)">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+          aria-label="Email address" />
         <button type="submit">Subscribe</button>
-        <p class="email-form__note">Unsubscribe anytime. We respect your inbox.</p>
+        <p class="email-form__note">
+          Unsubscribe anytime. We respect your inbox.
+        </p>
       </form>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
     <footer class="footer">
-      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a
+            href="/"
+            class="brand"
+            style="justify-content: flex-start; margin-bottom: 0.75rem"
+            aria-label="Kahani Korner home">
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="/assets/images/homepage/logo2.png" />
+              <img
+                src="/assets/images/homepage/logo.png"
+                alt="Kahani Korner"
+                class="footer-brand-logo" />
+            </picture>
+          </a>
+          <p class="footer-tagline">
+            Rooted in culture, topped with sweetness, made for little hearts.
+          </p>
+          <div
+            class="social-icons"
+            style="justify-content: flex-start; margin-top: 1rem">
+            <a
+              href="https://www.instagram.com/kahani.korner/"
+              target="_blank"
+              aria-label="Instagram"
+              ><img
+                src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
+                alt="Instagram"
+            /></a>
+            <a
+              href="https://facebook.com/kahanikorner"
+              target="_blank"
+              aria-label="Facebook"
+              ><img
+                src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
+                alt="Facebook"
+            /></a>
+            <a
+              href="https://tiktok.com/@kahanikorner"
+              target="_blank"
+              aria-label="TikTok"
+              ><img
+                src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
+                alt="TikTok"
+            /></a>
+          </div>
+        </div>
+        <div class="footer-links-grid">
+          <div class="footer-link-group">
+            <h3 class="footer-link-group__title">Shop</h3>
+            <ul>
+              <li><a href="/products.html">Books &amp; Stickers</a></li>
+              <li><a href="/subscribe.html">The Kahani Times</a></li>
+              <li><a href="/subscribe.html">Subscribe</a></li>
+            </ul>
+          </div>
+          <div class="footer-link-group">
+            <h3 class="footer-link-group__title">Learn</h3>
+            <ul>
+              <li><a href="/resources/resources.html">Free Resources</a></li>
+              <li><a href="/resources/songs.html">Urdu Songs</a></li>
+              <li><a href="/resources/cartoons.html">Cartoons</a></li>
+              <li><a href="/resources/parentguide.html">Parent Guide</a></li>
+            </ul>
+          </div>
+          <div class="footer-link-group">
+            <h3 class="footer-link-group__title">Company</h3>
+            <ul>
+              <li><a href="/about.html">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-link-group">
+            <h3 class="footer-link-group__title">Legal</h3>
+            <ul>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
+      </div>
     </footer>
 
+    <!-- ============================================================
+         SCRIPTS — identical behaviour to index.html
+         ============================================================ -->
     <script>
-      // --- WHY MOBILE FLOATING ICONS LOGIC ---
+      // --- WHY MOBILE FLOATING ICONS ---
       const whyData = {
         identity: {
           title: "Preserving Cultural Identity",
@@ -2759,7 +3333,7 @@
         },
         magic: {
           title: "Story-First Magic",
-          text: "Kids reread again and again — the fun doesn’t stop at 'The End.'",
+          text: "Kids reread again and again — the fun doesn't stop at 'The End.'",
         },
         parents: {
           title: "Parent-Friendly Resources",
@@ -2776,44 +3350,43 @@
       const whyTitle = document.getElementById("why-mobile-title");
       const whyText = document.getElementById("why-mobile-text");
       const whyClose = document.getElementById("why-mobile-close");
-
       let openWhyKey = null;
 
       function closeWhyCard() {
         if (!whyCard) return;
         whyCard.classList.remove("open");
         openWhyKey = null;
-        whyIcons.forEach((icon) => icon.classList.remove("active"));
+        whyIcons.forEach((i) => {
+          i.classList.remove("active");
+          i.setAttribute("aria-selected", "false");
+        });
       }
 
       if (whyIcons && whyCard && whyTitle && whyText) {
         whyIcons.forEach((icon) => {
           icon.addEventListener("click", () => {
-            const key = icon.dataset.card;
-            const data = whyData[key];
-
+            const key = icon.dataset.card,
+              data = whyData[key];
             if (openWhyKey === key) {
               closeWhyCard();
               return;
             }
-
-            whyIcons.forEach((i) => i.classList.remove("active"));
+            whyIcons.forEach((i) => {
+              i.classList.remove("active");
+              i.setAttribute("aria-selected", "false");
+            });
             icon.classList.add("active");
-
+            icon.setAttribute("aria-selected", "true");
             whyTitle.textContent = data.title;
             whyText.textContent = data.text;
-
             whyCard.classList.add("open");
             openWhyKey = key;
           });
         });
-
         if (window.innerWidth <= 768 && whyIcons.length > 0) {
-          const first = whyIcons[0];
-          const key = first.dataset.card;
-          const data = whyData[key];
-
-          whyIcons.forEach((i) => i.classList.remove("active"));
+          const first = whyIcons[0],
+            key = first.dataset.card,
+            data = whyData[key];
           first.classList.add("active");
           whyTitle.textContent = data.title;
           whyText.textContent = data.text;
@@ -2821,78 +3394,122 @@
           openWhyKey = key;
         }
       }
+      if (whyClose) whyClose.addEventListener("click", closeWhyCard);
 
-      if (whyClose) {
-        whyClose.addEventListener("click", () => {
-          closeWhyCard();
+      // --- REVIEWS CAROUSEL ---
+      (function () {
+        const track = document.getElementById("reviews-track");
+        const dotsEl = document.getElementById("reviews-dots");
+        if (!track) return;
+        const cards = Array.from(track.querySelectorAll(".review-card"));
+        const GAP = 24,
+          CARD_W = 300,
+          STEP = CARD_W + GAP;
+        let current = 0,
+          timer;
+        function visibleCount() {
+          return Math.max(
+            1,
+            Math.floor(track.parentElement.offsetWidth / STEP),
+          );
+        }
+        function maxIdx() {
+          return Math.max(0, cards.length - visibleCount());
+        }
+        function goTo(idx) {
+          current = Math.max(0, Math.min(idx, maxIdx()));
+          track.style.transform = `translateX(-${current * STEP}px)`;
+          document
+            .querySelectorAll(".rev-dot")
+            .forEach((d, i) => d.classList.toggle("active", i === current));
+        }
+        function buildDots() {
+          if (!dotsEl) return;
+          dotsEl.innerHTML = cards
+            .map(
+              (_, i) =>
+                `<button class="rev-dot${i === 0 ? " active" : ""}" onclick="(function(){const e=document.getElementById('reviews-track');if(e){const s=document.querySelectorAll('.rev-dot');s.forEach((d,j)=>d.classList.toggle('active',j===${i}));e.style.transform='translateX(-${i * STEP}px)';}})();" aria-label="Go to testimonial ${i + 1}"></button>`,
+            )
+            .join("");
+        }
+        function start() {
+          timer = setInterval(
+            () => goTo(current >= maxIdx() ? 0 : current + 1),
+            5000,
+          );
+        }
+        function stop() {
+          clearInterval(timer);
+        }
+        buildDots();
+        start();
+        const viewport = track.parentElement;
+        viewport.addEventListener("mouseenter", stop);
+        viewport.addEventListener("mouseleave", start);
+        viewport.addEventListener("focusin", stop);
+        viewport.addEventListener("focusout", start);
+        document.querySelector(".rev-prev")?.addEventListener("click", () => {
+          stop();
+          goTo(current <= 0 ? maxIdx() : current - 1);
+          start();
         });
-      }
+        document.querySelector(".rev-next")?.addEventListener("click", () => {
+          stop();
+          goTo(current >= maxIdx() ? 0 : current + 1);
+          start();
+        });
+        window.addEventListener("resize", () =>
+          goTo(Math.min(current, maxIdx())),
+        );
+      })();
 
-      // --- MOBILE MENU LOGIC ---
+      // --- MOBILE MENU ---
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
-
       function openMobileMenu() {
         if (!mobileMenuOverlay) return;
         mobileMenuOverlay.classList.remove("hidden");
-        requestAnimationFrame(() => {
-          mobileMenuOverlay.classList.add("open");
-        });
+        requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
       }
-
       function closeMobileMenu() {
         if (!mobileMenuOverlay) return;
         mobileMenuOverlay.classList.remove("open");
-        setTimeout(() => {
-          mobileMenuOverlay.classList.add("hidden");
-        }, 300);
+        setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
       }
 
-      // --- PARALLAX EFFECT FOR HERO ---
+      // --- PARALLAX ---
       const heroBgImage = document.querySelector(".hero__bg-image");
-
       function handleParallax() {
         if (!heroBgImage) return;
-
-        const viewportHeight = window.innerHeight;
-        const scrolled = window.scrollY;
-        const clamped = Math.max(0, Math.min(scrolled, viewportHeight));
-
-        const maxShift = window.innerWidth <= 768 ? 40 : 60;
-        const progress = clamped / viewportHeight;
-        const shift = progress * maxShift;
-
-        heroBgImage.style.transform = `translateY(${shift}px)`;
+        const vh = window.innerHeight,
+          scrolled = Math.max(0, Math.min(window.scrollY, vh));
+        heroBgImage.style.transform = `translateY(${(scrolled / vh) * (window.innerWidth <= 768 ? 40 : 60)}px)`;
       }
 
-      function initLandingPage() {
+      function initPage() {
         if (mobileToggle && mobileMenuOverlay) {
           mobileToggle.addEventListener("click", openMobileMenu);
-
           mobileMenuOverlay.addEventListener("click", (e) => {
             if (e.target === mobileMenuOverlay) closeMobileMenu();
           });
-
           const closeBtn = mobileMenuOverlay.querySelector(
-            ".mobile-menu__close"
+            ".mobile-menu__close",
           );
           const menuLinks = mobileMenuOverlay.querySelectorAll(
-            ".mobile-menu__links a"
+            ".mobile-menu__links a",
           );
-
           if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-          menuLinks.forEach((link) =>
-            link.addEventListener("click", closeMobileMenu)
+          menuLinks.forEach((l) =>
+            l.addEventListener("click", closeMobileMenu),
           );
         }
-
         handleParallax();
       }
 
       window.addEventListener("scroll", handleParallax);
-      window.addEventListener("load", initLandingPage);
+      window.addEventListener("load", initPage);
 
-      // accordian FAQ section
+      // --- FAQ accordion ---
       document.querySelectorAll(".faq-group").forEach((group) => {
         group.addEventListener("toggle", () => {
           if (!group.open) return;
@@ -2902,83 +3519,107 @@
         });
       });
 
+      // --- Floating hearts (once per session) ---
       window.addEventListener("load", () => {
-        // Only run on homepage
-        if (window.location.pathname !== "/") return;
-
-        // Only show once per session
         if (sessionStorage.getItem("heartsShown")) return;
         sessionStorage.setItem("heartsShown", "true");
-
         const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
-        const HEART_COUNT = 8;
-
-        for (let i = 0; i < HEART_COUNT; i++) {
+        for (let i = 0; i < 8; i++) {
           const icon = document.createElement("img");
           icon.src = iconSrc;
           icon.classList.add("heart");
-
           icon.style.left = Math.random() * 100 + "vw";
           icon.style.opacity = "0.35";
           icon.style.width = (14 + Math.random() * 8).toFixed(2) + "px";
           icon.style.animationDelay = Math.random() * 4 + "s";
           icon.style.animationDuration =
             (10 + Math.random() * 6).toFixed(2) + "s";
-
           document.body.appendChild(icon);
         }
       });
     </script>
 
     <script src="/assets/cart.js"></script>
+
     <script>
-      // --- CONTACT FORM ---
-      // TODO: Replace the mailto fallback below with a real POST to your backend
-      // endpoint (Firebase Function, Netlify Function, or Formspree) when ready.
       function handleContactSubmit(e) {
         e.preventDefault();
         const form = e.target;
-        const nameEl    = form.querySelector("#contact-name");
-        const emailEl   = form.querySelector("#contact-email");
-        const messageEl = form.querySelector("#contact-message");
+        const nameEl = form.querySelector("#contact-name"),
+          emailEl = form.querySelector("#contact-email"),
+          messageEl = form.querySelector("#contact-message");
         let valid = true;
-
-        [nameEl, emailEl, messageEl].forEach((el) => el.classList.remove("error"));
-
-        if (!nameEl.value.trim()) { nameEl.classList.add("error"); valid = false; }
-        if (!emailEl.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-          emailEl.classList.add("error"); valid = false;
-        }
-        if (!messageEl.value.trim()) { messageEl.classList.add("error"); valid = false; }
-        if (!valid) return;
-
-        const subject = encodeURIComponent("Message from " + nameEl.value.trim());
-        const body    = encodeURIComponent(
-          "Name: " + nameEl.value.trim() +
-          "\nEmail: " + emailEl.value.trim() +
-          "\n\nMessage:\n" + messageEl.value.trim()
+        [nameEl, emailEl, messageEl].forEach((el) =>
+          el.classList.remove("error"),
         );
-        window.location.href = "mailto:admin@kahanikorner.com?subject=" + subject + "&body=" + body;
+        if (!nameEl.value.trim()) {
+          nameEl.classList.add("error");
+          valid = false;
+        }
+        if (
+          !emailEl.value.trim() ||
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)
+        ) {
+          emailEl.classList.add("error");
+          valid = false;
+        }
+        if (!messageEl.value.trim()) {
+          messageEl.classList.add("error");
+          valid = false;
+        }
+        if (!valid) return;
+        const subject = encodeURIComponent(
+          "Message from " + nameEl.value.trim(),
+        );
+        const body = encodeURIComponent(
+          "Name: " +
+            nameEl.value.trim() +
+            "\nEmail: " +
+            emailEl.value.trim() +
+            "\n\nMessage:\n" +
+            messageEl.value.trim(),
+        );
+        window.location.href =
+          "mailto:admin@kahanikorner.com?subject=" + subject + "&body=" + body;
       }
 
       function handleEmailSubmit(e) {
         e.preventDefault();
-        const form = e.target;
-        const email = form.querySelector('input[type="email"]').value;
+        const form = e.target,
+          email = form.querySelector('input[type="email"]').value;
         fetch(form.action, {
           method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
           body: JSON.stringify({ email }),
         })
           .then((r) => {
             if (r.ok) {
-              form.innerHTML = '<p style="color:var(--granite);font-weight:700;">Thanks! You\'re on the list!</p>';
+              form.innerHTML =
+                '<p style="color:var(--granite);font-weight:700;">Thanks! You\'re on the list!</p>';
             } else {
               alert("Something went wrong. Please try again.");
             }
           })
           .catch(() => alert("Something went wrong. Please try again."));
       }
+    </script>
+    <script>
+      // FAQ smooth close animation
+      document.querySelectorAll('.faq-group__summary, .faq-group__body .faq-item summary').forEach(summary => {
+        summary.addEventListener('click', e => {
+          const details = summary.closest('details');
+          if (!details.open) return;
+          e.preventDefault();
+          details.classList.add('faq-closing');
+          details.addEventListener('animationend', () => {
+            details.classList.remove('faq-closing');
+            details.removeAttribute('open');
+          }, { once: true });
+        });
+      });
     </script>
   </body>
 </html>

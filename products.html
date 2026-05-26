@@ -635,11 +635,13 @@
 
       /* --- SHOP HERO / MAIN --- */
       .shop-main {
-        padding: 7rem 2rem 4rem;
+        padding: 7rem 4rem 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
       }
 
       .shop-main-inner {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
       }
 
@@ -813,6 +815,13 @@
         padding-bottom: 4rem;
       }
 
+      /* Bundle card spans full grid width and uses horizontal layout */
+      @media (max-width: 767px) {
+        .product-card--bundle .product-header h3 {
+          font-size: 1rem;
+        }
+      }
+
       /* Section dividers inside the product grid */
       .grid-section-header {
         grid-column: 1 / -1;
@@ -841,55 +850,64 @@
       @media (min-width: 768px) {
         .product-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 1.5rem;
+          gap: 2rem;
+        }
+      }
+      @media (min-width: 1024px) {
+        .product-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
         }
       }
 
-      @media (min-width: 1024px) {
-        .product-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 2rem;
-        }
+      /* Single visible card — center it */
+      .product-grid .product-card:not(.product-card--bundle):first-child:last-child {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        justify-self: center;
       }
 
       /* Compact card layout on small screens (2-col) */
       @media (max-width: 767px) {
+        .shop-main {
+          padding: 7rem 1rem 4rem;
+        }
         .product-card {
           border-radius: 0.75rem;
         }
         .product-image-container {
-          aspect-ratio: 1;
+          aspect-ratio: 4 / 5;
           padding: 0;
           height: auto;
           min-height: unset;
           max-height: unset;
         }
         .product-image-container img {
-          object-fit: cover;
+          object-fit: contain;
           border-radius: 0;
           max-width: none;
+          background: var(--soft-blush);
         }
         .product-info {
-          padding: 0;
+          padding: 0.5rem 0.6rem 0.6rem;
         }
         .product-header {
           flex-direction: column;
-          gap: 0.15rem;
+          gap: 0.2rem;
           align-items: flex-start;
-          margin-bottom: 0.35rem;
+          margin-bottom: 0.4rem;
         }
         .product-header h3 {
-          font-size: 0.72rem;
-          line-height: 1.2;
+          font-size: 0.85rem;
+          line-height: 1.25;
         }
         .price {
-          font-size: 0.7rem;
-          padding: 0.1rem 0.35rem;
+          font-size: 0.82rem;
+          padding: 0.15rem 0.4rem;
         }
         .product-actions {
           flex-direction: row;
-          gap: 0.3rem;
-          margin-top: 0.3rem;
+          gap: 0.35rem;
+          margin-top: 0.4rem;
         }
         .btn-label {
           display: none;
@@ -897,10 +915,10 @@
         .add-to-cart-btn,
         .buy-now-btn {
           flex: 1;
-          padding: 0.55rem;
+          padding: 0.65rem 0.4rem;
           border-radius: 0.6rem;
           gap: 0;
-          font-size: 0;
+          font-size: 0.75rem;
           box-shadow: 0 3px 0 var(--rosy-taupe);
         }
         .buy-now-btn {
@@ -911,6 +929,12 @@
         }
         .grid-section-header p {
           font-size: 0.75rem;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .product-grid {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -944,7 +968,7 @@
       .product-image-container img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 0;
         transition: transform 0.5s;
         mix-blend-mode: multiply;
@@ -1108,14 +1132,17 @@
         background: var(--card-bg);
         border: 2px solid var(--ash-grey);
         border-radius: 2rem;
-        padding: 2rem;
+        padding: 1rem;
         box-shadow: var(--shadow-soft);
       }
 
       @media (min-width: 768px) {
         .detail-container {
           grid-template-columns: 1.05fr 1fr;
-          padding: 3rem;
+          padding: 2rem;
+        }
+        .detail-image-wrapper {
+          padding: 2rem;
         }
       }
 
@@ -1133,7 +1160,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem;
+        padding: 1rem;
         width: 100%;
         position: relative;
       }
@@ -1288,6 +1315,7 @@
       .detail-actions {
         display: flex;
         gap: 0.75rem;
+        margin-bottom: 1.5rem;
       }
 
       .detail-actions .add-to-cart-btn,
@@ -1369,12 +1397,6 @@
       .primary-btn:active {
         transform: translateY(0);
         box-shadow: 0 0 0 var(--granite);
-      }
-
-      @media (max-width: 768px) {
-        .shop-main {
-          padding: 6rem 1.5rem 3.5rem;
-        }
       }
 
       .brand-logo {
@@ -1550,14 +1572,6 @@
             <div class="detail-info">
               <h1 id="detail-title">Product Title</h1>
               <span id="detail-price" class="detail-price">$0.00</span>
-              <div class="detail-description-box">
-                <h3>Description</h3>
-                <p id="detail-description"></p>
-              </div>
-              <div class="detail-features-box">
-                <h3>Why you'll love it</h3>
-                <ul id="detail-features"></ul>
-              </div>
               <div class="detail-actions">
                 <button id="detail-add-to-cart-btn" class="add-to-cart-btn large-btn">
                   <i class="fa-solid fa-cart-plus"></i> Add to Cart
@@ -1565,6 +1579,14 @@
                 <button id="detail-buy-now-btn" class="buy-now-btn large-btn">
                   Buy Now
                 </button>
+              </div>
+              <div class="detail-description-box">
+                <h3>Description</h3>
+                <p id="detail-description"></p>
+              </div>
+              <div class="detail-features-box">
+                <h3>Why you'll love it</h3>
+                <ul id="detail-features"></ul>
               </div>
             </div>
           </div>
@@ -1651,11 +1673,11 @@
         // ── SECTION: BUNDLE ──────────────────────────────────────────────
         {
           id: "price_1SYLwPP4FFhr5UNAc6JmV0iR",
-          name: "All Things Kahani Bundle",
+          name: "All Kahani's Bundle",
           price: 62.0,
           checkoutUrl: "https://buy.stripe.com/dRm3cx1k6dGddbt1JJ0Fi07",
           description:
-            "The All Things Kahani Bundle brings together all four story sets — each one packed with a beautiful storybook, an activity book, stickers, sequencing cards, and bilingual flashcards. Every set also includes a scannable QR code that unlocks read-aloud videos, vocabulary-building games, and bonus learning activities. Designed to spark joy, connection, and language growth, this bundle turns Urdu learning into a playful, immersive experience the whole family can enjoy.",
+            "All Kahani's Bundle brings together all four story sets — each one packed with a beautiful storybook, an activity book, stickers, sequencing cards, and bilingual flashcards. Every set also includes a scannable QR code that unlocks read-aloud videos, vocabulary-building games, and bonus learning activities. Designed to spark joy, connection, and language growth, this bundle turns Urdu learning into a playful, immersive experience the whole family can enjoy.",
           image: "./assets/images/products/books/books.png",
           category: "bundle",
           features: [
@@ -1674,15 +1696,13 @@
 
         // ── SECTION: INDIVIDUAL BOOKS ────────────────────────────────────
         {
-          id: "abbu-laye-motor-car",
+          id: "price_1TbIF6P4FFhr5UNAXn6meNvr",
           name: "Abbu Laye Motor Car",
-          price: null,
-          // TODO: Replace with Stripe checkout URL when individual book is listed
-          checkoutUrl: null,
+          price: 18.99,
+          checkoutUrl: "https://buy.stripe.com/aFa00l8My1Xvdbt7430Fi0j",
           description:
             "Abbu is coming home — and he's brought a brand-new motor car! A playful counting story in Urdu and English that makes little readers squeal with excitement.",
-          // TODO: Replace with dedicated Abbu Laye Motor Car book cover image
-          image: "./assets/images/products/books/books2.png",
+          image: "./assets/images/products/books/abbu/abbu-cover.png",
           category: "books",
           features: [
             "Bilingual Urdu–English picture book.",
@@ -1691,17 +1711,24 @@
             "Vibrant full-colour illustrations throughout.",
             "Suitable for ages 2–8.",
           ],
-          images: ["./assets/images/products/books/books2.png"],
+          images: [
+            "./assets/images/products/books/abbu/abbu-cover.png",
+            "./assets/images/products/books/abbu/abbu-activitybook.png",
+            "./assets/images/products/books/abbu/abbu-stickers.png",
+            "./assets/images/products/books/abbu/abbu-flashcards.png",
+            "./assets/images/products/books/abbu/abbu-flashcards-eng.png",
+            "./assets/images/products/books/abbu/abbu-sequence.png",
+            "./assets/images/products/books/abbu/abbu-bookopen.png",
+          ],
         },
         {
-          id: "dada-jee-ka-khet",
+          id: "price_1TbIHDP4FFhr5UNAeyIkRrax",
           name: "Dada Jee Ka Khet",
-          price: null,
-          // TODO: Replace with Stripe checkout URL when individual book is listed
-          checkoutUrl: null,
+          price: 18.99,
+          checkoutUrl: "https://buy.stripe.com/7sY14p6Eq1Xv2wPfAz0Fi0h",
           description:
             "Visit Dada Jee's farm and meet all the animals in this warm bilingual picture book — a beautiful bridge between generations and languages.",
-          image: "./qr/assets/images/dada.png",
+          image: "./assets/images/products/books/dada/dada-cover.png",
           category: "books",
           features: [
             "Bilingual Urdu–English picture book.",
@@ -1710,17 +1737,16 @@
             "Beautiful full-colour illustrations.",
             "Suitable for ages 2–8.",
           ],
-          images: ["./qr/assets/images/dada.png"],
+          images: ["./assets/images/products/books/dada/dada-cover.png", "./assets/images/products/books/dada/dada.png"],
         },
         {
-          id: "chuchu-chacha",
+          id: "price_1TbIIEP4FFhr5UNAaJeT8y6Y",
           name: "Chuchu Chacha",
-          price: null,
-          // TODO: Replace with Stripe checkout URL when individual book is listed
-          checkoutUrl: null,
+          price: 18.99,
+          checkoutUrl: "https://buy.stripe.com/28E5kF6Eqau10oHgED0Fi0g",
           description:
             "There's a wedding at Chuchu Chacha's! Join the celebration in this joyful story about family, food, and festivities — told in Urdu and English.",
-          image: "./qr/bb/chuchuchacha-qnvvv2/images/bookcover.png",
+          image: "./assets/images/products/books/chuchu/chuchu-cover.png",
           category: "books",
           features: [
             "Bilingual Urdu–English picture book.",
@@ -1729,17 +1755,24 @@
             "Beautiful full-colour illustrations.",
             "Suitable for ages 2–8.",
           ],
-          images: ["./qr/bb/chuchuchacha-qnvvv2/images/bookcover.png"],
+          images: [
+            "./assets/images/products/books/chuchu/chuchu-cover.png",
+            "./assets/images/products/books/chuchu/chuchu-activitybook.png",
+            "./assets/images/products/books/chuchu/chuchu-flashcard.png",
+            "./assets/images/products/books/chuchu/chuchu-flashcards-eng.png",
+            "./assets/images/products/books/chuchu/chuchu-sequence.png",
+            "./assets/images/products/books/chuchu/chuchu-bookopen.png",
+            "./assets/images/products/books/chuchu/chuchu-bundle.png",
+          ],
         },
         {
-          id: "aaloo-miyan",
+          id: "price_1TbIGJP4FFhr5UNAeGEVz0Ko",
           name: "Aaloo Miyan",
-          price: null,
-          // TODO: Replace with Stripe checkout URL when individual book is listed
-          checkoutUrl: null,
+          price: 18.99,
+          checkoutUrl: "https://buy.stripe.com/28E4gB9QC0Trb3l8870Fi0i",
           description:
             "Meet Aaloo Miyan — the cheeky, loveable potato who teaches Urdu words through big laughs and even bigger adventures. A fan favourite!",
-          image: "./qr/bb/aaloomiyan-kis2uo/images/bookcover.png",
+          image: "./assets/images/products/books/aaloo/aaloo-cover.png",
           category: "books",
           features: [
             "Bilingual Urdu–English picture book.",
@@ -1748,16 +1781,24 @@
             "Beautiful full-colour illustrations.",
             "Suitable for ages 2–8.",
           ],
-          images: ["./qr/bb/aaloomiyan-kis2uo/images/bookcover.png"],
+          images: [
+            "./assets/images/products/books/aaloo/aaloo-cover.png",
+            "./assets/images/products/books/aaloo/aaloo.png",
+            "./assets/images/products/books/aaloo/aaloo-stickers.png",
+            "./assets/images/products/books/aaloo/aaloo-flashcard.png",
+            "./assets/images/products/books/aaloo/aaloo-flashcardeng.png",
+            "./assets/images/products/books/aaloo/aaloo-sequence.png",
+            "./assets/images/products/books/aaloo/aaloo-bookopen.png",
+            "./assets/images/products/books/aaloo/aaloo-bundle.png",
+          ],
         },
 
         // ── SECTION: STICKERS & EXTRAS ───────────────────────────────────
         {
-          id: "oopsie-stickers",
+          id: "price_1Tb6jbP4FFhr5UNAHcybrHON",
           name: "Oopsie Stickers",
-          price: 6.67,
-          // TODO: Replace with Stripe checkout URL when Oopsie Stickers is listed
-          checkoutUrl: null,
+          price: 7.99,
+          checkoutUrl: "https://buy.stripe.com/fZu00l5Amau11sLfAz0Fi0f",
           description:
             "These \"Oopsie\" stickers have slight imperfections that may include: discoloration or printer error, lamination error or stickers cut unevenly or off center. Most of these imperfections are barely noticeable, and just the result of me being a crazy perfectionist! If you want a cheap alternative to my stickers or just a fun surprise, this is the perfect option! If you have any further questions, shoot me a message! :)",
           image: "./assets/images/products/stickers/oopsies/oopsies.png",
@@ -1772,11 +1813,10 @@
           images: ["./assets/images/products/stickers/oopsies/oopsies.png"],
         },
         {
-          id: "pakistani-mango-sticker-set",
+          id: "price_1Tb6DjP4FFhr5UNApKWkP5wA",
           name: "Pakistani Mango Stickers",
-          price: 15.99,
-          // TODO: Replace with Stripe checkout URL when listed
-          checkoutUrl: null,
+          price: 16.99,
+          checkoutUrl: "https://buy.stripe.com/28E14pbYK6dL0oH9cb0Fi0e",
           description:
             "Celebrate mango season the Pakistani way with our Pakistani Mango Sticker Set — a playful 9-piece holographic sticker collection inspired by aam season, desi nostalgia, summer treats, and the sweetest mango puns. This set includes a mix of vintage Pakistani mango stamp designs, cute mango characters, fruity wordplay, and summer favorites like mango lassi, mango juice, and mango kulfi. Each sticker has a fun holographic finish, giving the designs a shiny, eye-catching look that makes them perfect for decorating notebooks, laptops, water bottles, planners, lunch boxes, journals, gifts, and more. From Sindhri, Chaunsa, Anwar Ratol, and Dusehri stamp-style stickers to playful phrases like \"Aam-igos Forever,\" \"You're aam-azing,\" \"You're cool, but aam KUL-fi,\" and \"Aam-oré,\" this set is made for mango lovers, Pakistani families, Urdu learners, kids, teachers, and anyone who knows that mango season is basically a holiday.",
           image: "./assets/images/products/stickers/mango/mango-all.png",
@@ -1803,10 +1843,10 @@
           ],
         },
         {
-          id: "price_1T04U7P4FFhr5UNAKUJMkOt5",
+          id: "price_1SvrPwP4FFhr5UNAhWnlzbu5",
           name: "Stickers",
-          price: 15.15,
-          checkoutUrl: "https://buy.stripe.com/9B6cN73se1Xv2wP0FF0Fi0d",
+          price: 23.99,
+          checkoutUrl: "https://buy.stripe.com/aFaaEZd2O0Tr8Vddsr0Fi0c",
           description:
             "Holographic little pieces of Pakistan, wherever you are. Our Pakistani Nostalgia Diaspora Stickers are inspired by the everyday sights, sounds, and sayings we grew up with — made for Pakistanis raising memories far from home.",
           image: "./assets/images/products/stickers/15pack/stickers.png",
@@ -1980,7 +2020,7 @@
              </button>`;
 
         return `
-          <article class="product-card" onclick="openProductDetails('${product.id}')">
+          <article class="product-card${product.category === 'bundle' ? ' product-card--bundle' : ''}" onclick="openProductDetails('${product.id}')">
             <div class="product-image-container">
               <img src="${product.image}" alt="${product.name}">
             </div>

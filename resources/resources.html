@@ -912,6 +912,47 @@
         line-height: 1.5;
         margin: 0;
       }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+      .resource-search-wrapper {
+        margin-bottom: 1.5rem;
+      }
+      .resource-search-box {
+        position: relative;
+        max-width: 440px;
+      }
+      .resource-search-icon {
+        position: absolute;
+        left: 0.85rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--deep-teal);
+        font-size: 0.9rem;
+        pointer-events: none;
+      }
+      .resource-search-input {
+        width: 100%;
+        padding: 0.65rem 1rem 0.65rem 2.5rem;
+        border: 1.5px solid var(--ash-grey);
+        border-radius: var(--radius-pill);
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.92rem;
+        background: var(--white);
+        color: var(--black);
+        outline: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+      }
+      .resource-search-input:focus {
+        border-color: var(--deep-teal);
+        box-shadow: 0 0 0 3px rgba(104,125,112,0.15);
+      }
+      .resource-search-empty {
+        font-size: 0.9rem;
+        color: var(--deep-teal);
+        margin-top: 0.75rem;
+      }
+      .resource-search-empty.hidden { display: none; }
+
       .resource-link__badge {
         display: inline-block;
         margin-top: 0.35rem;
@@ -937,18 +978,9 @@
     <div class="topbar">
       <div class="topbar__inner">
         <div class="topbar__track">
-          <span>Pre-Order Books Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Pre-Order Books Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Pre-Order Books Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
+          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
         </div>
       </div>
     </div>
@@ -1063,7 +1095,23 @@
           your daily routine. Enjoy these resources from Kahani Korner!
         </p>
 
-        <div class="resource-grid">
+        <div class="resource-search-wrapper">
+          <label for="resource-search" class="sr-only">Search resources</label>
+          <div class="resource-search-box">
+            <i class="fa-solid fa-magnifying-glass resource-search-icon" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="resource-search"
+              class="resource-search-input"
+              placeholder="Search resources…"
+              autocomplete="off"
+              aria-label="Search resources"
+            />
+          </div>
+          <p class="resource-search-empty hidden" id="resource-search-empty" role="status">No resources match your search.</p>
+        </div>
+
+        <div class="resource-grid" id="resource-grid">
           <a class="resource-link" href="parentguide.html">
             <span class="resource-link__icon"><i class="fa-solid fa-book"></i></span>
             <span class="resource-link__title">Parent Guide</span>
@@ -1191,6 +1239,29 @@
           menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
         }
       });
+    </script>
+    <script>
+      (function () {
+        const searchInput = document.getElementById("resource-search");
+        const grid = document.getElementById("resource-grid");
+        const emptyMsg = document.getElementById("resource-search-empty");
+        if (!searchInput || !grid) return;
+
+        searchInput.addEventListener("input", () => {
+          const q = searchInput.value.trim().toLowerCase();
+          const tiles = grid.querySelectorAll(".resource-link");
+          let visible = 0;
+
+          tiles.forEach((tile) => {
+            const text = tile.textContent.toLowerCase();
+            const match = !q || text.includes(q);
+            tile.style.display = match ? "" : "none";
+            if (match) visible++;
+          });
+
+          emptyMsg.classList.toggle("hidden", visible > 0 || !q);
+        });
+      })();
     </script>
   </body>
 </html>

@@ -689,8 +689,35 @@
       .page-main {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 4rem 2rem;
+        padding: 2rem 2rem 4rem;
       }
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.82rem;
+        color: var(--muted, #8a9e94);
+        margin-bottom: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .breadcrumb a { color: var(--deep-teal); text-decoration: none; }
+      .breadcrumb a:hover { text-decoration: underline; }
+      .breadcrumb-sep { color: var(--ash-grey); }
+      .breadcrumb [aria-current="page"] { color: var(--granite); font-weight: 600; }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--deep-teal);
+        text-decoration: none;
+        margin-bottom: 1.5rem;
+        transition: gap 0.2s;
+      }
+      .back-link:hover { gap: 0.25rem; text-decoration: underline; }
 
       /* --- PARENT GUIDE CARD (styled like Resources card) --- */
       .guide-card {
@@ -1152,9 +1179,9 @@
 <div class="topbar">
 <div class="topbar__inner">
 <div class="topbar__track">
-<span>Pre-Order Books Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-<span>Pre-Order Books Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-<span>Pre-Order Books Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+<span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+<span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+<span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
 </div>
 </div>
 </div>
@@ -1237,6 +1264,16 @@
 <div aria-hidden="true" class="header-spacer"></div>
 <!-- MAIN -->
 <main class="page-main">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a>
+  <span aria-hidden="true" class="breadcrumb-sep">›</span>
+  <a href="/resources/resources.html">Resources</a>
+  <span aria-hidden="true" class="breadcrumb-sep">›</span>
+  <span aria-current="page">Parent Guide</span>
+</nav>
+<a href="/resources/resources.html" class="back-link">
+  <i class="fa-solid fa-arrow-left"></i> Back to Resources
+</a>
 <section aria-labelledby="guide-heading" class="guide-card">
 <div class="guide-header">
 <h1 id="guide-heading">Teach Urdu at Home</h1>
