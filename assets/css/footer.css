@@ -1,0 +1,138 @@
+/* ============================================================
+   KAHANI KORNER — Shared Footer Grid Layout
+   Edit footer in ONE place only: /components/footer.html
+
+   This file adds the full grid layout on top of the base
+   footer styles already defined in /assets/css/navbar.css
+   ============================================================ */
+
+/* ── Override base footer to remove text-align:center from grid area ── */
+footer.footer {
+  padding: 4rem 2rem 2rem;
+  margin-top: 0;
+  text-align: left;
+}
+
+/* ── Top section: brand column + links grid ── */
+.footer-top {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(176, 195, 183, 0.25);
+}
+
+/* ── Brand / logo / social column — centered ── */
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-brand-col a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Social icons row — centered ── */
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.footer-socials img {
+  width: 26px;
+  height: 26px;
+  filter: invert(1);
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-socials a:hover img {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* ── Links grid — 4 columns, left-aligned ── */
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.footer-link-group__title {
+  font-family: "Grandstander", cursive;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ash-grey);
+  margin: 0 0 0.75rem;
+}
+
+.footer-link-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.footer-link-group ul li a {
+  font-size: 0.88rem;
+  color: var(--white-smoke);
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.18s;
+}
+
+.footer-link-group ul li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ── Copyright bar ── */
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ash-grey);
+}
+
+/* ── Tablet ── */
+@media (max-width: 900px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  footer.footer {
+    padding: 3rem 1.5rem 2rem;
+  }
+  .footer-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+  }
+  .footer-link-group ul {
+    align-items: center;
+  }
+}

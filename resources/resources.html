@@ -57,6 +57,7 @@
 
     <!-- Optional shared CSS if you're using it elsewhere -->
     <link rel="stylesheet" href="../quicklinks/SharedCSS/common.css" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
 
     <style>
       /* --- THEME VARIABLES (same as landing / product) --- */
@@ -790,6 +791,9 @@
         color: var(--ash-grey);
         padding: 4rem 2rem;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .footer-tagline {
@@ -970,117 +974,256 @@
         cursor: default;
         pointer-events: none;
       }
+
+      /* --- SUBMIT A RESOURCE CTA --- */
+      .submit-cta {
+        margin-bottom: 1.75rem;
+      }
+      .submit-cta__btn {
+        display: inline-block;
+        background: var(--granite);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 0.65rem 1.6rem;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        box-shadow: 0 3px 0 var(--deep-teal);
+        transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      }
+      .submit-cta__btn:hover {
+        background: var(--deep-teal);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 0 var(--granite);
+      }
+      .submit-cta__btn:focus-visible {
+        outline: 3px solid var(--cotton-rose);
+        outline-offset: 3px;
+      }
+
+      /* --- SUBMIT RESOURCE MODAL --- */
+      .resource-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(28, 37, 36, 0.45);
+        backdrop-filter: blur(4px);
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .resource-modal-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .resource-modal-overlay.hidden { display: none; }
+
+      .resource-modal {
+        background: var(--white-smoke);
+        border: 1.5px solid var(--ash-grey);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-hover);
+        width: 100%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(16px) scale(0.98);
+        transition: transform 0.25s ease;
+      }
+      .resource-modal-overlay.open .resource-modal {
+        transform: translateY(0) scale(1);
+      }
+      .resource-modal__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.4rem 1.75rem 1rem;
+        position: sticky;
+        top: 0;
+        background: var(--white-smoke);
+        border-bottom: 1.5px solid var(--ash-grey);
+        z-index: 1;
+      }
+      .resource-modal__title {
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: var(--granite);
+        margin: 0;
+      }
+      .resource-modal__close {
+        background: var(--soft-blush);
+        border: 1.5px solid var(--ash-grey);
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        color: var(--granite);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.2s ease, transform 0.18s ease;
+      }
+      .resource-modal__close:hover {
+        background: var(--cotton-rose);
+        transform: rotate(90deg);
+      }
+      .resource-modal__close:focus-visible {
+        outline: 3px solid var(--cotton-rose);
+        outline-offset: 3px;
+      }
+      .resource-modal__body {
+        padding: 1.5rem 1.75rem 1.75rem;
+      }
+
+      /* --- RESOURCE FORM --- */
+      .rform-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-bottom: 1rem;
+      }
+      .rform-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      @media (max-width: 520px) {
+        .rform-row { grid-template-columns: 1fr; }
+      }
+      .rform-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--granite);
+        letter-spacing: 0.02em;
+      }
+      .rform-required { color: var(--rosy-taupe); }
+
+      .rform-input,
+      .rform-select,
+      .rform-textarea {
+        width: 100%;
+        padding: 0.6rem 0.85rem;
+        border: 1.5px solid var(--ash-grey);
+        border-radius: var(--radius-md);
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.88rem;
+        color: var(--black);
+        background: var(--white);
+        outline: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .rform-input:focus,
+      .rform-select:focus,
+      .rform-textarea:focus {
+        border-color: var(--deep-teal);
+        box-shadow: 0 0 0 3px rgba(104, 125, 112, 0.15);
+      }
+      .rform-input.error,
+      .rform-select.error,
+      .rform-textarea.error {
+        border-color: var(--danger);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+      }
+      .rform-select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234a594a' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2.5rem;
+        cursor: pointer;
+      }
+      .rform-textarea {
+        resize: vertical;
+        min-height: 72px;
+      }
+      .rform-error {
+        font-size: 0.78rem;
+        color: var(--danger);
+        font-weight: 600;
+      }
+      .rform-error.hidden { display: none; }
+
+      .rform-actions {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .rform-submit-btn {
+        background: var(--granite);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 0.7rem 2rem;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.03em;
+        box-shadow: 0 3px 0 var(--deep-teal);
+        transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      }
+      .rform-submit-btn:hover {
+        background: var(--deep-teal);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 0 var(--granite);
+      }
+      .rform-submit-btn:focus-visible {
+        outline: 3px solid var(--cotton-rose);
+        outline-offset: 3px;
+      }
+      .rform-submit-btn:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* Success panel */
+      .rform-success {
+        text-align: center;
+        padding: 1rem 0.5rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.55rem;
+      }
+      .rform-success.hidden { display: none; }
+      .rform-success__icon { font-size: 2.75rem; line-height: 1; }
+      .rform-success__title {
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+        font-size: 1.35rem;
+        color: var(--granite);
+        margin: 0;
+      }
+      .rform-success__body {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.65;
+        max-width: 400px;
+        margin: 0 auto 0.5rem;
+      }
     </style>
+
   </head>
 
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ✅ HEADER (from PRODUCTS page: includes hamburger + cart button) -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <!-- If resources/ is a folder, this absolute link is safest -->
-        <a href="https://kahanikorner.com" class="brand" aria-label="Kahani Korner Home">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-
-        <nav class="nav">
-          <a href="../products.html">Shop</a>
-          <a href="../subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html" class="nav-active">Resources</a>
-          <a href="../index.html#faq">Help</a>
-          <a href="../index.html#contact">Contact</a>
-        </nav>
-
-        <!-- ✅ NEW: cart + chai cluster -->
-        <div class="header-actions">
-          <button
-            class="icon-btn-circle cart-btn-landing"
-            id="cart-btn"
-            aria-label="Open cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-          </button>
-
-          <a
-            class="icon-btn-circle chai-btn"
-            href="https://buy.stripe.com/cNiaEZ2oa31zefxcon0Fi0b"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Buy me chai">
-            <i class="fa-solid fa-mug-hot"></i>
-            <span class="chai-tooltip">Buy me chai <i class="fa-solid fa-mug-hot"></i></span>
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <!-- ✅ CART OVERLAY (from PRODUCTS page) -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ✅ MOBILE MENU OVERLAY (from PRODUCTS page) -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <a href="https://kahanikorner.com" class="mobile-menu__brand" aria-label="Kahani Korner Home">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" style="height:34px;width:auto;display:block;" />
-            </picture>
-          </a>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <ul class="mobile-menu__links">
-          <li><a href="../products.html">Shop</a></li>
-          <li><a href="../subscribe.html">Subscribe</a></li>
-          <li><a href="resources.html" class="nav-active">Resources</a></li>
-          <li><a href="../index.html#faq">Help</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Spacer so content clears fixed header -->
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
     <div class="header-spacer" aria-hidden="true"></div>
 
     <!-- RESOURCES CONTENT -->
@@ -1109,6 +1252,11 @@
             />
           </div>
           <p class="resource-search-empty hidden" id="resource-search-empty" role="status">No resources match your search.</p>
+        </div>
+
+        <!-- SUBMIT A RESOURCE CTA -->
+        <div class="submit-cta">
+          <button class="submit-cta__btn" id="open-submit-modal" type="button">Submit a Resource</button>
         </div>
 
         <div class="resource-grid" id="resource-grid">
@@ -1148,6 +1296,12 @@
             <span class="resource-link__desc">Urdu cartoons and shows to watch together as a family.</span>
           </a>
 
+          <a class="resource-link" href="socialmedia.html">
+            <span class="resource-link__icon"><i class="fa-brands fa-instagram"></i></span>
+            <span class="resource-link__title">Social Media Links</span>
+            <span class="resource-link__desc">The complete Instagram &amp; TikTok directory for Urdu learning — kids, beginners, vocabulary, storytelling, culture, and more.</span>
+          </a>
+
           <div class="resource-link resource-link--soon">
             <span class="resource-link__icon"><i class="fa-solid fa-microphone"></i></span>
             <span class="resource-link__title">Podcasts</span>
@@ -1165,50 +1319,9 @@
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
-      </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
-
-    <script src="/assets/cart.js"></script>
     <script>
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
@@ -1263,5 +1376,278 @@
         });
       })();
     </script>
+
+    <!-- SUBMIT RESOURCE MODAL -->
+    <div class="resource-modal-overlay hidden" id="resource-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="resource-modal">
+        <div class="resource-modal__header">
+          <h2 class="resource-modal__title" id="modal-title">Submit a Resource</h2>
+          <button class="resource-modal__close" id="modal-close" type="button" aria-label="Close modal">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="resource-modal__body">
+
+          <form id="resource-submit-form" novalidate>
+            <input type="hidden" name="form_name" value="Kahani Korner Resource Submission" />
+
+            <div class="rform-row">
+              <div class="rform-group">
+                <label class="rform-label" for="res-title">Resource Title <span class="rform-required" aria-hidden="true">*</span></label>
+                <input class="rform-input" id="res-title" type="text" name="resourceTitle" placeholder="e.g. Urdu Alphabet Song" />
+                <span class="rform-error hidden" id="err-title">Please enter a resource title.</span>
+              </div>
+              <div class="rform-group">
+                <label class="rform-label" for="res-type">Resource Type <span class="rform-required" aria-hidden="true">*</span></label>
+                <select class="rform-select" id="res-type" name="resourceType">
+                  <option value="">— Select type —</option>
+                  <option value="Printable / Worksheet">Printable / Worksheet</option>
+                  <option value="Song / Nasheed">Song / Nasheed</option>
+                  <option value="Video">Video</option>
+                  <option value="Book">Book</option>
+                  <option value="App / Website">App / Website</option>
+                  <option value="Activity Idea">Activity Idea</option>
+                  <option value="Parent Guide">Parent Guide</option>
+                  <option value="Teacher Resource">Teacher Resource</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="rform-error hidden" id="err-type">Please select a resource type.</span>
+              </div>
+            </div>
+
+            <div class="rform-group">
+              <label class="rform-label" for="res-link">Resource Link <span class="rform-required" aria-hidden="true">*</span></label>
+              <input class="rform-input" id="res-link" type="url" name="resourceLink" placeholder="https://…" />
+              <span class="rform-error hidden" id="err-link">Please enter a valid URL (include https://).</span>
+            </div>
+
+            <div class="rform-group">
+              <label class="rform-label" for="res-desc">Short Description <span class="rform-required" aria-hidden="true">*</span></label>
+              <textarea class="rform-textarea" id="res-desc" name="description" rows="3" placeholder="Briefly describe what this resource is and why it's helpful…"></textarea>
+              <span class="rform-error hidden" id="err-desc">Please add a short description.</span>
+            </div>
+
+            <div class="rform-row">
+              <div class="rform-group">
+                <label class="rform-label" for="res-language">Language Focus</label>
+                <select class="rform-select" id="res-language" name="languageFocus">
+                  <option value="">— Select —</option>
+                  <option value="Urdu">Urdu</option>
+                  <option value="Roman Urdu">Roman Urdu</option>
+                  <option value="English / Urdu">English / Urdu</option>
+                  <option value="Arabic / Urdu">Arabic / Urdu</option>
+                  <option value="Punjabi / Urdu">Punjabi / Urdu</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="rform-group">
+                <label class="rform-label" for="res-age">Age Range</label>
+                <select class="rform-select" id="res-age" name="ageRange">
+                  <option value="">— Select —</option>
+                  <option value="Babies / Toddlers">Babies / Toddlers</option>
+                  <option value="Preschool">Preschool</option>
+                  <option value="Early Elementary">Early Elementary</option>
+                  <option value="Older Kids">Older Kids</option>
+                  <option value="Parents">Parents</option>
+                  <option value="Teachers">Teachers</option>
+                  <option value="All Ages">All Ages</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="rform-row">
+              <div class="rform-group">
+                <label class="rform-label" for="res-own">Is this your own resource?</label>
+                <select class="rform-select" id="res-own" name="isOwn">
+                  <option value="">— Select —</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="rform-group">
+                <label class="rform-label" for="res-cost">Is it free or paid?</label>
+                <select class="rform-select" id="res-cost" name="cost">
+                  <option value="">— Select —</option>
+                  <option value="Free">Free</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Freemium">Freemium</option>
+                  <option value="Not sure">Not sure</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="rform-row">
+              <div class="rform-group">
+                <label class="rform-label" for="res-name">Your Name <span class="rform-required" aria-hidden="true">*</span></label>
+                <input class="rform-input" id="res-name" type="text" name="submitterName" placeholder="Your name" autocomplete="name" />
+                <span class="rform-error hidden" id="err-name">Please enter your name.</span>
+              </div>
+              <div class="rform-group">
+                <label class="rform-label" for="res-email">Your Email <span class="rform-required" aria-hidden="true">*</span></label>
+                <input class="rform-input" id="res-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" />
+                <span class="rform-error hidden" id="err-email">Please enter a valid email address.</span>
+              </div>
+            </div>
+
+            <div class="rform-group">
+              <label class="rform-label" for="res-notes">Optional Notes</label>
+              <textarea class="rform-textarea" id="res-notes" name="notes" rows="2" placeholder="Anything else you'd like us to know…"></textarea>
+            </div>
+
+            <div class="rform-actions">
+              <button class="rform-submit-btn" id="rform-submit-btn" type="submit">Submit Resource</button>
+            </div>
+          </form>
+
+          <div class="rform-success hidden" id="rform-success" role="status" aria-live="polite">
+            <div class="rform-success__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#4a594a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3 class="rform-success__title">Resource received — shukriya!</h3>
+            <p class="rform-success__body">We'll check it out and may add it to the Kahani Korner library soon!</p>
+            <button class="rform-submit-btn" type="button" id="modal-success-close">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var overlay     = document.getElementById('resource-modal-overlay');
+        var openBtn     = document.getElementById('open-submit-modal');
+        var closeBtn    = document.getElementById('modal-close');
+        var form        = document.getElementById('resource-submit-form');
+        var submitBtn   = document.getElementById('rform-submit-btn');
+        var successPanel = document.getElementById('rform-success');
+        var successClose = document.getElementById('modal-success-close');
+        if (!overlay || !openBtn) return;
+
+        // ── Open / close ───────────────────────────────────────────────────
+        function openModal() {
+          overlay.classList.remove('hidden');
+          requestAnimationFrame(function () { overlay.classList.add('open'); });
+          document.body.style.overflow = 'hidden';
+          closeBtn.focus();
+        }
+        function closeModal() {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+          setTimeout(function () {
+            overlay.classList.add('hidden');
+            form.classList.remove('hidden');
+            successPanel.classList.add('hidden');
+            form.reset();
+            clearAllErrors();
+          }, 260);
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        successClose.addEventListener('click', closeModal);
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+        });
+
+        // ── Validation ─────────────────────────────────────────────────────
+        var required = [
+          { input: 'res-title', error: 'err-title', msg: 'Please enter a resource title.' },
+          { input: 'res-link',  error: 'err-link',  msg: 'Please enter a valid URL (include https://).' },
+          { input: 'res-type',  error: 'err-type',  msg: 'Please select a resource type.' },
+          { input: 'res-desc',  error: 'err-desc',  msg: 'Please add a short description.' },
+          { input: 'res-name',  error: 'err-name',  msg: 'Please enter your name.' },
+          { input: 'res-email', error: 'err-email', msg: 'Please enter a valid email address.' },
+        ];
+
+        function clearAllErrors() {
+          required.forEach(function (f) {
+            document.getElementById(f.input).classList.remove('error');
+            document.getElementById(f.error).classList.add('hidden');
+          });
+        }
+
+        required.forEach(function (f) {
+          var el = document.getElementById(f.input);
+          el.addEventListener('input',  function () { clearFieldError(f); });
+          el.addEventListener('change', function () { clearFieldError(f); });
+        });
+
+        function clearFieldError(f) {
+          document.getElementById(f.input).classList.remove('error');
+          document.getElementById(f.error).classList.add('hidden');
+        }
+
+        function validate() {
+          var ok = true;
+          clearAllErrors();
+          required.forEach(function (f) {
+            var val = document.getElementById(f.input).value.trim();
+            var bad = !val;
+            if (f.input === 'res-link' && val) {
+              try { new URL(val); } catch (_) { bad = true; }
+            }
+            if (f.input === 'res-email' && val) {
+              bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+            }
+            if (bad) {
+              document.getElementById(f.input).classList.add('error');
+              var errEl = document.getElementById(f.error);
+              errEl.textContent = f.msg;
+              errEl.classList.remove('hidden');
+              ok = false;
+            }
+          });
+          return ok;
+        }
+
+        // ── Submit → Formspree ─────────────────────────────────────────────
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!validate()) return;
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting…';
+
+          var data = {
+            _subject:      'New Resource Submission — Kahani Korner',
+            form_name:     'Kahani Korner Resource Submission',
+            resourceTitle: document.getElementById('res-title').value.trim(),
+            resourceLink:  document.getElementById('res-link').value.trim(),
+            resourceType:  document.getElementById('res-type').value,
+            languageFocus: document.getElementById('res-language').value,
+            ageRange:      document.getElementById('res-age').value,
+            description:   document.getElementById('res-desc').value.trim(),
+            isOwn:         document.getElementById('res-own').value,
+            cost:          document.getElementById('res-cost').value,
+            submitterName: document.getElementById('res-name').value.trim(),
+            email:         document.getElementById('res-email').value.trim(),
+            notes:         document.getElementById('res-notes').value.trim(),
+          };
+
+          fetch('https://formspree.io/f/xnjreraw', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data),
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error('server error');
+              form.classList.add('hidden');
+              successPanel.classList.remove('hidden');
+            })
+            .catch(function () {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit Resource';
+              alert('Something went wrong. Please try again.');
+            });
+        });
+
+      })();
+    </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
+
   </body>
 </html>

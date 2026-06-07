@@ -343,23 +343,120 @@ body.loaded .email-modal {
 
 
 
-/* resources filter search dropdown */
+/* resources filter bar */
 
- .filter-container {
-        margin: 0 auto 1.5rem;
-        width: 100%;
-        max-width: 400px;
-      }
+.filter-container {
+  margin: 0 auto 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem 2rem;
+}
 
-      select {
-        width: 100%;
-        padding: 0.75rem;
-        font-size: 1rem;
-        border-radius: 8px;
-        border: 2px solid var(--hookers-green);
-        background-color: var(--white-smoke);
-        color: var(--ash-gray);
-      }
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.filter-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--hookers-green);
+}
+
+.filter-group select {
+  padding: 0.38rem 2rem 0.38rem 0.85rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 2px solid var(--hookers-green);
+  background-color: var(--white-smoke);
+  color: var(--feldgrau);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23687d70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--hookers-green);
+  background-color: var(--white-smoke);
+  color: var(--ash-gray);
+}
+
+/* language pills */
+
+.lang-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.lang-pill {
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 2px solid var(--hookers-green);
+  background: var(--white-smoke);
+  color: var(--feldgrau);
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lang-pill:hover {
+  background: var(--ash-gray);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(74, 89, 74, 0.18);
+}
+
+.lang-pill[aria-selected="true"] {
+  background: var(--hookers-green);
+  color: #fff;
+  border-color: var(--hookers-green);
+  box-shadow: 0 4px 12px rgba(74, 89, 74, 0.28);
+}
+
+.lang-pill[aria-selected="true"]:hover {
+  background: var(--feldgrau);
+  border-color: var(--feldgrau);
+  transform: translateY(-1px);
+}
+
+.lang-pill:focus-visible {
+  outline: 2px solid var(--feldgrau);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+    gap: 1rem;
+  }
+  .filter-group select {
+    width: 100%;
+  }
+}
 
 /* resources video grid layout */
 

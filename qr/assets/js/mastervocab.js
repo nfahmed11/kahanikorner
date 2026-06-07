@@ -1,5 +1,380 @@
 export const vocab = [
   {
+    id: "aaloo",
+    word: {
+      baseRomanUrdu: "aaloo",
+      baseUrdu: "آلو",
+      english: "potato",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "aaloo",
+        urdu: "آلو",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/aaloo.png",
+    riddles: {
+      english:
+        "I grow down low under the ground,\nIn fries and curry I can be found!",
+      romanUrdu:
+        "Zameen ke neeche chhup kar aaoon,\nSalan aur fries mein sab ko bhaaoon!",
+      urdu: "زمین کے نیچے چھپ کر آؤں،\nسالن اور فرائز میں سب کو بھاؤں!",
+    },
+  },
+  {
+    id: "sabzi",
+    word: {
+      baseRomanUrdu: "sabzi",
+      baseUrdu: "سبزی",
+      english: "vegetable",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "sabziyan",
+        urdu: "سبزیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/sabzi.png",
+    riddles: {
+      english:
+        "Fresh and green, I help you grow,\nOn your plate my colors show!",
+      romanUrdu: "Taazi taazi, rang dikhaye,\nPlate mein aaye, sehat laaye!",
+      urdu: "تازہ تازہ، رنگ دکھائے،\nپلیٹ میں آئے، صحت لائے!",
+    },
+  },
+  {
+    id: "tokri",
+    word: {
+      baseRomanUrdu: "tokri",
+      baseUrdu: "ٹوکری",
+      english: "basket",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "tokriyan",
+        urdu: "ٹوکریاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/tokri.png",
+    riddles: {
+      english:
+        "I hold fruits, toys, or bread,\nCarry me with your hand instead!",
+      romanUrdu:
+        "Phal ya khilone mujh mein aayen,\nHaath mein pakro, ghar le jayen!",
+      urdu: "پھل یا کھلونے مجھ میں آئیں،\nہاتھ میں پکڑو، گھر لے جائیں!",
+    },
+  },
+  {
+    id: "darna",
+    word: {
+      baseRomanUrdu: "darna",
+      baseUrdu: "ڈرنا",
+      english: "fear",
+      pos: "verb",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [
+      {
+        romanUrdu: "dara",
+        urdu: "ڈرا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "dari",
+        urdu: "ڈری",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "daray",
+        urdu: "ڈرے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "darta",
+        urdu: "ڈرتا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "darti",
+        urdu: "ڈرتی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "dartay",
+        urdu: "ڈرتے",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/darna.png",
+    riddles: {
+      english:
+        "When your heart feels small and tight,\nYou may feel this in the night!",
+      romanUrdu: "Dil dhak dhak karne lagta hai,\nJab andhera sa lagta hai!",
+      urdu: "دل دھک دھک کرنے لگتا ہے،\nجب اندھیرا سا لگتا ہے!",
+    },
+  },
+  {
+    id: "baigan",
+    word: {
+      baseRomanUrdu: "baigan",
+      baseUrdu: "بیگن",
+      english: "eggplant",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "baigan",
+        urdu: "بیگن",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/baigan.png",
+    riddles: {
+      english: "Purple outside, soft inside,\nIn yummy curry I can hide!",
+      romanUrdu:
+        "Bahar se jamni, andar se narm,\nSalan mein aaoon garam garam!",
+      urdu: "باہر سے جامنی، اندر سے نرم،\nسالن میں آؤں گرم گرم!",
+    },
+  },
+  {
+    id: "laat",
+    word: {
+      baseRomanUrdu: "laat",
+      baseUrdu: "لات",
+      english: "kick",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "laaten",
+        urdu: "لاتیں",
+        gender: "feminine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "laat marna",
+        urdu: "لات مارنا",
+        gender: null,
+        number: null,
+      },
+      {
+        romanUrdu: "laat mari",
+        urdu: "لات ماری",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "laat mariyan",
+        urdu: "لاتیں ماریں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/laat.png",
+    riddles: {
+      english: "With your foot you push away,\nMaybe in soccer when you play!",
+      romanUrdu: "Paon se zor laga kar jaaye,\nFootball ko door bhagaye!",
+      urdu: "پاؤں سے زور لگا کر جائے،\nفٹبال کو دور بھگائے!",
+    },
+  },
+  {
+    id: "rona",
+    word: {
+      baseRomanUrdu: "rona",
+      baseUrdu: "رونا",
+      english: "cry",
+      pos: "verb",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [
+      {
+        romanUrdu: "roya",
+        urdu: "رویا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "royi",
+        urdu: "روئی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "roye",
+        urdu: "روئے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "rota",
+        urdu: "روتا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "roti",
+        urdu: "روتی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "rotay",
+        urdu: "روتے",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/rona.png",
+    riddles: {
+      english:
+        "When tears fall down from your eye,\nYou may do this when you cry!",
+      romanUrdu: "Aankh se aansoo girte jayen,\nDil ki baat sab ko batayen!",
+      urdu: "آنکھ سے آنسو گرتے جائیں،\nدل کی بات سب کو بتائیں!",
+    },
+  },
+  {
+    id: "gajar",
+    word: {
+      baseRomanUrdu: "gajar",
+      baseUrdu: "گاجر",
+      english: "carrot",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "gajaren",
+        urdu: "گاجریں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/gajar.png",
+    riddles: {
+      english:
+        "Orange and crunchy, long and bright,\nBunnies love my tasty bite!",
+      romanUrdu:
+        "Narangi, karari, lambi si cheez,\nKhargosh bole, yeh hai azeez!",
+      urdu: "نارنجی، کراری، لمبی سی چیز،\nخرگوش بولے، یہ ہے عزیز!",
+    },
+  },
+  {
+    id: "matar",
+    word: {
+      baseRomanUrdu: "matar",
+      baseUrdu: "مٹر",
+      english: "peas",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "matar",
+        urdu: "مٹر",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "matar ka dana",
+        urdu: "مٹر کا دانہ",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "matar ke danay",
+        urdu: "مٹر کے دانے",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/matar.png",
+    riddles: {
+      english: "Tiny green balls in a pod,\nIn rice and curry I taste so good!",
+      romanUrdu:
+        "Chhotay sabz danay saath saath,\nPulao mein laayein meethi baat!",
+      urdu: "چھوٹے سبز دانے ساتھ ساتھ،\nپلاؤ میں لائیں میٹھی بات!",
+    },
+  },
+  {
+    id: "keera",
+    word: {
+      baseRomanUrdu: "keera",
+      baseUrdu: "کیڑا",
+      english: "bug",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "keeray",
+        urdu: "کیڑے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "keeri",
+        urdu: "کیڑی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "keeriyan",
+        urdu: "کیڑیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/keera.png",
+    riddles: {
+      english:
+        "Small and tiny, I crawl around,\nIn grass or soil I may be found!",
+      romanUrdu:
+        "Chhota sa hoon, reenghta jaoon,\nMitti ya ghaas mein nazar aaoon!",
+      urdu: "چھوٹا سا ہوں، رینگتا جاؤں،\nمٹی یا گھاس میں نظر آؤں!",
+    },
+  },
+  {
     id: "aag",
     word: {
       baseRomanUrdu: "aag",
@@ -1912,7 +2287,7 @@ export const vocab = [
     grammar: { baseGender: null },
     variants: [
       {
-        romanUrdu: "hnsa",
+        romanUrdu: "hansa",
         urdu: "ہنسا",
         gender: "masculine",
         number: "singular",
@@ -4759,40 +5134,964 @@ export const vocab = [
       urdu: "دل کو چین اور آرام ملے،\nہر چیز بالکل ٹھیک لگے!",
     },
   },
+
+  {
+    id: "basta",
+    word: {
+      baseRomanUrdu: "basta",
+      baseUrdu: "بستہ",
+      english: "school bag",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "bastay",
+        urdu: "بستے",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/basta.png",
+    riddles: {
+      english:
+        "I carry books to school each day,\nOn little shoulders, I ride away!",
+      romanUrdu:
+        "Kitabein le kar school main jaun,\nBachon ke kandhon par nazar aaun!",
+      urdu: "کتابیں لے کر اسکول میں جاؤں،\nبچوں کے کندھوں پر نظر آؤں!",
+    },
+  },
+  {
+    id: "pani",
+    word: {
+      baseRomanUrdu: "pani",
+      baseUrdu: "پانی",
+      english: "water",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [],
+    image: "/qr/assets/images/pani.png",
+    riddles: {
+      english:
+        "You drink me when your mouth feels dry,\nI fall as rain from the cloudy sky!",
+      romanUrdu: "Pyaas lage to mujhe pilao,\nBadal se gir kar zameen pe aaun!",
+      urdu: "پیاس لگے تو مجھے پلاؤ،\nبادل سے گر کر زمین پہ آؤں!",
+    },
+  },
+  {
+    id: "ghanti",
+    word: {
+      baseRomanUrdu: "ghanti",
+      baseUrdu: "گھنٹی",
+      english: "bell",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "ghantiyan",
+        urdu: "گھنٹیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/ghanti.png",
+    riddles: {
+      english:
+        "Ding-dong, ding-dong, I like to ring,\nI tell the class a new thing!",
+      romanUrdu: "Tan tan kar ke awaaz lagaoon,\nSab bachon ko waqt bataoon!",
+      urdu: "ٹن ٹن کر کے آواز لگاؤں،\nسب بچوں کو وقت بتاؤں!",
+    },
+  },
+  {
+    id: "gaari",
+    word: {
+      baseRomanUrdu: "gaari",
+      baseUrdu: "گاڑی",
+      english: "car",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "gaariyan",
+        urdu: "گاڑیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/gaari.png",
+    riddles: {
+      english:
+        "Four wheels roll along the street,\nHop inside and take a seat!",
+      romanUrdu: "Char pahiye sadak pe chalay,\nAndar betho, safar nikalay!",
+      urdu: "چار پہیے سڑک پہ چلیں،\nاندر بیٹھو، سفر نکلے!",
+    },
+  },
+  {
+    id: "naak",
+    word: {
+      baseRomanUrdu: "naak",
+      baseUrdu: "ناک",
+      english: "nose",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [],
+    image: "/qr/assets/images/naak.png",
+    riddles: {
+      english: "On your face, I help you smell,\nSweet or stinky, I can tell!",
+      romanUrdu:
+        "Chehre par hoon, khushboo paoon,\nAchhi buri sab pehchan jaoon!",
+      urdu: "چہرے پر ہوں، خوشبو پاؤں،\nاچھی بری سب پہچان جاؤں!",
+    },
+  },
+  {
+    id: "diggi",
+    word: {
+      baseRomanUrdu: "diggi",
+      baseUrdu: "ڈگی",
+      english: "car trunk",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "diggiyan",
+        urdu: "ڈگیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/diggi.png",
+    riddles: {
+      english: "At the back of the car I stay,\nBags and boxes hide away!",
+      romanUrdu:
+        "Gaari ke peechay chhup kar rahoon,\nSamaan aur petiyan andar rakh loon!",
+      urdu: "گاڑی کے پیچھے چھپ کر رہوں،\nسامان اور پیٹیاں اندر رکھ لوں!",
+    },
+  },
+  {
+    id: "peti",
+    word: {
+      baseRomanUrdu: "peti",
+      baseUrdu: "پیٹی",
+      english: "crate",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "petiyan",
+        urdu: "پیٹیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/peti.png",
+    riddles: {
+      english:
+        "I hold fruit in a neat little square,\nOpen me up and goodies are there!",
+      romanUrdu:
+        "Phal sambhal kar andar rakhoon,\nKholo mujhe to tohfa dikhaoon!",
+      urdu: "پھل سنبھال کر اندر رکھوں،\nکھولو مجھے تو تحفہ دکھاؤں!",
+    },
+  },
+  {
+    id: "aam",
+    word: {
+      baseRomanUrdu: "aam",
+      baseUrdu: "آم",
+      english: "mango",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [],
+    image: "/qr/assets/images/aam.png",
+    riddles: {
+      english:
+        "Yellow and juicy, king of fruit,\nSweet in summer, soft and cute!",
+      romanUrdu: "Peela meetha phal kehlata,\nGarmi aaye to dil lubhata!",
+      urdu: "پیلا میٹھا پھل کہلاتا،\nگرمی آئے تو دل لبھاتا!",
+    },
+  },
+  {
+    id: "kagaz",
+    word: {
+      baseRomanUrdu: "kagaz",
+      baseUrdu: "کاغذ",
+      english: "paper",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "kagazaat",
+        urdu: "کاغذات",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/kagaz.png",
+    riddles: {
+      english:
+        "Draw on me or write your name,\nLetters and pictures are my game!",
+      romanUrdu:
+        "Mujh par likho ya tasveer banao,\nNaam likh kar sab ko dikhao!",
+      urdu: "مجھ پر لکھو یا تصویر بناؤ،\nنام لکھ کر سب کو دکھاؤ!",
+    },
+  },
+  {
+    id: "ras",
+    word: {
+      baseRomanUrdu: "ras",
+      baseUrdu: "رس",
+      english: "juice",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [],
+    image: "/qr/assets/images/ras.png",
+    riddles: {
+      english:
+        "I drip from fruit, so sweet and bright,\nSticky fingers, pure delight!",
+      romanUrdu:
+        "Phal se tapkoon meetha meetha,\nHaath chipkaoon dheere dheere!",
+      urdu: "پھل سے ٹپکوں میٹھا میٹھا،\nہاتھ چپکاؤں دھیرے دھیرے!",
+    },
+  },
+  {
+    id: "lassi",
+    word: {
+      baseRomanUrdu: "lassi",
+      baseUrdu: "لسی",
+      english: "lassi",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [],
+    image: "/qr/assets/images/lassi.png",
+    riddles: {
+      english: "Cool and creamy in a glass,\nDrink me slow and smile at last!",
+      romanUrdu: "Thandi thandi glass main aaun,\nPiyo mujhe aur muskurao!",
+      urdu: "ٹھنڈی ٹھنڈی گلاس میں آؤں،\nپیو مجھے اور مسکراؤ!",
+    },
+  },
+  {
+    id: "gutli",
+    word: {
+      baseRomanUrdu: "gutli",
+      baseUrdu: "گٹھلی",
+      english: "mango seed",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "gutliyan",
+        urdu: "گٹھلیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/gutli.png",
+    riddles: {
+      english: "Inside the fruit, I hide away,\nPlant me and a tree may sway!",
+      romanUrdu: "Phal ke andar chup si rahoon,\nMitti mile to poda ban jaoon!",
+      urdu: "پھل کے اندر چپ سی رہوں،\nمٹی ملے تو پودا بن جاؤں!",
+    },
+  },
+  {
+    id: "kameez",
+    word: {
+      baseRomanUrdu: "kameez",
+      baseUrdu: "قمیض",
+      english: "shirt",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "kameezen",
+        urdu: "قمیضیں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/kameez.png",
+    riddles: {
+      english:
+        "I cover your arms and tummy too,\nI can be red, green, white, or blue!",
+      romanUrdu: "Jism pe pehni jaati hoon,\nRang birangi lagti hoon!",
+      urdu: "جسم پہ پہنی جاتی ہوں،\nرنگ برنگی لگتی ہوں!",
+    },
+  },
+  {
+    id: "bachay",
+    word: {
+      baseRomanUrdu: "bachay",
+      baseUrdu: "بچے",
+      english: "children",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "bacha",
+        urdu: "بچہ",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "bachi",
+        urdu: "بچی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "bachiyan",
+        urdu: "بچیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/bachay.png",
+    riddles: {
+      english:
+        "They laugh and learn and run around,\nIn school and parks, they can be found!",
+      romanUrdu:
+        "Hanstay khelte seekhte jayen,\nSchool aur park main nazar aayen!",
+      urdu: "ہنستے کھیلتے سیکھتے جائیں،\nاسکول اور پارک میں نظر آئیں!",
+    },
+  },
+  {
+    id: "din",
+    word: {
+      baseRomanUrdu: "din",
+      baseUrdu: "دن",
+      english: "day",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "dinon",
+        urdu: "دنوں",
+        gender: "masculine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/din.png",
+    riddles: {
+      english:
+        "Sun comes up and I begin,\nPlay and learn before night comes in!",
+      romanUrdu: "Suraj niklay to main aaun,\nRaat se pehle kaam karwaun!",
+      urdu: "سورج نکلے تو میں آؤں،\nرات سے پہلے کام کرواؤں!",
+    },
+  },
+  {
+    id: "bhaagnay",
+    word: {
+      baseRomanUrdu: "bhaagnay",
+      baseUrdu: "بھاگنے",
+      english: "running",
+      pos: "verb",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [
+      {
+        romanUrdu: "bhaagna",
+        urdu: "بھاگنا",
+        gender: null,
+        number: null,
+      },
+      {
+        romanUrdu: "bhaaga",
+        urdu: "بھاگا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "bhaagi",
+        urdu: "بھاگی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "bhaagay",
+        urdu: "بھاگے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "bhaagin",
+        urdu: "بھاگیں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/bhaagnay.png",
+    riddles: {
+      english:
+        "Fast feet move across the ground,\nCatch me if you come around!",
+      romanUrdu: "Tez qadam se aagay jaoon,\nPakro mujhe to muskuraoon!",
+      urdu: "تیز قدم سے آگے جاؤں،\nپکڑو مجھے تو مسکراؤں!",
+    },
+  },
+  {
+    id: "lapetay",
+    word: {
+      baseRomanUrdu: "lapetay",
+      baseUrdu: "لپیٹے",
+      english: "wrapped",
+      pos: "verb",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [
+      {
+        romanUrdu: "lapetna",
+        urdu: "لپیٹنا",
+        gender: null,
+        number: null,
+      },
+      {
+        romanUrdu: "lapeta",
+        urdu: "لپیٹا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "lapeti",
+        urdu: "لپیٹی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "lapetay",
+        urdu: "لپیٹے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "lapetin",
+        urdu: "لپیٹیں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/lapetay.png",
+    riddles: {
+      english:
+        "I cover things from side to side,\nA little gift can stay inside!",
+      romanUrdu:
+        "Cheez ko dhak kar saath nibhaoon,\nTohfay ko chup kar main sajhaoon!",
+      urdu: "چیز کو ڈھک کر ساتھ نبھاؤں،\nتحفے کو چپ کر میں سجاؤں!",
+    },
+  },
+  {
+    id: "chup",
+    word: {
+      baseRomanUrdu: "chup",
+      baseUrdu: "چپ",
+      english: "quiet",
+      pos: "adjective",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [],
+    image: "/qr/assets/images/chup.png",
+    riddles: {
+      english:
+        "No loud sound, no noisy cheer,\nSoft and still is what you hear!",
+      romanUrdu: "Na shor ho na awaaz aaye,\nSab halka halka sa ho jaye!",
+      urdu: "نہ شور ہو نہ آواز آئے،\nسب ہلکا ہلکا سا ہو جائے!",
+    },
+  },
+  {
+    id: "garmi",
+    word: {
+      baseRomanUrdu: "garmi",
+      baseUrdu: "گرمی",
+      english: "heat",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [],
+    image: "/qr/assets/images/garmi.png",
+    riddles: {
+      english:
+        "The sun is strong, the air feels hot,\nCold drinks help you quite a lot!",
+      romanUrdu: "Suraj tez aur hawa bhi garam,\nThanda pani kar de karam!",
+      urdu: "سورج تیز اور ہوا بھی گرم،\nٹھنڈا پانی کر دے کرم!",
+    },
+  },
+  {
+    id: "dhoop",
+    word: {
+      baseRomanUrdu: "dhoop",
+      baseUrdu: "دھوپ",
+      english: "sunlight",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [],
+    image: "/qr/assets/images/dhoop.png",
+    riddles: {
+      english:
+        "Golden light from the sky so bright,\nIt warms the world with sunny light!",
+      romanUrdu:
+        "Suraj ki roshni chamak dikhaye,\nZameen ko pyar se garam banaye!",
+      urdu: "سورج کی روشنی چمک دکھائے،\nزمین کو پیار سے گرم بنائے!",
+    },
+  },
+  {
+    id: "tez",
+    word: {
+      baseRomanUrdu: "tez",
+      baseUrdu: "تیز",
+      english: "sharp",
+      pos: "adjective",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [],
+    image: "/qr/assets/images/tez.png",
+    riddles: {
+      english:
+        "Quick like wind or sharp to feel,\nI can cut like a tiny wheel!",
+      romanUrdu: "Kabhi jaldi, kabhi kaat dikhaoon,\nApna matlab samjha jaoon!",
+      urdu: "کبھی جلدی، کبھی کاٹ دکھاؤں،\nاپنا مطلب سمجھا جاؤں!",
+    },
+  },
+  {
+    id: "kachay",
+    word: {
+      baseRomanUrdu: "kachay",
+      baseUrdu: "کچے",
+      english: "unripe",
+      pos: "adjective",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "kacha",
+        urdu: "کچا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "kachi",
+        urdu: "کچی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "kachay",
+        urdu: "کچے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "kachiyan",
+        urdu: "کچیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/kachay.png",
+    riddles: {
+      english:
+        "Not sweet yet, not ready to eat,\nWait a while for a softer treat!",
+      romanUrdu:
+        "Abhi na meetha, abhi na tayyar,\nThora ruk jao, hoga mazedar!",
+      urdu: "ابھی نہ میٹھا، ابھی نہ تیار،\nتھوڑا رک جاؤ، ہوگا مزے دار!",
+    },
+  },
+  {
+    id: "meetha",
+    word: {
+      baseRomanUrdu: "meetha",
+      baseUrdu: "میٹھا",
+      english: "sweet",
+      pos: "adjective",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "meetha",
+        urdu: "میٹھا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "meethi",
+        urdu: "میٹھی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "meethay",
+        urdu: "میٹھے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "meethiyan",
+        urdu: "میٹھیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/meetha.png",
+    riddles: {
+      english:
+        "Like sugar, honey, fruit, or treat,\nOne little taste feels very sweet!",
+      romanUrdu: "Cheeni jaisa maza dilaye,\nZubaan pe aate hi muskuraaye!",
+      urdu: "چینی جیسا مزہ دلائے،\nزبان پہ آتے ہی مسکرائے!",
+    },
+  },
+  {
+    id: "thanday",
+    word: {
+      baseRomanUrdu: "thanday",
+      baseUrdu: "ٹھنڈے",
+      english: "cold",
+      pos: "adjective",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "thanda",
+        urdu: "ٹھنڈا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "thandi",
+        urdu: "ٹھنڈی",
+        gender: "feminine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "thanday",
+        urdu: "ٹھنڈے",
+        gender: "masculine",
+        number: "plural",
+      },
+      {
+        romanUrdu: "thandiyan",
+        urdu: "ٹھنڈیاں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/thanday.png",
+    riddles: {
+      english: "From the fridge, I feel so cool,\nPerfect after sun or school!",
+      romanUrdu:
+        "Fridge se nikloon thanda thanda,\nGarmi main lagta bohat pasanda!",
+      urdu: "فریج سے نکلوں ٹھنڈا ٹھنڈا،\nگرمی میں لگتا بہت پسندہ!",
+    },
+  },
+  {
+    id: "aakhri",
+    word: {
+      baseRomanUrdu: "aakhri",
+      baseUrdu: "آخری",
+      english: "last",
+      pos: "adjective",
+    },
+    grammar: {
+      baseGender: null,
+    },
+    variants: [],
+    image: "/qr/assets/images/aakhri.png",
+    riddles: {
+      english: "At the end, I take my place,\nAfter me, there is no race!",
+      romanUrdu: "Sab ke baad main aata hoon,\nQatar ka akhri kehlata hoon!",
+      urdu: "سب کے بعد میں آتا ہوں،\nقطار کا آخری کہلاتا ہوں!",
+    },
+  },
+  {
+    id: "dafa",
+    word: {
+      baseRomanUrdu: "dafa",
+      baseUrdu: "دفعہ",
+      english: "time",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "dafay",
+        urdu: "دفعے",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/dafa.png",
+    riddles: {
+      english:
+        "Once or twice, I help you count,\nHow many moments? Say the amount!",
+      romanUrdu: "Aik dafa ya do dafa bolo,\nKitni baar hai, asani se kholo!",
+      urdu: "ایک دفعہ یا دو دفعہ بولو،\nکتنی بار ہے، آسانی سے کھولو!",
+    },
+  },
+  {
+    id: "intizaar",
+    word: {
+      baseRomanUrdu: "intizaar",
+      baseUrdu: "انتظار",
+      english: "waiting",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [
+      {
+        romanUrdu: "intizaar karna",
+        urdu: "انتظار کرنا",
+        gender: null,
+        number: null,
+      },
+      {
+        romanUrdu: "intizaar kiya",
+        urdu: "انتظار کیا",
+        gender: "masculine",
+        number: "singular",
+      },
+      {
+        romanUrdu: "intizaar kiya",
+        urdu: "انتظار کیا",
+        gender: "feminine",
+        number: "singular",
+      },
+    ],
+    image: "/qr/assets/images/intizaar.png",
+    riddles: {
+      english:
+        "You stand and stay, not yet go,\nSomething is coming, but moving slow!",
+      romanUrdu: "Ruk kar dekho, abhi na jao,\nJo aana hai, usko pao!",
+      urdu: "رک کر دیکھو، ابھی نہ جاؤ،\nجو آنا ہے، اُس کو پاؤ!",
+    },
+  },
+  {
+    id: "shor",
+    word: {
+      baseRomanUrdu: "shor",
+      baseUrdu: "شور",
+      english: "noise",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [],
+    image: "/qr/assets/images/shor.png",
+    riddles: {
+      english:
+        "Too many sounds all mixed around,\nCover your ears from the loud sound!",
+      romanUrdu:
+        "Bohat si awaazain mil jayen,\nKaan pakar kar bachay muskuraayen!",
+      urdu: "بہت سی آوازیں مل جائیں،\nکان پکڑ کر بچے مسکرائیں!",
+    },
+  },
+  {
+    id: "khushboo",
+    word: {
+      baseRomanUrdu: "khushboo",
+      baseUrdu: "خوشبو",
+      english: "fragrance",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "feminine",
+    },
+    variants: [
+      {
+        romanUrdu: "khushbooyen",
+        urdu: "خوشبوئیں",
+        gender: "feminine",
+        number: "plural",
+      },
+    ],
+    image: "/qr/assets/images/khushboo.png",
+    riddles: {
+      english:
+        "You cannot see me, but I am there,\nFlowers and fruit send me through air!",
+      romanUrdu:
+        "Dikhti nahi par mehsoos hoon,\nPhool aur phal se main khush hoon!",
+      urdu: "دکھتی نہیں پر محسوس ہوں،\nپھول اور پھل سے میں خوش ہوں!",
+    },
+  },
+  {
+    id: "sabr",
+    word: {
+      baseRomanUrdu: "sabr",
+      baseUrdu: "صبر",
+      english: "patience",
+      pos: "noun",
+    },
+    grammar: {
+      baseGender: "masculine",
+    },
+    variants: [],
+    image: "/qr/assets/images/sabr.png",
+    riddles: {
+      english:
+        "When things are slow, stay calm and bright,\nWait with hope; it will be right!",
+      romanUrdu:
+        "Kaam ho dheera to ghabrana nahi,\nAaram se rukna, jaldi karna nahi!",
+      urdu: "کام ہو دھیرے تو گھبرانا نہیں،\nآرام سے رکنا، جلدی کرنا نہیں!",
+    },
+  },
 ];
 
-export function buildVariantLookup(words) {
+export function buildVariantLookup(vocabList) {
   const lookup = {};
 
-  words.forEach((entry) => {
-    lookup[entry.word.baseRomanUrdu] = {
-      id: entry.id,
-      type: "base",
-      matchedRomanUrdu: entry.word.baseRomanUrdu,
-      matchedUrdu: entry.word.baseUrdu,
+  const addEntry = ({
+    key,
+    parentId,
+    matchType,
+    romanUrdu,
+    urdu,
+    baseRomanUrdu,
+    baseUrdu,
+    english,
+    pos,
+    gender,
+    number,
+    image,
+  }) => {
+    if (!key) return;
+
+    lookup[key] = {
+      parentId,
+      matchType,
+      romanUrdu,
+      urdu,
+      baseRomanUrdu,
+      baseUrdu,
+      english,
+      pos,
+      gender,
+      number,
+      image,
+    };
+  };
+
+  vocabList.forEach((entry) => {
+    addEntry({
+      key: entry.word.baseRomanUrdu,
+      parentId: entry.id,
+      matchType: "base",
+      romanUrdu: entry.word.baseRomanUrdu,
+      urdu: entry.word.baseUrdu,
       baseRomanUrdu: entry.word.baseRomanUrdu,
       baseUrdu: entry.word.baseUrdu,
       english: entry.word.english,
       pos: entry.word.pos,
-      gender: entry.grammar?.baseGender ?? null,
+      gender: entry.grammar.baseGender,
       number: null,
       image: entry.image,
-    };
+    });
+
+    addEntry({
+      key: entry.word.baseUrdu,
+      parentId: entry.id,
+      matchType: "base",
+      romanUrdu: entry.word.baseRomanUrdu,
+      urdu: entry.word.baseUrdu,
+      baseRomanUrdu: entry.word.baseRomanUrdu,
+      baseUrdu: entry.word.baseUrdu,
+      english: entry.word.english,
+      pos: entry.word.pos,
+      gender: entry.grammar.baseGender,
+      number: null,
+      image: entry.image,
+    });
 
     entry.variants.forEach((variant) => {
-      lookup[variant.romanUrdu] = {
-        id: entry.id,
-        type: "variant",
-        matchedRomanUrdu: variant.romanUrdu,
-        matchedUrdu: variant.urdu,
+      addEntry({
+        key: variant.romanUrdu,
+        parentId: entry.id,
+        matchType: "variant",
+        romanUrdu: variant.romanUrdu,
+        urdu: variant.urdu,
         baseRomanUrdu: entry.word.baseRomanUrdu,
         baseUrdu: entry.word.baseUrdu,
         english: entry.word.english,
         pos: entry.word.pos,
-        gender: variant.gender ?? null,
-        number: variant.number ?? null,
+        gender: variant.gender,
+        number: variant.number,
         image: entry.image,
-      };
+      });
+
+      addEntry({
+        key: variant.urdu,
+        parentId: entry.id,
+        matchType: "variant",
+        romanUrdu: variant.romanUrdu,
+        urdu: variant.urdu,
+        baseRomanUrdu: entry.word.baseRomanUrdu,
+        baseUrdu: entry.word.baseUrdu,
+        english: entry.word.english,
+        pos: entry.word.pos,
+        gender: variant.gender,
+        number: variant.number,
+        image: entry.image,
+      });
     });
   });
 

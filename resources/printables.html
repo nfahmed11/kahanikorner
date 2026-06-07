@@ -50,6 +50,7 @@
 
     <!-- Optional shared CSS (ok to keep) -->
     <link rel="stylesheet" href="../quicklinks/SharedCSS/common.css" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
 
     <style>
       /* --- THEME VARIABLES (match Resources page) --- */
@@ -855,99 +856,8 @@
   </head>
 
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- HEADER -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-
-        <nav class="nav">
-          <a href="/products.html">Shop</a>
-          <a href="/subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html" class="nav-active">Resources</a>
-          <a href="../index.html#faq">Help</a>
-          <a href="../index.html#contact">Contact</a>
-        </nav>
-
-        <button class="cart-btn-landing" id="cart-btn" aria-label="Open cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- CART OVERLAY -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MOBILE MENU OVERLAY -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <ul class="mobile-menu__links">
-          <li><a href="/products.html">Shop</a></li>
-          <li><a href="/subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html" class="nav-active">Resources</a></li>
-          <li><a href="../index.html#faq">Help</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Spacer so content clears fixed header -->
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
     <div class="header-spacer" aria-hidden="true"></div>
 
     <!-- MAIN -->
@@ -967,6 +877,14 @@
                 <option value="all">All Resources</option>
               </select>
             </div>
+            <div class="filter-group">
+              <span class="filter-label">Language</span>
+              <div class="lang-pills" role="tablist" aria-label="Filter by language">
+                <button class="lang-pill" role="tab" aria-selected="false" data-lang="Urdu" tabindex="0">Urdu</button>
+                <button class="lang-pill" role="tab" aria-selected="false" data-lang="Hindi" tabindex="-1">Hindi</button>
+                <button class="lang-pill" role="tab" aria-selected="false" data-lang="Both" tabindex="-1">Both</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -974,48 +892,8 @@
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
-      </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
 
@@ -1452,6 +1330,7 @@
           const wrapper = document.createElement("div");
           wrapper.className = "video-wrapper video";
           wrapper.dataset.category = catSlug;
+          wrapper.dataset.language = item.language || "Urdu";
 
           const link = document.createElement("a");
           link.className = "video-link";
@@ -1522,13 +1401,39 @@
           filter.appendChild(opt);
         });
 
-        filter.onchange = () => {
-          const value = filter.value;
-          document.querySelectorAll(".video").forEach((card) => {
-            const matches = value === "all" || card.dataset.category === value;
-            card.style.display = matches ? "block" : "none";
+        function getLangFilter() {
+          return document.querySelector('.lang-pill[aria-selected="true"]')?.dataset.lang ?? "";
+        }
+        function setupLangPills() {
+          const pills = document.querySelectorAll(".lang-pill");
+          pills.forEach(pill => {
+            pill.addEventListener("click", () => {
+            const isActive = pill.getAttribute("aria-selected") === "true";
+            pills.forEach(p => p.setAttribute("aria-selected", "false"));
+            if (!isActive) pill.setAttribute("aria-selected", "true");
+              applyFilters();
+            });
+            pill.addEventListener("keydown", e => {
+              const arr = Array.from(pills);
+              const idx = arr.indexOf(pill);
+              if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); arr[(idx + 1) % arr.length].focus(); }
+              else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); arr[(idx - 1 + arr.length) % arr.length].focus(); }
+            });
           });
-        };
+        }
+
+        function applyFilters() {
+          const catVal = filter.value;
+          const langVal = getLangFilter();
+          document.querySelectorAll(".video").forEach((card) => {
+            const lang = card.dataset.language || "Urdu";
+            const catMatch = catVal === "all" || card.dataset.category === catVal;
+            const langMatch = !langVal || lang === langVal || lang === "Both";
+            card.style.display = catMatch && langMatch ? "block" : "none";
+          });
+        }
+        filter.onchange = applyFilters;
+        setupLangPills();
       }
 
       // --------- CART (same behavior as resources) ----------
@@ -1729,6 +1634,8 @@
         init();
       });
     </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>
 ```

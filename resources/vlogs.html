@@ -17,7 +17,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-N97Z02BGG4');
 </script>
     <meta charset="UTF-8" />
@@ -25,390 +24,743 @@
     <title>Vlogs — Kahani Korner</title>
     <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
+
+    <style>
+      /* ── Channel Directory ── */
+
+      .page-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto 2rem;
+        padding: 0 0.5rem;
+      }
+
+      .search-wrap {
+        position: relative;
+        width: 100%;
+      }
+
+      .search-wrap i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--hookers-green, #687d70);
+        font-size: 0.95rem;
+        pointer-events: none;
+      }
+
+      #searchInput {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.65rem 1rem 0.65rem 2.6rem;
+        font-size: 0.9rem;
+        font-family: inherit;
+        font-weight: 500;
+        border-radius: 999px;
+        border: 2px solid var(--hookers-green, #687d70);
+        background: var(--white-smoke, #f3f1f0);
+        color: var(--feldgrau, #4a594a);
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        outline: none;
+      }
+
+      #searchInput:focus {
+        border-color: var(--feldgrau, #4a594a);
+        box-shadow: 0 0 0 3px rgba(74, 89, 74, 0.12);
+      }
+
+      #searchInput::placeholder { color: var(--ash-gray, #b0c3b7); }
+
+      .filter-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-row .filter-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--hookers-green, #687d70);
+        white-space: nowrap;
+      }
+
+      /* ── Channel Grid ── */
+
+      .channel-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 1300px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 1100px) { .channel-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 768px)  { .channel-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+      @media (max-width: 440px)  { .channel-grid { grid-template-columns: 1fr; } }
+
+      /* ── Channel Card ── */
+
+      .channel-card {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(74, 89, 74, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 1.25rem 1.25rem;
+        gap: 0.6rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1.5px solid rgba(176, 195, 183, 0.45);
+        text-align: center;
+      }
+
+      .channel-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(74, 89, 74, 0.18);
+      }
+
+      /* ── Avatar ── */
+
+      .channel-avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        position: relative;
+      }
+
+      .avatar-fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-size: 1.75rem;
+        font-weight: 800;
+      }
+
+      /* ── Card Body ── */
+
+      .channel-name {
+        font-family: "Grandstander", cursive;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--feldgrau, #4a594a);
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .lang-badge {
+        display: inline-block;
+        padding: 0.18rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .lang-badge.urdu  { background: #fce8e8; color: #a85858; border: 1.5px solid #f0b8b8; }
+      .lang-badge.hindi { background: #e4f0e8; color: #3d6b4a; border: 1.5px solid #b0d4bc; }
+
+      .channel-desc {
+        font-size: 0.8rem;
+        color: var(--muted, #5c6b68);
+        line-height: 1.55;
+        margin: 0;
+        flex: 1;
+      }
+
+      /* ── Card Buttons ── */
+
+      .card-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0.4rem;
+      }
+
+      .btn-visit {
+        display: block;
+        width: 100%;
+        padding: 0.55rem 0.75rem;
+        background: var(--hookers-green, #687d70);
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.15s ease;
+        cursor: pointer;
+      }
+
+      .btn-visit:hover { background: var(--feldgrau, #4a594a); transform: translateY(-1px); }
+
+      .btn-home {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        background: transparent;
+        color: var(--hookers-green, #687d70);
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1.5px solid var(--ash-gray, #b0c3b7);
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        cursor: pointer;
+      }
+
+      .btn-home:hover { border-color: var(--hookers-green, #687d70); color: var(--feldgrau, #4a594a); transform: translateY(-1px); }
+
+      /* ── No Results ── */
+
+      .no-results {
+        text-align: center;
+        color: var(--muted, #5c6b68);
+        font-size: 0.95rem;
+        padding: 3rem 1rem;
+        width: 100%;
+      }
+
+      .no-results i { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; color: var(--ash-gray, #b0c3b7); }
+
+      /* ── Results count ── */
+
+      .results-count {
+        font-size: 0.78rem;
+        color: var(--muted, #5c6b68);
+        text-align: center;
+        margin: 0 0 1.25rem;
+        letter-spacing: 0.04em;
+      }
+
+      @media (max-width: 600px) {
+        .page-controls { padding: 0; }
+        .filter-row { justify-content: center; }
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-        <nav class="nav">
-          <a href="/products.html">Shop</a>
-          <a href="/subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html" class="nav-active">Resources</a>
-          <a href="/#faq">Help</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-        <div class="header-actions">
-          <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-          </button>
-        </div>
-      </div>
-    </header>
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
     <div class="header-spacer" aria-hidden="true"></div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <ul class="mobile-menu__links">
-          <li><a href="/products.html">Shop</a></li>
-          <li><a href="/subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html" class="nav-active">Resources</a></li>
-          <li><a href="/#faq">Help</a></li>
-          <li><a href="/#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-  <div class="container">
-    <h1>Vlogs</h1>
-
-    <p class="subheading">Here are some of our favorite Urdu vlogs that share everyday family life in a fun and relatable way. Their content naturally introduces Urdu to kids and parents—without the overstimulation of animated cartoons.</p>
-
-    <div class="filter-container">
-      <select id="categoryFilter">
-        <option value="all">All Videos</option>
-        
-      </select>
-    </div>
-
-    
-      <div class="grid">
-        <!-- Video wrappers will be dynamically inserted here -->
-      </div>
-    </div><!-- close .container -->
-
-    <footer class="footer">
-      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
+    <!-- Page Content -->
+    <div class="container">
+      <h1>Vlogs</h1>
+      <p class="subheading">
+        Favorite Urdu and Hindi vloggers who share everyday family life in a fun, relatable way — naturally introducing the language without overstimulation.
       </p>
 
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
+      <!-- Search + Language Filter -->
+      <div class="page-controls" role="search">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search channels by name or description…"
+            aria-label="Search channels"
+            autocomplete="off"
+          />
+        </div>
+        <div class="filter-row">
+          <span class="filter-label" id="lang-filter-label">Language</span>
+          <div class="lang-pills" role="tablist" aria-labelledby="lang-filter-label">
+            <button class="lang-pill" role="tab" aria-selected="true"  data-lang="all"   tabindex="0">All Languages</button>
+            <button class="lang-pill" role="tab" aria-selected="false" data-lang="urdu"  tabindex="-1">Urdu</button>
+            <button class="lang-pill" role="tab" aria-selected="false" data-lang="hindi" tabindex="-1">Hindi</button>
+          </div>
+        </div>
       </div>
 
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
+      <p class="results-count" id="resultsCount" aria-live="polite"></p>
 
-  
-<script>
-  // object and function to add new videos onto the page
-  const videolist =  [
-  {
-    name: "Siachen Village Vlogs",
-    type: "channel",
-    url: "https://www.youtube.com/@SiachenVillageVlogs/videos",
-    image: "/assets/images/resources/vlog1.png",
-    category: "Urdu",
-    description: "Welcome to Siachen Village Vlogs. Discover the real mountain life of northern Pakistan — simple, tough, yet full of heart.",
-  },
+      <div class="channel-grid" id="channelGrid" aria-live="polite" aria-label="Vlog channel directory"></div>
 
-  {
-  name: "MUSA TANVEER",
-  type: "channel",
-  url: "https://www.youtube.com/@MUSATANVEER/videos",
-  image: "https://yt3.googleusercontent.com/EiS5vEmZz2VnyZyQK3lUcd0LAw-e_0hJa7HXGSDuCU10k1KyBPr2LnZreRgYr0pbQz-BovN0OQ=s160-c-k-c0x00ffffff-no-rj",
-  category: "Comedy / Skits / Urdu Kids",
-  description: "Musa Tanveer is a child YouTuber known for entertaining Urdu skits, life lessons, and family-friendly content that kids love.",
-},
-   {
-    name: "Wildlens by Abrar",
-    type: "channel",
-    url: "https://www.youtube.com/@WildlensbyAbrar/videos",
-    image: "/assets/images/resources/abrar.png",
-    category: "Travel / Urdu",
-    description: "I'm Abrar Hassan, a travel vlogger riding around the world on my motorcycle.",
-  },
-  {
-    name: "Sanakay Sang",
-    type: "channel",
-    url: "https://www.youtube.com/@SanakaySang/videos",
-    image: "/assets/images/resources/sanakaysang.png",
-    category: "Educational / Kids",
-    description: "Let's have fun and learn together while we discover new things along the way.",
-  },
+      <p class="no-results hidden" id="noResults" aria-live="polite">
+        <i class="fa-solid fa-video-slash" aria-hidden="true"></i>
+        No channels match your search.<br>Try a different term or clear the filter.
+      </p>
+    </div>
 
-  {
-    name: "Urdu Aami",
-    type: "channel",
-    url: "https://www.youtube.com/@urduami/videos",
-    image: "/assets/images/resources/sarah.png",
-    category: "Urdu",
-    description: "An American Pakistani Mom of TWO. Trying to spread the love of an utmost tehzeeb URDU. We share Urdu lessons, Urdu stories and everything about URDU, our culture. ",
-  },
-  
-  
-  {
-    name: "We The Masti Kids",
-    type: "channel",
-    url: "https://www.youtube.com/@WeTheMastiKids",
-    image: "https://yt3.googleusercontent.com/ytc/AIdro_nX4cByod2SgtQ6FE168plNMr6YfAOdPTB_kdrjSJZdtg=s160-c-k-c0x00ffffff-no-rj",
-    category: "family",
-    description: "Follow two brothers, Ishmael and Isaac as they expand their knowledge and learn new Urdu words",
-  },
-  {
-  name: "Life with Hafsaa",
-  type: "channel",
-  url: "https://www.youtube.com/@LifewithHafsaa",
-  image: "https://yt3.googleusercontent.com/vC0ONj5Ngf0dKxu2167TQg0CneHZccVywfFKbmKQYuVLjBLFZuNKRUiAPbTeg7FZqUZm6rC2Aw=s160-c-k-c0x00ffffff-no-rj",
-  category: "Family / Islamic / Urdu",
-  description: "A family-friendly Urdu vlogging channel where Hafsaa shares her daily life, Islamic reflections, and routines with young children.",
-},
-{
-  name: "Sehrish Luqman Vlogs",
-  type: "channel",
-  url: "https://www.youtube.com/@SehrishLuqmanVlogss/videos",
-  image: "https://yt3.googleusercontent.com/LEz1Tn8cN3KcaZZ5bkqbWHMpu66-_2YqTprXRZlvHDzhbLwsKCEwo3_9tku2fSwmU0ksyHChzw=s160-c-k-c0x00ffffff-no-rj",
-  category: "Lifestyle / Urdu Vlogs",
-  description: "Sehrish Luqman shares Urdu-language lifestyle vlogs that include family moments, parenting, and engaging storytelling.",
-},
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
-{
-  name: "Abdul Rahman's Adventures",
-  type: "channel",
-  url: "https://www.youtube.com/@AbdulRahmankAdventures/videos",
-  image: "https://yt3.googleusercontent.com/JmH2tor51cQTuHrpUWM9PYlHN8vd2an7cd2RdgyhNsigAfLR3NYqIXUkIu-t8yfFUkOQOrjk3w=s160-c-k-c0x00ffffff-no-rj",
-  category: "Travel / Educational / Islamic",
-  description: "Young Abdul Rahman explores the world through Islamic family travel vlogs, Urdu storytelling, and cultural adventures.",
-},
+    <script>
+      // ── Channel data ────────────────────────────────────────────────────────
 
+      const channels = [
 
-    
-  ];
+        // ── URDU (12 channels) ────────────────────────────────────────────────
+        {
+          id: "siachen-village-vlogs",
+          name: "Siachen Village Vlogs",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@SiachenVillageVlogs/playlists",
+          allVideosUrl: "https://www.youtube.com/@SiachenVillageVlogs/videos",
+          avatar: "https://yt3.googleusercontent.com/H8MNzPtsq2Ybq1zLtiLBwzF5bDxzmnrkN2kZECaoRK3HFHaCh3GMK3HcaFdUdSowUPp-oZA5BQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Discover the real mountain life of northern Pakistan — simple, tough, yet full of heart."
+        },
+        {
+          id: "entertainment-with-musa",
+          name: "Entertainment with Musa",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@MUSATANVEER/playlists",
+          allVideosUrl: "https://www.youtube.com/@MUSATANVEER/videos",
+          avatar: "https://yt3.googleusercontent.com/EiS5vEmZz2VnyZyQK3lUcd0LAw-e_0hJa7HXGSDuCU10k1KyBPr2LnZreRgYr0pbQz-BovN0OQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Musa is a child YouTuber known for entertaining Urdu skits, life lessons, and family-friendly content that kids love."
+        },
+        {
+          id: "wildlens-by-abrar",
+          name: "WildLens by Abrar",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@WildlensbyAbrar/playlists",
+          allVideosUrl: "https://www.youtube.com/@WildlensbyAbrar/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_kbaPKUXJIii1Ab405zntFmSkrnKPGm8PFY9omOTcGkcoo=s160-c-k-c0x00ffffff-no-rj",
+          description: "A travel vlogger riding around the world on his motorcycle, narrating in natural Urdu."
+        },
+        {
+          id: "sana-kay-sang",
+          name: "Sana kay Sang",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@SanakaySang/playlists",
+          allVideosUrl: "https://www.youtube.com/@SanakaySang/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6hK7_uGXZYVAflR1-35fXq7edJgZmFX6_kPkHAhVTIt8=s160-c-k-c0x00ffffff-no-rj",
+          description: "Let's have fun and learn together while we discover new things along the way."
+        },
+        {
+          id: "urdu-ami",
+          name: "Urdu Ami",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@urduami/playlists",
+          allVideosUrl: "https://www.youtube.com/@urduami/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_mbZZEgszMc2F72Dh7UUQmUvAVYoGh0mbOXrQ7MLPAafh71=s160-c-k-c0x00ffffff-no-rj",
+          description: "An American Pakistani mom spreading the love of Urdu through lessons, stories, and culture."
+        },
+        {
+          id: "we-the-masti-kids",
+          name: "We The Masti Kids",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@WeTheMastiKids/playlists",
+          allVideosUrl: "https://www.youtube.com/@WeTheMastiKids/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_nX4cByod2SgtQ6FE168plNMr6YfAOdPTB_kdrjSJZdtg=s160-c-k-c0x00ffffff-no-rj",
+          description: "Follow two brothers, Ishmael and Isaac, as they expand their knowledge and learn new Urdu words."
+        },
+        {
+          id: "life-with-hafsah",
+          name: "Life with Hafsah",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@LifewithHafsaa/playlists",
+          allVideosUrl: "https://www.youtube.com/@LifewithHafsaa/videos",
+          avatar: "https://yt3.googleusercontent.com/vC0ONj5Ngf0dKxu2167TQg0CneHZccVywfFKbmKQYuVLjBLFZuNKRUiAPbTeg7FZqUZm6rC2Aw=s160-c-k-c0x00ffffff-no-rj",
+          description: "A family-friendly Urdu vlogging channel sharing daily life, Islamic reflections, and routines with young children."
+        },
+        {
+          id: "sehrish-luqman-vlogs",
+          name: "Sehrish & Luqman Vlogs",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@SehrishLuqmanVlogss/playlists",
+          allVideosUrl: "https://www.youtube.com/@SehrishLuqmanVlogss/videos",
+          avatar: "https://yt3.googleusercontent.com/LEz1Tn8cN3KcaZZ5bkqbWHMpu66-_2YqTprXRZlvHDzhbLwsKCEwo3_9tku2fSwmU0ksyHChzw=s160-c-k-c0x00ffffff-no-rj",
+          description: "Urdu-language lifestyle vlogs covering family moments, parenting, and engaging storytelling."
+        },
+        {
+          id: "abdul-rahman-adventures",
+          name: "Abdul Rahman k Adventures",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@AbdulRahmankAdventures/playlists",
+          allVideosUrl: "https://www.youtube.com/@AbdulRahmankAdventures/videos",
+          avatar: "https://yt3.googleusercontent.com/JmH2tor51cQTuHrpUWM9PYlHN8vd2an7cd2RdgyhNsigAfLR3NYqIXUkIu-t8yfFUkOQOrjk3w=s160-c-k-c0x00ffffff-no-rj",
+          description: "Young Abdul Rahman explores the world through Islamic family travel vlogs, Urdu storytelling, and cultural adventures."
+        },
+        {
+          id: "nageen-lifestyle",
+          name: "Nageen Lifestyle in America",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@NageenLifestyle/playlists",
+          allVideosUrl: "https://www.youtube.com/@NageenLifestyle/videos",
+          avatar: "https://yt3.googleusercontent.com/jql_gAhP3pBUvYCvKxZgW3NL25c8h4G0nisLvPSnxUVeWLdQhM-Ilv9-VLSE0aKCCTIs37Ukgg=s160-c-k-c0x00ffffff-no-rj",
+          description: "Pakistani mom in the US sharing daily routines, cooking, and family life in conversational Urdu."
+        },
+        {
+          id: "fariha-lifestyle",
+          name: "Fariha Lifestyle",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@farihalifestyle/playlists",
+          allVideosUrl: "https://www.youtube.com/@farihalifestyle/videos",
+          avatar: "https://yt3.googleusercontent.com/sb1bXps3G4QfY1IfWPEJKt7I4wA2mucDiQ2eNnuFK23v55VCvgyiRToLeDXvNOLQkaJuHwys=s160-c-k-c0x00ffffff-no-rj",
+          description: "Pakistani mom in the UK vlogging morning routines, cooking, and daily life in casual spoken Urdu."
+        },
+        {
+          id: "shoaib-maharzada",
+          name: "Shoaib Maharzada",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@shoaibmaharzada/playlists",
+          allVideosUrl: "https://www.youtube.com/@shoaibmaharzada/videos",
+          avatar: "https://yt3.googleusercontent.com/_tsTpP_ndPZY2UKoYqxlMA0gT14xLHU5kqPsaDpzqeoaGwDzXagYlvUOdxdMNFGRm74USmNfX34=s160-c-k-c0x00ffffff-no-rj",
+          description: "Travel vlogs and everyday life narrated in natural conversational Urdu."
+        },
 
-  const grid = document.querySelector(".grid");
-  grid.innerHTML = ""; // Clear any hardcoded video-wrapper divs
+        // ── HINDI (9 channels) ────────────────────────────────────────────────
+        {
+          id: "sourav-joshi-vlogs",
+          name: "Sourav Joshi Vlogs",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@souravjvlogs/playlists",
+          allVideosUrl: "https://www.youtube.com/@souravjvlogs/videos",
+          avatar: "https://yt3.googleusercontent.com/Eb6xZ8irjVgF187eBWAZTsUh7Q6qQSSz5kw_5yJxgUL12sVZORG9ilYGIpca9SyYmGotCHlt1Q=s160-c-k-c0x00ffffff-no-rj",
+          description: "India's most popular daily life vlogger featuring family activities and everyday Hindi conversation."
+        },
+        {
+          id: "dhruv-rathee-vlogs",
+          name: "Dhruv Rathee Vlogs",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@DhruvRatheeVlogs/playlists",
+          allVideosUrl: "https://www.youtube.com/@DhruvRatheeVlogs/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_klgvZS3LdOlpIBdznBEu5HN4pLP_IpOpGizLu6c7t2Tc8=s160-c-k-c0x00ffffff-no-rj",
+          description: "Travel vlogs narrated in natural conversational Hindi."
+        },
+        {
+          id: "nomadic-indian",
+          name: "Nomadic Indian",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@NomadicIndian/playlists",
+          allVideosUrl: "https://www.youtube.com/@NomadicIndian/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_k3Fm0FqqG1XRfuvpB6MeCq0D__ofhKQ3ykTJ1IrQyUQSM=s160-c-k-c0x00ffffff-no-rj",
+          description: "Solo travel channel exploring destinations around the world in Hindi."
+        },
+        {
+          id: "kanishk-gupta",
+          name: "Kanishk Gupta",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@KanishkGupta/playlists",
+          allVideosUrl: "https://www.youtube.com/@KanishkGupta/videos",
+          avatar: "https://yt3.googleusercontent.com/Wu7aiQF12aoAzdXTCgDIpkm_55BXg-J-Bo8FzV_9_XH0Z00NDwe7u1k_-PiG8XM1ohgKJ-6s=s160-c-k-c0x00ffffff-no-rj",
+          description: "Travel documentaries and village exploration narrated in slow descriptive Hindi."
+        },
+        {
+          id: "karl-rock",
+          name: "Karl Rock",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@KarlRock/playlists",
+          allVideosUrl: "https://www.youtube.com/@KarlRock/videos",
+          avatar: "https://yt3.googleusercontent.com/Nzlkj9QgjdpcrM-lalpYPKkM2hynBdUGhfGg3io38kC5WDiUKyfL_i7sdL8ylwhwyZL4oaU-=s160-c-k-c0x00ffffff-no-rj",
+          description: "Hindi-speaking foreigner sharing real interactions in markets, homes, and daily Indian life."
+        },
+        {
+          id: "indian-vlogger-mahika",
+          name: "Indian Vlogger Mahika's Channel",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@IndianVloggerMahikasChannel/playlists",
+          allVideosUrl: "https://www.youtube.com/@IndianVloggerMahikasChannel/videos",
+          avatar: "https://yt3.googleusercontent.com/4Lfmg1BI3SMy0o9JPoc2eYl5LA9NYLdYW5enKApTDee5lDp9WbtwOdG7jFUduCnNnbHPZ0kq=s160-c-k-c0x00ffffff-no-rj",
+          description: "Family routines, parenting, cooking, and daily life in natural Hindi."
+        },
+        {
+          id: "nisha-madhulika",
+          name: "NishaMadhulika",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@nishamadhulika/playlists",
+          allVideosUrl: "https://www.youtube.com/@nishamadhulika/videos",
+          avatar: "https://yt3.googleusercontent.com/Oym_qRh41EpoCDEQanF5rOauZVzdYutexIsZYqppdS_vXJQGk5S0RUx7UwpO9Zi4gXoMiapg=s160-c-k-c0x00ffffff-no-rj",
+          description: "India's most popular Hindi cooking channel with clear step-by-step narration."
+        },
+        {
+          id: "bb-ki-vines",
+          name: "BB Ki Vines",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@BBKiVines/playlists",
+          allVideosUrl: "https://www.youtube.com/@BBKiVines/videos",
+          avatar: "https://yt3.googleusercontent.com/H2c8y3sN7j3Hslc_eCun0FSJCQcrYl4zPyhsCt1510INBq1h2vFQTMUOtI4HJNkFD07s0pFlCA=s160-c-k-c0x00ffffff-no-rj",
+          description: "Comedy sketches and dialogue-heavy family scenarios in natural Hindi."
+        },
+        {
+          id: "raj-shamani",
+          name: "Raj Shamani",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@rajshamani/playlists",
+          allVideosUrl: "https://www.youtube.com/@rajshamani/videos",
+          avatar: "https://yt3.googleusercontent.com/qSVJkhoSs6lw5cNMsZAJ8ZAk1pxiewDb_gLtnzOsyM5TWQ6YggQj0eBetOLSxFuJqgxsyQ73NA=s160-c-k-c0x00ffffff-no-rj",
+          description: "Long-form Hindi interviews and discussions on business, science, and life."
+        }
+      ];
 
-  function getYouTubeID(embedURL) {
-    const match = embedURL.match(/embed\/([a-zA-Z0-9_-]+)/);
-    return match ? match[1] : "";
-  }
+      // ── Avatar palettes ───────────────────────────────────────────────────────
 
-  videolist.forEach((video) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = `video-wrapper video ${video.category}`;
+      const URDU_PALETTES = [
+        { bg: "#d49797", text: "#ffffff" },
+        { bg: "#c97878", text: "#ffffff" },
+        { bg: "#e8b8b8", text: "#7a3d3d" },
+        { bg: "#ffc4c3", text: "#8b4040" },
+        { bg: "#f3dedd", text: "#9a5050" },
+        { bg: "#b87a7a", text: "#ffffff" }
+      ];
 
-    const title = document.createElement("div");
-    title.className = `video-title ${video.category}`;
-    title.textContent = video.name;
+      const HINDI_PALETTES = [
+        { bg: "#687d70", text: "#ffffff" },
+        { bg: "#4a594a", text: "#ffffff" },
+        { bg: "#b0c3b7", text: "#3a4a3a" },
+        { bg: "#c9dcce", text: "#3a4a3a" },
+        { bg: "#8aab94", text: "#ffffff" },
+        { bg: "#5e7a65", text: "#ffffff" }
+      ];
 
-    if (video.type === "channel") {
-      const preview = document.createElement("a");
-      preview.href = video.url;
-      preview.target = "_blank";
-      preview.style.textDecoration = "none";
+      // ── Build card ────────────────────────────────────────────────────────────
 
-      const banner = document.createElement("img");
-      banner.src = video.image;
-      banner.alt = video.name;
-      banner.style.width = "100%";
-      banner.style.display = "block";
-      banner.style.objectFit = "cover";
-      banner.style.height = "180px"; // keep same height as iframe thumbnails
+      function buildCard(channel, colorIndex) {
+        const palettes = channel.language === "urdu" ? URDU_PALETTES : HINDI_PALETTES;
+        const palette  = palettes[colorIndex % palettes.length];
+        const initial  = channel.name.charAt(0).toUpperCase();
 
-      preview.appendChild(banner);
-      wrapper.appendChild(preview);
-    } else {
-      // default behavior for embedded videos
-      const preview = document.createElement("div");
-      preview.className = "video-thumbnail";
-      preview.style.position = "relative";
-      preview.style.cursor = "pointer";
+        const card = document.createElement("article");
+        card.className = "channel-card";
+        card.dataset.lang = channel.language;
+        card.dataset.name = channel.name.toLowerCase();
+        card.dataset.desc = channel.description.toLowerCase();
 
-      const thumbnail = document.createElement("img");
-      thumbnail.src = `https://img.youtube.com/vi/${getYouTubeID(
-        video.embed
-      )}/hqdefault.jpg`;
-      thumbnail.alt = video.name;
-      thumbnail.style.width = "100%";
-      thumbnail.style.display = "block";
+        // Avatar
+        const avatarWrap = document.createElement("div");
+        avatarWrap.className = "channel-avatar";
+        avatarWrap.style.background = palette.bg;
 
-      const playButton = document.createElement("div");
-      playButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="36" height="36" style="display:block;filter:drop-shadow(0 0 6px rgba(0,0,0,0.5))"><path d="M8 5v14l11-7z"/></svg>';
-      playButton.style.position = "absolute";
-      playButton.style.top = "50%";
-      playButton.style.left = "50%";
-      playButton.style.transform = "translate(-50%, -50%)";
-      playButton.style.fontSize = "2rem";
-      playButton.style.color = "#fff";
-      playButton.style.textShadow = "0 0 10px rgba(0,0,0,0.6)";
+        const fallback = document.createElement("span");
+        fallback.className = "avatar-fallback";
+        fallback.textContent = initial;
+        fallback.style.color = palette.text;
+        fallback.setAttribute("aria-hidden", "true");
+        avatarWrap.appendChild(fallback);
 
-      preview.addEventListener("click", () => {
-        const iframe = document.createElement("iframe");
-        iframe.src = video.embed + "?autoplay=1";
-        iframe.setAttribute("allowfullscreen", true);
-        iframe.setAttribute("loading", "lazy");
-        iframe.style.width = "100%";
-        iframe.style.height = "180px";
-        preview.replaceWith(iframe);
+        if (channel.avatar) {
+          const img = document.createElement("img");
+          img.src = channel.avatar;
+          img.alt = channel.name;
+          img.loading = "lazy";
+          img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;";
+          img.addEventListener("error", () => img.remove());
+          img.addEventListener("load",  () => { fallback.style.visibility = "hidden"; });
+          avatarWrap.appendChild(img);
+        }
+
+        // Name
+        const nameEl = document.createElement("h2");
+        nameEl.className = "channel-name";
+        nameEl.textContent = channel.name;
+
+        // Badge
+        const badge = document.createElement("span");
+        badge.className = `lang-badge ${channel.language}`;
+        badge.textContent = channel.language === "urdu" ? "Urdu" : "Hindi";
+
+        // Description
+        const desc = document.createElement("p");
+        desc.className = "channel-desc";
+        desc.textContent = channel.description;
+
+        // Buttons
+        const actions = document.createElement("div");
+        actions.className = "card-actions";
+
+        const visitBtn = document.createElement("a");
+        visitBtn.className = "btn-visit";
+        visitBtn.href = channel.allVideosUrl;
+        visitBtn.target = "_blank";
+        visitBtn.rel = "noopener noreferrer";
+        visitBtn.setAttribute("aria-label", `View videos from ${channel.name}`);
+        visitBtn.innerHTML = '<i class="fa-brands fa-youtube" aria-hidden="true" style="margin-right:0.4rem;"></i>View Videos';
+
+        const homeBtn = document.createElement("a");
+        homeBtn.className = "btn-home";
+        homeBtn.href = channel.playlistsUrl;
+        homeBtn.target = "_blank";
+        homeBtn.rel = "noopener noreferrer";
+        homeBtn.setAttribute("aria-label", `View ${channel.name} playlists`);
+        homeBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" style="margin-right:0.35rem; font-size:0.72rem;"></i>Playlists';
+
+        actions.appendChild(visitBtn);
+        actions.appendChild(homeBtn);
+
+        card.appendChild(avatarWrap);
+        card.appendChild(nameEl);
+        card.appendChild(badge);
+        card.appendChild(desc);
+        card.appendChild(actions);
+
+        return card;
+      }
+
+      // ── Render & filter ───────────────────────────────────────────────────────
+
+      const grid         = document.getElementById("channelGrid");
+      const noResults    = document.getElementById("noResults");
+      const resultsCount = document.getElementById("resultsCount");
+
+      function getActiveLang() {
+        return document.querySelector('.lang-pill[aria-selected="true"]')?.dataset.lang ?? "all";
+      }
+
+      function getSearchTerm() {
+        return document.getElementById("searchInput").value.trim().toLowerCase();
+      }
+
+      function renderChannels() {
+        const lang = getActiveLang();
+        const term = getSearchTerm();
+
+        const filtered = channels.filter(ch => {
+          const langMatch   = lang === "all" || ch.language === lang;
+          const searchMatch = !term
+            || ch.name.toLowerCase().includes(term)
+            || ch.description.toLowerCase().includes(term)
+            || ch.language.includes(term);
+          return langMatch && searchMatch;
+        });
+
+        grid.innerHTML = "";
+
+        if (filtered.length === 0) {
+          noResults.classList.remove("hidden");
+          resultsCount.textContent = "";
+        } else {
+          noResults.classList.add("hidden");
+          filtered.forEach((ch, i) => grid.appendChild(buildCard(ch, i)));
+          resultsCount.textContent = filtered.length === channels.length
+            ? `Showing all ${channels.length} channels`
+            : `Showing ${filtered.length} of ${channels.length} channels`;
+        }
+      }
+
+      // ── URL param support ────────────────────────────────────────────────────
+
+      function applyURLParams() {
+        const params    = new URLSearchParams(window.location.search);
+        const langParam = params.get("lang")?.toLowerCase();
+        const qParam    = params.get("q");
+
+        if (langParam && ["urdu", "hindi", "all"].includes(langParam)) {
+          document.querySelectorAll(".lang-pill").forEach(p => {
+            const selected = p.dataset.lang === langParam;
+            p.setAttribute("aria-selected", String(selected));
+            p.tabIndex = selected ? 0 : -1;
+          });
+        }
+        if (qParam) document.getElementById("searchInput").value = qParam;
+      }
+
+      // ── Language pill interaction ─────────────────────────────────────────────
+
+      function setupLangPills() {
+        const pills = document.querySelectorAll(".lang-pill");
+        pills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            pills.forEach(p => { p.setAttribute("aria-selected", "false"); p.tabIndex = -1; });
+            pill.setAttribute("aria-selected", "true");
+            pill.tabIndex = 0;
+            renderChannels();
+          });
+
+          pill.addEventListener("keydown", e => {
+            const arr = Array.from(pills);
+            const idx = arr.indexOf(pill);
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault(); arr[(idx + 1) % arr.length].focus();
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault(); arr[(idx - 1 + arr.length) % arr.length].focus();
+            }
+          });
+        });
+      }
+
+      // ── Search ───────────────────────────────────────────────────────────────
+
+      let searchTimeout;
+      document.getElementById("searchInput").addEventListener("input", () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(renderChannels, 120);
       });
 
-      preview.appendChild(thumbnail);
-      preview.appendChild(playButton);
-      wrapper.appendChild(preview);
-    }
+      // ── Mobile menu ───────────────────────────────────────────────────────────
 
-    const translation = document.createElement("div");
-    translation.className = "translation";
-    translation.textContent = video.description;
+      const mobileToggle      = document.getElementById("mobile-toggle");
+      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
 
-    wrapper.appendChild(title);
-    wrapper.appendChild(translation);
-    grid.appendChild(wrapper);
-  });
-
-  // Filter for category selection
-  const filter = document.getElementById("categoryFilter");
-
-  filter.addEventListener("change", () => {
-    const value = filter.value;
-    const allVideos = document.querySelectorAll(".video");
-    allVideos.forEach((video) => {
-      if (value === "all" || video.classList.contains(value)) {
-        video.style.display = "block";
-      } else {
-        video.style.display = "none";
+      function openMobileMenu() {
+        if (!mobileMenuOverlay) return;
+        mobileMenuOverlay.classList.remove("hidden");
+        requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
       }
-    });
-  });
 
-  const mobileToggle = document.getElementById("mobile-toggle");
-  const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
-  function openMobileMenu() {
-    if (!mobileMenuOverlay) return;
-    mobileMenuOverlay.classList.remove("hidden");
-    requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
-  }
-  function closeMobileMenu() {
-    if (!mobileMenuOverlay) return;
-    mobileMenuOverlay.classList.remove("open");
-    setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
-  }
-  if (mobileToggle && mobileMenuOverlay) {
-    mobileToggle.addEventListener("click", openMobileMenu);
-    mobileMenuOverlay.addEventListener("click", (e) => {
-      if (e.target === mobileMenuOverlay) closeMobileMenu();
-    });
-    const closeBtn = mobileMenuOverlay.querySelector(".mobile-menu__close");
-    const menuLinks = mobileMenuOverlay.querySelectorAll(".mobile-menu__links a");
-    if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-    menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
-  }
+      function closeMobileMenu() {
+        if (!mobileMenuOverlay) return;
+        mobileMenuOverlay.classList.remove("open");
+        setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
+      }
 
-  window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
+      if (mobileToggle && mobileMenuOverlay) {
+        mobileToggle.addEventListener("click", openMobileMenu);
+        mobileMenuOverlay.addEventListener("click", e => {
+          if (e.target === mobileMenuOverlay) closeMobileMenu();
+        });
+        const closeBtn  = mobileMenuOverlay.querySelector(".mobile-menu__close");
+        const menuLinks = mobileMenuOverlay.querySelectorAll(".mobile-menu__links a");
+        if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
+        menuLinks.forEach(link => link.addEventListener("click", closeMobileMenu));
+      }
 
-     // pink heart images from Icons8
-const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+      // ── Init ─────────────────────────────────────────────────────────────────
 
+      applyURLParams();
+      setupLangPills();
+      renderChannels();
 
-for (let i = 0; i < 15; i++) {
-  const icon = document.createElement("img");
-  icon.src = iconSrc;
-  icon.classList.add("heart");
-  icon.style.left = Math.random() * 100 + "vw";
-  icon.style.animationDelay = Math.random() * 10 + "s";
-  icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
-  icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
-  document.body.appendChild(icon);
-}
+      // ── Floating hearts ───────────────────────────────────────────────────────
 
-
-  });
-</script>
-    <script src="/assets/cart.js"></script>
-</body> 
-
-
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+        const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+        for (let i = 0; i < 15; i++) {
+          const icon = document.createElement("img");
+          icon.src = iconSrc;
+          icon.classList.add("heart");
+          icon.alt = "";
+          icon.setAttribute("aria-hidden", "true");
+          icon.style.left = Math.random() * 100 + "vw";
+          icon.style.animationDelay = Math.random() * 10 + "s";
+          icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+          icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+          document.body.appendChild(icon);
+        }
+      });
+    </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
+  </body>
 </html>

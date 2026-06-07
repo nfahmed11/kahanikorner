@@ -56,6 +56,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
 
     <style>
       /* --- THEME VARIABLES (same as landing) --- */
@@ -247,6 +248,108 @@
         text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
           -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
       }
+
+      /* ---- FREE RESOURCES DROPDOWN ---- */
+      .nav-dropdown { position: relative; }
+      .nav-dropdown__trigger {
+        background: none; border: none; padding: 0;
+        font-family: inherit; font-size: inherit; font-weight: inherit;
+        text-transform: inherit; letter-spacing: inherit; color: inherit;
+        cursor: pointer; display: inline-flex; align-items: center; gap: 0.3em;
+      }
+      .nav-dropdown__trigger:hover {
+        color: var(--soft-blush); font-weight: 700;
+        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+      }
+      .nav-dropdown__trigger:focus-visible { outline: 2px solid var(--deep-teal); outline-offset: 3px; border-radius: 4px; }
+      .nav-dropdown__chevron { font-size: 0.65em; transition: transform 0.22s ease; }
+      .nav-dropdown.is-open .nav-dropdown__chevron,
+      .nav-dropdown:hover .nav-dropdown__chevron,
+      .nav-dropdown:focus-within .nav-dropdown__chevron { transform: rotate(180deg); }
+      .dropdown-menu {
+        position: absolute; top: calc(100% + 14px); left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        min-width: 230px; background: #fff;
+        border: 2px solid rgba(176, 195, 183, 0.7); border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(74, 89, 74, 0.14);
+        padding: 0.45rem 0.4rem 0.55rem; opacity: 0; pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
+      }
+      .dropdown-menu::before {
+        content: ""; position: absolute; top: -18px; left: 0; right: 0; height: 18px;
+      }
+      .nav-dropdown:hover .dropdown-menu,
+      .nav-dropdown:focus-within .dropdown-menu,
+      .nav-dropdown.is-open .dropdown-menu {
+        opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+      }
+      .dropdown-menu__header {
+        padding: 0.6rem 0.85rem 0.5rem;
+        border-bottom: 1px solid rgba(176, 195, 183, 0.5); margin-bottom: 0.3rem;
+      }
+      .dropdown-menu__title {
+        display: block; font-family: "Grandstander", cursive; font-size: 0.77rem;
+        font-weight: 800; color: var(--granite); text-transform: none; letter-spacing: 0; margin-bottom: 0.15rem;
+      }
+      .dropdown-menu__desc { display: block; font-size: 0.71rem; color: var(--muted); text-transform: none; letter-spacing: 0; line-height: 1.4; }
+      .dropdown-menu__item {
+        display: flex; align-items: center; gap: 0.55rem;
+        padding: 0.52rem 0.85rem; font-size: 0.84rem; font-weight: 500;
+        text-transform: none; letter-spacing: 0; color: var(--granite); border-radius: 10px;
+        transition: background 0.15s, color 0.15s, transform 0.1s;
+      }
+      .dropdown-menu__item i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
+      .dropdown-menu__item:hover, .dropdown-menu__item:focus-visible {
+        background: var(--soft-blush); color: var(--granite); transform: translateX(3px); outline: none;
+      }
+      .dropdown-menu__item--submit {
+        margin-top: 0.3rem; padding-top: 0.6rem; color: var(--deep-teal); font-weight: 700;
+        border-top: 1px dashed rgba(176, 195, 183, 0.5);
+      }
+      .dropdown-menu__item--submit:hover { background: var(--mint); color: var(--granite); }
+      /* Mobile sliding panel */
+      .mobile-free-resources-btn {
+        width: 100%; display: flex; align-items: center; justify-content: space-between;
+        background: none; border: none; border-bottom: 1px dashed var(--white-smoke);
+        padding: 0.75rem 0.25rem; font-family: inherit; font-size: 0.95rem;
+        text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+        color: var(--granite); cursor: pointer; transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-free-resources-btn:hover { color: var(--cotton-rose); transform: translateX(3px); }
+      .mobile-menu__body { flex: 1; position: relative; overflow: hidden; min-height: 0; }
+      .mobile-panel {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        overflow-y: auto; -webkit-overflow-scrolling: touch;
+        transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1), opacity 0.25s ease;
+      }
+      .mobile-panel--main { transform: translateX(0); opacity: 1; }
+      .mobile-panel--main.slide-away { transform: translateX(-30%); opacity: 0; pointer-events: none; }
+      .mobile-panel--resources { transform: translateX(100%); opacity: 0; pointer-events: none; }
+      .mobile-panel--resources.slide-in { transform: translateX(0); opacity: 1; pointer-events: auto; }
+      .mobile-panel__back {
+        display: inline-flex; align-items: center; gap: 0.45rem;
+        background: none; border: none; color: var(--deep-teal); font-family: inherit;
+        font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+        cursor: pointer; padding: 0.2rem 0 0.2rem 0.1rem; margin-bottom: 0.85rem;
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-panel__back:hover { color: var(--granite); transform: translateX(-2px); }
+      .mobile-panel__title {
+        font-family: "Grandstander", cursive; font-size: 1rem; font-weight: 800;
+        color: var(--granite); margin: 0 0 0.65rem; padding-bottom: 0.65rem;
+        border-bottom: 2px solid var(--white-smoke);
+      }
+      .mobile-resources-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+      .mobile-resources-links li a {
+        display: flex; align-items: center; gap: 0.55rem;
+        padding: 0.75rem 0.25rem; font-size: 0.95rem; font-weight: 500;
+        color: var(--granite); border-bottom: 1px dashed var(--white-smoke);
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-resources-links li a i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
+      .mobile-resources-links li:last-child a { border-bottom: none; }
+      .mobile-resources-links li a:hover { color: var(--cotton-rose); transform: translateX(3px); }
 
       .mobile-toggle {
         display: none;
@@ -807,6 +910,150 @@
         font-weight: 800;
       }
 
+      /* --- CATEGORY GRID --- */
+      .category-section {
+        margin-bottom: 3rem;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      @media (max-width: 900px) {
+        .category-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .category-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+
+      .category-card {
+        background: var(--white);
+        border: 2px solid var(--ash-grey);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .category-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--rosy-taupe);
+      }
+
+      .category-card:hover .category-card__btn {
+        background: var(--cotton-rose);
+      }
+
+      .category-card__image {
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: var(--soft-blush);
+      }
+
+      .category-card__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+        mix-blend-mode: multiply;
+      }
+
+      .category-card:hover .category-card__image img {
+        transform: scale(1.05);
+      }
+
+      .category-card__body {
+        padding: 1.25rem 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .category-card__title {
+        font-family: "Grandstander", cursive;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-shadow: none;
+        margin: 0 0 0.4rem;
+      }
+
+      .category-card__desc {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.55;
+        margin: 0 0 0.75rem;
+        flex: 1;
+      }
+
+      .category-card__count {
+        display: inline-block;
+        align-self: flex-start;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--deep-teal);
+        background: var(--mint);
+        padding: 0.2rem 0.6rem;
+        border-radius: var(--radius-pill);
+        margin-bottom: 1rem;
+      }
+
+      .category-card__btn {
+        width: 100%;
+        padding: 0.8rem;
+        background: var(--soft-blush);
+        color: var(--granite);
+        border: 2px solid var(--granite);
+        border-radius: var(--radius-md);
+        font-weight: 700;
+        font-size: 0.92rem;
+        transition: all 0.2s;
+        box-shadow: 0 4px 0 var(--rosy-taupe);
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .category-card__btn:hover {
+        background: var(--cotton-rose);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--rosy-taupe);
+      }
+
+      .category-card__btn:active {
+        transform: translateY(0);
+        box-shadow: 0 0 0 var(--rosy-taupe);
+      }
+
+      /* --- PRODUCT VIEW HEADER (shown when a category is active) --- */
+      .product-view-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .category-view-title {
+        font-family: "Grandstander", cursive;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-shadow: none;
+        margin: 0;
+      }
+
       /* --- PRODUCT GRID --- */
       .product-grid {
         display: grid;
@@ -882,7 +1129,7 @@
           max-height: unset;
         }
         .product-image-container img {
-          object-fit: contain;
+          object-fit: cover;
           border-radius: 0;
           max-width: none;
           background: var(--soft-blush);
@@ -968,7 +1215,7 @@
       .product-image-container img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 0;
         transition: transform 0.5s;
         mix-blend-mode: multiply;
@@ -1168,7 +1415,7 @@
       .detail-image-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         mix-blend-mode: multiply;
         filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
         transition: opacity 0.2s ease;
@@ -1414,101 +1661,8 @@
     </style>
   </head>
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-
-        <nav class="nav">
-          <a href="products.html" class="nav-active">Shop</a>
-          <a href="subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html">Resources</a>
-          <a href="index.html#faq">Help</a>
-          <a href="index.html#contact">Contact</a>
-        </nav>
-
-        <button class="cart-btn-landing" id="cart-btn">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <ul class="mobile-menu__links">
-          <li><a href="products.html" class="nav-active">Shop</a></li>
-          <li><a href="subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html">Resources</a></li>
-          <li><a href="/index.html#faq">Help</a></li>
-          <li><a href="/index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
 
     <!-- MAIN SHOP CONTENT -->
     <main class="shop-main">
@@ -1528,24 +1682,58 @@
           </p>
         </section>
 
-        <!-- Filter Section -->
-        <div class="filter-container" id="filter-container">
-          <div class="custom-select-wrapper">
-            <div class="custom-select">
-              <div class="custom-select__trigger">
-                <span>All Collections</span>
-                <div class="arrow"></div>
+        <!-- Category Grid (default view — shown before any category is selected) -->
+        <div id="category-grid-section" class="category-section">
+          <div class="category-grid">
+
+            <!-- Individual Books -->
+            <div class="category-card" onclick="showProductView('books')">
+              <div class="category-card__image">
+                <img src="./assets/images/products/books/abbu/abbu-cover.png" alt="Individual Books" />
               </div>
-              <div class="custom-options">
-                <div class="custom-option selected" data-value="all">
-                  All Collections
-                </div>
-                <div class="custom-option" data-value="books">Individual Books</div>
-                <div class="custom-option" data-value="bundle">Bundle</div>
-                <div class="custom-option" data-value="stickers">Stickers</div>
+              <div class="category-card__body">
+                <h2 class="category-card__title">Individual Books</h2>
+                <p class="category-card__desc">Shop our bilingual Urdu books one at a time.</p>
+                <span class="category-card__count">4 titles</span>
+                <button class="category-card__btn">View Products →</button>
               </div>
             </div>
+
+            <!-- Bundle -->
+            <div class="category-card" onclick="showProductView('bundle')">
+              <div class="category-card__image">
+                <img src="./assets/images/products/books/bundle/fourbundle.png" alt="Bundle" />
+              </div>
+              <div class="category-card__body">
+                <h2 class="category-card__title">Bundle</h2>
+                <p class="category-card__desc">Get multiple Kahani Korner books together in one special set.</p>
+                <span class="category-card__count">1 set</span>
+                <button class="category-card__btn">View Products →</button>
+              </div>
+            </div>
+
+            <!-- Stickers -->
+            <div class="category-card" onclick="showProductView('stickers')">
+              <div class="category-card__image">
+                <img src="./assets/images/products/stickers/15pack/stickers.png" alt="Stickers" />
+              </div>
+              <div class="category-card__body">
+                <h2 class="category-card__title">Stickers</h2>
+                <p class="category-card__desc">Cute Urdu and Pakistani culture stickers for kids, gifts, and learning.</p>
+                <span class="category-card__count">3 designs</span>
+                <button class="category-card__btn">View Products →</button>
+              </div>
+            </div>
+
           </div>
+        </div>
+
+        <!-- Product View Header (shown when a category is selected) -->
+        <div id="product-view-header" class="product-view-header hidden">
+          <button id="back-to-categories-btn" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> All Categories
+          </button>
+          <h2 class="category-view-title" id="category-view-title"></h2>
         </div>
 
         <!-- Product Grid -->
@@ -1617,50 +1805,10 @@
 
     <div id="contact"></div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <a href="https://kahanikorner.com" class="brand" style="justify-content:center;margin-bottom:1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
-      </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="/assets/cart.js"></script>
 
 
     <script>
@@ -1677,8 +1825,8 @@
           price: 62.0,
           checkoutUrl: "https://buy.stripe.com/dRm3cx1k6dGddbt1JJ0Fi07",
           description:
-            "All Kahani's Bundle brings together all four story sets — each one packed with a beautiful storybook, an activity book, stickers, sequencing cards, and bilingual flashcards. Every set also includes a scannable QR code that unlocks read-aloud videos, vocabulary-building games, and bonus learning activities. Designed to spark joy, connection, and language growth, this bundle turns Urdu learning into a playful, immersive experience the whole family can enjoy.",
-          image: "./assets/images/products/books/books.png",
+            "All Kahani's Bundle brings together all four story sets — each one packed with a beautiful storybook, an activity book, stickers, sequencing cards, and bilingual flashcards. Every set also includes a scannable QR code that unlocks read-aloud videos, vocabulary-building games, and bonus learning activities. Designed to spark joy, connection, and language growth, this bundle turns Urdu learning into a playful, immersive experience the whole family can enjoy.<br><br><b>Please Note:</b><br>Our book bundles are made and prepared with care. This item is a pre-order, and it may take <b>10–15 days</b> for your order to be prepared and mailed.",
+          image: "./assets/images/products/books/bundle/fourbundle.png",
           category: "bundle",
           features: [
             "Includes all 4 complete Kahani story sets — each with a storybook, activity book, stickers, sequencing cards, and bilingual flashcards.",
@@ -1688,9 +1836,13 @@
             "Perfect for homeschooling, weekend learning, classrooms, or gifting — suitable for ages 2 to 10.",
           ],
           images: [
-            "./assets/images/products/books/bookcontents.png",
+            "./assets/images/products/books/bundle/bookcontents.png",
             "./assets/images/products/books/books.png",
             "./assets/images/products/books/books2.png",
+            "./assets/images/products/books/abbu/abbu-bundle.png",
+            "./assets/images/products/books/dada/dada-bundle.png",
+            "./assets/images/products/books/chuchu/chuchu-bundle.png",
+            "./assets/images/products/books/aaloo/aaloo-bundle.png",
           ],
         },
 
@@ -1737,7 +1889,16 @@
             "Beautiful full-colour illustrations.",
             "Suitable for ages 2–8.",
           ],
-          images: ["./assets/images/products/books/dada/dada-cover.png", "./assets/images/products/books/dada/dada.png"],
+          images: [
+            "./assets/images/products/books/dada/dada-cover.png",
+            "./assets/images/products/books/dada/dada7.png",
+            "./assets/images/products/books/dada/dada-act.png",
+            "./assets/images/products/books/dada/dada-act-open.png",
+            "./assets/images/products/books/dada/dada-open.png",
+            "./assets/images/products/books/dada/dada-sticker.png",
+            "./assets/images/products/books/dada/dada-flashurdu.png",
+            "./assets/images/products/books/dada/dada-bundle.png",
+          ],
         },
         {
           id: "price_1TbIIEP4FFhr5UNAaJeT8y6Y",
@@ -1871,26 +2032,29 @@
       ];
 
       // --- STATE (page-level only) ---
-      let currentCategory = "all";
+      let currentCategory = null;
       let currentProductId = null;
 
       // --- DOM ELEMENTS ---
-      const mobileToggle       = document.getElementById("mobile-toggle");
-      const mobileMenuOverlay  = document.getElementById("mobile-menu-overlay");
-      const productGrid        = document.getElementById("product-grid");
-      const productDetailView  = document.getElementById("product-detail-view");
-      const backToStoreBtn     = document.getElementById("back-to-store-btn");
-      const detailImage        = document.getElementById("detail-image");
-      const detailTitle        = document.getElementById("detail-title");
-      const detailPrice        = document.getElementById("detail-price");
-      const detailDescription  = document.getElementById("detail-description");
-      const detailFeatures     = document.getElementById("detail-features");
-      const detailAddToCartBtn = document.getElementById("detail-add-to-cart-btn");
-      const detailBuyNowBtn    = document.getElementById("detail-buy-now-btn");
-      const successModal       = document.getElementById("success-modal");
+      const mobileToggle        = document.getElementById("mobile-toggle");
+      const mobileMenuOverlay   = document.getElementById("mobile-menu-overlay");
+      const productGrid         = document.getElementById("product-grid");
+      const productDetailView   = document.getElementById("product-detail-view");
+      const backToStoreBtn      = document.getElementById("back-to-store-btn");
+      const detailImage         = document.getElementById("detail-image");
+      const detailTitle         = document.getElementById("detail-title");
+      const detailPrice         = document.getElementById("detail-price");
+      const detailDescription   = document.getElementById("detail-description");
+      const detailFeatures      = document.getElementById("detail-features");
+      const detailAddToCartBtn  = document.getElementById("detail-add-to-cart-btn");
+      const detailBuyNowBtn     = document.getElementById("detail-buy-now-btn");
+      const successModal        = document.getElementById("success-modal");
       const continueShoppingBtn = document.getElementById("continue-shopping-btn");
-      const shopHeroSection    = document.getElementById("shop-hero-section");
-      const filterContainerEl  = document.getElementById("filter-container");
+      const shopHeroSection     = document.getElementById("shop-hero-section");
+      const categoryGridSection = document.getElementById("category-grid-section");
+      const productViewHeader   = document.getElementById("product-view-header");
+      const backToCategoriesBtn = document.getElementById("back-to-categories-btn");
+      const categoryViewTitle   = document.getElementById("category-view-title");
 
       // --- CART FEEDBACK ---
       // Flashes a button to "✓ Added!" briefly so users know it worked.
@@ -1914,9 +2078,33 @@
         flashAdded(btn);
       };
 
+      // --- CATEGORY / PRODUCT VIEW TOGGLES ---
+      function showCategoryView() {
+        currentCategory = null;
+        if (shopHeroSection)     shopHeroSection.classList.remove("hidden");
+        if (categoryGridSection) categoryGridSection.classList.remove("hidden");
+        if (productViewHeader)   productViewHeader.classList.add("hidden");
+        if (productGrid)         productGrid.classList.add("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      window.showProductView = function(category) {
+        const labels = { books: "Individual Books", bundle: "Bundle", stickers: "Stickers" };
+        currentCategory = category;
+
+        if (shopHeroSection)     shopHeroSection.classList.add("hidden");
+        if (categoryGridSection) categoryGridSection.classList.add("hidden");
+        if (productViewHeader)   productViewHeader.classList.remove("hidden");
+        if (categoryViewTitle)   categoryViewTitle.textContent = labels[category] || category;
+
+        renderProducts();
+        if (productGrid) productGrid.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
       // --- INIT (product/UI concerns only; cart is handled by cart.js) ---
       function init() {
-        renderProducts();
+        showCategoryView();
 
         // Mobile menu
         if (mobileToggle && mobileMenuOverlay) {
@@ -1930,7 +2118,8 @@
           menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
         }
 
-        setupCustomDropdown();
+        if (backToCategoriesBtn)
+          backToCategoriesBtn.addEventListener("click", showCategoryView);
 
         if (backToStoreBtn)
           backToStoreBtn.addEventListener("click", closeProductDetails);
@@ -1962,36 +2151,6 @@
 
         if (continueShoppingBtn)
           continueShoppingBtn.addEventListener("click", closeSuccessModal);
-      }
-
-      // --- DROPDOWN ---
-      function setupCustomDropdown() {
-        const wrapper = document.querySelector(".custom-select-wrapper");
-        if (!wrapper) return;
-
-        const select      = wrapper.querySelector(".custom-select");
-        const trigger     = wrapper.querySelector(".custom-select__trigger");
-        const options     = wrapper.querySelectorAll(".custom-option");
-        const triggerSpan = trigger.querySelector("span");
-
-        trigger.addEventListener("click", () => {
-          select.classList.toggle("open");
-        });
-
-        options.forEach((option) => {
-          option.addEventListener("click", () => {
-            select.classList.remove("open");
-            options.forEach((opt) => opt.classList.remove("selected"));
-            option.classList.add("selected");
-            triggerSpan.textContent = option.textContent;
-            currentCategory = option.getAttribute("data-value");
-            renderProducts();
-          });
-        });
-
-        window.addEventListener("click", (e) => {
-          if (!select.contains(e.target)) select.classList.remove("open");
-        });
       }
 
       // --- PRODUCT RENDERING ---
@@ -2047,21 +2206,9 @@
       }
 
       function renderProducts() {
-        if (!productGrid) return;
-
-        if (currentCategory === "all") {
-          const bundle  = products.filter((p) => p.category === "bundle");
-          const books   = products.filter((p) => p.category === "books");
-          const stickers = products.filter((p) => p.category === "stickers");
-
-          productGrid.innerHTML =
-            renderSection("⭐ Best Value Bundle", "All 4 books + activities in one box", bundle) +
-            renderSection("📚 Individual Books", "Browse individual titles — email us to order", books) +
-            renderSection("🎨 Stickers & Extras", null, stickers);
-        } else {
-          const filtered = products.filter((p) => p.category === currentCategory);
-          productGrid.innerHTML = filtered.map(renderProductCard).join("");
-        }
+        if (!productGrid || !currentCategory) return;
+        const filtered = products.filter((p) => p.category === currentCategory);
+        productGrid.innerHTML = filtered.map(renderProductCard).join("");
       }
 
       // --- DETAIL VIEW ---
@@ -2111,7 +2258,7 @@
 
         detailTitle.textContent       = product.name;
         detailPrice.textContent       = product.price !== null ? `$${product.price.toFixed(2)}` : "Price on request";
-        detailDescription.textContent = product.description;
+        detailDescription.innerHTML = product.description;
 
         if (detailAddToCartBtn) {
           detailAddToCartBtn.disabled = !product.checkoutUrl;
@@ -2137,8 +2284,9 @@
           if (Math.abs(dx) > 40) navigateGallery(dx < 0 ? 1 : -1);
         };
 
-        if (shopHeroSection)   shopHeroSection.classList.add("hidden");
-        if (filterContainerEl) filterContainerEl.classList.add("hidden");
+        if (shopHeroSection)     shopHeroSection.classList.add("hidden");
+        if (categoryGridSection) categoryGridSection.classList.add("hidden");
+        if (productViewHeader)   productViewHeader.classList.add("hidden");
 
         productGrid.classList.add("hidden");
         productDetailView.classList.remove("hidden");
@@ -2150,8 +2298,7 @@
         productDetailView.classList.add("hidden");
         productGrid.classList.remove("hidden");
         currentProductId = null;
-        if (shopHeroSection)   shopHeroSection.classList.remove("hidden");
-        if (filterContainerEl) filterContainerEl.classList.remove("hidden");
+        if (productViewHeader) productViewHeader.classList.remove("hidden");
       }
 
       // --- SUCCESS MODAL ---
@@ -2176,5 +2323,7 @@
 
       window.addEventListener("load", init);
     </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>

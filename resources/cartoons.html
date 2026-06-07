@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Microsoft Analytics tag to track analytics  -->
@@ -33,7 +33,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kahani Korner — Cartoons</title>
-    <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/homepage/logo2.png" />
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,11 +51,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
 
-    <!-- Optional shared CSS (ok to keep) -->
     <link rel="stylesheet" href="../quicklinks/SharedCSS/common.css" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
 
     <style>
-      /* --- THEME VARIABLES (match Resources page) --- */
+      /* ── THEME VARIABLES ── */
       :root {
         --granite: #4a594a;
         --deep-teal: #687d70;
@@ -63,25 +66,20 @@
         --rosy-taupe: #d49797;
         --black: #1c2524;
         --white: #ffffff;
-
         --mint: #c9dcce;
         --radius-lg: 24px;
-        --radius-md: 16px;
         --radius-pill: 999px;
-
         --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
         --shadow-hover: 0 22px 50px rgba(74, 89, 74, 0.25);
-
         --card-bg: #ffffff;
         --danger: #ef4444;
         --muted: #5c6b68;
-
-        --topbar-h: 15px; /* keep consistent with your Resources page */
+        --topbar-h: 15px;
         --header-top-gap: 1.75rem;
         --header-h: 74px;
       }
 
-      /* --- RESET & BASE --- */
+      /* ── RESET & BASE ── */
       *,
       *::before,
       *::after {
@@ -92,20 +90,6 @@
         width: 100%;
         overflow-x: hidden;
       }
-
-      body {
-        margin: 0;
-        font-family: "Open Sans", system-ui, sans-serif;
-        color: var(--granite);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        background: var(--white-smoke);
-
-        /* OVERRIDE any "hidden until loaded" styles from common.css */
-        opacity: 1 !important;
-        visibility: visible !important;
-      }
-
       img {
         max-width: 100%;
         display: block;
@@ -117,6 +101,18 @@
       button,
       select {
         font-family: inherit;
+        cursor: pointer;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Open Sans", system-ui, sans-serif;
+        color: var(--granite);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        background: var(--white-smoke);
+        opacity: 1 !important;
+        visibility: visible !important;
       }
 
       h1,
@@ -134,7 +130,7 @@
         display: none !important;
       }
 
-      /* --- TOP PROMO BAR --- */
+      /* ── TOP PROMO BAR ── */
       .topbar {
         width: 100%;
         background: var(--ash-grey);
@@ -172,12 +168,7 @@
         }
       }
 
-      :root {
-        --topbar-h: 15px;
-        --header-top-gap: 1.75rem;
-        --header-h: 74px;
-      }
-
+      /* ── HEADER ── */
       .header {
         position: fixed;
         top: calc(var(--topbar-h) + var(--header-top-gap));
@@ -191,7 +182,9 @@
         border: 2px solid rgba(176, 195, 183, 0.7);
         border-radius: 999px;
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-        transition: background 0.25s ease, border-color 0.25s ease,
+        transition:
+          background 0.25s ease,
+          border-color 0.25s ease,
           box-shadow 0.25s ease;
       }
 
@@ -225,15 +218,6 @@
         display: block;
       }
 
-      .nav a.nav-active {
-        font-weight: 700;
-        color: var(--rosy-taupe);
-      }
-
-      .mobile-menu__links li a.nav-active {
-        color: var(--rosy-taupe);
-      }
-
       .nav {
         display: flex;
         align-items: center;
@@ -244,12 +228,26 @@
         letter-spacing: 0.05em;
       }
 
+      .nav a {
+        color: var(--granite);
+        transition:
+          color 0.2s,
+          font-weight 0.1s;
+      }
+
       .nav a:hover {
         color: var(--soft-blush);
         font-weight: 700;
-        transform: scale(1.05);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
+      }
+
+      .nav a.nav-active {
+        font-weight: 700;
+        color: var(--rosy-taupe);
       }
 
       .mobile-toggle {
@@ -257,8 +255,9 @@
         background: none;
         border: none;
         font-size: 1.5rem;
-        cursor: pointer;
         color: var(--granite);
+        padding: 0.25rem;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .header-actions {
@@ -278,9 +277,13 @@
         align-items: center;
         justify-content: center;
         color: var(--granite);
-        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          background 0.2s;
         cursor: pointer;
         font-size: 1rem;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .icon-btn-circle:hover {
@@ -306,7 +309,7 @@
         border: 2px solid var(--white-smoke);
       }
 
-      /* Chai tooltip + steam */
+      /* Chai tooltip */
       .chai-btn {
         position: relative;
         isolation: isolate;
@@ -375,7 +378,9 @@
         opacity: 0;
         transform: translateY(-6px);
         pointer-events: none;
-        transition: opacity 0.18s ease, transform 0.18s ease;
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease;
       }
 
       .chai-tooltip::after {
@@ -397,12 +402,13 @@
         transform: translateY(0);
       }
 
-      /* Mobile menu */
+      /* ── MOBILE MENU ── */
       .mobile-menu-overlay {
         position: fixed;
         inset: 0;
         background: rgba(28, 37, 36, 0.35);
         backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         z-index: 120;
         opacity: 0;
         pointer-events: none;
@@ -452,10 +458,6 @@
         color: var(--granite);
       }
 
-      .mobile-menu__brand i {
-        color: var(--rosy-taupe);
-      }
-
       .mobile-menu__close {
         background: var(--soft-blush);
         border: 2px solid var(--granite);
@@ -490,6 +492,10 @@
         border-bottom: 1px dashed var(--white-smoke);
       }
 
+      .mobile-menu__links li a.nav-active {
+        color: var(--rosy-taupe);
+      }
+
       @media (min-width: 769px) {
         .mobile-menu-overlay {
           display: none;
@@ -497,6 +503,10 @@
       }
 
       @media (max-width: 768px) {
+        .header {
+          padding: 0.5rem 1rem;
+        }
+
         .header__inner {
           display: grid !important;
           grid-template-columns: 1fr auto 1fr;
@@ -509,64 +519,34 @@
           grid-column: 1;
           justify-self: start;
         }
-
         .brand {
           grid-column: 2;
           justify-self: center;
-          font-size: 1rem;
         }
-
         .header-actions {
           grid-column: 3;
           justify-self: end;
         }
-
         .nav {
           display: none !important;
         }
       }
 
-      @media (max-width: 768px) {
-        .header__inner {
-          display: grid !important;
-          grid-template-columns: 1fr auto 1fr;
-          align-items: center;
-          width: 100%;
-        }
-
-        .mobile-toggle {
-          display: block !important;
-          grid-column: 1;
-          justify-self: start;
-        }
-
-        .brand {
-          grid-column: 2;
-          justify-self: center;
-        }
-
-        .cart-btn-landing {
-          grid-column: 3;
-          justify-self: end;
-        }
-
-        .nav {
-          display: none !important;
-        }
-      }
-
-      /* --- CART OVERLAY (kept identical) --- */
+      /* ── CART OVERLAY ── */
       .cart-overlay {
         position: fixed;
         inset: 0;
         background: rgba(74, 89, 74, 0.2);
         z-index: 110;
         opacity: 0;
+        pointer-events: none;
         transition: opacity 0.3s ease;
         backdrop-filter: blur(4px);
       }
+
       .cart-overlay.open {
         opacity: 1;
+        pointer-events: auto;
       }
 
       .cart-sidebar {
@@ -597,6 +577,11 @@
         justify-content: space-between;
         align-items: center;
         background: var(--white-smoke);
+      }
+
+      .cart-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
       }
 
       .close-btn {
@@ -635,24 +620,19 @@
         height: 4rem;
         border-radius: 0.75rem;
         object-fit: cover;
-        background: white;
       }
-
       .cart-item-details {
         flex: 1;
       }
-
       .cart-item-details h4 {
         font-size: 1rem;
         margin-bottom: 0.25rem;
       }
-
       .cart-item-price {
         font-weight: 700;
         color: var(--rosy-taupe);
         margin-bottom: 0.5rem;
       }
-
       .cart-controls {
         display: flex;
         align-items: center;
@@ -660,27 +640,31 @@
       }
 
       .qty-btn {
+        background: var(--white-smoke);
+        border: 1px solid var(--ash-grey);
+        border-radius: 6px;
         width: 1.75rem;
         height: 1.75rem;
-        border: 2px solid var(--ash-grey);
-        background: white;
-        border-radius: 0.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: bold;
-        color: var(--granite);
         cursor: pointer;
       }
 
       .remove-btn {
-        margin-left: auto;
         background: none;
         border: none;
         color: var(--danger);
-        font-size: 0.75rem;
-        font-weight: 600;
+        font-size: 0.8rem;
         cursor: pointer;
+        padding: 0;
+        margin-left: auto;
+      }
+
+      .empty-cart-msg {
+        text-align: center;
+        color: var(--muted);
+        padding: 2rem;
       }
 
       .cart-footer {
@@ -692,38 +676,33 @@
       .cart-total {
         display: flex;
         justify-content: space-between;
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--granite);
+        font-weight: 700;
         margin-bottom: 1rem;
       }
 
       .checkout-btn {
         width: 100%;
-        padding: 1.25rem;
+        padding: 0.85rem;
         background: var(--granite);
         color: white;
         border: none;
-        border-radius: 1rem;
-        font-size: 1.125rem;
+        border-radius: var(--radius-pill);
+        font-family: "Grandstander", cursive;
+        font-size: 1rem;
         font-weight: 700;
-        transition: transform 0.2s, box-shadow 0.2s;
-        box-shadow: 0 4px 0 var(--deep-teal);
         cursor: pointer;
+        transition: background 0.2s;
       }
 
-      .empty-cart-msg {
-        text-align: center;
-        color: var(--deep-teal);
-        margin-top: 2rem;
-        font-style: italic;
+      .checkout-btn:hover {
+        background: var(--deep-teal);
       }
 
-      /* --- PAGE LAYOUT (Cartoons) --- */
+      /* ── PAGE LAYOUT ── */
       .page-main {
         width: min(1200px, calc(100% - 2rem));
         margin: 0 auto;
-        padding: 3.25rem 0 4rem; /* no side padding */
+        padding: 3.25rem 0 4rem;
       }
 
       .cartoons-card {
@@ -732,11 +711,13 @@
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-soft);
         padding: clamp(1.75rem, 3vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+        overflow: hidden;
       }
 
+      /* ── PAGE HEADER ── */
       .cartoons-header {
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0;
       }
 
       .cartoons-header h1 {
@@ -745,174 +726,350 @@
       }
 
       .subheading {
-        margin: 0 auto;
+        margin: 0 auto 0;
         max-width: 760px;
         color: var(--muted);
         font-size: clamp(0.95rem, 1.2vw, 1.05rem);
         line-height: 1.75;
       }
 
-      .controls-row {
-        margin-top: 1.75rem;
+      /* ── STICKY CONTROLS ── */
+      .controls-sticky {
+        position: sticky;
+        top: calc(
+          var(--topbar-h) + var(--header-top-gap) + var(--header-h) + 0.5rem
+        );
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        margin: 1.75rem 0 0;
+        border-bottom: 1.5px solid rgba(176, 195, 183, 0.45);
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 0.85rem;
       }
 
-      .filter-container {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: var(--white-smoke);
-        border: 2px solid var(--ash-grey);
-        border-radius: var(--radius-pill);
-        padding: 0.55rem 0.75rem;
-        box-shadow: 0 10px 24px rgba(74, 89, 74, 0.08);
-      }
-
-      .filter-container label {
-        font-weight: 700;
-        font-size: 0.85rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--deep-teal);
-        padding-left: 0.25rem;
-      }
-
-      #categoryFilter {
-        appearance: none;
-        -webkit-appearance: none;
-        border: 0;
-        background: transparent;
-        font-weight: 700;
-        color: var(--granite);
-        padding: 0.35rem 2rem 0.35rem 0.6rem;
-        border-radius: var(--radius-pill);
-        cursor: pointer;
-        outline: none;
-        min-width: 190px;
-      }
-
-      .filter-container {
+      .search-wrap {
         position: relative;
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
       }
 
-      .filter-container::after {
-        content: "▾";
+      .search-wrap i {
         position: absolute;
-        right: 14px;
+        left: 1rem;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--rosy-taupe);
-        font-weight: 900;
+        color: var(--deep-teal);
+        font-size: 0.9rem;
         pointer-events: none;
       }
 
-      /* --- GRID / VIDEO CARDS --- */
-      .grid {
-        margin-top: 2rem;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.25rem;
+      #searchInput {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.6rem 1rem 0.6rem 2.5rem;
+        font-size: 0.88rem;
+        font-family: inherit;
+        font-weight: 500;
+        border-radius: 999px;
+        border: 2px solid var(--ash-grey);
+        background: var(--white-smoke);
+        color: var(--granite);
+        transition:
+          box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        outline: none;
       }
 
-      @media (max-width: 980px) {
-        .grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+      #searchInput:focus {
+        border-color: var(--deep-teal);
+        box-shadow: 0 0 0 3px rgba(104, 125, 112, 0.12);
+      }
+
+      #searchInput::placeholder {
+        color: var(--ash-grey);
+      }
+
+      .filter-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-label-inline {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--deep-teal);
+        white-space: nowrap;
+      }
+
+      /* ── LANGUAGE PILLS ── */
+      .lang-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        align-items: center;
+      }
+
+      .lang-pill {
+        border-radius: 999px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: inherit;
+        border: 2px solid var(--deep-teal);
+        background: var(--white-smoke);
+        color: var(--granite);
+        cursor: pointer;
+        line-height: 1;
+        white-space: nowrap;
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .lang-pill:hover {
+        background: var(--ash-grey);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(74, 89, 74, 0.15);
+      }
+
+      .lang-pill[aria-selected="true"] {
+        background: var(--deep-teal);
+        color: #fff;
+        border-color: var(--deep-teal);
+        box-shadow: 0 4px 12px rgba(74, 89, 74, 0.25);
+      }
+
+      .lang-pill[aria-selected="true"]:hover {
+        background: var(--granite);
+        border-color: var(--granite);
+        transform: translateY(-1px);
+      }
+
+      .lang-pill:focus-visible {
+        outline: 2px solid var(--granite);
+        outline-offset: 3px;
+      }
+
+      /* ── RESULTS COUNT ── */
+      .results-meta {
+        text-align: center;
+        font-size: 0.78rem;
+        color: var(--muted);
+        padding: 1.25rem 0 0;
+        letter-spacing: 0.04em;
+      }
+
+      /* ── CHANNEL GRID ── */
+      .channel-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+      }
+
+      @media (max-width: 1100px) {
+        .channel-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
-      @media (max-width: 620px) {
-        .grid {
+      @media (max-width: 768px) {
+        .channel-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+      }
+      @media (max-width: 440px) {
+        .channel-grid {
           grid-template-columns: 1fr;
         }
       }
 
-      .video-wrapper {
+      /* ── CHANNEL CARD ── */
+      .channel-card {
         background: var(--white);
-        border: 2px solid var(--ash-grey);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: 0 14px 32px rgba(74, 89, 74, 0.12);
-        transition: transform 0.25s ease, box-shadow 0.25s ease,
-          border-color 0.25s ease;
+        border: 1.5px solid rgba(176, 195, 183, 0.5);
+        border-radius: 18px;
+        box-shadow: 0 6px 20px rgba(74, 89, 74, 0.09);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 1.1rem 1.2rem;
+        gap: 0.55rem;
+        text-align: center;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border-color 0.2s ease;
       }
 
-      .video-wrapper:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-hover);
-        border-color: rgba(212, 151, 151, 0.65);
+      .channel-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 36px rgba(74, 89, 74, 0.16);
+        border-color: rgba(212, 151, 151, 0.5);
       }
 
-      .video-thumb {
-        width: 100%;
-        height: 190px;
-        object-fit: cover;
-        display: block;
-        background: var(--white-smoke);
-      }
-
-      .video-body {
-        padding: 1rem 1.1rem 1.2rem;
-      }
-
-      .video-title {
-        font-family: "Grandstander", cursive;
-        font-weight: 800;
-        font-size: 1.2rem;
-        margin: 0 0 0.35rem;
-        line-height: 1.25;
-      }
-
-      .video-meta {
+      /* ── AVATAR ── */
+      .channel-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
       }
 
-      .video-type {
-        font-size: 0.8rem;
+      .avatar-fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-size: 1.7rem;
         font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--deep-teal);
-        opacity: 0.9;
-        white-space: nowrap;
       }
 
-      .chip {
-        font-size: 0.75rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        padding: 0.3rem 0.6rem;
-        border-radius: var(--radius-pill);
-        background: var(--white-smoke);
-        border: 1px solid rgba(176, 195, 183, 0.75);
+      .channel-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── CARD TEXT ── */
+      .channel-name {
+        font-family: "Grandstander", cursive;
+        font-size: 0.9rem;
+        font-weight: 700;
         color: var(--granite);
-        white-space: nowrap;
+        margin: 0;
+        line-height: 1.3;
       }
 
-      .translation {
-        font-size: 0.95rem;
+      .lang-badge {
+        display: inline-block;
+        padding: 0.16rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .lang-badge.urdu {
+        background: #fce8e8;
+        color: #a85858;
+        border: 1.5px solid #f0b8b8;
+      }
+      .lang-badge.hindi {
+        background: #e4f0e8;
+        color: #3d6b4a;
+        border: 1.5px solid #b0d4bc;
+      }
+
+      .channel-desc {
+        font-size: 0.78rem;
         color: var(--muted);
-        line-height: 1.7;
+        line-height: 1.55;
+        margin: 0;
+        flex: 1;
       }
 
-      .video-link {
+      /* ── CARD BUTTONS ── */
+      .card-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        width: 100%;
+        margin-top: 0.35rem;
+      }
+
+      .btn-visit {
         display: block;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        background: var(--deep-teal);
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition:
+          background 0.2s ease,
+          transform 0.15s ease;
+        cursor: pointer;
       }
 
-      .video-link:focus-visible {
-        outline: 3px solid var(--cotton-rose);
-        outline-offset: 3px;
-        border-radius: var(--radius-lg);
+      .btn-visit:hover {
+        background: var(--granite);
+        transform: translateY(-1px);
       }
 
-      /* --- FLOATING HEARTS (keep your vibe, but softer) --- */
+      .btn-home {
+        display: block;
+        width: 100%;
+        padding: 0.45rem 0.75rem;
+        background: transparent;
+        color: var(--deep-teal);
+        font-family: inherit;
+        font-size: 0.76rem;
+        font-weight: 600;
+        border: 1.5px solid var(--ash-grey);
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition:
+          border-color 0.2s ease,
+          color 0.2s ease,
+          transform 0.15s ease;
+        cursor: pointer;
+      }
+
+      .btn-home:hover {
+        border-color: var(--deep-teal);
+        color: var(--granite);
+        transform: translateY(-1px);
+      }
+
+      /* ── NO RESULTS ── */
+      .no-results {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.95rem;
+        padding: 3rem 1rem;
+        width: 100%;
+      }
+
+      .no-results i {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+        display: block;
+        color: var(--ash-grey);
+      }
+
+      /* ── FLOATING HEARTS ── */
       .heart {
         position: fixed;
         top: -40px;
@@ -929,7 +1086,7 @@
         }
       }
 
-      /* --- FOOTER (match Resources) --- */
+      /* ── FOOTER ── */
       .footer {
         width: 100%;
         background: var(--granite);
@@ -944,26 +1101,9 @@
         font-size: 0.95rem;
         color: var(--white-smoke);
       }
-
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 1.25rem;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .social-icons img {
-        width: 26px;
-        height: 26px;
-        filter: invert(1);
-        opacity: 0.85;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .social-icons a:hover img {
-        opacity: 1;
-        transform: translateY(-2px);
+      footer.footer a {
+        color: var(--white);
+        font-weight: 700;
       }
 
       .footer-brand-logo {
@@ -972,197 +1112,889 @@
         display: block;
         filter: brightness(0) invert(1);
         opacity: 0.9;
+        margin: 0 auto 1rem;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        margin: 0.5rem 0 1.5rem;
+      }
+
+      .social-icons img {
+        width: 26px;
+        height: 26px;
+        filter: invert(1);
+        opacity: 0.85;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .social-icons a:hover img {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      /* ── RESPONSIVE CONTROLS ── */
+      @media (max-width: 600px) {
+        .controls-sticky {
+          padding: 0.75rem 0;
+        }
+        .filter-row {
+          justify-content: center;
+        }
       }
     </style>
   </head>
 
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ✅ HEADER (includes hamburger + cart button + chai button) -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-
-        <nav class="nav">
-          <a href="/products.html">Shop</a>
-          <a href="/subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html" class="nav-active">Resources</a>
-          <a href="../index.html#faq">Help</a>
-          <a href="../index.html#contact">Contact</a>
-        </nav>
-
-        <div class="header-actions">
-          <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-          </button>
-
-          <a
-            class="icon-btn-circle chai-btn"
-            href="https://buy.stripe.com/cNiaEZ2oa31zefxcon0Fi0b"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Buy me chai">
-            <i class="fa-solid fa-mug-hot"></i>
-            <span class="chai-tooltip">Buy me chai <i class="fa-solid fa-mug-hot"></i></span>
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <!-- Spacer so content clears fixed header -->
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
     <div class="header-spacer" aria-hidden="true"></div>
 
-    <!-- ✅ MOBILE MENU OVERLAY -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <ul class="mobile-menu__links">
-          <li><a href="../products.html">Shop</a></li>
-          <li><a href="../subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html" class="nav-active">Resources</a></li>
-          <li><a href="../index.html#faq">Help</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- CART OVERLAY -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAIN -->
+    <!-- Main -->
     <main class="page-main">
       <section class="cartoons-card">
         <div class="cartoons-header">
           <h1>Cartoons</h1>
           <p class="subheading">
-            Discover a delightful collection of Urdu cartoons that entertain and
-            educate. From classic tales to modern adventures, these selections
-            are perfect for young hearts and curious minds.
+            Discover a curated collection of YouTube channels featuring Urdu and
+            Hindi cartoons — from classic tales and Islamic series to superhero
+            adventures and educational animation.
           </p>
+        </div>
 
-          <div class="controls-row">
-            <div class="filter-container">
-              <label for="categoryFilter">Category</label>
-              <select id="categoryFilter">
-                <option value="all">All Videos</option>
-              </select>
+        <!-- Sticky Search + Filter -->
+        <div class="controls-sticky" role="search">
+          <div class="search-wrap">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Search channels by name or description…"
+              aria-label="Search channels"
+              autocomplete="off" />
+          </div>
+          <div class="filter-row">
+            <span class="filter-label-inline" id="lang-filter-label"
+              >Language</span
+            >
+            <div
+              class="lang-pills"
+              role="tablist"
+              aria-labelledby="lang-filter-label">
+              <button
+                class="lang-pill"
+                role="tab"
+                aria-selected="true"
+                data-lang="all"
+                tabindex="0">
+                All
+              </button>
+              <button
+                class="lang-pill"
+                role="tab"
+                aria-selected="false"
+                data-lang="urdu"
+                tabindex="-1">
+                Urdu
+              </button>
+              <button
+                class="lang-pill"
+                role="tab"
+                aria-selected="false"
+                data-lang="hindi"
+                tabindex="-1">
+                Hindi
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="grid"></div>
+        <p class="results-meta" id="resultsCount" aria-live="polite"></p>
+
+        <div
+          class="channel-grid"
+          id="channelGrid"
+          aria-live="polite"
+          aria-label="Cartoon channel directory"></div>
+
+        <p class="no-results hidden" id="noResults" aria-live="polite">
+          <i class="fa-solid fa-tv" aria-hidden="true"></i>
+          No channels match your search.<br />Try a different term or clear the
+          filter.
+        </p>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
-      </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
     <script>
-      // --- STRIPE PAYLOAD (same as Resources) ---
-      function buildStripePayload(cartItems) {
-        const line_items = cartItems.map((item) => ({
-          price: item.id,
-          quantity: item.quantity,
-        }));
-        return { line_items };
+      // ── Channel Data ──────────────────────────────────────────────────────────
+      // Sorted alphabetically within each language group
+
+      const channels = [
+        // ── URDU (35 channels, A–Z) ────────────────────────────────────────────
+        {
+          name: "Aasaan Urdu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/em__1Iu_7M3TM6tDytzlLqNmz3spg7Px3ZswFB_BwkMXTY8c5GFUcnyQ4qc-jDYc6TYSyIbYIA=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@AasaanUrduCtoon/playlists",
+          allVideosUrl: "https://www.youtube.com/@AasaanUrduCtoon/videos",
+          description:
+            "Easy Urdu cartoons and lessons designed to make learning Urdu simple and fun for kids.",
+        },
+        {
+          name: "Alief TV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/NAYJoAnczKto2GmS7l8eU-loC5ClPuWUdsKLB7LYGypfQQ-Z1TcvLfesMVNPJUn-xnn7fF3gKho=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@alieftvnetwork/playlists",
+          allVideosUrl: "https://www.youtube.com/@alieftvnetwork/videos",
+          description:
+            "Animated Urdu content and children's programming celebrating Pakistani culture and family values.",
+        },
+        {
+          name: "Animate with KK",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_ld4FhKZieM1lZ94SLHwEq1z3fv43otVh73sTQs1rTTgg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@AnimatewithKK/playlists",
+          allVideosUrl: "https://www.youtube.com/@AnimatewithKK/videos",
+          description:
+            "Home of 3 Bahadur — Pakistan's first CG-animated superhero franchise, available in Urdu.",
+        },
+        {
+          name: "Bachon Ka Qalandar Shaoor",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/VyndCkRLO_sRm_gObRXEiXyswgDcKF_p21RvJwsuNO00dILSE6u95EtEkMmeq6k8-27_x9RL=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@bachonkaqalandarshaoor/playlists",
+          allVideosUrl: "https://www.youtube.com/@bachonkaqalandarshaoor/videos",
+          description:
+            "Islamic wisdom, moral stories, and spiritual content for children in Urdu.",
+        },
+        {
+          name: "Dream Stories Masti Urdu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/f_SNxWedmDHkDkkqY4cfBKvuz5VfLu94DhiygQfPDAhO0w1MyZ8lZ3BXcPSIy7LVVGEiCAqU=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@dreamstoriesmastiurdu/playlists",
+          allVideosUrl: "https://www.youtube.com/@dreamstoriesmastiurdu/videos",
+          description:
+            "Animated moral stories and Urdu fairy tales, blending fun and life lessons with colorful visuals.",
+        },
+        {
+          name: "Fun Smarties",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/PsHP2xIQVIvAyf_RdWr9-KKFT7YZNLaWiG7LUxpQAW-TlzGV3a4LfiXgrktf-4f-oxfcLKeimRI=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@FunSmarties/playlists",
+          allVideosUrl: "https://www.youtube.com/@FunSmarties/videos",
+          description:
+            "Engaging Urdu rhymes, alphabet songs, and fun educational content for little ones.",
+        },
+        {
+          name: "Ghulam Rasool Official",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/EPZeUpOn50HVn52Bj-vi36nFSknHKI97kpbdnxvroIsz5CsBl5lY59xM0dTbkiV_PT_Yr2X9=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@ghulamrasoolofficial/playlists",
+          allVideosUrl: "https://www.youtube.com/@ghulamrasoolofficial/videos",
+          description:
+            "The classic Ghulam Rasool animated series — beloved Islamic moral stories for Pakistani families.",
+        },
+        {
+          name: "Hoora TV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/rr8q8TQrEuGt3tIpqVd3lrMDPv8hMqA2kPLEX0x8hulOJLsxTw4dyB6vh99h_T9QORY1IZti=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@hooratv/playlists",
+          allVideosUrl: "https://www.youtube.com/@hooratv/videos",
+          description:
+            "Vibrant Urdu songs, cartoons, and stories entertaining and educating young Pakistani children.",
+        },
+        {
+          name: "Inteam Kids",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_nD0N5m4kU1qi3F7I2Aoov_VdodGSn3dYgYD9HTLbyiO_8=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@InteamKids/playlists",
+          allVideosUrl: "https://www.youtube.com/@InteamKids/videos",
+          description:
+            "Animated Urdu kids programming with fun stories and characters for young Pakistani children.",
+        },
+        {
+          name: "Islamic Kids Official",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/F7jwgIvZcYa2nVahFxA8MpHzcQDHPqCoZspsRyXLIQvK6jGBVYDVwAC6ViFzjeHgKdQ5QGP0=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@IslamicKidsOficial/playlists",
+          allVideosUrl: "https://www.youtube.com/@IslamicKidsOficial/videos",
+          description:
+            "Islamic moral stories and educational content for Muslim children delivered in Urdu.",
+        },
+        {
+          name: "ISPR Official",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/N_YkOpqOjowatIwGb7qQNp3xoBS_KiYW3BovRdKpij0A4FiHxtf8CfD3XVxJ-j4id9P-o9bb=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@ISPR/playlists",
+          allVideosUrl: "https://www.youtube.com/@ISPR/videos",
+          description:
+            "Home of Team Muhafiz and The J&J Show — animated series tackling social issues for Pakistani kids.",
+        },
+        {
+          name: "Kids Land",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_l8YRmETp0KbIj2jNsgqs-Amv3ApDV39YXcgnMhmuZsphI=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@KidsLandOfficial/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsLandOfficial/videos",
+          description:
+            "Kaneez Fatima and Ghulam Rasool cartoons plus nursery rhymes and stories in Urdu and Hindi.",
+        },
+        {
+          name: "Kids Madani Channel",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_kkIgMAkrI-b6AESWzfc3Df4B0QeyGof8Qhd-M9I8hQPbs=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@KidsMadaniChannel/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsMadaniChannel/videos",
+          description:
+            "Islamic education, Urdu nasheeds, and faith-based animated content for young Muslim children.",
+        },
+        {
+          name: "Kids Message",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/XbdKK8OdiFCrcCXG8QpFyS1k9gLkOI4d6ki8PNaUz57hWFNmnt0AuiFczDMFFPi5JKhlrNuxGe8=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@kidsmessage/playlists",
+          allVideosUrl: "https://www.youtube.com/@kidsmessage/videos",
+          description:
+            "Islamic stories, moral lessons, and character-building animations for Muslim children in Urdu.",
+        },
+        {
+          name: "Kids Planet Urdu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_kKQ7xrG7ZDsXl4IwtVqRxxc088NYr7xNa-KZ5wvUAMxg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@KidsPlanetUrdu/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsPlanetUrdu/videos",
+          description:
+            "Fun Urdu nursery rhymes, fairy tales, and educational cartoons designed for young children.",
+        },
+        {
+          name: "Kids Zone Pakistan",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/8OIbcX3lD89pQJzRMVLG7MIb_-_ieZfC4WyHXDaAJHL4YhPl6xkpIHtIMGrY3u8ZsZ1hJuEu4w=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@KidsZonePakistan/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsZonePakistan/videos",
+          description:
+            "Urdu-dubbed cartoons and animated series including popular Pakistani and international content.",
+        },
+        {
+          name: "Koo Koo TV Urdu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/rG_0r5SRYDP9Gg26mpWV5SND8oMsi3G0gJBVP0y1MWFc7jjA7OMok7-1M03zEYobn7PHesSlBw=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@kookootvurdu/playlists",
+          allVideosUrl: "https://www.youtube.com/@kookootvurdu/videos",
+          description:
+            "Fun animated stories and nursery rhymes for children, dubbed and narrated in Urdu.",
+        },
+        {
+          name: "Noor Land TV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/HtjRbY5kkJCNKW9XfA6-He9xXurUcrlB4nPDPTWjFNP18WWd_wwASCv2_f1k2YEXXabukgfK7Q=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@noorlandtv/playlists",
+          allVideosUrl: "https://www.youtube.com/@noorlandtv/videos",
+          description:
+            "Islamic stories, songs, and wholesome content for Muslim families with young children.",
+        },
+        {
+          name: "Omar and Hana Urdu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/gnWmvtV0gdNwPIlRP_85lcYZzQ--ZuqH3Jc8Hb-BvHGKtMEqCASoeuYWObWe0vLWwN8XyqeOLA=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@Omarandhanaurdu/playlists",
+          allVideosUrl: "https://www.youtube.com/@Omarandhanaurdu/videos",
+          description:
+            "Loving siblings Omar and Hana explore Islamic values, etiquette, and everyday lessons through songs and stories.",
+        },
+        {
+          name: "Pakkay Dost",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/dYvB5XAIpk06SFVqD_t1P_PimVaS40_9DQJgxMftmt4h5wsSYLr4BDwDiorzWzXO84GNCB9oyw=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@pakkaydost/playlists",
+          allVideosUrl: "https://www.youtube.com/@pakkaydost/videos",
+          description:
+            "Original Pakistani Urdu puppet show teaching children about friendship, kindness, and sharing.",
+        },
+        {
+          name: "Professor Jugnu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/cQHNUpz-G41qK7ZHYS5fzm1kJcp-RZmqW02mUjxkATVG1Z-GrISU3Bs3evtVOrnNk7sSO8FuUg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@ProfessorJugnu/playlists",
+          allVideosUrl: "https://www.youtube.com/@ProfessorJugnu/videos",
+          description:
+            "Animated educational cartoons making learning Urdu vocabulary and concepts fun for children.",
+        },
+        {
+          name: "Quaid Say Baatein",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_kp53oNIYSYft8IWG3z24NWnQiUTcS15at_EGmOH866Qg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@QuaidSayBaatein/playlists",
+          allVideosUrl: "https://www.youtube.com/@QuaidSayBaatein/videos",
+          description:
+            "Animated series teaching children civic values and life lessons inspired by Quaid-e-Azam's principles.",
+        },
+        {
+          name: "Rafi Peer Kids TV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_lTcI8lVCEvuiTizx49ozP9aiA0Nu9fvy4mhVcc7ixuMA=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@simsimhamaraofficial/playlists",
+          allVideosUrl: "https://www.youtube.com/@simsimhamaraofficial/videos",
+          description:
+            "Rafi Peer Kids aims to develop the language, problem-solving, and critical thinking abilities of children and to promote positive attitudes towards diverse and marginalized groups in a culturally sensitive manner.",
+        },
+        {
+          name: "Roro & Dodo Tales",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/DsN1NJ3RkxITOUxvFAyBdqci9c7g0g-ofMses50i4mh194k6RC0DGIaiVfzSBs_jAzdkqJv8rIg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@rorododotales/playlists",
+          allVideosUrl: "https://www.youtube.com/@rorododotales/videos",
+          description:
+            "Dubbed animated stories and moral tales for young children presented in Urdu.",
+        },
+        {
+          name: "Sabz Studios",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/umgKcjDMJQ3BU1u4DZAZbsbH_HfqXY7TUc48DSgTI1eWFReZ5IfrzD_yzpaYzAWZugo1ttMc=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@SabzStudios/playlists",
+          allVideosUrl: "https://www.youtube.com/@SabzStudios/videos",
+          description:
+            "Home of Jan Cartoon — Pakistani animated series celebrating everyday adventures and family values.",
+        },
+        {
+          name: "Safeguard Prime",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/W6qfWZ5ZgwnUmv3sa2qsT_u0sGifxGoWlwIQv1dwzJvlG-4srbdmxiTrmlHYDJX-ihVWGf0c=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@CommanderSafeguard-v3f/playlists",
+          allVideosUrl: "https://www.youtube.com/@CommanderSafeguard-v3f/videos",
+          description:
+            "Commander Safeguard — Pakistan's animated hygiene superhero fighting germs to teach children healthy habits.",
+        },
+        {
+          name: "Soha Telling Tales",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/MLlTyBtJpzK3nbBYdpoIGF9UttSWIz7nsYrMqcN7Fod89jPc90Oi7XxqRN0mov14RlFcvio1sg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@SohaTellingTales/playlists",
+          allVideosUrl: "https://www.youtube.com/@SohaTellingTales/videos",
+          description:
+            "Interactive storytelling sessions and imaginative tales for young Urdu learners.",
+        },
+        {
+          name: "Taleemabad",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/7yS-RsoCuDba63VfwSXu5wA5b6OIQk9GItKjUawqpbg4AP3aTKPmHaMhzDm1bvVSWOaiForVGg=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@Taleemabad/playlists",
+          allVideosUrl: "https://www.youtube.com/@Taleemabad/videos",
+          description:
+            "Animated national curriculum content in Urdu, ideal for preschool and early primary children.",
+        },
+        {
+          name: "ToffeeTV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_lniRlGNukubI3tpX3ejMZBCfGsz87llX3wjFalq9IPqFE=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@toffeetvpk/playlists",
+          allVideosUrl: "https://www.youtube.com/@toffeetvpk/videos",
+          description:
+            "Pakistan's beloved children's channel featuring Urdu cartoons, songs, stories, and educational content.",
+        },
+        {
+          name: "Unicorn Black Studios",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/reFRkJ-Y2dpcQPbB92Cv-yKD-WibjCU--v4bx98b6wFd1M0bFvrdbMsIh_om1V-b8IxeSNY6TA=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@UnicornBlackStudios/playlists",
+          allVideosUrl: "https://www.youtube.com/@UnicornBlackStudios/videos",
+          description:
+            "Home of Burka Avenger — Pakistan's animated superheroine fighting for education and justice in Urdu.",
+        },
+        {
+          name: "Urdu Fairy Tales",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_nD1DpOUx50DRo8wmD3Byeyo8-v5fUNJW8lya7VfXsHNm0=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@UrduFairyTales/playlists",
+          allVideosUrl: "https://www.youtube.com/@UrduFairyTales/videos",
+          description:
+            "Classic Urdu fairy tales and folk stories brought to life with beautiful animation for young children.",
+        },
+        {
+          name: "Urdu Islamic Kids Videos",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_n7gq6iNh9Zasw2QAMyJLWYWM-8eTMg6SaA2MQ4BBAf3A=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@UrduIslamicKidsVideos/playlists",
+          allVideosUrl: "https://www.youtube.com/@UrduIslamicKidsVideos/videos",
+          description:
+            "Quranic stories and prophets' tales for kids, bringing beloved Islamic narratives to life in Urdu.",
+        },
+        {
+          name: "Wow Kidz Comedy",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/9CUfZXeAGdbToPMoguOfVU9QBvP18fQasySFZ0hJh0iu53g6QZkQn-Wr-V6ReJI-Ds82qpZr=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@WowKidzComedy01/playlists",
+          allVideosUrl: "https://www.youtube.com/@WowKidzComedy01/videos",
+          description:
+            "Comedy cartoons including Motu Patlu and other animated favorites fully dubbed in Urdu.",
+        },
+        {
+          name: "Wow Kidz Urdu",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_n7rA1Y9LtXGorHXOb0hNR-eFR08QEABwoRh6ZOlFBY0g=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@WowKidzUrdu/playlists",
+          allVideosUrl: "https://www.youtube.com/@WowKidzUrdu/videos",
+          description:
+            "Popular international cartoons and children's content dubbed and presented in Urdu.",
+        },
+        {
+          name: "Yusuf aur Maryam",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/em_3Ph7CDOuL72ia8tcQySaDA4VBK9vdkOVhy-1ksAGGrOPedlNYSVremz_mWLBUFyddH2b-=s72-c-k-c0x00ffffff-no-rj",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@Yusufaurmaryam/playlists",
+          allVideosUrl: "https://www.youtube.com/@Yusufaurmaryam/videos",
+          description:
+            "Beautiful Islamic animated series following Yusuf and Maryam through faith-inspired adventures.",
+        },
+
+        // ── HINDI (17 channels, A–Z) ───────────────────────────────────────────
+        {
+          name: "BookBox Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_lm_joDbDf7Ps_5oi_BVZd2g6GkBex-ynOyi-sgA--n0Q=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@BookboxHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@BookboxHindi/videos",
+          description:
+            "Animated Hindi storybooks with subtitles, making reading and listening a joyful experience for kids.",
+        },
+        {
+          name: "Dream Stories TV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_nZN6xjNmPPUdq4iexvPCD0mYwHZrEhu1ZQuGkp83cMeRk=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@DreamStoriesTV/playlists",
+          allVideosUrl: "https://www.youtube.com/@DreamStoriesTV/videos",
+          description:
+            "Animated dream stories, fairy tales, and imaginative adventures for children in Hindi.",
+        },
+        {
+          name: "Golden Stories Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/MCH3QH94AG3KjsqHU8O4UjD5ImVn4nWV0rySAKZJXPKRvVAKERCCG9gBwpD2bd5S2yhgG_WozaE=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@GoldenStoriesHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@GoldenStoriesHindi/videos",
+          description:
+            "Classic golden tales and moral stories from Indian tradition, beautifully animated in Hindi.",
+        },
+        {
+          name: "Infobells Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_mWKlOUcsnrq8oXV8BemcuyrfG52ztaqZmoDThFc1v-etg=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@infobellshindirhymes/playlists",
+          allVideosUrl: "https://www.youtube.com/@infobellshindirhymes/videos",
+          description:
+            "High-quality animated Hindi rhymes and educational songs with rich visuals for early learners.",
+        },
+        {
+          name: "Jingle Toons",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_lQm2XrrKZ3ie2CZrKUyv-24bln9TKYDf7R0w3R0cJ2TfM=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@JingleToons/playlists",
+          allVideosUrl: "https://www.youtube.com/@JingleToons/videos",
+          description:
+            "Catchy Hindi jingles and cartoon songs that make learning vocabulary and concepts fun for children.",
+        },
+        {
+          name: "Kids Channel India",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/hZYF-Hz4YJp36GJZamItXW6PXGapw5p0nAneFgaRcTYymJLvWpXE0tF7SubIzv_rKa3HVgECN2g=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@kidschannelindia/playlists",
+          allVideosUrl: "https://www.youtube.com/@kidschannelindia/videos",
+          description:
+            "A large collection of animated preschool stories, songs, and educational videos in Hindi.",
+        },
+        {
+          name: "Kids Planet Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_k71XX_amlKiQOGHodV4BnG7yXcLyLhGLU0M35aHnL91KE=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@KidsPlanetHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsPlanetHindi/videos",
+          description:
+            "Hindi nursery rhymes, fairy tales, and educational cartoons for young children in India.",
+        },
+        {
+          name: "Little Treehouse India",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_lh0zur4rENkfQX1M3GWDsFczQD_J3X9OCTn5wrJvbMeQ=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@LittleTreehouseIndia/playlists",
+          allVideosUrl: "https://www.youtube.com/@LittleTreehouseIndia/videos",
+          description:
+            "Beloved nursery rhymes adapted with Hindi lyrics, bright visuals, and fun melodies for children.",
+        },
+        {
+          name: "MishuToons Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ZQxDxfz_5J8PedanwXy07M4MHKGC5GC_1CsF8-V0_71N4Wdmk-sijXhB1CKk7dxHLc86Ty_dVA=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@Mishutoonofficial/playlists",
+          allVideosUrl: "https://www.youtube.com/@Mishutoonofficial/videos",
+          description:
+            "Animated Hindi village stories and moral tales with natural, conversational Hindi dialogue.",
+        },
+        {
+          name: "Modern Toonss",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/Cv6w5n8g2-pLjqKnggRid0l0U-SU7USQQj61zI4Lap_zD84GaZ8DOTF8jtnybu79mbnnRV9x8Q=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@ModernToonss/playlists",
+          allVideosUrl: "https://www.youtube.com/@ModernToonss/videos",
+          description:
+            "Modern animated cartoon series and funny episodes dubbed and presented in Hindi.",
+        },
+        {
+          name: "Mr Bean Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/dxkpiTzvYRjj7blvss7TQso1Hy_SYugUCvWV1S3AbPkxiWBgnHriqGcvEM2GkwAn7NFz42XFAm8=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@MrBeanHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@MrBeanHindi/videos",
+          description:
+            "The iconic Mr Bean animated series fully dubbed in Hindi — perfect for laughs and silly adventures.",
+        },
+        {
+          name: "Oggy Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/V6A8gkySU2s3LUpXNoT8QYrRKZFzEfYzRepgVW7_nrEJLSdFcwv4ZXSmWYTAVapW3qIjMqfp=s160-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@OggyHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@OggyHindi/videos",
+          description:
+            "Oggy and the Cockroaches — the hilarious slapstick cartoon fully dubbed in Hindi for Indian kids.",
+        },
+        {
+          name: "PunToon Kids Hindi",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/odV6jl9xFNml9_ncfVZwKy_2epQH4kCCDFmkftAEKrBI3l5j0BwlDPM02SmAfrrP1XFytm30Ag=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@PunToonKids-Hindi-r9j/playlists",
+          allVideosUrl: "https://www.youtube.com/@PunToonKids-Hindi-r9j/videos",
+          description:
+            "Animated moral stories and fairy tales presented in clear, child-friendly Hindi.",
+        },
+        {
+          name: "Sharum Ki Sketchbook",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_mF2DT0icRJywPmLb2qNQxyogcY3jQKMzHHVOm4NAZRv_k=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@SharumKiSketchbook/playlists",
+          allVideosUrl: "https://www.youtube.com/@SharumKiSketchbook/videos",
+          description:
+            "Creative storytelling, sketchbook adventures, and imaginative animations for kids in Hindi.",
+        },
+        {
+          name: "The Kids Zone",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/PVQezIBFzrwt_8iVO2PuSFyfZ9SBkDvM4V1IjVLDb_G4GOfG9SSs_8ZgiRNGdgUNeQvLqe1q=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@TheKidsZone233/playlists",
+          allVideosUrl: "https://www.youtube.com/@TheKidsZone233/videos",
+          description:
+            "Hindi nursery rhymes and preschool learning videos for young children.",
+        },
+        {
+          name: "Ultra Kids Zone",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_kmMC-Q6Jgow-KOoJae-zbFDrTVGMXAglPPdNNPMXH2_w=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@UltraKidsZone/playlists",
+          allVideosUrl: "https://www.youtube.com/@UltraKidsZone/videos",
+          description:
+            "A vast collection of animated Hindi stories, folk tales, and cartoons for young viewers.",
+        },
+        {
+          name: "Walt Disney Studios India",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/ytc/AIdro_kFxN68s-5DC-kb1IzjunRPojiAc1ljKgo4oQDB1LuV53g=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@WaltDisneyStudiosIndia/playlists",
+          allVideosUrl: "https://www.youtube.com/@WaltDisneyStudiosIndia/videos",
+          description:
+            "Official Disney India channel with trailers, songs, and magical content in Hindi for young fans.",
+        },
+        {
+          name: "WowKidz Official TV",
+          profileImageUrl:
+            "https://yt3.googleusercontent.com/3uOW-LJchrMU9b4UBAvyxUB_jGj8McvtxhET8pqOhCYWQWNubxeYPYzmYWi91lOaiwp3zHM=s72-c-k-c0x00ffffff-no-rj",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@WowKidzOfficialTV/playlists",
+          allVideosUrl: "https://www.youtube.com/@WowKidzOfficialTV/videos",
+          description:
+            "Popular animated cartoons and comedy shows beloved by children across India, in Hindi.",
+        },
+      ];
+
+      // ── Avatar colour palettes ─────────────────────────────────────────────────
+
+      const URDU_PALETTES = [
+        { bg: "#d49797", text: "#ffffff" },
+        { bg: "#c97878", text: "#ffffff" },
+        { bg: "#e8b8b8", text: "#7a3d3d" },
+        { bg: "#ffc4c3", text: "#8b4040" },
+        { bg: "#f3dedd", text: "#9a5050" },
+        { bg: "#b87a7a", text: "#ffffff" },
+      ];
+
+      const HINDI_PALETTES = [
+        { bg: "#687d70", text: "#ffffff" },
+        { bg: "#4a594a", text: "#ffffff" },
+        { bg: "#b0c3b7", text: "#3a4a3a" },
+        { bg: "#c9dcce", text: "#3a4a3a" },
+        { bg: "#8aab94", text: "#ffffff" },
+        { bg: "#5e7a65", text: "#ffffff" },
+      ];
+
+      // ── Card builder ──────────────────────────────────────────────────────────
+
+      function buildCard(channel, colorIndex) {
+        const palettes =
+          channel.language === "urdu" ? URDU_PALETTES : HINDI_PALETTES;
+        const palette = palettes[colorIndex % palettes.length];
+        const initial = channel.name.charAt(0).toUpperCase();
+
+        const card = document.createElement("article");
+        card.className = "channel-card";
+        card.dataset.lang = channel.language;
+        card.dataset.name = channel.name.toLowerCase();
+        card.dataset.desc = channel.description.toLowerCase();
+
+        // Avatar
+        const avatarWrap = document.createElement("div");
+        avatarWrap.className = "channel-avatar";
+        avatarWrap.style.background = palette.bg;
+
+        const fallback = document.createElement("span");
+        fallback.className = "avatar-fallback";
+        fallback.textContent = initial;
+        fallback.style.color = palette.text;
+        fallback.setAttribute("aria-hidden", "true");
+        avatarWrap.appendChild(fallback);
+
+        if (channel.profileImageUrl) {
+          const avatarImg = document.createElement("img");
+          avatarImg.className = "channel-avatar-img";
+          avatarImg.src = channel.profileImageUrl;
+          avatarImg.alt = `${channel.name} profile image`;
+          avatarImg.loading = "lazy";
+          avatarImg.referrerPolicy = "no-referrer";
+          avatarImg.onerror = () => avatarImg.remove();
+          avatarWrap.appendChild(avatarImg);
+        }
+
+        // Name
+        const nameEl = document.createElement("h2");
+        nameEl.className = "channel-name";
+        nameEl.textContent = channel.name;
+
+        // Badge
+        const badge = document.createElement("span");
+        badge.className = `lang-badge ${channel.language}`;
+        badge.textContent = channel.language === "urdu" ? "Urdu" : "Hindi";
+
+        // Description
+        const desc = document.createElement("p");
+        desc.className = "channel-desc";
+        desc.textContent = channel.description;
+
+        // Buttons
+        const actions = document.createElement("div");
+        actions.className = "card-actions";
+
+        const visitBtn = document.createElement("a");
+        visitBtn.className = "btn-visit";
+        visitBtn.href = channel.allVideosUrl;
+        visitBtn.target = "_blank";
+        visitBtn.rel = "noopener noreferrer";
+        visitBtn.setAttribute("aria-label", `View videos from ${channel.name}`);
+        visitBtn.innerHTML =
+          '<i class="fa-brands fa-youtube" aria-hidden="true" style="margin-right:0.4rem;"></i>View Videos';
+
+        const homeBtn = document.createElement("a");
+        homeBtn.className = "btn-home";
+        homeBtn.href = channel.playlistsUrl;
+        homeBtn.target = "_blank";
+        homeBtn.rel = "noopener noreferrer";
+        homeBtn.setAttribute(
+          "aria-label",
+          `View ${channel.name} playlists`,
+        );
+        homeBtn.innerHTML =
+          '<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" style="margin-right:0.35rem; font-size:0.7rem;"></i>Playlists';
+
+        actions.appendChild(visitBtn);
+        actions.appendChild(homeBtn);
+
+        card.appendChild(avatarWrap);
+        card.appendChild(nameEl);
+        card.appendChild(badge);
+        card.appendChild(desc);
+        card.appendChild(actions);
+
+        return card;
       }
 
-      // --- PRODUCT DATA (optional / for cart rendering) ---
+      // ── Render & filter ───────────────────────────────────────────────────────
+
+      const grid = document.getElementById("channelGrid");
+      const noResults = document.getElementById("noResults");
+      const resultsCount = document.getElementById("resultsCount");
+
+      function getActiveLang() {
+        return (
+          document.querySelector('.lang-pill[aria-selected="true"]')?.dataset
+            .lang ?? "all"
+        );
+      }
+
+      function getSearchTerm() {
+        return document
+          .getElementById("searchInput")
+          .value.trim()
+          .toLowerCase();
+      }
+
+      function renderChannels() {
+        const lang = getActiveLang();
+        const term = getSearchTerm();
+
+        const filtered = channels.filter((ch) => {
+          const langMatch = lang === "all" || ch.language === lang;
+          const searchMatch =
+            !term ||
+            ch.name.toLowerCase().includes(term) ||
+            ch.description.toLowerCase().includes(term) ||
+            ch.language.includes(term);
+          return langMatch && searchMatch;
+        });
+
+        grid.innerHTML = "";
+
+        if (filtered.length === 0) {
+          noResults.classList.remove("hidden");
+          resultsCount.textContent = "";
+        } else {
+          noResults.classList.add("hidden");
+          filtered.forEach((ch, i) => grid.appendChild(buildCard(ch, i)));
+          resultsCount.textContent =
+            filtered.length === channels.length
+              ? `Showing all ${channels.length} channels`
+              : `Showing ${filtered.length} of ${channels.length} channels`;
+        }
+      }
+
+      // ── URL param support ────────────────────────────────────────────────────
+
+      function applyURLParams() {
+        const params = new URLSearchParams(window.location.search);
+        const langParam = params.get("lang")?.toLowerCase();
+        const qParam = params.get("q");
+
+        if (langParam && ["urdu", "hindi", "all"].includes(langParam)) {
+          document.querySelectorAll(".lang-pill").forEach((p) => {
+            const selected = p.dataset.lang === langParam;
+            p.setAttribute("aria-selected", String(selected));
+            p.tabIndex = selected ? 0 : -1;
+          });
+        }
+        if (qParam) document.getElementById("searchInput").value = qParam;
+      }
+
+      // ── Language pill interaction ─────────────────────────────────────────────
+
+      function setupLangPills() {
+        const pills = document.querySelectorAll(".lang-pill");
+        pills.forEach((pill) => {
+          pill.addEventListener("click", () => {
+            pills.forEach((p) => {
+              p.setAttribute("aria-selected", "false");
+              p.tabIndex = -1;
+            });
+            pill.setAttribute("aria-selected", "true");
+            pill.tabIndex = 0;
+            renderChannels();
+          });
+
+          pill.addEventListener("keydown", (e) => {
+            const arr = Array.from(pills);
+            const idx = arr.indexOf(pill);
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault();
+              arr[(idx + 1) % arr.length].focus();
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault();
+              arr[(idx - 1 + arr.length) % arr.length].focus();
+            }
+          });
+        });
+      }
+
+      // ── Search ───────────────────────────────────────────────────────────────
+
+      let searchTimeout;
+      document.getElementById("searchInput").addEventListener("input", () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(renderChannels, 120);
+      });
+
+      // ── Cart ─────────────────────────────────────────────────────────────────
+
+      function buildStripePayload(cartItems) {
+        return {
+          line_items: cartItems.map((item) => ({
+            price: item.id,
+            quantity: item.quantity,
+          })),
+        };
+      }
+
       const products = [
         {
           id: "price_1SYLwPP4FFhr5UNAc6JmV0iR",
@@ -1184,10 +2016,8 @@
         },
       ];
 
-      // ✅ SAME cart key for cross-page persistence
       let cart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
 
-      // --- DOM ELEMENTS ---
       const cartBtn = document.getElementById("cart-btn");
       const closeCartBtn = document.getElementById("close-cart");
       const cartOverlay = document.getElementById("cart-overlay");
@@ -1196,361 +2026,23 @@
       const cartBadge = document.getElementById("cart-badge");
       const checkoutBtn = document.getElementById("checkout-btn");
 
-      const mobileToggle = document.getElementById("mobile-toggle");
-      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
-
-      // --------- YOUR VIDEO LIST ----------
-      const videolist = [
-        {
-          name: "Omar & Hana (Urdu)",
-          type: "channel",
-          url: "https://www.youtube.com/c/Omarandhanaurdu",
-          image:
-            "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ65dQLLNBtZQR9Rm1KhDdMYOtEiySVf9J2ERVKSLmBbUNRwYOCxGOoTwl-tBgO-8PyNr6tuw",
-          category: "Islamic / Educational",
-          description:
-            "Omar & Hana are loving siblings who explore Islamic values and everyday lessons through songs and stories in Urdu.",
-        },
-        {
-          name: "Burka Avenger",
-          type: "series",
-          url: "https://www.youtube.com/watch?v=XahbqLdCVhE&list=PLvwdOR2-ClA6Ttaq-QyGvbeREO7_-3zCd",
-          image: "https://i.ytimg.com/vi/h3JZGLNYwQ8/maxresdefault.jpg",
-          category: "Superhero / Social Issues",
-          description:
-            "Pakistani animated superheroine Jiya (Burka Avenger) fights injustice and supports girls’ education in Urdu.",
-        },
-        {
-          name: "3 Bahadur (Movie)",
-          type: "film / clips",
-          url: "https://www.youtube.com/watch?v=nYFe7wrkoyE",
-          image: "https://i.ytimg.com/vi/nYFe7wrkoyE/sddefault.jpg",
-          category: "Superhero / Adventure",
-          description:
-            "Pakistan’s first full-length CG-animated superhero film dubbed or subtitled in Urdu.",
-        },
-        {
-          name: "3 Bahadur - Revenge of Baba Balam (Movie)",
-          type: "film / clips",
-          url: "https://www.youtube.com/watch?v=KM1idkyZDf8",
-          image:
-            "https://upload.wikimedia.org/wikipedia/en/1/16/3_Bahadur_part_2_poster.jpeg",
-          category: "Superhero / Adventure",
-          description:
-            "Pakistan’s first full-length CG-animated superhero film dubbed or subtitled in Urdu.",
-        },
-        {
-          name: "Team Muhafiz",
-          type: "series",
-          url: "https://www.youtube.com/@GeoJuniors",
-          image:
-            "https://yt3.googleusercontent.com/qOzZs3kS_-IF2rzc-4171HShemwCeVwwRz4QPjfglGDbIxRCRFb1VlJq885UpS7FXprboZR1F6k=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Social Justice / Superhero",
-          description:
-            "Animated series about teens fighting social issues, originally in Urdu (via ISPR-Geo).",
-        },
-        {
-          name: "Kids Planet Urdu",
-          type: "channel",
-          url: "https://www.youtube.com/c/kidsplaneturdu",
-          image:
-            "https://yt3.googleusercontent.com/fVC2VfgnGdFIvGQUD-TKl-QoQ35GXmRqcS9A3c6TI6ooVDogLQ69Qm2crYZGhvQ4O1vS-6KORQ=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Educational / Rhymes",
-          description:
-            "Fun Urdu nursery rhymes, fairy tales and educational cartoons designed for young children.",
-        },
-        {
-          name: "Kids Planet Hindi",
-          type: "channel",
-          url: "https://www.youtube.com/@KidsPlanetHindi",
-          image:
-            "https://yt3.googleusercontent.com/m2RJFd_wJ95P44kAHDCYvSsqxHTaWLbdG3SCsJcW45yE_qgWx6Q5i8zPUpqIARIdisoY_GAA4vQ=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Educational / Rhymes / Hindi-Urdu",
-          description:
-            "Kids Planet Hindi offers a wide range of Hindi and Urdu nursery rhymes, moral stories, and cartoons for children.",
-        },
-        {
-          name: "Dream Stories Masti Urdu",
-          type: "channel",
-          url: "https://www.youtube.com/@dreamstoriesmastiurdu/videos",
-          image:
-            "https://yt3.googleusercontent.com/FoY8Ua88SAOnO25P6xb5xsz1LqC7LjffE5XUuR1G0J3-tB2F6rmBqerVayLpga3BRDbVrXm-Tw=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Storytelling / Entertainment",
-          description:
-            "Animated moral stories and fairy tales in Urdu designed for children, blending fun and life lessons with colorful visuals and engaging narration.",
-        },
-        {
-          name: "Quaid Say Baatein",
-          type: "channel",
-          url: "https://www.youtube.com/@QuaidSayBaatein/videos",
-          image:
-            "https://yt3.googleusercontent.com/ytc/AIdro_kp53oNIYSYft8IWG3z24NWnQiUTcS15at_EGmOH866Qg=s160-c-k-c0x00ffffff-no-rj",
-          category: "Patriotic / Educational",
-          description:
-            "Animated series teaching children life lessons and civic values inspired by Quaid-e-Azam’s principles.",
-        },
-        {
-          name: "Rafi Peer Kids TV (Sim Sim Hamara)",
-          type: "channel",
-          url: "https://www.youtube.com/@simsimhamaraofficial/videos",
-          image:
-            "https://yt3.googleusercontent.com/KlfFQWBT73w_kHiMObPxDbI5M4IFx_ZKMuyGBQRK8488aTKBuOyP7TP3OgU3dz_G4J-1I1Vv4lg=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Educational / Puppetry / Urdu",
-          description:
-            "Sim Sim Hamara is a Pakistani children's television series based on Sesame Street, promoting early childhood education, diversity, and social harmony in Urdu.",
-        },
-        {
-          name: "Commander Safeguard",
-          type: "series",
-          url: "https://www.youtube.com/@SafeguardPakistan/playlists",
-          image: "/assets/images/resources/commander.png",
-          category: "Educational / Hygiene",
-          description:
-            "Pakistan’s first animated superhero fighting germs to teach hand-washing in Urdu.",
-        },
-        {
-          name: "Jan Cartoon",
-          type: "series",
-          url: "https://www.youtube.com/@SabzStudios/playlists",
-          image: "/assets/images/resources/jan.png",
-          category: "Family / Life Lessons",
-          description:
-            "Light-hearted animated stories about a curious five-year-old boy and everyday adventures in Urdu.",
-        },
-        {
-          name: "Bachon Ka Qalandar Shaoor",
-          type: "channel",
-          url: "https://www.youtube.com/@bachonkaqalandarshaoor",
-          image:
-            "https://yt3.googleusercontent.com/VyndCkRLO_sRm_gObRXEiXyswgDcKF_p21RvJwsuNO00dILSE6u95EtEkMmeq6k8-27_x9RL=s160-c-k-c0x00ffffff-no-rj",
-          category: "Islamic / Urdu / Spiritual",
-          description:
-            "Bachon Ka Qalandar Shaoor shares Islamic wisdom, stories, and moral teachings for children in Urdu.",
-        },
-        {
-          name: "Sherazade (Urdu Dubbing)",
-          type: "dubbed",
-          url: "https://www.youtube.com/watch?v=pX0q3UHLKME",
-          image: "https://img.youtube.com/vi/pX0q3UHLKME/hqdefault.jpg",
-          category: "Dubbed Folk Tales",
-          description:
-            "Urdu-dubbed mega-episode of Arabian Nights style storytelling.",
-        },
-        {
-          name: "Taleemabad",
-          type: "channel",
-          url: "https://www.youtube.com/@Taleemabad/playlists",
-          image:
-            "https://yt3.googleusercontent.com/7yS-RsoCuDba63VfwSXu5wA5b6OIQk9GItKjUawqpbg4AP3aTKPmHaMhzDm1bvVSWOaiForVGg=s160-c-k-c0x00ffffff-no-rj",
-          category: "School Curriculum / Animated",
-          description:
-            "Animated videos in Urdu for kids that teach national curriculum topics, ideal for preschool and early primary grades.",
-        },
-        {
-          name: "Ghulam Rasool Cartoon Series",
-          type: "series",
-          url: "https://www.youtube.com/results?search_query=Ghulam+Rasool+Cartoon+Urdu",
-          image: "https://img.youtube.com/vi/bWuZrWJjE7M/hqdefault.jpg",
-          category: "Islamic / Moral Stories",
-          description:
-            "3D animated moral stories in Urdu, popular on Kids Zone Pakistan.",
-        },
-        {
-          name: "Kaneez Fatima Cartoon Series",
-          type: "series",
-          url: "https://www.youtube.com/watch?v=S8tiai8LBwY",
-          image: "https://img.youtube.com/vi/S8tiai8LBwY/hqdefault.jpg",
-          category: "Islamic Moral Stories",
-          description:
-            "Compilation series in Urdu/Hindi teaching Islamic values through short stories.",
-        },
-        {
-          name: "Wow Kidz Comedy TV",
-          type: "series",
-          url: "https://www.youtube.com/@WowKidzComedyTV/videos",
-          image:
-            "https://yt3.googleusercontent.com/VovRLQLSTQGy5KBqFbCfQGwNG73zjFMvUTZED7V8cmIHDKc0U9ul1C_bVii3yQHB99Q7JMeEcw=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Comedy / Adventure",
-          description:
-            "Hilarious duo Motlu and Patlu get into wild adventures. Now available fully dubbed in Urdu for kids!",
-        },
-        {
-          name: "Kids Zone Pakistan",
-          type: "series",
-          url: "https://www.youtube.com/@KidsZonePakistan/playlists",
-          image:
-            "https://yt3.googleusercontent.com/8OIbcX3lD89pQJzRMVLG7MIb_-_ieZfC4WyHXDaAJHL4YhPl6xkpIHtIMGrY3u8ZsZ1hJuEu4w=s160-c-k-c0x00ffffff-no-rj",
-          category: "Comedy / Adventure",
-          description:
-            "Kids Zone Pakistan is a Kids TV Channel, for the Urdu speaking population.",
-        },
-        {
-          name: "Pakkay Dost",
-          type: "puppets",
-          url: "https://www.youtube.com/@pakkaydost/playlists",
-          image:
-            "https://yt3.googleusercontent.com/l1MIIH-qyI7vKpTn1TrNpKtPuHEyP6bqwhFWJvgnnn4Qb_qk94JKjwNEDJTwizddJJnHkav-Bw=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Comedy / Adventure",
-          description:
-            "Pakkay Dost is a Pakistani Urdu puppet show that teaches children about friendship, kindness, and sharing.",
-        },
-        {
-          name: "Kids Message",
-          type: "channel",
-          url: "https://www.youtube.com/@KidsMessage/playlists",
-          image:
-            "https://yt3.googleusercontent.com/0ggYHeqdQhiAg4ZP9n81QqGAJXI-_FatFQO11CGfsF8Xr9ldk_K5Iar91HL5EvS7jt7tChbE=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-          category: "Islamic / Moral Lessons",
-          description:
-            "An Urdu-language kids channel sharing Islamic stories, moral lessons, and character-building animations.",
-        },
-        {
-          name: "Kids Land Official",
-          type: "channel",
-          url: "https://www.youtube.com/@KidsLandOfficial/playlists",
-          image:
-            "https://yt3.googleusercontent.com/ytc/AIdro_l8YRmETp0KbIj2jNsgqs-Amv3ApDV39YXcgnMhmuZsphI=s160-c-k-c0x00ffffff-no-rj",
-          category: "Cartoons / Rhymes / Urdu-Hindi",
-          description:
-            "A colorful channel featuring nursery rhymes, animated stories, and educational content in Urdu and Hindi.",
-        },
-        {
-          name: "Team Muhafiz",
-          type: "series",
-          url: "https://www.youtube.com/watch?v=xavzHy6aMLc&list=PLcAPTl-NPAsvYdDGEANu9r0bFqd4nwDFn",
-          image: "/assets/images/resources/team.png",
-          category: "Superhero / Social Issues",
-          description:
-            "Team Muhafiz follows Pakistani teens tackling social issues like education, extremism, and the environment — in Urdu.",
-        },
-        {
-          name: "The J&J Show",
-          type: "series / episode",
-          url: "https://www.youtube.com/watch?v=dwUqOgjQEJA",
-          image: "https://i.ytimg.com/vi/dwUqOgjQEJA/hqdefault.jpg",
-          category: "Health / Educational",
-          description:
-            "An Urdu-language kids episode where J&J explain the Coronavirus in a fun, accessible way. Produced by Rafi Peer Theatre.",
-        },
-      ];
-
-      // --- SHORT LABELS (UI) ---
-      // Keep your original strings in the data, but DISPLAY these short versions.
-      const CATEGORY_LABELS = {
-        "Islamic / Educational": "Islamic",
-        "Superhero / Social Issues": "Superhero",
-        "Superhero / Adventure": "Superhero",
-        "Social Justice / Superhero": "Justice",
-        "Educational / Rhymes": "Rhymes",
-        "Educational / Rhymes / Hindi-Urdu": "Rhymes",
-        "Storytelling / Entertainment": "Stories",
-        "Patriotic / Educational": "Patriotic",
-        "Educational / Puppetry / Urdu": "Puppets",
-        "Educational / Hygiene": "Hygiene",
-        "Family / Life Lessons": "Family",
-        "Islamic / Urdu / Spiritual": "Islamic",
-        "Dubbed Folk Tales": "Dubbed",
-        "School Curriculum / Animated": "School",
-        "Islamic / Moral Stories": "Islamic",
-        "Islamic Moral Stories": "Islamic",
-        "Comedy / Adventure": "Comedy",
-        "Cartoons / Rhymes / Urdu-Hindi": "Rhymes",
-        "Health / Educational": "Health",
-      };
-
-      const TYPE_LABELS = {
-        channel: "Channel",
-        series: "Series",
-        "film / clips": "Movie",
-        dubbed: "Dubbed",
-        puppets: "Puppets",
-        "series / episode": "Episode",
-        film: "Movie",
-        clips: "Clips",
-      };
-
-      function getCategoryLabel(category) {
-        return (
-          CATEGORY_LABELS[category] ||
-          String(category || "Other")
-            .split("/")[0]
-            .trim()
-        ); // fallback
-      }
-
-      function getTypeLabel(type) {
-        const t = String(type || "video")
-          .toLowerCase()
-          .trim();
-        return TYPE_LABELS[t] || TYPE_LABELS[t.replace(/\s+/g, " ")] || "Video";
-      }
-
-      // --------- CART (same behavior as resources) ----------
-      function init() {
-        renderVideos();
-        populateCategoryFilter();
-        updateCartUI();
-
-        if (cartBtn) cartBtn.addEventListener("click", openCart);
-        if (closeCartBtn) closeCartBtn.addEventListener("click", closeCart);
-
-        if (cartOverlay) {
-          cartOverlay.addEventListener("click", (e) => {
-            if (e.target === cartOverlay) closeCart();
-          });
-        }
-
-        if (checkoutBtn) checkoutBtn.addEventListener("click", handleCheckout);
-
-        // mobile menu
-        if (mobileToggle && mobileMenuOverlay) {
-          mobileToggle.addEventListener("click", openMobileMenu);
-
-          mobileMenuOverlay.addEventListener("click", (e) => {
-            if (e.target === mobileMenuOverlay) closeMobileMenu();
-          });
-
-          const closeBtn = mobileMenuOverlay.querySelector(
-            ".mobile-menu__close"
-          );
-          const menuLinks = mobileMenuOverlay.querySelectorAll(
-            ".mobile-menu__links a"
-          );
-          if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-          menuLinks.forEach((link) =>
-            link.addEventListener("click", closeMobileMenu)
-          );
-        }
-
-        window.addEventListener("storage", (event) => {
-          if (event.key === "kahani_cart") {
-            cart = JSON.parse(event.newValue) || [];
-            updateCartUI();
-          }
-        });
-      }
-
       function saveCart() {
         localStorage.setItem("kahani_cart", JSON.stringify(cart));
       }
 
       function updateCartUI() {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
         if (cartBadge) {
           cartBadge.textContent = totalItems;
           cartBadge.classList.toggle("hidden", totalItems === 0);
         }
-
         const total = cart.reduce(
           (sum, item) => sum + item.price * item.quantity,
-          0
+          0,
         );
         if (cartTotalAmount)
           cartTotalAmount.textContent = `$${total.toFixed(2)}`;
-
         if (!cartItemsContainer) return;
-
         if (cart.length === 0) {
           cartItemsContainer.innerHTML =
             '<div class="empty-cart-msg">Your cart is empty.</div>';
@@ -1562,24 +2054,16 @@
               <img src="${item.image}" alt="${item.name}">
               <div class="cart-item-details">
                 <h4>${item.name}</h4>
-                <div class="cart-item-price">$${(
-                  item.price * item.quantity
-                ).toFixed(2)}</div>
+                <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
                 <div class="cart-controls">
-                  <button class="qty-btn" onclick="updateQuantity('${
-                    item.id
-                  }', -1)">-</button>
+                  <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
                   <span>${item.quantity}</span>
-                  <button class="qty-btn" onclick="updateQuantity('${
-                    item.id
-                  }', 1)">+</button>
-                  <button class="remove-btn" onclick="removeFromCart('${
-                    item.id
-                  }')">Remove</button>
+                  <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                  <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
                 </div>
               </div>
             </div>
-          `
+          `,
             )
             .join("");
         }
@@ -1589,9 +2073,8 @@
         const item = cart.find((item) => item.id === productId);
         if (!item) return;
         item.quantity += change;
-        if (item.quantity <= 0) {
-          window.removeFromCart(productId);
-        } else {
+        if (item.quantity <= 0) window.removeFromCart(productId);
+        else {
           saveCart();
           updateCartUI();
         }
@@ -1617,26 +2100,22 @@
 
       async function handleCheckout() {
         if (!checkoutBtn || cart.length === 0) return;
-
         const { line_items } = buildStripePayload(cart);
         const originalText = checkoutBtn.innerText;
-        checkoutBtn.innerText = "Redirecting to Stripe...";
+        checkoutBtn.innerText = "Redirecting to Stripe…";
         checkoutBtn.disabled = true;
-
         try {
           const response = await fetch("/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ items: line_items }),
           });
-
           if (!response.ok) {
             alert("There was a problem starting checkout. Please try again.");
             checkoutBtn.innerText = originalText;
             checkoutBtn.disabled = false;
             return;
           }
-
           const data = await response.json();
           window.location.href = data.url;
         } catch (err) {
@@ -1647,131 +2126,73 @@
         }
       }
 
+      // ── Mobile menu ───────────────────────────────────────────────────────────
+
+      const mobileToggle = document.getElementById("mobile-toggle");
+      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+
       function openMobileMenu() {
         if (!mobileMenuOverlay) return;
         mobileMenuOverlay.classList.remove("hidden");
-        requestAnimationFrame(() => {
-          mobileMenuOverlay.classList.add("open");
-        });
+        requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
       }
 
       function closeMobileMenu() {
         if (!mobileMenuOverlay) return;
         mobileMenuOverlay.classList.remove("open");
-        setTimeout(() => {
-          mobileMenuOverlay.classList.add("hidden");
-        }, 300);
+        setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
       }
 
-      // --------- CARTOONS GRID ----------
-      const grid = document.querySelector(".grid");
-      const filter = document.getElementById("categoryFilter");
+      // ── Init ─────────────────────────────────────────────────────────────────
 
-      function slugifyCategory(str) {
-        return String(str || "")
-          .toLowerCase()
-          .trim()
-          .replace(/&/g, "and")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-      }
+      applyURLParams();
+      setupLangPills();
+      renderChannels();
+      updateCartUI();
 
-      function renderVideos() {
-        if (!grid) return;
-        grid.innerHTML = "";
-
-        videolist.forEach((video) => {
-          const categoryLabel = getCategoryLabel(video.category); // SHORT
-          const typeLabel = getTypeLabel(video.type); // SHORT
-
-          const catSlug = slugifyCategory(categoryLabel);
-
-          const wrapper = document.createElement("div");
-          wrapper.className = "video-wrapper video";
-          wrapper.dataset.category = catSlug;
-
-          const link = document.createElement("a");
-          link.className = "video-link";
-          link.href = video.url;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-
-          const banner = document.createElement("img");
-          banner.className = "video-thumb";
-          banner.src = video.image;
-          banner.alt = video.name;
-
-          link.appendChild(banner);
-          wrapper.appendChild(link);
-
-          const body = document.createElement("div");
-          body.className = "video-body";
-
-          const title = document.createElement("div");
-          title.className = "video-title";
-          title.textContent = video.name;
-
-          const meta = document.createElement("div");
-          meta.className = "video-meta";
-
-          const type = document.createElement("div");
-          type.className = "video-type";
-          type.textContent = typeLabel;
-
-          const chip = document.createElement("div");
-          chip.className = "chip";
-          chip.textContent = categoryLabel; // SHORT
-
-          meta.appendChild(type);
-          meta.appendChild(chip);
-
-          const desc = document.createElement("div");
-          desc.className = "translation";
-          desc.textContent = video.description;
-
-          body.appendChild(title);
-          body.appendChild(meta);
-          body.appendChild(desc);
-
-          wrapper.appendChild(body);
-          grid.appendChild(wrapper);
+      if (cartBtn) cartBtn.addEventListener("click", openCart);
+      if (closeCartBtn) closeCartBtn.addEventListener("click", closeCart);
+      if (cartOverlay)
+        cartOverlay.addEventListener("click", (e) => {
+          if (e.target === cartOverlay) closeCart();
         });
+      if (checkoutBtn) checkoutBtn.addEventListener("click", handleCheckout);
+
+      if (mobileToggle && mobileMenuOverlay) {
+        mobileToggle.addEventListener("click", openMobileMenu);
+        mobileMenuOverlay.addEventListener("click", (e) => {
+          if (e.target === mobileMenuOverlay) closeMobileMenu();
+        });
+        const closeMobileBtn = mobileMenuOverlay.querySelector(
+          ".mobile-menu__close",
+        );
+        const menuLinks = mobileMenuOverlay.querySelectorAll(
+          ".mobile-menu__links a",
+        );
+        if (closeMobileBtn)
+          closeMobileBtn.addEventListener("click", closeMobileMenu);
+        menuLinks.forEach((link) =>
+          link.addEventListener("click", closeMobileMenu),
+        );
       }
 
-      function populateCategoryFilter() {
-        if (!filter) return;
+      window.addEventListener("storage", (e) => {
+        if (e.key === "kahani_cart") {
+          cart = JSON.parse(e.newValue) || [];
+          updateCartUI();
+        }
+      });
 
-        // unique SHORT category labels
-        const categories = Array.from(
-          new Set(videolist.map((v) => getCategoryLabel(v.category)))
-        ).sort((a, b) => a.localeCompare(b));
+      // ── Floating hearts ───────────────────────────────────────────────────────
 
-        categories.forEach((catLabel) => {
-          const opt = document.createElement("option");
-          opt.value = slugifyCategory(catLabel);
-          opt.textContent = catLabel;
-          filter.appendChild(opt);
-        });
-
-        filter.addEventListener("change", () => {
-          const value = filter.value;
-          const all = document.querySelectorAll(".video");
-          all.forEach((card) => {
-            const matches = value === "all" || card.dataset.category === value;
-            card.style.display = matches ? "block" : "none";
-          });
-        });
-      }
-
-      // floating hearts (your original, slightly lighter)
       window.addEventListener("load", () => {
-        document.body.classList.add("loaded");
-
         const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
         for (let i = 0; i < 14; i++) {
           const icon = document.createElement("img");
           icon.src = iconSrc;
           icon.classList.add("heart");
+          icon.alt = "";
+          icon.setAttribute("aria-hidden", "true");
           icon.style.left = Math.random() * 100 + "vw";
           icon.style.animationDelay = Math.random() * 10 + "s";
           icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
@@ -1779,9 +2200,9 @@
             (7 + Math.random() * 5).toFixed(2) + "s";
           document.body.appendChild(icon);
         }
-
-        init();
       });
     </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>

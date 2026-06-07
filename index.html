@@ -64,6 +64,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
     <link rel="preload" as="image" href="/assets/images/homepage/fam.png" />
 
     <style>
@@ -299,6 +300,11 @@
       .nav a:hover {
         color: var(--soft-blush);
         font-weight: 700;
+        text-shadow:
+          -1px -1px 0 var(--granite),
+           1px -1px 0 var(--granite),
+          -1px  1px 0 var(--granite),
+           1px  1px 0 var(--granite);
       }
       .nav a.nav-active {
         font-weight: 700;
@@ -313,6 +319,147 @@
         height: 2px;
         background: var(--granite);
         border-radius: 999px;
+      }
+
+      /* ---- FREE RESOURCES DROPDOWN (desktop) ---- */
+      .nav-dropdown {
+        position: relative;
+      }
+      .nav-dropdown__trigger {
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        text-transform: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+      }
+      .nav-dropdown__trigger:hover {
+        color: var(--soft-blush);
+        font-weight: 700;
+        text-shadow:
+          -1px -1px 0 var(--granite),
+           1px -1px 0 var(--granite),
+          -1px  1px 0 var(--granite),
+           1px  1px 0 var(--granite);
+      }
+      .nav-dropdown__trigger:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .nav-dropdown__chevron {
+        font-size: 0.65em;
+        transition: transform 0.22s ease;
+      }
+      .nav-dropdown.is-open .nav-dropdown__chevron,
+      .nav-dropdown:hover .nav-dropdown__chevron,
+      .nav-dropdown:focus-within .nav-dropdown__chevron {
+        transform: rotate(180deg);
+      }
+      /* Dropdown panel */
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        min-width: 230px;
+        background: #fff;
+        border: 2px solid rgba(176, 195, 183, 0.7);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(74, 89, 74, 0.14);
+        padding: 0.45rem 0.4rem 0.55rem;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+        z-index: 200;
+      }
+      /* Invisible bridge fills the gap so hover isn't lost moving from trigger to panel */
+      .dropdown-menu::before {
+        content: "";
+        position: absolute;
+        top: -18px;
+        left: 0;
+        right: 0;
+        height: 18px;
+      }
+      .nav-dropdown:hover .dropdown-menu,
+      .nav-dropdown:focus-within .dropdown-menu,
+      .nav-dropdown.is-open .dropdown-menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+      .dropdown-menu__header {
+        padding: 0.6rem 0.85rem 0.5rem;
+        border-bottom: 1px solid rgba(176, 195, 183, 0.5);
+        margin-bottom: 0.3rem;
+      }
+      .dropdown-menu__title {
+        display: block;
+        font-family: "Grandstander", cursive;
+        font-size: 0.77rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-transform: none;
+        letter-spacing: 0;
+        margin-bottom: 0.15rem;
+      }
+      .dropdown-menu__desc {
+        display: block;
+        font-size: 0.71rem;
+        color: var(--muted);
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1.4;
+      }
+      .dropdown-menu__item {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.52rem 0.85rem;
+        font-size: 0.84rem;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--granite);
+        border-radius: 10px;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          transform 0.1s;
+      }
+      .dropdown-menu__item i {
+        width: 1.1em;
+        text-align: center;
+        color: var(--deep-teal);
+        flex-shrink: 0;
+      }
+      .dropdown-menu__item:hover,
+      .dropdown-menu__item:focus-visible {
+        background: var(--soft-blush);
+        color: var(--granite);
+        transform: translateX(3px);
+        outline: none;
+      }
+      .dropdown-menu__item--submit {
+        margin-top: 0.3rem;
+        padding-top: 0.6rem;
+        color: var(--deep-teal);
+        font-weight: 700;
+        border-top: 1px dashed rgba(176, 195, 183, 0.5);
+      }
+      .dropdown-menu__item--submit:hover {
+        background: var(--mint);
+        color: var(--granite);
       }
 
       .mobile-toggle {
@@ -442,6 +589,137 @@
         color: var(--cotton-rose);
         transform: translateX(3px);
       }
+
+      /* ---- FREE RESOURCES — sliding sub-panel (mobile) ---- */
+      .mobile-free-resources-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: none;
+        border: none;
+        border-bottom: 1px dashed var(--white-smoke);
+        padding: 0.75rem 0.25rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+        color: var(--granite);
+        cursor: pointer;
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-free-resources-btn:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
+      .mobile-free-resources-btn:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      /* Sliding panel container */
+      .mobile-menu__body {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        min-height: 0;
+      }
+      .mobile-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition:
+          transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+          opacity 0.25s ease;
+      }
+      /* Main nav panel — slides left when resources panel opens */
+      .mobile-panel--main {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      .mobile-panel--main.slide-away {
+        transform: translateX(-30%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* Resources panel — starts off-screen right, slides in */
+      .mobile-panel--resources {
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-panel--resources.slide-in {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      /* Back button */
+      .mobile-panel__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        background: none;
+        border: none;
+        color: var(--deep-teal);
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        cursor: pointer;
+        padding: 0.2rem 0 0.2rem 0.1rem;
+        margin-bottom: 0.85rem;
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-panel__back:hover {
+        color: var(--granite);
+        transform: translateX(-2px);
+      }
+      .mobile-panel__back:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      /* Panel title */
+      .mobile-panel__title {
+        font-family: "Grandstander", cursive;
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--granite);
+        margin: 0 0 0.65rem;
+        padding-bottom: 0.65rem;
+        border-bottom: 2px solid var(--white-smoke);
+      }
+      /* Resource links list */
+      .mobile-resources-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .mobile-resources-links li a {
+        display: block;
+        padding: 0.75rem 0.25rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--granite);
+        border-bottom: 1px dashed var(--white-smoke);
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-resources-links li:last-child a {
+        border-bottom: none;
+      }
+      .mobile-resources-links li a:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
+
       @media (min-width: 769px) {
         .mobile-menu-overlay {
           display: none;
@@ -1658,7 +1936,7 @@
          ============================================================ */
       .faq-section {
         padding: 4rem 2rem;
-        background: var(--white-smoke);
+        background: linear-gradient(180deg, var(--white-smoke), rgba(243, 222, 221, 0.22));
       }
       .faq-section .section__title {
         color: var(--granite);
@@ -1687,8 +1965,8 @@
         gap: 12px;
         background: linear-gradient(
           180deg,
-          rgba(176, 195, 183, 0.55),
-          rgba(176, 195, 183, 0.35)
+          rgba(243, 222, 221, 0.45),
+          rgba(201, 220, 206, 0.32)
         );
         color: var(--granite);
         font-weight: 900;
@@ -1768,7 +2046,7 @@
         border-color: rgba(104, 125, 112, 0.9);
       }
       .faq-group__body .faq-item[open] summary {
-        background: rgba(201, 220, 206, 0.7);
+        background: rgba(243, 222, 221, 0.55);
       }
 
       /* FAQ open/close animations */
@@ -1946,6 +2224,31 @@
         transform: translateY(-2px);
         box-shadow: 0 6px 0 var(--deep-teal);
       }
+      .contact-form-submit:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 4px 0 var(--deep-teal);
+      }
+      .contact-form-msg {
+        font-size: 0.92rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        margin-bottom: 0.25rem;
+        display: none;
+      }
+      .contact-form-msg.success {
+        display: block;
+        background: #edf5ef;
+        color: var(--granite);
+        border: 1.5px solid var(--mint);
+      }
+      .contact-form-msg.error {
+        display: block;
+        background: #fdf0f0;
+        color: #8b3a3a;
+        border: 1.5px solid var(--rosy-taupe);
+      }
       .contact-form-divider {
         display: flex;
         align-items: center;
@@ -2028,7 +2331,7 @@
       .email-section__title {
         font-family: "Grandstander", cursive;
         font-size: clamp(1.5rem, 4vw, 2rem);
-        color: var(--granite);
+        color: var(--deep-teal);
         margin: 0 0 0.5rem;
       }
       .email-section__sub {
@@ -2086,6 +2389,184 @@
         margin-top: 0.5rem;
         width: 100%;
         text-align: center;
+      }
+
+      /* ============================================================
+         NEWSLETTER POPUP
+         ============================================================ */
+      .nl-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(28, 37, 36, 0.55);
+        z-index: 1200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .nl-overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .nl-modal {
+        background: var(--white-smoke);
+        border: 2px solid var(--ash-grey);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 8px 40px rgba(74, 89, 74, 0.12);
+        max-width: 480px;
+        width: 100%;
+        padding: 2.5rem 2.25rem 2rem;
+        position: relative;
+        transform: translateY(16px) scale(0.98);
+        transition: transform 0.3s ease;
+      }
+      .nl-overlay.open .nl-modal {
+        transform: translateY(0) scale(1);
+      }
+      .nl-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--deep-teal);
+        padding: 0.25rem;
+        line-height: 1;
+        transition: color 0.2s;
+      }
+      .nl-close:hover {
+        color: var(--granite);
+      }
+      .nl-title {
+        font-family: "Grandstander", cursive;
+        font-size: clamp(1.35rem, 4vw, 1.65rem);
+        color: var(--deep-teal);
+        margin: 0 0 0.65rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4em;
+      }
+      .nl-body {
+        color: var(--deep-teal);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0 0 1.5rem;
+      }
+      .nl-highlight {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25em;
+      }
+      .nl-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+      .nl-form label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--granite);
+      }
+      .nl-form input[type="email"] {
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--ash-grey);
+        border-radius: var(--radius-pill);
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.95rem;
+        color: var(--granite);
+        background: #fff;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .nl-form input[type="email"]:focus {
+        border-color: var(--deep-teal);
+      }
+      .nl-form input[type="email"].nl-input-error {
+        border-color: var(--rosy-taupe);
+      }
+      .nl-form-error {
+        font-size: 0.8rem;
+        color: var(--rosy-taupe);
+        margin-top: -0.15rem;
+        display: none;
+      }
+      .nl-form-error.visible {
+        display: block;
+      }
+      .nl-submit {
+        padding: 0.8rem 1.75rem;
+        background: var(--granite);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-pill);
+        font-family: "Grandstander", cursive;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+        white-space: nowrap;
+        align-self: stretch;
+        margin-top: 0.1rem;
+      }
+      .nl-submit:hover:not(:disabled) {
+        background: var(--deep-teal);
+        transform: translateY(-2px);
+      }
+      .nl-submit:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+      .nl-note {
+        font-size: 0.75rem;
+        color: var(--deep-teal);
+        text-align: center;
+        margin: 0;
+      }
+      .nl-success {
+        text-align: center;
+        padding: 0.5rem 0;
+      }
+      .nl-success__icon {
+        margin-bottom: 0.75rem;
+        color: var(--deep-teal);
+      }
+      .nl-success__title {
+        font-family: "Grandstander", cursive;
+        font-size: 1.35rem;
+        color: var(--granite);
+        margin: 0 0 0.5rem;
+      }
+      .nl-success__body {
+        color: var(--deep-teal);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0 0 1.25rem;
+      }
+      .nl-success__close {
+        padding: 0.65rem 1.5rem;
+        background: var(--granite);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-pill);
+        font-family: "Grandstander", cursive;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .nl-success__close:hover {
+        background: var(--deep-teal);
+      }
+      @media (max-width: 480px) {
+        .nl-modal {
+          padding: 2rem 1.5rem 1.75rem;
+        }
       }
 
       /* ============================================================
@@ -2200,107 +2681,62 @@
   </head>
 
   <body>
-    <!-- ======================== TOP PROMO BAR ======================== -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Free Urdu Resources</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Free Urdu Resources</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Free Urdu Resources</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
 
-    <!-- ======================== HEADER ======================== -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
+    <!-- ======================== NEWSLETTER POPUP ======================== -->
+    <div id="nl-overlay" class="nl-overlay" role="dialog" aria-modal="true" aria-labelledby="nl-title">
+      <div class="nl-modal" id="nl-modal">
+        <button class="nl-close" id="nl-close" type="button" aria-label="Close newsletter signup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+            <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
+          </svg>
         </button>
-        <a
-          href="https://kahanikorner.com"
-          class="brand"
-          aria-label="Kahani Korner Home">
-          <picture>
-            <source
-              media="(max-width: 768px)"
-              srcset="/assets/images/homepage/logo2.png" />
-            <img
-              src="/assets/images/homepage/logo.png"
-              alt="Kahani Korner"
-              class="brand-logo" />
-          </picture>
-        </a>
-        <nav class="nav" aria-label="Main navigation">
-          <a href="/products.html">Shop</a>
-          <a href="/subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html">Free Resources</a>
-          <a href="#faq">Help</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <button class="cart-btn-landing" id="cart-btn" aria-label="Open cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-        </button>
-      </div>
-    </header>
 
-    <!-- ======================== CART OVERLAY ======================== -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2 style="color: var(--granite); text-shadow: none; margin: 0">
-            Your Cart
+        <div id="nl-form-view">
+          <h2 class="nl-title" id="nl-title">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
+            Stay in the loop
           </h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <p class="nl-body">
+            New stories, Urdu resources, surprise drops, promos, and special sales — straight to your inbox.
+            <span class="nl-highlight">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="0.85em" height="0.85em" aria-hidden="true" style="color: var(--rosy-taupe); flex-shrink: 0">
+                <path d="M12 1l2.753 8.472H23l-7.193 5.227 2.753 8.472L12 18.944l-6.56 4.227 2.753-8.472L1 9.472h8.247L12 1z" />
+              </svg>
+              No spam, ever.
+            </span>
+          </p>
+          <form class="nl-form" id="nl-form" novalidate>
+            <input type="hidden" name="form_name" value="Kahani Korner Newsletter Popup" />
+            <input type="hidden" name="source" value="newsletter_popup" />
+            <label for="nl-email">Email address</label>
+            <input
+              type="email"
+              id="nl-email"
+              name="email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email" />
+            <span class="nl-form-error" id="nl-email-error">Please enter a valid email address.</span>
+            <button type="submit" class="nl-submit" id="nl-submit">Subscribe</button>
+            <p class="nl-note">Unsubscribe anytime. We respect your inbox.</p>
+          </form>
         </div>
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span><span id="cart-total-amount">$0.00</span>
+
+        <div id="nl-success-view" class="nl-success" style="display: none">
+          <div class="nl-success__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
           </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
+          <h3 class="nl-success__title">You're on the list.</h3>
+          <p class="nl-success__body">Keep an eye out for new stories, Urdu resources, surprise drops, promos, and special sales from Kahani Korner.</p>
+          <button class="nl-success__close" id="nl-success-close" type="button">Close</button>
         </div>
       </div>
-    </div>
-
-    <!-- ======================== MOBILE MENU ======================== -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu" aria-label="Mobile navigation">
-        <div class="mobile-menu__header">
-          <a
-            href="https://kahanikorner.com"
-            class="mobile-menu__brand"
-            aria-label="Kahani Korner Home">
-            <picture>
-              <source
-                media="(max-width: 768px)"
-                srcset="/assets/images/homepage/logo2.png" />
-              <img
-                src="/assets/images/homepage/logo.png"
-                alt="Kahani Korner"
-                style="height: 34px; width: auto; display: block" />
-            </picture>
-          </a>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <ul class="mobile-menu__links">
-          <li><a href="/products.html">Shop</a></li>
-          <li><a href="/subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html">Free Resources</a></li>
-          <li><a href="#faq">Help</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
     </div>
 
     <!-- ============================================================
@@ -3106,7 +3542,7 @@
       aria-labelledby="contact-heading">
       <div class="contact-container">
         <div class="contact-content">
-          <span class="feature-tag">Questions, Collabs, or Salaam?</span>
+          <span class="feature-tag">CHITTHIS WELCOME.</span>
           <h2
             id="contact-heading"
             style="
@@ -3114,17 +3550,20 @@
               text-shadow: none;
               font-size: var(--h2);
             ">
-            Come say hi — we love hearing from you
+            Questions, collabs, or salaam?
           </h2>
           <p class="contact-note">
-            Shipping questions, gift ideas, collab dreams, or just want to say
-            السلام عليكم? Drop us a note below and we'll get back to you soon.
+            Subscription help, gift ideas, or just a friendly hello, we'd love to hear from you.
+          </p>
+          <p class="contact-note" style="margin-top: 0.25rem">
+            Send us a little paighaam and we'll get back to you soon. ✿
           </p>
           <form
             id="contact-form"
             class="contact-form"
             novalidate
             onsubmit="handleContactSubmit(event)">
+            <input type="hidden" name="form_name" value="Kahani Korner Contact Form" />
             <div class="contact-form-row">
               <label for="contact-name">Name</label>
               <input
@@ -3153,16 +3592,11 @@
                 placeholder="What's on your mind?"
                 required></textarea>
             </div>
-            <button type="submit" class="contact-form-submit">
+            <button type="submit" class="contact-form-submit" id="contact-submit-btn">
               <i class="fa-solid fa-paper-plane"></i> Send Message
             </button>
           </form>
-          <div class="contact-form-divider">or reach us directly</div>
-          <div class="contact-actions">
-            <a href="mailto:admin@kahanikorner.com" class="contact-link"
-              ><i class="fa-solid fa-envelope"></i> admin@kahanikorner.com</a
-            >
-          </div>
+          <div id="contact-form-msg" class="contact-form-msg" role="status" aria-live="polite"></div>
         </div>
         <div class="contact-image">
           <img
@@ -3190,12 +3624,12 @@
         </svg>
       </h2>
       <p class="email-section__sub">
-        New stories, resources, and surprise drops — straight to your inbox. No
-        spam, ever.
+        New stories, Urdu resources, surprise drops, promos, and special sales
+        — straight to your inbox. No spam, ever.
       </p>
       <form
         class="email-form"
-        action="https://formspree.io/f/YOUR_FORM_ID"
+        action="https://formspree.io/f/mgoqgqkk"
         method="POST"
         onsubmit="handleEmailSubmit(event)">
         <input
@@ -3212,98 +3646,8 @@
       </form>
     </section>
 
-    <!-- ============================================================
-         FOOTER
-         ============================================================ -->
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="footer-brand-col">
-          <a
-            href="/"
-            class="brand"
-            style="justify-content: flex-start; margin-bottom: 0.75rem"
-            aria-label="Kahani Korner home">
-            <picture>
-              <source
-                media="(max-width: 768px)"
-                srcset="/assets/images/homepage/logo2.png" />
-              <img
-                src="/assets/images/homepage/logo.png"
-                alt="Kahani Korner"
-                class="footer-brand-logo" />
-            </picture>
-          </a>
-          <p class="footer-tagline">
-            Rooted in culture, topped with sweetness, made for little hearts.
-          </p>
-          <div
-            class="social-icons"
-            style="justify-content: flex-start; margin-top: 1rem">
-            <a
-              href="https://www.instagram.com/kahani.korner/"
-              target="_blank"
-              aria-label="Instagram"
-              ><img
-                src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-                alt="Instagram"
-            /></a>
-            <a
-              href="https://facebook.com/kahanikorner"
-              target="_blank"
-              aria-label="Facebook"
-              ><img
-                src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-                alt="Facebook"
-            /></a>
-            <a
-              href="https://tiktok.com/@kahanikorner"
-              target="_blank"
-              aria-label="TikTok"
-              ><img
-                src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-                alt="TikTok"
-            /></a>
-          </div>
-        </div>
-        <div class="footer-links-grid">
-          <div class="footer-link-group">
-            <h3 class="footer-link-group__title">Shop</h3>
-            <ul>
-              <li><a href="/products.html">Books &amp; Stickers</a></li>
-              <li><a href="/subscribe.html">The Kahani Times</a></li>
-              <li><a href="/subscribe.html">Subscribe</a></li>
-            </ul>
-          </div>
-          <div class="footer-link-group">
-            <h3 class="footer-link-group__title">Learn</h3>
-            <ul>
-              <li><a href="/resources/resources.html">Free Resources</a></li>
-              <li><a href="/resources/songs.html">Urdu Songs</a></li>
-              <li><a href="/resources/cartoons.html">Cartoons</a></li>
-              <li><a href="/resources/parentguide.html">Parent Guide</a></li>
-            </ul>
-          </div>
-          <div class="footer-link-group">
-            <h3 class="footer-link-group__title">Company</h3>
-            <ul>
-              <li><a href="/about.html">About Us</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#faq">FAQ</a></li>
-            </ul>
-          </div>
-          <div class="footer-link-group">
-            <h3 class="footer-link-group__title">Legal</h3>
-            <ul>
-              <li><a href="/privacy.html">Privacy Policy</a></li>
-              <li><a href="/terms.html">Terms of Service</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-      </div>
-    </footer>
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
     <!-- ============================================================
          SCRIPTS — identical behaviour to index.html
@@ -3463,6 +3807,8 @@
         );
       })();
 
+      // Free Resources dropdown behaviour loaded from shared file below
+
       // --- MOBILE MENU ---
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
@@ -3539,48 +3885,59 @@
       });
     </script>
 
-    <script src="/assets/cart.js"></script>
-
     <script>
       function handleContactSubmit(e) {
         e.preventDefault();
         const form = e.target;
         const nameEl = form.querySelector("#contact-name"),
           emailEl = form.querySelector("#contact-email"),
-          messageEl = form.querySelector("#contact-message");
+          messageEl = form.querySelector("#contact-message"),
+          submitBtn = document.getElementById("contact-submit-btn"),
+          msgEl = document.getElementById("contact-form-msg");
+
+        // Clear previous state
+        [nameEl, emailEl, messageEl].forEach((el) => el.classList.remove("error"));
+        msgEl.className = "contact-form-msg";
+        msgEl.textContent = "";
+
+        // Validate
         let valid = true;
-        [nameEl, emailEl, messageEl].forEach((el) =>
-          el.classList.remove("error"),
-        );
-        if (!nameEl.value.trim()) {
-          nameEl.classList.add("error");
-          valid = false;
+        if (!nameEl.value.trim()) { nameEl.classList.add("error"); valid = false; }
+        if (!emailEl.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+          emailEl.classList.add("error"); valid = false;
         }
-        if (
-          !emailEl.value.trim() ||
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)
-        ) {
-          emailEl.classList.add("error");
-          valid = false;
-        }
-        if (!messageEl.value.trim()) {
-          messageEl.classList.add("error");
-          valid = false;
-        }
+        if (!messageEl.value.trim()) { messageEl.classList.add("error"); valid = false; }
         if (!valid) return;
-        const subject = encodeURIComponent(
-          "Message from " + nameEl.value.trim(),
-        );
-        const body = encodeURIComponent(
-          "Name: " +
-            nameEl.value.trim() +
-            "\nEmail: " +
-            emailEl.value.trim() +
-            "\n\nMessage:\n" +
-            messageEl.value.trim(),
-        );
-        window.location.href =
-          "mailto:admin@kahanikorner.com?subject=" + subject + "&body=" + body;
+
+        // Submit to Formspree
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Sending...';
+
+        fetch("https://formspree.io/f/xlgvqvav", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            name: nameEl.value.trim(),
+            email: emailEl.value.trim(),
+            message: messageEl.value.trim(),
+            form_name: "Kahani Korner Contact Form",
+          }),
+        })
+          .then((r) => {
+            if (r.ok) {
+              form.style.display = "none";
+              msgEl.className = "contact-form-msg success";
+              msgEl.textContent = "Shukriya! Your message has been sent. We’ll get back to you soon.";
+            } else {
+              throw new Error("server");
+            }
+          })
+          .catch(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+            msgEl.className = "contact-form-msg error";
+            msgEl.textContent = "Something went wrong. Please try again or email us directly.";
+          });
       }
 
       function handleEmailSubmit(e) {
@@ -3607,6 +3964,101 @@
       }
     </script>
     <script>
+      // Newsletter popup
+      (function () {
+        var STORAGE_KEY = "kk_nl_popup_seen";
+        var overlay = document.getElementById("nl-overlay");
+        var closeBtn = document.getElementById("nl-close");
+        var form = document.getElementById("nl-form");
+        var emailInput = document.getElementById("nl-email");
+        var emailError = document.getElementById("nl-email-error");
+        var submitBtn = document.getElementById("nl-submit");
+        var formView = document.getElementById("nl-form-view");
+        var successView = document.getElementById("nl-success-view");
+        var successCloseBtn = document.getElementById("nl-success-close");
+
+        if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+        function openPopup() {
+          if (sessionStorage.getItem(STORAGE_KEY)) return;
+          sessionStorage.setItem(STORAGE_KEY, "1");
+          clearTimeout(timer);
+          window.removeEventListener("scroll", onScroll);
+          overlay.classList.add("open");
+          document.body.style.overflow = "hidden";
+          emailInput.focus();
+        }
+
+        function closePopup() {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        var timer = setTimeout(openPopup, 10000);
+
+        function onScroll() {
+          var scrolled = window.scrollY + window.innerHeight;
+          var total = document.documentElement.scrollHeight;
+          if (scrolled / total >= 0.5) openPopup();
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        closeBtn.addEventListener("click", closePopup);
+        successCloseBtn.addEventListener("click", closePopup);
+
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) closePopup();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && overlay.classList.contains("open")) closePopup();
+        });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var email = emailInput.value.trim();
+          var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+          emailInput.classList.remove("nl-input-error");
+          emailError.classList.remove("visible");
+
+          if (!valid) {
+            emailInput.classList.add("nl-input-error");
+            emailError.classList.add("visible");
+            emailInput.focus();
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Subscribing...";
+
+          fetch("https://formspree.io/f/mgoqgqkk", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              email: email,
+              form_name: "Kahani Korner Newsletter Popup",
+              source: "newsletter_popup",
+            }),
+          })
+            .then(function (r) {
+              if (r.ok) {
+                formView.style.display = "none";
+                successView.style.display = "block";
+              } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Subscribe";
+                alert("Something went wrong. Please try again.");
+              }
+            })
+            .catch(function () {
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Subscribe";
+              alert("Something went wrong. Please try again.");
+            });
+        });
+      })();
+
       // FAQ smooth close animation
       document.querySelectorAll('.faq-group__summary, .faq-group__body .faq-item summary').forEach(summary => {
         summary.addEventListener('click', e => {
@@ -3621,5 +4073,7 @@
         });
       });
     </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>

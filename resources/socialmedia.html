@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics  -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag to track analytics (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urdu Learning on Social Media — Kahani Korner</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/homepage/logo2.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
+    <style>
+      /* ── Platform card banners ──────────────────────────────────────── */
+      .tt-banner {
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(135deg, #010101 60%, #1a1a2e 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .tt-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 70% 30%,
+            rgba(105, 201, 208, 0.18) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle at 30% 70%,
+            rgba(255, 0, 80, 0.15) 0%,
+            transparent 60%
+          );
+      }
+      .ig-banner {
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(
+          135deg,
+          #405de6 0%,
+          #833ab4 35%,
+          #c13584 60%,
+          #e1306c 80%,
+          #fd1d1d 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .ig-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 75% 25%,
+            rgba(255, 255, 255, 0.12) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 25% 75%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 55%
+          );
+      }
+      .banner-icon {
+        font-size: 1.8rem;
+        color: #fff;
+        z-index: 1;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
+      }
+      .banner-handle {
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #fff;
+        z-index: 1;
+        letter-spacing: 0.02em;
+      }
+      .tt-badge {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: linear-gradient(135deg, #69c9d0, #ee1d52);
+        border-radius: 50px;
+        padding: 2px 10px;
+        font-size: 0.63rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        z-index: 1;
+      }
+      .ig-badge {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 50px;
+        padding: 2px 10px;
+        font-size: 0.63rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        z-index: 1;
+      }
+
+      /* ── Filter bar ─────────────────────────────────────────────────── */
+      .filter-container {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .filter-container select {
+        flex: 1;
+        min-width: 160px;
+      }
+
+      /* ── Category sections ──────────────────────────────────────────── */
+      .category-section {
+        margin-bottom: 2rem;
+      }
+      .category-heading {
+        font-family: "Grandstander", cursive;
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 2rem 0 0.35rem;
+        color: var(--text-dark, #2d2d2d);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        border-bottom: 2px solid var(--ash-grey, #e8e0dc);
+        padding-bottom: 0.5rem;
+      }
+      .category-note {
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.82rem;
+        color: #888;
+        margin: 0 0 1rem;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Promo Bar -->
+    <div class="topbar">
+      <div class="topbar__inner">
+        <div class="topbar__track">
+          <span>Shop Now</span><span>•</span
+          ><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Shop Now</span><span>•</span
+          ><span>Free Shipping on All US Orders</span><span>•</span>
+          <span>Shop Now</span><span>•</span
+          ><span>Free Shipping on All US Orders</span><span>•</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="https://kahanikorner.com" class="brand">
+          <picture>
+            <source
+              media="(max-width: 768px)"
+              srcset="/assets/images/homepage/logo2.png" />
+            <img
+              src="/assets/images/homepage/logo.png"
+              alt="Kahani Korner"
+              class="brand-logo" />
+          </picture>
+        </a>
+        <nav class="nav">
+          <a href="/products.html">Shop</a>
+          <a href="/subscribe.html">Subscribe</a>
+          <a href="/resources/resources.html" class="nav-active">Resources</a>
+          <a href="/#faq">Help</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <div class="header-spacer" aria-hidden="true"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
+      <nav class="mobile-menu">
+        <div class="mobile-menu__header">
+          <span class="mobile-menu__brand">
+            <picture>
+              <source
+                media="(max-width: 768px)"
+                srcset="/assets/images/homepage/logo2.png" />
+              <img
+                src="/assets/images/homepage/logo.png"
+                alt="Kahani Korner"
+                class="brand-logo" />
+            </picture>
+          </span>
+          <button class="mobile-menu__close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <ul class="mobile-menu__links">
+          <li><a href="/products.html">Shop</a></li>
+          <li><a href="/subscribe.html">Subscribe</a></li>
+          <li>
+            <a href="/resources/resources.html" class="nav-active">Resources</a>
+          </li>
+          <li><a href="/#faq">Help</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay hidden">
+      <div class="cart-sidebar">
+        <div class="cart-header">
+          <h2>Your Cart</h2>
+          <button id="close-cart" class="close-btn" aria-label="Close cart">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="cart-items" class="cart-items">
+          <div class="empty-cart-msg">Your cart is empty.</div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total</span>
+            <span id="cart-total-amount">$0.00</span>
+          </div>
+          <button id="checkout-btn" class="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>Urdu Learning on Social Media</h1>
+      <p class="subheading">
+        The most complete Urdu-learning social media directory for parents,
+        teachers, homeschoolers, and diaspora families — combining the best
+        Instagram and TikTok accounts in one place.
+      </p>
+
+      <div class="filter-container">
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="Kids">📚 Kids</option>
+          <option value="Beginners">🌍 Beginners</option>
+          <option value="Vocabulary">🗣️ Vocabulary</option>
+          <option value="Stories">📖 Stories</option>
+          <option value="Culture">🇵🇰 Culture</option>
+          <option value="Songs">🎵 Songs &amp; Rhymes</option>
+          <option value="Tutoring">🎓 Classes &amp; Tutoring</option>
+        </select>
+        <select id="platformFilter">
+          <option value="all">All Platforms</option>
+          <option value="Instagram">📸 Instagram</option>
+          <option value="TikTok">🎵 TikTok</option>
+        </select>
+      </div>
+
+      <div id="sections-container"></div>
+    </div>
+    <!-- close .container -->
+
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+      /* ── Mobile menu ─────────────────────────────────────────────────────── */
+      const mobileToggle = document.getElementById("mobile-toggle");
+      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+      function openMobileMenu() {
+        if (!mobileMenuOverlay) return;
+        mobileMenuOverlay.classList.remove("hidden");
+        requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
+      }
+      function closeMobileMenu() {
+        if (!mobileMenuOverlay) return;
+        mobileMenuOverlay.classList.remove("open");
+        setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
+      }
+      if (mobileToggle && mobileMenuOverlay) {
+        mobileToggle.addEventListener("click", openMobileMenu);
+        mobileMenuOverlay.addEventListener("click", (e) => {
+          if (e.target === mobileMenuOverlay) closeMobileMenu();
+        });
+        const closeBtn = mobileMenuOverlay.querySelector(".mobile-menu__close");
+        const menuLinks = mobileMenuOverlay.querySelectorAll(
+          ".mobile-menu__links a",
+        );
+        if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
+        menuLinks.forEach((link) =>
+          link.addEventListener("click", closeMobileMenu),
+        );
+      }
+
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+
+        /* ── Master account list ───────────────────────────────────────────── */
+        const accounts = [
+          // ── 📚 KIDS ──────────────────────────────────────────────────────
+          {
+            name: "Urdu Madrasa | Urdu For Kids",
+            handle: "@urdumadrasa",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdumadrasa",
+            category: "Kids",
+            description:
+              "Urdu books and podcast-style content for bilingual kids; diaspora-focused learning resources.",
+          },
+          {
+            name: "Urdu Madrasa | Urdu For Kids",
+            handle: "@urdumadrasa",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@urdumadrasa",
+            category: "Kids",
+            description:
+              "Urdu books and podcast-style content for bilingual kids; diaspora-focused learning resources.",
+          },
+          {
+            name: "Urdu PreSchool",
+            handle: "@urdupreschool",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdupreschool",
+            category: "Kids",
+            description:
+              "Fun Urdu content for babies, toddlers, and their parents — learning through play and songs.",
+          },
+          {
+            name: "Harf Harf Pehchan",
+            handle: "@harfharfpehchan",
+            platform: "Instagram",
+            url: "https://www.instagram.com/harfharfpehchan",
+            category: "Kids",
+            description:
+              "Letter-by-letter Urdu alphabet recognition content for early readers and preschoolers.",
+          },
+          {
+            name: "Buzzing Bees Classroom",
+            handle: "@buzzingbeesclassroom",
+            platform: "Instagram",
+            url: "https://www.instagram.com/buzzingbeesclassroom",
+            category: "Kids",
+            description:
+              "Interactive classroom-style Urdu lessons and activities for young learners.",
+          },
+          {
+            name: "Homeschooling STEM Hub",
+            handle: "@homeschoolingstemhub",
+            platform: "Instagram",
+            url: "https://www.instagram.com/homeschoolingstemhub",
+            category: "Kids",
+            description:
+              "Urdu-integrated homeschooling resources combining STEM and language learning.",
+          },
+          {
+            name: "Urdu Kids Club",
+            handle: "@urdukidsclub",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdukidsclub",
+            category: "Kids",
+            description:
+              "Printable Urdu worksheets and themed learning packs for children aged 3–7.",
+          },
+          {
+            name: "Urdu with Little Ele",
+            handle: "@urduwithlittleele",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urduwithlittleele",
+            category: "Kids",
+            description:
+              "Early Urdu learning through stories and playful educational content for young children.",
+          },
+          {
+            name: "Learning Urdu",
+            handle: "@learningurdukids",
+            platform: "Instagram",
+            url: "https://www.instagram.com/learningurdukids",
+            category: "Kids",
+            description:
+              "Urdu learning content designed for kids and diaspora families.",
+          },
+          {
+            name: "Urdu Kids Store",
+            handle: "@urdukidsstore",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@urdukidsstore",
+            category: "Kids",
+            description:
+              "Educational Urdu kids content including poems, songs, and early learning videos.",
+          },
+          {
+            name: "Kuukuu TV | Urdu Stories for Kids",
+            handle: "@kuukuutv",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@kuukuutv",
+            category: "Kids",
+            description:
+              "Animated and narrated Urdu moral stories that captivate children from the first watch.",
+          },
+
+          // ── 🌍 BEGINNERS ─────────────────────────────────────────────────
+          {
+            name: "Urdu Tech — Jaweria",
+            handle: "@urdu_tech",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdu_tech",
+            category: "Beginners",
+            description:
+              "Practical, fun Urdu lessons designed for expats and diaspora learners.",
+          },
+          {
+            name: "Learn Urdu with me | دادی جان",
+            handle: "@learn_urdu_with_me",
+            platform: "Instagram",
+            url: "https://www.instagram.com/learn_urdu_with_me",
+            category: "Beginners",
+            description:
+              "Diaspora-focused Urdu learning community across Instagram and TikTok.",
+          },
+          {
+            name: "Alif Say Urdu By Zara",
+            handle: "@alifsayurdubyzara",
+            platform: "Instagram",
+            url: "https://www.instagram.com/alifsayurdubyzara",
+            category: "Beginners",
+            description:
+              "Conversational Urdu, cultural integration, and simplified learning content.",
+          },
+          {
+            name: "Urdu Cove (Annie)",
+            handle: "@urdukacove",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdukacove",
+            category: "Beginners",
+            description:
+              "Urdu podcast, YouTube channel, and beginner-friendly Alif Bay Pay learning series.",
+          },
+          {
+            name: "Urdu with Chachu",
+            handle: "@urduwithchachu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urduwithchachu",
+            category: "Beginners",
+            description:
+              'Fun "Word of the Day" style Urdu content — great for families and casual learners.',
+          },
+          {
+            name: "Alif Se Yeh — Urdu Hub",
+            handle: "@alifseyeh",
+            platform: "Instagram",
+            url: "https://www.instagram.com/alifseyeh",
+            category: "Beginners",
+            description:
+              "Urdu courses, translation, poetry, and a full spoken Urdu ecosystem.",
+          },
+          {
+            name: "Welcome Urdu",
+            handle: "@welcomeurdu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/welcomeurdu",
+            category: "Beginners",
+            description:
+              "Urdu quizzes, shayari, and educational content for learners at all levels.",
+          },
+          {
+            name: "Let's Talk Urdu",
+            handle: "@letstalkurdu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/letstalkurdu",
+            category: "Beginners",
+            description:
+              'Beginner-friendly Urdu videos and accessible "Urdu Made Easy" content.',
+          },
+          {
+            name: "Learn Urdu with Me",
+            handle: "@learnurduwithme",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@learnurduwithme",
+            category: "Beginners",
+            description:
+              "Beginner-friendly Urdu lessons, phrases, and playlists for diaspora learners.",
+          },
+          {
+            name: "Learn Urdu",
+            handle: "@learn.urdu0",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@learn.urdu0",
+            category: "Beginners",
+            description:
+              "Short-form beginner Urdu lessons with a friendly, community-style teaching approach.",
+          },
+          {
+            name: "Cassandra Learns Urdu",
+            handle: "@cassandra_learns_",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@cassandra_learns_",
+            category: "Beginners",
+            description:
+              "Non-native learner sharing her Urdu learning journey — relatable for absolute beginners.",
+          },
+
+          // ── 🗣️ VOCABULARY ────────────────────────────────────────────────
+          {
+            name: "Rekhta Learning",
+            handle: "@rekhtalearning",
+            platform: "Instagram",
+            url: "https://www.instagram.com/rekhtalearning",
+            category: "Vocabulary",
+            description:
+              "Premium Urdu language and literature learning platform with courses and live classes.",
+          },
+          {
+            name: "Words in Urdu",
+            handle: "@wordsinurdu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/wordsinurdu",
+            category: "Vocabulary",
+            description:
+              "Daily Urdu vocabulary posts for consistent, bite-sized language building.",
+          },
+          {
+            name: "Zari Jafri | Urdu Enthusiast",
+            handle: "@zari_jafrii",
+            platform: "Instagram",
+            url: "https://www.instagram.com/zari_jafrii",
+            category: "Vocabulary",
+            description:
+              "Urdu vocabulary, phrases, and expressive language content for curious learners.",
+          },
+          {
+            name: "Urdu Dost",
+            handle: "@urdudost.learning",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdudost.learning",
+            category: "Vocabulary",
+            description:
+              "Simple Urdu vocabulary and learning resources for beginners.",
+          },
+          {
+            name: "Lafz Lafz Kunji",
+            handle: "@lafzlafzkunji",
+            platform: "Instagram",
+            url: "https://www.instagram.com/lafzlafzkunji",
+            category: "Vocabulary",
+            description:
+              "Word-by-word Urdu learning with clear breakdowns and structural explanations.",
+          },
+          {
+            name: "Urdu Haus",
+            handle: "@urduhaus",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urduhaus",
+            category: "Vocabulary",
+            description:
+              "Urdu language content focused on vocabulary and everyday conversational phrases.",
+          },
+          {
+            name: "Speak in Urdu",
+            handle: "@speakinurdu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/speakinurdu",
+            category: "Vocabulary",
+            description:
+              "Conversational practice prompts and everyday phrases to build speaking confidence.",
+          },
+          {
+            name: "English with Muskan",
+            handle: "@learningenglishurdu",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@learningenglishurdu",
+            category: "Vocabulary",
+            description:
+              "Bilingual Urdu–English vocabulary and conversational learning content.",
+          },
+          {
+            name: "English Learning with Urdu",
+            handle: "@learningenglish.withurdu",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@learningenglish.withurdu",
+            category: "Vocabulary",
+            description:
+              "English vocabulary explained through Urdu for bilingual fluency building.",
+          },
+          {
+            name: "English to Urdu Vocabulary",
+            handle: "@englishto5urdo",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@englishto5urdo",
+            category: "Vocabulary",
+            description:
+              "Daily English–Urdu vocabulary pairs in a simple, beginner-friendly format.",
+          },
+
+          // ── 📖 STORIES ────────────────────────────────────────────────────
+          {
+            name: "Jaani Ki Kahaani",
+            handle: "@jaanikikahaani",
+            platform: "Instagram",
+            url: "https://www.instagram.com/jaanikikahaani",
+            category: "Stories",
+            description:
+              "Urdu storytelling podcast for children, available on Spotify and Apple Podcasts.",
+          },
+          {
+            name: "Kahani Korner",
+            handle: "@kahani.korner",
+            platform: "Instagram",
+            url: "https://www.instagram.com/kahani.korner",
+            category: "Stories",
+            description:
+              "Bilingual Urdu-English storybooks, activity sets, and QR-linked read-aloud videos for families.",
+          },
+          {
+            name: "Urdu Stories",
+            handle: "@urdustories350",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@urdustories350",
+            category: "Stories",
+            description:
+              "High-engagement short moral stories in Urdu — great for bedtime and classroom listening.",
+          },
+          {
+            name: "Urdu Stories Hub",
+            handle: "@itxminu89",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@itxminu89",
+            category: "Stories",
+            description:
+              "Engaging Urdu story-reading content with strong audience interaction.",
+          },
+
+          // ── 🇵🇰 CULTURE ──────────────────────────────────────────────────
+          {
+            name: "My Zuban",
+            handle: "@myzuban",
+            platform: "Instagram",
+            url: "https://www.instagram.com/myzuban",
+            category: "Culture",
+            description:
+              "UK-based bilingual Urdu and Arabic learning journey for kids with free resources.",
+          },
+          {
+            name: "Urdu Daan Fold | Courses & Events",
+            handle: "@urdufold",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdufold",
+            category: "Culture",
+            description:
+              "Urdu learning courses and cultural community events for diaspora families.",
+          },
+          {
+            name: "Alfaazz Online School",
+            handle: "@alfaazzonline",
+            platform: "Instagram",
+            url: "https://www.instagram.com/alfaazzonline",
+            category: "Culture",
+            description:
+              "Online Urdu school blending language learning with cultural education.",
+          },
+          {
+            name: "Komal Badar",
+            handle: "@aao_urdu_parhain",
+            platform: "Instagram",
+            url: "https://www.instagram.com/aao_urdu_parhain",
+            category: "Culture",
+            description:
+              '"آؤ اردو پڑھیں" — cultural Urdu learning content and resources.',
+          },
+          {
+            name: "Khailokidz™",
+            handle: "@khailokidz",
+            platform: "Instagram",
+            url: "https://www.instagram.com/khailokidz",
+            category: "Culture",
+            description:
+              "Culture-inspired Urdu books, activities, and learning events for kids.",
+          },
+          {
+            name: "Home with Alif Ba Seen",
+            handle: "@homewithalifbaaseen",
+            platform: "Instagram",
+            url: "https://www.instagram.com/homewithalifbaaseen",
+            category: "Culture",
+            description:
+              "Early Urdu literacy and alphabet-based content — ideal for home learning environments.",
+          },
+          {
+            name: "Good Tree Urdu",
+            handle: "@goodtreeurdu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/goodtreeurdu",
+            category: "Culture",
+            description:
+              "Urdu learning and cultural content for families building a connection to their heritage.",
+          },
+          {
+            name: "PLC UK | Pakistan Legends Cultures",
+            handle: "@pakistanlegendscultures",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@pakistanlegendscultures",
+            category: "Culture",
+            description:
+              "Promotes Pakistani culture, traditions, and Urdu-language content globally.",
+          },
+          {
+            name: "Pakistani Culture",
+            handle: "@pakistani.culture",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@pakistani.culture",
+            category: "Culture",
+            description:
+              "Shares Pakistani traditions including language, music, fashion, and cultural heritage.",
+          },
+
+          // ── 🎵 SONGS & RHYMES ─────────────────────────────────────────────
+          {
+            name: "Ladoo Loves Urdu | Soundbooks",
+            handle: "@ladoolovesurdu",
+            platform: "Instagram",
+            url: "https://www.instagram.com/ladoolovesurdu",
+            category: "Songs",
+            description:
+              "Musical Urdu-English soundbooks and songs for children by a Pakistani-Canadian mom.",
+          },
+          {
+            name: "Urdu Poem for Kids",
+            handle: "@urdupoemforkids7",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@urdupoemforkids7",
+            category: "Songs",
+            description:
+              "Short Urdu poems and nursery rhymes that make language feel playful and memorable.",
+          },
+          {
+            name: "Nadia Auntyjee | Learn Urdu & Hindi",
+            handle: "@learnurduandhindi",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@learnurduandhindi",
+            category: "Songs",
+            description:
+              "Native Urdu/Hindi speaker sharing nursery rhymes, language tips, and cultural learning.",
+          },
+
+          // ── 🎓 CLASSES & TUTORING ─────────────────────────────────────────
+          {
+            name: "Kids Bolo®",
+            handle: "@kidsbolo",
+            platform: "Instagram",
+            url: "https://www.instagram.com/kidsbolo",
+            category: "Tutoring",
+            description:
+              "Urdu summer camps, talking pen books, and self-paced online Urdu modules for kids and adults in the West.",
+          },
+          {
+            name: "Urdu Munchkins",
+            handle: "@urdumunchkins",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdumunchkins",
+            category: "Tutoring",
+            description:
+              "Customised Urdu lesson plans and fun spoken Urdu classes for diaspora parents and kids.",
+          },
+          {
+            name: "Urdu Learning Lab",
+            handle: "@urdulearninglab",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urdulearninglab",
+            category: "Tutoring",
+            description:
+              "Virtual Urdu classes, bilingual story sessions, and structured learning programmes.",
+          },
+          {
+            name: "Zainab Kazmi | UrduZubaan",
+            handle: "@zee_ktuitions",
+            platform: "Instagram",
+            url: "https://www.instagram.com/zee_ktuitions",
+            category: "Tutoring",
+            description:
+              "Online Urdu tuition and personalised language coaching for diaspora learners.",
+          },
+          {
+            name: "Arsheela Hunean",
+            handle: "@learnurduandmore",
+            platform: "Instagram",
+            url: "https://www.instagram.com/learnurduandmore",
+            category: "Tutoring",
+            description:
+              "Bilingual Urdu teaching for English-speaking kids and beginners.",
+          },
+          {
+            name: "Neha Fatima | Urdu Tutor & Linguist",
+            handle: "@urduwithneha",
+            platform: "Instagram",
+            url: "https://www.instagram.com/urduwithneha",
+            category: "Tutoring",
+            description:
+              "Spoken Urdu for non-natives and overseas Pakistanis through structured, approachable lessons.",
+          },
+          {
+            name: "Learn Urdu 101",
+            handle: "@learnurdu101",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@learnurdu101",
+            category: "Tutoring",
+            description:
+              "Structured Urdu lessons with grammar and vocabulary-focused content for all levels.",
+          },
+        ];
+
+        /* ── Category metadata ─────────────────────────────────────────────── */
+        const categoryMeta = {
+          Kids: {
+            emoji: "📚",
+            label: "Urdu Learning for Kids",
+            note: "Perfect for parents, homeschoolers, and early-years educators raising bilingual children.",
+          },
+          Beginners: {
+            emoji: "🌍",
+            label: "Beginner Urdu & Diaspora Learners",
+            note: "Ideal for diaspora families, non-native learners, and mixed-language households starting their Urdu journey.",
+          },
+          Vocabulary: {
+            emoji: "🗣️",
+            label: "Vocabulary, Phrases & Conversation",
+            note: "Great for building daily language habits — perfect for learners at any stage.",
+          },
+          Stories: {
+            emoji: "📖",
+            label: "Urdu Stories, Books & Storytelling",
+            note: "Storytelling is one of the most natural ways children absorb language — these accounts make it magical.",
+          },
+          Culture: {
+            emoji: "🇵🇰",
+            label: "Pakistani Culture + Language",
+            note: "For families who want language and cultural identity to grow together.",
+          },
+          Songs: {
+            emoji: "🎵",
+            label: "Songs, Rhymes & Audio Learning",
+            note: "Music and rhythm are powerful memory tools — especially powerful for young Urdu learners.",
+          },
+          Tutoring: {
+            emoji: "🎓",
+            label: "Structured Classes & Tutoring",
+            note: "For families ready to move beyond casual learning into structured, consistent Urdu education.",
+          },
+        };
+
+        const ORDER = [
+          "Kids",
+          "Beginners",
+          "Vocabulary",
+          "Stories",
+          "Culture",
+          "Songs",
+          "Tutoring",
+        ];
+        const sectionsContainer = document.getElementById("sections-container");
+
+        function renderAll(filterCat, filterPlatform) {
+          sectionsContainer.innerHTML = "";
+
+          ORDER.forEach((cat) => {
+            if (filterCat !== "all" && filterCat !== cat) return;
+
+            const filtered = accounts.filter((a) => {
+              const catMatch = a.category === cat;
+              const platMatch =
+                filterPlatform === "all" || a.platform === filterPlatform;
+              return catMatch && platMatch;
+            });
+
+            if (filtered.length === 0) return;
+
+            const section = document.createElement("div");
+            section.className = "category-section";
+
+            const heading = document.createElement("h2");
+            heading.className = "category-heading";
+            heading.textContent = `${categoryMeta[cat].emoji} ${categoryMeta[cat].label}`;
+            section.appendChild(heading);
+
+            const note = document.createElement("p");
+            note.className = "category-note";
+            note.textContent = categoryMeta[cat].note;
+            section.appendChild(note);
+
+            const grid = document.createElement("div");
+            grid.className = "grid";
+
+            filtered.forEach((account) => {
+              const isIG = account.platform === "Instagram";
+              const wrapper = document.createElement("div");
+              wrapper.className = "video-wrapper video";
+
+              const link = document.createElement("a");
+              link.href = account.url;
+              link.target = "_blank";
+              link.style.textDecoration = "none";
+
+              const banner = document.createElement("div");
+              banner.className = isIG ? "ig-banner" : "tt-banner";
+
+              const badge = document.createElement("span");
+              badge.className = isIG ? "ig-badge" : "tt-badge";
+              badge.textContent = account.platform;
+
+              const icon = document.createElement("i");
+              icon.className = `fa-brands ${isIG ? "fa-instagram" : "fa-tiktok"} banner-icon`;
+
+              const handleEl = document.createElement("span");
+              handleEl.className = "banner-handle";
+              handleEl.textContent = account.handle;
+
+              banner.appendChild(badge);
+              banner.appendChild(icon);
+              banner.appendChild(handleEl);
+              link.appendChild(banner);
+              wrapper.appendChild(link);
+
+              const title = document.createElement("div");
+              title.className = "video-title";
+              title.textContent = account.name;
+
+              const desc = document.createElement("div");
+              desc.className = "translation";
+              desc.textContent = account.description;
+
+              wrapper.appendChild(title);
+              wrapper.appendChild(desc);
+              grid.appendChild(wrapper);
+            });
+
+            section.appendChild(grid);
+            sectionsContainer.appendChild(section);
+          });
+        }
+
+        renderAll("all", "all");
+
+        const catFilter = document.getElementById("categoryFilter");
+        const platFilter = document.getElementById("platformFilter");
+        catFilter.addEventListener("change", () =>
+          renderAll(catFilter.value, platFilter.value),
+        );
+        platFilter.addEventListener("change", () =>
+          renderAll(catFilter.value, platFilter.value),
+        );
+
+        /* ── Floating hearts ─────────────────────────────────────────────── */
+        const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+        for (let i = 0; i < 15; i++) {
+          const icon = document.createElement("img");
+          icon.src = iconSrc;
+          icon.classList.add("heart");
+          icon.style.left = Math.random() * 100 + "vw";
+          icon.style.animationDelay = Math.random() * 10 + "s";
+          icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+          icon.style.animationDuration =
+            (6 + Math.random() * 4).toFixed(2) + "s";
+          document.body.appendChild(icon);
+        }
+      });
+    </script>
+    <script src="/assets/cart.js"></script>
+  <script src="/assets/js/footer-loader.js" defer></script>
+  </body>
+</html>

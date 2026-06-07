@@ -17,453 +17,900 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-N97Z02BGG4');
 </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kahani Korner Songs</title>
+    <title>Kahani Korner — Songs &amp; Channels</title>
     <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
-    <style></style>
-  </head>
-  <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Header -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-        <nav class="nav">
-          <a href="/products.html">Shop</a>
-          <a href="/subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html" class="nav-active">Resources</a>
-          <a href="/#faq">Help</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-        <div class="header-actions">
-          <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-          </button>
-        </div>
-      </div>
-    </header>
-    <div class="header-spacer" aria-hidden="true"></div>
+    <style>
+      /* ── Channel Directory Page ── */
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <ul class="mobile-menu__links">
-          <li><a href="/products.html">Shop</a></li>
-          <li><a href="/subscribe.html">Subscribe</a></li>
-          <li><a href="/resources/resources.html" class="nav-active">Resources</a></li>
-          <li><a href="/#faq">Help</a></li>
-          <li><a href="/#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-    <h1>Songs</h1>
-
-    <p class="subheading">
-      Sing along, learn along — our favorite Urdu tunes for little ears!
-    </p>
-
-    <div class="filter-container">
-      <select id="categoryFilter">
-        <option value="all">All Songs</option>
-        <option value="animals">Animals</option>
-        <option value="counting">Counting</option>
-        <option value="transport">Transport</option>
-        <option value="classic">Classic</option>
-        <option value="letters">Letters</option>
-        <option value="rhyme">Rhymes</option>
-        <option value="food">Food</option>
-        <option value="family">Family</option>
-        <option value="routine">Routine</option>
-        <option value="story">Story</option>
-        <option value="weather">Weather</option>
-        <option value="fun">Fun</option>
-      </select>
-    </div>
-
-    <div class="grid"></div>
-    </div><!-- close .container -->
-
-    <footer class="footer">
-      <a href="/" class="brand" style="justify-content: center; margin-bottom: 1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
-      </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
-
-    <script>
-      // object and function to add new videos onto the page
-      const songlist = [
-        {
-          name: "Kut kut murghi",
-          embed: "https://www.youtube.com/embed/gOgfKlsaIxU",
-          category: "animals",
-          description: "Chicken - A fun song about a chicken!",
-        },
-        {
-          name: "Gaari Aye",
-          embed: "https://www.youtube.com/embed/HiZ7x55IHps",
-          category: "transport",
-          description: "The Car is Here – A joyful tune about cars arriving.",
-        },
-        {
-          name: "Lakri ki Kaanti",
-          embed: "https://www.youtube.com/embed/P2r7LoytBfo",
-          category: "classic",
-          description:
-            "Wooden Stick Song – A classic rhyme with catchy repetition.",
-        },
-        {
-          name: "Ghora",
-          embed: "https://www.youtube.com/embed/vjyHKPPIlpI",
-          category: "animals",
-          description:
-            "Horse Song – Galloping rhythm introduces animal vocabulary.",
-        },
-        {
-          name: "Alphabet Urdu",
-          embed: "https://www.youtube.com/embed/WeQDABiJ5a8",
-          category: "letters",
-          description:
-            "Learn Urdu Alphabet – Visuals and repetition of Urdu letters.",
-        },
-        {
-          name: "ABC Animals in Urdu",
-          embed: "https://www.youtube.com/embed/lml8gwRNZj4",
-          category: "animals",
-          description: "Alphabet Animals – Urdu alphabet paired with animals.",
-        },
-        {
-          name: "ABC Urdu",
-          embed: "https://www.youtube.com/embed/XUhe_Q1q66c",
-          category: "letters",
-          description: "Urdu ABC – Simple, beginner-friendly letter song.",
-        },
-        {
-          name: "Akar Bakr",
-          embed: "https://www.youtube.com/embed/YH0vJ3v4l14",
-          category: "rhyme",
-          description: "Traditional Urdu rhyme for playful fun and rhythm.",
-        },
-        {
-          name: "Aloo Miyan",
-          embed: "https://www.youtube.com/embed/9bQqTgCNmmI",
-          category: "food",
-          description: "Mr. Potato – Cute song using food to teach Urdu.",
-        },
-        {
-          name: "Nani Teri Morne",
-          embed: "https://www.youtube.com/embed/yrynT4T55Xc",
-          category: "family",
-          description: "Grandma’s Peacock – Sweet lullaby about Nani.",
-        },
-        {
-          name: "Haathi",
-          embed: "https://www.youtube.com/embed/i35AUg11hvo",
-          category: "animals",
-          description:
-            "Elephant Song – Fun lyrics describing a haathi (elephant).",
-        },
-        {
-          name: "Haathi (Alternate)",
-          embed: "https://www.youtube.com/embed/rbX-ZgvD1Jc",
-          category: "animals",
-          description: "Another version of the popular elephant rhyme.",
-        },
-        {
-          name: "Abu Laye Motor Car",
-          embed: "https://www.youtube.com/embed/k83yNjbv_Ig",
-          category: "transport",
-          description: "Dad Brings a Car – Story-driven song with repetition.",
-        },
-        {
-          name: "Bulbul Ka Bacha",
-          embed: "https://www.youtube.com/embed/Kn0iazTunQI",
-          category: "animals",
-          description: "The Baby Bulbul – A classic Urdu rhyme with birds.",
-        },
-        {
-          name: "Kachwa",
-          embed: "https://www.youtube.com/embed/o-Sp3d2sn3I",
-          category: "animals",
-          description: "Turtle Song – Slow and steady wins the rhyme!",
-        },
-        {
-          name: "Utho Baita",
-          embed: "https://www.youtube.com/embed/hylhIXUA-J0",
-          category: "routine",
-          description: "Wake Up Little One – Urdu morning routine tune.",
-        },
-        {
-          name: "Tota",
-          embed: "https://www.youtube.com/embed/0a2IYv2_kfk",
-          category: "animals",
-          description: "Parrot Song – Rhythmic and repetitive vocabulary song.",
-        },
-        {
-          name: "Titli",
-          embed: "https://www.youtube.com/embed/cVoO_k7R4ac",
-          category: "animals",
-          description: "Butterfly Song – Gentle and colorful nature tune.",
-        },
-        {
-          name: "Pyasa Kawa",
-          embed: "https://www.youtube.com/embed/M41oOKxf03Y",
-          category: "story",
-          description: "Thirsty Crow – Urdu moral story turned into a rhyme.",
-        },
-        {
-          name: "Barish",
-          embed: "https://www.youtube.com/embed/4kOkOvbTpZY",
-          category: "weather",
-          description: "Rain Song – Sounds of the rain with playful lyrics.",
-        },
-        {
-          name: "Chuchu Chacha",
-          embed: "https://www.youtube.com/embed/Ehj6WCdNcYI",
-          category: "fun",
-          description: "ChuChu Chacha– Silly, catchy tune with lots of laughs.",
-        },
-        {
-          name: "Aloo Kachaloo",
-          embed: "https://www.youtube.com/embed/1E6jXT47Vlo",
-          category: "food",
-          description: "Potato Song – Classic nursery rhyme with wordplay.",
-        },
-
-        {
-          name: "Pakkay Dost",
-          embed: "https://www.youtube.com/@pakkaydost/playlists",
-          category: "puppets",
-          description: "Good Friends – Urdu puppet show with songs.",
-        },
-        
-      ];
-
-      const grid = document.querySelector(".grid");
-      grid.innerHTML = ""; // Clear any hardcoded video-wrapper divs
-
-      function getYouTubeID(embedURL) {
-        const match = embedURL.match(/embed\/([a-zA-Z0-9_-]+)/);
-        return match ? match[1] : "";
+      .page-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto 2rem;
+        padding: 0 0.5rem;
       }
 
-      songlist.forEach((song) => {
-        const wrapper = document.createElement("div");
-        wrapper.className = `video-wrapper song ${song.category}`;
+      .search-wrap {
+        position: relative;
+        width: 100%;
+      }
 
-        const title = document.createElement("div");
-        title.className = `video-title ${song.category}`;
-        title.textContent = song.name;
+      .search-wrap i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--hookers-green, #687d70);
+        font-size: 0.95rem;
+        pointer-events: none;
+      }
 
-        const preview = document.createElement("div");
-        preview.className = "video-thumbnail";
-        preview.style.position = "relative";
-        preview.style.cursor = "pointer";
+      #searchInput {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.65rem 1rem 0.65rem 2.6rem;
+        font-size: 0.9rem;
+        font-family: inherit;
+        font-weight: 500;
+        border-radius: 999px;
+        border: 2px solid var(--hookers-green, #687d70);
+        background: var(--white-smoke, #f3f1f0);
+        color: var(--feldgrau, #4a594a);
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        outline: none;
+      }
 
-        // Thumbnail Image
-        const thumbnail = document.createElement("img");
-        thumbnail.src = `https://img.youtube.com/vi/${getYouTubeID(
-          song.embed
-        )}/hqdefault.jpg`;
-        thumbnail.alt = song.name;
-        thumbnail.style.width = "100%";
-        thumbnail.style.display = "block";
+      #searchInput:focus {
+        border-color: var(--feldgrau, #4a594a);
+        box-shadow: 0 0 0 3px rgba(74, 89, 74, 0.12);
+      }
 
-        // Play Button Overlay
-        const playButton = document.createElement("div");
-        playButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="36" height="36" style="display:block;filter:drop-shadow(0 0 6px rgba(0,0,0,0.5))"><path d="M8 5v14l11-7z"/></svg>';
-        playButton.style.position = "absolute";
-        playButton.style.top = "50%";
-        playButton.style.left = "50%";
-        playButton.style.transform = "translate(-50%, -50%)";
-        playButton.style.fontSize = "2rem";
-        playButton.style.color = "#fff";
-        playButton.style.textShadow = "0 0 10px rgba(0,0,0,0.6)";
+      #searchInput::placeholder {
+        color: var(--ash-gray, #b0c3b7);
+      }
 
-        // On Click → Replace with iframe
-        preview.addEventListener("click", () => {
-          const iframe = document.createElement("iframe");
-          iframe.src = song.embed + "?autoplay=1";
-          iframe.setAttribute("allowfullscreen", true);
-          iframe.setAttribute("loading", "lazy");
-          iframe.style.width = "100%";
-          iframe.style.height = "180px";
-          preview.replaceWith(iframe);
+      .filter-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-row .filter-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--hookers-green, #687d70);
+        white-space: nowrap;
+      }
+
+      /* ── Channel Grid ── */
+
+      .channel-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 1300px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 1100px) {
+        .channel-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      @media (max-width: 768px) {
+        .channel-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      }
+
+      @media (max-width: 440px) {
+        .channel-grid { grid-template-columns: 1fr; }
+      }
+
+      /* ── Channel Card ── */
+
+      .channel-card {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(74, 89, 74, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 1.25rem 1.25rem;
+        gap: 0.6rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1.5px solid rgba(176, 195, 183, 0.45);
+        text-align: center;
+      }
+
+      .channel-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(74, 89, 74, 0.18);
+      }
+
+      /* ── Avatar ── */
+
+      .channel-avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-size: 1.75rem;
+        font-weight: 800;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        position: relative;
+      }
+
+      .channel-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+      }
+
+      .channel-avatar .avatar-fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-size: 1.75rem;
+        font-weight: 800;
+      }
+
+      /* ── Card Body ── */
+
+      .channel-name {
+        font-family: "Grandstander", cursive;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--feldgrau, #4a594a);
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .lang-badge {
+        display: inline-block;
+        padding: 0.18rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .lang-badge.urdu {
+        background: #fce8e8;
+        color: #a85858;
+        border: 1.5px solid #f0b8b8;
+      }
+
+      .lang-badge.hindi {
+        background: #e4f0e8;
+        color: #3d6b4a;
+        border: 1.5px solid #b0d4bc;
+      }
+
+      .channel-desc {
+        font-size: 0.8rem;
+        color: var(--muted, #5c6b68);
+        line-height: 1.55;
+        margin: 0;
+        flex: 1;
+      }
+
+      /* ── Card Buttons ── */
+
+      .card-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0.4rem;
+      }
+
+      .btn-visit {
+        display: block;
+        width: 100%;
+        padding: 0.55rem 0.75rem;
+        background: var(--hookers-green, #687d70);
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.15s ease;
+        cursor: pointer;
+      }
+
+      .btn-visit:hover {
+        background: var(--feldgrau, #4a594a);
+        transform: translateY(-1px);
+      }
+
+      .btn-home {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        background: transparent;
+        color: var(--hookers-green, #687d70);
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1.5px solid var(--ash-gray, #b0c3b7);
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        cursor: pointer;
+      }
+
+      .btn-home:hover {
+        border-color: var(--hookers-green, #687d70);
+        color: var(--feldgrau, #4a594a);
+        transform: translateY(-1px);
+      }
+
+      /* ── No Results ── */
+
+      .no-results {
+        text-align: center;
+        color: var(--muted, #5c6b68);
+        font-size: 0.95rem;
+        padding: 3rem 1rem;
+        width: 100%;
+      }
+
+      .no-results i {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+        display: block;
+        color: var(--ash-gray, #b0c3b7);
+      }
+
+      /* ── Results count ── */
+
+      .results-count {
+        font-size: 0.78rem;
+        color: var(--muted, #5c6b68);
+        text-align: center;
+        margin: 0 0 1.25rem;
+        letter-spacing: 0.04em;
+      }
+
+      /* ── Responsive controls ── */
+
+      @media (max-width: 600px) {
+        .page-controls { padding: 0; }
+        .filter-row { justify-content: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
+    <div class="header-spacer" aria-hidden="true"></div>
+
+    <!-- Page Content -->
+    <div class="container">
+      <h1>Songs &amp; Rhymes</h1>
+      <p class="subheading">
+        Discover YouTube channels filled with Urdu and Hindi songs, nursery rhymes, and children's music.
+      </p>
+
+      <!-- Search + Language Filter -->
+      <div class="page-controls" role="search">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search channels by name or description…"
+            aria-label="Search channels"
+            autocomplete="off"
+          />
+        </div>
+        <div class="filter-row">
+          <span class="filter-label" id="lang-filter-label">Language</span>
+          <div class="lang-pills" role="tablist" aria-labelledby="lang-filter-label">
+            <button class="lang-pill" role="tab" aria-selected="true"  data-lang="all"   tabindex="0">All Languages</button>
+            <button class="lang-pill" role="tab" aria-selected="false" data-lang="urdu"  tabindex="-1">Urdu</button>
+            <button class="lang-pill" role="tab" aria-selected="false" data-lang="hindi" tabindex="-1">Hindi</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="results-count" id="resultsCount" aria-live="polite"></p>
+
+      <div class="channel-grid" id="channelGrid" aria-live="polite" aria-label="Channel directory"></div>
+
+      <p class="no-results hidden" id="noResults" aria-live="polite">
+        <i class="fa-solid fa-music" aria-hidden="true"></i>
+        No channels match your search.<br>Try a different term or clear the filter.
+      </p>
+    </div>
+
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+      // ── Channel data ────────────────────────────────────────────────────────
+
+      const channels = [
+        // ── URDU ──────────────────────────────────────────────────────────────
+        {
+          id: "pakkay-dost",
+          name: "Pakkay Dost",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@pakkaydost/playlists",
+          allVideosUrl: "https://www.youtube.com/@pakkaydost/videos",
+          avatar: "https://yt3.googleusercontent.com/dYvB5XAIpk06SFVqD_t1P_PimVaS40_9DQJgxMftmt4h5wsSYLr4BDwDiorzWzXO84GNCB9oyw=s160-c-k-c0x00ffffff-no-rj",
+          description: "Urdu puppet shows, original songs, and nursery rhymes featuring adorable characters for young children."
+        },
+        {
+          id: "the-global-school",
+          name: "The Global School",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@TheGlobalSchool/playlists",
+          allVideosUrl: "https://www.youtube.com/@TheGlobalSchool/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_kmFMmfmuC5WBjUMwByyXgpTTQxz8YBncRpeDzbFbYzpw=s160-c-k-c0x00ffffff-no-rj",
+          description: "Urdu alphabet songs, educational rhymes, and learning content designed for preschool and early childhood."
+        },
+        {
+          id: "aao-urdu-seekhain",
+          name: "Aao Urdu Seekhain",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@AaoUrduSeekhain/playlists",
+          allVideosUrl: "https://www.youtube.com/@AaoUrduSeekhain/videos",
+          avatar: "https://yt3.googleusercontent.com/UXy4jKRSt1EDFjqa7Frz4ZX6LMGKTc6W8IJ1YAm1SnWdt4R17p35mcJ6JZRYFHoVcMJ97xfZ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Learn Urdu through fun songs, letter practice, and interactive nursery rhymes for beginner learners."
+        },
+        {
+          id: "noor-land-tv",
+          name: "Noor Land TV",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@noorlandtv/playlists",
+          allVideosUrl: "https://www.youtube.com/@noorlandtv/videos",
+          avatar: "https://yt3.googleusercontent.com/HtjRbY5kkJCNKW9XfA6-He9xXurUcrlB4nPDPTWjFNP18WWd_wwASCv2_f1k2YEXXabukgfK7Q=s160-c-k-c0x00ffffff-no-rj",
+          description: "Cheerful Urdu songs, Islamic nursery rhymes, and wholesome content for Muslim families with young children."
+        },
+        {
+          id: "b2-kids",
+          name: "B2 Kids",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@b2kids111/playlists",
+          allVideosUrl: "https://www.youtube.com/@b2kids111/videos",
+          avatar: "https://yt3.googleusercontent.com/R1ZYFtNhTQUwviCC-jE2XnPORw_rX2fkL76X05EnP2eCLAG1ns3A8uxuabPx20f4YdvsqW8_=s160-c-k-c0x00ffffff-no-rj",
+          description: "Lively Urdu rhymes, counting songs, and playful educational content for toddlers and young children."
+        },
+        {
+          id: "peek-freans-gluco",
+          name: "Peek Freans Gluco",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@PeekFreansGluco/playlists",
+          allVideosUrl: "https://www.youtube.com/@PeekFreansGluco/videos",
+          avatar: "https://yt3.googleusercontent.com/sBY55KfZhcRmXxsahv1Se-eVRkDL63wvENDDw8sRlomf-YEGssVBJKdb5j-2jOcD4NwlXDqyEw=s160-c-k-c0x00ffffff-no-rj",
+          description: "Fun Urdu children's songs, jingles, and colorful musical content for little ones from a beloved brand."
+        },
+        {
+          id: "kids-zone-urdu",
+          name: "Kids Zone Urdu",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@kidszoneurdu4981/playlists",
+          allVideosUrl: "https://www.youtube.com/@kidszoneurdu4981/videos",
+          avatar: "https://yt3.googleusercontent.com/JZZRXCFV6tWNykC6W-gCdlLDTipii8lxmL9Nzo2BMREx9oD__gFBh8kkvuAWGDVDtYT9QazUog=s160-c-k-c0x00ffffff-no-rj",
+          description: "A fun zone packed with Urdu nursery rhymes, educational songs, and colorful animated content for children."
+        },
+        {
+  id: "sabeel-toons",
+  name: "Sabeel Toons",
+  language: "urdu",
+  playlistsUrl: "https://www.youtube.com/@SabeelToonsOfficial/playlists",
+  videos: "https://www.youtube.com/@SabeelToonsOfficial/videos",
+  avatar: "https://yt3.googleusercontent.com/ItvEpbu14Mf-DuMJSWW9OzX_7zLXLpw43y39yzjLpzVrwj4dpif9mM9OppO9GeIrW4SiwPxpPA=s160-c-k-c0x00ffffff-no-rj",
+  description: "Islamic animated songs, nursery rhymes, and moral stories for children in Urdu and Hindi, inspired by Quranic values and Ahlul Bayt teachings."
+},
+        {
+          id: "hoora-tv",
+          name: "Hoora TV",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@hooratv/playlists",
+          allVideosUrl: "https://www.youtube.com/@hooratv/videos",
+          avatar: "https://yt3.googleusercontent.com/rr8q8TQrEuGt3tIpqVd3lrMDPv8hMqA2kPLEX0x8hulOJLsxTw4dyB6vh99h_T9QORY1IZti=s160-c-k-c0x00ffffff-no-rj",
+          description: "Vibrant Urdu songs, rhymes, and stories to entertain and educate young Pakistani children at home."
+        },
+        {
+          id: "toffee-tv",
+          name: "ToffeeTV",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@toffeetvpk/playlists",
+          allVideosUrl: "https://www.youtube.com/@toffeetvpk/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_lniRlGNukubI3tpX3ejMZBCfGsz87llX3wjFalq9IPqFE=s160-c-k-c0x00ffffff-no-rj",
+          description: "Pakistan's beloved children's channel with Urdu songs, cartoons, stories, and educational rhymes."
+        },
+        {
+          id: "kids-madani-channel",
+          name: "Kids Madani Channel",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@KidsMadaniChannel/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsMadaniChannel/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_kkIgMAkrI-b6AESWzfc3Df4B0QeyGof8Qhd-M9I8hQPbs=s160-c-k-c0x00ffffff-no-rj",
+          description: "Islamic Urdu nasheeds, children's songs, and faith-based content delivered in a warm, kid-friendly format."
+        },
+        {
+          id: "urdu-kids-channel",
+          name: "Urdu Kids Channel",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@Urdukidschannel/playlists",
+          allVideosUrl: "https://www.youtube.com/@Urdukidschannel/videos",
+          avatar: "https://yt3.googleusercontent.com/bmkIdUw7atDi9DXOe5JzJtOgjkYKe3xf7jKzOHIvxuciJH6Xz40_8zU8T5Zhfp8Acy488LNUZJA=s160-c-k-c0x00ffffff-no-rj",
+          description: "Simple, catchy Urdu rhymes and songs perfect for toddlers learning their very first words."
+        },
+        {
+          id: "chintu-kids-club",
+          name: "Chintu Kids Club",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@ChintuKidsClub/playlists",
+          allVideosUrl: "https://www.youtube.com/@ChintuKidsClub/videos",
+          avatar: "https://yt3.googleusercontent.com/iyMZogo4-1fPJG5V0ZiRBEdMsr-k5fqOg6xhnnnN7K4SxtDhBj7R8ZMOTVC6qtXOHgBMlkV_eA=s160-c-k-c0x00ffffff-no-rj",
+          description: "Colorful Urdu rhymes and stories for young children, starring the lovable Chintu character."
+        },
+        {
+          id: "bacha-party",
+          name: "Bacha Party",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@bachaparty7142/playlists",
+          allVideosUrl: "https://www.youtube.com/@bachaparty7142/videos",
+          avatar: "https://yt3.googleusercontent.com/GX6DrTrRVaf6iynpHHVcOIp7rcWJv06zXuPDZ5Gy3qV_1MkUEOxpuSlXnAXOVzYfYuZm-CYqdmw=s160-c-k-c0x00ffffff-no-rj",
+          description: "Entertaining Urdu songs and children's content from Pakistan, great for family viewing."
+        },
+        {
+          id: "doo-dah-doo",
+          name: "Doo Dah Doo",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@DooDahDoo/playlists",
+          allVideosUrl: "https://www.youtube.com/@DooDahDoo/videos",
+          avatar: "https://yt3.googleusercontent.com/XxJwmq_7-LeJ1QeXZIpvoyl_SOp4NgUuKpJUYBHJa3rkMy-AQUZMbbwbh_TuuVtobMiHJDoQeQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Original Urdu music and rhythmic rhymes crafted to help children learn language through melody."
+        },
+        {
+          id: "sunehre-din",
+          name: "Sunehre Din",
+          language: "urdu",
+          playlistsUrl: "https://www.youtube.com/@SunehreDin-b2m/playlists",
+          allVideosUrl: "https://www.youtube.com/@SunehreDin-b2m/videos",
+          avatar: "https://yt3.googleusercontent.com/4f7lBHHCteC3GP7ixvmdMoWWn2RRxY7xGxKtlpNYXBsAsLMDg-1616QzblTVXXm4uztZj0lv12w=s160-c-k-c0x00ffffff-no-rj",
+          description: "Classic and modern Urdu children's songs celebrating culture, family, and joyful childhood."
+        },
+
+        // ── HINDI ─────────────────────────────────────────────────────────────
+        {
+          id: "coco-tv-rhymes",
+          name: "Coco TV Rhymes",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@cocokidstvrhymes/playlists",
+          allVideosUrl: "https://www.youtube.com/@cocokidstvrhymes/videos",
+          avatar: "https://yt3.googleusercontent.com/fcHOpdGq8asZL3EXpUVSR4VsDP2VhcoKA-82D9PvvYDTGZYRaW81Z2zju2U8-4clDaHalP8uiQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Animated Hindi nursery rhymes and colorful songs featuring Coco and friends for little kids."
+        },
+        {
+          id: "jingle-toons",
+          name: "Jingle Toons",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@JingleToons/playlists",
+          allVideosUrl: "https://www.youtube.com/@JingleToons/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_lQm2XrrKZ3ie2CZrKUyv-24bln9TKYDf7R0w3R0cJ2TfM=s160-c-k-c0x00ffffff-no-rj",
+          description: "Catchy Hindi jingles and toon songs that make learning vocabulary and concepts fun for children."
+        },
+        {
+          id: "little-treehouse-india",
+          name: "Little Treehouse India",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@LittleTreehouseIndia/playlists",
+          allVideosUrl: "https://www.youtube.com/@LittleTreehouseIndia/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_lh0zur4rENkfQX1M3GWDsFczQD_J3X9OCTn5wrJvbMeQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Indian adaptation of beloved nursery rhymes with Hindi lyrics, bright visuals, and fun melodies."
+        },
+        {
+          id: "zappy-toons",
+          name: "ZappyToons",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@zappytoons/playlists",
+          allVideosUrl: "https://www.youtube.com/@zappytoons/videos",
+          avatar: "https://yt3.googleusercontent.com/TXHK5qQIr9Zgh7tpyfZ9JG8sKcbTdfUuyMWukYjKLVSnp5ZuOV9Tal4mW25FczTlEIaA2HoJ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Energetic Hindi songs, rhymes, and animated toons designed to keep young children entertained and learning."
+        },
+        {
+          id: "kids-channel-india",
+          name: "Kids Channel India",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@kidschannelindia/playlists",
+          allVideosUrl: "https://www.youtube.com/@kidschannelindia/videos",
+          avatar: "https://yt3.googleusercontent.com/hZYF-Hz4YJp36GJZamItXW6PXGapw5p0nAneFgaRcTYymJLvWpXE0tF7SubIzv_rKa3HVgECN2g=s160-c-k-c0x00ffffff-no-rj",
+          description: "A wide collection of Hindi rhymes, songs, and educational content for Indian children."
+        },
+        {
+          id: "dinobees-hindi",
+          name: "Dinobees Hindi Cartoons",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@DinobeesHindiCartoonsForKids/playlists",
+          allVideosUrl: "https://www.youtube.com/@DinobeesHindiCartoonsForKids/videos",
+          avatar: "https://yt3.googleusercontent.com/imj_9-Tr94Cg7J0E5Fye54qWedBZahu_0ZWUKRXssivcWRLFbeyzn0xqL7c7f2DqrrxQJ3lv6w=s160-c-k-c0x00ffffff-no-rj",
+          description: "Dinosaur-themed Hindi cartoons and songs that combine adventure with early childhood learning."
+        },
+        {
+          id: "riya-kids-tv",
+          name: "RIYA KIDS TV",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@riyakidtv/playlists",
+          allVideosUrl: "https://www.youtube.com/@riyakidtv/videos",
+          avatar: "https://yt3.googleusercontent.com/YbFVtYHjhGCxB-V05CEExiOny7xxyyeq61owDG8orNsbGjDUyY1CERe2D1sdvIXjWCbxmZNhLNI=s160-c-k-c0x00ffffff-no-rj",
+          description: "Hindi songs, rhymes, and stories featuring Riya in fun adventures for toddlers and preschoolers."
+        },
+        {
+          id: "noonoo-kids-hindi",
+          name: "NooNoo Kids Hindi",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@NooNooKidsHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@NooNooKidsHindi/videos",
+          avatar: "https://yt3.googleusercontent.com/HG2eSX8BTuWMwPR2NiSf8clANs1YHURpmzfB5-_go6JN0Wok_uE_kj1XVgB2P5zM5Bn4W2s3OQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Sweet Hindi nursery rhymes and lullabies featuring NooNoo characters loved by young children."
+        },
+        {
+          id: "infobells-hindi",
+          name: "Infobells Hindi",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@infobellshindirhymes/playlists",
+          allVideosUrl: "https://www.youtube.com/@infobellshindirhymes/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_mWKlOUcsnrq8oXV8BemcuyrfG52ztaqZmoDThFc1v-etg=s160-c-k-c0x00ffffff-no-rj",
+          description: "High-quality animated Hindi rhymes and educational songs with rich visuals for early learners."
+        },
+        {
+          id: "chuchutvhindi",
+          name: "ChuChuTV Hindi",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@ChuChuTVHindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@ChuChuTVHindi/videos",
+          avatar: "https://yt3.googleusercontent.com/ytc/AIdro_l7aczYe8G53nSS18B9NAkiQpxD-ptKgkGxIqaIR4kfn0Q=s160-c-k-c0x00ffffff-no-rj",
+          description: "One of India's most popular children's channels with Hindi nursery rhymes and fun educational songs."
+        },
+        {
+          id: "kids-tv-india",
+          name: "Kids TV India Hindi Rhymes",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@KidsTVIndiaHindiRhymes/playlists",
+          allVideosUrl: "https://www.youtube.com/@KidsTVIndiaHindiRhymes/videos",
+          avatar: "https://yt3.googleusercontent.com/O5amfWJoCgMCS3srHhW24hjkSZvVTuw5yKLPZZncuzEUPI_C-Tnf-WxxHsGSSNDQ1rhK9s_t=s160-c-k-c0x00ffffff-no-rj",
+          description: "Traditional and modern Hindi rhymes with colorful animations, great for toddlers and preschoolers."
+        },
+        {
+          id: "ladoo-kids",
+          name: "Ladoo Kids Hindi Nursery Rhymes",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@LadooKidsHindiNurseryRhymes/playlists",
+          allVideosUrl: "https://www.youtube.com/@LadooKidsHindiNurseryRhymes/videos",
+          avatar: "https://yt3.googleusercontent.com/E3Vbv3xX6efXMWKZ1gJtIZ2Xsun0PpwAbFoNY-qJk2zluOtygxasFB6vQQiqpXnMrX_DP5Rj3J0=s160-c-k-c0x00ffffff-no-rj",
+          description: "Hindi nursery rhymes featuring the sweet Ladoo character, perfect for little ones at home."
+        },
+        {
+          id: "shemaroo-kids",
+          name: "Shemaroo Kids Hindi",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@shemarookidshindi/playlists",
+          allVideosUrl: "https://www.youtube.com/@shemarookidshindi/videos",
+          avatar: "https://yt3.googleusercontent.com/dscXeQS_6DkNfXA-NFlqUifedD-RxGGLVM6_CKnz2NCHPNgpaLLF7BjQygy7GO6AY_5Nlt8sCaQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "A premium Hindi kids channel with nursery rhymes, folk songs, and entertaining children's content."
+        },
+        {
+          id: "acche-bache",
+          name: "Acche Bache Channel",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@AccheBacheChannel/playlists",
+          allVideosUrl: "https://www.youtube.com/@AccheBacheChannel/videos",
+          avatar: "https://yt3.googleusercontent.com/QgNhr2VBuocwQfP8ZznuXQ-nQbZcLNeDIVNEJxkunjTuJHN54GULsrDKOkDRQmh6V4V8TEUzAA=s160-c-k-c0x00ffffff-no-rj",
+          description: "Values-based songs and stories teaching kindness, honesty, and good manners to young children."
+        },
+        {
+          id: "mini-star-rhymes",
+          name: "Mini Star Rhymes Hindi",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@ministarrhymeshindi-n2r/playlists",
+          allVideosUrl: "https://www.youtube.com/@ministarrhymeshindi-n2r/videos",
+          avatar: "https://yt3.googleusercontent.com/yi76ykskH2SFmqMMslMSP1c4uRhsV4pLufPuZuip6DlobJslvevEmVlTHCeRh2A3s6-SbJeECQ=s160-c-k-c0x00ffffff-no-rj",
+          description: "Mini Star brings sparkling Hindi nursery rhymes and songs for the tiniest of learners."
+        },
+        {
+          id: "duggu-rhymes",
+          name: "Duggu Rhymes TV",
+          language: "hindi",
+          playlistsUrl: "https://www.youtube.com/@duggurhymestv/playlists",
+          allVideosUrl: "https://www.youtube.com/@duggurhymestv/videos",
+          avatar: "https://yt3.googleusercontent.com/vZkH2c8RpAWYfEJzO-4oj1LiTFBGJdY30MF4mM-TAIG6R8IKIrYCApeprEzL_98_a5mJ02fd=s160-c-k-c0x00ffffff-no-rj",
+          description: "Duggu makes Hindi learning fun with silly rhymes, songs, and colorful animated characters."
+        }
+      ];
+
+      // ── Avatar palette (cycles through per card index) ──────────────────────
+
+      const URDU_PALETTES = [
+        { bg: "#d49797", text: "#ffffff" },
+        { bg: "#c97878", text: "#ffffff" },
+        { bg: "#e8b8b8", text: "#7a3d3d" },
+        { bg: "#ffc4c3", text: "#8b4040" },
+        { bg: "#f3dedd", text: "#9a5050" },
+        { bg: "#b87a7a", text: "#ffffff" }
+      ];
+
+      const HINDI_PALETTES = [
+        { bg: "#687d70", text: "#ffffff" },
+        { bg: "#4a594a", text: "#ffffff" },
+        { bg: "#b0c3b7", text: "#3a4a3a" },
+        { bg: "#c9dcce", text: "#3a4a3a" },
+        { bg: "#8aab94", text: "#ffffff" },
+        { bg: "#5e7a65", text: "#ffffff" }
+      ];
+
+      // ── Build card DOM ───────────────────────────────────────────────────────
+
+      function buildCard(channel, colorIndex) {
+        const palettes = channel.language === "urdu" ? URDU_PALETTES : HINDI_PALETTES;
+        const palette = palettes[colorIndex % palettes.length];
+        const initial = channel.name.charAt(0).toUpperCase();
+
+        const card = document.createElement("article");
+        card.className = "channel-card";
+        card.dataset.lang = channel.language;
+        card.dataset.name = channel.name.toLowerCase();
+        card.dataset.desc = channel.description.toLowerCase();
+
+        const avatarWrap = document.createElement("div");
+        avatarWrap.className = "channel-avatar";
+        avatarWrap.style.background = palette.bg;
+
+        const fallback = document.createElement("span");
+        fallback.className = "avatar-fallback";
+        fallback.textContent = initial;
+        fallback.style.color = palette.text;
+        fallback.setAttribute("aria-hidden", "true");
+        avatarWrap.appendChild(fallback);
+
+        if (channel.avatar) {
+          const img = document.createElement("img");
+          img.src = channel.avatar;
+          img.alt = channel.name;
+          img.loading = "lazy";
+          img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;";
+          img.addEventListener("error", () => img.remove());
+          img.addEventListener("load",  () => { fallback.style.visibility = "hidden"; });
+          avatarWrap.appendChild(img);
+        }
+
+        // Name
+        const nameEl = document.createElement("h2");
+        nameEl.className = "channel-name";
+        nameEl.textContent = channel.name;
+
+        // Badge
+        const badge = document.createElement("span");
+        badge.className = `lang-badge ${channel.language}`;
+        badge.textContent = channel.language === "urdu" ? "Urdu" : "Hindi";
+
+        // Description
+        const desc = document.createElement("p");
+        desc.className = "channel-desc";
+        desc.textContent = channel.description;
+
+        // Buttons
+        const actions = document.createElement("div");
+        actions.className = "card-actions";
+
+        const visitBtn = document.createElement("a");
+        visitBtn.className = "btn-visit";
+        visitBtn.href = channel.allVideosUrl;
+        visitBtn.target = "_blank";
+        visitBtn.rel = "noopener noreferrer";
+        visitBtn.setAttribute("aria-label", `View videos from ${channel.name}`);
+        visitBtn.innerHTML = '<i class="fa-brands fa-youtube" aria-hidden="true" style="margin-right:0.4rem;"></i>View Videos';
+
+        const homeBtn = document.createElement("a");
+        homeBtn.className = "btn-home";
+        homeBtn.href = channel.playlistsUrl;
+        homeBtn.target = "_blank";
+        homeBtn.rel = "noopener noreferrer";
+        homeBtn.setAttribute("aria-label", `View ${channel.name} playlists`);
+        homeBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" style="margin-right:0.35rem; font-size:0.72rem;"></i>Playlists';
+
+        actions.appendChild(visitBtn);
+        actions.appendChild(homeBtn);
+
+        card.appendChild(avatarWrap);
+        card.appendChild(nameEl);
+        card.appendChild(badge);
+        card.appendChild(desc);
+        card.appendChild(actions);
+
+        return card;
+      }
+
+      // ── State & render ───────────────────────────────────────────────────────
+
+      const grid = document.getElementById("channelGrid");
+      const noResults = document.getElementById("noResults");
+      const resultsCount = document.getElementById("resultsCount");
+
+      function getActiveLang() {
+        return document.querySelector('.lang-pill[aria-selected="true"]')?.dataset.lang ?? "all";
+      }
+
+      function getSearchTerm() {
+        return document.getElementById("searchInput").value.trim().toLowerCase();
+      }
+
+      function renderChannels() {
+        const lang = getActiveLang();
+        const term = getSearchTerm();
+
+        const filtered = channels.filter(ch => {
+          const langMatch = lang === "all" || ch.language === lang;
+          const searchMatch = !term
+            || ch.name.toLowerCase().includes(term)
+            || ch.description.toLowerCase().includes(term)
+            || ch.language.includes(term);
+          return langMatch && searchMatch;
         });
 
-        preview.appendChild(thumbnail);
-        preview.appendChild(playButton);
-        wrapper.appendChild(preview);
+        grid.innerHTML = "";
 
-        const translation = document.createElement("div");
-        translation.className = "translation";
-        translation.textContent = song.description;
+        if (filtered.length === 0) {
+          noResults.classList.remove("hidden");
+          resultsCount.textContent = "";
+        } else {
+          noResults.classList.add("hidden");
+          let colorIndex = 0;
+          filtered.forEach(ch => {
+            grid.appendChild(buildCard(ch, colorIndex++));
+          });
+          const total = channels.length;
+          resultsCount.textContent = filtered.length === total
+            ? `Showing all ${total} channels`
+            : `Showing ${filtered.length} of ${total} channels`;
+        }
+      }
 
-        wrapper.appendChild(title);
-        // wrapper.appendChild(iframe);
-        wrapper.appendChild(translation);
-        grid.appendChild(wrapper);
-      });
+      // ── URL param support ────────────────────────────────────────────────────
 
-      //   filter for search
-      const filter = document.getElementById("categoryFilter");
+      function applyURLParams() {
+        const params = new URLSearchParams(window.location.search);
+        const langParam = params.get("lang")?.toLowerCase();
+        const qParam = params.get("q");
 
-      filter.addEventListener("change", () => {
-        const value = filter.value;
-        const allSongs = document.querySelectorAll(".song");
-        allSongs.forEach((song) => {
-          if (value === "all" || song.classList.contains(value)) {
-            song.style.display = "block";
-          } else {
-            song.style.display = "none";
-          }
+        if (langParam && ["urdu", "hindi", "all"].includes(langParam)) {
+          document.querySelectorAll(".lang-pill").forEach(p => {
+            const selected = p.dataset.lang === langParam;
+            p.setAttribute("aria-selected", String(selected));
+            p.tabIndex = selected ? 0 : -1;
+          });
+        }
+        if (qParam) {
+          document.getElementById("searchInput").value = qParam;
+        }
+      }
+
+      // ── Language pill interaction ────────────────────────────────────────────
+
+      function setupLangPills() {
+        const pills = document.querySelectorAll(".lang-pill");
+        pills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            pills.forEach(p => { p.setAttribute("aria-selected", "false"); p.tabIndex = -1; });
+            pill.setAttribute("aria-selected", "true");
+            pill.tabIndex = 0;
+            renderChannels();
+          });
+
+          pill.addEventListener("keydown", e => {
+            const arr = Array.from(pills);
+            const idx = arr.indexOf(pill);
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault();
+              arr[(idx + 1) % arr.length].focus();
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault();
+              arr[(idx - 1 + arr.length) % arr.length].focus();
+            }
+          });
         });
+      }
+
+      // ── Search input ─────────────────────────────────────────────────────────
+
+      let searchTimeout;
+      document.getElementById("searchInput").addEventListener("input", () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(renderChannels, 120);
       });
+
+      // ── Mobile menu ──────────────────────────────────────────────────────────
 
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+
       function openMobileMenu() {
         if (!mobileMenuOverlay) return;
         mobileMenuOverlay.classList.remove("hidden");
         requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
       }
+
       function closeMobileMenu() {
         if (!mobileMenuOverlay) return;
         mobileMenuOverlay.classList.remove("open");
         setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
       }
+
       if (mobileToggle && mobileMenuOverlay) {
         mobileToggle.addEventListener("click", openMobileMenu);
-        mobileMenuOverlay.addEventListener("click", (e) => {
+        mobileMenuOverlay.addEventListener("click", e => {
           if (e.target === mobileMenuOverlay) closeMobileMenu();
         });
         const closeBtn = mobileMenuOverlay.querySelector(".mobile-menu__close");
         const menuLinks = mobileMenuOverlay.querySelectorAll(".mobile-menu__links a");
         if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-        menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
+        menuLinks.forEach(link => link.addEventListener("click", closeMobileMenu));
       }
+
+      // ── Init ─────────────────────────────────────────────────────────────────
+
+      applyURLParams();
+      setupLangPills();
+      renderChannels();
+
+      // ── Floating hearts ──────────────────────────────────────────────────────
 
       window.addEventListener("load", () => {
         document.body.classList.add("loaded");
-
-        // pink heart images from Icons8
-const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
-
-
-for (let i = 0; i < 15; i++) {
-  const icon = document.createElement("img");
-  icon.src = iconSrc;
-  icon.classList.add("heart");
-  icon.style.left = Math.random() * 100 + "vw";
-  icon.style.animationDelay = Math.random() * 10 + "s";
-  icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
-  icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
-  document.body.appendChild(icon);
-}
-
+        const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+        for (let i = 0; i < 15; i++) {
+          const icon = document.createElement("img");
+          icon.src = iconSrc;
+          icon.classList.add("heart");
+          icon.alt = "";
+          icon.setAttribute("aria-hidden", "true");
+          icon.style.left = Math.random() * 100 + "vw";
+          icon.style.animationDelay = Math.random() * 10 + "s";
+          icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+          icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+          document.body.appendChild(icon);
+        }
       });
     </script>
-    <script src="/assets/cart.js"></script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>

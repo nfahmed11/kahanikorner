@@ -56,6 +56,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/navbar.css" />
 
     <style>
       /* --- THEME VARIABLES (same as landing) --- */
@@ -247,6 +248,108 @@
         text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
           -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
       }
+
+      /* ---- FREE RESOURCES DROPDOWN ---- */
+      .nav-dropdown { position: relative; }
+      .nav-dropdown__trigger {
+        background: none; border: none; padding: 0;
+        font-family: inherit; font-size: inherit; font-weight: inherit;
+        text-transform: inherit; letter-spacing: inherit; color: inherit;
+        cursor: pointer; display: inline-flex; align-items: center; gap: 0.3em;
+      }
+      .nav-dropdown__trigger:hover {
+        color: var(--soft-blush); font-weight: 700;
+        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+      }
+      .nav-dropdown__trigger:focus-visible { outline: 2px solid var(--deep-teal); outline-offset: 3px; border-radius: 4px; }
+      .nav-dropdown__chevron { font-size: 0.65em; transition: transform 0.22s ease; }
+      .nav-dropdown.is-open .nav-dropdown__chevron,
+      .nav-dropdown:hover .nav-dropdown__chevron,
+      .nav-dropdown:focus-within .nav-dropdown__chevron { transform: rotate(180deg); }
+      .dropdown-menu {
+        position: absolute; top: calc(100% + 14px); left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        min-width: 230px; background: #fff;
+        border: 2px solid rgba(176, 195, 183, 0.7); border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(74, 89, 74, 0.14);
+        padding: 0.45rem 0.4rem 0.55rem; opacity: 0; pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
+      }
+      .dropdown-menu::before {
+        content: ""; position: absolute; top: -18px; left: 0; right: 0; height: 18px;
+      }
+      .nav-dropdown:hover .dropdown-menu,
+      .nav-dropdown:focus-within .dropdown-menu,
+      .nav-dropdown.is-open .dropdown-menu {
+        opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+      }
+      .dropdown-menu__header {
+        padding: 0.6rem 0.85rem 0.5rem;
+        border-bottom: 1px solid rgba(176, 195, 183, 0.5); margin-bottom: 0.3rem;
+      }
+      .dropdown-menu__title {
+        display: block; font-family: "Grandstander", cursive; font-size: 0.77rem;
+        font-weight: 800; color: var(--granite); text-transform: none; letter-spacing: 0; margin-bottom: 0.15rem;
+      }
+      .dropdown-menu__desc { display: block; font-size: 0.71rem; color: var(--muted); text-transform: none; letter-spacing: 0; line-height: 1.4; }
+      .dropdown-menu__item {
+        display: flex; align-items: center; gap: 0.55rem;
+        padding: 0.52rem 0.85rem; font-size: 0.84rem; font-weight: 500;
+        text-transform: none; letter-spacing: 0; color: var(--granite); border-radius: 10px;
+        transition: background 0.15s, color 0.15s, transform 0.1s;
+      }
+      .dropdown-menu__item i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
+      .dropdown-menu__item:hover, .dropdown-menu__item:focus-visible {
+        background: var(--soft-blush); color: var(--granite); transform: translateX(3px); outline: none;
+      }
+      .dropdown-menu__item--submit {
+        margin-top: 0.3rem; padding-top: 0.6rem; color: var(--deep-teal); font-weight: 700;
+        border-top: 1px dashed rgba(176, 195, 183, 0.5);
+      }
+      .dropdown-menu__item--submit:hover { background: var(--mint); color: var(--granite); }
+      /* Mobile sliding panel */
+      .mobile-free-resources-btn {
+        width: 100%; display: flex; align-items: center; justify-content: space-between;
+        background: none; border: none; border-bottom: 1px dashed var(--white-smoke);
+        padding: 0.75rem 0.25rem; font-family: inherit; font-size: 0.95rem;
+        text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+        color: var(--granite); cursor: pointer; transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-free-resources-btn:hover { color: var(--cotton-rose); transform: translateX(3px); }
+      .mobile-menu__body { flex: 1; position: relative; overflow: hidden; min-height: 0; }
+      .mobile-panel {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        overflow-y: auto; -webkit-overflow-scrolling: touch;
+        transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1), opacity 0.25s ease;
+      }
+      .mobile-panel--main { transform: translateX(0); opacity: 1; }
+      .mobile-panel--main.slide-away { transform: translateX(-30%); opacity: 0; pointer-events: none; }
+      .mobile-panel--resources { transform: translateX(100%); opacity: 0; pointer-events: none; }
+      .mobile-panel--resources.slide-in { transform: translateX(0); opacity: 1; pointer-events: auto; }
+      .mobile-panel__back {
+        display: inline-flex; align-items: center; gap: 0.45rem;
+        background: none; border: none; color: var(--deep-teal); font-family: inherit;
+        font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+        cursor: pointer; padding: 0.2rem 0 0.2rem 0.1rem; margin-bottom: 0.85rem;
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-panel__back:hover { color: var(--granite); transform: translateX(-2px); }
+      .mobile-panel__title {
+        font-family: "Grandstander", cursive; font-size: 1rem; font-weight: 800;
+        color: var(--granite); margin: 0 0 0.65rem; padding-bottom: 0.65rem;
+        border-bottom: 2px solid var(--white-smoke);
+      }
+      .mobile-resources-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+      .mobile-resources-links li a {
+        display: flex; align-items: center; gap: 0.55rem;
+        padding: 0.75rem 0.25rem; font-size: 0.95rem; font-weight: 500;
+        color: var(--granite); border-bottom: 1px dashed var(--white-smoke);
+        transition: color 0.2s, transform 0.1s;
+      }
+      .mobile-resources-links li a i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
+      .mobile-resources-links li:last-child a { border-bottom: none; }
+      .mobile-resources-links li a:hover { color: var(--cotton-rose); transform: translateX(3px); }
 
       .mobile-toggle {
         display: none;
@@ -841,18 +944,8 @@
         grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 2rem;
         padding-bottom: 4rem;
-      }
-
-      @media (min-width: 640px) {
-        .product-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .product-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
+        max-width: 380px;
+        margin: 0 auto;
       }
 
       .product-card {
@@ -1391,101 +1484,8 @@
   </head>
 
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-          <span>Shop Now</span>
-          <span>•</span>
-          <span>Free Shipping on All US Orders</span>
-          <span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Header (same as landing) -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </a>
-
-        <nav class="nav">
-          <a href="products.html">Shop</a>
-          <a href="subscribe.html" class="nav-active">Subscribe</a>
-          <a href="/resources/resources.html">Resources</a>
-          <a href="index.html#faq">Help</a>
-          <a href="index.html#contact">Contact</a>
-        </nav>
-
-        <button class="cart-btn-landing" id="cart-btn">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-              <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <ul class="mobile-menu__links">
-          <li><a href="products.html">Shop</a></li>
-          <li><a href="subscribe.html" class="nav-active">Subscribe</a></li>
-          <li><a href="/resources/resources.html">Resources</a></li>
-          <li><a href="index.html#faq">Help</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
 
     <!-- MAIN SHOP CONTENT -->
     <main class="shop-main">
@@ -1619,47 +1619,8 @@
 
     <div id="contact"></div>
 
-    <!-- Footer (same vibe as landing) -->
-    <footer class="footer">
-      <a href="https://kahanikorner.com" class="brand" style="justify-content:center;margin-bottom:1rem;">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-        </picture>
-      </a>
-      <p class="footer-tagline">
-        Rooted in culture, topped with sweetness, made for little hearts.
-      </p>
-
-      <div class="social-icons">
-        <a
-          href="https://www.instagram.com/kahani.korner/"
-          target="_blank"
-          aria-label="Instagram">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"
-            alt="Instagram" />
-        </a>
-        <a
-          href="https://facebook.com/kahanikorner"
-          target="_blank"
-          aria-label="Facebook">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
-            alt="Facebook" />
-        </a>
-        <a
-          href="https://tiktok.com/@kahanikorner"
-          target="_blank"
-          aria-label="TikTok">
-          <img
-            src="https://img.icons8.com/ios-filled/50/000000/tiktok.png"
-            alt="TikTok" />
-        </a>
-      </div>
-
-      <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-    </footer>
+    <!-- Edit footer in one place only: /components/footer.html -->
+    <div id="footer-placeholder"></div>
 
     <script>
       // --- STRIPE URLS ---
@@ -2205,5 +2166,7 @@
 
       window.addEventListener("load", init);
     </script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>

@@ -208,91 +208,9 @@
   </style>
 </head>
 <body>
-  <!-- Top Promo Bar -->
-  <div class="topbar">
-    <div class="topbar__inner">
-      <div class="topbar__track">
-        <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-        <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-        <span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="header">
-    <div class="header__inner">
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <a href="https://kahanikorner.com" class="brand">
-        <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-          <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-        </picture>
-      </a>
-      <nav class="nav">
-        <a href="/products.html">Shop</a>
-        <a href="/subscribe.html">Subscribe</a>
-        <a href="/resources/resources.html">Resources</a>
-        <a href="/#faq">Help</a>
-        <a href="/#contact">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-        </button>
-      </div>
-    </div>
-  </header>
+  <!-- Edit navbar in one place only: /components/navbar.html -->
+  <div id="navbar-placeholder"></div>
   <div class="header-spacer" aria-hidden="true"></div>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-    <nav class="mobile-menu">
-      <div class="mobile-menu__header">
-        <span class="mobile-menu__brand">
-          <picture>
-            <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-            <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
-          </picture>
-        </span>
-        <button class="mobile-menu__close" aria-label="Close menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <ul class="mobile-menu__links">
-        <li><a href="/products.html">Shop</a></li>
-        <li><a href="/subscribe.html">Subscribe</a></li>
-        <li><a href="/resources/resources.html">Resources</a></li>
-        <li><a href="/#faq">Help</a></li>
-        <li><a href="/#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Cart Overlay -->
-  <div id="cart-overlay" class="cart-overlay hidden">
-    <div class="cart-sidebar">
-      <div class="cart-header">
-        <h2>Your Cart</h2>
-        <button id="close-cart" class="close-btn" aria-label="Close cart">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div id="cart-items" class="cart-items">
-        <div class="empty-cart-msg">Your cart is empty.</div>
-      </div>
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>Total</span>
-          <span id="cart-total-amount">$0.00</span>
-        </div>
-        <button id="checkout-btn" class="checkout-btn">Checkout</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Main Content -->
   <main class="about-main">
@@ -343,27 +261,8 @@
     </div>
   </main>
 
-  <footer class="footer">
-    <a href="/" aria-label="Kahani Korner home">
-      <picture>
-        <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-        <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="footer-brand-logo" />
-      </picture>
-    </a>
-    <p>Rooted in culture, topped with sweetness, made for little hearts.</p>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/kahani.korner/" target="_blank" aria-label="Instagram">
-        <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram" />
-      </a>
-      <a href="https://facebook.com/kahanikorner" target="_blank" aria-label="Facebook">
-        <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook" />
-      </a>
-      <a href="https://tiktok.com/@kahanikorner" target="_blank" aria-label="TikTok">
-        <img src="https://img.icons8.com/ios-filled/50/000000/tiktok.png" alt="TikTok" />
-      </a>
-    </div>
-    <p>&copy; 2026 Kahani Korner. All rights reserved.</p>
-  </footer>
+  <!-- Edit footer in one place only: /components/footer.html -->
+  <div id="footer-placeholder"></div>
 
   <script>
     const mobileToggle = document.getElementById("mobile-toggle");
@@ -389,6 +288,7 @@
       menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
     }
   </script>
-  <script src="/assets/cart.js"></script>
+  <script src="/assets/js/navbar-loader.js" defer></script>
+  <script src="/assets/js/footer-loader.js" defer></script>
 </body>
 </html>
