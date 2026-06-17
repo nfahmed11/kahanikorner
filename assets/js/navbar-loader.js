@@ -100,15 +100,9 @@
     var trigger = document.getElementById('nav-dropdown-trigger');
 
     if (trigger) {
-      trigger.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var isOpen = wrap.classList.toggle('is-open');
-        trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
       trigger.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
           wrap.classList.remove('is-open');
-          trigger.setAttribute('aria-expanded', 'false');
           trigger.focus();
         }
       });

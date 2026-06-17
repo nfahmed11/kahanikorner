@@ -18,164 +18,72 @@
     </script>
 
     <!-- Google tag to track analytics (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+      function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-N97Z02BGG4");
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Urdu Learning on Social Media — Kahani Korner</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/assets/images/homepage/logo2.png" />
+    <link rel="icon" type="image/png" href="/assets/images/homepage/logo2.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
     <style>
-      /* ── Platform card banners ──────────────────────────────────────── */
-      .tt-banner {
-        width: 100%;
-        height: 180px;
-        background: linear-gradient(135deg, #010101 60%, #1a1a2e 100%);
+      /* ── Filters ──────────────────────────────────────────────────────── */
+      .filter-rows {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        position: relative;
-        overflow: hidden;
+        gap: 0.85rem;
+        margin-bottom: 1.75rem;
       }
-      .tt-banner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(
-            circle at 70% 30%,
-            rgba(105, 201, 208, 0.18) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            circle at 30% 70%,
-            rgba(255, 0, 80, 0.15) 0%,
-            transparent 60%
-          );
-      }
-      .ig-banner {
-        width: 100%;
-        height: 180px;
-        background: linear-gradient(
-          135deg,
-          #405de6 0%,
-          #833ab4 35%,
-          #c13584 60%,
-          #e1306c 80%,
-          #fd1d1d 100%
-        );
+      .filter-row {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .ig-banner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(
-            circle at 75% 25%,
-            rgba(255, 255, 255, 0.12) 0%,
-            transparent 55%
-          ),
-          radial-gradient(
-            circle at 25% 75%,
-            rgba(255, 255, 255, 0.08) 0%,
-            transparent 55%
-          );
-      }
-      .banner-icon {
-        font-size: 1.8rem;
-        color: #fff;
-        z-index: 1;
-        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
-      }
-      .banner-handle {
-        font-family: "Open Sans", sans-serif;
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: #fff;
-        z-index: 1;
-        letter-spacing: 0.02em;
-      }
-      .tt-badge {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        background: linear-gradient(135deg, #69c9d0, #ee1d52);
-        border-radius: 50px;
-        padding: 2px 10px;
-        font-size: 0.63rem;
-        font-weight: 700;
-        color: #fff;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        z-index: 1;
-      }
-      .ig-badge {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        border-radius: 50px;
-        padding: 2px 10px;
-        font-size: 0.63rem;
-        font-weight: 700;
-        color: #fff;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        z-index: 1;
-      }
-
-      /* ── Filter bar ─────────────────────────────────────────────────── */
-      .filter-container {
-        display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
-        align-items: center;
-        margin-bottom: 1.5rem;
       }
-      .filter-container select {
-        flex: 1;
-        min-width: 160px;
+      .filter-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--hookers-green, #687d70);
+        white-space: nowrap;
+      }
+      #categoryFilter {
+        appearance: none;
+        -webkit-appearance: none;
+        background: var(--white-smoke, #f3f1f0)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23687d70' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E")
+          no-repeat right 0.85rem center;
+        border: 2px solid var(--ash-grey, #b0c3b7);
+        border-radius: 999px;
+        padding: 0.5rem 2.4rem 0.5rem 1rem;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--feldgrau, #4a594a);
+        cursor: pointer;
+        outline: none;
+        min-width: 200px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      #categoryFilter:focus {
+        border-color: var(--hookers-green, #687d70);
+        box-shadow: 0 0 0 3px rgba(104, 125, 112, 0.15);
       }
 
       /* ── Category sections ──────────────────────────────────────────── */
-      .category-section {
-        margin-bottom: 2rem;
-      }
+      .category-section { margin-bottom: 2rem; }
       .category-heading {
         font-family: "Grandstander", cursive;
         font-size: 1.15rem;
@@ -189,182 +97,230 @@
         padding-bottom: 0.5rem;
       }
       .category-note {
-        font-family: "Open Sans", sans-serif;
         font-size: 0.82rem;
         color: #888;
         margin: 0 0 1rem;
         font-style: italic;
       }
+
+      /* ── Channel Grid ── */
+      .channel-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        width: 100%;
+      }
+      @media (max-width: 1100px) { .channel-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 768px)  { .channel-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+      @media (max-width: 440px)  { .channel-grid { grid-template-columns: 1fr; } }
+
+      /* ── Channel Card ── */
+      .channel-card {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(74, 89, 74, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 1.25rem 1.25rem;
+        gap: 0.55rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1.5px solid rgba(176, 195, 183, 0.45);
+        text-align: center;
+      }
+      .channel-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(74, 89, 74, 0.18);
+      }
+
+      /* ── Avatar ── */
+      .channel-avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-size: 1.75rem;
+        font-weight: 800;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        position: relative;
+      }
+      .channel-avatar img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      .channel-avatar .avatar-fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Grandstander", cursive;
+        font-size: 1.75rem;
+        font-weight: 800;
+      }
+
+      /* ── Platform badges ── */
+      .badge-row {
+        display: flex;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .platform-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.18rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .badge-ig {
+        background: linear-gradient(135deg, #833ab4, #c13584, #fd1d1d);
+        color: #fff;
+      }
+      .badge-tt {
+        background: #010101;
+        color: #fff;
+      }
+
+      /* ── Card Body ── */
+      .channel-name {
+        font-family: "Grandstander", cursive;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--feldgrau, #4a594a);
+        margin: 0;
+        line-height: 1.3;
+      }
+      .channel-desc {
+        font-size: 0.8rem;
+        color: var(--muted, #5c6b68);
+        line-height: 1.55;
+        margin: 0;
+        flex: 1;
+      }
+
+      /* ── Card Buttons ── */
+      .card-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        width: 100%;
+        margin-top: 0.4rem;
+      }
+      .btn-visit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        width: 100%;
+        padding: 0.52rem 0.75rem;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 999px;
+        text-align: center;
+        text-decoration: none;
+        transition: opacity 0.2s ease, transform 0.15s ease;
+        cursor: pointer;
+      }
+      .btn-visit:hover { opacity: 0.85; transform: translateY(-1px); }
+      .btn-ig-visit {
+        background: linear-gradient(135deg, #833ab4, #c13584, #fd1d1d);
+        color: #fff;
+      }
+      .btn-tt-visit {
+        background: #010101;
+        color: #fff;
+      }
+      .btn-single {
+        background: var(--hookers-green, #687d70);
+        color: #fff;
+      }
+      .btn-single:hover { background: var(--feldgrau, #4a594a); }
+
+      /* ── No results ── */
+      .no-results {
+        text-align: center;
+        color: var(--muted, #5c6b68);
+        font-size: 0.95rem;
+        padding: 3rem 1rem;
+        width: 100%;
+      }
+      .no-results i {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+        display: block;
+        color: var(--ash-gray, #b0c3b7);
+      }
+
+      @media (max-width: 600px) {
+        .filter-rows { padding: 0 0.5rem; }
+      }
     </style>
   </head>
   <body>
-    <!-- Top Promo Bar -->
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__track">
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-          <span>Shop Now</span><span>•</span
-          ><span>Free Shipping on All US Orders</span><span>•</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-      <div class="header__inner">
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <a href="https://kahanikorner.com" class="brand">
-          <picture>
-            <source
-              media="(max-width: 768px)"
-              srcset="/assets/images/homepage/logo2.png" />
-            <img
-              src="/assets/images/homepage/logo.png"
-              alt="Kahani Korner"
-              class="brand-logo" />
-          </picture>
-        </a>
-        <nav class="nav">
-          <a href="/products.html">Shop</a>
-          <a href="/subscribe.html">Subscribe</a>
-          <a href="/resources/resources.html" class="nav-active">Resources</a>
-          <a href="/#faq">Help</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-        <div class="header-actions">
-          <button class="icon-btn-circle" id="cart-btn" aria-label="Open cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-badge-landing hidden" id="cart-badge">0</span>
-          </button>
-        </div>
-      </div>
-    </header>
+    <!-- Edit navbar in one place only: /components/navbar.html -->
+    <div id="navbar-placeholder"></div>
     <div class="header-spacer" aria-hidden="true"></div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay hidden">
-      <nav class="mobile-menu">
-        <div class="mobile-menu__header">
-          <span class="mobile-menu__brand">
-            <picture>
-              <source
-                media="(max-width: 768px)"
-                srcset="/assets/images/homepage/logo2.png" />
-              <img
-                src="/assets/images/homepage/logo.png"
-                alt="Kahani Korner"
-                class="brand-logo" />
-            </picture>
-          </span>
-          <button class="mobile-menu__close" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <ul class="mobile-menu__links">
-          <li><a href="/products.html">Shop</a></li>
-          <li><a href="/subscribe.html">Subscribe</a></li>
-          <li>
-            <a href="/resources/resources.html" class="nav-active">Resources</a>
-          </li>
-          <li><a href="/#faq">Help</a></li>
-          <li><a href="/#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay hidden">
-      <div class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Your Cart</h2>
-          <button id="close-cart" class="close-btn" aria-label="Close cart">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div id="cart-items" class="cart-items">
-          <div class="empty-cart-msg">Your cart is empty.</div>
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total</span>
-            <span id="cart-total-amount">$0.00</span>
-          </div>
-          <button id="checkout-btn" class="checkout-btn">Checkout</button>
-        </div>
-      </div>
-    </div>
 
     <div class="container">
       <h1>Urdu Learning on Social Media</h1>
       <p class="subheading">
         The most complete Urdu-learning social media directory for parents,
-        teachers, homeschoolers, and diaspora families — combining the best
-        Instagram and TikTok accounts in one place.
+        teachers, homeschoolers, and diaspora families — the best Instagram and
+        TikTok accounts all in one place.
       </p>
 
-      <div class="filter-container">
-        <select id="categoryFilter">
-          <option value="all">All Categories</option>
-          <option value="Kids">📚 Kids</option>
-          <option value="Beginners">🌍 Beginners</option>
-          <option value="Vocabulary">🗣️ Vocabulary</option>
-          <option value="Stories">📖 Stories</option>
-          <option value="Culture">🇵🇰 Culture</option>
-          <option value="Songs">🎵 Songs &amp; Rhymes</option>
-          <option value="Tutoring">🎓 Classes &amp; Tutoring</option>
-        </select>
-        <select id="platformFilter">
-          <option value="all">All Platforms</option>
-          <option value="Instagram">📸 Instagram</option>
-          <option value="TikTok">🎵 TikTok</option>
-        </select>
+      <div class="filter-rows">
+        <div class="filter-row">
+          <label class="filter-label" for="categoryFilter">Category</label>
+          <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="Kids">📚 Kids</option>
+            <option value="Beginners">🌍 Beginners</option>
+            <option value="Vocabulary">🗣️ Vocabulary</option>
+            <option value="Stories">📖 Stories</option>
+            <option value="Culture">🇵🇰 Culture</option>
+            <option value="Songs">🎵 Songs &amp; Rhymes</option>
+            <option value="Tutoring">🎓 Classes &amp; Tutoring</option>
+          </select>
+        </div>
+        <div class="filter-row">
+          <div class="lang-pills" role="tablist" aria-label="Filter by platform">
+            <button class="lang-pill" role="tab" aria-selected="true"  data-plat="all"       tabindex="0">All</button>
+            <button class="lang-pill" role="tab" aria-selected="false" data-plat="Instagram" tabindex="-1"><i class="fa-brands fa-instagram"></i> Instagram</button>
+            <button class="lang-pill" role="tab" aria-selected="false" data-plat="TikTok"    tabindex="-1"><i class="fa-brands fa-tiktok"></i> TikTok</button>
+          </div>
+        </div>
       </div>
 
       <div id="sections-container"></div>
     </div>
-    <!-- close .container -->
 
     <!-- Edit footer in one place only: /components/footer.html -->
     <div id="footer-placeholder"></div>
 
     <script>
-      /* ── Mobile menu ─────────────────────────────────────────────────────── */
-      const mobileToggle = document.getElementById("mobile-toggle");
-      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
-      function openMobileMenu() {
-        if (!mobileMenuOverlay) return;
-        mobileMenuOverlay.classList.remove("hidden");
-        requestAnimationFrame(() => mobileMenuOverlay.classList.add("open"));
-      }
-      function closeMobileMenu() {
-        if (!mobileMenuOverlay) return;
-        mobileMenuOverlay.classList.remove("open");
-        setTimeout(() => mobileMenuOverlay.classList.add("hidden"), 300);
-      }
-      if (mobileToggle && mobileMenuOverlay) {
-        mobileToggle.addEventListener("click", openMobileMenu);
-        mobileMenuOverlay.addEventListener("click", (e) => {
-          if (e.target === mobileMenuOverlay) closeMobileMenu();
-        });
-        const closeBtn = mobileMenuOverlay.querySelector(".mobile-menu__close");
-        const menuLinks = mobileMenuOverlay.querySelectorAll(
-          ".mobile-menu__links a",
-        );
-        if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-        menuLinks.forEach((link) =>
-          link.addEventListener("click", closeMobileMenu),
-        );
-      }
-
       window.addEventListener("load", () => {
         document.body.classList.add("loaded");
 
-        /* ── Master account list ───────────────────────────────────────────── */
+        /* ── Master account list ─────────────────────────────────────────── */
         const accounts = [
           // ── 📚 KIDS ──────────────────────────────────────────────────────
           {
@@ -373,8 +329,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdumadrasa",
             category: "Kids",
-            description:
-              "Urdu books and podcast-style content for bilingual kids; diaspora-focused learning resources.",
+            avatar: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/482822074_515629734914593_1474657977856509443_n.jpg",
+            description: "Urdu books and podcast-style content for bilingual kids; diaspora-focused learning resources.",
           },
           {
             name: "Urdu Madrasa | Urdu For Kids",
@@ -382,8 +338,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@urdumadrasa",
             category: "Kids",
-            description:
-              "Urdu books and podcast-style content for bilingual kids; diaspora-focused learning resources.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-avt-0068/4b7ca3619a1728ec99360f0ef6f236e9~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Urdu books and podcast-style content for bilingual kids; diaspora-focused learning resources.",
           },
           {
             name: "Urdu PreSchool",
@@ -391,8 +347,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdupreschool",
             category: "Kids",
-            description:
-              "Fun Urdu content for babies, toddlers, and their parents — learning through play and songs.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/340347376_772981537594953_3168525158051150881_n.jpg",
+            description: "Fun Urdu content for babies, toddlers, and their parents — learning through play and songs.",
           },
           {
             name: "Harf Harf Pehchan",
@@ -400,8 +356,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/harfharfpehchan",
             category: "Kids",
-            description:
-              "Letter-by-letter Urdu alphabet recognition content for early readers and preschoolers.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.82787-19/654110039_18085208666521944_6636155854657083405_n.jpg",
+            description: "Letter-by-letter Urdu alphabet recognition content for early readers and preschoolers.",
           },
           {
             name: "Buzzing Bees Classroom",
@@ -409,8 +365,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/buzzingbeesclassroom",
             category: "Kids",
-            description:
-              "Interactive classroom-style Urdu lessons and activities for young learners.",
+            avatar: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/395793701_919433289512859_8033679685161473375_n.jpg",
+            description: "Interactive classroom-style Urdu lessons and activities for young learners.",
           },
           {
             name: "Homeschooling STEM Hub",
@@ -418,8 +374,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/homeschoolingstemhub",
             category: "Kids",
-            description:
-              "Urdu-integrated homeschooling resources combining STEM and language learning.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.75761-19/502226568_18035390555649450_9146798962098367183_n.jpg",
+            description: "Urdu-integrated homeschooling resources combining STEM and language learning.",
           },
           {
             name: "Urdu Kids Club",
@@ -427,8 +383,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdukidsclub",
             category: "Kids",
-            description:
-              "Printable Urdu worksheets and themed learning packs for children aged 3–7.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/495246554_17846272515469000_1186837302019450571_n.jpg",
+            description: "Printable Urdu worksheets and themed learning packs for children aged 3–7.",
           },
           {
             name: "Urdu with Little Ele",
@@ -436,8 +392,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urduwithlittleele",
             category: "Kids",
-            description:
-              "Early Urdu learning through stories and playful educational content for young children.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/464812797_8467647626637729_1254824902674471928_n.jpg",
+            description: "Early Urdu learning through stories and playful educational content for young children.",
           },
           {
             name: "Learning Urdu",
@@ -445,8 +401,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/learningurdukids",
             category: "Kids",
-            description:
-              "Urdu learning content designed for kids and diaspora families.",
+            avatar: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/348856500_1417212575740527_2991526140523325850_n.jpg",
+            description: "Urdu learning content designed for kids and diaspora families.",
           },
           {
             name: "Urdu Kids Store",
@@ -454,8 +410,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@urdukidsstore",
             category: "Kids",
-            description:
-              "Educational Urdu kids content including poems, songs, and early learning videos.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-avt-0068/cf9cf0febb4e40fe804912bd90664df3~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Educational Urdu kids content including poems, songs, and early learning videos.",
           },
           {
             name: "Kuukuu TV | Urdu Stories for Kids",
@@ -463,8 +419,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@kuukuutv",
             category: "Kids",
-            description:
-              "Animated and narrated Urdu moral stories that captivate children from the first watch.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-avt-0068/0f24e7cb0f1dd85075956b231e2303fe~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Animated and narrated Urdu moral stories that captivate children from the first watch.",
           },
 
           // ── 🌍 BEGINNERS ─────────────────────────────────────────────────
@@ -474,8 +430,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdu_tech",
             category: "Beginners",
-            description:
-              "Practical, fun Urdu lessons designed for expats and diaspora learners.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/302371832_842963937084772_1314358820106713996_n.jpg",
+            description: "Practical, fun Urdu lessons designed for expats and diaspora learners.",
           },
           {
             name: "Learn Urdu with me | دادی جان",
@@ -483,8 +439,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/learn_urdu_with_me",
             category: "Beginners",
-            description:
-              "Diaspora-focused Urdu learning community across Instagram and TikTok.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/472623650_925538843022372_1084643465030580222_n.jpg",
+            description: "Diaspora-focused Urdu learning community across Instagram and TikTok.",
           },
           {
             name: "Alif Say Urdu By Zara",
@@ -492,8 +448,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/alifsayurdubyzara",
             category: "Beginners",
-            description:
-              "Conversational Urdu, cultural integration, and simplified learning content.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/126199022_130755985259818_1648852819910848164_n.jpg",
+            description: "Conversational Urdu, cultural integration, and simplified learning content.",
           },
           {
             name: "Urdu Cove (Annie)",
@@ -501,8 +457,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdukacove",
             category: "Beginners",
-            description:
-              "Urdu podcast, YouTube channel, and beginner-friendly Alif Bay Pay learning series.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/255080159_205077101668300_6337528632140068081_n.jpg",
+            description: "Urdu podcast, YouTube channel, and beginner-friendly Alif Bay Pay learning series.",
           },
           {
             name: "Urdu with Chachu",
@@ -510,8 +466,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urduwithchachu",
             category: "Beginners",
-            description:
-              'Fun "Word of the Day" style Urdu content — great for families and casual learners.',
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/347448978_1398714300907285_4528483134390822699_n.jpg",
+            description: "Fun \"Word of the Day\" style Urdu content — great for families and casual learners.",
           },
           {
             name: "Alif Se Yeh — Urdu Hub",
@@ -519,8 +475,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/alifseyeh",
             category: "Beginners",
-            description:
-              "Urdu courses, translation, poetry, and a full spoken Urdu ecosystem.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/117950102_165285998476613_3023396226293376444_n.jpg",
+            description: "Urdu courses, translation, poetry, and a full spoken Urdu ecosystem.",
           },
           {
             name: "Welcome Urdu",
@@ -528,8 +484,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/welcomeurdu",
             category: "Beginners",
-            description:
-              "Urdu quizzes, shayari, and educational content for learners at all levels.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/163427284_454167622480676_609297588241050078_n.jpg",
+            description: "Urdu quizzes, shayari, and educational content for learners at all levels.",
           },
           {
             name: "Let's Talk Urdu",
@@ -537,8 +493,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/letstalkurdu",
             category: "Beginners",
-            description:
-              'Beginner-friendly Urdu videos and accessible "Urdu Made Easy" content.',
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/439447554_1135521884306194_284690070213614080_n.jpg",
+            description: "Beginner-friendly Urdu videos and accessible \"Urdu Made Easy\" content.",
           },
           {
             name: "Learn Urdu with Me",
@@ -546,8 +502,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@learnurduwithme",
             category: "Beginners",
-            description:
-              "Beginner-friendly Urdu lessons, phrases, and playlists for diaspora learners.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-maliva-avt-0068/e6503481a545012b5b9879534473430e~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Beginner-friendly Urdu lessons, phrases, and playlists for diaspora learners.",
           },
           {
             name: "Learn Urdu",
@@ -555,8 +511,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@learn.urdu0",
             category: "Beginners",
-            description:
-              "Short-form beginner Urdu lessons with a friendly, community-style teaching approach.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/4471850d64f0641c115927f97e951500~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Short-form beginner Urdu lessons with a friendly, community-style teaching approach.",
           },
           {
             name: "Cassandra Learns Urdu",
@@ -564,8 +520,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@cassandra_learns_",
             category: "Beginners",
-            description:
-              "Non-native learner sharing her Urdu learning journey — relatable for absolute beginners.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/b5cbde6e2806f4153e6083602d53f54b~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Non-native learner sharing her Urdu learning journey — relatable for absolute beginners.",
           },
 
           // ── 🗣️ VOCABULARY ────────────────────────────────────────────────
@@ -575,8 +531,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/rekhtalearning",
             category: "Vocabulary",
-            description:
-              "Premium Urdu language and literature learning platform with courses and live classes.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/409053643_363065253239264_1401186473789338658_n.jpg",
+            description: "Premium Urdu language and literature learning platform with courses and live classes.",
           },
           {
             name: "Words in Urdu",
@@ -584,8 +540,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/wordsinurdu",
             category: "Vocabulary",
-            description:
-              "Daily Urdu vocabulary posts for consistent, bite-sized language building.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/141015040_1059081901163811_3382065929959217687_n.jpg",
+            description: "Daily Urdu vocabulary posts for consistent, bite-sized language building.",
           },
           {
             name: "Zari Jafri | Urdu Enthusiast",
@@ -593,8 +549,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/zari_jafrii",
             category: "Vocabulary",
-            description:
-              "Urdu vocabulary, phrases, and expressive language content for curious learners.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.82787-19/670501293_18574203649026801_7640662981543970942_n.jpg",
+            description: "Urdu vocabulary, phrases, and expressive language content for curious learners.",
           },
           {
             name: "Urdu Dost",
@@ -602,8 +558,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdudost.learning",
             category: "Vocabulary",
-            description:
-              "Simple Urdu vocabulary and learning resources for beginners.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/302449144_395560509372357_6016359469463785852_n.jpg",
+            description: "Simple Urdu vocabulary and learning resources for beginners.",
           },
           {
             name: "Lafz Lafz Kunji",
@@ -611,8 +567,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/lafzlafzkunji",
             category: "Vocabulary",
-            description:
-              "Word-by-word Urdu learning with clear breakdowns and structural explanations.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/124276937_1802701889896798_2295122346449923512_n.jpg",
+            description: "Word-by-word Urdu learning with clear breakdowns and structural explanations.",
           },
           {
             name: "Urdu Haus",
@@ -620,8 +576,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urduhaus",
             category: "Vocabulary",
-            description:
-              "Urdu language content focused on vocabulary and everyday conversational phrases.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.82787-19/560374241_17896412928300864_5427410677090256037_n.jpg",
+            description: "Urdu language content focused on vocabulary and everyday conversational phrases.",
           },
           {
             name: "Speak in Urdu",
@@ -629,8 +585,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/speakinurdu",
             category: "Vocabulary",
-            description:
-              "Conversational practice prompts and everyday phrases to build speaking confidence.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.82787-19/589243598_17868705822499583_8075159036970582175_n.jpg",
+            description: "Conversational practice prompts and everyday phrases to build speaking confidence.",
           },
           {
             name: "English with Muskan",
@@ -638,8 +594,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@learningenglishurdu",
             category: "Vocabulary",
-            description:
-              "Bilingual Urdu–English vocabulary and conversational learning content.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/8e0b8de212413a6e867767a91991184b~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Bilingual Urdu–English vocabulary and conversational learning content.",
           },
           {
             name: "English Learning with Urdu",
@@ -647,8 +603,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@learningenglish.withurdu",
             category: "Vocabulary",
-            description:
-              "English vocabulary explained through Urdu for bilingual fluency building.",
+            avatar: "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-avt-0068/bcde5d7ea6c735c3cbb4de65948f700c~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "English vocabulary explained through Urdu for bilingual fluency building.",
           },
           {
             name: "English to Urdu Vocabulary",
@@ -656,8 +612,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@englishto5urdo",
             category: "Vocabulary",
-            description:
-              "Daily English–Urdu vocabulary pairs in a simple, beginner-friendly format.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-avt-0068/fdf84abd76f102c71f307d3ac3a87f39~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Daily English–Urdu vocabulary pairs in a simple, beginner-friendly format.",
           },
 
           // ── 📖 STORIES ────────────────────────────────────────────────────
@@ -667,8 +623,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/jaanikikahaani",
             category: "Stories",
-            description:
-              "Urdu storytelling podcast for children, available on Spotify and Apple Podcasts.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/497786163_17883220050291967_2386587357225072471_n.jpg",
+            description: "Urdu storytelling podcast for children, available on Spotify and Apple Podcasts.",
           },
           {
             name: "Kahani Korner",
@@ -676,8 +632,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/kahani.korner",
             category: "Stories",
-            description:
-              "Bilingual Urdu-English storybooks, activity sets, and QR-linked read-aloud videos for families.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.82787-19/517246316_17962192745946639_1269688047039943398_n.jpg",
+            description: "Bilingual Urdu-English storybooks, activity sets, and QR-linked read-aloud videos for families.",
           },
           {
             name: "Urdu Stories",
@@ -685,17 +641,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@urdustories350",
             category: "Stories",
-            description:
-              "High-engagement short moral stories in Urdu — great for bedtime and classroom listening.",
-          },
-          {
-            name: "Urdu Stories Hub",
-            handle: "@itxminu89",
-            platform: "TikTok",
-            url: "https://www.tiktok.com/@itxminu89",
-            category: "Stories",
-            description:
-              "Engaging Urdu story-reading content with strong audience interaction.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-useast2a-avt-0068-euttp/af582995744ff2066b94df522e02244e~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "High-engagement short moral stories in Urdu — great for bedtime and classroom listening.",
           },
 
           // ── 🇵🇰 CULTURE ──────────────────────────────────────────────────
@@ -705,8 +652,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/myzuban",
             category: "Culture",
-            description:
-              "UK-based bilingual Urdu and Arabic learning journey for kids with free resources.",
+            avatar: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/206883858_542679793780503_320381423344444527_n.jpg",
+            description: "UK-based bilingual Urdu and Arabic learning journey for kids with free resources.",
           },
           {
             name: "Urdu Daan Fold | Courses & Events",
@@ -714,8 +661,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdufold",
             category: "Culture",
-            description:
-              "Urdu learning courses and cultural community events for diaspora families.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.75761-19/500812666_17979076181842240_830796063482588664_n.jpg",
+            description: "Urdu learning courses and cultural community events for diaspora families.",
           },
           {
             name: "Alfaazz Online School",
@@ -723,8 +670,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/alfaazzonline",
             category: "Culture",
-            description:
-              "Online Urdu school blending language learning with cultural education.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/252533689_1075402579939661_6269807432919614970_n.jpg",
+            description: "Online Urdu school blending language learning with cultural education.",
           },
           {
             name: "Komal Badar",
@@ -732,8 +679,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/aao_urdu_parhain",
             category: "Culture",
-            description:
-              '"آؤ اردو پڑھیں" — cultural Urdu learning content and resources.',
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/449144364_1252652612365451_8529074016638835763_n.jpg",
+            description: "\"آؤ اردو پڑھیں\" — cultural Urdu learning content and resources.",
           },
           {
             name: "Khailokidz™",
@@ -741,8 +688,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/khailokidz",
             category: "Culture",
-            description:
-              "Culture-inspired Urdu books, activities, and learning events for kids.",
+            avatar: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/475484253_514454511667371_6761039902911004053_n.jpg",
+            description: "Culture-inspired Urdu books, activities, and learning events for kids.",
           },
           {
             name: "Home with Alif Ba Seen",
@@ -750,8 +697,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/homewithalifbaaseen",
             category: "Culture",
-            description:
-              "Early Urdu literacy and alphabet-based content — ideal for home learning environments.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.82787-19/683460549_17885913519501538_2490961806053583953_n.jpg",
+            description: "Early Urdu literacy and alphabet-based content — ideal for home learning environments.",
           },
           {
             name: "Good Tree Urdu",
@@ -759,26 +706,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/goodtreeurdu",
             category: "Culture",
-            description:
-              "Urdu learning and cultural content for families building a connection to their heritage.",
-          },
-          {
-            name: "PLC UK | Pakistan Legends Cultures",
-            handle: "@pakistanlegendscultures",
-            platform: "TikTok",
-            url: "https://www.tiktok.com/@pakistanlegendscultures",
-            category: "Culture",
-            description:
-              "Promotes Pakistani culture, traditions, and Urdu-language content globally.",
-          },
-          {
-            name: "Pakistani Culture",
-            handle: "@pakistani.culture",
-            platform: "TikTok",
-            url: "https://www.tiktok.com/@pakistani.culture",
-            category: "Culture",
-            description:
-              "Shares Pakistani traditions including language, music, fashion, and cultural heritage.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/272941162_484850916551372_8123331106868275875_n.jpg",
+            description: "Urdu learning and cultural content for families building a connection to their heritage.",
           },
 
           // ── 🎵 SONGS & RHYMES ─────────────────────────────────────────────
@@ -788,8 +717,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/ladoolovesurdu",
             category: "Songs",
-            description:
-              "Musical Urdu-English soundbooks and songs for children by a Pakistani-Canadian mom.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/496020685_17877056700319912_3071243777510810351_n.jpg",
+            description: "Musical Urdu-English soundbooks and songs for children by a Pakistani-Canadian mom.",
           },
           {
             name: "Urdu Poem for Kids",
@@ -797,8 +726,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@urdupoemforkids7",
             category: "Songs",
-            description:
-              "Short Urdu poems and nursery rhymes that make language feel playful and memorable.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-useast2a-avt-0068-euttp/7ddc17cfff5b8f769d2773330a5997d0~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Short Urdu poems and nursery rhymes that make language feel playful and memorable.",
           },
           {
             name: "Nadia Auntyjee | Learn Urdu & Hindi",
@@ -806,8 +735,8 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@learnurduandhindi",
             category: "Songs",
-            description:
-              "Native Urdu/Hindi speaker sharing nursery rhymes, language tips, and cultural learning.",
+            avatar: "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/4316dfeae6cac41a96467ac1bd868345~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Native Urdu/Hindi speaker sharing nursery rhymes, language tips, and cultural learning.",
           },
 
           // ── 🎓 CLASSES & TUTORING ─────────────────────────────────────────
@@ -817,8 +746,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/kidsbolo",
             category: "Tutoring",
-            description:
-              "Urdu summer camps, talking pen books, and self-paced online Urdu modules for kids and adults in the West.",
+            avatar: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-19/272991260_302512971845704_7171996269014348112_n.jpg",
+            description: "Urdu summer camps, talking pen books, and self-paced online Urdu modules for kids and adults in the West.",
           },
           {
             name: "Urdu Munchkins",
@@ -826,8 +755,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdumunchkins",
             category: "Tutoring",
-            description:
-              "Customised Urdu lesson plans and fun spoken Urdu classes for diaspora parents and kids.",
+            avatar: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/491462351_1756267818567877_3209131310079708883_n.jpg",
+            description: "Customised Urdu lesson plans and fun spoken Urdu classes for diaspora parents and kids.",
           },
           {
             name: "Urdu Learning Lab",
@@ -835,8 +764,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urdulearninglab",
             category: "Tutoring",
-            description:
-              "Virtual Urdu classes, bilingual story sessions, and structured learning programmes.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/200784671_188737669831330_7416172386150513411_n.jpg",
+            description: "Virtual Urdu classes, bilingual story sessions, and structured learning programmes.",
           },
           {
             name: "Zainab Kazmi | UrduZubaan",
@@ -844,8 +773,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/zee_ktuitions",
             category: "Tutoring",
-            description:
-              "Online Urdu tuition and personalised language coaching for diaspora learners.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/426026046_3770019129884662_2877460391434474039_n.jpg",
+            description: "Online Urdu tuition and personalised language coaching for diaspora learners.",
           },
           {
             name: "Arsheela Hunean",
@@ -853,8 +782,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/learnurduandmore",
             category: "Tutoring",
-            description:
-              "Bilingual Urdu teaching for English-speaking kids and beginners.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/452688021_512609831226515_7390453993254637090_n.jpg",
+            description: "Bilingual Urdu teaching for English-speaking kids and beginners.",
           },
           {
             name: "Neha Fatima | Urdu Tutor & Linguist",
@@ -862,8 +791,8 @@
             platform: "Instagram",
             url: "https://www.instagram.com/urduwithneha",
             category: "Tutoring",
-            description:
-              "Spoken Urdu for non-natives and overseas Pakistanis through structured, approachable lessons.",
+            avatar: "https://scontent-dfw5-1.cdninstagram.com/v/t51.2885-19/468277011_917394776666219_3683671284456410118_n.jpg",
+            description: "Spoken Urdu for non-natives and overseas Pakistanis through structured, approachable lessons.",
           },
           {
             name: "Learn Urdu 101",
@@ -871,75 +800,189 @@
             platform: "TikTok",
             url: "https://www.tiktok.com/@learnurdu101",
             category: "Tutoring",
-            description:
-              "Structured Urdu lessons with grammar and vocabulary-focused content for all levels.",
+            avatar: "https://p19-common-sign.tiktokcdn-us.com/tos-maliva-avt-0068/10dd8b6c27f76c8325c631f269d4ecdc~tplv-tiktokx-cropcenter:1080:1080.jpeg",
+            description: "Structured Urdu lessons with grammar and vocabulary-focused content for all levels.",
           },
         ];
 
-        /* ── Category metadata ─────────────────────────────────────────────── */
+        /* ── Category metadata ───────────────────────────────────────────── */
         const categoryMeta = {
-          Kids: {
-            emoji: "📚",
-            label: "Urdu Learning for Kids",
-            note: "Perfect for parents, homeschoolers, and early-years educators raising bilingual children.",
-          },
-          Beginners: {
-            emoji: "🌍",
-            label: "Beginner Urdu & Diaspora Learners",
-            note: "Ideal for diaspora families, non-native learners, and mixed-language households starting their Urdu journey.",
-          },
-          Vocabulary: {
-            emoji: "🗣️",
-            label: "Vocabulary, Phrases & Conversation",
-            note: "Great for building daily language habits — perfect for learners at any stage.",
-          },
-          Stories: {
-            emoji: "📖",
-            label: "Urdu Stories, Books & Storytelling",
-            note: "Storytelling is one of the most natural ways children absorb language — these accounts make it magical.",
-          },
-          Culture: {
-            emoji: "🇵🇰",
-            label: "Pakistani Culture + Language",
-            note: "For families who want language and cultural identity to grow together.",
-          },
-          Songs: {
-            emoji: "🎵",
-            label: "Songs, Rhymes & Audio Learning",
-            note: "Music and rhythm are powerful memory tools — especially powerful for young Urdu learners.",
-          },
-          Tutoring: {
-            emoji: "🎓",
-            label: "Structured Classes & Tutoring",
-            note: "For families ready to move beyond casual learning into structured, consistent Urdu education.",
-          },
+          Kids:       { emoji: "📚", label: "Urdu Learning for Kids",              note: "Perfect for parents, homeschoolers, and early-years educators raising bilingual children." },
+          Beginners:  { emoji: "🌍", label: "Beginner Urdu & Diaspora Learners",   note: "Ideal for diaspora families, non-native learners, and mixed-language households starting their Urdu journey." },
+          Vocabulary: { emoji: "🗣️", label: "Vocabulary, Phrases & Conversation",  note: "Great for building daily language habits — perfect for learners at any stage." },
+          Stories:    { emoji: "📖", label: "Urdu Stories, Books & Storytelling",  note: "Storytelling is one of the most natural ways children absorb language — these accounts make it magical." },
+          Culture:    { emoji: "🇵🇰", label: "Pakistani Culture + Language",        note: "For families who want language and cultural identity to grow together." },
+          Songs:      { emoji: "🎵", label: "Songs, Rhymes & Audio Learning",      note: "Music and rhythm are powerful memory tools — especially powerful for young Urdu learners." },
+          Tutoring:   { emoji: "🎓", label: "Structured Classes & Tutoring",       note: "For families ready to move beyond casual learning into structured, consistent Urdu education." },
         };
 
-        const ORDER = [
-          "Kids",
-          "Beginners",
-          "Vocabulary",
-          "Stories",
-          "Culture",
-          "Songs",
-          "Tutoring",
+        const ORDER = ["Kids", "Beginners", "Vocabulary", "Stories", "Culture", "Songs", "Tutoring"];
+
+        /* ── Avatar palettes ─────────────────────────────────────────────── */
+        const IG_PALETTES = [
+          { bg: "#d49797", text: "#ffffff" },
+          { bg: "#c97878", text: "#ffffff" },
+          { bg: "#e8b8b8", text: "#7a3d3d" },
+          { bg: "#ffc4c3", text: "#8b4040" },
+          { bg: "#f3dedd", text: "#9a5050" },
+          { bg: "#b87a7a", text: "#ffffff" },
         ];
+        const TT_PALETTES = [
+          { bg: "#1a1a2e", text: "#ffffff" },
+          { bg: "#010101", text: "#ffffff" },
+          { bg: "#0d0d1a", text: "#69c9d0" },
+          { bg: "#0f0f1f", text: "#ee1d52" },
+          { bg: "#16213e", text: "#ffffff" },
+          { bg: "#0a0a0a", text: "#ffffff" },
+        ];
+
+        /* ── Merge accounts with same handle across platforms ────────────── */
+        const mergedAccounts = [];
+        const handleMap = new Map();
+        accounts.forEach((account) => {
+          const key = account.handle.toLowerCase();
+          if (handleMap.has(key)) {
+            handleMap.get(key).extraPlatform = {
+              platform: account.platform,
+              url: account.url,
+              avatar: account.avatar,
+            };
+          } else {
+            mergedAccounts.push(handleMap.set(key, { ...account }).get(key));
+          }
+        });
+
+        /* ── Build card DOM ──────────────────────────────────────────────── */
+        function buildCard(account, colorIndex) {
+          const isIG      = account.platform === "Instagram";
+          const isCombined = !!account.extraPlatform;
+          const palette   = (isIG ? IG_PALETTES : TT_PALETTES)[colorIndex % 6];
+          const initial   = account.name.charAt(0).toUpperCase();
+
+          const card = document.createElement("article");
+          card.className = "channel-card";
+
+          /* Avatar */
+          const avatarWrap = document.createElement("div");
+          avatarWrap.className = "channel-avatar";
+          avatarWrap.style.background = palette.bg;
+
+          const fallback = document.createElement("span");
+          fallback.className = "avatar-fallback";
+          fallback.textContent = initial;
+          fallback.style.color = palette.text;
+          fallback.setAttribute("aria-hidden", "true");
+          avatarWrap.appendChild(fallback);
+
+          if (account.avatar) {
+            const img = document.createElement("img");
+            img.src = account.avatar;
+            img.alt = account.name;
+            img.loading = "lazy";
+            img.addEventListener("error", () => img.remove());
+            img.addEventListener("load",  () => { fallback.style.visibility = "hidden"; });
+            avatarWrap.appendChild(img);
+          }
+
+          /* Platform badge(s) */
+          const badgeRow = document.createElement("div");
+          badgeRow.className = "badge-row";
+
+          if (isCombined) {
+            const b1 = document.createElement("span");
+            b1.className = "platform-badge badge-ig";
+            b1.innerHTML = '<i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram';
+            const b2 = document.createElement("span");
+            b2.className = "platform-badge badge-tt";
+            b2.innerHTML = '<i class="fa-brands fa-tiktok" aria-hidden="true"></i> TikTok';
+            badgeRow.appendChild(b1);
+            badgeRow.appendChild(b2);
+          } else {
+            const b = document.createElement("span");
+            b.className = `platform-badge ${isIG ? "badge-ig" : "badge-tt"}`;
+            b.innerHTML = isIG
+              ? '<i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram'
+              : '<i class="fa-brands fa-tiktok" aria-hidden="true"></i> TikTok';
+            badgeRow.appendChild(b);
+          }
+
+          /* Name */
+          const nameEl = document.createElement("h2");
+          nameEl.className = "channel-name";
+          nameEl.textContent = account.name;
+
+          /* Description */
+          const desc = document.createElement("p");
+          desc.className = "channel-desc";
+          desc.textContent = account.description;
+
+          /* Buttons */
+          const actions = document.createElement("div");
+          actions.className = "card-actions";
+
+          if (isCombined) {
+            const igEntry = account.platform === "Instagram" ? account : account.extraPlatform;
+            const ttEntry = account.platform === "TikTok"    ? account : account.extraPlatform;
+
+            const igBtn = document.createElement("a");
+            igBtn.className = "btn-visit btn-ig-visit";
+            igBtn.href = igEntry.url;
+            igBtn.target = "_blank";
+            igBtn.rel = "noopener noreferrer";
+            igBtn.innerHTML = '<i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram';
+
+            const ttBtn = document.createElement("a");
+            ttBtn.className = "btn-visit btn-tt-visit";
+            ttBtn.href = ttEntry.url;
+            ttBtn.target = "_blank";
+            ttBtn.rel = "noopener noreferrer";
+            ttBtn.innerHTML = '<i class="fa-brands fa-tiktok" aria-hidden="true"></i> TikTok';
+
+            actions.appendChild(igBtn);
+            actions.appendChild(ttBtn);
+          } else {
+            const btn = document.createElement("a");
+            btn.className = `btn-visit ${isIG ? "btn-ig-visit" : "btn-tt-visit"}`;
+            btn.href = account.url;
+            btn.target = "_blank";
+            btn.rel = "noopener noreferrer";
+            btn.setAttribute("aria-label", `Visit ${account.handle} on ${account.platform}`);
+            btn.innerHTML = isIG
+              ? '<i class="fa-brands fa-instagram" aria-hidden="true"></i> Visit on Instagram'
+              : '<i class="fa-brands fa-tiktok" aria-hidden="true"></i> Visit on TikTok';
+            actions.appendChild(btn);
+          }
+
+          card.appendChild(avatarWrap);
+          card.appendChild(badgeRow);
+          card.appendChild(nameEl);
+          card.appendChild(desc);
+          card.appendChild(actions);
+
+          return card;
+        }
+
+        /* ── Render all sections ─────────────────────────────────────────── */
         const sectionsContainer = document.getElementById("sections-container");
 
         function renderAll(filterCat, filterPlatform) {
           sectionsContainer.innerHTML = "";
 
+          let totalVisible = 0;
+
           ORDER.forEach((cat) => {
             if (filterCat !== "all" && filterCat !== cat) return;
 
-            const filtered = accounts.filter((a) => {
-              const catMatch = a.category === cat;
-              const platMatch =
-                filterPlatform === "all" || a.platform === filterPlatform;
-              return catMatch && platMatch;
+            const filtered = mergedAccounts.filter((a) => {
+              if (a.category !== cat) return false;
+              if (filterPlatform === "all") return true;
+              const hasPrimary = a.platform === filterPlatform;
+              const hasExtra   = a.extraPlatform && a.extraPlatform.platform === filterPlatform;
+              return hasPrimary || hasExtra;
             });
 
             if (filtered.length === 0) return;
+            totalVisible += filtered.length;
 
             const section = document.createElement("div");
             section.className = "category-section";
@@ -955,83 +998,51 @@
             section.appendChild(note);
 
             const grid = document.createElement("div");
-            grid.className = "grid";
+            grid.className = "channel-grid";
 
-            filtered.forEach((account) => {
-              const isIG = account.platform === "Instagram";
-              const wrapper = document.createElement("div");
-              wrapper.className = "video-wrapper video";
-
-              const link = document.createElement("a");
-              link.href = account.url;
-              link.target = "_blank";
-              link.style.textDecoration = "none";
-
-              const banner = document.createElement("div");
-              banner.className = isIG ? "ig-banner" : "tt-banner";
-
-              const badge = document.createElement("span");
-              badge.className = isIG ? "ig-badge" : "tt-badge";
-              badge.textContent = account.platform;
-
-              const icon = document.createElement("i");
-              icon.className = `fa-brands ${isIG ? "fa-instagram" : "fa-tiktok"} banner-icon`;
-
-              const handleEl = document.createElement("span");
-              handleEl.className = "banner-handle";
-              handleEl.textContent = account.handle;
-
-              banner.appendChild(badge);
-              banner.appendChild(icon);
-              banner.appendChild(handleEl);
-              link.appendChild(banner);
-              wrapper.appendChild(link);
-
-              const title = document.createElement("div");
-              title.className = "video-title";
-              title.textContent = account.name;
-
-              const desc = document.createElement("div");
-              desc.className = "translation";
-              desc.textContent = account.description;
-
-              wrapper.appendChild(title);
-              wrapper.appendChild(desc);
-              grid.appendChild(wrapper);
-            });
+            filtered.forEach((account, i) => grid.appendChild(buildCard(account, i)));
 
             section.appendChild(grid);
             sectionsContainer.appendChild(section);
           });
+
+          if (totalVisible === 0) {
+            const empty = document.createElement("p");
+            empty.className = "no-results";
+            empty.innerHTML = '<i class="fa-brands fa-instagram" aria-hidden="true"></i>No accounts match your filter.<br>Try a different category or platform.';
+            sectionsContainer.appendChild(empty);
+          }
         }
 
         renderAll("all", "all");
 
-        const catFilter = document.getElementById("categoryFilter");
-        const platFilter = document.getElementById("platformFilter");
-        catFilter.addEventListener("change", () =>
-          renderAll(catFilter.value, platFilter.value),
-        );
-        platFilter.addEventListener("change", () =>
-          renderAll(catFilter.value, platFilter.value),
-        );
-
-        /* ── Floating hearts ─────────────────────────────────────────────── */
-        const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
-        for (let i = 0; i < 15; i++) {
-          const icon = document.createElement("img");
-          icon.src = iconSrc;
-          icon.classList.add("heart");
-          icon.style.left = Math.random() * 100 + "vw";
-          icon.style.animationDelay = Math.random() * 10 + "s";
-          icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
-          icon.style.animationDuration =
-            (6 + Math.random() * 4).toFixed(2) + "s";
-          document.body.appendChild(icon);
+        /* ── Filter wiring ───────────────────────────────────────────────── */
+        const catSelect = document.getElementById("categoryFilter");
+        function getActiveCat()  { return catSelect ? catSelect.value : "all"; }
+        function getActivePlat() {
+          return document.querySelector('[data-plat][aria-selected="true"]')?.dataset.plat ?? "all";
         }
+
+        catSelect.addEventListener("change", () => renderAll(getActiveCat(), getActivePlat()));
+
+        const platPills = document.querySelectorAll("[data-plat]");
+        platPills.forEach((pill) => {
+          pill.addEventListener("click", () => {
+            platPills.forEach((p) => { p.setAttribute("aria-selected", "false"); p.tabIndex = -1; });
+            pill.setAttribute("aria-selected", "true");
+            pill.tabIndex = 0;
+            renderAll(getActiveCat(), getActivePlat());
+          });
+          pill.addEventListener("keydown", (e) => {
+            const arr = Array.from(platPills);
+            const idx = arr.indexOf(pill);
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); arr[(idx + 1) % arr.length].focus(); }
+            else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); arr[(idx - 1 + arr.length) % arr.length].focus(); }
+          });
+        });
       });
     </script>
-    <script src="/assets/cart.js"></script>
-  <script src="/assets/js/footer-loader.js" defer></script>
+    <script src="/assets/js/navbar-loader.js" defer></script>
+    <script src="/assets/js/footer-loader.js" defer></script>
   </body>
 </html>

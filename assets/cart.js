@@ -160,7 +160,14 @@ async function handleCheckout() {
 }
 
 // ---- INIT ----
+let _cartInitialized = false;
+
 function initCart() {
+  // Guard: cart.js is loaded dynamically (via navbar-loader.js) so this function
+  // could theoretically be called more than once if the loader runs twice.
+  if (_cartInitialized) return;
+  _cartInitialized = true;
+
   updateCartUI();
 
   if (cartBtn)      cartBtn.addEventListener("click", openCart);
@@ -182,4 +189,11 @@ function initCart() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initCart);
+// cart.js is injected dynamically by navbar-loader.js (via document.createElement),
+// which means it always runs after DOMContentLoaded has already fired.
+// The defensive check below handles both load orders correctly.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCart);
+} else {
+  initCart();
+}

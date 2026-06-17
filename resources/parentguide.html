@@ -38,6 +38,7 @@
 <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" referrerpolicy="no-referrer" rel="stylesheet"/>
 <!-- Optional shared CSS -->
 <link href="../quicklinks/SharedCSS/common.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/navbar.css" />
 <style>
       /* --- THEME VARIABLES (match Resources blueprint) --- */
       :root {
@@ -1175,93 +1176,8 @@
 </style>
 </head>
 <body>
-<!-- Top Promo Bar -->
-<div class="topbar">
-<div class="topbar__inner">
-<div class="topbar__track">
-<span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-<span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-<span>Shop Now</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-</div>
-</div>
-</div>
-<!-- HEADER (matches blueprint) -->
-<header class="header">
-<div class="header__inner">
-<button aria-label="Open menu" class="mobile-toggle" id="mobile-toggle">
-<i class="fa-solid fa-bars"></i>
-</button>
-<a aria-label="Kahani Korner Home" class="brand" href="https://kahanikorner.com">
-<picture>
-<source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-<img alt="Kahani Korner" class="brand-logo" src="/assets/images/homepage/logo.png"/>
-</picture>
-</a>
-<nav class="nav">
-<a href="../products.html">Shop</a>
-<a href="../subscribe.html">Subscribe</a>
-<a class="nav-active" href="/resources/resources.html">Resources</a>
-<a href="../index.html#faq">Help</a>
-<a href="../index.html#contact">Contact</a>
-</nav>
-<div class="header-actions">
-<button aria-label="Open cart" class="icon-btn-circle cart-btn-landing" id="cart-btn">
-<i class="fa-solid fa-cart-shopping"></i>
-<span class="cart-badge-landing hidden" id="cart-badge">0</span>
-</button>
-<a aria-label="Buy me chai" class="icon-btn-circle chai-btn" href="https://buy.stripe.com/cNiaEZ2oa31zefxcon0Fi0b" rel="noopener noreferrer" target="_blank">
-<i class="fa-solid fa-mug-hot"></i>
-<span class="chai-tooltip">Buy me chai <i class="fa-solid fa-mug-hot"></i></span>
-</a>
-</div>
-</div>
-</header>
-<!-- CART OVERLAY (matches blueprint) -->
-<div class="cart-overlay hidden" id="cart-overlay">
-<div class="cart-sidebar">
-<div class="cart-header">
-<h2>Your Cart</h2>
-<button aria-label="Close cart" class="close-btn" id="close-cart">
-<i class="fa-solid fa-xmark"></i>
-</button>
-</div>
-<div class="cart-items" id="cart-items">
-<div class="empty-cart-msg">Your cart is empty.</div>
-</div>
-<div class="cart-footer">
-<div class="cart-total">
-<span>Total</span>
-<span id="cart-total-amount">$0.00</span>
-</div>
-<button class="checkout-btn" id="checkout-btn">Checkout</button>
-</div>
-</div>
-</div>
-<!-- MOBILE MENU OVERLAY (matches blueprint) -->
-<div class="mobile-menu-overlay hidden" id="mobile-menu-overlay">
-<nav class="mobile-menu">
-<div class="mobile-menu__header">
-<a aria-label="Kahani Korner Home" class="mobile-menu__brand" href="https://kahanikorner.com">
-<picture>
-<source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png">
-<img alt="Kahani Korner" src="/assets/images/homepage/logo.png" style="height:34px;width:auto;display:block;"/>
-</picture>
-</a>
-<button aria-label="Close menu" class="mobile-menu__close">
-<i class="fa-solid fa-xmark"></i>
-</button>
-</div>
-<ul class="mobile-menu__links">
-<li><a href="../products.html">Shop</a></li>
-<li><a href="../subscribe.html">Subscribe</a></li>
-<li><a class="nav-active" href="resources.html">Resources</a></li>
-<li><a href="../index.html#faq">Help</a></li>
-<li><a href="../index.html#contact">Contact</a></li>
-</ul>
-</nav>
-</div>
-<!-- Spacer so content clears fixed header -->
-<div aria-hidden="true" class="header-spacer"></div>
+<!-- Edit navbar in one place only: /components/navbar.html -->
+<div id="navbar-placeholder"></div>
 <!-- MAIN -->
 <main class="page-main">
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -1883,6 +1799,7 @@
         init();
       });
     </script>
+  <script src="/assets/js/navbar-loader.js" defer></script>
   <script src="/assets/js/footer-loader.js" defer></script>
 </body>
 </html>

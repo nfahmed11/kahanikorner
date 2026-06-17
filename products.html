@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Microsoft Analytics tag to track analytics  -->
@@ -33,13 +33,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Shop — Kahani Korner</title>
-    <link rel="icon" href="/assets/images/homepage/logo2.png" type="image/png" />
-    <meta name="description" content="Browse Kahani Korner's collection of Urdu-English children's books, stickers, and cultural keepsakes — crafted for little hearts." />
+    <link
+      rel="icon"
+      href="/assets/images/homepage/logo2.png"
+      type="image/png" />
+    <meta
+      name="description"
+      content="Browse Kahani Korner's collection of Urdu-English children's books, stickers, and cultural keepsakes — crafted for little hearts." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kahanikorner.com/products.html" />
     <meta property="og:title" content="Shop — Kahani Korner" />
-    <meta property="og:description" content="Browse Kahani Korner's collection of Urdu-English children's books, stickers, and cultural keepsakes — crafted for little hearts." />
-    <meta property="og:image" content="https://kahanikorner.com/assets/images/homepage/logo.png" />
+    <meta
+      property="og:description"
+      content="Browse Kahani Korner's collection of Urdu-English children's books, stickers, and cultural keepsakes — crafted for little hearts." />
+    <meta
+      property="og:image"
+      content="https://kahanikorner.com/assets/images/homepage/logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Font Awesome Icons -->
@@ -73,7 +82,7 @@
 
         --green: #b0c3b7;
         --mint: #c9dcce;
-        --radius-lg: 24px;
+        --radius-lg: 2rem;
         --radius-md: 16px;
         --radius-pill: 999px;
         --radius: 1.5rem;
@@ -124,8 +133,11 @@
         line-height: 1.2;
         margin: 0 0 1rem;
         color: var(--white-smoke);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
       }
 
       .hidden {
@@ -204,7 +216,9 @@
         border: 2px solid rgba(176, 195, 183, 0.7);
         border-radius: 999px;
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-        transition: background 0.25s ease, border-color 0.25s ease,
+        transition:
+          background 0.25s ease,
+          border-color 0.25s ease,
           box-shadow 0.25s ease;
       }
 
@@ -245,111 +259,278 @@
         color: var(--soft-blush);
         font-weight: 700;
         transform: scale(1.05);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
       }
 
       /* ---- FREE RESOURCES DROPDOWN ---- */
-      .nav-dropdown { position: relative; }
+      .nav-dropdown {
+        position: relative;
+      }
       .nav-dropdown__trigger {
-        background: none; border: none; padding: 0;
-        font-family: inherit; font-size: inherit; font-weight: inherit;
-        text-transform: inherit; letter-spacing: inherit; color: inherit;
-        cursor: pointer; display: inline-flex; align-items: center; gap: 0.3em;
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        text-transform: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
       }
       .nav-dropdown__trigger:hover {
-        color: var(--soft-blush); font-weight: 700;
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        color: var(--soft-blush);
+        font-weight: 700;
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
       }
-      .nav-dropdown__trigger:focus-visible { outline: 2px solid var(--deep-teal); outline-offset: 3px; border-radius: 4px; }
-      .nav-dropdown__chevron { font-size: 0.65em; transition: transform 0.22s ease; }
+      .nav-dropdown__trigger:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .nav-dropdown__chevron {
+        font-size: 0.65em;
+        transition: transform 0.22s ease;
+      }
       .nav-dropdown.is-open .nav-dropdown__chevron,
       .nav-dropdown:hover .nav-dropdown__chevron,
-      .nav-dropdown:focus-within .nav-dropdown__chevron { transform: rotate(180deg); }
+      .nav-dropdown:focus-within .nav-dropdown__chevron {
+        transform: rotate(180deg);
+      }
       .dropdown-menu {
-        position: absolute; top: calc(100% + 14px); left: 50%;
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 50%;
         transform: translateX(-50%) translateY(-8px);
-        min-width: 230px; background: #fff;
-        border: 2px solid rgba(176, 195, 183, 0.7); border-radius: 18px;
+        min-width: 230px;
+        background: #fff;
+        border: 2px solid rgba(176, 195, 183, 0.7);
+        border-radius: 18px;
         box-shadow: 0 8px 32px rgba(74, 89, 74, 0.14);
-        padding: 0.45rem 0.4rem 0.55rem; opacity: 0; pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
+        padding: 0.45rem 0.4rem 0.55rem;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+        z-index: 200;
       }
       .dropdown-menu::before {
-        content: ""; position: absolute; top: -18px; left: 0; right: 0; height: 18px;
+        content: "";
+        position: absolute;
+        top: -18px;
+        left: 0;
+        right: 0;
+        height: 18px;
       }
       .nav-dropdown:hover .dropdown-menu,
       .nav-dropdown:focus-within .dropdown-menu,
       .nav-dropdown.is-open .dropdown-menu {
-        opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
       }
       .dropdown-menu__header {
         padding: 0.6rem 0.85rem 0.5rem;
-        border-bottom: 1px solid rgba(176, 195, 183, 0.5); margin-bottom: 0.3rem;
+        border-bottom: 1px solid rgba(176, 195, 183, 0.5);
+        margin-bottom: 0.3rem;
       }
       .dropdown-menu__title {
-        display: block; font-family: "Grandstander", cursive; font-size: 0.77rem;
-        font-weight: 800; color: var(--granite); text-transform: none; letter-spacing: 0; margin-bottom: 0.15rem;
+        display: block;
+        font-family: "Grandstander", cursive;
+        font-size: 0.77rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-transform: none;
+        letter-spacing: 0;
+        margin-bottom: 0.15rem;
       }
-      .dropdown-menu__desc { display: block; font-size: 0.71rem; color: var(--muted); text-transform: none; letter-spacing: 0; line-height: 1.4; }
+      .dropdown-menu__desc {
+        display: block;
+        font-size: 0.71rem;
+        color: var(--muted);
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1.4;
+      }
       .dropdown-menu__item {
-        display: flex; align-items: center; gap: 0.55rem;
-        padding: 0.52rem 0.85rem; font-size: 0.84rem; font-weight: 500;
-        text-transform: none; letter-spacing: 0; color: var(--granite); border-radius: 10px;
-        transition: background 0.15s, color 0.15s, transform 0.1s;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.52rem 0.85rem;
+        font-size: 0.84rem;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--granite);
+        border-radius: 10px;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          transform 0.1s;
       }
-      .dropdown-menu__item i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
-      .dropdown-menu__item:hover, .dropdown-menu__item:focus-visible {
-        background: var(--soft-blush); color: var(--granite); transform: translateX(3px); outline: none;
+      .dropdown-menu__item i {
+        width: 1.1em;
+        text-align: center;
+        color: var(--deep-teal);
+        flex-shrink: 0;
+      }
+      .dropdown-menu__item:hover,
+      .dropdown-menu__item:focus-visible {
+        background: var(--soft-blush);
+        color: var(--granite);
+        transform: translateX(3px);
+        outline: none;
       }
       .dropdown-menu__item--submit {
-        margin-top: 0.3rem; padding-top: 0.6rem; color: var(--deep-teal); font-weight: 700;
+        margin-top: 0.3rem;
+        padding-top: 0.6rem;
+        color: var(--deep-teal);
+        font-weight: 700;
         border-top: 1px dashed rgba(176, 195, 183, 0.5);
       }
-      .dropdown-menu__item--submit:hover { background: var(--mint); color: var(--granite); }
+      .dropdown-menu__item--submit:hover {
+        background: var(--mint);
+        color: var(--granite);
+      }
       /* Mobile sliding panel */
       .mobile-free-resources-btn {
-        width: 100%; display: flex; align-items: center; justify-content: space-between;
-        background: none; border: none; border-bottom: 1px dashed var(--white-smoke);
-        padding: 0.75rem 0.25rem; font-family: inherit; font-size: 0.95rem;
-        text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
-        color: var(--granite); cursor: pointer; transition: color 0.2s, transform 0.1s;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: none;
+        border: none;
+        border-bottom: 1px dashed var(--white-smoke);
+        padding: 0.75rem 0.25rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+        color: var(--granite);
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          transform 0.1s;
       }
-      .mobile-free-resources-btn:hover { color: var(--cotton-rose); transform: translateX(3px); }
-      .mobile-menu__body { flex: 1; position: relative; overflow: hidden; min-height: 0; }
+      .mobile-free-resources-btn:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
+      .mobile-menu__body {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        min-height: 0;
+      }
       .mobile-panel {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        overflow-y: auto; -webkit-overflow-scrolling: touch;
-        transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1), opacity 0.25s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition:
+          transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+          opacity 0.25s ease;
       }
-      .mobile-panel--main { transform: translateX(0); opacity: 1; }
-      .mobile-panel--main.slide-away { transform: translateX(-30%); opacity: 0; pointer-events: none; }
-      .mobile-panel--resources { transform: translateX(100%); opacity: 0; pointer-events: none; }
-      .mobile-panel--resources.slide-in { transform: translateX(0); opacity: 1; pointer-events: auto; }
+      .mobile-panel--main {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      .mobile-panel--main.slide-away {
+        transform: translateX(-30%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-panel--resources {
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-panel--resources.slide-in {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
       .mobile-panel__back {
-        display: inline-flex; align-items: center; gap: 0.45rem;
-        background: none; border: none; color: var(--deep-teal); font-family: inherit;
-        font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
-        cursor: pointer; padding: 0.2rem 0 0.2rem 0.1rem; margin-bottom: 0.85rem;
-        transition: color 0.2s, transform 0.1s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        background: none;
+        border: none;
+        color: var(--deep-teal);
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        cursor: pointer;
+        padding: 0.2rem 0 0.2rem 0.1rem;
+        margin-bottom: 0.85rem;
+        transition:
+          color 0.2s,
+          transform 0.1s;
       }
-      .mobile-panel__back:hover { color: var(--granite); transform: translateX(-2px); }
+      .mobile-panel__back:hover {
+        color: var(--granite);
+        transform: translateX(-2px);
+      }
       .mobile-panel__title {
-        font-family: "Grandstander", cursive; font-size: 1rem; font-weight: 800;
-        color: var(--granite); margin: 0 0 0.65rem; padding-bottom: 0.65rem;
+        font-family: "Grandstander", cursive;
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--granite);
+        margin: 0 0 0.65rem;
+        padding-bottom: 0.65rem;
         border-bottom: 2px solid var(--white-smoke);
       }
-      .mobile-resources-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
-      .mobile-resources-links li a {
-        display: flex; align-items: center; gap: 0.55rem;
-        padding: 0.75rem 0.25rem; font-size: 0.95rem; font-weight: 500;
-        color: var(--granite); border-bottom: 1px dashed var(--white-smoke);
-        transition: color 0.2s, transform 0.1s;
+      .mobile-resources-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
       }
-      .mobile-resources-links li a i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
-      .mobile-resources-links li:last-child a { border-bottom: none; }
-      .mobile-resources-links li a:hover { color: var(--cotton-rose); transform: translateX(3px); }
+      .mobile-resources-links li a {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.75rem 0.25rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--granite);
+        border-bottom: 1px dashed var(--white-smoke);
+        transition:
+          color 0.2s,
+          transform 0.1s;
+      }
+      .mobile-resources-links li a i {
+        width: 1.1em;
+        text-align: center;
+        color: var(--deep-teal);
+        flex-shrink: 0;
+      }
+      .mobile-resources-links li:last-child a {
+        border-bottom: none;
+      }
+      .mobile-resources-links li a:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
 
       .mobile-toggle {
         display: none;
@@ -371,7 +552,9 @@
         align-items: center;
         justify-content: center;
         color: var(--granite);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         cursor: pointer;
         font-size: 1rem;
       }
@@ -501,7 +684,9 @@
         font-size: 1.25rem;
         color: var(--granite);
         cursor: pointer;
-        transition: background 0.2s ease, transform 0.1s ease;
+        transition:
+          background 0.2s ease,
+          transform 0.1s ease;
       }
 
       .mobile-menu__links {
@@ -522,7 +707,9 @@
         font-weight: 600;
         color: var(--granite);
         border-bottom: 1px dashed var(--white-smoke);
-        transition: color 0.2s ease, transform 0.1s ease;
+        transition:
+          color 0.2s ease,
+          transform 0.1s ease;
       }
 
       .mobile-menu__links li:last-child a {
@@ -691,7 +878,9 @@
         border-radius: 1rem;
         font-size: 1.125rem;
         font-weight: 700;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         box-shadow: 0 4px 0 var(--deep-teal);
       }
 
@@ -728,7 +917,9 @@
         height: 26px;
         filter: invert(1);
         opacity: 0.85;
-        transition: opacity 0.2s ease, transform 0.2s ease;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
       }
 
       .social-icons a:hover img {
@@ -941,7 +1132,10 @@
         border-radius: var(--radius-lg);
         overflow: hidden;
         cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s,
+          border-color 0.3s;
         display: flex;
         flex-direction: column;
       }
@@ -1036,6 +1230,47 @@
         box-shadow: 0 0 0 var(--rosy-taupe);
       }
 
+      /* Coming-soon category card */
+      .category-card--soon {
+        opacity: 0.6;
+        cursor: default;
+        pointer-events: none;
+        position: relative;
+      }
+      .category-card--soon .category-card__btn {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .category-card__soon-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        background: var(--granite);
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        z-index: 2;
+      }
+
+      /* Coming-soon badge on product cards */
+      .product-soon-badge {
+        display: inline-block;
+        background: var(--soft-blush);
+        color: var(--granite);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        border: 1.5px solid var(--rosy-taupe);
+        margin-bottom: 0.35rem;
+      }
+
       /* --- PRODUCT VIEW HEADER (shown when a category is active) --- */
       .product-view-header {
         display: flex;
@@ -1093,7 +1328,6 @@
         margin: 0;
       }
 
-
       @media (min-width: 768px) {
         .product-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1107,7 +1341,8 @@
       }
 
       /* Single visible card — center it */
-      .product-grid .product-card:not(.product-card--bundle):first-child:last-child {
+      .product-grid
+        .product-card:not(.product-card--bundle):first-child:last-child {
         grid-column: 1 / -1;
         max-width: 50%;
         justify-self: center;
@@ -1119,7 +1354,7 @@
           padding: 7rem 1rem 4rem;
         }
         .product-card {
-          border-radius: 0.75rem;
+          border-radius: 1.25rem;
         }
         .product-image-container {
           aspect-ratio: 4 / 5;
@@ -1192,7 +1427,10 @@
         flex-direction: column;
         background: var(--card-bg);
         border: 2px solid var(--ash-grey);
-        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s,
+          border-color 0.3s;
         cursor: pointer;
       }
 
@@ -1446,10 +1684,16 @@
         border-color: var(--deep-teal);
       }
 
-      .gallery-arrow.hidden { display: none; }
+      .gallery-arrow.hidden {
+        display: none;
+      }
 
-      .gallery-prev { left: 0.6rem; }
-      .gallery-next { right: 0.6rem; }
+      .gallery-prev {
+        left: 0.6rem;
+      }
+      .gallery-next {
+        right: 0.6rem;
+      }
 
       .detail-dots {
         display: flex;
@@ -1458,7 +1702,9 @@
         padding-top: 0.5rem;
       }
 
-      .detail-dots.hidden { display: none; }
+      .detail-dots.hidden {
+        display: none;
+      }
 
       .detail-dot {
         width: 9px;
@@ -1685,15 +1931,18 @@
         <!-- Category Grid (default view — shown before any category is selected) -->
         <div id="category-grid-section" class="category-section">
           <div class="category-grid">
-
             <!-- Individual Books -->
             <div class="category-card" onclick="showProductView('books')">
               <div class="category-card__image">
-                <img src="./assets/images/products/books/abbu/abbu-cover.png" alt="Individual Books" />
+                <img
+                  src="./assets/images/products/books/abbu/abbu-cover.png"
+                  alt="Individual Books" />
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Individual Books</h2>
-                <p class="category-card__desc">Shop our bilingual Urdu books one at a time.</p>
+                <p class="category-card__desc">
+                  Shop our bilingual Urdu books one at a time.
+                </p>
                 <span class="category-card__count">4 titles</span>
                 <button class="category-card__btn">View Products →</button>
               </div>
@@ -1702,11 +1951,15 @@
             <!-- Bundle -->
             <div class="category-card" onclick="showProductView('bundle')">
               <div class="category-card__image">
-                <img src="./assets/images/products/books/bundle/fourbundle.png" alt="Bundle" />
+                <img
+                  src="./assets/images/products/books/bundle/fourbundle.png"
+                  alt="Bundle" />
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Bundle</h2>
-                <p class="category-card__desc">Get multiple Kahani Korner books together in one special set.</p>
+                <p class="category-card__desc">
+                  Get multiple Kahani Korner books together in one special set.
+                </p>
                 <span class="category-card__count">1 set</span>
                 <button class="category-card__btn">View Products →</button>
               </div>
@@ -1715,16 +1968,41 @@
             <!-- Stickers -->
             <div class="category-card" onclick="showProductView('stickers')">
               <div class="category-card__image">
-                <img src="./assets/images/products/stickers/15pack/stickers.png" alt="Stickers" />
+                <img
+                  src="./assets/images/products/stickers/15pack/stickers.png"
+                  alt="Stickers" />
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Stickers</h2>
-                <p class="category-card__desc">Cute Urdu and Pakistani culture stickers for kids, gifts, and learning.</p>
+                <p class="category-card__desc">
+                  Cute Urdu and Pakistani culture stickers for kids, gifts, and
+                  learning.
+                </p>
                 <span class="category-card__count">3 designs</span>
                 <button class="category-card__btn">View Products →</button>
               </div>
             </div>
 
+            <!-- Coloring Books -->
+            <div
+              class="category-card"
+              onclick="showProductView('coloringbooks')">
+              <div class="category-card__image">
+                <img
+                  src="./assets/images/products/colorbook/mockcoloring.png"
+                  alt="Coloring Books"
+                  onerror="this.style.display = 'none'" />
+              </div>
+              <div class="category-card__body">
+                <h2 class="category-card__title">Coloring Books</h2>
+                <p class="category-card__desc">
+                  Tiny, travel-friendly coloring books filled with cozy
+                  Pakistani food, culture, and Urdu-inspired pages.
+                </p>
+                <span class="category-card__count">1 design</span>
+                <button class="category-card__btn">View Products →</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1747,11 +2025,17 @@
           <div class="detail-container">
             <div class="detail-gallery">
               <div class="detail-image-wrapper">
-                <button class="gallery-arrow gallery-prev" onclick="navigateGallery(-1)" aria-label="Previous image">
+                <button
+                  class="gallery-arrow gallery-prev"
+                  onclick="navigateGallery(-1)"
+                  aria-label="Previous image">
                   <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <img id="detail-image" src="" alt="Product Image" />
-                <button class="gallery-arrow gallery-next" onclick="navigateGallery(1)" aria-label="Next image">
+                <button
+                  class="gallery-arrow gallery-next"
+                  onclick="navigateGallery(1)"
+                  aria-label="Next image">
                   <i class="fa-solid fa-chevron-right"></i>
                 </button>
               </div>
@@ -1761,7 +2045,9 @@
               <h1 id="detail-title">Product Title</h1>
               <span id="detail-price" class="detail-price">$0.00</span>
               <div class="detail-actions">
-                <button id="detail-add-to-cart-btn" class="add-to-cart-btn large-btn">
+                <button
+                  id="detail-add-to-cart-btn"
+                  class="add-to-cart-btn large-btn">
                   <i class="fa-solid fa-cart-plus"></i> Add to Cart
                 </button>
                 <button id="detail-buy-now-btn" class="buy-now-btn large-btn">
@@ -1808,8 +2094,9 @@
     <!-- Edit footer in one place only: /components/footer.html -->
     <div id="footer-placeholder"></div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
     <script>
       // ---------------------------------------------------------------
@@ -1961,7 +2248,7 @@
           price: 7.99,
           checkoutUrl: "https://buy.stripe.com/fZu00l5Amau11sLfAz0Fi0f",
           description:
-            "These \"Oopsie\" stickers have slight imperfections that may include: discoloration or printer error, lamination error or stickers cut unevenly or off center. Most of these imperfections are barely noticeable, and just the result of me being a crazy perfectionist! If you want a cheap alternative to my stickers or just a fun surprise, this is the perfect option! If you have any further questions, shoot me a message! :)",
+            'These "Oopsie" stickers have slight imperfections that may include: discoloration or printer error, lamination error or stickers cut unevenly or off center. Most of these imperfections are barely noticeable, and just the result of me being a crazy perfectionist! If you want a cheap alternative to my stickers or just a fun surprise, this is the perfect option! If you have any further questions, shoot me a message! :)',
           image: "./assets/images/products/stickers/oopsies/oopsies.png",
           category: "stickers",
           features: [
@@ -1979,13 +2266,13 @@
           price: 16.99,
           checkoutUrl: "https://buy.stripe.com/28E14pbYK6dL0oH9cb0Fi0e",
           description:
-            "Celebrate mango season the Pakistani way with our Pakistani Mango Sticker Set — a playful 9-piece holographic sticker collection inspired by aam season, desi nostalgia, summer treats, and the sweetest mango puns. This set includes a mix of vintage Pakistani mango stamp designs, cute mango characters, fruity wordplay, and summer favorites like mango lassi, mango juice, and mango kulfi. Each sticker has a fun holographic finish, giving the designs a shiny, eye-catching look that makes them perfect for decorating notebooks, laptops, water bottles, planners, lunch boxes, journals, gifts, and more. From Sindhri, Chaunsa, Anwar Ratol, and Dusehri stamp-style stickers to playful phrases like \"Aam-igos Forever,\" \"You're aam-azing,\" \"You're cool, but aam KUL-fi,\" and \"Aam-oré,\" this set is made for mango lovers, Pakistani families, Urdu learners, kids, teachers, and anyone who knows that mango season is basically a holiday.",
+            'Celebrate mango season the Pakistani way with our Pakistani Mango Sticker Set — a playful 9-piece holographic sticker collection inspired by aam season, desi nostalgia, summer treats, and the sweetest mango puns. This set includes a mix of vintage Pakistani mango stamp designs, cute mango characters, fruity wordplay, and summer favorites like mango lassi, mango juice, and mango kulfi. Each sticker has a fun holographic finish, giving the designs a shiny, eye-catching look that makes them perfect for decorating notebooks, laptops, water bottles, planners, lunch boxes, journals, gifts, and more. From Sindhri, Chaunsa, Anwar Ratol, and Dusehri stamp-style stickers to playful phrases like "Aam-igos Forever," "You\'re aam-azing," "You\'re cool, but aam KUL-fi," and "Aam-oré," this set is made for mango lovers, Pakistani families, Urdu learners, kids, teachers, and anyone who knows that mango season is basically a holiday.',
           image: "./assets/images/products/stickers/mango/mango-all.png",
           category: "stickers",
           features: [
             "9-piece holographic die-cut sticker set.",
             "Designs include: mango stamps (Sindhri, Chaunsa, Anwar Ratol, Dusehri), mango lassi, mango juice box, mango kulfi, cute mango characters, and desi puns.",
-            "Playful phrases: \"Aam-igos Forever,\" \"You're aam-azing,\" \"You're cool, but aam KUL-fi,\" \"Aam-oré.\"",
+            'Playful phrases: "Aam-igos Forever," "You\'re aam-azing," "You\'re cool, but aam KUL-fi," "Aam-oré."',
             "Holographic finish — shiny and eye-catching.",
             "Perfect for laptops, notebooks, water bottles, planners, journals, lunch boxes, Eid gifts, and kids' crafts.",
           ],
@@ -2029,6 +2316,34 @@
             "./assets/images/products/stickers/15pack/rupee.png",
           ],
         },
+
+        // ── SECTION: COLORING BOOKS ──────────────────────────────────────
+        {
+          id: "price_1TjQGxP4FFhr5UNAMtrY7cJq",
+          name: "Pakistani Food Mini Coloring Book",
+          price: 9.99,
+          checkoutUrl: "https://buy.stripe.com/7sYfZjbYK0TrfjBbkj0Fi0k",
+          description:
+            "Bring a little desi joy with you anywhere. The <strong>Pakistani Food Mini Coloring Book</strong> is a tiny, travel-friendly coloring book filled with cozy food and drink pages inspired by beloved Pakistani snacks, sweets, drinks, and family favorites.<br><br>From samosas and chai to mangoes, mithai, rooh afza, biryani, and more, each page is simple, cute, and easy to color at home or on the go.",
+          image: "./assets/images/products/colorbook/mockcoloring.png",
+          category: "coloringbooks",
+          features: [
+            "Size: 3 × 3.5 inches — compact and travel-friendly",
+            "50 sheets, including 45 coloring artwork pages",
+            "Top-glue lay-flat binding for easy coloring",
+            "Rounded bottom corners for a cute, finished look",
+            "Soft cover with glossy finish for durability",
+            "Smooth uncoated paper for comfortable coloring",
+            "Cute Pakistani food and drink themed pages",
+            "Great for kids, teens, adults, party favors, gift bags, Eid baskets, stocking stuffers, and everyday creative time",
+          ],
+          images: [
+            "./assets/images/products/colorbook/mockcoloring.png",
+            "./assets/images/products/colorbook/coloring.png",
+            "./assets/images/products/colorbook/tearoff.png",
+            "./assets/images/products/colorbook/glue.png",
+          ],
+        },
       ];
 
       // --- STATE (page-level only) ---
@@ -2036,25 +2351,33 @@
       let currentProductId = null;
 
       // --- DOM ELEMENTS ---
-      const mobileToggle        = document.getElementById("mobile-toggle");
-      const mobileMenuOverlay   = document.getElementById("mobile-menu-overlay");
-      const productGrid         = document.getElementById("product-grid");
-      const productDetailView   = document.getElementById("product-detail-view");
-      const backToStoreBtn      = document.getElementById("back-to-store-btn");
-      const detailImage         = document.getElementById("detail-image");
-      const detailTitle         = document.getElementById("detail-title");
-      const detailPrice         = document.getElementById("detail-price");
-      const detailDescription   = document.getElementById("detail-description");
-      const detailFeatures      = document.getElementById("detail-features");
-      const detailAddToCartBtn  = document.getElementById("detail-add-to-cart-btn");
-      const detailBuyNowBtn     = document.getElementById("detail-buy-now-btn");
-      const successModal        = document.getElementById("success-modal");
-      const continueShoppingBtn = document.getElementById("continue-shopping-btn");
-      const shopHeroSection     = document.getElementById("shop-hero-section");
-      const categoryGridSection = document.getElementById("category-grid-section");
-      const productViewHeader   = document.getElementById("product-view-header");
-      const backToCategoriesBtn = document.getElementById("back-to-categories-btn");
-      const categoryViewTitle   = document.getElementById("category-view-title");
+      const mobileToggle = document.getElementById("mobile-toggle");
+      const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+      const productGrid = document.getElementById("product-grid");
+      const productDetailView = document.getElementById("product-detail-view");
+      const backToStoreBtn = document.getElementById("back-to-store-btn");
+      const detailImage = document.getElementById("detail-image");
+      const detailTitle = document.getElementById("detail-title");
+      const detailPrice = document.getElementById("detail-price");
+      const detailDescription = document.getElementById("detail-description");
+      const detailFeatures = document.getElementById("detail-features");
+      const detailAddToCartBtn = document.getElementById(
+        "detail-add-to-cart-btn",
+      );
+      const detailBuyNowBtn = document.getElementById("detail-buy-now-btn");
+      const successModal = document.getElementById("success-modal");
+      const continueShoppingBtn = document.getElementById(
+        "continue-shopping-btn",
+      );
+      const shopHeroSection = document.getElementById("shop-hero-section");
+      const categoryGridSection = document.getElementById(
+        "category-grid-section",
+      );
+      const productViewHeader = document.getElementById("product-view-header");
+      const backToCategoriesBtn = document.getElementById(
+        "back-to-categories-btn",
+      );
+      const categoryViewTitle = document.getElementById("category-view-title");
 
       // --- CART FEEDBACK ---
       // Flashes a button to "✓ Added!" briefly so users know it worked.
@@ -2074,28 +2397,39 @@
       window.addToCartWithFeedback = function (btn, productId) {
         const product = products.find((p) => p.id === productId);
         if (!product) return;
-        window.addToCart({ id: product.id, name: product.name, price: product.price, image: product.image });
+        window.addToCart({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+        });
         flashAdded(btn);
       };
 
       // --- CATEGORY / PRODUCT VIEW TOGGLES ---
       function showCategoryView() {
         currentCategory = null;
-        if (shopHeroSection)     shopHeroSection.classList.remove("hidden");
+        if (shopHeroSection) shopHeroSection.classList.remove("hidden");
         if (categoryGridSection) categoryGridSection.classList.remove("hidden");
-        if (productViewHeader)   productViewHeader.classList.add("hidden");
-        if (productGrid)         productGrid.classList.add("hidden");
+        if (productViewHeader) productViewHeader.classList.add("hidden");
+        if (productGrid) productGrid.classList.add("hidden");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      window.showProductView = function(category) {
-        const labels = { books: "Individual Books", bundle: "Bundle", stickers: "Stickers" };
+      window.showProductView = function (category) {
+        const labels = {
+          books: "Individual Books",
+          bundle: "Bundle",
+          stickers: "Stickers",
+          coloringbooks: "Coloring Books",
+        };
         currentCategory = category;
 
-        if (shopHeroSection)     shopHeroSection.classList.add("hidden");
+        if (shopHeroSection) shopHeroSection.classList.add("hidden");
         if (categoryGridSection) categoryGridSection.classList.add("hidden");
-        if (productViewHeader)   productViewHeader.classList.remove("hidden");
-        if (categoryViewTitle)   categoryViewTitle.textContent = labels[category] || category;
+        if (productViewHeader) productViewHeader.classList.remove("hidden");
+        if (categoryViewTitle)
+          categoryViewTitle.textContent = labels[category] || category;
 
         renderProducts();
         if (productGrid) productGrid.classList.remove("hidden");
@@ -2112,10 +2446,16 @@
           mobileMenuOverlay.addEventListener("click", (e) => {
             if (e.target === mobileMenuOverlay) closeMobileMenu();
           });
-          const closeBtn   = mobileMenuOverlay.querySelector(".mobile-menu__close");
-          const menuLinks  = mobileMenuOverlay.querySelectorAll(".mobile-menu__links a");
+          const closeBtn = mobileMenuOverlay.querySelector(
+            ".mobile-menu__close",
+          );
+          const menuLinks = mobileMenuOverlay.querySelectorAll(
+            ".mobile-menu__links a",
+          );
           if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-          menuLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
+          menuLinks.forEach((link) =>
+            link.addEventListener("click", closeMobileMenu),
+          );
         }
 
         if (backToCategoriesBtn)
@@ -2129,7 +2469,12 @@
           detailAddToCartBtn.addEventListener("click", () => {
             const product = products.find((p) => p.id === currentProductId);
             if (!product) return;
-            window.addToCart({ id: product.id, name: product.name, price: product.price, image: product.image });
+            window.addToCart({
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              image: product.image,
+            });
             flashAdded(detailAddToCartBtn);
           });
         }
@@ -2155,9 +2500,10 @@
 
       // --- PRODUCT RENDERING ---
       function renderProductCard(product) {
-        const priceLabel = product.price !== null
-          ? `<span class="price">$${product.price.toFixed(2)}</span>`
-          : `<span class="price" style="font-size:0.8rem;padding:0.2rem 0.5rem;">Email to Order</span>`;
+        const priceLabel =
+          product.price !== null
+            ? `<span class="price">$${product.price.toFixed(2)}</span>`
+            : `<span class="price" style="font-size:0.8rem;padding:0.2rem 0.5rem;">Email to Order</span>`;
 
         const cartSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>`;
         const boltSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
@@ -2178,13 +2524,18 @@
                ${boltSvg}<span class="btn-label">Buy Now</span>
              </button>`;
 
+        const soonBadge = product.comingSoon
+          ? `<span class="product-soon-badge">Coming Soon</span>`
+          : "";
+
         return `
-          <article class="product-card${product.category === 'bundle' ? ' product-card--bundle' : ''}" onclick="openProductDetails('${product.id}')">
+          <article class="product-card${product.category === "bundle" ? " product-card--bundle" : ""}" onclick="openProductDetails('${product.id}')">
             <div class="product-image-container">
               <img src="${product.image}" alt="${product.name}">
             </div>
             <div class="product-info">
               <div class="product-header">
+                ${soonBadge}
                 <h3>${product.name}</h3>
                 ${priceLabel}
               </div>
@@ -2213,8 +2564,8 @@
 
       // --- DETAIL VIEW ---
       let galleryImages = [];
-      let galleryIndex  = 0;
-      let touchStartX   = 0;
+      let galleryIndex = 0;
+      let touchStartX = 0;
 
       function renderGallery() {
         const single = galleryImages.length <= 1;
@@ -2229,22 +2580,30 @@
         if (dotsEl) {
           dotsEl.classList.toggle("hidden", single);
           dotsEl.innerHTML = galleryImages
-            .map((_, i) => `<button class="detail-dot${i === galleryIndex ? " active" : ""}" onclick="goToGalleryImage(${i})" aria-label="Image ${i + 1}"></button>`)
+            .map(
+              (_, i) =>
+                `<button class="detail-dot${i === galleryIndex ? " active" : ""}" onclick="goToGalleryImage(${i})" aria-label="Image ${i + 1}"></button>`,
+            )
             .join("");
         }
       }
 
       window.navigateGallery = (dir) => {
-        galleryIndex = (galleryIndex + dir + galleryImages.length) % galleryImages.length;
+        galleryIndex =
+          (galleryIndex + dir + galleryImages.length) % galleryImages.length;
         detailImage.style.opacity = "0.7";
-        setTimeout(() => { detailImage.style.opacity = "1"; }, 150);
+        setTimeout(() => {
+          detailImage.style.opacity = "1";
+        }, 150);
         renderGallery();
       };
 
       window.goToGalleryImage = (index) => {
         galleryIndex = index;
         detailImage.style.opacity = "0.7";
-        setTimeout(() => { detailImage.style.opacity = "1"; }, 150);
+        setTimeout(() => {
+          detailImage.style.opacity = "1";
+        }, 150);
         renderGallery();
       };
 
@@ -2253,11 +2612,17 @@
         if (!product || !productDetailView) return;
 
         currentProductId = productId;
-        galleryImages    = (product.images && product.images.length > 0) ? product.images : [product.image];
-        galleryIndex     = 0;
+        galleryImages =
+          product.images && product.images.length > 0
+            ? product.images
+            : [product.image];
+        galleryIndex = 0;
 
-        detailTitle.textContent       = product.name;
-        detailPrice.textContent       = product.price !== null ? `$${product.price.toFixed(2)}` : "Price on request";
+        detailTitle.textContent = product.name;
+        detailPrice.textContent =
+          product.price !== null
+            ? `$${product.price.toFixed(2)}`
+            : "Price on request";
         detailDescription.innerHTML = product.description;
 
         if (detailAddToCartBtn) {
@@ -2271,22 +2636,26 @@
         renderGallery();
 
         if (product.features) {
-          detailFeatures.innerHTML = product.features.map((f) => `<li>${f}</li>`).join("");
+          detailFeatures.innerHTML = product.features
+            .map((f) => `<li>${f}</li>`)
+            .join("");
         } else {
           detailFeatures.innerHTML = "";
         }
 
         // Touch swipe on the image wrapper
         const wrapper = document.querySelector(".detail-image-wrapper");
-        wrapper.ontouchstart = (e) => { touchStartX = e.changedTouches[0].clientX; };
-        wrapper.ontouchend   = (e) => {
+        wrapper.ontouchstart = (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+        };
+        wrapper.ontouchend = (e) => {
           const dx = e.changedTouches[0].clientX - touchStartX;
           if (Math.abs(dx) > 40) navigateGallery(dx < 0 ? 1 : -1);
         };
 
-        if (shopHeroSection)     shopHeroSection.classList.add("hidden");
+        if (shopHeroSection) shopHeroSection.classList.add("hidden");
         if (categoryGridSection) categoryGridSection.classList.add("hidden");
-        if (productViewHeader)   productViewHeader.classList.add("hidden");
+        if (productViewHeader) productViewHeader.classList.add("hidden");
 
         productGrid.classList.add("hidden");
         productDetailView.classList.remove("hidden");
