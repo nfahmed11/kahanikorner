@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+        t = l.createElement(r); t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fill the Kahani | Kahani Korner</title>
+    <meta name="description" content="Fill in missing words from this month's Urdu story." />
+    <link rel="stylesheet" href="/qr/assets/css/fill-the-kahani.css" />
+  </head>
+
+  <body>
+
+    <!-- Settings overlay -->
+    <div class="ftk-settings-overlay" id="ftk-settings-overlay"></div>
+
+    <!-- Settings popup modal (centered) -->
+    <div class="ftk-settings-drawer" id="ftk-settings-drawer"
+         role="dialog" aria-modal="true" aria-label="Game settings" aria-hidden="true">
+      <div class="ftk-drawer-top">
+        <h2 class="ftk-drawer-title">Settings</h2>
+        <button class="ftk-drawer-close" id="ftk-settings-close" type="button" aria-label="Close settings">✕</button>
+      </div>
+
+      <div class="ftk-drawer-section">
+        <p class="ftk-drawer-label">Difficulty</p>
+        <div class="ftk-spills" id="difficulty-pills" role="group" aria-label="Select difficulty"></div>
+      </div>
+
+      <div class="ftk-drawer-section">
+        <p class="ftk-drawer-label">Show</p>
+        <div class="ftk-spills" id="lang-pills" role="group" aria-label="Select language display"></div>
+      </div>
+    </div>
+
+    <main class="ftk-main">
+
+      <!-- Empty state -->
+      <div class="ftk-empty-state" id="ftk-empty-state" style="display:none" aria-live="polite">
+        <div class="ftk-empty-icon" aria-hidden="true">📖</div>
+        <h2 class="ftk-empty-title">Coming Soon!</h2>
+        <p class="ftk-empty-text">Fill the Kahani hasn't been added for this issue yet.<br>Check back soon!</p>
+        <a class="ftk-ghost-link" href="javascript:history.back()">← Go back</a>
+      </div>
+
+      <!-- Game -->
+      <div id="ftk-game" style="display:none">
+
+        <!-- ─── Sticky word bank tray ─────────────────────────────────────── -->
+        <div class="ftk-bank-tray">
+
+          <!-- Toprow: hint · progress · gear -->
+          <div class="ftk-tray-toprow">
+            <button class="ftk-hint-btn" id="ftk-hint-btn" type="button">💡 Hint: English</button>
+            <span class="ftk-progress-label" id="ftk-progress-text">1 of 31</span>
+            <button class="ftk-gear-btn" id="ftk-gear-btn" type="button" aria-label="Open settings">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="ftk-progress-bar-wrap">
+            <div class="ftk-progress-fill" id="ftk-progress-fill" style="width:0%"></div>
+          </div>
+
+          <!-- Word chips -->
+          <div class="ftk-choices" id="ftk-choices" role="group" aria-label="Answer choices"></div>
+
+          <!-- Reset -->
+          <div class="ftk-bank-footer">
+            <button class="ftk-reset-btn" id="ftk-reset-btn" type="button" style="display:none" aria-label="Reset word selections">
+              &#8635; Reset
+            </button>
+          </div>
+
+        </div><!-- /ftk-bank-tray -->
+
+        <!-- ─── Wrong answer feedback ──────────────────────────────────────── -->
+        <div class="ftk-feedback" id="ftk-feedback" role="status" aria-live="polite" style="display:none"></div>
+
+        <!-- ─── Story lines card ──────────────────────────────────────────── -->
+        <div class="ftk-q-card">
+          <div class="ftk-q-tag" id="ftk-level-badge">Easy</div>
+          <div class="ftk-sentence" id="ftk-sentence" aria-live="polite" aria-label="Story sentence with blanks"></div>
+        </div>
+
+        <!-- ─── Correct answer reveal ─────────────────────────────────────── -->
+        <div class="ftk-success" id="ftk-completed" style="display:none" aria-live="polite">
+          <div class="ftk-correct-tag">&#10003; All correct!</div>
+          <div class="ftk-done-sentence" id="ftk-completed-sentence"></div>
+          <div class="ftk-say-loud">&#128483; Say it out loud!</div>
+          <div class="ftk-talk-box">
+            <div class="ftk-talk-label">Talk About It</div>
+            <div id="ftk-talk-prompt"></div>
+          </div>
+          <button class="ftk-next-btn" id="ftk-next-btn" type="button">Next &rarr;</button>
+        </div>
+
+        <!-- ─── No questions for level ────────────────────────────────────── -->
+        <div class="ftk-no-q" id="ftk-no-questions" style="display:none">
+          <p>No questions for this difficulty yet. Try a different level.</p>
+          <button class="ftk-outline-btn" id="ftk-goto-l1-btn" type="button">Try Easy</button>
+        </div>
+
+      </div><!-- /ftk-game -->
+
+      <!-- Completion screen -->
+      <div class="ftk-done-screen" id="ftk-completion" style="display:none" aria-live="polite">
+        <div class="ftk-done-card">
+          <div class="ftk-done-emoji" aria-hidden="true">&#127881;</div>
+          <h2 class="ftk-done-title">Great job!<br>You filled the kahani!</h2>
+          <p class="ftk-done-score" id="ftk-completion-score"></p>
+          <div class="ftk-done-actions">
+            <button class="ftk-primary-btn" id="ftk-replay-btn" type="button">Play Again</button>
+            <button class="ftk-outline-btn" id="ftk-change-level-btn" type="button">Choose Difficulty</button>
+            <a class="ftk-ghost-link" href="javascript:history.back()">&larr; Back to Extras</a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <script src="/qr/assets/js/fill-the-kahani.js"></script>
+
+  </body>
+</html>

@@ -1,258 +1,484 @@
-/* GLOBAL “NEWSPAPER” FEEL */
+/* =====================================================================
+   THE KAHANI TIMES — AUDIO NEWSLETTER
+   Colorful vintage newspaper style
+===================================================================== */
+
+:root {
+  --cream:     #fdf9f0;
+  --parchment: #f3ebda;
+  --bg:        #d8d3c4;
+  --ink:       #1e1a12;
+  --ink-mid:   #3d3629;
+  --ink-light: #4a4338;
+  --ink-muted: #7b7264;
+  --border:    #c8bc9f;
+  --mustard:   #c9971a;
+  --coral:     #b85540;
+  --sage:      #5e8f64;
+  --teal:      #3580a0;
+  --tan:       #c4a882;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
-  font-family: "Authentic Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #e4e0d4;
+  font-family: "Authentic Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
   margin: 0;
   min-height: 100vh;
-
   display: flex;
-  justify-content: center;   /* horizontal centering */
-  align-items: center;       /* vertical centering */
-
-  padding: 1rem;
-  padding-bottom: 140px; /* space for audio bar */
-  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem 170px;
 }
-  
-  header {
-    padding: 0.75rem 1rem 0;
-    text-align: center;
-  }
-  
-  main {
-    width: 100%;
-    max-width: 960px;
-    padding: 1.75rem 1.5rem 2.25rem;
-    background: #fdf9f0;
-    border: 1px solid #d2c7af;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 0.35rem;
-    font-family: "Grandstander", system-ui, sans-serif;
-    font-size: 1.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border-bottom: 2px solid #333333;
-    padding-bottom: 0.35rem;
-  }
-  
-  .subtitle {
-    text-align: center;
-    color: #6b6255;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-  }
-  
-  .page-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.4rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .page-tab {
-    border: 1px solid #b7aa91;
-    background: #fdf9f0;
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
-      transform 0.1s ease;
-  }
-  
-  .page-tab:hover {
-    transform: translateY(-1px);
-  }
-  
-  .page-tab.active {
-    background: #333333;
-    color: #fdf9f0;
-    border-color: #333333;
-    font-weight: 600;
-  }
-  
-  .page-meta {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #7b7264;
-    margin-bottom: 1rem;
-    font-style: italic;
-  }
-  
-  .page-wrapper {
-    background: #fdf9f0;
-    border-radius: 0;
-    padding: 1rem 0;
-    border-top: 1px solid #d2c7af;
-    border-bottom: 1px solid #d2c7af;
-  }
-  
-  .newsletter-page {
-    display: none;
-    padding: 0.75rem 0.25rem;
-  }
-  
-  .newsletter-page.active {
-    display: block;
-  }
-  
-  .page-heading {
-    display: block;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid #d2c7af;
-    padding-bottom: 0.35rem;
-  }
-  
-  .page-heading h2 {
-    font-size: 1rem;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #333333;
-  }
-  
-  .page-tag {
-    font-size: 0.75rem;
-    padding: 0.1rem 0.5rem;
-    border-radius: 999px;
-    background: #f1e4cf;
-    color: #4a4338;
-    white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: inline-block;
-    margin-top: 0.3rem;
-  }
-  
-  .section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-    justify-items: center;
-  }
-  
-  /* ARTICLE-LIKE BUTTONS */
-  .section-button {
-    border: none;
-    border-radius: 0;
-    padding: 0.55rem 0.75rem;
-    text-align: left;
-    background: transparent;
-    cursor: pointer;
-    font-size: 0.88rem;
-    line-height: 1.35;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    border-left: 2px solid #b7aa91;
-    transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
-    max-width: 360px;
-    width: 100%;
-  }
-  
-  .section-button:hover {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: #333333;
-    transform: translateY(-1px);
-  }
-  
-  .section-button span.icon {
-    font-size: 1rem;
-    line-height: 1;
-    margin-top: 0.15rem;
-  }
-  
-  .section-button .label-main {
-    font-weight: 700;
-    text-transform: none;
-  }
-  
-  .section-button .label-sub {
-    display: block;
-    font-size: 0.78rem;
-    color: #6b6255;
-  }
-  
-  /* BOTTOM AUDIO BAR */
-  .audio-player-bar {
-    position: fixed !important;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    box-sizing: border-box;
-    background: #f1e4cf;
-    border-top: 1px solid #c9bda6;
-    padding: 0.75rem 1rem 1.25rem;
-    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
-    box-shadow: 0 -8px 20px rgba(15, 23, 42, 0.18);
-    z-index: 9999;
-  }
-  
+
+/* =====================================================================
+   MAIN CARD
+===================================================================== */
+main {
+  width: 100%;
+  max-width: 680px;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.18), 0 20px 50px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+
+/* =====================================================================
+   MASTHEAD
+===================================================================== */
+.masthead-eyebrow {
+  background: var(--ink);
+  color: var(--cream);
+  text-align: center;
+  font-family: "Grandstander", system-ui, sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+}
+
+.masthead-body {
+  padding: 1.5rem 1.75rem 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.masthead-kicker {
+  font-size: 0.67rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 0.55rem;
+}
+
+h1 {
+  font-family: "Grandstander", system-ui, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.masthead-rule {
+  width: 70%;
+  margin: 0.5rem auto 0.7rem;
+  border: none;
+  border-top: 3px double var(--ink);
+}
+
+.subtitle {
+  color: var(--ink-light);
+  font-size: 0.87rem;
+  margin: 0 0 1rem;
+  letter-spacing: 0.03em;
+}
+
+.masthead-chips {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.meta-chip {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 0.18rem 0.5rem;
+  border: 1.5px solid var(--ink-mid);
+  color: var(--ink-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--parchment);
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+/* =====================================================================
+   HOW TO LISTEN
+===================================================================== */
+.how-to-box {
+  margin: 1rem 1.75rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--parchment);
+  border: 1px dashed var(--tan);
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.how-to-title {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin: 0 0 0.3rem;
+}
+
+.how-to-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--ink-light);
+  line-height: 1.85;
+}
+
+/* =====================================================================
+   PAGE TABS
+===================================================================== */
+.page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 2px solid var(--ink);
+  background: var(--parchment);
+}
+
+.page-tab {
+  border: 2px solid var(--ink);
+  background: var(--cream);
+  color: var(--ink);
+  padding: 0.35rem 1.1rem;
+  border-radius: 4px;
+  font-family: "Grandstander", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.page-tab:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.page-tab:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.page-tab.active {
+  background: var(--mustard);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* =====================================================================
+   PAGE CONTENT AREA
+===================================================================== */
+.page-wrapper {
+  padding: 0;
+}
+
+.newsletter-page {
+  display: none;
+  padding: 1.25rem 1.75rem 1.6rem;
+}
+
+.newsletter-page.active {
+  display: block;
+}
+
+/* Page Heading */
+.page-heading {
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.page-heading h2 {
+  font-family: "Grandstander", system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0.1rem 0 0.45rem;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.page-tag {
+  display: inline-block;
+  font-size: 0.63rem;
+  padding: 0.14rem 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--cream);
+  border-radius: 2px;
+}
+
+.page-tag.story  { background: var(--coral); }
+.page-tag.advice { background: var(--teal); }
+.page-tag.vocab  { background: var(--sage); }
+.page-tag.letter { background: var(--mustard); color: var(--ink); }
+
+/* =====================================================================
+   AUDIO CARDS
+===================================================================== */
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.9rem;
+}
+
+.section-button {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 0;
+  text-align: left;
+  background: var(--cream);
+  cursor: pointer;
+  display: flex;
+  align-items: stretch;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.13s ease, box-shadow 0.13s ease, border-color 0.13s ease;
+  font-family: inherit;
+}
+
+.section-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.07);
+  border-color: var(--ink-mid);
+}
+
+.section-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Colored left bar */
+.card-accent-bar {
+  display: block;
+  width: 6px;
+  flex-shrink: 0;
+}
+
+.section-button.accent-coral   .card-accent-bar { background: var(--coral); }
+.section-button.accent-teal    .card-accent-bar { background: var(--teal); }
+.section-button.accent-sage    .card-accent-bar { background: var(--sage); }
+.section-button.accent-mustard .card-accent-bar { background: var(--mustard); }
+
+/* Speaker icon */
+.section-button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.65rem;
+  flex-shrink: 0;
+  color: var(--ink-muted);
+}
+
+.section-button.accent-coral   .icon { color: var(--coral); }
+.section-button.accent-teal    .icon { color: var(--teal); }
+.section-button.accent-sage    .icon { color: var(--sage); }
+.section-button.accent-mustard .icon { color: var(--mustard); }
+
+/* Card text */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1rem 0;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.label-main {
+  font-family: "Grandstander", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.label-sub {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.3;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card-badge {
+  font-size: 0.59rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.12rem 0.42rem;
+  border-radius: 2px;
+  font-weight: 700;
+  color: var(--cream);
+  white-space: nowrap;
+}
+
+.section-button.accent-coral   .card-badge { background: var(--coral); }
+.section-button.accent-teal    .card-badge { background: var(--teal); }
+.section-button.accent-sage    .card-badge { background: var(--sage); }
+.section-button.accent-mustard .card-badge { background: var(--mustard); color: var(--ink); }
+
+.tap-hint {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* =====================================================================
+   AUDIO PLAYER BAR
+===================================================================== */
+.audio-player-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: var(--cream);
+  border-top: 3px solid var(--mustard);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.16);
+  padding: 0.65rem 1rem 1rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+.audio-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.player-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.now-playing-badge {
+  font-family: "Grandstander", system-ui, sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mustard);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.now-playing {
+  font-size: 0.82rem;
+  color: var(--ink-light);
+}
+
+.now-playing strong {
+  color: var(--ink);
+}
+
+audio {
+  width: 100%;
+  max-width: 560px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* =====================================================================
+   RESPONSIVE
+===================================================================== */
+@media (min-width: 640px) {
   .audio-inner {
-    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .player-info {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.1rem;
+    flex-shrink: 0;
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 0.75rem 0.5rem 170px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .masthead-body {
+    padding: 1.1rem 1.1rem 1rem;
+  }
+
+  .how-to-box {
+    margin: 0.75rem 1.1rem;
+  }
+
+  .page-nav {
+    padding: 0.75rem 1.1rem;
     gap: 0.4rem;
-    text-align: center;
   }
-  
-  .now-playing {
-    font-size: 0.8rem;
-    color: #4a4338;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+
+  .page-tab {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.72rem;
   }
-  
-  .now-playing strong {
-    color: #111111;
-    text-transform: none;
-    letter-spacing: normal;
+
+  .newsletter-page {
+    padding: 1rem 1.1rem 1.25rem;
   }
-  
-  audio {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    display: block;
+
+  .section-grid {
+    grid-template-columns: 1fr;
   }
-  
-  @media (min-width: 640px) {
-    .audio-inner {
-      flex-direction: row;
-      justify-content: center;
-      gap: 1.25rem;
-      text-align: left;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    main {
-      margin: 1rem 0.5rem 2rem;
-      padding: 1.25rem 1rem 2rem;
-    }
-  
-    h1 {
-      font-size: 1.4rem;
-    }
-  
-    .subtitle {
-      font-size: 0.8rem;
-    }
-  
-    .section-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}

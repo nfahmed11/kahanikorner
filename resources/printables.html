@@ -266,17 +266,7 @@
         },
       ];
 
-      // ✅ SAME cart key for cross-page persistence
-      let cart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
-
-      // --- DOM ELEMENTS ---
-      const cartBtn = document.getElementById("cart-btn");
-      const closeCartBtn = document.getElementById("close-cart");
-      const cartOverlay = document.getElementById("cart-overlay");
-      const cartItemsContainer = document.getElementById("cart-items");
-      const cartTotalAmount = document.getElementById("cart-total-amount");
-      const cartBadge = document.getElementById("cart-badge");
-      const checkoutBtn = document.getElementById("checkout-btn");
+      // cart state, UI, and event wiring are handled by cart.js (loaded via navbar-loader.js)
 
       // ==============================
       // RESOURCES LIST (PDF + LINKS)
@@ -732,146 +722,10 @@
         });
       }
 
-      // --------- CART (same behavior as resources) ----------
       function init() {
         renderPDFs();
-        updateCartUI();
-
-        if (cartBtn) cartBtn.addEventListener("click", openCart);
-        if (closeCartBtn) closeCartBtn.addEventListener("click", closeCart);
-
-        if (cartOverlay) {
-          cartOverlay.addEventListener("click", (e) => {
-            if (e.target === cartOverlay) closeCart();
-          });
-        }
-
-        if (checkoutBtn) checkoutBtn.addEventListener("click", handleCheckout);
-
-        window.addEventListener("storage", (event) => {
-          if (event.key === "kahani_cart") {
-            cart = JSON.parse(event.newValue) || [];
-            updateCartUI();
-          }
-        });
       }
 
-      function saveCart() {
-        localStorage.setItem("kahani_cart", JSON.stringify(cart));
-      }
-
-      function updateCartUI() {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-        if (cartBadge) {
-          cartBadge.textContent = totalItems;
-          cartBadge.classList.toggle("hidden", totalItems === 0);
-        }
-
-        const total = cart.reduce(
-          (sum, item) => sum + item.price * item.quantity,
-          0
-        );
-        if (cartTotalAmount)
-          cartTotalAmount.textContent = `$${total.toFixed(2)}`;
-
-        if (!cartItemsContainer) return;
-
-        if (cart.length === 0) {
-          cartItemsContainer.innerHTML =
-            '<div class="empty-cart-msg">Your cart is empty.</div>';
-        } else {
-          cartItemsContainer.innerHTML = cart
-            .map(
-              (item) => `
-              <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}">
-                <div class="cart-item-details">
-                  <h4>${item.name}</h4>
-                  <div class="cart-item-price">$${(
-                    item.price * item.quantity
-                  ).toFixed(2)}</div>
-                  <div class="cart-controls">
-                    <button class="qty-btn" onclick="updateQuantity('${
-                      item.id
-                    }', -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQuantity('${
-                      item.id
-                    }', 1)">+</button>
-                    <button class="remove-btn" onclick="removeFromCart('${
-                      item.id
-                    }')">Remove</button>
-                  </div>
-                </div>
-              </div>
-            `
-            )
-            .join("");
-        }
-      }
-
-      window.updateQuantity = (productId, change) => {
-        const item = cart.find((item) => item.id === productId);
-        if (!item) return;
-        item.quantity += change;
-        if (item.quantity <= 0) {
-          window.removeFromCart(productId);
-        } else {
-          saveCart();
-          updateCartUI();
-        }
-      };
-
-      window.removeFromCart = (productId) => {
-        cart = cart.filter((item) => item.id !== productId);
-        saveCart();
-        updateCartUI();
-      };
-
-      function openCart() {
-        if (!cartOverlay) return;
-        cartOverlay.classList.remove("hidden");
-        setTimeout(() => cartOverlay.classList.add("open"), 10);
-      }
-
-      function closeCart() {
-        if (!cartOverlay) return;
-        cartOverlay.classList.remove("open");
-        setTimeout(() => cartOverlay.classList.add("hidden"), 300);
-      }
-
-      async function handleCheckout() {
-        if (!checkoutBtn || cart.length === 0) return;
-
-        const { line_items } = buildStripePayload(cart);
-        const originalText = checkoutBtn.innerText;
-        checkoutBtn.innerText = "Redirecting to Stripe...";
-        checkoutBtn.disabled = true;
-
-        try {
-          const response = await fetch("/create-checkout-session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: line_items }),
-          });
-
-          if (!response.ok) {
-            alert("There was a problem starting checkout. Please try again.");
-            checkoutBtn.innerText = originalText;
-            checkoutBtn.disabled = false;
-            return;
-          }
-
-          const data = await response.json();
-          window.location.href = data.url;
-        } catch (err) {
-          console.error("Error:", err);
-          alert("Unexpected error. Please try again.");
-          checkoutBtn.innerText = originalText;
-          checkoutBtn.disabled = false;
-        }
-      }
 
       // floating hearts
       window.addEventListener("load", () => {

@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // autoplay might be blocked; user can press play
       });
 
-      nowPlaying.innerHTML = `Now playing: <strong>${title}</strong>`;
+      nowPlaying.innerHTML = `<strong>${title}</strong>`;
     });
   });
 });

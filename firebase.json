@@ -12,6 +12,10 @@
         "function": "createCheckoutSession"
       },
       {
+        "source": "/api/checkout/kahani-times-archive",
+        "function": "createArchiveCheckout"
+      },
+      {
         "source": "/api/generate-sentence",
         "function": "generateSentence"
       }

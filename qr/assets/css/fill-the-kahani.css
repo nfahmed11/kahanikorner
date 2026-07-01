@@ -1,0 +1,767 @@
+/* ── Fill the Kahani — Stylesheet ─────────────────────────────────────────
+   Warm desi-pastel palette · sticky word bank · centered popup settings
+   ──────────────────────────────────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Fredoka:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap");
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Color palette ───────────────────────────────────────────────────────── */
+:root {
+  /* surfaces */
+  --bg:            #fff7ea;
+  --bg2:           #fbe7e7;
+  --surface:       #ffffff;
+  --surface-alt:   #fef9f3;
+
+  /* teal (primary) */
+  --teal:          #2f8f8f;
+  --teal-lt:       #4aadad;
+  --teal-bg:       #dff4ec;
+
+  /* coral */
+  --coral-deep:    #d45a5a;
+  --coral-bg:      #fde8e3;
+
+  /* mango / gold */
+  --gold:          #c99a2e;
+  --gold-bg:       #fff3d0;
+  --gold-border:   #f0c96a;
+  --mango:         #ffd98a;
+
+  /* lavender */
+  --lavender:      #e9def8;
+
+  /* mint */
+  --mint:          #dff4ec;
+
+  /* plum */
+  --plum:          #2f2445;
+
+  /* text */
+  --text:          #2f2445;
+  --text-body:     #3d2f5c;
+  --text-mid:      #6b5480;
+  --text-muted:    #9488a8;
+
+  /* borders */
+  --border:        #e8dff5;
+  --border-warm:   #eaddd0;
+
+  /* success */
+  --success-bg:    #dff4ec;
+  --success:       #1a6a45;
+  --success-bdr:   #a8d9c0;
+
+  /* error */
+  --error-bg:      #fde8e3;
+  --error:         #a02222;
+  --error-bdr:     #f5b0a0;
+
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+html, body { min-height: 100vh; min-height: 100svh; }
+body {
+  font-family: "Fredoka", sans-serif;
+  background: linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%) fixed;
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Toprow inside sticky tray (hint · progress · gear) ──────────────────── */
+.ftk-tray-toprow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+/* progress label centred via auto margins */
+.ftk-tray-toprow .ftk-progress-label { flex: 1; text-align: center; }
+
+.ftk-back {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--teal);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+.ftk-back:hover { opacity: 1; }
+
+.ftk-tray-title {
+  flex: 1;
+  text-align: center;
+  font-family: "Grandstander", cursive;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--plum);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ftk-gear-btn {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid rgba(47, 36, 69, 0.18);
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-mid);
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.ftk-gear-btn:hover { background: rgba(255,255,255,0.9); color: var(--teal); }
+.ftk-gear-btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* ── Lang warning ────────────────────────────────────────────────────────── */
+.ftk-lang-warning {
+  font-size: 0.72rem;
+  color: var(--coral-deep);
+  font-weight: 600;
+  margin-top: 0.45rem;
+  display: none;
+  animation: ftk-fadein 0.2s;
+}
+
+/* ── Settings overlay ────────────────────────────────────────────────────── */
+.ftk-settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(47, 36, 69, 0.52);
+  z-index: 190;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.ftk-settings-overlay.open { opacity: 1; pointer-events: all; }
+
+/* ── Settings popup modal ────────────────────────────────────────────────── */
+.ftk-settings-drawer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%) scale(0.93);
+  opacity: 0;
+  pointer-events: none;
+  width: min(88vw, 380px);
+  background: var(--surface);
+  border-radius: 22px;
+  padding: 1.4rem 1.5rem 1.8rem;
+  z-index: 200;
+  box-shadow: 0 20px 64px rgba(47, 36, 69, 0.22), 0 4px 16px rgba(47, 36, 69, 0.10);
+  transition: transform 0.28s cubic-bezier(0.34, 1.36, 0.64, 1), opacity 0.2s ease;
+}
+.ftk-settings-drawer.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ftk-drawer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.35rem;
+}
+
+.ftk-drawer-title {
+  font-family: "Grandstander", cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ftk-drawer-close {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--border);
+  background: var(--surface-alt);
+  border-radius: 50%;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.ftk-drawer-close:hover { background: var(--error-bg); border-color: var(--error-bdr); color: var(--error); }
+
+.ftk-drawer-section { margin-bottom: 1.1rem; }
+.ftk-drawer-section:last-child { margin-bottom: 0; }
+
+.ftk-drawer-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Settings pills ──────────────────────────────────────────────────────── */
+.ftk-spills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ftk-spill {
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text-body);
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.ftk-spill:hover:not(.ftk-spill--active) { border-color: var(--teal-lt); color: var(--teal); background: var(--teal-bg); }
+.ftk-spill--active { background: var(--teal); border-color: var(--teal); color: #ffffff; }
+.ftk-spill:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* ── Main layout ─────────────────────────────────────────────────────────── */
+.ftk-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 0 3.5rem;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.ftk-empty-state { text-align: center; padding: 3rem 1rem; }
+.ftk-empty-icon  { font-size: 3rem; margin-bottom: 0.85rem; }
+.ftk-empty-title { font-family: "Grandstander", cursive; font-size: 1.4rem; color: var(--text); margin-bottom: 0.55rem; }
+.ftk-empty-text  { color: var(--text-mid); font-size: 0.95rem; line-height: 1.55; margin-bottom: 1.25rem; }
+
+/* ── Sticky word bank tray ───────────────────────────────────────────────── */
+.ftk-bank-tray {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, var(--mint) 0%, var(--lavender) 100%);
+  border-radius: 0 0 22px 22px;
+  padding: 0.65rem 1rem 0.8rem;
+  box-shadow: 0 6px 28px rgba(47, 36, 69, 0.12);
+  margin-bottom: 1rem;
+}
+
+/* ── Meta row: settings chip · hint · progress ───────────────────────────── */
+.ftk-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.ftk-settings-chip {
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 2px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.ftk-settings-chip:hover { color: var(--teal); background: rgba(255,255,255,0.95); }
+.ftk-settings-chip:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+.ftk-progress-label { font-size: 0.72rem; font-weight: 700; color: var(--text-mid); white-space: nowrap; }
+
+/* ── Progress bar ────────────────────────────────────────────────────────── */
+.ftk-progress-bar-wrap {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.7rem;
+}
+.ftk-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal) 0%, var(--gold) 60%, var(--coral-deep) 100%);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* ── Word chips (inside tray) ────────────────────────────────────────────── */
+.ftk-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+/* JS also sets class ftk-choices--chips; let that inherit the above */
+.ftk-choices--chips { /* inherits .ftk-choices */ }
+
+/* Reset footer inside tray */
+.ftk-bank-footer { display: flex; justify-content: center; margin-top: 0.5rem; min-height: 1px; }
+
+/* ── Question card ───────────────────────────────────────────────────────── */
+.ftk-q-card {
+  background: var(--surface);
+  border-radius: 20px;
+  border: 1.5px solid var(--border-warm);
+  padding: 1.25rem 1.2rem 1.45rem;
+  box-shadow: 0 2px 18px rgba(47, 36, 69, 0.07);
+  margin: 0 0.5rem 0.9rem;
+  scroll-margin-top: 180px;
+}
+
+.ftk-q-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  background: var(--teal-bg);
+  border: 1.5px solid rgba(47, 143, 143, 0.4);
+  border-radius: 20px;
+  padding: 2px 12px;
+  margin-bottom: 0.9rem;
+  font-family: "Grandstander", cursive;
+}
+
+/* ── Sentence ────────────────────────────────────────────────────────────── */
+.ftk-sentence { line-height: 1.6; }
+.ftk-sentence-line { display: block; }
+.ftk-sentence-line + .ftk-sentence-line { margin-top: 0.55rem; }
+
+.ftk-sentence-line.roman-text {
+  font-family: "Fredoka", sans-serif;
+  font-size: clamp(1rem, 4vw, 1.15rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 2;
+}
+.ftk-sentence-line.urdu-text {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+  font-weight: 500;
+  color: var(--text);
+  text-align: right;
+  line-height: 2.6;
+}
+.ftk-sentence-line.english-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  border-top: 1px dashed var(--border-warm);
+  padding-top: 0.35rem;
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+
+/* ── Blank spans ─────────────────────────────────────────────────────────── */
+.ftk-blank {
+  display: inline-block;
+  min-width: 80px;
+  height: 1.5em;
+  border-bottom: 3px solid var(--teal-lt);
+  margin: 0 4px;
+  vertical-align: bottom;
+  background: rgba(47, 143, 143, 0.07);
+  border-radius: 4px 4px 0 0;
+  transition: all 0.15s;
+}
+.ftk-blank--empty { cursor: crosshair; }
+.ftk-blank--over {
+  background: rgba(47, 143, 143, 0.22);
+  border-bottom-color: var(--teal);
+  border-bottom-width: 4px;
+  min-width: 96px;
+  box-shadow: 0 4px 16px rgba(47, 143, 143, 0.25);
+}
+.ftk-blank--filled {
+  background: var(--teal);
+  color: #ffffff;
+  border-bottom: none;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-weight: 700;
+  min-width: auto;
+  height: auto;
+  line-height: 1.5;
+  cursor: default;
+}
+.ftk-blank--urdu { font-family: "Noto Nastaliq Urdu", serif; }
+
+/* ── Word chips ──────────────────────────────────────────────────────────── */
+.word-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.05rem;
+  border-radius: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: var(--surface);
+  color: var(--text-body);
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: grab;
+  touch-action: none;
+  transition: all 0.18s;
+  min-height: 40px;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0 2px 6px rgba(47, 36, 69, 0.10);
+  text-align: center;
+}
+.word-chip:hover:not(:disabled):not(.dragging) {
+  border-color: var(--teal-lt);
+  color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(47, 143, 143, 0.22);
+}
+.word-chip:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.word-chip.dragging { opacity: 0.22; transform: scale(0.92); cursor: grabbing; }
+.word-chip.used     { display: none; }
+
+/* Ghost element that floats during drag */
+.word-chip--ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.93;
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0 12px 36px rgba(47, 36, 69, 0.28);
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #ffffff;
+  transition: none !important;
+  cursor: grabbing;
+}
+
+/* ── Bilingual chips ─────────────────────────────────────────────────────── */
+.word-chip--bilingual {
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0.3rem 0.9rem 0.38rem;
+  min-height: 50px;
+  line-height: 1;
+}
+.chip-roman {
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+  display: block;
+  text-align: center;
+}
+.chip-urdu {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  display: block;
+  direction: rtl;
+  text-align: center;
+}
+
+/* Urdu-only chips (dir=rtl, not bilingual) also get Nastaliq */
+.word-chip[dir="rtl"] {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: 1rem;
+  line-height: 1.9;
+}
+.word-chip--ghost.word-chip--bilingual { flex-direction: column; align-items: center; }
+
+/* ── Tap-selected chip ───────────────────────────────────────────────────── */
+.ftk-chip--selected {
+  border-color: var(--teal) !important;
+  background: var(--teal-bg) !important;
+  color: var(--teal) !important;
+  box-shadow: 0 0 0 3px rgba(47, 143, 143, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ── Reset button ────────────────────────────────────────────────────────── */
+.ftk-reset-btn {
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--text-mid);
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.ftk-reset-btn:hover { color: var(--coral-deep); border-color: var(--coral-deep); background: rgba(255,255,255,0.85); }
+
+/* ── Hint button ─────────────────────────────────────────────────────────── */
+.ftk-hint-btn {
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  border: 1.5px solid var(--gold-border);
+  background: var(--gold-bg);
+  color: var(--gold);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.ftk-hint-btn:hover { background: var(--mango); border-color: var(--gold); }
+.ftk-hint-btn--active {
+  background: var(--mango);
+  border-color: var(--gold);
+  color: var(--plum);
+}
+.ftk-hint-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ── Wrong-answer feedback ───────────────────────────────────────────────── */
+.ftk-feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0 0.5rem 0.75rem;
+  animation: ftk-fadein 0.2s;
+}
+.ftk-feedback--incorrect { background: var(--error-bg); border: 1.5px solid var(--error-bdr); color: var(--error); }
+.ftk-feedback--correct   { background: var(--success-bg); border: 1.5px solid var(--success-bdr); color: var(--success); }
+.ftk-feedback-icon { font-size: 1.05rem; }
+
+/* ── Multi-slot layout ───────────────────────────────────────────────────── */
+.ftk-slot { padding: 0.1rem 0; }
+.ftk-slot + .ftk-slot {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1.5px dashed var(--border-warm);
+}
+
+.ftk-slot-english {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.2rem;
+  line-height: 1.45;
+  border-top: 1px dashed rgba(148, 136, 168, 0.3);
+  padding-top: 0.25rem;
+}
+
+/* ── Success reveal ──────────────────────────────────────────────────────── */
+.ftk-success {
+  background: var(--success-bg);
+  border: 1.5px solid var(--success-bdr);
+  border-radius: 20px;
+  padding: 1.2rem;
+  margin: 0 0.5rem 0.9rem;
+  animation: ftk-slideup 0.3s ease;
+}
+
+.ftk-correct-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--success);
+  color: #ffffff;
+  font-family: "Grandstander", cursive;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 0.9rem;
+}
+
+.ftk-done-sentence {
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--success-bdr);
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.85rem;
+}
+.ftk-slot-sep {
+  border: none;
+  border-top: 1.5px dashed rgba(26, 106, 69, 0.2);
+  margin: 0.5rem 0;
+}
+.ftk-completed-line { display: block; }
+.ftk-completed-line + .ftk-completed-line { margin-top: 0.45rem; }
+.ftk-completed-line.roman-text   { font-family: "Fredoka", sans-serif; font-size: 0.98rem; font-weight: 700; color: var(--text); line-height: 1.5; }
+.ftk-completed-line.urdu-text    { font-family: "Noto Nastaliq Urdu", serif; font-size: 1.15rem; color: var(--text); text-align: right; line-height: 2.4; }
+.ftk-completed-line.english-text { font-size: 0.78rem; color: var(--text-muted); font-style: italic; border-top: 1px dashed rgba(26, 106, 69, 0.2); padding-top: 0.35rem; margin-top: 0.2rem; line-height: 1.4; }
+
+.ftk-say-loud {
+  font-family: "Grandstander", cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-align: center;
+  margin: 0.7rem 0 0.8rem;
+}
+
+.ftk-talk-box {
+  background: var(--gold-bg);
+  border: 1.5px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.9rem;
+}
+.ftk-talk-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  font-family: "Grandstander", cursive;
+  margin-bottom: 0.4rem;
+}
+.talk-roman   { font-family: "Fredoka", sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--text-body); line-height: 1.5; margin-bottom: 3px; }
+.talk-urdu    { font-family: "Noto Nastaliq Urdu", serif; font-size: 1.05rem; color: var(--text-body); text-align: right; line-height: 2.3; display: block; }
+.talk-english { font-size: 0.76rem; color: var(--text-muted); font-style: italic; margin-top: 2px; }
+
+.ftk-next-btn {
+  display: block;
+  width: 100%;
+  padding: 0.82rem;
+  background: var(--teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Grandstander", cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ftk-next-btn:hover  { background: var(--teal-lt); transform: translateY(-1px); }
+.ftk-next-btn:active { transform: translateY(0); }
+.ftk-next-btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+
+/* ── No questions for level ──────────────────────────────────────────────── */
+.ftk-no-q {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--surface);
+  border: 1.5px dashed var(--border);
+  border-radius: 16px;
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0.5rem;
+}
+.ftk-no-q p { margin-bottom: 1rem; }
+
+/* ── Completion screen ───────────────────────────────────────────────────── */
+.ftk-done-screen { padding: 1.5rem 0.5rem; animation: ftk-fadein 0.4s; }
+.ftk-done-card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border: 1.5px solid var(--border-warm);
+  box-shadow: 0 4px 24px rgba(47, 36, 69, 0.08);
+}
+.ftk-done-emoji { font-size: 3rem; margin-bottom: 0.75rem; }
+.ftk-done-title {
+  font-family: "Grandstander", cursive;
+  font-size: clamp(1.3rem, 5vw, 1.65rem);
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.ftk-done-score  { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.ftk-done-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+/* ── Shared CTA buttons / link ───────────────────────────────────────────── */
+.ftk-primary-btn {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  padding: 0.78rem;
+  background: var(--teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Grandstander", cursive;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ftk-primary-btn:hover { background: var(--teal-lt); transform: translateY(-1px); }
+.ftk-primary-btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+.ftk-outline-btn {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  padding: 0.72rem;
+  background: var(--surface);
+  color: var(--text-body);
+  border: 2px solid var(--border-warm);
+  border-radius: 12px;
+  font-family: "Grandstander", cursive;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ftk-outline-btn:hover { border-color: var(--teal-lt); color: var(--teal); }
+.ftk-outline-btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+.ftk-ghost-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.4rem 0;
+  display: inline-block;
+}
+.ftk-ghost-link:hover { color: var(--text-mid); }
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes ftk-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  60%       { transform: translateX(6px); }
+}
+@keyframes ftk-slideup {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ftk-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ftk-bounce {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.15); }
+  65%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+.ftk-blank--bounce { animation: ftk-bounce 0.45s ease; }
+.ftk-blank--shake  { animation: ftk-shake 0.4s ease; }
+
+/* ── Touch / coarse-pointer enlargements ─────────────────────────────────── */
+@media (pointer: coarse) {
+  .ftk-blank          { min-width: 96px; height: 1.8em; }
+  .word-chip          { min-height: 44px; padding: 0.55rem 1.2rem; }
+  .word-chip--bilingual { min-height: 56px; }
+}

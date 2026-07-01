@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Ayaan ke Aam</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img
+          src="/assets/images/homepage/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo" />
+      </a>
+    </header>
+
+    <h1 id="story-title"></h1>
+
+    <div class="container">
+      <div id="book-cover" class="book-placeholder"></div>
+
+      <div class="level-picker" id="level-picker"></div>
+
+      <div class="button-container" id="button-container"></div>
+    </div>
+
+    <script>
+      window.STORY_HOME_CONFIG = {
+        slug: "ayaan-ke-aam",
+        title: "Ayaan ke Aam",
+        coverImage: "./assets/images/bookcover.png",
+        readAloudHref: "./activities/thekahanitimes.html",
+
+        /*
+    ┌────────────────────────────────────────────────────────────────────────┐
+    │  AI HELPER PROMPT — use this to generate content for a new issue.     │
+    └────────────────────────────────────────────────────────────────────────┘
+
+    Step 1: Split the monthly story into story.lines objects:
+      { id, romanUrdu, urdu, english }
+
+    Step 2: Create Fill the Kahani questions using those line IDs in sourceLineIds.
+    For each question include:
+      id, level, sourceLineIds, missingWords,
+      romanUrdu, urdu, english,
+      completedRomanUrdu, completedUrdu, completedEnglish,
+      choices, answer
+
+    Rules:
+    - Use only vocabulary from this story.
+    - Make blanks useful content words (nouns, verbs).
+    - Keep Roman Urdu beginner-friendly.
+    - Urdu script must be correct.
+    - English should be a direct translation.
+    - answer[] entries must match the ___ blanks left-to-right.
+    - Level 1: one blank, 3 choices (auto-check)
+    - Level 2: two blanks, word-bank chips
+    - Level 3: two sentences, 2–3 blanks, word bank
+    - Level 4 (Story Mode): 3–4 sentences, 3–5 blanks, word bank
+    */
+
+        story: {
+          title: "Safiyah Aur Chaand",
+          lines: [
+            {
+              id: "line-1",
+              romanUrdu: "Safiyah Abu ke saath bakra mandi gayi.",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u0627\u0628\u0648 \u06a9\u06d2 \u0633\u0627\u062a\u06be \u0628\u06a9\u0631\u06c1 \u0645\u0646\u0688\u06cc \u06af\u0626\u06cc\u06d4",
+              english: "Safiyah went to the goat market with Abu.",
+            },
+            {
+              id: "line-2",
+              romanUrdu: "Mandi mein bakray, gaayein, aur bheirein khari thin.",
+              urdu: "\u0645\u0646\u0688\u06cc \u0645\u06cc\u06ba \u0628\u06a9\u0631\u06d2\u060c \u06af\u0627\u0626\u06cc\u06ba\u060c \u0627\u0648\u0631 \u0628\u06be\u06cc\u0691\u06cc\u06ba \u06a9\u06be\u0691\u06cc \u062a\u06be\u06cc\u06ba\u06d4",
+              english: "In the market, goats, cows, and sheep were standing.",
+            },
+            {
+              id: "line-3",
+              romanUrdu:
+                "Kahin \u201cmeh meh,\u201d kahin ghantiyon ki \u201cchan chan,\u201d aur kahin logon ki baatein sunai de rahi thin.",
+              urdu: "\u06a9\u06c1\u06cc\u06ba \u201c\u0645\u06cc\u06ba \u0645\u06cc\u06ba\u201d\u060c \u06a9\u06c1\u06cc\u06ba \u06af\u06be\u0646\u0679\u06cc\u0648\u06ba \u06a9\u06cc \u201c\u0686\u06be\u0646 \u0686\u06be\u0646\u201d\u060c \u0627\u0648\u0631 \u06a9\u06c1\u06cc\u06ba \u0644\u0648\u06af\u0648\u06ba \u06a9\u06cc \u0628\u0627\u062a\u06cc\u06ba \u0633\u0646\u0627\u0626\u06cc \u062f\u06d2 \u0631\u06c1\u06cc \u062a\u06be\u06cc\u06ba\u06d4",
+              english:
+                "In one place there was \u201cmeh meh,\u201d in another the \u201cchan chan\u201d of bells, and in another the sound of people talking.",
+            },
+            {
+              id: "line-4",
+              romanUrdu: "Safiyah ka dil khushi se dhad dhad kar raha tha.",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u06a9\u0627 \u062f\u0644 \u062e\u0648\u0634\u06cc \u0633\u06d2 \u062f\u06be\u0691 \u062f\u06be\u0691 \u06a9\u0631 \u0631\u06c1\u0627 \u062a\u06be\u0627\u06d4",
+              english: "Safiyah's heart was beating with happiness.",
+            },
+            {
+              id: "line-5",
+              romanUrdu: "Phir us ne aik chota sa bakra dekha.",
+              urdu: "\u067e\u06be\u0631 \u0627\u0633 \u0646\u06d2 \u0627\u06cc\u06a9 \u0686\u06be\u0648\u0679\u0627 \u0633\u0627 \u0628\u06a9\u0631\u06c1 \u062f\u06cc\u06a9\u06be\u0627\u06d4",
+              english: "Then she saw a small goat.",
+            },
+            {
+              id: "line-6",
+              romanUrdu:
+                "Uski aankhein narm thin, aur uske maathey par safed nishaan bilkul chotay chaand jaisa tha.",
+              urdu: "\u0627\u0633 \u06a9\u06cc \u0622\u0646\u06a9\u06be\u06cc\u06ba \u0646\u0631\u0645 \u062a\u06be\u06cc\u06ba\u060c \u0627\u0648\u0631 \u0627\u0633 \u06a9\u06d2 \u0645\u0627\u062a\u06be\u06d2 \u067e\u0631 \u0633\u0641\u06cc\u062f \u0646\u0634\u0627\u0646 \u0628\u0627\u0644\u06a9\u0644 \u0686\u06be\u0648\u0679\u06d2 \u0686\u0627\u0646\u062f \u062c\u06cc\u0633\u0627 \u062a\u06be\u0627\u06d4",
+              english:
+                "Its eyes were gentle, and the white mark on its forehead was just like a little moon.",
+            },
+            {
+              id: "line-7",
+              romanUrdu:
+                "Safiyah ne Abu ka haath pakar kar kaha, \u201cAbu, kya hum isay ghar le ja saktay hain?\u201d",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0627\u0628\u0648 \u06a9\u0627 \u06c1\u0627\u062a\u06be \u067e\u06a9\u0691 \u06a9\u0631 \u06a9\u06c1\u0627\u060c \u201c\u0627\u0628\u0648\u060c \u06a9\u06cc\u0627 \u06c1\u0645 \u0627\u0633\u06d2 \u06af\u06be\u0631 \u0644\u06d2 \u062c\u0627 \u0633\u06a9\u062a\u06d2 \u06c1\u06cc\u06ba\u061f\u201d",
+              english:
+                "Safiyah held Abu's hand and said, \u201cAbu, can we take it home?\u201d",
+            },
+            {
+              id: "line-8",
+              romanUrdu: "Abu muskura diye.",
+              urdu: "\u0627\u0628\u0648 \u0645\u0633\u06a9\u0631\u0627 \u062f\u06cc\u06d2\u06d4",
+              english: "Abu smiled.",
+            },
+            {
+              id: "line-9",
+              romanUrdu:
+                "\u201cTheek hai, lekin iska khayal tum bhi rakhogi.\u201d",
+              urdu: "\u201c\u0679\u06be\u06cc\u06a9 \u06c1\u06d2\u060c \u0644\u06cc\u06a9\u0646 \u0627\u0633 \u06a9\u0627 \u062e\u06cc\u0627\u0644 \u062a\u0645 \u0628\u06be\u06cc \u0631\u06a9\u06be\u0648 \u06af\u06cc\u06d4\u201d",
+              english: "\u201cOkay, but you will also take care of it.\u201d",
+            },
+            {
+              id: "line-10",
+              romanUrdu:
+                "Safiyah ne foran kaha, \u201cIska naam Chaand hoga!\u201d",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0641\u0648\u0631\u0627\u064b \u06a9\u06c1\u0627\u060c \u201c\u0627\u0633 \u06a9\u0627 \u0646\u0627\u0645 \u0686\u0627\u0646\u062f \u06c1\u0648\u06af\u0627!\u201d",
+              english:
+                "Safiyah immediately said, \u201cIts name will be Chaand!\u201d",
+            },
+            {
+              id: "line-11",
+              romanUrdu:
+                "Ghar aa kar Safiyah ne gattay ki takhti par Chaand ka naam likha.",
+              urdu: "\u06af\u06be\u0631 \u0622 \u06a9\u0631 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u06af\u062a\u06d2 \u06a9\u06cc \u062a\u062e\u062a\u06cc \u067e\u0631 \u0686\u0627\u0646\u062f \u06a9\u0627 \u0646\u0627\u0645 \u0644\u06a9\u06be\u0627\u06d4",
+              english:
+                "After coming home, Safiyah wrote Chaand's name on a cardboard sign.",
+            },
+            {
+              id: "line-12",
+              romanUrdu:
+                "Us ne Chaand ko pani diya, chara khilaya, aur har shaam uske paas baithti.",
+              urdu: "\u0627\u0633 \u0646\u06d2 \u0686\u0627\u0646\u062f \u06a9\u0648 \u067e\u0627\u0646\u06cc \u062f\u06cc\u0627\u060c \u0686\u0627\u0631\u06c1 \u06a9\u06be\u0644\u0627\u06cc\u0627\u060c \u0627\u0648\u0631 \u06c1\u0631 \u0634\u0627\u0645 \u0627\u0633 \u06a9\u06d2 \u067e\u0627\u0633 \u0628\u06cc\u0679\u06be\u062a\u06cc\u06d4",
+              english:
+                "She gave Chaand water, fed him fodder, and sat near him every evening.",
+            },
+            {
+              id: "line-13",
+              romanUrdu:
+                "Chaand halki si \u201cmee mee\u201d karta, aur uski ghanti \u201cchan chan\u201d bajti.",
+              urdu: "\u0686\u0627\u0646\u062f \u06c1\u0644\u06a9\u06cc \u0633\u06cc \u201c\u0645\u06cc\u06ba \u0645\u06cc\u06ba\u201d \u06a9\u0631\u062a\u0627\u060c \u0627\u0648\u0631 \u0627\u0633 \u06a9\u06cc \u06af\u06be\u0646\u0679\u06cc \u201c\u0686\u06be\u0646 \u0686\u06be\u0646\u201d \u0628\u062c\u062a\u06cc\u06d4",
+              english:
+                "Chaand softly said \u201cmee mee,\u201d and his bell went \u201cchan chan.\u201d",
+            },
+            {
+              id: "line-14",
+              romanUrdu:
+                "Safiyah kehti, \u201cChaand mera dost hai. Main isay hamesha rakhungi.\u201d",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u06a9\u06c1\u062a\u06cc\u060c \u201c\u0686\u0627\u0646\u062f \u0645\u06cc\u0631\u0627 \u062f\u0648\u0633\u062a \u06c1\u06d2\u06d4 \u0645\u06cc\u06ba \u0627\u0633\u06d2 \u06c1\u0645\u06cc\u0634\u06c1 \u0631\u06a9\u06be\u0648\u06ba \u06af\u06cc\u06d4\u201d",
+              english:
+                "Safiyah would say, \u201cChaand is my friend. I will keep him forever.\u201d",
+            },
+            {
+              id: "line-15",
+              romanUrdu:
+                "Eid qareeb aayi to Safiyah ne baron ko qurbani ki baat karte suna.",
+              urdu: "\u0639\u06cc\u062f \u0642\u0631\u06cc\u0628 \u0622\u0626\u06cc \u062a\u0648 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0628\u0691\u0648\u06ba \u06a9\u0648 \u0642\u0631\u0628\u0627\u0646\u06cc \u06a9\u06cc \u0628\u0627\u062a \u06a9\u0631\u062a\u06d2 \u0633\u0646\u0627\u06d4",
+              english:
+                "When Eid came near, Safiyah heard the grown-ups talking about qurbani.",
+            },
+            {
+              id: "line-16",
+              romanUrdu: "Uski aankhon mein aansu aa gaye.",
+              urdu: "\u0627\u0633 \u06a9\u06cc \u0622\u0646\u06a9\u06be\u0648\u06ba \u0645\u06cc\u06ba \u0622\u0646\u0633\u0648 \u0622 \u06af\u0626\u06d2\u06d4",
+              english: "Tears came into her eyes.",
+            },
+            {
+              id: "line-17",
+              romanUrdu:
+                "\u201cLekin Abu, mujhe laga Chaand mera dost hai.\u201d",
+              urdu: "\u201c\u0644\u06cc\u06a9\u0646 \u0627\u0628\u0648\u060c \u0645\u062c\u06be\u06d2 \u0644\u06af\u0627 \u0686\u0627\u0646\u062f \u0645\u06cc\u0631\u0627 \u062f\u0648\u0633\u062a \u06c1\u06d2\u06d4\u201d",
+              english: "\u201cBut Abu, I thought Chaand was my friend.\u201d",
+            },
+            {
+              id: "line-18",
+              romanUrdu: "Ammi uske paas baith gayin.",
+              urdu: "\u0627\u0645\u06cc \u0627\u0633 \u06a9\u06d2 \u067e\u0627\u0633 \u0628\u06cc\u0679\u06be \u06af\u0626\u06cc\u06ba\u06d4",
+              english: "Ammi sat beside her.",
+            },
+            {
+              id: "line-19",
+              romanUrdu:
+                "\u201cBeta, dosti ka matlab sirf rakhna nahi hota.\u201d",
+              urdu: "\u201c\u0628\u06cc\u0679\u0627\u060c \u062f\u0648\u0633\u062a\u06cc \u06a9\u0627 \u0645\u0637\u0644\u0628 \u0635\u0631\u0641 \u0631\u06a9\u06be\u0646\u0627 \u0646\u06c1\u06cc\u06ba \u06c1\u0648\u062a\u0627\u06d4\u201d",
+              english:
+                "\u201cMy child, friendship does not only mean keeping something.\u201d",
+            },
+            {
+              id: "line-20",
+              romanUrdu:
+                "\u201cDosti ka matlab pyar, khayal, aur izzat bhi hota hai.\u201d",
+              urdu: "\u201c\u062f\u0648\u0633\u062a\u06cc \u06a9\u0627 \u0645\u0637\u0644\u0628 \u067e\u06cc\u0627\u0631\u060c \u062e\u06cc\u0627\u0644\u060c \u0627\u0648\u0631 \u0639\u0632\u062a \u0628\u06be\u06cc \u06c1\u0648\u062a\u0627 \u06c1\u06d2\u06d4\u201d",
+              english:
+                "\u201cFriendship also means love, care, and respect.\u201d",
+            },
+            {
+              id: "line-21",
+              romanUrdu:
+                "Abu ne narmi se kaha, \u201cQurbani zulm nahi hai.\u201d",
+              urdu: "\u0627\u0628\u0648 \u0646\u06d2 \u0646\u0631\u0645\u06cc \u0633\u06d2 \u06a9\u06c1\u0627\u060c \u201c\u0642\u0631\u0628\u0627\u0646\u06cc \u0638\u0644\u0645 \u0646\u06c1\u06cc\u06ba \u06c1\u06d2\u06d4\u201d",
+              english: "Abu said gently, \u201cQurbani is not cruelty.\u201d",
+            },
+            {
+              id: "line-22",
+              romanUrdu:
+                "\u201cYeh Allah ka hukum yaad karna, Nabi Ibrahim alayhi-s-salam ki kahani samajhna, aur apni khushi doosron ke saath baantna hai.\u201d",
+              urdu: "\u201c\u06cc\u06c1 \u0627\u0644\u0644\u06c1 \u06a9\u0627 \u062d\u06a9\u0645 \u06cc\u0627\u062f \u06a9\u0631\u0646\u0627\u060c \u0646\u0628\u06cc \u0627\u0628\u0631\u0627\u06c1\u06cc\u0645 \u0639\u0644\u06cc\u06c1 \u0627\u0644\u0633\u0644\u0627\u0645 \u06a9\u06cc \u06a9\u06c1\u0627\u0646\u06cc \u0633\u0645\u062c\u06be\u0646\u0627\u060c \u0627\u0648\u0631 \u0627\u067e\u0646\u06cc \u062e\u0648\u0634\u06cc \u062f\u0648\u0633\u0631\u0648\u06ba \u06a9\u06d2 \u0633\u0627\u062a\u06be \u0628\u0627\u0646\u0679\u0646\u0627 \u06c1\u06d2\u06d4\u201d",
+              english:
+                "\u201cIt is remembering Allah's command, understanding the story of Prophet Ibrahim, peace be upon him, and sharing our happiness with others.\u201d",
+            },
+            {
+              id: "line-23",
+              romanUrdu:
+                "\u201cBaat se baat banti hai, is liye tum jo poochna chaho pooch sakti ho.\u201d",
+              urdu: "\u201c\u0628\u0627\u062a \u0633\u06d2 \u0628\u0627\u062a \u0628\u0646\u062a\u06cc \u06c1\u06d2\u060c \u0627\u0633 \u0644\u06cc\u06d2 \u062a\u0645 \u062c\u0648 \u067e\u0648\u0686\u06be\u0646\u0627 \u0686\u0627\u06c1\u0648 \u067e\u0648\u0686\u06be \u0633\u06a9\u062a\u06cc \u06c1\u0648\u06d4\u201d",
+              english:
+                "\u201cTalking helps us understand, so you can ask whatever you want to ask.\u201d",
+            },
+            {
+              id: "line-24",
+              romanUrdu: "Safiyah ne bohat sawal kiye.",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0628\u06c1\u062a \u0633\u0648\u0627\u0644 \u06a9\u06cc\u06d2\u06d4",
+              english: "Safiyah asked many questions.",
+            },
+            {
+              id: "line-25",
+              romanUrdu: "Ammi Abu ne usay pyaar se samjhaya.",
+              urdu: "\u0627\u0645\u06cc \u0627\u0628\u0648 \u0646\u06d2 \u0627\u0633\u06d2 \u067e\u06cc\u0627\u0631 \u0633\u06d2 \u0633\u0645\u062c\u06be\u0627\u06cc\u0627\u06d4",
+              english: "Ammi and Abu explained it to her with love.",
+            },
+            {
+              id: "line-26",
+              romanUrdu:
+                "Safiyah ne socha, \u201cJab tak Chaand mere saath hai, main iska sab se acha khayal rakhungi.\u201d",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0633\u0648\u0686\u0627\u060c \u201c\u062c\u0628 \u062a\u06a9 \u0686\u0627\u0646\u062f \u0645\u06cc\u0631\u06d2 \u0633\u0627\u062a\u06be \u06c1\u06d2\u060c \u0645\u06cc\u06ba \u0627\u0633 \u06a9\u0627 \u0633\u0628 \u0633\u06d2 \u0627\u0686\u06be\u0627 \u062e\u06cc\u0627\u0644 \u0631\u06a9\u06be\u0648\u06ba \u06af\u06cc\u06d4\u201d",
+              english:
+                "Safiyah thought, \u201cAs long as Chaand is with me, I will take the best care of him.\u201d",
+            },
+            {
+              id: "line-27",
+              romanUrdu: "Eid ke din Safiyah ne Eid ke kapray pehne.",
+              urdu: "\u0639\u06cc\u062f \u06a9\u06d2 \u062f\u0646 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0639\u06cc\u062f \u06a9\u06d2 \u06a9\u067e\u0691\u06d2 \u067e\u06c1\u0646\u06d2\u06d4",
+              english: "On Eid day, Safiyah wore her Eid clothes.",
+            },
+            {
+              id: "line-28",
+              romanUrdu:
+                "Dil thora udaas tha, lekin jab us ne gosht ke hissay parosiyon aur zarooratmand gharon mein baantay, to logon ke chehray khil uthay.",
+              urdu: "\u062f\u0644 \u062a\u06be\u0648\u0691\u0627 \u0627\u062f\u0627\u0633 \u062a\u06be\u0627\u060c \u0644\u06cc\u06a9\u0646 \u062c\u0628 \u0627\u0633 \u0646\u06d2 \u06af\u0648\u0634\u062a \u06a9\u06d2 \u062d\u0635\u06d2 \u067e\u0691\u0648\u0633\u06cc\u0648\u06ba \u0627\u0648\u0631 \u0636\u0631\u0648\u0631\u062a \u0645\u0646\u062f \u06af\u06be\u0631\u0648\u06ba \u0645\u06cc\u06ba \u0628\u0627\u0646\u0679\u06d2\u060c \u062a\u0648 \u0644\u0648\u06af\u0648\u06ba \u06a9\u06d2 \u0686\u06c1\u0631\u06d2 \u06a9\u06be\u0644 \u0627\u0679\u06be\u06d2\u06d4",
+              english:
+                "Her heart was a little sad, but when she shared portions of meat with neighbors and families in need, people's faces lit up.",
+            },
+            {
+              id: "line-29",
+              romanUrdu:
+                "Safiyah ne dheere se kaha, \u201cEid ki khushi tab barhti hai jab hum usay baanttay hain.\u201d",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u062f\u06be\u06cc\u0631\u06d2 \u0633\u06d2 \u06a9\u06c1\u0627\u060c \u201c\u0639\u06cc\u062f \u06a9\u06cc \u062e\u0648\u0634\u06cc \u062a\u0628 \u0628\u0691\u06be\u062a\u06cc \u06c1\u06d2 \u062c\u0628 \u06c1\u0645 \u0627\u0633\u06d2 \u0628\u0627\u0646\u0679\u062a\u06d2 \u06c1\u06cc\u06ba\u06d4\u201d",
+              english:
+                "Safiyah softly said, \u201cEid happiness grows when we share it.\u201d",
+            },
+            {
+              id: "line-30",
+              romanUrdu:
+                "Raat ko Safiyah ne dua ki, \u201cAllah, Chaand ke liye rehmat, aur mujhe hamesha janwaron se narmi karna sikha.\u201d",
+              urdu: "\u0631\u0627\u062a \u06a9\u0648 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u062f\u0639\u0627 \u06a9\u06cc\u060c \u201c\u0627\u0644\u0644\u06c1\u060c \u0686\u0627\u0646\u062f \u06a9\u06d2 \u0644\u06cc\u06d2 \u0631\u062d\u0645\u062a\u060c \u0627\u0648\u0631 \u0645\u062c\u06be\u06d2 \u06c1\u0645\u06cc\u0634\u06c1 \u062c\u0627\u0646\u0648\u0631\u0648\u06ba \u0633\u06d2 \u0646\u0631\u0645\u06cc \u06a9\u0631\u0646\u0627 \u0633\u06a9\u06be\u0627\u06d4\u201d",
+              english:
+                "At night, Safiyah made dua, \u201cAllah, have mercy on Chaand, and always teach me to be gentle with animals.\u201d",
+            },
+            {
+              id: "line-31",
+              romanUrdu:
+                "Usay samajh aa gaya ke kuch alvida bhi apne peechay neki chor jatay hain.",
+              urdu: "\u0627\u0633\u06d2 \u0633\u0645\u062c\u06be \u0622 \u06af\u06cc\u0627 \u06a9\u06c1 \u06a9\u0686\u06be \u0627\u0644\u0648\u062f\u0627\u0639 \u0628\u06be\u06cc \u0627\u067e\u0646\u06d2 \u067e\u06cc\u0686\u06be\u06d2 \u0646\u06cc\u06a9\u06cc \u0686\u06be\u0648\u0691 \u062c\u0627\u062a\u06d2 \u06c1\u06cc\u06ba\u06d4",
+              english:
+                "She understood that some goodbyes leave goodness behind.",
+            },
+          ],
+        },
+
+        fillTheKahani: {
+          title: "Fill the Kahani",
+          subtitle: "Fill in missing words from this month's kahani.",
+          questions: [
+            // ── EASY (Level 1) ──────────────────────────────────────
+            {
+              id: "jun26-q1",
+              level: 1,
+              sourceLineIds: ["line-1"],
+              missingWords: ["bakra"],
+              romanUrdu: "Safiyah Abu ke saath ___ mandi gayi.",
+              urdu: "صفیہ ابو کے ساتھ ___ منڈی گئی۔",
+              english: "Safiyah went to the animal market with Abu.",
+              completedRomanUrdu: "Safiyah Abu ke saath bakra mandi gayi.",
+              completedUrdu: "صفیہ ابو کے ساتھ بکرہ منڈی گئی۔",
+              completedEnglish: "Safiyah went to the goat market with Abu.",
+              choices: [
+                {
+                  value: "bakra",
+                  romanUrdu: "bakra",
+                  urdu: "بکرہ",
+                  english: "goat",
+                },
+                {
+                  value: "aam",
+                  romanUrdu: "aam",
+                  urdu: "آم",
+                  english: "mango",
+                },
+                {
+                  value: "pani",
+                  romanUrdu: "pani",
+                  urdu: "پانی",
+                  english: "water",
+                },
+              ],
+              answer: ["bakra"],
+            },
+
+            {
+              id: "jun26-q2",
+              level: 1,
+              sourceLineIds: ["line-12"],
+              missingWords: ["chara"],
+              romanUrdu: "Safiyah ne Chaand ko ___ khilaya.",
+              urdu: "صفیہ نے چاند کو ___ کھلایا۔",
+              english: "Safiyah fed Chaand some fodder.",
+              completedRomanUrdu: "Safiyah ne Chaand ko chara khilaya.",
+              completedUrdu: "صفیہ نے چاند کو چارہ کھلایا۔",
+              completedEnglish: "Safiyah fed Chaand some fodder.",
+              choices: [
+                {
+                  value: "chara",
+                  romanUrdu: "chara",
+                  urdu: "چارہ",
+                  english: "fodder / hay",
+                },
+                {
+                  value: "kitaab",
+                  romanUrdu: "kitaab",
+                  urdu: "کتاب",
+                  english: "book",
+                },
+                {
+                  value: "ghanti",
+                  romanUrdu: "ghanti",
+                  urdu: "گھنٹی",
+                  english: "bell",
+                },
+              ],
+              answer: ["chara"],
+            },
+
+            {
+              id: "jun26-q3",
+              level: 1,
+              sourceLineIds: ["line-29"],
+              missingWords: ["khushi"],
+              romanUrdu:
+                "Eid ki ___ tab barhti hai jab hum usay baanttay hain.",
+              urdu: "عید کی ___ تب بڑھتی ہے جب ہم اسے بانٹتے ہیں۔",
+              english: "Eid ___ grows when we share it.",
+              completedRomanUrdu:
+                "Eid ki khushi tab barhti hai jab hum usay baanttay hain.",
+              completedUrdu: "عید کی خوشی تب بڑھتی ہے جب ہم اسے بانٹتے ہیں۔",
+              completedEnglish: "Eid happiness grows when we share it.",
+              choices: [
+                {
+                  value: "khushi",
+                  romanUrdu: "khushi",
+                  urdu: "خوشی",
+                  english: "happiness",
+                },
+                {
+                  value: "sawal",
+                  romanUrdu: "sawal",
+                  urdu: "سوال",
+                  english: "question",
+                },
+                {
+                  value: "ghar",
+                  romanUrdu: "ghar",
+                  urdu: "گھر",
+                  english: "home",
+                },
+              ],
+              answer: ["khushi"],
+            },
+
+            // ── MEDIUM (Level 2) ──────────────────────────────────
+            {
+              id: "jun26-q4",
+              level: 2,
+              sourceLineIds: ["line-14"],
+              missingWords: ["dost", "hamesha"],
+              romanUrdu:
+                "Safiyah kehti, \u201cChaand mera ___ hai. Main isay ___ rakhungi.\u201d",
+              urdu: "\u0635\u0641\u06cc\u06c1 \u06a9\u06c1\u062a\u06cc\u060c \u201c\u0686\u0627\u0646\u062f \u0645\u06cc\u0631\u0627 ___ \u06c1\u06d2\u06d4 \u0645\u06cc\u06ba \u0627\u0633\u06d2 ___ \u0631\u06a9\u06be\u0648\u06ba \u06af\u06cc\u06d4\u201d",
+              english:
+                "Safiyah would say, \u201cChaand is my friend. I will keep him forever.\u201d",
+              completedRomanUrdu:
+                "Safiyah kehti, \u201cChaand mera dost hai. Main isay hamesha rakhungi.\u201d",
+              completedUrdu:
+                "\u0635\u0641\u06cc\u06c1 \u06a9\u06c1\u062a\u06cc\u060c \u201c\u0686\u0627\u0646\u062f \u0645\u06cc\u0631\u0627 \u062f\u0648\u0633\u062a \u06c1\u06d2\u06d4 \u0645\u06cc\u06ba \u0627\u0633\u06d2 \u06c1\u0645\u06cc\u0634\u06c1 \u0631\u06a9\u06be\u0648\u06ba \u06af\u06cc\u06d4\u201d",
+              completedEnglish:
+                "Safiyah would say, \u201cChaand is my friend. I will keep him forever.\u201d",
+              choices: [
+                {
+                  value: "dost",
+                  romanUrdu: "dost",
+                  urdu: "دوست",
+                  english: "friend",
+                },
+                {
+                  value: "hamesha",
+                  romanUrdu: "hamesha",
+                  urdu: "ہمیشہ",
+                  english: "forever",
+                },
+                {
+                  value: "bakra",
+                  romanUrdu: "bakra",
+                  urdu: "بکرہ",
+                  english: "goat",
+                },
+                {
+                  value: "chara",
+                  romanUrdu: "chara",
+                  urdu: "چارہ",
+                  english: "fodder",
+                },
+              ],
+              answer: ["dost", "hamesha"],
+            },
+
+            {
+              id: "jun26-q5",
+              level: 2,
+              sourceLineIds: ["line-1", "line-2"],
+              missingWords: ["mandi", "janwar"],
+              romanUrdu:
+                "Abu aur Safiyah ___ mein bahut saray ___ dekhne gayi.",
+              urdu: "ابو اور صفیہ ___ میں بہت سارے ___ دیکھنے گئی۔",
+              english:
+                "Abu and Safiyah went to the market to see many animals.",
+              completedRomanUrdu:
+                "Abu aur Safiyah mandi mein bahut saray janwar dekhne gayi.",
+              completedUrdu: "ابو اور صفیہ منڈی میں بہت سارے جانور دیکھنے گئی۔",
+              completedEnglish:
+                "Abu and Safiyah went to the market to see many animals.",
+              choices: [
+                {
+                  value: "mandi",
+                  romanUrdu: "mandi",
+                  urdu: "منڈی",
+                  english: "market",
+                },
+                {
+                  value: "janwar",
+                  romanUrdu: "janwar",
+                  urdu: "جانور",
+                  english: "animals",
+                },
+                {
+                  value: "pani",
+                  romanUrdu: "pani",
+                  urdu: "پانی",
+                  english: "water",
+                },
+                { value: "Eid", romanUrdu: "Eid", urdu: "عید", english: "Eid" },
+              ],
+              answer: ["mandi", "janwar"],
+            },
+
+            // ── HARD (Level 3) ───────────────────────────────────────
+            {
+              id: "jun26-q6",
+              level: 3,
+              sourceLineIds: ["line-5", "line-6", "line-12"],
+              missingWords: ["chota", "pani", "chara"],
+              romanUrdu:
+                "Phir us ne aik ___ sa bakra dekha. Us ne Chaand ko ___ diya, ___ khilaya, aur har shaam uske paas baithti.",
+              urdu: "پھر اس نے ایک ___ سا بکرہ دیکھا۔ اس نے چاند کو ___ دیا، ___ کھلایا، اور ہر شام اس کے پاس بیٹھتی۔",
+              english:
+                "Then she saw a small goat. She gave Chaand water, fed him fodder, and sat near him every evening.",
+              completedRomanUrdu:
+                "Phir us ne aik chota sa bakra dekha. Us ne Chaand ko pani diya, chara khilaya, aur har shaam uske paas baithti.",
+              completedUrdu:
+                "پھر اس نے ایک چھوٹا سا بکرہ دیکھا۔ اس نے چاند کو پانی دیا، چارہ کھلایا، اور ہر شام اس کے پاس بیٹھتی۔",
+              completedEnglish:
+                "Then she saw a small goat. She gave Chaand water, fed him fodder, and sat near him every evening.",
+              choices: [
+                {
+                  value: "chota",
+                  romanUrdu: "chota",
+                  urdu: "چھوٹا",
+                  english: "small",
+                },
+                {
+                  value: "pani",
+                  romanUrdu: "pani",
+                  urdu: "پانی",
+                  english: "water",
+                },
+                {
+                  value: "chara",
+                  romanUrdu: "chara",
+                  urdu: "چارہ",
+                  english: "fodder",
+                },
+                {
+                  value: "ghar",
+                  romanUrdu: "ghar",
+                  urdu: "گھر",
+                  english: "home",
+                },
+                {
+                  value: "khushi",
+                  romanUrdu: "khushi",
+                  urdu: "خوشی",
+                  english: "happiness",
+                },
+              ],
+              answer: ["chota", "pani", "chara"],
+            },
+
+            // ── STORY MODE (Level 4) ─────────────────────────────────
+            {
+              id: "jun26-q7",
+              level: 4,
+              sourceLineIds: ["line-15", "line-20", "line-27", "line-29"],
+              missingWords: ["Eid", "dosti", "khushi", "baanttay"],
+              romanUrdu:
+                "___ qareeb aayi to Safiyah ne baron ko qurbani ki baat karte suna. Ammi ne kaha ke ___ ka matlab pyar, khayal, aur izzat bhi hota hai. ___ ke din Safiyah ne Eid ke kapray pehne. Safiyah ne kaha, \u201cEid ki khushi tab barhti hai jab hum usay ___ hain.\u201d",
+              urdu: "___ \u0642\u0631\u06cc\u0628 \u0622\u0626\u06cc \u062a\u0648 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0628\u0691\u0648\u06ba \u06a9\u0648 \u0642\u0631\u0628\u0627\u0646\u06cc \u06a9\u06cc \u0628\u0627\u062a \u06a9\u0631\u062a\u06d2 \u0633\u0646\u0627\u06d4 \u0627\u0645\u06cc \u0646\u06d2 \u06a9\u06c1\u0627 \u06a9\u06c1 ___ \u06a9\u0627 \u0645\u0637\u0644\u0628 \u067e\u06cc\u0627\u0631\u060c \u062e\u06cc\u0627\u0644\u060c \u0627\u0648\u0631 \u0639\u0632\u062a \u0628\u06be\u06cc \u06c1\u0648\u062a\u0627 \u06c1\u06d2\u06d4 ___ \u06a9\u06d2 \u062f\u0646 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0639\u06cc\u062f \u06a9\u06d2 \u06a9\u067e\u0691\u06d2 \u067e\u06c1\u0646\u06d2\u06d4 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u06a9\u06c1\u0627\u060c \u201c\u0639\u06cc\u062f \u06a9\u06cc \u062e\u0648\u0634\u06cc \u062a\u0628 \u0628\u0691\u06be\u062a\u06cc \u06c1\u06d2 \u062c\u0628 \u06c1\u0645 \u0627\u0633\u06d2 ___ \u06c1\u06cc\u06ba\u06d4\u201d",
+              english:
+                "When Eid came near, Safiyah heard the grown-ups talking about qurbani. Ammi said that friendship also means love, care, and respect. On Eid day, Safiyah wore her Eid clothes. Safiyah said, \u201cEid happiness grows when we share it.\u201d",
+              completedRomanUrdu:
+                "Eid qareeb aayi to Safiyah ne baron ko qurbani ki baat karte suna. Ammi ne kaha ke dosti ka matlab pyar, khayal, aur izzat bhi hota hai. Eid ke din Safiyah ne Eid ke kapray pehne. Safiyah ne kaha, \u201cEid ki khushi tab barhti hai jab hum usay baanttay hain.\u201d",
+              completedUrdu:
+                "\u0639\u06cc\u062f \u0642\u0631\u06cc\u0628 \u0622\u0626\u06cc \u062a\u0648 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0628\u0691\u0648\u06ba \u06a9\u0648 \u0642\u0631\u0628\u0627\u0646\u06cc \u06a9\u06cc \u0628\u0627\u062a \u06a9\u0631\u062a\u06d2 \u0633\u0646\u0627\u06d4 \u0627\u0645\u06cc \u0646\u06d2 \u06a9\u06c1\u0627 \u06a9\u06c1 \u062f\u0648\u0633\u062a\u06cc \u06a9\u0627 \u0645\u0637\u0644\u0628 \u067e\u06cc\u0627\u0631\u060c \u062e\u06cc\u0627\u0644\u060c \u0627\u0648\u0631 \u0639\u0632\u062a \u0628\u06be\u06cc \u06c1\u0648\u062a\u0627 \u06c1\u06d2\u06d4 \u0639\u06cc\u062f \u06a9\u06d2 \u062f\u0646 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u0639\u06cc\u062f \u06a9\u06d2 \u06a9\u067e\u0691\u06d2 \u067e\u06c1\u0646\u06d2\u06d4 \u0635\u0641\u06cc\u06c1 \u0646\u06d2 \u06a9\u06c1\u0627\u060c \u201c\u0639\u06cc\u062f \u06a9\u06cc \u062e\u0648\u0634\u06cc \u062a\u0628 \u0628\u0691\u06be\u062a\u06cc \u06c1\u06d2 \u062c\u0628 \u06c1\u0645 \u0627\u0633\u06d2 \u0628\u0627\u0646\u0679\u062a\u06d2 \u06c1\u06cc\u06ba\u06d4\u201d",
+              completedEnglish:
+                "When Eid came near, Safiyah heard the grown-ups talking about qurbani. Ammi said that friendship also means love, care, and respect. On Eid day, Safiyah wore her Eid clothes. Safiyah said, \u201cEid happiness grows when we share it.\u201d",
+              choices: [
+                { value: "Eid", romanUrdu: "Eid", urdu: "عید", english: "Eid" },
+                {
+                  value: "dosti",
+                  romanUrdu: "dosti",
+                  urdu: "دوستی",
+                  english: "friendship",
+                },
+                {
+                  value: "khushi",
+                  romanUrdu: "khushi",
+                  urdu: "خوشی",
+                  english: "happiness",
+                },
+                {
+                  value: "baanttay",
+                  romanUrdu: "baanttay",
+                  urdu: "بانٹتے",
+                  english: "share",
+                },
+                {
+                  value: "chara",
+                  romanUrdu: "chara",
+                  urdu: "چارہ",
+                  english: "fodder",
+                },
+                {
+                  value: "bakra",
+                  romanUrdu: "bakra",
+                  urdu: "بکرہ",
+                  english: "goat",
+                },
+              ],
+              answer: ["Eid", "dosti", "khushi", "baanttay"],
+            },
+          ], // ← end of questions array
+        }, // ← end of fillTheKahani
+
+        orderedWords: [
+          "mandi",
+          "bakray",
+          "gaayein",
+          "bheirein",
+          "ghantiyon",
+          "dil",
+          "aankhein",
+          "maathey",
+          "nishaan",
+          "chaand",
+          "haath",
+          "ghar",
+          "naam",
+          "pani",
+          "chara",
+          "shaam",
+          "dost",
+          "aansu",
+          "janwaron",
+          "dekha",
+          "pakar",
+          "le ja",
+          "muskura",
+          "likha",
+          "khilaya",
+          "baithti",
+          "baantay",
+          "gayi",
+          "chota",
+          "narm",
+          "safed",
+          "khari",
+          "qareeb",
+          "narmi",
+          "sunai",
+          "awaazein",
+          "baatein",
+          "samjhaya",
+          "khushi",
+          "khayal",
+          "qurbani",
+          "dua",
+          "neki",
+        ],
+
+        totalLevels: 5,
+        defaultLevel: 1,
+
+        activityAnswerKeys: [
+          {
+            id: "june-urdu-bingo",
+            title: "Urdu Bingo",
+            subtitle: "Answer Key",
+            type: "text",
+            answers: [
+              {
+                prompt: 'Say "Eid Mubarak" in Urdu',
+                romanUrdu: "Eid Mubarak.",
+                urdu: "عید مبارک۔",
+              },
+              {
+                prompt: "Tell someone what you did for Eid in Urdu",
+                romanUrdu: "Eid par main ne ___ kiya.",
+                urdu: "عید پر میں نے ___ کیا۔",
+              },
+              {
+                prompt: "Ask someone about their Eid in Urdu",
+                romanUrdu: "Aap ki Eid kaisi thi?",
+                urdu: "آپ کی عید کیسی تھی؟",
+              },
+              {
+                prompt: "Say one thing you ate on Eid in Urdu",
+                romanUrdu: "Eid par main ne ___ khaya.",
+                urdu: "عید پر میں نے ___ کھایا۔",
+              },
+              {
+                prompt: "Say how you feel today in Urdu",
+                romanUrdu: "Aaj main ___ hoon.",
+                urdu: "آج میں ___ ہوں۔",
+              },
+              {
+                prompt: 'Tell someone "Please take this" in Urdu',
+                romanUrdu: "Yeh lein.",
+                urdu: "یہ لیں۔",
+              },
+              {
+                prompt: "Say one thing you shared in Urdu",
+                romanUrdu: "Main ne ___ baanta.",
+                urdu: "میں نے ___ بانٹا۔",
+              },
+              {
+                prompt: "Describe an animal in Urdu",
+                romanUrdu: "Yeh janwar ___ hai.",
+                urdu: "یہ جانور ___ ہے۔",
+              },
+              {
+                prompt: 'Ask "Are you okay?" in Urdu',
+                romanUrdu: "Kya aap theek hain?",
+                urdu: "کیا آپ ٹھیک ہیں؟",
+              },
+              {
+                prompt: 'Tell someone "Drink water" in Urdu',
+                romanUrdu: "Pani piyen.",
+                urdu: "پانی پئیں۔",
+              },
+              {
+                prompt: "Say one kind thing in Urdu",
+                romanUrdu: "Aap bohat achay hain.",
+                urdu: "آپ بہت اچھے ہیں۔",
+              },
+              {
+                prompt: "Tell someone your favourite Eid food in Urdu",
+                romanUrdu: "Mera pasandida Eid ka khana ___ hai.",
+                urdu: "میرا پسندیدہ عید کا کھانا ___ ہے۔",
+              },
+              {
+                prompt: "SPEAK ONLY URDU!",
+                romanUrdu: "Sirf Urdu bolein.",
+                urdu: "صرف اردو بولیں۔",
+              },
+              {
+                prompt: 'Ask "Can I ask a question?" in Urdu',
+                romanUrdu: "Kya main sawal pooch sakta/sakti hoon?",
+                urdu: "کیا میں سوال پوچھ سکتا/سکتی ہوں؟",
+              },
+              {
+                prompt: 'Tell someone "Eat food" in Urdu',
+                romanUrdu: "Khana khayen.",
+                urdu: "کھانا کھائیں۔",
+              },
+              {
+                prompt: 'Say "Share happiness" in Urdu',
+                romanUrdu: "Khushi baantein.",
+                urdu: "خوشی بانٹیں۔",
+              },
+              {
+                prompt: "Say one thing you are thankful for in Urdu",
+                romanUrdu: "Main ___ ke liye shukar guzar hoon.",
+                urdu: "میں ___ کے لیے شکر گزار ہوں۔",
+              },
+              {
+                prompt: 'Tell someone "I will help" in Urdu',
+                romanUrdu: "Main madad karunga/karungi.",
+                urdu: "میں مدد کروں گا/گی۔",
+              },
+              {
+                prompt: "Describe something cute in Urdu",
+                romanUrdu: "Yeh ___ pyara hai.",
+                urdu: "یہ ___ پیارا ہے۔",
+              },
+              {
+                prompt: 'Tell someone "Come sit with us" in Urdu',
+                romanUrdu: "Aayen, hamaray saath baithen.",
+                urdu: "آئیں، ہمارے ساتھ بیٹھیں۔",
+              },
+              {
+                prompt: "Ask someone what they ate in Urdu",
+                romanUrdu: "Aap ne kya khaya?",
+                urdu: "آپ نے کیا کھایا؟",
+              },
+              {
+                prompt: "Say one thing you wore on Eid in Urdu",
+                romanUrdu: "Eid par main ne ___ pehna.",
+                urdu: "عید پر میں نے ___ پہنا۔",
+              },
+              {
+                prompt: 'Say "Thank you for sharing" in Urdu',
+                romanUrdu: "Baantnay ka shukriya.",
+                urdu: "بانٹنے کا شکریہ۔",
+              },
+              {
+                prompt: "Tell someone what made you happy in Urdu",
+                romanUrdu: "Mujhe ___ se khushi hui.",
+                urdu: "مجھے ___ سے خوشی ہوئی۔",
+              },
+              {
+                prompt: "Ask someone what made them happy in Urdu",
+                romanUrdu: "Aap ko kis baat se khushi hui?",
+                urdu: "آپ کو کس بات سے خوشی ہوئی؟",
+              },
+            ],
+          },
+        ],
+
+        activities: [
+          {
+            id: "readaloud",
+            label: "Audio",
+            href: "./activities/thekahanitimes.html",
+            useWordsParam: true,
+          },
+          {
+            id: "flashcards",
+            label: "Flashcards",
+            href: "/qr/assets/html/flashcards.html",
+            useWordsParam: true,
+          },
+          {
+            id: "matching",
+            label: "Picture Match",
+            href: "/qr/assets/html/matching.html",
+            useWordsParam: true,
+          },
+          {
+            id: "riddles",
+            label: "Riddles",
+            href: "/qr/assets/html/riddles.html",
+            useWordsParam: true,
+          },
+          {
+            id: "memory",
+            label: "Memory Game",
+            href: "/qr/assets/html/memory.html",
+            useWordsParam: true,
+          },
+          {
+            id: "wordsearch",
+            label: "Word Search",
+            href: "/qr/assets/html/wordsearch.html",
+            useWordsParam: true,
+          },
+        ],
+      };
+    </script>
+
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
+    <script>
+      const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+      for (let i = 0; i < 15; i++) {
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.classList.add("heart");
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDelay = Math.random() * 10 + "s";
+        icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+        icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+        document.body.appendChild(icon);
+      }
+    </script>
+  </body>
+</html>

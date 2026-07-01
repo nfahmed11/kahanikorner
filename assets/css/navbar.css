@@ -309,7 +309,23 @@ header.header {
   cursor: pointer;
 }
 
-.cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; }
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  /* Firefox: thin scrollbar that doesn't eat layout space */
+  scrollbar-width: thin;
+  scrollbar-color: var(--ash-grey) transparent;
+}
+
+/* Chrome/Edge/Android: make the scrollbar a 4px overlay strip so it
+   doesn't steal from the right-side padding the way the default scrollbar does */
+.cart-items::-webkit-scrollbar { width: 4px; }
+.cart-items::-webkit-scrollbar-track { background: transparent; }
+.cart-items::-webkit-scrollbar-thumb {
+  background: var(--ash-grey);
+  border-radius: 4px;
+}
 
 .cart-item {
   display: flex;
@@ -318,6 +334,7 @@ header.header {
   background: var(--white-smoke);
   padding: 1rem;
   border-radius: 1rem;
+  min-width: 0;
 }
 
 .cart-item img {
@@ -325,9 +342,15 @@ header.header {
   height: 4rem;
   border-radius: 0.75rem;
   object-fit: cover;
+  /* image must never shrink — always keep its defined size */
+  flex-shrink: 0;
 }
 
-.cart-item-details { flex: 1; }
+.cart-item-details {
+  flex: 1;
+  /* required so long text (month names) wraps instead of overflowing */
+  min-width: 0;
+}
 .cart-item-details h4 { font-size: 1rem; margin-bottom: 0.25rem; }
 .cart-item-price { font-weight: 700; color: var(--rosy-taupe); margin-bottom: 0.5rem; }
 
@@ -350,8 +373,10 @@ header.header {
   border: none;
   color: var(--danger);
   font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
-  padding: 0;
+  /* small padding so touch target is comfortable and text has breathing room */
+  padding: 0.25rem 0;
   margin-left: auto;
 }
 

@@ -7,7 +7,6 @@ if (!config) {
 const pageTitle = document.getElementById("page-title");
 const storyTitleEl = document.getElementById("story-title");
 const bookCoverEl = document.getElementById("book-cover");
-const levelPickerEl = document.getElementById("level-picker");
 const buttonContainerEl = document.getElementById("button-container");
 
 const storageKey = `kk-story-level-${config.slug}`;
@@ -94,81 +93,7 @@ function renderHeader() {
 
 let currentLevel;
 
-// ── Shared pill helper ────────────────────────────────────────
-function updatePillStates() {
-  document.querySelectorAll(".level-pill").forEach((pill) => {
-    const lvl = Number(pill.getAttribute("data-level"));
-    pill.classList.toggle("active", lvl === currentLevel);
-  });
-}
-
-function makePill(value, label, ariaLabel) {
-  const pill = document.createElement("button");
-  pill.className = `level-pill${value === currentLevel ? " active" : ""}`;
-  pill.type = "button";
-  pill.textContent = label;
-  pill.setAttribute("data-level", value);
-  pill.setAttribute("aria-label", ariaLabel);
-  return pill;
-}
-
-function renderLevelPills() {
-  currentLevel = loadSavedLevel();
-  if (!levelPickerEl) return;
-
-  const totalWords = config.orderedWords.length;
-
-  levelPickerEl.innerHTML = `
-    <div class="level-picker-label">Choose Words</div>
-    <div class="level-pills" id="level-pills"></div>
-    <p id="level-summary" class="level-summary"></p>
-  `;
-
-  const pillsContainer = document.getElementById("level-pills");
-
-  for (let level = 1; level <= TOTAL_LEVELS; level++) {
-    const words = getWordsForLevel(config.orderedWords, level);
-    const label = level === 5 ? "All" : `${level}`;
-    const ariaLabel =
-      level === 5 ? `All ${totalWords} words` : `Set ${level} — ${words.length} words`;
-
-    const pill = makePill(level, label, ariaLabel);
-
-    pill.addEventListener("click", () => {
-      currentLevel = level;
-      saveLevel(level);
-      updatePillStates();
-      updateSummary(level, totalWords);
-      renderButtons();
-    });
-
-    pillsContainer.appendChild(pill);
-  }
-
-  updateSummary(currentLevel, totalWords);
-}
-
-function updateSummary(level, totalWords) {
-  const summaryEl = document.getElementById("level-summary");
-  if (!summaryEl) return;
-
-  if (level === 5) {
-    summaryEl.textContent = `All ${totalWords} words`;
-    return;
-  }
-
-  if (isLargeStory()) {
-    const chunkSize = Math.ceil(totalWords / CHUNK_LEVELS);
-    const start = (level - 1) * chunkSize;
-    const end = Math.min(start + chunkSize, totalWords);
-    summaryEl.textContent = `Words ${start + 1}–${end} of ${totalWords}`;
-  } else {
-    const count = getWordsForLevel(config.orderedWords, level).length;
-    summaryEl.textContent = `${count} of ${totalWords} words`;
-  }
-}
-
-// Helper text shown beneath each tile label
+// ── Activity helpers ──────────────────────────────────────────
 const HELPER_TEXT = {
   readaloud: "Listen to the story",
   allvocabcards: "Practice these words",
@@ -184,51 +109,6 @@ const HELPER_TEXT = {
   fallingwords: "Catch words in time",
 };
 
-// Defines the 3 learning stages and which game IDs belong to each
-const SECTION_ICONS = {
-  learn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 3v4"/>
-  <path d="M12 17v4"/>
-  <path d="M4.22 4.22l2.83 2.83"/>
-  <path d="M16.95 16.95l2.83 2.83"/>
-  <path d="M1 12h4"/>
-  <path d="M19 12h4"/>
-  <path d="M4.22 19.78l2.83-2.83"/>
-  <path d="M16.95 7.05l2.83-2.83"/>
-</svg>`,
-  challenge: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M9 18V5"/>
-  <path d="M15 18V5"/>
-  <path d="M9 5a3 3 0 0 0-6 0v2a3 3 0 0 0 3 3"/>
-  <path d="M15 5a3 3 0 0 1 6 0v2a3 3 0 0 1-3 3"/>
-  <path d="M6 10a4 4 0 0 0 12 0"/>
-</svg>`,
-  practice: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="10"/>
-  <circle cx="12" cy="12" r="6"/>
-  <circle cx="12" cy="12" r="2"/>
-</svg>`,
-};
-
-const SECTIONS = [
-  {
-    key: "learn",
-    label: "Learn — Start Here",
-    ids: ["readaloud", "allvocabcards", "allstory"],
-  },
-  {
-    key: "practice",
-    label: "Practice",
-    ids: ["flashcards", "matching", "fillblank", "riddles"],
-  },
-  {
-    key: "challenge",
-    label: "Challenge",
-    ids: ["quiz", "memory", "wordsearch", "speedgrid", "fallingwords"],
-  },
-];
-
-// SVG icons for each activity
 const ACTIVITY_ICONS = {
   readaloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`,
   flashcards: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="m8 13 4-7 4 7"/><path d="M9.1 11h5.7"/></svg>`,
@@ -245,26 +125,215 @@ const ACTIVITY_ICONS = {
   fillblank: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>`,
 };
 
-// Builds a flat ordered list of all buttons
-function buildAllButtons(wordsParam, allStoryParam) {
-  const buttons = [];
-  const hasReadaloud = config.activities.some((a) => a.id === "readaloud");
+function getStoryAudioHref() {
+  return config.activities?.find((a) => a.id === "readaloud")?.href ?? null;
+}
 
-  if (!hasReadaloud) {
-    buttons.push({
-      id: "allvocabcards",
-      label: "Cards in This Level",
-      href: `/qr/assets/html/allvocab.html?words=${wordsParam}`,
-    });
+// ── Newspaper Extras section ───────────────────────────────────
+function renderNewspaperExtrasSection() {
+  const totalWords = config.orderedWords.length;
 
-    buttons.push({
-      id: "allstory",
-      label: "All Story Words",
-      href: `/qr/assets/html/allvocab.html?words=${allStoryParam}`,
+  const section = document.createElement("div");
+  section.className = "ne-section";
+
+  // Section header
+  const sectionHeader = document.createElement("div");
+  sectionHeader.className = "ne-section__header";
+  sectionHeader.innerHTML = `
+    <span class="ne-badge">Newspaper</span>
+    <h2 class="ne-section__title">Newspaper Extras</h2>
+    <p class="ne-section__sub">Everything that goes with this month's printed newspaper.</p>
+  `;
+  section.appendChild(sectionHeader);
+
+  // Main 2×2 card grid: Story Audio, Answer Keys, Fill the Kahani, Full Word Bank
+  const audioHref = getStoryAudioHref();
+  const hasAnswerKeys = !!config.activityAnswerKeys?.length;
+  const mainGrid = document.createElement("div");
+  mainGrid.className = "ne-main-grid";
+
+  if (audioHref) {
+    const audioCard = document.createElement("a");
+    audioCard.href = audioHref;
+    audioCard.className = "ne-card ne-card--audio";
+    audioCard.innerHTML = `
+      <div class="ne-card__icon">${ACTIVITY_ICONS.readaloud}</div>
+      <div class="ne-card__title">Story Audio</div>
+      <div class="ne-card__sub">Listen to this month's story</div>
+    `;
+    mainGrid.appendChild(audioCard);
+  }
+
+  if (hasAnswerKeys) {
+    const akCard = document.createElement("button");
+    akCard.type = "button";
+    akCard.className = "ne-card ne-card--keys";
+    akCard.innerHTML = `
+      <div class="ne-card__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M7 8h10M7 12h10M7 16h6"/>
+        </svg>
+      </div>
+      <div class="ne-card__title">Activity Answer Keys</div>
+      <div class="ne-card__sub">Check answers for this month's newspaper activities</div>
+    `;
+    akCard.addEventListener("click", openActivityAnswerKeysModal);
+    mainGrid.appendChild(akCard);
+  }
+
+  // Fill the Kahani card
+  const ftkQuestions = config?.fillTheKahani?.questions;
+  const hasFtk = Array.isArray(ftkQuestions) && ftkQuestions.length > 0;
+
+  const fillKahaniCard = document.createElement(hasFtk ? "a" : "div");
+  fillKahaniCard.className = "ne-card ne-card--fillkahani" + (hasFtk ? "" : " ne-card--fillkahani-soon");
+  fillKahaniCard.setAttribute("aria-label", "Fill the Kahani — Fill in missing words from this month's kahani");
+  fillKahaniCard.innerHTML = `
+    <div class="ne-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"/>
+        <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>
+      </svg>
+    </div>
+    <div class="ne-card__title">Fill the Kahani</div>
+    <div class="ne-card__sub">${hasFtk ? "Fill in missing words from this month's kahani" : "Coming soon"}</div>
+  `;
+
+  if (hasFtk) {
+    const FTK_HREF = "/qr/assets/html/fill-the-kahani.html";
+    fillKahaniCard.href = FTK_HREF;
+    fillKahaniCard.addEventListener("click", function (event) {
+      event.preventDefault();
+      try {
+        sessionStorage.setItem("KAHANI_CURRENT_ISSUE", JSON.stringify(config));
+      } catch (e) {
+        console.warn("[KK] Could not save issue config to sessionStorage", e);
+      }
+      window.location.href = FTK_HREF;
     });
   }
 
+  mainGrid.appendChild(fillKahaniCard);
+
+  // Full Word Bank card — reflects the currently selected level
+  const bankCard = document.createElement("a");
+  bankCard.id = "ne-bank-card";
+  bankCard.className = "ne-card ne-card--bank";
+  bankCard.innerHTML = `
+    <div class="ne-card__icon">${ACTIVITY_ICONS.allvocabcards}</div>
+    <div class="ne-card__title" id="ne-bank-title"></div>
+    <div class="ne-card__sub" id="ne-bank-sub"></div>
+  `;
+  mainGrid.appendChild(bankCard);
+  section.appendChild(mainGrid);
+
+  // Word Sets module — compact chooser below the 4-card grid
+  const wordSetsCard = document.createElement("div");
+  wordSetsCard.className = "ne-wordsets";
+  wordSetsCard.innerHTML = `
+    <div class="ne-wordsets__header">
+      <div class="ne-wordsets__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/>
+          <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/>
+          <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
+        </svg>
+      </div>
+      <div class="ne-wordsets__info">
+        <div class="ne-wordsets__title">Choose a Word Set</div>
+        <div class="ne-wordsets__sub">Practice a few story words at a time.</div>
+      </div>
+    </div>
+    <div class="ne-pills-row" id="ne-pills-row"></div>
+    <p class="ne-level-summary" id="ne-level-summary"></p>
+  `;
+  section.appendChild(wordSetsCard);
+
+  // Build the level pills
+  const pillsRow = wordSetsCard.querySelector("#ne-pills-row");
+  for (let level = 1; level <= TOTAL_LEVELS; level++) {
+    const words = getWordsForLevel(config.orderedWords, level);
+    const label = level === 5 ? "All" : `${level}`;
+    const ariaLabel =
+      level === 5 ? `All ${totalWords} words` : `Set ${level} — ${words.length} words`;
+
+    const pill = document.createElement("button");
+    pill.className = `ne-pill${level === currentLevel ? " ne-pill--active" : ""}`;
+    pill.type = "button";
+    pill.textContent = label;
+    pill.setAttribute("data-level", level);
+    pill.setAttribute("aria-label", ariaLabel);
+
+    pill.addEventListener("click", () => {
+      currentLevel = level;
+      saveLevel(level);
+      wordSetsCard.querySelectorAll(".ne-pill").forEach((p) => {
+        p.classList.toggle("ne-pill--active", Number(p.getAttribute("data-level")) === level);
+      });
+      updateNeSummary(level, totalWords);
+      renderPracticeGamesSection();
+      updateBankCard(level);
+    });
+
+    pillsRow.appendChild(pill);
+  }
+
+  updateNeSummary(currentLevel, totalWords);
+
+  buttonContainerEl.appendChild(section);
+  updateBankCard(currentLevel);
+}
+
+function updateNeSummary(level, totalWords) {
+  const summaryEl = document.getElementById("ne-level-summary");
+  if (!summaryEl) return;
+
+  if (level === 5) {
+    summaryEl.textContent = `Showing all ${totalWords} words`;
+    return;
+  }
+
+  if (isLargeStory()) {
+    const chunkSize = Math.ceil(totalWords / CHUNK_LEVELS);
+    const start = (level - 1) * chunkSize;
+    const end = Math.min(start + chunkSize, totalWords);
+    summaryEl.textContent = `Set ${level} of ${CHUNK_LEVELS} · Words ${start + 1}–${end} of ${totalWords}`;
+  } else {
+    const count = getWordsForLevel(config.orderedWords, level).length;
+    summaryEl.textContent = `${count} of ${totalWords} words`;
+  }
+}
+
+function updateBankCard(level) {
+  const card = document.getElementById("ne-bank-card");
+  if (!card) return;
+
+  const totalWords = config.orderedWords.length;
+  const words = getWordsForLevel(config.orderedWords, level);
+  card.href = `/qr/assets/html/allvocab.html?words=${buildWordsParam(words)}`;
+
+  const titleEl = document.getElementById("ne-bank-title");
+  const subEl = document.getElementById("ne-bank-sub");
+
+  if (level === 5) {
+    if (titleEl) titleEl.textContent = "Full Word Bank";
+    if (subEl) subEl.textContent = `Browse all ${totalWords} words from this story`;
+  } else {
+    if (titleEl) titleEl.textContent = `Word Set ${level}`;
+    if (subEl) subEl.textContent = `Browse ${words.length} of ${totalWords} words`;
+  }
+}
+
+// ── Practice Games section ─────────────────────────────────────
+function buildPracticeGameButtons() {
+  const activeWords = getWordsForLevel(config.orderedWords, currentLevel ?? loadSavedLevel());
+  const wordsParam = buildWordsParam(activeWords);
+  const buttons = [];
+
   for (const activity of config.activities) {
+    if (activity.id === "readaloud") continue;
+
     const sep = activity.href.includes("?") ? "&" : "?";
     const href = activity.useWordsParam
       ? `${activity.href}${sep}words=${wordsParam}`
@@ -272,27 +341,12 @@ function buildAllButtons(wordsParam, allStoryParam) {
 
     buttons.push({ id: activity.id, label: activity.label, href });
 
-    if (activity.id === "readaloud") {
-      buttons.push({
-        id: "allvocabcards",
-        label: "Cards in this Set",
-        href: `/qr/assets/html/allvocab.html?words=${wordsParam}`,
-      });
-
-      buttons.push({
-        id: "allstory",
-        label: "All Story Cards",
-        href: `/qr/assets/html/allvocab.html?words=${allStoryParam}`,
-      });
-    }
-
     if (activity.id === "flashcards") {
       buttons.push({
         id: "quiz",
         label: "Quiz",
         href: `/qr/assets/html/quiz.html?words=${wordsParam}`,
       });
-
       buttons.push({
         id: "fillblank",
         label: "Fill in the Blank",
@@ -306,7 +360,6 @@ function buildAllButtons(wordsParam, allStoryParam) {
         label: "Speed Grid",
         href: `/qr/assets/html/speedgrid.html?words=${wordsParam}`,
       });
-
       buttons.push({
         id: "fallingwords",
         label: "Falling Words",
@@ -318,72 +371,248 @@ function buildAllButtons(wordsParam, allStoryParam) {
   return buttons;
 }
 
-function renderButtons() {
-  const activeWords = getWordsForLevel(
-    config.orderedWords,
-    currentLevel ?? loadSavedLevel(),
-  );
+function renderPracticeGamesSection() {
+  const existing = document.getElementById("pg-section");
+  if (existing) existing.remove();
 
-  const wordsParam = buildWordsParam(activeWords);
-  const allStoryParam = buildWordsParam(config.orderedWords);
+  const buttons = buildPracticeGameButtons();
+  if (buttons.length === 0) return;
 
-  buttonContainerEl.innerHTML = "";
+  const section = document.createElement("div");
+  section.id = "pg-section";
+  section.className = "pg-section";
 
-  const buttonMap = new Map(
-    buildAllButtons(wordsParam, allStoryParam).map((b) => [b.id, b]),
-  );
+  const sectionHeader = document.createElement("div");
+  sectionHeader.className = "pg-section__header";
+  sectionHeader.innerHTML = `
+    <span class="ne-badge ne-badge--games">Practice</span>
+    <h2 class="pg-section__title">Practice Games</h2>
+    <p class="pg-section__sub">Play with this month's Urdu words</p>
+  `;
+  section.appendChild(sectionHeader);
 
-  for (const section of SECTIONS) {
-    const sectionButtons = section.ids
-      .map((id) => buttonMap.get(id))
-      .filter(Boolean);
+  const grid = document.createElement("div");
+  grid.className = "activity-section__grid";
 
-    if (sectionButtons.length === 0) continue;
+  for (const btn of buttons) {
+    const link = document.createElement("a");
+    link.className = `button button--${btn.id}`;
+    link.href = btn.href;
 
-    const sectionEl = document.createElement("div");
-    sectionEl.className = "activity-section";
+    const icon = ACTIVITY_ICONS[btn.id] || "";
+    const helper = HELPER_TEXT[btn.id] || "";
 
-    const heading = document.createElement("h2");
-    heading.className = "activity-section__heading";
-
-    const icon = SECTION_ICONS[section.key] || "";
-
-    heading.innerHTML = `
-      <span class="section-icon">${icon}</span>
-      <span class="section-label">${section.label}</span>
+    link.innerHTML = `
+      ${icon}
+      <span class="button__label">${btn.label}</span>
+      ${helper ? `<span class="button__helper">${helper}</span>` : ""}
     `;
 
-    sectionEl.appendChild(heading);
-
-    const grid = document.createElement("div");
-    grid.className = "activity-section__grid";
-
-    for (const btn of sectionButtons) {
-      const link = document.createElement("a");
-      link.className = `button button--${btn.id}`;
-      link.href = btn.href;
-
-      const icon = ACTIVITY_ICONS[btn.id] || "";
-      const helper = HELPER_TEXT[btn.id] || "";
-
-      link.innerHTML = `
-        ${icon}
-        <span class="button__label">${btn.label}</span>
-        ${helper ? `<span class="button__helper">${helper}</span>` : ""}
-      `;
-
-      grid.appendChild(link);
-    }
-
-    sectionEl.appendChild(grid);
-    buttonContainerEl.appendChild(sectionEl);
+    grid.appendChild(link);
   }
+
+  section.appendChild(grid);
+  buttonContainerEl.appendChild(section);
+}
+
+// ── Activity Answer Keys modal ────────────────────────────────
+function openActivityAnswerKeysModal() {
+  const existing = document.getElementById("ak-full-overlay");
+  if (existing) existing.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "ak-full-overlay";
+  overlay.className = "ak-full-overlay";
+
+  const panel = document.createElement("div");
+  panel.className = "ak-full-panel";
+
+  function closePanel() {
+    overlay.classList.remove("open");
+    setTimeout(() => overlay.remove(), 300);
+  }
+
+  const header = document.createElement("div");
+  header.className = "ak-full-header";
+
+  const headerText = document.createElement("div");
+  const titleEl = document.createElement("h2");
+  titleEl.className = "ak-full-title";
+  titleEl.textContent = "Activity Answer Keys";
+  const subtitleEl = document.createElement("p");
+  subtitleEl.className = "ak-full-subtitle";
+  subtitleEl.textContent = "Check answers for this month's newspaper activities.";
+  headerText.appendChild(titleEl);
+  headerText.appendChild(subtitleEl);
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "ak-full-close";
+  closeBtn.setAttribute("aria-label", "Close");
+  closeBtn.innerHTML = "✕";
+  closeBtn.addEventListener("click", closePanel);
+
+  header.appendChild(headerText);
+  header.appendChild(closeBtn);
+  panel.appendChild(header);
+
+  const content = document.createElement("div");
+  content.className = "ak-full-content";
+
+  const cards = config.activityAnswerKeys.map((ak) => {
+    const card = renderAnswerKeyCard(ak);
+    content.appendChild(card);
+    return card;
+  });
+
+  // Accordion: clicking a trigger opens it and closes all others
+  cards.forEach((card) => {
+    const trigger = card.querySelector(".ak-accordion__trigger");
+    const body = card.querySelector(".ak-accordion__body");
+
+    trigger.addEventListener("click", () => {
+      const isOpen = card.classList.contains("ak-accordion--open");
+
+      cards.forEach((c) => {
+        c.classList.remove("ak-accordion--open");
+        const b = c.querySelector(".ak-accordion__body");
+        if (b) b.style.maxHeight = "0";
+      });
+
+      if (!isOpen) {
+        card.classList.add("ak-accordion--open");
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
+    });
+  });
+
+  panel.appendChild(content);
+  overlay.appendChild(panel);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closePanel();
+  });
+
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add("open"));
+}
+
+function renderAnswerKeyCard(ak) {
+  const card = document.createElement("div");
+  card.className = "ak-key-card ak-accordion";
+
+  // Clickable header row (acts as the accordion trigger)
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "ak-accordion__trigger";
+
+  const triggerText = document.createElement("div");
+  triggerText.className = "ak-accordion__label";
+
+  const titleEl = document.createElement("div");
+  titleEl.className = "ak-key-title";
+  titleEl.textContent = ak.title;
+  triggerText.appendChild(titleEl);
+
+  if (ak.subtitle) {
+    const subEl = document.createElement("div");
+    subEl.className = "ak-key-subtitle";
+    subEl.textContent = ak.subtitle;
+    triggerText.appendChild(subEl);
+  }
+
+  const chevron = document.createElement("span");
+  chevron.className = "ak-accordion__chevron";
+  chevron.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+  trigger.appendChild(triggerText);
+  trigger.appendChild(chevron);
+  card.appendChild(trigger);
+
+  // Collapsible body (starts closed)
+  const body = document.createElement("div");
+  body.className = "ak-accordion__body";
+  body.style.maxHeight = "0";
+
+  if ((ak.type === "text" || ak.type === "mixed") && ak.answers?.length) {
+    const list = document.createElement("ol");
+    list.className = "ak-answers-list";
+
+    ak.answers.forEach((answer, i) => {
+      const item = document.createElement("li");
+      item.className = "ak-answer-item";
+
+      const numEl = document.createElement("div");
+      numEl.className = "ak-answer-num";
+      numEl.textContent = i + 1;
+      item.appendChild(numEl);
+
+      const answerBody = document.createElement("div");
+      answerBody.className = "ak-answer-body";
+
+      const promptEl = document.createElement("div");
+      promptEl.className = "ak-answer-prompt";
+      promptEl.textContent = answer.prompt;
+      answerBody.appendChild(promptEl);
+
+      if (answer.romanUrdu) {
+        const romanEl = document.createElement("div");
+        romanEl.className = "ak-answer-roman";
+        romanEl.textContent = answer.romanUrdu;
+        answerBody.appendChild(romanEl);
+      }
+
+      if (answer.urdu) {
+        const urduEl = document.createElement("div");
+        urduEl.className = "ak-answer-urdu";
+        urduEl.setAttribute("dir", "rtl");
+        urduEl.textContent = answer.urdu;
+        answerBody.appendChild(urduEl);
+      }
+
+      item.appendChild(answerBody);
+      list.appendChild(item);
+    });
+
+    body.appendChild(list);
+  }
+
+  if ((ak.type === "image" || ak.type === "mixed") && ak.image) {
+    const imgWrapper = document.createElement("div");
+    imgWrapper.className = "ak-image-wrapper";
+
+    const img = document.createElement("img");
+    img.src = ak.image;
+    img.alt = ak.imageAlt || `${ak.title} answer key`;
+    img.className = "ak-image";
+    imgWrapper.appendChild(img);
+
+    const openBtn = document.createElement("a");
+    openBtn.className = "ak-download-btn";
+    openBtn.href = ak.image;
+    openBtn.target = "_blank";
+    openBtn.rel = "noopener noreferrer";
+    openBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Open full image
+    `;
+    imgWrapper.appendChild(openBtn);
+
+    body.appendChild(imgWrapper);
+  }
+
+  card.appendChild(body);
+  return card;
 }
 
 function init() {
   renderHeader();
-  renderLevelPills();
-  renderButtons();
+  currentLevel = loadSavedLevel();
+  buttonContainerEl.innerHTML = "";
+  renderNewspaperExtrasSection();
+  renderPracticeGamesSection();
 }
 
 init();

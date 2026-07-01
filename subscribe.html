@@ -944,8 +944,14 @@
         grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 2rem;
         padding-bottom: 4rem;
-        max-width: 380px;
+        max-width: 800px;
         margin: 0 auto;
+      }
+
+      @media (min-width: 600px) {
+        .product-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
 
       .product-card {
@@ -1480,6 +1486,741 @@
         filter: brightness(0) invert(1);
         opacity: 0.9;
       }
+
+      /* ===== ARCHIVE PRODUCT STYLES ===== */
+      .archive-badge {
+        display: inline-block;
+        background: var(--soft-blush);
+        color: var(--rosy-taupe);
+        font-family: "Grandstander", cursive;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.75rem;
+        border-radius: 999px;
+        border: 1.5px solid rgba(212, 151, 151, 0.4);
+        margin-bottom: 0.65rem;
+        align-self: flex-start;
+      }
+
+      .archive-subtitle {
+        font-size: 0.93rem;
+        color: var(--muted);
+        margin: 0.2rem 0 1rem;
+        font-style: italic;
+      }
+
+      .archive-price-display {
+        font-family: "Grandstander", cursive;
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: var(--deep-teal);
+        background: var(--soft-blush);
+        padding: 0.4rem 1.1rem;
+        border-radius: 1.1rem;
+        display: inline-block;
+        transform: rotate(-2deg);
+        margin-bottom: 1.5rem;
+        align-self: flex-start;
+      }
+
+      .archive-note-box {
+        background: var(--white-smoke);
+        border: 1.5px solid var(--ash-grey);
+        border-radius: 1rem;
+        padding: 0.85rem 1.1rem;
+        font-size: 0.81rem;
+        color: var(--muted);
+        line-height: 1.55;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ===== ARCHIVE SELECTOR SECTION ===== */
+      .arch-selector-section {
+        margin-top: 1.75rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        align-items: start;
+      }
+
+      @media (max-width: 767px) {
+        .arch-selector-section { grid-template-columns: 1fr; }
+      }
+
+      .arch-left-col,
+      .arch-right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .arch-step-box {
+        background: #ffffff;
+        border: 2px solid var(--ash-grey);
+        border-radius: 1.5rem;
+        padding: 1.25rem;
+        box-shadow: 0 4px 14px rgba(74, 89, 74, 0.06);
+      }
+
+      .arch-step-title {
+        font-family: "Grandstander", cursive;
+        font-size: 0.93rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-shadow: none;
+        margin: 0 0 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+      }
+
+      .arch-step-num {
+        width: 1.5rem;
+        height: 1.5rem;
+        background: var(--granite);
+        color: #fff;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      /* Year grid */
+      .arch-year-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .arch-year-btn {
+        padding: 0.5rem 1.1rem;
+        border: 2px solid var(--ash-grey);
+        border-radius: 0.75rem;
+        background: #fff;
+        color: var(--granite);
+        font-family: "Grandstander", cursive;
+        font-size: 0.88rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        box-shadow: 0 3px 0 var(--ash-grey);
+      }
+
+      .arch-year-btn:hover {
+        border-color: var(--deep-teal);
+        background: var(--white-smoke);
+        transform: translateY(-1px);
+      }
+
+      .arch-year-btn.selected {
+        background: var(--granite);
+        border-color: var(--granite);
+        color: #fff;
+        box-shadow: 0 3px 0 var(--deep-teal);
+      }
+
+      .arch-hint {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin: 0.65rem 0 0;
+        line-height: 1.45;
+      }
+
+      /* Month grid */
+      .arch-month-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.4rem;
+      }
+
+      .arch-month-btn {
+        aspect-ratio: 1;
+        border: 2px solid var(--ash-grey);
+        border-radius: 0.65rem;
+        background: #fff;
+        color: var(--granite);
+        font-family: "Grandstander", cursive;
+        font-size: 0.75rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.12rem;
+        padding: 0.25rem;
+        line-height: 1.1;
+      }
+
+      .arch-month-btn:hover:not(:disabled):not(.sold-out) {
+        border-color: var(--rosy-taupe);
+        background: #fbe7e7;
+        transform: translateY(-1px);
+      }
+
+      .arch-month-btn.selected {
+        background: var(--granite);
+        border-color: var(--granite);
+        color: #fff;
+        box-shadow: 0 3px 0 var(--deep-teal);
+      }
+
+      .arch-month-btn.sold-out,
+      .arch-month-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        background: var(--white-smoke);
+        border-style: dashed;
+        transform: none !important;
+      }
+
+      .arch-soldout-label {
+        font-size: 0.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--rosy-taupe);
+        line-height: 1;
+      }
+
+      .arch-month-btn:disabled .arch-soldout-label {
+        color: var(--muted);
+      }
+
+      /* Summary box */
+      .arch-summary-box {
+        background: linear-gradient(180deg, #f7f4f3 0%, var(--white-smoke) 100%);
+        border: 2px solid var(--ash-grey);
+        border-radius: 1.5rem;
+        padding: 1.25rem;
+        box-shadow: 0 4px 14px rgba(74, 89, 74, 0.06);
+      }
+
+      .arch-summary-title {
+        font-family: "Grandstander", cursive;
+        font-size: 0.93rem;
+        font-weight: 800;
+        color: var(--rosy-taupe);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-shadow: none;
+        margin: 0 0 0.85rem;
+      }
+
+      .arch-summary-empty {
+        font-size: 0.81rem;
+        color: var(--muted);
+        font-style: italic;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .arch-summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 0.83rem;
+        color: var(--granite);
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+      }
+
+      .arch-summary-label { color: var(--muted); font-weight: 500; }
+
+      .arch-summary-months {
+        font-size: 0.81rem;
+        color: var(--deep-teal);
+        font-weight: 600;
+        margin: 0.15rem 0 0.6rem;
+        line-height: 1.55;
+      }
+
+      .arch-summary-price {
+        font-family: "Grandstander", cursive;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--deep-teal);
+        margin-top: 0.65rem;
+        padding-top: 0.65rem;
+        border-top: 1.5px dashed var(--ash-grey);
+      }
+
+      .arch-summary-price-note {
+        display: block;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-weight: 500;
+        margin-top: 0.1rem;
+      }
+
+      /* Packaging note */
+      .arch-packaging-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        background: var(--white-smoke);
+        border: 1.5px solid var(--ash-grey);
+        border-radius: 1.1rem;
+        padding: 1rem 1.1rem;
+        font-size: 0.81rem;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .arch-packaging-icon {
+        font-size: 1.1rem;
+        color: var(--rosy-taupe);
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      .arch-packaging-note strong {
+        display: block;
+        color: var(--granite);
+        font-size: 0.84rem;
+        margin-bottom: 0.3rem;
+        font-weight: 700;
+      }
+
+      .arch-packaging-note p { margin: 0 0 0.3rem; }
+      .arch-packaging-note p:last-child { margin-bottom: 0; }
+
+      /* CTA message */
+      .arch-cta-msg {
+        font-size: 0.79rem;
+        color: var(--muted);
+        text-align: center;
+        margin: 0 0 0.6rem;
+        min-height: 1.2em;
+        font-style: italic;
+      }
+
+      /* Subscription callout */
+      .arch-sub-callout {
+        margin-top: 1.75rem;
+        text-align: center;
+      }
+
+      .arch-sub-callout-inner {
+        display: inline-block;
+        background: var(--soft-blush);
+        border: 1.5px solid rgba(212, 151, 151, 0.35);
+        border-radius: 1.5rem;
+        padding: 1.25rem 1.75rem;
+        max-width: 460px;
+      }
+
+      .arch-sub-callout-inner p {
+        font-size: 0.88rem;
+        color: var(--granite);
+        margin: 0 0 0.3rem;
+      }
+
+      .arch-sub-callout-inner p:first-child {
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 480px) {
+        .arch-month-grid { grid-template-columns: repeat(3, 1fr); }
+        .arch-sub-callout-inner { padding: 1rem 1.1rem; }
+      }
+
+      /* ===== WHAT YOU NEED TO KNOW — ACCORDION ===== */
+      .kkt-faq-helper-text {
+        font-size: 0.78rem;
+        color: var(--muted);
+        text-align: center;
+        margin: -0.6rem 0 1rem;
+        line-height: 1.45;
+        font-weight: 500;
+      }
+
+      .kkt-faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+
+      .kkt-faq-item {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1.5px solid rgba(176, 195, 183, 0.8);
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      .kkt-faq-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.8rem 0.9rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        transition: background 0.15s ease;
+      }
+
+      .kkt-faq-trigger:hover {
+        background: #fbe7e7;
+      }
+
+      .kkt-faq-trigger[aria-expanded="true"] {
+        background: #fbe7e7;
+      }
+
+      .kkt-faq-trigger:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: -2px;
+        border-radius: 0.85rem;
+      }
+
+      .kkt-faq-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 50%;
+        background: var(--soft-blush);
+        color: var(--rosy-taupe);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.72rem;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+
+      .kkt-faq-trigger[aria-expanded="true"] .kkt-faq-icon {
+        background: var(--rosy-taupe);
+        color: #ffffff;
+      }
+
+      .kkt-faq-question {
+        flex: 1;
+        font-family: "Grandstander", cursive;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--granite);
+        line-height: 1.3;
+      }
+
+      .kkt-faq-chevron {
+        font-size: 0.68rem;
+        color: var(--muted);
+        flex-shrink: 0;
+        transition: transform 0.25s ease;
+      }
+
+      .kkt-faq-trigger[aria-expanded="true"] .kkt-faq-chevron {
+        transform: rotate(180deg);
+      }
+
+      .kkt-faq-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.25s ease;
+      }
+
+      .kkt-faq-panel.is-open {
+        grid-template-rows: 1fr;
+      }
+
+      .kkt-faq-panel-inner { overflow: hidden; }
+
+      .kkt-faq-body {
+        padding: 0.1rem 0.9rem 0.9rem 3.3rem;
+        font-size: 0.845rem;
+        color: var(--deep-teal);
+        line-height: 1.65;
+        font-weight: 500;
+      }
+
+      /* ===== KAHANI TIMES SHIPPING CYCLE ===== */
+      .kkt-cycle-section {
+        margin-top: 2.5rem;
+        padding: 2rem 1.75rem;
+        background: linear-gradient(180deg, #f7f4f3 0%, var(--white-smoke) 100%);
+        border: 2px solid var(--ash-grey);
+        border-radius: 2rem;
+        box-shadow: var(--shadow-soft);
+        text-align: center;
+      }
+
+      /* Override global heading styles inside this section */
+      .kkt-cycle-section h2,
+      .kkt-cycle-section h3 {
+        color: var(--granite);
+        text-shadow: none;
+      }
+
+      /* Status banner */
+      .kkt-status-banner {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        background: #fbe7e7;
+        border: 1.5px solid rgba(212, 151, 151, 0.35);
+        border-radius: 1.25rem;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.75rem;
+        text-align: left;
+      }
+
+      .kkt-status-banner-icon {
+        font-size: 1.35rem;
+        color: var(--rosy-taupe);
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      .kkt-status-banner-body { flex: 1; }
+
+      .kkt-status-banner-title {
+        font-family: "Grandstander", cursive;
+        font-size: 0.93rem;
+        font-weight: 800;
+        color: var(--granite);
+        margin: 0 0 0.2rem;
+      }
+
+      .kkt-status-banner-text {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.55;
+      }
+
+      .kkt-cycle-title {
+        font-size: 1.35rem;
+        margin: 0 0 0.3rem;
+      }
+
+      .kkt-cycle-subtitle {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        font-weight: 600;
+      }
+
+      /* Countdown */
+      .kkt-countdown {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+      }
+
+      .kkt-countdown-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--white);
+        border: 2px solid var(--ash-grey);
+        border-radius: 1rem;
+        padding: 0.65rem 1rem;
+        min-width: 4.2rem;
+        box-shadow: 0 4px 0 var(--ash-grey);
+      }
+
+      .kkt-count {
+        font-family: "Grandstander", cursive;
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--granite);
+        line-height: 1;
+      }
+
+      .kkt-count-label {
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 0.3rem;
+      }
+
+      .kkt-countdown-sep {
+        font-family: "Grandstander", cursive;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--ash-grey);
+        padding-bottom: 1.25rem;
+      }
+
+      .kkt-closed-msg {
+        font-family: "Grandstander", cursive;
+        font-size: 0.95rem;
+        color: var(--muted);
+        background: var(--white-smoke);
+        border: 2px solid var(--ash-grey);
+        border-radius: 1rem;
+        padding: 0.75rem 1.5rem;
+        display: inline-block;
+        margin-bottom: 2rem;
+      }
+
+      /* Calendars */
+      .kkt-calendars {
+        display: flex;
+        gap: 1.25rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .kkt-cal-card {
+        flex: 1;
+        min-width: 0;
+        max-width: 400px;
+        background: #ffffff;
+        border: 2px solid var(--ash-grey);
+        border-radius: 1.5rem;
+        padding: 1.25rem 1rem;
+        box-shadow: 0 4px 14px rgba(74, 89, 74, 0.06);
+      }
+
+      .kkt-cal-month-title {
+        font-size: 0.95rem;
+        margin: 0 0 0.75rem;
+        font-family: "Grandstander", cursive;
+        font-weight: 800;
+      }
+
+      .kkt-cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 3px;
+      }
+
+      .kkt-cal-day-header {
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: center;
+        padding: 0.25rem 0;
+        letter-spacing: 0.04em;
+      }
+
+      .kkt-cal-day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--granite);
+        border-radius: 6px;
+      }
+
+      .kkt-cal-day--cycle {
+        background: var(--soft-blush);
+      }
+
+      .kkt-cal-day--prep {
+        background: var(--mint);
+      }
+
+      .kkt-cal-day--today {
+        background: var(--granite) !important;
+        color: #ffffff !important;
+        font-weight: 800;
+        border-radius: 6px;
+      }
+
+      .kkt-cal-day--shipping {
+        box-shadow: inset 0 0 0 2px var(--rosy-taupe);
+      }
+
+      /* Legend */
+      .kkt-legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.85rem 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .kkt-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .kkt-legend-swatch {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+
+      .kkt-legend-swatch--prep {
+        background: var(--mint);
+        border: 1.5px solid var(--ash-grey);
+      }
+
+      .kkt-legend-swatch--cycle {
+        background: var(--soft-blush);
+        border: 1.5px solid rgba(212, 151, 151, 0.5);
+      }
+
+      .kkt-legend-swatch--shipping {
+        background: transparent;
+        box-shadow: inset 0 0 0 2px var(--rosy-taupe);
+      }
+
+      .kkt-legend-swatch--today {
+        background: var(--granite);
+      }
+
+      .kkt-timezone-note {
+        font-size: 0.73rem;
+        color: var(--muted);
+        margin: 0.25rem 0 1.5rem;
+        opacity: 0.75;
+      }
+
+      .kkt-shipping-copy {
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 0.9rem;
+        color: var(--granite);
+        line-height: 1.75;
+        background: var(--white-smoke);
+        border: 1.5px solid var(--ash-grey);
+        border-radius: 1.1rem;
+        padding: 1.1rem 1.5rem;
+        text-align: left;
+      }
+
+      @media (max-width: 640px) {
+        .kkt-cycle-section {
+          padding: 1.5rem 1rem;
+          border-radius: 1.5rem;
+          margin-top: 2rem;
+        }
+
+        .kkt-status-banner { border-radius: 1rem; padding: 0.85rem 1rem; gap: 0.65rem; }
+        .kkt-cycle-title { font-size: 1.1rem; }
+        .kkt-count { font-size: 1.5rem; }
+        .kkt-countdown-sep { font-size: 1.3rem; padding-bottom: 1rem; }
+        .kkt-countdown-unit { min-width: 3rem; padding: 0.55rem 0.65rem; }
+        .kkt-calendars { flex-direction: column; }
+        .kkt-cal-card { max-width: 100%; }
+        .kkt-shipping-copy { text-align: center; }
+      }
     </style>
   </head>
 
@@ -1566,7 +2307,8 @@
               </div>
 
               <div class="detail-features-box">
-                <h3>What you need to know</h3>
+                <h3>What You Need to Know</h3>
+                <p class="kkt-faq-helper-text">Quick answers about shipping, payments, and your Kahani Times subscription.</p>
                 <div id="detail-features" class="detail-feature-sections"></div>
               </div>
 
@@ -1592,7 +2334,251 @@
               </button> -->
             </div>
           </div>
+
+          <!-- ===== KAHANI TIMES SHIPPING CYCLE ===== -->
+          <section class="kkt-cycle-section" aria-labelledby="kkt-cycle-title">
+
+            <!-- Status banner: currently packing -->
+            <div class="kkt-status-banner" role="status" aria-label="Current mail preparation status">
+              <i class="fa-solid fa-box-open kkt-status-banner-icon" aria-hidden="true"></i>
+              <div class="kkt-status-banner-body">
+                <p class="kkt-status-banner-title">Currently Packing — June 2026 Mail</p>
+                <p class="kkt-status-banner-text">June mail is being prepared from June 20–30 and ships from the US on June 30.</p>
+              </div>
+            </div>
+
+            <h2 id="kkt-cycle-title" class="kkt-cycle-title">Next Kahani Times — August 2026</h2>
+            <p class="kkt-cycle-subtitle">Subscribe by Jul 20 &middot; Ships from the US Jul 30</p>
+
+            <!-- Live countdown -->
+            <div id="kkt-countdown"
+                 class="kkt-countdown"
+                 aria-live="polite"
+                 aria-label="Time remaining to subscribe for the next cycle">
+              <div class="kkt-countdown-unit">
+                <span class="kkt-count" id="kkt-days">00</span>
+                <span class="kkt-count-label">Days</span>
+              </div>
+              <span class="kkt-countdown-sep" aria-hidden="true">:</span>
+              <div class="kkt-countdown-unit">
+                <span class="kkt-count" id="kkt-hrs">00</span>
+                <span class="kkt-count-label">Hrs</span>
+              </div>
+              <span class="kkt-countdown-sep" aria-hidden="true">:</span>
+              <div class="kkt-countdown-unit">
+                <span class="kkt-count" id="kkt-mins">00</span>
+                <span class="kkt-count-label">Mins</span>
+              </div>
+              <span class="kkt-countdown-sep" aria-hidden="true">:</span>
+              <div class="kkt-countdown-unit">
+                <span class="kkt-count" id="kkt-secs">00</span>
+                <span class="kkt-count-label">Secs</span>
+              </div>
+            </div>
+            <p id="kkt-closed-msg"
+               class="kkt-closed-msg"
+               style="display:none;"
+               role="status">
+              This month's subscription window has closed.
+            </p>
+
+            <!-- Monthly calendars -->
+            <div class="kkt-calendars">
+              <div class="kkt-cal-card">
+                <h3 class="kkt-cal-month-title">June 2026</h3>
+                <div class="kkt-cal-grid"
+                     id="kkt-cal-june"
+                     role="grid"
+                     aria-label="June 2026 shipping calendar"></div>
+              </div>
+              <div class="kkt-cal-card">
+                <h3 class="kkt-cal-month-title">July 2026</h3>
+                <div class="kkt-cal-grid"
+                     id="kkt-cal-july"
+                     role="grid"
+                     aria-label="July 2026 shipping calendar"></div>
+              </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="kkt-legend" aria-label="Calendar legend">
+              <div class="kkt-legend-item">
+                <span class="kkt-legend-swatch kkt-legend-swatch--prep" aria-hidden="true"></span>
+                <span>Current prep — Jun 20–30</span>
+              </div>
+              <div class="kkt-legend-item">
+                <span class="kkt-legend-swatch kkt-legend-swatch--shipping" aria-hidden="true"></span>
+                <span>Jun 30 — June mail ships</span>
+              </div>
+              <div class="kkt-legend-item">
+                <span class="kkt-legend-swatch kkt-legend-swatch--cycle" aria-hidden="true"></span>
+                <span>Next cycle — Jun 21–Jul 20</span>
+              </div>
+              <div class="kkt-legend-item">
+                <span class="kkt-legend-swatch kkt-legend-swatch--shipping" aria-hidden="true"></span>
+                <span>Jul 30 — next mail ships</span>
+              </div>
+              <div class="kkt-legend-item">
+                <span class="kkt-legend-swatch kkt-legend-swatch--today" aria-hidden="true"></span>
+                <span>Today</span>
+              </div>
+            </div>
+            <p class="kkt-timezone-note">Dates follow our store's timezone (Central Time, US).</p>
+
+            <!-- Shipping information -->
+            <p class="kkt-shipping-copy">
+              Your first envelope ships from the United States on July 30, and typically
+              arrives within 2–4 weeks for USA subscribers, and 4–6 weeks internationally.<br><br>
+              Delivery times can vary depending on your location and local postal service.
+              Feel free to email us if you do not receive yours — we're happy to help.
+            </p>
+
+          </section>
+
         </section>
+
+        <!-- ===== ARCHIVE DETAIL VIEW ===== -->
+        <section id="archive-detail-view" class="product-detail-view hidden">
+          <button id="archive-back-btn" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Store
+          </button>
+
+          <div class="detail-container">
+            <div class="detail-gallery">
+              <div class="detail-image-wrapper">
+                <img id="archive-detail-image"
+                     src="/assets/images/products/subscribe/feb.png"
+                     alt="The Kahani Times Archive — past editions" />
+              </div>
+            </div>
+
+            <div class="detail-info">
+              <span class="archive-badge">Past Editions</span>
+              <h1 style="text-shadow:none;color:var(--granite);margin-top:0;">The Kahani Times Archive</h1>
+              <div class="archive-price-display">
+                $15.99 <span style="font-size:0.65em;font-weight:600;opacity:0.8;">per edition</span>
+              </div>
+              <p class="archive-subtitle">Own a piece of Kahani Korner history. Select the year and months you'd like — we'll ship them together in one package.</p>
+              <div class="archive-note-box">
+                <i class="fa-solid fa-circle-info" style="color:var(--rosy-taupe);margin-right:0.45rem;" aria-hidden="true"></i>
+                Each archived edition is $15.99. Select multiple months and all items ship together as one bundle.
+              </div>
+            </div>
+          </div>
+
+          <!-- Selector -->
+          <div class="arch-selector-section">
+
+            <div class="arch-left-col">
+              <!-- Step 1: Year -->
+              <div class="arch-step-box">
+                <h3 class="arch-step-title">
+                  <span class="arch-step-num" aria-hidden="true">1</span>
+                  Choose a Year
+                </h3>
+                <div id="arch-year-grid" class="arch-year-grid" role="group" aria-label="Select a year"></div>
+              </div>
+
+              <!-- Step 2: Months -->
+              <div class="arch-step-box">
+                <h3 class="arch-step-title">
+                  <span class="arch-step-num" aria-hidden="true">2</span>
+                  Choose Month(s)
+                </h3>
+                <div id="arch-month-grid" class="arch-month-grid" role="group" aria-label="Select one or more months">
+                  <p style="font-size:0.82rem;color:var(--muted);font-style:italic;grid-column:1/-1;margin:0;">
+                    Select a year above to see available months.
+                  </p>
+                </div>
+                <p class="arch-hint">You can pick multiple months — they all ship together.</p>
+              </div>
+            </div>
+
+            <div class="arch-right-col">
+              <!-- Summary -->
+              <div class="arch-summary-box">
+                <p class="arch-summary-title">Your Selection</p>
+                <p id="arch-summary-empty" class="arch-summary-empty">No editions selected yet. Choose a year and at least one month to continue.</p>
+                <div id="arch-summary-content" style="display:none;">
+                  <div class="arch-summary-row">
+                    <span class="arch-summary-label">Year</span>
+                    <span id="arch-summary-year"></span>
+                  </div>
+                  <div class="arch-summary-row">
+                    <span class="arch-summary-label">Editions</span>
+                    <span id="arch-summary-count"></span>
+                  </div>
+                  <p id="arch-summary-months" class="arch-summary-months"></p>
+                  <div class="arch-summary-price">
+                    <span id="arch-summary-price-total"></span>
+                    <span class="arch-summary-price-note" id="arch-summary-price-note"></span>
+                  </div>
+                </div>
+                <p id="arch-error-msg" style="display:none;font-size:0.8rem;color:#c0392b;margin:0.5rem 0 0;line-height:1.4;"></p>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.65rem;">
+                  <button id="arch-add-btn"
+                          class="add-to-cart-btn large-btn"
+                          style="width:100%;margin-top:0;"
+                          disabled
+                          onclick="handleArchiveCheckout()">
+                    Buy Now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                  </button>
+                  <button id="arch-cart-btn"
+                          class="secondary-btn"
+                          style="margin-top:0;"
+                          disabled
+                          onclick="window.addArchiveToCart()">
+                    <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+
+              <!-- Packaging note -->
+              <div class="arch-packaging-note">
+                <i class="fa-solid fa-box arch-packaging-icon" aria-hidden="true"></i>
+                <div>
+                  <strong>Bundled &amp; Protected</strong>
+                  <p>All selected editions ship together from the United States.</p>
+                  <p>Each edition will be sent in a clear protective sleeve.</p>
+                  <p>Delivery: 2–4 weeks USA &nbsp;·&nbsp; 4–6 weeks international</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Archive FAQ -->
+          <div class="detail-features-box" style="margin-top:1.75rem;">
+            <h3>Archive Questions</h3>
+            <p class="kkt-faq-helper-text">Everything you need to know about ordering past editions.</p>
+            <div id="archive-features" class="detail-feature-sections"></div>
+          </div>
+
+          <!-- Subscription callout -->
+          <div class="arch-sub-callout">
+            <div class="arch-sub-callout-inner">
+              <p>Love collecting Kahani Times?</p>
+              <p>Never miss an edition — subscribe monthly and get each new issue delivered to your door.</p>
+              <button
+                onclick="closeArchiveDetails(); openProductDetails();"
+                style="background:none;border:none;padding:0;cursor:pointer;margin-top:0.85rem;display:block;width:100%;">
+                <div style="display:flex;align-items:center;gap:0.9rem;background:#fff;border:2px solid var(--ash-grey);border-radius:1.1rem;padding:0.65rem 0.85rem;transition:box-shadow 0.18s ease;"
+                     onmouseenter="this.style.boxShadow='0 6px 18px rgba(74,89,74,0.15)'"
+                     onmouseleave="this.style.boxShadow='none'">
+                  <img src="/assets/images/products/subscribe/feb.png"
+                       alt="The Kahani Times Subscription"
+                       style="width:62px;height:62px;object-fit:cover;border-radius:0.65rem;flex-shrink:0;">
+                  <div style="text-align:left;">
+                    <p style="font-family:'Grandstander',cursive;font-weight:800;font-size:0.88rem;color:var(--granite);margin:0 0 0.18rem;">The Kahani Times</p>
+                    <p style="font-size:0.76rem;color:var(--muted);margin:0 0 0.3rem;">Monthly subscription</p>
+                    <p style="font-size:0.76rem;color:var(--deep-teal);font-weight:700;margin:0;">From $9.99/mo &nbsp;<i class="fa-solid fa-arrow-right" style="font-size:0.65rem;"></i></p>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+        </section>
+
       </div>
     </main>
 
@@ -1654,54 +2640,85 @@
         ],
         featureSections: [
           {
-            title: "When your package ships",
+            title: "When does my package ship?",
             icon: "shipping",
-            items: [
-              "Shipping occurs during the last week of each month.",
-              "Orders placed after the 20th begin with the following month’s shipment.",
-              "Example: if you subscribe on December 21, your first package ships at the end of January and typically arrives in early February.",
-              "Shipping is free, and address updates should be made before the 20th for the next shipment.",
-            ],
+            answer: "Packages ship during the last week of each month. Orders placed after the 20th begin with the following month’s shipment. For example, if you subscribe on December 21, your first package ships at the end of January and typically arrives in early February. Shipping is free.",
           },
           {
-            title: "How payments work",
+            title: "What is the monthly cutoff date?",
+            icon: "calendar",
+            answer: "Subscribe by the 20th to be included in that month’s upcoming shipment. Orders placed after the 20th roll into the next month’s mail cycle.",
+          },
+          {
+            title: "How do payments work?",
             icon: "card",
-            items: [
-              "Your first payment is charged on the day you subscribe.",
-              "After that, future payments are charged on the 1st of the next month you have not yet paid for.",
-              "Example: if you subscribe on December 21, you are charged that day for January’s package, and your next payment is taken on February 1 for February’s package.",
-            ],
+            answer: "Your first payment is charged on the day you subscribe. After that, future payments are charged on the 1st of the next month you have not yet paid for.",
           },
           {
-            title: "What’s included",
-            icon: "package",
-            items: [
-              "Each month includes a mini newspaper in Urdu and English.",
-              "Packages also include collectible items such as stickers, recipes, prints, and occasional surprise extras.",
-            ],
+            title: "When should I update my address?",
+            icon: "location",
+            answer: "Please update your address before the 20th so your next shipment goes to the correct place.",
           },
           {
-            title: "Managing your subscription",
+            title: "Where does Kahani Times ship from?",
             icon: "mail",
-            items: [
-              "This is a recurring monthly subscription.",
-              "You can skip, pause, or cancel anytime by emailing us.",
-            ],
+            answer: "Kahani Times ships from the US at the end of each month.",
           },
         ],
       };
 
-      // --- STATE ---
-      let cart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
+      // --- ARCHIVE DATA ---
+      // Update ARCHIVE_PRICE_PER_MONTH to change pricing.
+      const ARCHIVE_PRICE_PER_MONTH = 15.99;
+      const MONTH_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const MONTH_FULL   = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+      // ARCHIVE_AVAILABILITY: year → array[12] — true=available, false=sold out, null=not released
+      // Update this object to add years, mark months sold-out, or remove unavailable months.
+      const ARCHIVE_AVAILABILITY = {
+        2025: [false, false, false, false, false, false, false, false, false, false, true, true],
+        2026: [true, true, true, true, true, true, null, null, null, null, null, null],
+      };
+
+      const archiveFaqSections = [
+        {
+          title: "Can I order just one month?",
+          icon: "calendar",
+          answer: "Yes! You can order any single month or any combination of months from a given year. Each edition is $15.99.",
+        },
+        {
+          title: "Can I order months from different years?",
+          icon: "package",
+          answer: "Each cart item covers one year at a time. Add them to your cart separately to order across multiple years — we'll still ship everything together.",
+        },
+        {
+          title: "What condition are the archived editions in?",
+          icon: "mail",
+          answer: "Each archived edition is in new condition and protected in a clear sleeve.",
+        },
+        {
+          title: "How long does archive shipping take?",
+          icon: "shipping",
+          answer: "Archive bundles ship from the United States within 1–3 business days of your order. Delivery typically takes 2–4 weeks for USA and 4–6 weeks internationally.",
+        },
+        {
+          title: "What if a month I want is sold out?",
+          icon: "card",
+          answer: "Sold-out months are shown with a 'Sold Out' label and cannot be added. We unfortunately cannot restock past editions, but you can still order any available months.",
+        },
+      ];
+
+      const archiveState = {
+        selectedYear:   null,
+        selectedMonths: new Set(),
+      };
 
       // --- DOM ELEMENTS ---
-      const cartBtn = document.getElementById("cart-btn");
-      const closeCartBtn = document.getElementById("close-cart");
-      const cartOverlay = document.getElementById("cart-overlay");
+      // cart-items and cart-total-amount live in subscribe.html's own HTML (not the navbar),
+      // so they are available immediately. cart-btn / cartBadge / cartOverlay are in the
+      // dynamically-loaded navbar and are managed by cart.js after it loads.
       const cartItemsContainer = document.getElementById("cart-items");
-      const cartTotalAmount = document.getElementById("cart-total-amount");
-      const cartBadge = document.getElementById("cart-badge");
-      const checkoutBtn = document.getElementById("checkout-btn");
+      const cartTotalAmount    = document.getElementById("cart-total-amount");
 
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
@@ -1740,15 +2757,6 @@
         renderProducts();
         updateCartUI();
 
-        if (cartBtn) cartBtn.addEventListener("click", openCart);
-        if (closeCartBtn) closeCartBtn.addEventListener("click", closeCart);
-        if (cartOverlay) {
-          cartOverlay.addEventListener("click", (e) => {
-            if (e.target === cartOverlay) closeCart();
-          });
-        }
-        if (checkoutBtn) checkoutBtn.addEventListener("click", handleCheckout);
-
         // mobile menu
         if (mobileToggle && mobileMenuOverlay) {
           mobileToggle.addEventListener("click", openMobileMenu);
@@ -1767,18 +2775,14 @@
           );
         }
 
-        setupCustomDropdown(); // kept (visual unchanged)
-
-        // cross-tab sync
-        window.addEventListener("storage", (event) => {
-          if (event.key === "kahani_cart") {
-            cart = JSON.parse(event.newValue) || [];
-            updateCartUI();
-          }
-        });
+        setupCustomDropdown();
 
         if (backToStoreBtn)
           backToStoreBtn.addEventListener("click", closeProductDetails);
+
+        const archiveBackBtn = document.getElementById("archive-back-btn");
+        if (archiveBackBtn)
+          archiveBackBtn.addEventListener("click", closeArchiveDetails);
 
         // ✅ TWO subscribe buttons on detail
         if (detailSubscribeUsaBtn) {
@@ -1836,7 +2840,7 @@
         });
       }
 
-      // --- PRODUCT RENDERING (SINGLE CARD + LABELED PRICING + 2 SUBSCRIBE BUTTONS) ---
+      // --- PRODUCT RENDERING ---
       function renderProducts() {
         if (!productGrid) return;
 
@@ -1851,7 +2855,6 @@
                 <span class="price" style="font-size:0.85rem;">Monthly</span>
               </div>
 
-              <!-- Labeled pricing — visible before any scrolling -->
               <div class="subscribe-pricing">
                 <div class="subscribe-pricing-item">
                   <span class="subscribe-pricing-label">USA</span>
@@ -1870,10 +2873,36 @@
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_USA}'">
                   USA · ${product.priceUSA} <i class="fa-solid fa-arrow-right"></i>
                 </button>
-
                 <button class="add-to-cart-btn"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_INTL}'">
                   Intl · ${product.priceIntl} <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" onclick="openArchiveDetails()">
+            <div class="product-image-container">
+              <img src="/assets/images/products/subscribe/jan.png" alt="The Kahani Times Archive — past editions">
+            </div>
+            <div class="product-info" style="justify-content: center;">
+              <div class="product-header">
+                <h3>The Kahani Times Archive</h3>
+                <span class="price" style="font-size:0.85rem;">Per Edition</span>
+              </div>
+
+              <div class="subscribe-pricing">
+                <div class="subscribe-pricing-item" style="grid-column:1/-1;">
+                  <span class="subscribe-pricing-label">Price</span>
+                  <span class="subscribe-pricing-value">$15.99</span>
+                  <span class="subscribe-pricing-note">Per past edition</span>
+                </div>
+              </div>
+
+              <div class="subscribe-btns">
+                <button class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); openArchiveDetails()">
+                  Browse Archive <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -1883,61 +2912,89 @@
 
       // --- DETAIL VIEW ---
 
-      function getFeatureIcon(icon) {
-        const icons = {
-          shipping: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 7h11v8H3z"></path>
-        <path d="M14 10h3l3 3v2h-6z"></path>
-        <circle cx="8" cy="18" r="1.75"></circle>
-        <circle cx="18" cy="18" r="1.75"></circle>
-      </svg>
-    `,
-          card: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="3" y="6" width="18" height="12" rx="2"></rect>
-        <path d="M3 10h18"></path>
-        <path d="M7 14h4"></path>
-      </svg>
-    `,
-          package: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 8.5 12 4l8 4.5"></path>
-        <path d="M4 8.5V16L12 20l8-4V8.5"></path>
-        <path d="M12 4v16"></path>
-      </svg>
-    `,
-          mail: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="3" y="6" width="18" height="12" rx="2"></rect>
-        <path d="m5 8 7 6 7-6"></path>
-      </svg>
-    `,
-        };
-
-        return icons[icon] || icons.package;
-      }
-
-      function renderFeatureSections(sections = []) {
+      function renderFeatureSections(sections = [], prefix = 'kkt-faq') {
         if (!sections.length) return "";
 
-        return sections
-          .map(
-            (section) => `
-        <div class="detail-feature-section">
-          <div class="detail-feature-section-header">
-            <span class="detail-feature-icon">
-              ${getFeatureIcon(section.icon)}
-            </span>
-            <h4 class="detail-feature-section-title">${section.title}</h4>
-          </div>
-          <ul class="detail-feature-list">
-            ${section.items.map((item) => `<li>${item}</li>`).join("")}
-          </ul>
-        </div>
-      `
-          )
-          .join("");
+        const iconMap = {
+          shipping: 'fa-truck-fast',
+          calendar: 'fa-calendar-check',
+          card:     'fa-credit-card',
+          location: 'fa-location-dot',
+          mail:     'fa-envelope',
+          package:  'fa-box',
+        };
+
+        const items = sections.map((section, i) => {
+          const faIcon    = iconMap[section.icon] || 'fa-circle-info';
+          const panelId   = `${prefix}-panel-${i}`;
+          const triggerId = `${prefix}-trigger-${i}`;
+          const isFirst   = i === 0;
+          return `
+            <div class="kkt-faq-item">
+              <button class="kkt-faq-trigger"
+                      id="${triggerId}"
+                      aria-expanded="${isFirst ? 'true' : 'false'}"
+                      aria-controls="${panelId}">
+                <span class="kkt-faq-icon" aria-hidden="true">
+                  <i class="fa-solid ${faIcon}"></i>
+                </span>
+                <span class="kkt-faq-question">${section.title}</span>
+                <i class="fa-solid fa-chevron-down kkt-faq-chevron" aria-hidden="true"></i>
+              </button>
+              <div id="${panelId}"
+                   class="kkt-faq-panel${isFirst ? ' is-open' : ''}"
+                   role="region"
+                   aria-labelledby="${triggerId}">
+                <div class="kkt-faq-panel-inner">
+                  <div class="kkt-faq-body">${section.answer}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `<div class="kkt-faq-list" role="list">${items}</div>`;
+      }
+
+      function initFaqAccordion(root) {
+        var scope = root || document;
+        const triggers = Array.from(scope.querySelectorAll('.kkt-faq-trigger'));
+        triggers.forEach(function (trigger) {
+          trigger.addEventListener('click', function () {
+            const isOpen = this.getAttribute('aria-expanded') === 'true';
+            const panel  = document.getElementById(this.getAttribute('aria-controls'));
+
+            // Collapse all
+            triggers.forEach(function (t) {
+              t.setAttribute('aria-expanded', 'false');
+              const p = document.getElementById(t.getAttribute('aria-controls'));
+              if (p) p.classList.remove('is-open');
+            });
+
+            // Expand this one only if it was closed
+            if (!isOpen) {
+              this.setAttribute('aria-expanded', 'true');
+              if (panel) panel.classList.add('is-open');
+            }
+          });
+
+          trigger.addEventListener('keydown', function (e) {
+            const idx = triggers.indexOf(this);
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              if (triggers[idx + 1]) triggers[idx + 1].focus();
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              if (idx > 0) triggers[idx - 1].focus();
+            } else if (e.key === 'Home') {
+              e.preventDefault();
+              triggers[0].focus();
+            } else if (e.key === 'End') {
+              e.preventDefault();
+              triggers[triggers.length - 1].focus();
+            }
+          });
+        });
       }
 
       window.openProductDetails = () => {
@@ -1977,6 +3034,7 @@
           detailFeatures.innerHTML = renderFeatureSections(
             product.featureSections
           );
+          initFaqAccordion();
         } else {
           detailFeatures.innerHTML = "";
         }
@@ -2014,99 +3072,311 @@
         if (filterContainerEl) filterContainerEl.classList.remove("hidden");
       }
 
-      // --- CART LOGIC (unchanged; currently not used for direct Stripe links) ---
-      function saveCart() {
-        localStorage.setItem("kahani_cart", JSON.stringify(cart));
-      }
+      // --- ARCHIVE DETAIL VIEW ---
+      window.openArchiveDetails = function () {
+        const archiveView = document.getElementById("archive-detail-view");
+        if (!archiveView) return;
 
-      function updateCartUI() {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        if (cartBadge) {
-          cartBadge.textContent = totalItems;
-          cartBadge.classList.toggle("hidden", totalItems === 0);
+        // Reset selector state
+        archiveState.selectedYear   = null;
+        archiveState.selectedMonths = new Set();
+
+        // Populate year buttons and reset month grid
+        renderArchiveYearGrid();
+        document.getElementById("arch-month-grid").innerHTML = `
+          <p style="font-size:0.82rem;color:var(--muted);font-style:italic;grid-column:1/-1;margin:0;">
+            Select a year above to see available months.
+          </p>`;
+        updateArchiveSummary();
+
+        // Render archive FAQ scoped to this view
+        const archiveFeatures = document.getElementById("archive-features");
+        if (archiveFeatures) {
+          archiveFeatures.innerHTML = renderFeatureSections(archiveFaqSections, "arch-faq");
+          initFaqAccordion(archiveView);
         }
 
-        const total = cart.reduce(
-          (sum, item) => sum + item.price * item.quantity,
-          0
-        );
-        if (cartTotalAmount)
-          cartTotalAmount.textContent = `$${total.toFixed(2)}`;
+        if (shopHeroSection) shopHeroSection.classList.add("hidden");
+        if (filterContainerEl) filterContainerEl.classList.add("hidden");
+        productGrid.classList.add("hidden");
+        archiveView.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
 
-        if (!cartItemsContainer) return;
-        if (cart.length === 0) {
-          cartItemsContainer.innerHTML =
-            '<div class="empty-cart-msg">Your cart is empty.</div>';
+      function closeArchiveDetails() {
+        const archiveView = document.getElementById("archive-detail-view");
+        if (!archiveView) return;
+        archiveView.classList.add("hidden");
+        productGrid.classList.remove("hidden");
+        if (shopHeroSection) shopHeroSection.classList.remove("hidden");
+        if (filterContainerEl) filterContainerEl.classList.remove("hidden");
+      }
+
+      function renderArchiveYearGrid() {
+        const grid = document.getElementById("arch-year-grid");
+        if (!grid) return;
+        const years = Object.keys(ARCHIVE_AVAILABILITY).sort((a, b) => b - a);
+        grid.innerHTML = years.map(year => `
+          <button class="arch-year-btn" data-year="${year}"
+                  onclick="window.archSelectYear(${year})">
+            ${year}
+          </button>`).join("");
+      }
+
+      function renderArchiveMonthGrid(year) {
+        const grid = document.getElementById("arch-month-grid");
+        if (!grid) return;
+        const availability = ARCHIVE_AVAILABILITY[year] || [];
+        grid.innerHTML = MONTH_LABELS.map((label, i) => {
+          const status     = availability[i]; // true=available, false=sold out, null=unreleased
+          const isSelected = archiveState.selectedMonths.has(i);
+
+          if (status === null || status === undefined) {
+            return `<button class="arch-month-btn" disabled title="Not available">
+              <span>${label}</span>
+            </button>`;
+          }
+          if (status === false) {
+            return `<button class="arch-month-btn sold-out" disabled title="Sold out">
+              <span>${label}</span>
+              <span class="arch-soldout-label">Sold Out</span>
+            </button>`;
+          }
+          return `<button class="arch-month-btn${isSelected ? ' selected' : ''}"
+            onclick="window.archToggleMonth(${i})"
+            aria-pressed="${isSelected}"
+            title="${MONTH_FULL[i]} ${year}">
+            <span>${label}</span>
+          </button>`;
+        }).join("");
+      }
+
+      function updateArchiveSummary() {
+        const emptyEl   = document.getElementById("arch-summary-empty");
+        const contentEl = document.getElementById("arch-summary-content");
+        const yearEl    = document.getElementById("arch-summary-year");
+        const countEl   = document.getElementById("arch-summary-count");
+        const monthsEl  = document.getElementById("arch-summary-months");
+        const priceEl   = document.getElementById("arch-summary-price-total");
+        const noteEl    = document.getElementById("arch-summary-price-note");
+        const addBtn    = document.getElementById("arch-add-btn");
+        const cartBtn   = document.getElementById("arch-cart-btn");
+
+        const { selectedYear, selectedMonths } = archiveState;
+        const count = selectedMonths.size;
+
+        if (!selectedYear || count === 0) {
+          if (emptyEl)   emptyEl.style.display   = "";
+          if (contentEl) contentEl.style.display = "none";
+          if (addBtn)    addBtn.disabled          = true;
+          if (cartBtn)   cartBtn.disabled         = true;
+          return;
+        }
+
+        if (emptyEl)   emptyEl.style.display   = "none";
+        if (contentEl) contentEl.style.display = "";
+
+        const monthNames = Array.from(selectedMonths).sort((a, b) => a - b).map(m => MONTH_FULL[m]);
+        const total = (count * ARCHIVE_PRICE_PER_MONTH).toFixed(2);
+
+        if (yearEl)   yearEl.textContent  = selectedYear;
+        if (countEl)  countEl.textContent = `${count} edition${count !== 1 ? "s" : ""}`;
+        if (monthsEl) monthsEl.textContent = monthNames.join(", ");
+        if (priceEl)  priceEl.textContent = `$${total}`;
+        if (noteEl)   noteEl.textContent  = `$${ARCHIVE_PRICE_PER_MONTH.toFixed(2)} × ${count} edition${count !== 1 ? "s" : ""}`;
+        if (addBtn)   addBtn.disabled     = false;
+        if (cartBtn)  cartBtn.disabled    = false;
+      }
+
+      window.archSelectYear = function (year) {
+        archiveState.selectedYear   = year;
+        archiveState.selectedMonths = new Set();
+
+        document.querySelectorAll(".arch-year-btn").forEach(btn => {
+          btn.classList.toggle("selected", parseInt(btn.dataset.year) === year);
+        });
+
+        renderArchiveMonthGrid(year);
+        updateArchiveSummary();
+      };
+
+      window.archToggleMonth = function (monthIndex) {
+        if (archiveState.selectedMonths.has(monthIndex)) {
+          archiveState.selectedMonths.delete(monthIndex);
         } else {
-          cartItemsContainer.innerHTML = cart
-            .map(
-              (item) => `
+          archiveState.selectedMonths.add(monthIndex);
+        }
+        renderArchiveMonthGrid(archiveState.selectedYear);
+        updateArchiveSummary();
+      };
+
+      function setArchiveError(msg) {
+        const el = document.getElementById("arch-error-msg");
+        if (!el) return;
+        el.textContent = msg;
+        el.style.display = msg ? "" : "none";
+      }
+
+      function setArchiveLoading(loading) {
+        const btn     = document.getElementById("arch-add-btn");
+        const cartBtn = document.getElementById("arch-cart-btn");
+        if (!btn) return;
+        if (loading) {
+          btn.disabled = true;
+          btn.innerHTML = 'Preparing checkout… <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+          if (cartBtn) cartBtn.disabled = true;
+        } else {
+          const hasSelection = archiveState.selectedYear && archiveState.selectedMonths.size > 0;
+          btn.disabled = !hasSelection;
+          btn.innerHTML = 'Buy Now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+          if (cartBtn) cartBtn.disabled = !hasSelection;
+        }
+      }
+
+      window.handleArchiveCheckout = async function () {
+        const { selectedYear, selectedMonths } = archiveState;
+
+        if (!selectedYear) {
+          setArchiveError("Please select a year first.");
+          return;
+        }
+        if (!selectedMonths || selectedMonths.size === 0) {
+          setArchiveError("Please select at least one month.");
+          return;
+        }
+
+        setArchiveError("");
+        setArchiveLoading(true);
+
+        try {
+          const response = await fetch("/api/checkout/kahani-times-archive", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              selectedYear: String(selectedYear),
+              selectedMonths: Array.from(selectedMonths).sort((a, b) => a - b).map(m => MONTH_FULL[m]),
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "Unable to create checkout.");
+          }
+          if (!data.url) {
+            throw new Error("Checkout URL missing.");
+          }
+
+          window.location.href = data.url;
+        } catch (err) {
+          console.error("[Archive checkout]", err);
+          setArchiveError("Something went wrong creating your checkout. Please try again.");
+          setArchiveLoading(false);
+        }
+      };
+
+      window.addArchiveToCart = function () {
+        const { selectedYear, selectedMonths } = archiveState;
+        if (!selectedYear || selectedMonths.size === 0) return;
+
+        const months     = Array.from(selectedMonths).sort((a, b) => a - b);
+        const monthNames = months.map(m => MONTH_FULL[m]);
+        const count      = months.length;
+        const total      = count * ARCHIVE_PRICE_PER_MONTH;
+
+        const cartItem = {
+          id:             `archive-${selectedYear}`,
+          productType:    "kahani_times_archive",
+          name:           "The Kahani Times Archive",
+          selectedYear:   String(selectedYear),
+          selectedMonths: monthNames,
+          quantity:       count,
+          price:          ARCHIVE_PRICE_PER_MONTH,
+          total:          total,
+          image:          "/assets/images/products/subscribe/jan.png",
+          packaging:      "Bundled together in one clear protective plastic sleeve",
+        };
+
+        // Replace existing archive item for same year (per-year dedup)
+        const existingIdx = cart.findIndex(item => item.productType === "kahani_times_archive" && item.selectedYear === String(selectedYear));
+        if (existingIdx >= 0) {
+          cart[existingIdx] = cartItem;
+        } else {
+          cart.push(cartItem);
+        }
+
+        saveCart();
+        updateCartUI();
+        window.openCart();
+
+        // Reset selection and show confirmation
+        archiveState.selectedMonths = new Set();
+        renderArchiveMonthGrid(selectedYear);
+        updateArchiveSummary();
+      };
+
+      // --- CART UI (subscribe-page version; cart.js preserves this via its guard) ---
+      // Reads directly from localStorage so it is safe to call before cart.js loads.
+      // Queries DOM elements live so timing of navbar injection doesn't matter.
+      function updateCartUI() {
+        const currentCart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
+
+        const badge = document.getElementById("cart-badge");
+        const totalItems = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+        if (badge) {
+          badge.textContent = totalItems;
+          badge.classList.toggle("hidden", totalItems === 0);
+        }
+
+        const totalEl = document.getElementById("cart-total-amount");
+        const total = currentCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+
+        const cartBox = document.getElementById("cart-items");
+        if (!cartBox) return;
+        if (currentCart.length === 0) {
+          cartBox.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
+          return;
+        }
+
+        cartBox.innerHTML = currentCart.map((item) => {
+          const itemTotal = (item.price * item.quantity).toFixed(2);
+
+          if (item.productType === "kahani_times_archive") {
+            const monthList = Array.isArray(item.selectedMonths) ? item.selectedMonths.join(", ") : (item.selectedMonths || "");
+            return `
               <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}">
+                <img src="${item.image || '/assets/images/products/subscribe/jan.png'}" alt="${item.name}">
                 <div class="cart-item-details">
                   <h4>${item.name}</h4>
-                  <div class="cart-item-price">$${(
-                    item.price * item.quantity
-                  ).toFixed(2)}</div>
+                  <div style="font-size:0.75rem;color:var(--muted,#888);margin-top:0.15rem;line-height:1.65;">
+                    <span style="display:block;"><strong>Year:</strong> ${item.selectedYear}</span>
+                    <span style="display:block;"><strong>Months:</strong> ${monthList}</span>
+                    <span style="display:block;"><strong>Qty:</strong> ${item.quantity}</span>
+                  </div>
+                  <div class="cart-item-price">$${itemTotal}</div>
                   <div class="cart-controls">
-                    <button class="qty-btn" onclick="updateQuantity('${
-                      item.id
-                    }', -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQuantity('${
-                      item.id
-                    }', 1)">+</button>
-                    <button class="remove-btn" onclick="removeFromCart('${
-                      item.id
-                    }')">Remove</button>
+                    <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
                   </div>
                 </div>
+              </div>`;
+          }
+
+          return `
+            <div class="cart-item">
+              <img src="${item.image || ''}" alt="${item.name}">
+              <div class="cart-item-details">
+                <h4>${item.name}</h4>
+                <div class="cart-item-price">$${itemTotal}</div>
+                <div class="cart-controls">
+                  <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                  <span>${item.quantity}</span>
+                  <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                  <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+                </div>
               </div>
-            `
-            )
-            .join("");
-        }
-      }
-
-      window.addToCart = function (productId) {
-        // kept for compatibility; not used in this flow
-        const existingItem = cart.find((item) => item.id === productId);
-        if (existingItem) existingItem.quantity++;
-        else cart.push({ id: productId, quantity: 1 });
-
-        saveCart();
-        updateCartUI();
-        openCart();
-      };
-
-      window.updateQuantity = function (productId, change) {
-        const item = cart.find((item) => item.id === productId);
-        if (!item) return;
-
-        item.quantity += change;
-        if (item.quantity <= 0) removeFromCart(productId);
-        else {
-          saveCart();
-          updateCartUI();
-        }
-      };
-
-      window.removeFromCart = function (productId) {
-        cart = cart.filter((item) => item.id !== productId);
-        saveCart();
-        updateCartUI();
-      };
-
-      function openCart() {
-        if (!cartOverlay) return;
-        cartOverlay.classList.remove("hidden");
-        setTimeout(() => cartOverlay.classList.add("open"), 10);
-      }
-
-      function closeCart() {
-        if (!cartOverlay) return;
-        cartOverlay.classList.remove("open");
-        setTimeout(() => cartOverlay.classList.add("hidden"), 300);
+            </div>`;
+        }).join("");
       }
 
       function closeSuccessModal() {
@@ -2115,37 +3385,38 @@
         setTimeout(() => successModal.classList.add("hidden"), 300);
       }
 
-      async function handleCheckout() {
-        if (!checkoutBtn || cart.length === 0) return;
+      // Cart checkout — sends all items (archive + regular) to /create-checkout-session.
+      // Registered before cart.js loads so cart.js delegates to it via the
+      // window.customHandleCheckout hook.
+      window.customHandleCheckout = async function () {
+        const currentCart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
+        if (currentCart.length === 0) return;
 
-        const { line_items } = buildStripePayload(cart);
-        const originalText = checkoutBtn.innerText;
-        checkoutBtn.innerText = "Redirecting to Stripe...";
-        checkoutBtn.disabled = true;
+        const btn = document.getElementById("checkout-btn");
+        const originalText = btn ? btn.innerText : "Checkout";
+        if (btn) { btn.disabled = true; btn.innerText = "Redirecting to Stripe…"; }
 
         try {
           const response = await fetch("/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: line_items }),
+            body: JSON.stringify({ cartItems: currentCart, cancelUrl: "https://kahanikorner.com/subscribe.html" }),
           });
 
+          const data = await response.json().catch(() => ({}));
           if (!response.ok) {
-            alert("There was a problem starting checkout. Please try again.");
-            checkoutBtn.innerText = originalText;
-            checkoutBtn.disabled = false;
-            return;
+            console.error("[Cart checkout] Server error:", data.error);
+            throw new Error(data.error || "Checkout failed.");
           }
+          if (!data.url) throw new Error("No checkout URL returned.");
 
-          const data = await response.json();
           window.location.href = data.url;
         } catch (err) {
-          console.error("Error:", err);
-          alert("Unexpected error. Please try again.");
-          checkoutBtn.innerText = originalText;
-          checkoutBtn.disabled = false;
+          console.error("[Cart checkout]", err);
+          alert(err.message || "Something went wrong. Please try again.");
+          if (btn) { btn.disabled = false; btn.innerText = originalText; }
         }
-      }
+      };
 
       // --- MOBILE MENU CONTROL ---
       function openMobileMenu() {
@@ -2165,6 +3436,105 @@
       }
 
       window.addEventListener("load", init);
+
+      // ===== KAHANI TIMES SHIPPING CYCLE =====
+      (function () {
+        // Countdown: July 20, 2026 11:59 PM CDT = July 21, 2026 04:59:00 UTC
+        var DEADLINE    = new Date('2026-07-21T04:59:00Z');
+        // Current prep window (June calendar highlight)
+        var PREP_START  = new Date(2026, 5, 20); // June 20
+        var PREP_END    = new Date(2026, 5, 30); // June 30
+        // Current ship date
+        var SHIP_JUN    = new Date(2026, 5, 30); // June 30
+        // Next subscription cycle (July calendar highlight; Jun 21–30 shows as prep on June)
+        var CYCLE_START = new Date(2026, 6, 1);  // July 1
+        var CYCLE_END   = new Date(2026, 6, 20); // July 20
+        // Next ship date
+        var SHIP_JUL    = new Date(2026, 6, 30); // July 30
+
+        function todayMidnight() {
+          var n = new Date();
+          return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+        }
+
+        function updateCountdown() {
+          var countdownEl = document.getElementById('kkt-countdown');
+          var closedEl    = document.getElementById('kkt-closed-msg');
+          if (!countdownEl || !closedEl) return;
+
+          var diff = DEADLINE - new Date();
+          if (diff <= 0) {
+            countdownEl.style.display = 'none';
+            closedEl.style.display    = 'block';
+            return;
+          }
+          closedEl.style.display    = 'none';
+          countdownEl.style.display = 'flex';
+
+          var days = Math.floor(diff / 86400000);
+          var hrs  = Math.floor((diff % 86400000) / 3600000);
+          var mins = Math.floor((diff % 3600000)  / 60000);
+          var secs = Math.floor((diff % 60000)    / 1000);
+
+          document.getElementById('kkt-days').textContent = String(days).padStart(2, '0');
+          document.getElementById('kkt-hrs').textContent  = String(hrs).padStart(2, '0');
+          document.getElementById('kkt-mins').textContent = String(mins).padStart(2, '0');
+          document.getElementById('kkt-secs').textContent = String(secs).padStart(2, '0');
+        }
+
+        function renderCalendar(year, month, gridId) {
+          var grid = document.getElementById(gridId);
+          if (!grid) return;
+
+          var today     = todayMidnight();
+          var firstDay  = new Date(year, month, 1).getDay(); // 0=Sun
+          var offset    = (firstDay === 0) ? 6 : firstDay - 1; // Mon-based
+          var daysInMon = new Date(year, month + 1, 0).getDate();
+          var dayNames  = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+          var html      = '';
+
+          dayNames.forEach(function (d) {
+            html += '<div class="kkt-cal-day-header" aria-hidden="true">' + d + '</div>';
+          });
+
+          for (var i = 0; i < offset; i++) {
+            html += '<div class="kkt-cal-day"></div>';
+          }
+
+          for (var day = 1; day <= daysInMon; day++) {
+            var date     = new Date(year, month, day);
+            var isToday  = date.getTime() === today.getTime();
+            var isPrep   = date >= PREP_START  && date <= PREP_END;
+            var isCycle  = date >= CYCLE_START && date <= CYCLE_END;
+            var isShipJun = date.getTime() === SHIP_JUN.getTime();
+            var isShipJul = date.getTime() === SHIP_JUL.getTime();
+
+            var cls = 'kkt-cal-day';
+            if (isCycle)          cls += ' kkt-cal-day--cycle';
+            if (isPrep)           cls += ' kkt-cal-day--prep';   // overrides cycle if both
+            if (isToday)          cls += ' kkt-cal-day--today';  // always wins via !important
+            if (isShipJun || isShipJul) cls += ' kkt-cal-day--shipping';
+
+            var ariaLbl = day
+              + (isToday   ? ', today'                   : '')
+              + (isPrep    ? ', June mail prep window'   : '')
+              + (isCycle   ? ', next subscription cycle' : '')
+              + (isShipJun ? ', June mail ships from US' : '')
+              + (isShipJul ? ', next mail ships from US' : '');
+
+            html += '<div class="' + cls + '" aria-label="' + ariaLbl + '">' + day + '</div>';
+          }
+
+          grid.innerHTML = html;
+        }
+
+        window.addEventListener('load', function () {
+          renderCalendar(2026, 5, 'kkt-cal-june');
+          renderCalendar(2026, 6, 'kkt-cal-july');
+          updateCountdown();
+          setInterval(updateCountdown, 1000);
+        });
+      }());
     </script>
     <script src="/assets/js/navbar-loader.js" defer></script>
     <script src="/assets/js/footer-loader.js" defer></script>

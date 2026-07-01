@@ -29,14 +29,6 @@ function getCartTotalPrice() {
   return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
-function buildStripePayload(cartItems) {
-  const line_items = cartItems.map((item) => ({
-    price: item.id,
-    quantity: item.quantity,
-  }));
-  return { line_items };
-}
-
 // ---- PUBLIC API ----
 // Exposed on window so any page script can call these directly.
 
@@ -75,47 +67,75 @@ window.openCart = openCart;   // expose so inline onclick attributes can call it
 window.closeCart = closeCart; // same
 
 // ---- UI ----
-function updateCartUI() {
-  if (cartBadge) {
+// Pages that need custom cart rendering (e.g. subscribe.html) define window.updateCartUI
+// before this script loads. The guard below preserves that custom version.
+window.updateCartUI = window.updateCartUI || function updateCartUI() {
+  // Query live so this works even if called before the navbar finished loading
+  const badge = document.getElementById("cart-badge") || cartBadge;
+  const totalEl = document.getElementById("cart-total-amount") || cartTotal;
+  const box = document.getElementById("cart-items") || cartItemsBox;
+
+  if (badge) {
     const totalItems = getCartTotalItems();
-    cartBadge.textContent = totalItems;
-    cartBadge.classList.toggle("hidden", totalItems === 0);
+    badge.textContent = totalItems;
+    badge.classList.toggle("hidden", totalItems === 0);
   }
 
-  if (cartTotal) {
-    cartTotal.textContent = `$${getCartTotalPrice().toFixed(2)}`;
+  if (totalEl) {
+    totalEl.textContent = `$${getCartTotalPrice().toFixed(2)}`;
   }
 
-  if (cartItemsBox) {
+  if (box) {
     if (cart.length === 0) {
-      cartItemsBox.innerHTML =
+      box.innerHTML =
         '<div class="empty-cart-msg">Your cart is empty.</div>';
     } else {
-      cartItemsBox.innerHTML = cart
-        .map(
-          (item) => `
-        <div class="cart-item">
-          <img src="${item.image}" alt="${item.name}">
-          <div class="cart-item-details">
-            <h4>${item.name}</h4>
-            <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-            <div class="cart-controls">
-              <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-              <span>${item.quantity}</span>
-              <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-              <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
-            </div>
-          </div>
-        </div>
-      `
-        )
+      box.innerHTML = cart
+        .map((item) => {
+          if (item.productType === "kahani_times_archive") {
+            const monthList = Array.isArray(item.selectedMonths)
+              ? item.selectedMonths.join(", ")
+              : (item.selectedMonths || "");
+            return `
+              <div class="cart-item">
+                <img src="${item.image || '/assets/images/products/subscribe/jan.png'}" alt="${item.name}">
+                <div class="cart-item-details">
+                  <h4>${item.name}</h4>
+                  <div style="font-size:0.75rem;color:#888;margin-top:0.15rem;line-height:1.65;">
+                    <span style="display:block;"><strong>Year:</strong> ${item.selectedYear}</span>
+                    <span style="display:block;"><strong>Months:</strong> ${monthList}</span>
+                    <span style="display:block;"><strong>Qty:</strong> ${item.quantity}</span>
+                  </div>
+                  <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                  <div class="cart-controls">
+                    <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+                  </div>
+                </div>
+              </div>`;
+          }
+          return `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="cart-item-details">
+                <h4>${item.name}</h4>
+                <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                <div class="cart-controls">
+                  <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                  <span>${item.quantity}</span>
+                  <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                  <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+                </div>
+              </div>
+            </div>`;
+        })
         .join("");
     }
   }
-}
+};
 
 function openCart() {
   if (!cartOverlay) return;
+  updateCartUI();
   cartOverlay.classList.remove("hidden");
   setTimeout(() => cartOverlay.classList.add("open"), 10);
 }
@@ -130,20 +150,28 @@ function closeCart() {
 async function handleCheckout() {
   if (!checkoutBtn || cart.length === 0) return;
 
-  const { line_items } = buildStripePayload(cart);
   const originalText = checkoutBtn.innerText;
   checkoutBtn.innerText = "Redirecting to Stripe...";
   checkoutBtn.disabled = true;
 
   try {
+    // Send raw cart items; backend routes each item to the correct Stripe price
     const response = await fetch("/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: line_items }),
+      body: JSON.stringify({ cartItems: cart, cancelUrl: window.location.href }),
     });
 
     if (!response.ok) {
-      alert("There was a problem starting checkout. Please try again.");
+      let errMsg = "There was a problem starting checkout. Please try again.";
+      try {
+        const errData = await response.json();
+        if (errData && errData.error) {
+          console.error("Checkout error from server:", errData.error);
+          errMsg = errData.error;
+        }
+      } catch (_) {}
+      alert(errMsg);
       checkoutBtn.innerText = originalText;
       checkoutBtn.disabled = false;
       return;
@@ -177,8 +205,16 @@ function initCart() {
       if (e.target === cartOverlay) closeCart();
     });
   }
-  // Wire checkout button — was missing in the original cart.js
-  if (checkoutBtn)  checkoutBtn.addEventListener("click", handleCheckout);
+  // Wire checkout button — pages may override via window.customHandleCheckout
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", function () {
+      if (typeof window.customHandleCheckout === "function") {
+        window.customHandleCheckout();
+      } else {
+        handleCheckout();
+      }
+    });
+  }
 
   // Sync cart across tabs/pages
   window.addEventListener("storage", (event) => {

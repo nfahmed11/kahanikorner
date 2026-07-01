@@ -2,8 +2,129 @@ const functions = require("firebase-functions");
 const stripe = require("stripe");
 const OpenAI = require("openai");
 
+// ─────────────────────────────────────────────────────────────────────────────
+// archiveAvailability — server-side source of truth for which months can be
+// purchased. Update this whenever inventory changes; it mirrors the frontend
+// ARCHIVE_AVAILABILITY constant but uses month names as keys for easy validation.
+// true = available, false = sold out / not yet released (both are rejected).
+// ─────────────────────────────────────────────────────────────────────────────
+const ARCHIVE_AVAILABILITY = {
+  "2025": {
+    January: false, February: false, March: false, April: false,
+    May: false,     June: false,     July: false,  August: false,
+    September: false, October: false, November: true, December: true,
+  },
+  "2026": {
+    January: true, February: true, March: true, April: true,
+    May: true,     June: true,
+    July: false,   August: false,  September: false, October: false,
+    November: false, December: false,
+  },
+};
+
+exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    res.status(204).send("");
+    return;
+  }
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method Not Allowed" });
+    return;
+  }
+
+  const stripeKey     = process.env.STRIPE_SECRET_KEY || "";
+  const archivePriceId = process.env.STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID || "";
+
+  if (!stripeKey) {
+    res.status(500).json({ error: "Server configuration error: STRIPE_SECRET_KEY is not set." });
+    return;
+  }
+  if (!stripeKey.startsWith("sk_live_") && !stripeKey.startsWith("sk_test_")) {
+    res.status(500).json({ error: "Server configuration error: STRIPE_SECRET_KEY does not look like a valid Stripe secret key." });
+    return;
+  }
+  if (!archivePriceId) {
+    res.status(500).json({ error: "Server configuration error: STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID is not set." });
+    return;
+  }
+
+  const { selectedYear, selectedMonths } = req.body || {};
+
+  // ── Input validation ───────────────────────────────────────────────────────
+  if (!selectedYear || typeof selectedYear !== "string") {
+    res.status(400).json({ error: "Please select a year first." });
+    return;
+  }
+  if (!Array.isArray(selectedMonths) || selectedMonths.length === 0) {
+    res.status(400).json({ error: "Please select at least one month." });
+    return;
+  }
+  if (!ARCHIVE_AVAILABILITY[selectedYear]) {
+    res.status(400).json({ error: `Year ${selectedYear} is not available.` });
+    return;
+  }
+
+  // Deduplicate
+  const uniqueMonths = [...new Set(selectedMonths)];
+
+  // Validate each month against server-side availability
+  const yearAvailability = ARCHIVE_AVAILABILITY[selectedYear];
+  for (const month of uniqueMonths) {
+    if (typeof month !== "string" || !yearAvailability.hasOwnProperty(month)) {
+      res.status(400).json({ error: `"${month}" is not a valid month name.` });
+      return;
+    }
+    if (!yearAvailability[month]) {
+      res.status(400).json({ error: `${month} ${selectedYear} is not available for purchase.` });
+      return;
+    }
+  }
+
+  // ── Create Stripe Checkout Session ────────────────────────────────────────
+  try {
+    const stripeClient = stripe(stripeKey);
+
+    const session = await stripeClient.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price: archivePriceId,
+          quantity: uniqueMonths.length,
+        },
+      ],
+      metadata: {
+        product_type:    "kahani_times_archive",
+        selected_year:   selectedYear,
+        selected_months: uniqueMonths.join(", "),
+        selected_count:  String(uniqueMonths.length),
+        packaging:       "Bundled together in one clear protective plastic sleeve",
+      },
+      payment_intent_data: {
+        metadata: {
+          product_type:    "kahani_times_archive",
+          selected_year:   selectedYear,
+          selected_months: uniqueMonths.join(", "),
+          selected_count:  String(uniqueMonths.length),
+          packaging:       "Bundled together in one clear protective plastic sleeve",
+        },
+      },
+      success_url: "https://kahanikorner.com/success.html?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url:  "https://kahanikorner.com/subscribe.html",
+    });
+
+    res.status(200).json({ url: session.url });
+  } catch (err) {
+    console.error("[createArchiveCheckout] Stripe error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
-  // Allow CORS
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
@@ -14,38 +135,141 @@ exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
   }
 
   if (req.method !== "POST") {
-    res.status(405).send("Method Not Allowed");
+    res.status(405).json({ error: "Method Not Allowed" });
     return;
   }
 
   const key = process.env.STRIPE_SECRET_KEY || "";
-  console.log("Stripe key prefix:", key.substring(0, 12));
+  const archivePriceId = process.env.STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID || "";
 
   if (!key) {
-    res.status(500).json({ error: "Stripe key not configured" });
+    console.error("[createCheckoutSession] STRIPE_SECRET_KEY is not set.");
+    res.status(500).json({ error: "Server configuration error: STRIPE_SECRET_KEY is not set." });
+    return;
+  }
+  if (!key.startsWith("sk_live_") && !key.startsWith("sk_test_")) {
+    console.error("[createCheckoutSession] STRIPE_SECRET_KEY does not look like a valid Stripe secret key.");
+    res.status(500).json({ error: "Server configuration error: STRIPE_SECRET_KEY does not look like a valid Stripe secret key." });
     return;
   }
 
-  try {
-    const stripeClient = stripe(key);
-    const { items } = req.body;
+  // Accept raw cart items (cartItems) from the frontend
+  const { cartItems } = req.body || {};
 
-    if (!items || items.length === 0) {
-      res.status(400).json({ error: "No items in cart" });
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    res.status(400).json({ error: "No items in cart." });
+    return;
+  }
+
+  console.log("[createCheckoutSession] Incoming cart items:", JSON.stringify(cartItems));
+
+  const lineItems = [];
+  const metadata = {};
+
+  // ── Regular products ──────────────────────────────────────────────────────
+  const regularItems = cartItems.filter((item) => item.productType !== "kahani_times_archive");
+  for (const item of regularItems) {
+    if (!item.id || typeof item.id !== "string") {
+      res.status(400).json({ error: `Cart item "${item.name || "unknown"}" is missing a valid price ID.` });
+      return;
+    }
+    lineItems.push({ price: item.id, quantity: item.quantity || 1 });
+  }
+
+  // ── Archive products ──────────────────────────────────────────────────────
+  const archiveItems = cartItems.filter((item) => item.productType === "kahani_times_archive");
+  if (archiveItems.length > 0) {
+    if (!archivePriceId) {
+      console.error("[createCheckoutSession] STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID is not set.");
+      res.status(500).json({ error: "Server configuration error: archive price ID is not configured." });
       return;
     }
 
-    const session = await stripeClient.checkout.sessions.create({
+    let totalArchiveQty = 0;
+    const archiveSummaries = [];
+
+    for (const archiveItem of archiveItems) {
+      const year   = String(archiveItem.selectedYear || "");
+      const months = archiveItem.selectedMonths;
+
+      if (!year) {
+        res.status(400).json({ error: "Archive item missing selectedYear." });
+        return;
+      }
+      if (!ARCHIVE_AVAILABILITY[year]) {
+        res.status(400).json({ error: `Year ${year} is not available.` });
+        return;
+      }
+      if (months === undefined || months === null) {
+        res.status(400).json({ error: "Archive item missing selectedMonths." });
+        return;
+      }
+      if (!Array.isArray(months)) {
+        res.status(400).json({ error: "Archive item selectedMonths must be an array." });
+        return;
+      }
+      if (months.length === 0) {
+        res.status(400).json({ error: "Archive item selectedMonths must not be empty." });
+        return;
+      }
+
+      const uniqueMonths = [...new Set(months)];
+      const yearAvailability = ARCHIVE_AVAILABILITY[year];
+      for (const month of uniqueMonths) {
+        if (!Object.prototype.hasOwnProperty.call(yearAvailability, month)) {
+          res.status(400).json({ error: `"${month}" is not a valid month name.` });
+          return;
+        }
+        if (!yearAvailability[month]) {
+          res.status(400).json({ error: `Archive item has unavailable month: ${month} ${year}.` });
+          return;
+        }
+      }
+
+      totalArchiveQty += uniqueMonths.length;
+      archiveSummaries.push({ year, months: uniqueMonths, count: uniqueMonths.length });
+    }
+
+    lineItems.push({ price: archivePriceId, quantity: totalArchiveQty });
+
+    metadata.has_archive = "true";
+    if (archiveSummaries.length === 1) {
+      metadata.archive_selected_year   = archiveSummaries[0].year;
+      metadata.archive_selected_months = archiveSummaries[0].months.join(", ");
+      metadata.archive_selected_count  = String(archiveSummaries[0].count);
+      metadata.archive_packaging       = "Bundled together in one clear protective plastic sleeve";
+    } else {
+      // Multiple archive years — compact to stay within Stripe's 500-char limit per value
+      metadata.archive_items = archiveSummaries
+        .map((s) => `${s.year}: ${s.months.join(", ")}`)
+        .join(" | ")
+        .substring(0, 500);
+    }
+  }
+
+  console.log("[createCheckoutSession] Built Stripe line items:", JSON.stringify(lineItems));
+  console.log("[createCheckoutSession] Checkout metadata:", JSON.stringify(metadata));
+
+  try {
+    const stripeClient = stripe(key);
+
+    const sessionConfig = {
       payment_method_types: ["card"],
-      line_items: items,
+      line_items: lineItems,
       mode: "payment",
       success_url: "https://kahanikorner.com/success.html",
-      cancel_url: "https://kahanikorner.com/products.html",
-    });
+      cancel_url:  req.body.cancelUrl || "https://kahanikorner.com/products.html",
+    };
 
+    if (Object.keys(metadata).length > 0) {
+      sessionConfig.metadata = metadata;
+      sessionConfig.payment_intent_data = { metadata };
+    }
+
+    const session = await stripeClient.checkout.sessions.create(sessionConfig);
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error("Stripe error:", err.message);
+    console.error("[createCheckoutSession] Stripe error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
