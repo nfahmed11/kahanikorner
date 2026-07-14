@@ -102,19 +102,47 @@ var genericTalkPrompts = [
     return pool;
   }
 
+  // Roman Urdu words that correspond to TWO Urdu-script words, not one — this
+  // breaks naive index-for-index alignment between the two token streams.
+  // Covers pronoun+postposition contractions ("iska" → "اس کا") and
+  // future-tense verb+auxiliary forms ("rakhogi" → "رکھو گی").
+  var DOUBLE_URDU_TOKEN = {
+    iska: true, iski: true, iske: true, uska: true, uski: true, uske: true,
+    unka: true, unki: true, unke: true, inka: true, inki: true, inke: true,
+    rakhogi: true, rakhungi: true, rakhoge: true, rakhega: true,
+    rakhengi: true, rakhenge: true, zarooratmand: true
+  };
+
+  // Maps each roman token to its (start, end) index span in the raw Urdu
+  // token array, consuming an extra Urdu token for DOUBLE_URDU_TOKEN words
+  // so every later word stays in sync.
+  function alignRomanToUrdu(rToks, uToksRaw) {
+    var spans = [];
+    var ui = 0;
+    for (var ri = 0; ri < rToks.length; ri++) {
+      var span = DOUBLE_URDU_TOKEN[rToks[ri].toLowerCase()] ? 2 : 1;
+      var end  = Math.min(ui + span - 1, uToksRaw.length - 1);
+      spans.push({ start: ui, end: end });
+      ui = end + 1;
+    }
+    return spans;
+  }
+
+  function stripUrduPunct(t) { return t.replace(/[“”"",،.۔؟?!।:;"'"']/g, ''); }
+
   // Build roman → urdu token map from position alignment across all lines
   function buildRomanUrduMap(lines) {
     var map = {};
     lines.forEach(function (line) {
-      var rToks = tokenize(line.romanUrdu);
-      var uToks = line.urdu.split(/\s+/).map(function (t) {
-        return t.replace(/[,،.؟?!।:;"'"']/g, '');
-      });
+      var rToks     = tokenize(line.romanUrdu);
+      var uToksRaw  = line.urdu.split(/\s+/).map(stripUrduPunct);
+      var spans     = alignRomanToUrdu(rToks, uToksRaw);
       rToks.forEach(function (rt, i) {
         var lw = rt.toLowerCase();
-        if (!map[lw] && i < uToks.length && uToks[i].length > 0) {
-          map[lw] = uToks[i];
-        }
+        if (map[lw]) return;
+        var span = spans[i];
+        var text = uToksRaw.slice(span.start, span.end + 1).join(' ').trim();
+        if (text) map[lw] = text;
       });
     });
     return map;
@@ -149,11 +177,12 @@ var genericTalkPrompts = [
     var blankedR  = blankIn(line.romanUrdu, rWord);
     if (blankedR === line.romanUrdu) return null;
 
-    // Urdu: find token at same index position
-    var uWords    = line.urdu.split(/\s+/);
-    var uIdx      = Math.min(rIdx, uWords.length - 1);
-    var uRaw      = uWords[uIdx] || '';
-    var uTok      = uRaw.replace(/[,،.؟?!।:;"'"']/g, '');
+    // Urdu: find the token span aligned to this roman word's position
+    var uWordsRaw = line.urdu.split(/\s+/);
+    var spans     = alignRomanToUrdu(rToks, uWordsRaw);
+    var span      = spans[rIdx] || { start: rIdx, end: rIdx };
+    var uRaw      = uWordsRaw.slice(span.start, span.end + 1).join(' ');
+    var uTok      = stripUrduPunct(uRaw);
     var blankedU  = uTok ? blankUrduToken(line.urdu, uTok) : line.urdu;
     var ansUrdu   = romanUrduMap[rWord.toLowerCase()] || uTok || '';
 

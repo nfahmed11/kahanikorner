@@ -601,8 +601,6 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  max-height: 80px;
-  overflow-y: auto;
 }
 
 .variant-row {
@@ -807,14 +805,3 @@ body::before {
   }
 }
 
-/* ---------- Scrollbar styling ---------- */
-.card-variants::-webkit-scrollbar {
-  width: 3px;
-}
-.card-variants::-webkit-scrollbar-track {
-  background: transparent;
-}
-.card-variants::-webkit-scrollbar-thumb {
-  background: rgba(124,92,191,0.2);
-  border-radius: 3px;
-}

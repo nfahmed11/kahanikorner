@@ -43,6 +43,151 @@ const STORAGE_KEYS = {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
+// ---------- Debug helpers ----------
+
+const VOCAB_DEBUG = true;
+
+const vocabDebug = {
+  requestedWords: [],
+  missingFromMaster: [],
+  missingRequiredData: [],
+  missingImages: [],
+  failedImages: [],
+};
+
+function resetVocabDebug(ids = []) {
+  vocabDebug.requestedWords = [...ids];
+  vocabDebug.missingFromMaster = [];
+  vocabDebug.missingRequiredData = [];
+  vocabDebug.missingImages = [];
+  vocabDebug.failedImages = [];
+}
+
+function addUniqueDebugItem(list, item, key = "id") {
+  if (!item) return;
+  const exists = list.some((existing) => existing[key] === item[key]);
+  if (!exists) list.push(item);
+}
+
+function validateVocabEntry(entry, sourceWord = entry?.id) {
+  if (!entry) return;
+
+  const missingFields = [];
+
+  if (!entry.id) missingFields.push("id");
+  if (!entry.word?.baseRomanUrdu) missingFields.push("word.baseRomanUrdu");
+  if (!entry.word?.baseUrdu) missingFields.push("word.baseUrdu");
+  if (!entry.word?.english) missingFields.push("word.english");
+  if (!entry.word?.pos) missingFields.push("word.pos");
+  if (!entry.grammar) missingFields.push("grammar");
+  if (!Array.isArray(entry.variants)) missingFields.push("variants");
+  if (!entry.image) missingFields.push("image");
+
+  if (missingFields.length > 0) {
+    addUniqueDebugItem(vocabDebug.missingRequiredData, {
+      id: entry.id || sourceWord,
+      sourceWord,
+      missingFields,
+      entry,
+    });
+  }
+
+  if (!hasValidImage(entry)) {
+    addUniqueDebugItem(vocabDebug.missingImages, {
+      id: entry.id || sourceWord,
+      sourceWord,
+      image: entry.image || null,
+      reason: !entry.image ? "No image path found" : "Invalid image path",
+      entry,
+    });
+  }
+}
+
+function logVocabDebugReport() {
+  if (!VOCAB_DEBUG) return;
+
+  console.group("🧩 Kahani Korner Vocab Debug Report");
+
+  console.log("Requested story words:", vocabDebug.requestedWords);
+
+  if (vocabDebug.missingFromMaster.length) {
+    console.warn(
+      "Words NOT found in master vocab:",
+      vocabDebug.missingFromMaster,
+    );
+  } else {
+    console.log("✅ All requested words were found in master vocab.");
+  }
+
+  if (vocabDebug.missingRequiredData.length) {
+    console.warn(
+      "Words missing required data:",
+      vocabDebug.missingRequiredData,
+    );
+  } else {
+    console.log("✅ No missing required vocab data.");
+  }
+
+  if (vocabDebug.missingImages.length) {
+    console.warn("Words missing image paths:", vocabDebug.missingImages);
+  } else {
+    console.log("✅ All vocab entries have image paths.");
+  }
+
+  if (vocabDebug.failedImages.length) {
+    console.warn("Images that failed to load:", vocabDebug.failedImages);
+  } else {
+    console.log("✅ No image load failures detected yet.");
+  }
+
+  console.groupEnd();
+
+  logWordsWithNoWorkingImage();
+}
+
+/** Single combined list: words with no image path OR whose image failed to load in the browser. */
+function logWordsWithNoWorkingImage() {
+  const words = [
+    ...vocabDebug.missingImages.map((i) => i.sourceWord || i.id),
+    ...vocabDebug.failedImages.map((i) => i.id),
+  ];
+  const uniqueWords = [...new Set(words)];
+
+  console.log(
+    `🚫 Words with no image or a broken image (${uniqueWords.length}):`,
+    uniqueWords,
+  );
+}
+
+window.kkVocabDebug = {
+  imageFailed(img) {
+    const wrapper = img.closest(".card-wrapper");
+    const id = wrapper?.dataset?.id || "unknown";
+    const src = img.getAttribute("src");
+
+    addUniqueDebugItem(vocabDebug.failedImages, {
+      id,
+      image: src,
+      reason: "Browser could not load this image file",
+    });
+
+    console.warn("🖼️ Vocab image failed to load:", {
+      id,
+      image: src,
+    });
+
+    logWordsWithNoWorkingImage();
+
+    img.style.display = "none";
+  },
+
+  report() {
+    logVocabDebugReport();
+  },
+
+  data: vocabDebug,
+};
+
 const els = {
   grid: $("#cards-grid"),
   searchInput: $("#search-input"),
@@ -64,21 +209,22 @@ const els = {
 // ---------- State ----------
 
 let state = {
-  direction: "urdu-english",   // "urdu-english" | "english-urdu"
-  displayMode: "both",         // "both" | "image" | "word"
-  filters: {                   // toggleable filters
+  direction: "urdu-english", // "urdu-english" | "english-urdu"
+  displayMode: "both", // "both" | "image" | "word"
+  filters: {
+    // toggleable filters
     verbs: false,
     "new-only": false,
   },
   search: "",
   sort: "default",
-  density: "comfortable",      // "comfortable" | "compact"
-  tab: "all",                  // "all" | "known" | "new"
+  density: "comfortable", // "comfortable" | "compact"
+  tab: "all", // "all" | "known" | "new"
   knownIds: new Set(),
 };
 
-let storyVocab = [];           // filtered vocab from master list
-let storyVocabIds = [];        // ordered IDs from story context
+let storyVocab = []; // filtered vocab from master list
+let storyVocabIds = []; // ordered IDs from story context
 
 // ---------- Storage helpers ----------
 
@@ -86,7 +232,9 @@ function loadJSON(key, fallback) {
   try {
     const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : fallback;
-  } catch { return fallback; }
+  } catch {
+    return fallback;
+  }
 }
 
 function saveJSON(key, val) {
@@ -103,17 +251,26 @@ function saveKnown() {
 }
 
 function loadPersistedState() {
-  state.direction = localStorage.getItem(STORAGE_KEYS.direction) || "urdu-english";
+  state.direction =
+    localStorage.getItem(STORAGE_KEYS.direction) || "urdu-english";
   state.displayMode = localStorage.getItem(STORAGE_KEYS.displayMode) || "both";
   state.sort = localStorage.getItem(STORAGE_KEYS.sort) || "default";
   state.density = localStorage.getItem(STORAGE_KEYS.density) || "comfortable";
   loadKnown();
 }
 
-function saveDirection() { localStorage.setItem(STORAGE_KEYS.direction, state.direction); }
-function saveDisplayMode() { localStorage.setItem(STORAGE_KEYS.displayMode, state.displayMode); }
-function saveSort() { localStorage.setItem(STORAGE_KEYS.sort, state.sort); }
-function saveDensity() { localStorage.setItem(STORAGE_KEYS.density, state.density); }
+function saveDirection() {
+  localStorage.setItem(STORAGE_KEYS.direction, state.direction);
+}
+function saveDisplayMode() {
+  localStorage.setItem(STORAGE_KEYS.displayMode, state.displayMode);
+}
+function saveSort() {
+  localStorage.setItem(STORAGE_KEYS.sort, state.sort);
+}
+function saveDensity() {
+  localStorage.setItem(STORAGE_KEYS.density, state.density);
+}
 
 // ---------- Current story vocab reader ----------
 
@@ -122,7 +279,10 @@ function readStoryVocabIds() {
   const params = new URLSearchParams(location.search);
   const wordsParam = params.get("words");
   if (wordsParam) {
-    return wordsParam.split(",").map((w) => w.trim()).filter(Boolean);
+    return wordsParam
+      .split(",")
+      .map((w) => w.trim())
+      .filter(Boolean);
   }
 
   // Priority 2: sessionStorage
@@ -134,11 +294,14 @@ function readStoryVocabIds() {
     if (!Array.isArray(parsed) || parsed.length === 0) return null;
 
     // Support: array of strings OR array of objects with .id
-    return parsed.map((item) => {
-      if (typeof item === "string") return item.trim();
-      if (item && typeof item === "object" && item.id) return String(item.id).trim();
-      return "";
-    }).filter(Boolean);
+    return parsed
+      .map((item) => {
+        if (typeof item === "string") return item.trim();
+        if (item && typeof item === "object" && item.id)
+          return String(item.id).trim();
+        return "";
+      })
+      .filter(Boolean);
   } catch {
     return null;
   }
@@ -166,6 +329,8 @@ function buildVocabLookup() {
 }
 
 function filterMasterVocab(ids) {
+  resetVocabDebug(ids);
+
   const lookup = buildVocabLookup();
   const seen = new Set();
   const result = [];
@@ -173,21 +338,37 @@ function filterMasterVocab(ids) {
   for (const id of ids) {
     const key = id.toLowerCase();
     const entry = lookup.get(key);
+
     if (entry && !seen.has(entry.id)) {
       seen.add(entry.id);
+      validateVocabEntry(entry, id);
       result.push(entry);
     } else if (!entry && !seen.has(key)) {
-      // Word not in mastervocab — show as a text-only fallback card
       seen.add(key);
-      result.push({
+
+      const fallbackEntry = {
         id,
-        word: { baseRomanUrdu: id, baseUrdu: "", english: "", pos: "" },
+        word: {
+          baseRomanUrdu: id,
+          baseUrdu: "",
+          english: "",
+          pos: "",
+        },
         grammar: {},
         variants: [],
         image: null,
+      };
+
+      addUniqueDebugItem(vocabDebug.missingFromMaster, {
+        id,
+        reason: "Word was requested by story but not found in mastervocab.js",
       });
+
+      validateVocabEntry(fallbackEntry, id);
+      result.push(fallbackEntry);
     }
   }
+
   return result;
 }
 
@@ -252,10 +433,16 @@ function getFilteredSortedCards() {
   // Sort
   switch (state.sort) {
     case "az-english":
-      cards.sort((a, b) => (a.word?.english || "").localeCompare(b.word?.english || ""));
+      cards.sort((a, b) =>
+        (a.word?.english || "").localeCompare(b.word?.english || ""),
+      );
       break;
     case "az-roman":
-      cards.sort((a, b) => (a.word?.baseRomanUrdu || "").localeCompare(b.word?.baseRomanUrdu || ""));
+      cards.sort((a, b) =>
+        (a.word?.baseRomanUrdu || "").localeCompare(
+          b.word?.baseRomanUrdu || "",
+        ),
+      );
       break;
     case "unknown-first":
       cards.sort((a, b) => {
@@ -293,7 +480,7 @@ function renderCardFrontContent(entry) {
   let html = "";
 
   if (showImage && imgSrc) {
-    html += `<img class="card-image" src="${escHtml(imgSrc)}" alt="${escHtml(entry.word?.english || "")}" loading="lazy" onerror="this.style.display='none'" />`;
+    html += `<img class="card-image" src="${escHtml(imgSrc)}" alt="${escHtml(entry.word?.english || "")}" loading="lazy" onerror="window.kkVocabDebug.imageFailed(this)" />`;
   }
 
   if (showWord) {
@@ -343,8 +530,10 @@ function renderCardBackContent(entry) {
     html += `<div class="card-variants">`;
     for (const v of entry.variants) {
       html += `<div class="variant-row">`;
-      if (v.romanUrdu) html += `<span class="variant-roman">${escHtml(v.romanUrdu)}</span>`;
-      if (v.urdu) html += `<span class="variant-urdu">${escHtml(v.urdu)}</span>`;
+      if (v.romanUrdu)
+        html += `<span class="variant-roman">${escHtml(v.romanUrdu)}</span>`;
+      if (v.urdu)
+        html += `<span class="variant-urdu">${escHtml(v.urdu)}</span>`;
       const meta = [v.gender, v.number].filter(Boolean).join(", ");
       if (meta) html += `<span class="variant-meta">(${escHtml(meta)})</span>`;
       html += `</div>`;
@@ -382,7 +571,10 @@ function renderCards() {
     wrapper.className = `card-wrapper ${accentClass}${isKnown ? " is-known" : ""}`;
     wrapper.setAttribute("tabindex", "0");
     wrapper.setAttribute("role", "button");
-    wrapper.setAttribute("aria-label", `${entry.word?.english || entry.id} vocabulary card. Tap to flip.`);
+    wrapper.setAttribute(
+      "aria-label",
+      `${entry.word?.english || entry.id} vocabulary card. Tap to flip.`,
+    );
     wrapper.dataset.id = entry.id;
 
     wrapper.innerHTML = `
@@ -453,7 +645,10 @@ function syncChips() {
   });
 
   // Density class on body
-  document.body.classList.toggle("density-compact", state.density === "compact");
+  document.body.classList.toggle(
+    "density-compact",
+    state.density === "compact",
+  );
 
   // Update filter toggle badge
   syncFiltersBadge();
@@ -465,7 +660,8 @@ function syncFiltersBadge() {
     (state.displayMode !== "both" ? 1 : 0) +
     (state.density !== "comfortable" ? 1 : 0);
 
-  els.filtersLabel.textContent = activeCount > 0 ? `Filters (${activeCount})` : "Filters";
+  els.filtersLabel.textContent =
+    activeCount > 0 ? `Filters (${activeCount})` : "Filters";
   els.toggleFiltersBtn.classList.toggle("has-active-filters", activeCount > 0);
 }
 
@@ -597,7 +793,8 @@ function bindControlEvents() {
 
   // Back button
   els.backBtn.addEventListener("click", () => history.back());
-  if (els.emptyBackBtn) els.emptyBackBtn.addEventListener("click", () => history.back());
+  if (els.emptyBackBtn)
+    els.emptyBackBtn.addEventListener("click", () => history.back());
 
   // Retry
   if (els.retryBtn) {
@@ -664,6 +861,7 @@ function init() {
 
   storyVocabIds = ids;
   storyVocab = filterMasterVocab(ids);
+  logVocabDebugReport();
 
   if (storyVocab.length === 0) {
     els.emptyNoStory.hidden = false;

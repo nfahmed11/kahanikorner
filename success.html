@@ -8,11 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --granite: #4a594a;
-      --deep-teal: #687d70;
-      --soft-blush: #f3dedd;
-      --rosy-taupe: #d49797;
-      --white-smoke: #f3f1f0;
+      --deep-teal: #2e6a68;
+      --sage-green: #9eaf8b;
+      --dusty-blush: #e9c7cf;
+      --pale-rose: #f6e3e7;
+      --rose-pink: #e19697;
+      --warm-white: #fffdf8;
+      --charcoal: #1f2928;
+
+      --granite: var(--charcoal);
+      --soft-blush: var(--pale-rose);
+      --rosy-taupe: var(--rose-pink);
+      --white-smoke: var(--warm-white);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -27,13 +34,13 @@
     }
     .card {
       background: white;
-      border: 2px solid #b0c3b7;
+      border: 2px solid var(--sage-green);
       border-radius: 2rem;
       padding: 3rem 2.5rem;
       max-width: 480px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 18px 40px rgba(74,89,74,0.12);
+      box-shadow: 0 18px 40px rgba(31,41,40,0.12);
     }
     .icon {
       font-size: 3.5rem;
@@ -53,23 +60,23 @@
     a {
       display: inline-block;
       padding: 0.9rem 2rem;
-      background: var(--granite);
+      background: var(--deep-teal);
       color: white;
       border-radius: 1rem;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 4px 0 var(--deep-teal);
+      box-shadow: 0 4px 0 #234f4d;
       transition: transform 0.2s, box-shadow 0.2s;
     }
     a:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 0 var(--deep-teal);
+      box-shadow: 0 6px 0 #234f4d;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#b0c3b7" width="56" height="56"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9eaf8b" width="56" height="56"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
     <h1>Order Confirmed!</h1>
     <p>Thank you for your purchase from Kahani Korner.<br>You'll receive a confirmation email shortly.</p>
     <a href="/products.html">Continue Shopping</a>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+
+    <title id="docTitle">Audio Newsletter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="/qr/assets/css/audionewsletter.css" />
+  </head>
+
+  <body>
+    <main>
+      <!-- MASTHEAD TOP BAR -->
+      <div class="masthead-eyebrow">✦ The Kahani Times ✦ Audio Edition ✦</div>
+
+      <!-- MASTHEAD BODY -->
+      <div class="masthead-body">
+        <p class="masthead-kicker" id="mastheadKicker"></p>
+        <h1 id="storyTitle"></h1>
+        <div class="masthead-rule"></div>
+        <p class="subtitle">Listen to this month's newspaper story, section by section.</p>
+        <div class="masthead-chips" id="mastheadChips"></div>
+      </div>
+
+      <!-- HOW TO LISTEN -->
+      <div class="how-to-box">
+        <p class="how-to-title">✦ How to Listen</p>
+        <ol class="how-to-list">
+          <li>Tap a section card to play.</li>
+          <li>Follow along in your newspaper!</li>
+        </ol>
+      </div>
+
+      <!-- PAGE TABS -->
+      <div class="page-nav" id="pageNav"></div>
+
+      <!-- PAGE CONTENT -->
+      <div class="page-wrapper" id="pageWrapper"></div>
+    </main>
+
+    <!-- AUDIO PLAYER BAR -->
+    <div class="audio-player-bar">
+      <div class="audio-inner">
+        <div class="player-info">
+          <span class="now-playing-badge">▶ Now Playing</span>
+          <div class="now-playing" id="nowPlaying">Nothing yet — tap a section to start.</div>
+        </div>
+        <audio id="audioPlayer" controls preload="none">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <script src="/qr/assets/js/audionewsletter-data.js"></script>
+    <script src="/qr/assets/js/audionewsletter.js" defer></script>
+  </body>
+</html>

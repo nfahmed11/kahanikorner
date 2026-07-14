@@ -1,11 +1,24 @@
  :root {
-        --feldgrau: #4a594a;
-        --hookers-green: #687d70;
-        --ash-gray: #b0c3b7;
-        --white-smoke: #f3f1f0;
-        --misty-rose: #f3dedd;
-        --tea-rose: #ffc4c3;
-        --rosy-brown: #d49797;
+        --deep-teal: #2e6a68;
+        --sage-green: #9eaf8b;
+        --light-sage: #dadebb;
+        --dusty-blush: #e9c7cf;
+        --pale-rose: #f6e3e7;
+        --rose-pink: #e19697;
+        --rose-pink-hover: #d68588;
+        --rose-pink-active: #c9787c;
+        --warm-white: #fffdf8;
+        --charcoal: #1f2928;
+        --muted-gray: #52615d;
+        --light-neutral: #e8e4dc;
+
+        --feldgrau: var(--charcoal);
+        --hookers-green: var(--deep-teal);
+        --ash-gray: var(--sage-green);
+        --white-smoke: var(--warm-white);
+        --misty-rose: var(--pale-rose);
+        --tea-rose: var(--dusty-blush);
+        --rosy-brown: var(--rose-pink);
       }
 
       
@@ -211,7 +224,7 @@ h1 {
         font-size: 1.5rem;
         opacity: 0;
         animation: floatSwirl 6s linear infinite;
-        color: rgba(106, 144, 120, 0.4);
+        color: rgba(158, 175, 139, 0.4);
       }
 
       @keyframes floatSwirl {
@@ -305,20 +318,24 @@ body.loaded .email-modal {
 
 /* Input Field */
 .modal-content input[type="email"] {
-  border: 1px solid var(--ash-gray);
+  border: 1px solid var(--light-neutral);
 }
 
 /* Submit Button */
 .modal-content button[type="submit"] {
-  background-color: var(--ash-gray);
-  color: var(--white-smoke);
+  background-color: var(--rose-pink);
+  color: var(--warm-white);
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .modal-content button[type="submit"]:hover {
-  background-color: var(--ash-gray);
+  background-color: var(--rose-pink-hover);
+}
+
+.modal-content button[type="submit"]:active {
+  background-color: var(--rose-pink-active);
 }
 
 /* Close Button */
@@ -380,7 +397,7 @@ body.loaded .email-modal {
   color: var(--feldgrau);
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23687d70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%232e6a68' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 0.65rem center;
   cursor: pointer;
@@ -425,14 +442,14 @@ select {
 .lang-pill:hover {
   background: var(--ash-gray);
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(74, 89, 74, 0.18);
+  box-shadow: 0 4px 10px rgba(31, 41, 40, 0.18);
 }
 
 .lang-pill[aria-selected="true"] {
   background: var(--hookers-green);
   color: #fff;
   border-color: var(--hookers-green);
-  box-shadow: 0 4px 12px rgba(74, 89, 74, 0.28);
+  box-shadow: 0 4px 12px rgba(31, 41, 40, 0.28);
 }
 
 .lang-pill[aria-selected="true"]:hover {

@@ -4,22 +4,46 @@
    ======================================================== */
 
 :root {
-  --granite: #4a594a;
-  --deep-teal: #687d70;
-  --ash-grey: #b0c3b7;
-  --white-smoke: #f3f1f0;
-  --soft-blush: #f3dedd;
-  --cotton-rose: #ffc4c3;
-  --rosy-taupe: #d49797;
-  --black: #1c2524;
-  --white: #ffffff;
-  --mint: #c9dcce;
+  /* Brand tokens (Kahani Korner palette) */
+  --deep-teal: #2e6a68;
+  --sage-green: #9eaf8b;
+  --light-sage: #dadebb;
+  --dusty-blush: #e9c7cf;
+  --pale-rose: #f6e3e7;
+  --rose-pink: #e19697;
+  --rose-pink-hover: #d68588;
+  --rose-pink-active: #c9787c;
+  --warm-white: #fffdf8;
+  --charcoal: #1f2928;
+  --muted-gray: #52615d;
+  --light-neutral: #e8e4dc;
+
+  --color-sage-light: var(--light-sage);
+  --color-sage-muted: var(--sage-green);
+  --color-teal: var(--deep-teal);
+  --color-teal-dark: #234f4d;
+  --color-warm-white: var(--warm-white);
+  --color-cream: #faf7f0;
+  --color-text: var(--charcoal);
+  --color-text-muted: var(--muted-gray);
+  --color-border: var(--light-neutral);
+
+  /* Legacy variable names kept for compatibility, remapped to new palette */
+  --granite: var(--color-text);
+  --ash-grey: var(--color-sage-muted);
+  --white-smoke: var(--color-warm-white);
+  --soft-blush: var(--pale-rose);
+  --cotton-rose: var(--dusty-blush);
+  --rosy-taupe: var(--rose-pink);
+  --black: var(--color-text);
+  --white: var(--color-warm-white);
+  --mint: var(--color-sage-light);
   --radius-lg: 24px;
   --radius-pill: 999px;
-  --shadow-hover: 0 22px 50px rgba(74, 89, 74, 0.25);
-  --card-bg: #ffffff;
-  --danger: #ef4444;
-  --muted: #5c6b68;
+  --shadow-hover: 0 22px 50px rgba(46, 106, 104, 0.22);
+  --card-bg: var(--color-warm-white);
+  --danger: #b23b3b;
+  --muted: var(--color-text-muted);
   --topbar-h: 15px;
   --header-top-gap: 1.75rem;
   --header-h: 74px;
@@ -50,7 +74,7 @@ h1, h2, h3, h4 {
   font-weight: 800;
   line-height: 1.2;
   margin: 0 0 1rem;
-  color: var(--granite);
+  color: var(--deep-teal);
 }
 
 /* ── TOP PROMO BAR ── */
@@ -99,7 +123,7 @@ header.header {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(176, 195, 183, 0.7);
+  border: 2px solid rgba(158, 175, 139, 0.7);
   border-radius: 999px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -125,7 +149,7 @@ header.header {
   font-family: "Grandstander", cursive;
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--granite);
+  color: var(--deep-teal);
   text-decoration: none;
 }
 
@@ -153,7 +177,7 @@ header.header {
 }
 
 .nav a:hover {
-  color: var(--soft-blush);
+  color: var(--rose-pink);
   font-weight: 700;
   text-shadow:
     -1px -1px 0 var(--granite),
@@ -164,7 +188,7 @@ header.header {
 
 .nav a.nav-active {
   font-weight: 700;
-  color: var(--rosy-taupe);
+  color: var(--deep-teal);
 }
 
 /* ── MOBILE TOGGLE ── */
@@ -234,7 +258,7 @@ header.header {
   top: -0.25rem;
   right: -0.25rem;
   background: var(--rosy-taupe);
-  color: white;
+  color: var(--granite);
   font-size: 0.75rem;
   font-weight: 800;
   min-width: 1.5rem;
@@ -250,7 +274,7 @@ header.header {
 .cart-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(74, 89, 74, 0.2);
+  background: rgba(31, 41, 40, 0.3);
   z-index: 110;
   opacity: 0;
   pointer-events: none;
@@ -352,7 +376,7 @@ header.header {
   min-width: 0;
 }
 .cart-item-details h4 { font-size: 1rem; margin-bottom: 0.25rem; }
-.cart-item-price { font-weight: 700; color: var(--rosy-taupe); margin-bottom: 0.5rem; }
+.cart-item-price { font-weight: 700; color: var(--deep-teal); margin-bottom: 0.5rem; }
 
 .cart-controls { display: flex; align-items: center; gap: 0.5rem; }
 
@@ -398,8 +422,8 @@ header.header {
 .checkout-btn {
   width: 100%;
   padding: 0.85rem;
-  background: var(--granite);
-  color: white;
+  background: var(--deep-teal);
+  color: var(--color-warm-white);
   border: none;
   border-radius: var(--radius-pill);
   font-family: "Grandstander", cursive;
@@ -409,13 +433,13 @@ header.header {
   transition: background 0.2s;
 }
 
-.checkout-btn:hover { background: var(--deep-teal); }
+.checkout-btn:hover { background: var(--color-teal-dark); }
 
 /* ── MOBILE MENU ── */
 .mobile-menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(28, 37, 36, 0.35);
+  background: rgba(31, 41, 40, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 120;
@@ -497,13 +521,13 @@ header.header {
   text-decoration: none;
 }
 
-.mobile-menu__links li a.nav-active { color: var(--rosy-taupe); }
+.mobile-menu__links li a.nav-active { color: var(--deep-teal); }
 
 /* ── SHARED FOOTER ── */
 footer.footer {
   width: 100%;
-  background: var(--granite);
-  color: var(--ash-grey);
+  background: var(--deep-teal);
+  color: var(--color-sage-light);
   padding: 4rem 2rem;
   text-align: center;
   margin-top: 3rem;
@@ -516,6 +540,7 @@ footer.footer {
 }
 
 footer.footer a { color: var(--white); font-weight: 700; }
+footer.footer a:hover { color: var(--pale-rose); }
 
 .footer-brand-logo {
   height: 40px;
@@ -596,13 +621,13 @@ footer.footer a { color: var(--white); font-weight: 700; }
   cursor: pointer; display: inline-flex; align-items: center; gap: 0.3em;
 }
 .nav-dropdown__trigger:hover {
-  color: var(--soft-blush); font-weight: 700;
+  color: var(--rose-pink); font-weight: 700;
   text-shadow:
     -1px -1px 0 var(--granite),  1px -1px 0 var(--granite),
     -1px  1px 0 var(--granite),  1px  1px 0 var(--granite);
 }
 .nav-dropdown__trigger.nav-active {
-  color: var(--rosy-taupe); font-weight: 700;
+  color: var(--deep-teal); font-weight: 700;
 }
 .nav-dropdown__trigger:focus-visible {
   outline: 2px solid var(--deep-teal); outline-offset: 3px; border-radius: 4px;
@@ -615,9 +640,9 @@ footer.footer a { color: var(--white); font-weight: 700; }
 .dropdown-menu {
   position: absolute; top: calc(100% + 14px); left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  min-width: 230px; background: #fff;
-  border: 2px solid rgba(176, 195, 183, 0.7); border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(74, 89, 74, 0.14);
+  min-width: 230px; background: var(--color-warm-white);
+  border: 2px solid rgba(158, 175, 139, 0.7); border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(31, 41, 40, 0.14);
   padding: 0.45rem 0.4rem 0.55rem; opacity: 0; pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
 }
@@ -632,7 +657,7 @@ footer.footer a { color: var(--white); font-weight: 700; }
 }
 .dropdown-menu__header {
   padding: 0.6rem 0.85rem 0.5rem;
-  border-bottom: 1px solid rgba(176, 195, 183, 0.5); margin-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(158, 175, 139, 0.5); margin-bottom: 0.3rem;
 }
 .dropdown-menu__title {
   display: block; font-family: "Grandstander", cursive; font-size: 0.77rem;
@@ -656,7 +681,7 @@ footer.footer a { color: var(--white); font-weight: 700; }
 }
 .dropdown-menu__item--submit {
   margin-top: 0.3rem; padding-top: 0.6rem; color: var(--deep-teal);
-  font-weight: 700; border-top: 1px dashed rgba(176, 195, 183, 0.5);
+  font-weight: 700; border-top: 1px dashed rgba(158, 175, 139, 0.5);
 }
 .dropdown-menu__item--submit:hover { background: var(--mint); color: var(--granite); }
 
@@ -670,7 +695,7 @@ footer.footer a { color: var(--white); font-weight: 700; }
   text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
   color: var(--granite); cursor: pointer; transition: color 0.2s, transform 0.1s;
 }
-.mobile-free-resources-btn:hover { color: var(--cotton-rose); transform: translateX(3px); }
+.mobile-free-resources-btn:hover { color: var(--deep-teal); transform: translateX(3px); }
 .mobile-menu__body {
   flex: 1; position: relative; overflow: hidden; min-height: 0;
 }
@@ -705,4 +730,4 @@ footer.footer a { color: var(--white); font-weight: 700; }
 }
 .mobile-resources-links li a i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
 .mobile-resources-links li:last-child a { border-bottom: none; }
-.mobile-resources-links li a:hover { color: var(--cotton-rose); transform: translateX(3px); }
+.mobile-resources-links li a:hover { color: var(--deep-teal); transform: translateX(3px); }

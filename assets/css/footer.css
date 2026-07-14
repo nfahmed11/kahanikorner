@@ -21,7 +21,7 @@ footer.footer {
   grid-template-columns: 1fr 2fr;
   gap: 3rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(176, 195, 183, 0.25);
+  border-bottom: 1px solid rgba(218, 222, 187, 0.3);
 }
 
 /* ── Brand / logo / social column — centered ── */
@@ -75,7 +75,7 @@ footer.footer {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--ash-grey);
+  color: var(--color-sage-light);
   margin: 0 0 0.75rem;
 }
 
@@ -99,6 +99,7 @@ footer.footer {
 
 .footer-link-group ul li a:hover {
   opacity: 1;
+  color: var(--pale-rose);
   text-decoration: underline;
 }
 
@@ -109,7 +110,7 @@ footer.footer {
   padding-top: 1.5rem;
   text-align: center;
   font-size: 0.82rem;
-  color: var(--ash-grey);
+  color: var(--sage-green);
 }
 
 /* ── Tablet ── */

@@ -42,17 +42,29 @@
 
   <style>
     :root {
-      --granite: #4a594a;
-      --deep-teal: #687d70;
-      --ash-grey: #b0c3b7;
-      --white-smoke: #f3f1f0;
-      --soft-blush: #f3dedd;
-      --cotton-rose: #ffc4c3;
-      --mint: #c9dcce;
-      --black: #1c2524;
+      --deep-teal: #2e6a68;
+      --sage-green: #9eaf8b;
+      --light-sage: #dadebb;
+      --dusty-blush: #e9c7cf;
+      --pale-rose: #f6e3e7;
+      --rose-pink: #e19697;
+      --rose-pink-hover: #d68588;
+      --rose-pink-active: #c9787c;
+      --warm-white: #fffdf8;
+      --charcoal: #1f2928;
+      --muted-gray: #52615d;
+      --light-neutral: #e8e4dc;
+
+      --granite: var(--charcoal);
+      --ash-grey: var(--sage-green);
+      --white-smoke: var(--warm-white);
+      --soft-blush: var(--pale-rose);
+      --cotton-rose: var(--dusty-blush);
+      --mint: var(--light-sage);
+      --black: var(--charcoal);
       --white: #ffffff;
       --radius-lg: 24px;
-      --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
+      --shadow-soft: 0 18px 40px rgba(31, 41, 40, 0.15);
     }
 
     *,
@@ -64,8 +76,8 @@
     body {
       font-family: 'Open Sans', sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(243, 222, 221, 0.55), transparent 34rem),
-        radial-gradient(circle at bottom right, rgba(201, 220, 206, 0.55), transparent 32rem),
+        radial-gradient(circle at top left, rgba(246, 227, 231, 0.55), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(218, 222, 187, 0.55), transparent 32rem),
         var(--white-smoke);
       color: var(--black);
       margin: 0;
@@ -79,7 +91,7 @@
 
     .legal-card {
       background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(104, 125, 112, 0.16);
+      border: 1px solid rgba(46, 106, 104, 0.16);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-soft);
       padding: clamp(1.5rem, 4vw, 3rem);
@@ -143,16 +155,16 @@
     }
 
     .legal-note {
-      background: rgba(243, 222, 221, 0.45);
-      border: 1px solid rgba(104, 125, 112, 0.14);
+      background: rgba(246, 227, 231, 0.45);
+      border: 1px solid rgba(46, 106, 104, 0.14);
       border-radius: 18px;
       padding: 1rem 1.1rem;
       margin: 1.25rem 0 0;
     }
 
     .footer {
-      background: var(--granite);
-      color: var(--ash-grey);
+      background: var(--deep-teal);
+      color: var(--light-sage);
       padding: 2rem 1.25rem;
       text-align: center;
       font-size: 0.85rem;

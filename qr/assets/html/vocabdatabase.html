@@ -1,0 +1,2009 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocab Inspector</title>
+    <style>
+      :root {
+        --bg: #fff8fb;
+        --panel: rgba(255, 255, 255, 0.92);
+        --panel-strong: #ffffff;
+        --text: #2b2430;
+        --muted: #6f6474;
+        --pink: #f9d8e7;
+        --pink-strong: #f4b8d2;
+        --mint: #dff5ea;
+        --blue: #dfeaff;
+        --lavender: #eee5ff;
+        --gold: #fff3c9;
+        --peach: #ffe7dc;
+        --danger: #ffdede;
+        --success: #daf6e5;
+        --warning: #fff1c7;
+        --border: rgba(43, 36, 48, 0.1);
+        --shadow: 0 14px 40px rgba(104, 76, 96, 0.12);
+        --radius-xl: 28px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, #ffe8f1 0%, transparent 28%),
+          radial-gradient(circle at top right, #e7fff4 0%, transparent 25%),
+          linear-gradient(180deg, #fffafc 0%, #fff6f9 100%);
+        min-height: 100vh;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1500px, calc(100% - 32px));
+        margin: 24px auto 40px;
+      }
+
+      .hero {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.94),
+          rgba(255, 247, 252, 0.98)
+        );
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        padding: 22px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .title-wrap h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      .title-wrap p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        max-width: 820px;
+        font-size: 15px;
+      }
+
+      .count-pill {
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--lavender), var(--pink));
+        padding: 12px 16px;
+        font-weight: 800;
+        white-space: nowrap;
+        border: 1px solid rgba(43, 36, 48, 0.08);
+      }
+
+      .controls {
+        display: grid;
+        grid-template-columns: 1.35fr 0.85fr 0.85fr 0.85fr 0.85fr;
+        gap: 12px;
+      }
+
+      .control {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 12px 14px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .control label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .control input,
+      .control select,
+      .control textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+      }
+
+      .toolbar-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        grid-column: 1 / -1;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          opacity 0.15s ease,
+          box-shadow 0.15s ease;
+        box-shadow: 0 8px 20px rgba(104, 76, 96, 0.08);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, #f4b8d2, #ead9ff);
+        color: #3d2f40;
+      }
+
+      .btn.soft {
+        background: #f8f0f7;
+        color: #5b4e5e;
+      }
+
+      .btn.warn {
+        background: #fff0d0;
+        color: #6c5400;
+      }
+
+      .btn.success {
+        background: #def6e9;
+        color: #1f5d43;
+      }
+
+      .layout {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: minmax(320px, 1.2fr) minmax(360px, 0.95fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+      }
+
+      .grid-panel {
+        padding: 18px;
+      }
+
+      .grid-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .grid-header h2,
+      .detail-header h2 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .tiny-note {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 14px;
+      }
+
+      .mini-card {
+        position: relative;
+        border: 1px solid rgba(43, 36, 48, 0.08);
+        border-radius: 24px;
+        background: linear-gradient(180deg, #ffffff 0%, #fff8fc 100%);
+        box-shadow: 0 10px 26px rgba(102, 73, 89, 0.08);
+        padding: 12px;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+        min-height: 225px;
+        display: grid;
+        grid-template-rows: auto 92px auto auto;
+        gap: 10px;
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .mini-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 34px rgba(102, 73, 89, 0.12);
+      }
+
+      .mini-card.active {
+        border-color: rgba(244, 184, 210, 0.95);
+        box-shadow: 0 18px 40px rgba(206, 115, 154, 0.18);
+      }
+
+      .mini-card.problem {
+        outline: 2px solid rgba(255, 177, 140, 0.6);
+      }
+
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .pos-badge,
+      .status-badge,
+      .chip,
+      .review-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 1;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .pos-badge {
+        background: var(--blue);
+      }
+
+      .status-ok {
+        background: var(--mint);
+      }
+
+      .status-missing {
+        background: #ffe0df;
+      }
+
+      .status-generic {
+        background: var(--gold);
+      }
+
+      .status-suspicious {
+        background: var(--peach);
+      }
+
+      .status-approved {
+        background: var(--success);
+      }
+
+      .status-review {
+        background: #ffe7e7;
+      }
+
+      .status-unset {
+        background: #f2eef5;
+      }
+
+      .chip {
+        background: #f5effa;
+        color: #5f4f68;
+      }
+
+      .review-pill {
+        background: #f6f1f8;
+        color: #68586d;
+      }
+
+      .mini-image {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          rgba(245, 239, 250, 0.9),
+          rgba(223, 245, 234, 0.9)
+        );
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(43, 36, 48, 0.06);
+      }
+
+      .mini-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        display: none;
+        place-items: center;
+        text-align: center;
+        padding: 10px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #712e2e;
+        background: rgba(255, 224, 224, 0.9);
+      }
+
+      .image-overlay.show {
+        display: grid;
+      }
+
+      .mini-title {
+        display: grid;
+        gap: 4px;
+      }
+
+      .roman {
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .urdu {
+        font-size: 22px;
+        line-height: 1.25;
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .english {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .mini-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+   .detail-panel {
+  position: sticky;
+  top: 20px;
+  padding: 18px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+      .detail-empty {
+        min-height: 600px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        color: var(--muted);
+        padding: 28px;
+      }
+
+      .detail-card {
+        display: grid;
+        gap: 16px;
+        position: relative;
+      }
+
+      .detail-empty[hidden],
+      .detail-card[hidden] {
+        display: none !important;
+      }
+
+      .detail-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 999px;
+        background: #f4e8f0;
+        color: #5c4655;
+        font-size: 22px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .detail-top {
+        display: grid;
+        grid-template-columns: 132px 1fr;
+        gap: 16px;
+        align-items: center;
+        padding-right: 46px;
+      }
+
+      .detail-image {
+        position: relative;
+        width: 132px;
+        height: 132px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          rgba(245, 239, 250, 0.95),
+          rgba(223, 245, 234, 0.95)
+        );
+        border: 1px solid rgba(43, 36, 48, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .detail-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .detail-title h3 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      .detail-title .urdu {
+        font-size: 34px;
+      }
+
+      .detail-title .english {
+        font-size: 15px;
+      }
+
+      .detail-title .roman,
+      .detail-title .urdu,
+      .detail-title .english,
+      .variant-main .roman,
+      .variant-main .urdu,
+      .variant-main .english {
+        overflow: visible;
+        text-overflow: unset;
+        white-space: normal;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .section {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(255, 249, 252, 0.96)
+        );
+        border: 1px solid rgba(43, 36, 48, 0.08);
+        border-radius: 22px;
+        padding: 14px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .section h4 {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .riddle-line {
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(245, 239, 250, 0.7);
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .variant-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .variant-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(223, 245, 234, 0.45);
+      }
+
+      .variant-main {
+        display: grid;
+        gap: 3px;
+      }
+
+      .variant-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-end;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .meta-box {
+        border-radius: 16px;
+        padding: 12px;
+        background: rgba(223, 234, 255, 0.55);
+        border: 1px solid rgba(43, 36, 48, 0.06);
+      }
+
+      .meta-label {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 6px;
+      }
+
+      .meta-value {
+        font-size: 14px;
+        font-weight: 700;
+        word-break: break-word;
+      }
+
+      .footer-note {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .editor-grid {
+        display: grid;
+        gap: 10px;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .field.full {
+        grid-column: 1 / -1;
+      }
+
+      .field label {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        border: 1px solid rgba(43, 36, 48, 0.1);
+        border-radius: 14px;
+        background: #fff;
+        padding: 10px 12px;
+        color: var(--text);
+        outline: none;
+      }
+
+      .field textarea {
+        min-height: 86px;
+        resize: vertical;
+      }
+
+      .editor-actions,
+      .variant-editor-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .check-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .check-item {
+        border-radius: 16px;
+        padding: 10px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        background: rgba(245, 239, 250, 0.55);
+      }
+
+      .code-box {
+        background: #241d28;
+        color: #f7eef7;
+        padding: 12px;
+        border-radius: 16px;
+        overflow: auto;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .sticky-bottom {
+        position: sticky;
+        bottom: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.96) 28%
+        );
+        padding-top: 10px;
+      }
+
+      @media (max-width: 1180px) {
+        .controls {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+
+    @media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-panel {
+    position: static;
+    min-height: unset;
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+      @media (max-width: 760px) {
+        .shell {
+          width: min(100% - 20px, 1500px);
+        }
+
+        .controls {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .count-pill {
+          white-space: normal;
+          font-size: 13px;
+          text-align: center;
+        }
+
+        .cards-grid {
+          grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+        }
+
+        .detail-top {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          text-align: center;
+          padding-right: 0;
+        }
+
+        .meta-grid,
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .detail-close {
+          top: 4px;
+          right: 4px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .shell {
+          width: calc(100% - 16px);
+          margin: 12px auto 24px;
+        }
+
+        .hero {
+          padding: 14px;
+          border-radius: 20px;
+          gap: 12px;
+        }
+
+        .hero-top {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .title-wrap h1 {
+          font-size: 24px;
+        }
+
+        .count-pill {
+          font-size: 12px;
+          padding: 8px 12px;
+        }
+
+        .controls {
+          grid-template-columns: 1fr;
+        }
+
+        .btn {
+          padding: 9px 12px;
+          font-size: 13px;
+        }
+
+        .toolbar-row {
+          gap: 8px;
+        }
+
+        .cards-grid {
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        }
+
+        .mini-card {
+          min-height: 200px;
+        }
+
+        .detail-image {
+          width: 100px;
+          height: 100px;
+        }
+
+        .detail-title h3 {
+          font-size: 22px;
+        }
+
+        .detail-title .urdu {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <section class="hero">
+        <div class="hero-top">
+          <div class="title-wrap">
+            <h1>Vocab Inspector</h1>
+            <p>
+              Visual review board for your master <code>mastervocab.js</code>. Audit
+              images, riddles, variants, transliterations, grammar, duplicate
+              meanings, and edit entries locally before exporting an updated
+              file.
+            </p>
+          </div>
+          <div class="count-pill" id="summary-pill">Loading…</div>
+        </div>
+
+        <div class="controls">
+          <div class="control">
+            <label for="search-input">Search</label>
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search Roman Urdu, Urdu, English, id…" />
+          </div>
+
+          <div class="control">
+            <label for="pos-filter">Part of speech</label>
+            <select id="pos-filter">
+              <option value="all">All</option>
+            </select>
+          </div>
+
+          <div class="control">
+            <label for="status-filter">Review status</label>
+            <select id="status-filter">
+              <option value="all">All</option>
+              <option value="broken-image">Broken image</option>
+              <option value="missing-image-path">Missing image path</option>
+              <option value="generic-riddle">Generic riddle</option>
+              <option value="missing-riddle">Missing riddle text</option>
+              <option value="no-variants">No variants</option>
+              <option value="suspicious-roman">Suspicious romanization</option>
+              <option value="duplicate-english">
+                Duplicate English meaning
+              </option>
+              <option value="duplicate-urdu">Duplicate Urdu base</option>
+              <option value="missing-gender">Missing base gender</option>
+              <option value="approved">Approved</option>
+              <option value="needs-review">Needs review</option>
+              <option value="ready-looking">Looks okay</option>
+            </select>
+          </div>
+
+          <div class="control">
+            <label for="sort-filter">Sort by</label>
+            <select id="sort-filter">
+              <option value="az">A → Z</option>
+              <option value="variants">Most variants</option>
+              <option value="images">Image issues first</option>
+              <option value="riddles">Generic riddles first</option>
+              <option value="suspicious">Suspicious first</option>
+            </select>
+          </div>
+
+        <div class="control">
+  <label for="review-filter">Reviewer view</label>
+  <select id="review-filter">
+    <option value="all">All cards</option>
+    <option value="problems-only">Only problems</option>
+    <option value="unedited">Not reviewed</option>
+    <option value="no-image">No image only</option>
+  </select>
+</div>
+
+        <div class="toolbar-row">
+          <button class="btn primary" id="download-js-btn">
+            Download updated mastervocab.js
+          </button>
+          <button class="btn soft" id="copy-js-btn">Copy full mastervocab.js</button>
+          <button class="btn soft" id="copy-entry-btn">
+            Copy active entry
+          </button>
+          <button class="btn warn" id="show-problems-btn">
+            Show only problems
+          </button>
+          <button class="btn success" id="show-all-btn">Show all</button>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="panel grid-panel">
+          <div class="grid-header">
+            <h2>Cards</h2>
+            <div class="tiny-note" id="result-count">0 results</div>
+          </div>
+          <div class="cards-grid" id="cards-grid"></div>
+        </div>
+
+        <aside class="panel detail-panel" id="detail-panel">
+          <div class="detail-empty" id="detail-empty">
+            <div>
+              <h2 style="margin: 0 0 8px">Pick a card</h2>
+              <p style="margin: 0">
+                Click a word card to inspect its image, riddles, variants,
+                schema details, and edit the entry right here.
+              </p>
+            </div>
+          </div>
+          <div class="detail-card" id="detail-card" hidden></div>
+        </aside>
+      </section>
+    </div>
+
+    <script type="module">
+      import { vocab as sourceVocab } from "../js/mastervocab.js";
+
+      const cardsGrid = document.getElementById("cards-grid");
+      const detailEmpty = document.getElementById("detail-empty");
+      const detailCard = document.getElementById("detail-card");
+      const summaryPill = document.getElementById("summary-pill");
+      const resultCount = document.getElementById("result-count");
+      const searchInput = document.getElementById("search-input");
+      const posFilter = document.getElementById("pos-filter");
+      const statusFilter = document.getElementById("status-filter");
+      const sortFilter = document.getElementById("sort-filter");
+      const reviewFilter = document.getElementById("review-filter");
+      const downloadJsBtn = document.getElementById("download-js-btn");
+      const copyJsBtn = document.getElementById("copy-js-btn");
+      const copyEntryBtn = document.getElementById("copy-entry-btn");
+      const showProblemsBtn = document.getElementById("show-problems-btn");
+      const showAllBtn = document.getElementById("show-all-btn");
+
+      const GENERIC_RIDDLE_STARTS = [
+        "you may notice this",
+        "this tells how something",
+        "this helps tell when",
+        "this is an action you can do",
+      ];
+
+      const SUSPICIOUS_PATTERNS = [
+        /\bbn/i,
+        /\bmn/i,
+        /\brk/i,
+        /\blg/i,
+        /\bghbr/i,
+        /\bphn/i,
+        /\bpte\b/i,
+        /\bdlon\b/i,
+        /\bdnon\b/i,
+        /\bsmnd/i,
+        /\bnoton\b/i,
+        /\bgia\b/i,
+        /\bgii\b/i,
+        /\blia\b/i,
+        /\bdia\b/i,
+        /\bsoia\b/i,
+      ];
+
+      const state = {
+        vocab: structuredClone(sourceVocab),
+        enriched: [],
+        imageStatusCache: new Map(),
+        activeId: null,
+        reviewMap: JSON.parse(
+          localStorage.getItem("vocabInspectorReviews") || "{}",
+        ),
+      };
+
+      function saveReviews() {
+        localStorage.setItem(
+          "vocabInspectorReviews",
+          JSON.stringify(state.reviewMap),
+        );
+      }
+
+      function setReview(id, value) {
+        if (!id) return;
+        if (!value) {
+          delete state.reviewMap[id];
+        } else {
+          state.reviewMap[id] = value;
+        }
+        saveReviews();
+      }
+
+      function escapeHtml(str = "") {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\\"/g, "&quot;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function byId(id) {
+        return state.vocab.find((entry) => entry.id === id) || null;
+      }
+
+      function getRomanForms(entry) {
+        const forms = [];
+        if (entry?.word?.baseRomanUrdu) forms.push(entry.word.baseRomanUrdu);
+        if (Array.isArray(entry?.variants)) {
+          entry.variants.forEach((variant) => {
+            if (variant?.romanUrdu) forms.push(variant.romanUrdu);
+          });
+        }
+        return [...new Set(forms.filter(Boolean))];
+      }
+
+      function isGenericRiddle(entry) {
+        const english = entry?.riddles?.english?.trim().toLowerCase() || "";
+        return GENERIC_RIDDLE_STARTS.some((start) => english.startsWith(start));
+      }
+
+      function hasMissingRiddle(entry) {
+        return (
+          !entry?.riddles?.english ||
+          !entry?.riddles?.romanUrdu ||
+          !entry?.riddles?.urdu
+        );
+      }
+
+      function hasMissingImagePath(entry) {
+        return !entry?.image || !String(entry.image).trim();
+      }
+
+      function suspiciousRoman(entry) {
+        const all = getRomanForms(entry).join(" | ");
+        if (!all) return false;
+        return SUSPICIOUS_PATTERNS.some((pattern) => pattern.test(all));
+      }
+
+      function imageFilenameMismatch(entry) {
+        const image = entry?.image || "";
+        if (!image || !entry?.id) return false;
+        const file =
+          image
+            .split("/")
+            .pop()
+            ?.replace(/\.(png|jpg|jpeg|webp|svg)$/i, "") || "";
+        return file !== entry.id;
+      }
+
+      async function checkImage(path) {
+        if (!path) return false;
+        if (state.imageStatusCache.has(path))
+          return state.imageStatusCache.get(path);
+
+        const ok = await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          img.src = path;
+        });
+
+        state.imageStatusCache.set(path, ok);
+        return ok;
+      }
+
+      function countMap(entries, getter) {
+        const map = new Map();
+        entries.forEach((entry) => {
+          const value = getter(entry);
+          if (!value) return;
+          map.set(value, (map.get(value) || 0) + 1);
+        });
+        return map;
+      }
+
+      async function enrichEntries() {
+        const englishCounts = countMap(state.vocab, (e) =>
+          e.word?.english?.trim().toLowerCase(),
+        );
+        const urduCounts = countMap(state.vocab, (e) =>
+          e.word?.baseUrdu?.trim(),
+        );
+        const romanCounts = countMap(state.vocab, (e) =>
+          e.word?.baseRomanUrdu?.trim().toLowerCase(),
+        );
+
+        state.enriched = await Promise.all(
+          state.vocab.map(async (entry) => {
+            const imageOk = hasMissingImagePath(entry)
+              ? false
+              : await checkImage(entry.image);
+            const genericRiddle = isGenericRiddle(entry);
+            const missingRiddle = hasMissingRiddle(entry);
+            const suspicious = suspiciousRoman(entry);
+            const duplicateEnglish =
+              !!entry.word?.english &&
+              (englishCounts.get(entry.word.english.trim().toLowerCase()) ||
+                0) > 1;
+            const duplicateUrdu =
+              !!entry.word?.baseUrdu &&
+              (urduCounts.get(entry.word.baseUrdu.trim()) || 0) > 1;
+            const duplicateRoman =
+              !!entry.word?.baseRomanUrdu &&
+              (romanCounts.get(entry.word.baseRomanUrdu.trim().toLowerCase()) ||
+                0) > 1;
+
+            return {
+              ...entry,
+              _imageOk: imageOk,
+              _genericRiddle: genericRiddle,
+              _missingRiddle: missingRiddle,
+              _variantCount: Array.isArray(entry.variants)
+                ? entry.variants.length
+                : 0,
+              _suspiciousRoman: suspicious,
+              _duplicateEnglish: duplicateEnglish,
+              _duplicateUrdu: duplicateUrdu,
+              _duplicateRoman: duplicateRoman,
+              _missingImagePath: hasMissingImagePath(entry),
+              _missingGender: entry?.grammar?.baseGender == null,
+              _imageFilenameMismatch: imageFilenameMismatch(entry),
+              _reviewState: state.reviewMap[entry.id] || "",
+            };
+          }),
+        );
+      }
+
+      function getStatus(entry) {
+        if (entry._reviewState === "approved") {
+          return { label: "Approved", className: "status-approved" };
+        }
+        if (entry._reviewState === "needs-review") {
+          return { label: "Needs review", className: "status-review" };
+        }
+        if (entry._missingImagePath) {
+          return { label: "No image path", className: "status-missing" };
+        }
+        if (!entry._imageOk) {
+          return { label: "Broken image", className: "status-missing" };
+        }
+        if (entry._missingRiddle) {
+          return { label: "Missing riddle", className: "status-generic" };
+        }
+        if (entry._genericRiddle) {
+          return { label: "Generic riddle", className: "status-generic" };
+        }
+        if (entry._suspiciousRoman || entry._imageFilenameMismatch) {
+          return { label: "Suspicious", className: "status-suspicious" };
+        }
+        return { label: "Looks okay", className: "status-ok" };
+      }
+
+      function hasProblems(entry) {
+        return (
+          entry._missingImagePath ||
+          !entry._imageOk ||
+          entry._missingRiddle ||
+          entry._genericRiddle ||
+          entry._suspiciousRoman ||
+          entry._duplicateEnglish ||
+          entry._duplicateUrdu ||
+          entry._duplicateRoman ||
+          entry._missingGender ||
+          entry._imageFilenameMismatch
+        );
+      }
+
+      function buildPosOptions() {
+        const seen = new Set(["all"]);
+        posFilter.innerHTML = '<option value="all">All</option>';
+        state.vocab
+          .map((e) => e.word?.pos)
+          .filter(Boolean)
+          .sort()
+          .forEach((pos) => {
+            if (seen.has(pos)) return;
+            seen.add(pos);
+            const option = document.createElement("option");
+            option.value = pos;
+            option.textContent = pos;
+            posFilter.appendChild(option);
+          });
+      }
+
+      function matchesSearch(entry, q) {
+        if (!q) return true;
+        const haystack = [
+          entry.id,
+          entry.word?.baseRomanUrdu,
+          entry.word?.baseUrdu,
+          entry.word?.english,
+          entry.word?.pos,
+          entry.image,
+          ...(entry.variants || []).flatMap((v) => [
+            v.romanUrdu,
+            v.urdu,
+            v.gender,
+            v.number,
+          ]),
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return haystack.includes(q);
+      }
+
+      function matchesStatus(entry, status) {
+        switch (status) {
+          case "broken-image":
+            return !entry._missingImagePath && !entry._imageOk;
+          case "missing-image-path":
+            return entry._missingImagePath;
+          case "generic-riddle":
+            return entry._genericRiddle;
+          case "missing-riddle":
+            return entry._missingRiddle;
+          case "no-variants":
+            return entry._variantCount === 0;
+          case "suspicious-roman":
+            return (
+              entry._suspiciousRoman ||
+              entry._imageFilenameMismatch ||
+              entry._duplicateRoman
+            );
+          case "duplicate-english":
+            return entry._duplicateEnglish;
+          case "duplicate-urdu":
+            return entry._duplicateUrdu;
+          case "missing-gender":
+            return entry._missingGender;
+          case "approved":
+            return entry._reviewState === "approved";
+          case "needs-review":
+            return entry._reviewState === "needs-review";
+          case "ready-looking":
+            return !hasProblems(entry) && !entry._reviewState;
+          default:
+            return true;
+        }
+      }
+
+      function matchesReviewFilter(entry, filter) {
+        if (filter === "problems-only") return hasProblems(entry);
+        if (filter === "unedited") return !entry._reviewState;
+        return true;
+      }
+
+      function sortEntries(entries, mode) {
+        const items = [...entries];
+
+        if (mode === "variants") {
+          items.sort(
+            (a, b) =>
+              b._variantCount - a._variantCount ||
+              a.word.baseRomanUrdu.localeCompare(b.word.baseRomanUrdu),
+          );
+          return items;
+        }
+
+        if (mode === "images") {
+          items.sort(
+            (a, b) =>
+              Number(a._imageOk && !a._missingImagePath) -
+                Number(b._imageOk && !b._missingImagePath) ||
+              a.word.baseRomanUrdu.localeCompare(b.word.baseRomanUrdu),
+          );
+          return items;
+        }
+
+        if (mode === "riddles") {
+          items.sort(
+            (a, b) =>
+              Number(b._genericRiddle || b._missingRiddle) -
+                Number(a._genericRiddle || a._missingRiddle) ||
+              a.word.baseRomanUrdu.localeCompare(b.word.baseRomanUrdu),
+          );
+          return items;
+        }
+
+        if (mode === "suspicious") {
+          items.sort(
+            (a, b) =>
+              Number(hasProblems(b)) - Number(hasProblems(a)) ||
+              a.word.baseRomanUrdu.localeCompare(b.word.baseRomanUrdu),
+          );
+          return items;
+        }
+
+        items.sort((a, b) =>
+          a.word.baseRomanUrdu.localeCompare(b.word.baseRomanUrdu),
+        );
+        return items;
+      }
+
+      function currentFilteredEntries() {
+        const query = searchInput.value.trim().toLowerCase();
+        const pos = posFilter.value;
+        const status = statusFilter.value;
+        const sortMode = sortFilter.value;
+        const review = reviewFilter.value;
+
+        return sortEntries(
+          state.enriched.filter((entry) => {
+            if (pos !== "all" && entry.word?.pos !== pos) return false;
+            if (!matchesSearch(entry, query)) return false;
+            if (!matchesStatus(entry, status)) return false;
+            if (!matchesReviewFilter(entry, review)) return false;
+            return true;
+          }),
+          sortMode,
+        );
+      }
+
+      function renderCards() {
+        const filtered = currentFilteredEntries();
+        cardsGrid.innerHTML = "";
+        resultCount.textContent = `${filtered.length} result${
+          filtered.length === 1 ? "" : "s"
+        }`;
+
+        if (!filtered.length) {
+          cardsGrid.innerHTML = `<div class="tiny-note">No matching words.</div>`;
+          detailEmpty.hidden = false;
+          detailCard.hidden = true;
+          return;
+        }
+
+        filtered.forEach((entry) => {
+          const statusInfo = getStatus(entry);
+          const article = document.createElement("article");
+          article.className = `mini-card${
+            entry.id === state.activeId ? " active" : ""
+          }${hasProblems(entry) ? " problem" : ""}`;
+          article.dataset.id = entry.id;
+
+          article.innerHTML = `
+            <div class="badge-row">
+              <span class="pos-badge">${escapeHtml(entry.word?.pos || "—")}</span>
+              <span class="status-badge ${statusInfo.className}">${escapeHtml(statusInfo.label)}</span>
+            </div>
+
+            <div class="mini-image">
+              <img
+  src="${escapeHtml(entry.image || "/qr/assets/images/noimage.png")}"
+  alt="${escapeHtml(entry.word?.baseRomanUrdu || entry.id)}"
+  onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+/>
+              <div class="image-overlay ${entry._imageOk ? "" : "show"}">
+                ${entry._missingImagePath ? "No image path" : "Broken image"}
+              </div>
+            </div>
+
+            <div class="mini-title">
+              <div class="roman">${escapeHtml(entry.word?.baseRomanUrdu || "")}</div>
+              <div class="urdu">${escapeHtml(entry.word?.baseUrdu || "")}</div>
+              <div class="english">${escapeHtml(entry.word?.english || "")}</div>
+            </div>
+
+            <div class="mini-footer">
+              <span>${entry._variantCount} variant${
+                entry._variantCount === 1 ? "" : "s"
+              }</span>
+              <span>${entry.grammar?.baseGender || "—"}</span>
+            </div>
+          `;
+
+          article.addEventListener("click", () => {
+            state.activeId = entry.id;
+            renderCards();
+            renderDetail(entry.id);
+          });
+
+          cardsGrid.appendChild(article);
+        });
+
+        const activeEntry =
+          filtered.find((entry) => entry.id === state.activeId) || filtered[0];
+        state.activeId = activeEntry.id;
+        renderDetail(activeEntry.id);
+      }
+
+      function renderVariantEditors(variants) {
+        if (!variants.length) {
+          return `<div class="tiny-note">No variants on this entry.</div>`;
+        }
+
+        return variants
+          .map(
+            (variant, idx) => `
+            <div class="variant-item">
+              <div class="variant-main">
+                <div class="roman">${escapeHtml(variant.romanUrdu || "")}</div>
+                <div class="urdu">${escapeHtml(variant.urdu || "")}</div>
+                ${variant.english ? `<div class="english">${escapeHtml(variant.english)}</div>` : ""}
+              </div>
+              <div class="variant-tags">
+                ${variant.form ? `<span class="chip">${escapeHtml(variant.form)}</span>` : ""}
+                <span class="chip">${escapeHtml(variant.gender || "—")}</span>
+                <span class="chip">${escapeHtml(variant.number || "—")}</span>
+                <button class="btn soft variant-edit-btn" data-variant-index="${idx}" style="padding:6px 10px;">Edit</button>
+                <button class="btn warn variant-delete-btn" data-variant-index="${idx}" style="padding:6px 10px;">Delete</button>
+              </div>
+            </div>
+          `,
+          )
+          .join("");
+      }
+
+      function renderChecks(entry) {
+        const checks = [
+          ["Image path present", !entry._missingImagePath],
+          ["Image loads", entry._imageOk],
+          ["English riddle present", !!entry?.riddles?.english],
+          ["Roman Urdu riddle present", !!entry?.riddles?.romanUrdu],
+          ["Urdu riddle present", !!entry?.riddles?.urdu],
+          ["Riddle not generic", !entry._genericRiddle],
+          ["Base gender present", !entry._missingGender],
+          ["Image filename matches id", !entry._imageFilenameMismatch],
+          ["Roman not suspicious", !entry._suspiciousRoman],
+          ["English not duplicated", !entry._duplicateEnglish],
+          ["Urdu not duplicated", !entry._duplicateUrdu],
+          ["Roman base not duplicated", !entry._duplicateRoman],
+        ];
+
+        return checks
+          .map(
+            ([label, ok]) => `
+              <div class="check-item">
+                <span>${escapeHtml(label)}</span>
+                <span class="chip ${ok ? "status-ok" : "status-missing"}">${
+                  ok ? "OK" : "Check"
+                }</span>
+              </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderDetail(id) {
+        const entry = byId(id);
+        const enriched = state.enriched.find((e) => e.id === id);
+
+        if (!entry || !enriched) {
+          detailEmpty.hidden = false;
+          detailCard.hidden = true;
+          return;
+        }
+
+        detailEmpty.hidden = true;
+        detailCard.hidden = false;
+
+        const statusInfo = getStatus(enriched);
+        const variants = Array.isArray(entry.variants) ? entry.variants : [];
+        const reviewState = state.reviewMap[id] || "";
+
+        detailEmpty.hidden = true;
+        detailCard.hidden = false;
+
+        detailCard.innerHTML = `
+          <button class="detail-close" id="detail-close-btn" aria-label="Close panel">×</button>
+
+          <div class="detail-header">
+            <h2>Word Detail</h2>
+          </div>
+
+          <div class="detail-top">
+            <div class="detail-image">
+              <img
+  src="${escapeHtml(entry.image || "/qr/assets/images/noimage.png")}"
+  alt="${escapeHtml(entry.word?.baseRomanUrdu || entry.id)}"
+  onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+/>
+              <div class="image-overlay ${enriched._imageOk ? "" : "show"}">
+                ${enriched._missingImagePath ? "No image path" : "Broken image"}
+              </div>
+            </div>
+
+            <div class="detail-title">
+              <h3>${escapeHtml(entry.word?.baseRomanUrdu || "")}</h3>
+              <div class="urdu">${escapeHtml(entry.word?.baseUrdu || "")}</div>
+              <div class="english">${escapeHtml(entry.word?.english || "")}</div>
+            </div>
+          </div>
+
+          <div class="chip-row">
+            <span class="chip">id: ${escapeHtml(entry.id)}</span>
+            <span class="chip">pos: ${escapeHtml(entry.word?.pos || "—")}</span>
+            <span class="chip">base gender: ${escapeHtml(
+              entry.grammar?.baseGender || "—",
+            )}</span>
+            <span class="chip ${statusInfo.className}">${escapeHtml(
+              statusInfo.label,
+            )}</span>
+            ${
+              reviewState
+                ? `<span class="review-pill">${escapeHtml(reviewState)}</span>`
+                : `<span class="review-pill status-unset">not reviewed</span>`
+            }
+          </div>
+
+          <div class="editor-actions">
+            <button class="btn success" id="approve-btn">Mark approved</button>
+            <button class="btn warn" id="needs-review-btn">Mark needs review</button>
+            <button class="btn soft" id="clear-review-btn">Clear review</button>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-box">
+              <div class="meta-label">Image path</div>
+              <div class="meta-value">${escapeHtml(entry.image || "—")}</div>
+            </div>
+            <div class="meta-box">
+              <div class="meta-label">Variants</div>
+              <div class="meta-value">${variants.length}</div>
+            </div>
+            <div class="meta-box">
+              <div class="meta-label">Roman forms</div>
+              <div class="meta-value">${escapeHtml(getRomanForms(entry).join(", ") || "—")}</div>
+            </div>
+            <div class="meta-box">
+              <div class="meta-label">Quick flags</div>
+              <div class="meta-value">
+                ${
+                  [
+                    enriched._suspiciousRoman ? "suspicious roman" : "",
+                    enriched._duplicateEnglish ? "duplicate english" : "",
+                    enriched._duplicateUrdu ? "duplicate urdu" : "",
+                    enriched._duplicateRoman ? "duplicate roman" : "",
+                    enriched._imageFilenameMismatch ? "filename mismatch" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" · ") || "none"
+                }
+              </div>
+            </div>
+          </div>
+
+          <section class="section">
+            <h4>Review checks</h4>
+            <div class="check-list">${renderChecks(enriched)}</div>
+          </section>
+
+          <section class="section">
+            <h4>Riddles</h4>
+            <div class="riddle-line"><strong>English:</strong><br />${escapeHtml(
+              entry.riddles?.english || "—",
+            )}</div>
+            <div class="riddle-line"><strong>Roman Urdu:</strong><br />${escapeHtml(
+              entry.riddles?.romanUrdu || "—",
+            )}</div>
+            <div class="riddle-line"><strong>Urdu:</strong><br />${escapeHtml(
+              entry.riddles?.urdu || "—",
+            )}</div>
+          </section>
+
+          <section class="section">
+            <h4>Variants</h4>
+            <div class="variant-list">
+              ${renderVariantEditors(variants)}
+            </div>
+            <div class="variant-editor-actions">
+              <button class="btn soft" id="add-variant-btn">Add variant</button>
+            </div>
+          </section>
+
+          <section class="section">
+            <h4>Edit entry</h4>
+            <div class="editor-grid">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="edit-id">ID</label>
+                  <input id="edit-id" value="${escapeHtml(entry.id || "")}" />
+                </div>
+                <div class="field">
+                  <label for="edit-pos">Part of speech</label>
+                  <input id="edit-pos" value="${escapeHtml(entry.word?.pos || "")}" />
+                </div>
+                <div class="field">
+                  <label for="edit-roman">Base Roman Urdu</label>
+                  <input id="edit-roman" value="${escapeHtml(
+                    entry.word?.baseRomanUrdu || "",
+                  )}" />
+                </div>
+                <div class="field">
+                  <label for="edit-urdu">Base Urdu</label>
+                  <input id="edit-urdu" value="${escapeHtml(entry.word?.baseUrdu || "")}" />
+                </div>
+                <div class="field">
+                  <label for="edit-english">English</label>
+                  <input id="edit-english" value="${escapeHtml(
+                    entry.word?.english || "",
+                  )}" />
+                </div>
+                <div class="field">
+                  <label for="edit-gender">Base gender</label>
+                  <select id="edit-gender">
+                    <option value="" ${
+                      !entry.grammar?.baseGender ? "selected" : ""
+                    }>—</option>
+                    <option value="masculine" ${
+                      entry.grammar?.baseGender === "masculine"
+                        ? "selected"
+                        : ""
+                    }>masculine</option>
+                    <option value="feminine" ${
+                      entry.grammar?.baseGender === "feminine" ? "selected" : ""
+                    }>feminine</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label for="edit-image">Image path</label>
+                  <input id="edit-image" value="${escapeHtml(entry.image || "")}" />
+                </div>
+                <div class="field full">
+                  <label for="edit-riddle-en">English riddle</label>
+                  <textarea id="edit-riddle-en">${escapeHtml(
+                    entry.riddles?.english || "",
+                  )}</textarea>
+                </div>
+                <div class="field full">
+                  <label for="edit-riddle-roman">Roman Urdu riddle</label>
+                  <textarea id="edit-riddle-roman">${escapeHtml(
+                    entry.riddles?.romanUrdu || "",
+                  )}</textarea>
+                </div>
+                <div class="field full">
+                  <label for="edit-riddle-urdu">Urdu riddle</label>
+                  <textarea id="edit-riddle-urdu">${escapeHtml(
+                    entry.riddles?.urdu || "",
+                  )}</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="editor-actions sticky-bottom">
+              <button class="btn primary" id="save-entry-btn">Save entry</button>
+              <button class="btn soft" id="copy-entry-json-btn">Copy entry JSON</button>
+            </div>
+          </section>
+
+          <section class="section">
+            <h4>Preview: generated JS for this entry</h4>
+            <pre class="code-box" id="entry-code-preview">${escapeHtml(
+              entryToObjectCode(entry),
+            )}</pre>
+          </section>
+
+          <div class="footer-note">
+            Changes here update the in-browser copy only. Use “Download updated mastervocab.js” to save a new file.
+          </div>
+        `;
+
+        attachDetailHandlers(id);
+      }
+
+      function attachDetailHandlers(id) {
+        document
+          .getElementById("detail-close-btn")
+          ?.addEventListener("click", () => {
+            detailCard.hidden = true;
+            detailEmpty.hidden = false;
+            state.activeId = null;
+            renderCards();
+          });
+
+        document
+          .getElementById("approve-btn")
+          ?.addEventListener("click", async () => {
+            setReview(id, "approved");
+            await refresh();
+          });
+
+        document
+          .getElementById("needs-review-btn")
+          ?.addEventListener("click", async () => {
+            setReview(id, "needs-review");
+            await refresh();
+          });
+
+        document
+          .getElementById("clear-review-btn")
+          ?.addEventListener("click", async () => {
+            setReview(id, "");
+            await refresh();
+          });
+
+        document
+          .getElementById("save-entry-btn")
+          ?.addEventListener("click", async () => {
+            saveEntryFromEditor(id);
+            await refresh(id);
+          });
+
+        document
+          .getElementById("copy-entry-json-btn")
+          ?.addEventListener("click", async () => {
+            const entry = byId(id);
+            await navigator.clipboard.writeText(JSON.stringify(entry, null, 2));
+          });
+
+        document
+          .getElementById("add-variant-btn")
+          ?.addEventListener("click", async () => {
+            const entry = byId(id);
+            entry.variants = entry.variants || [];
+            entry.variants.push({
+              romanUrdu: "",
+              urdu: "",
+              english: null,
+              gender: null,
+              number: null,
+              form: null,
+            });
+            await refresh(id);
+          });
+
+        document.querySelectorAll(".variant-delete-btn").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const idx = Number(btn.dataset.variantIndex);
+            const entry = byId(id);
+            entry.variants.splice(idx, 1);
+            await refresh(id);
+          });
+        });
+
+        document.querySelectorAll(".variant-edit-btn").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const idx = Number(btn.dataset.variantIndex);
+            editVariantPrompt(id, idx);
+            await refresh(id);
+          });
+        });
+      }
+
+      function editVariantPrompt(id, idx) {
+        const entry = byId(id);
+        const variant = entry?.variants?.[idx];
+        if (!variant) return;
+
+        const romanUrdu = prompt(
+          "Variant Roman Urdu:",
+          variant.romanUrdu ?? "",
+        );
+        if (romanUrdu === null) return;
+
+        const urdu = prompt("Variant Urdu:", variant.urdu ?? "");
+        if (urdu === null) return;
+
+        const english = prompt("Variant English:", variant.english ?? "");
+        if (english === null) return;
+
+        const gender = prompt(
+          "Variant gender (masculine/feminine or blank):",
+          variant.gender ?? "",
+        );
+        if (gender === null) return;
+
+        const number = prompt(
+          "Variant number (singular/plural or blank):",
+          variant.number ?? "",
+        );
+        if (number === null) return;
+
+        const form = prompt(
+          "Variant form (past/present/command/past compound or blank):",
+          variant.form ?? "",
+        );
+        if (form === null) return;
+
+        entry.variants[idx] = {
+          romanUrdu: romanUrdu.trim(),
+          urdu: urdu.trim(),
+          english: english.trim() || null,
+          gender: gender.trim() || null,
+          number: number.trim() || null,
+          form: form.trim() || null,
+        };
+      }
+
+      function saveEntryFromEditor(id) {
+        const entry = byId(id);
+        if (!entry) return;
+
+        entry.id = document.getElementById("edit-id").value.trim();
+        entry.word.baseRomanUrdu = document
+          .getElementById("edit-roman")
+          .value.trim();
+        entry.word.baseUrdu = document.getElementById("edit-urdu").value.trim();
+        entry.word.english = document
+          .getElementById("edit-english")
+          .value.trim();
+        entry.word.pos = document.getElementById("edit-pos").value.trim();
+        entry.image = document.getElementById("edit-image").value.trim();
+        entry.grammar = entry.grammar || {};
+        entry.grammar.baseGender =
+          document.getElementById("edit-gender").value || null;
+        entry.riddles = entry.riddles || {};
+        entry.riddles.english = document
+          .getElementById("edit-riddle-en")
+          .value.trim();
+        entry.riddles.romanUrdu = document
+          .getElementById("edit-riddle-roman")
+          .value.trim();
+        entry.riddles.urdu = document
+          .getElementById("edit-riddle-urdu")
+          .value.trim();
+
+        if (state.activeId === id && entry.id !== id) {
+          const reviewVal = state.reviewMap[id];
+          if (reviewVal) {
+            delete state.reviewMap[id];
+            state.reviewMap[entry.id] = reviewVal;
+            saveReviews();
+          }
+          state.activeId = entry.id;
+        }
+      }
+
+      function serializeValue(value, indent = 0) {
+        const space = "  ".repeat(indent);
+
+        if (value === null) return "null";
+        if (typeof value === "string") return JSON.stringify(value);
+        if (typeof value === "number" || typeof value === "boolean")
+          return String(value);
+
+        if (Array.isArray(value)) {
+          if (!value.length) return "[]";
+          return `[
+${value
+  .map(
+    (item) => `${"  ".repeat(indent + 1)}${serializeValue(item, indent + 1)}`,
+  )
+  .join(",\n")}
+${space}]`;
+        }
+
+        const entries = Object.entries(value);
+        if (!entries.length) return "{}";
+
+        return `{
+${entries
+  .map(
+    ([key, val]) =>
+      `${"  ".repeat(indent + 1)}${key}: ${serializeValue(val, indent + 1)}`,
+  )
+  .join(",\n")}
+${space}}`;
+      }
+
+      function entryToObjectCode(entry) {
+        return serializeValue(entry, 0);
+      }
+
+      function generateVocabJs() {
+        return `export const vocab = ${serializeValue(state.vocab, 0)};
+
+export function buildVariantLookup(words) {
+  const lookup = {};
+
+  words.forEach((entry) => {
+    lookup[entry.word.baseRomanUrdu] = {
+      id: entry.id,
+      type: "base",
+      matchedRomanUrdu: entry.word.baseRomanUrdu,
+      matchedUrdu: entry.word.baseUrdu,
+      baseRomanUrdu: entry.word.baseRomanUrdu,
+      baseUrdu: entry.word.baseUrdu,
+      english: entry.word.english,
+      pos: entry.word.pos,
+      gender: entry.grammar?.baseGender ?? null,
+      number: null,
+      image: entry.image
+    };
+
+    (entry.variants || []).forEach((variant) => {
+      lookup[variant.romanUrdu] = {
+        id: entry.id,
+        type: "variant",
+        matchedRomanUrdu: variant.romanUrdu,
+        matchedUrdu: variant.urdu,
+        baseRomanUrdu: entry.word.baseRomanUrdu,
+        baseUrdu: entry.word.baseUrdu,
+        english: entry.word.english,
+        pos: entry.word.pos,
+        gender: variant.gender ?? null,
+        number: variant.number ?? null,
+        image: entry.image
+      };
+    });
+  });
+
+  return lookup;
+}
+
+export const variantLookup = buildVariantLookup(vocab);
+`;
+      }
+
+      async function refresh(preferredId = null) {
+        buildPosOptions();
+        await enrichEntries();
+        updateSummary();
+
+        if (preferredId) state.activeId = preferredId;
+        renderCards();
+      }
+
+      function updateSummary() {
+        const brokenImages = state.enriched.filter(
+          (e) => !e._missingImagePath && !e._imageOk,
+        ).length;
+        const noImagePath = state.enriched.filter(
+          (e) => e._missingImagePath,
+        ).length;
+        const genericRiddles = state.enriched.filter(
+          (e) => e._genericRiddle,
+        ).length;
+        const suspicious = state.enriched.filter(
+          (e) => e._suspiciousRoman,
+        ).length;
+        const approved = state.enriched.filter(
+          (e) => e._reviewState === "approved",
+        ).length;
+
+        summaryPill.textContent =
+          `${state.enriched.length} words · ` +
+          `${brokenImages} broken image${brokenImages === 1 ? "" : "s"} · ` +
+          `${noImagePath} no-path · ` +
+          `${genericRiddles} generic riddle${genericRiddles === 1 ? "" : "s"} · ` +
+          `${suspicious} suspicious · ` +
+          `${approved} approved`;
+      }
+
+      function copyText(text) {
+        return navigator.clipboard.writeText(text);
+      }
+
+      function downloadText(filename, text) {
+        const blob = new Blob([text], {
+          type: "text/javascript;charset=utf-8",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      [searchInput, posFilter, statusFilter, sortFilter, reviewFilter].forEach(
+        (el) => {
+          el.addEventListener("input", renderCards);
+          el.addEventListener("change", renderCards);
+        },
+      );
+
+      showProblemsBtn.addEventListener("click", () => {
+        reviewFilter.value = "problems-only";
+        statusFilter.value = "all";
+        renderCards();
+      });
+
+      showAllBtn.addEventListener("click", () => {
+        reviewFilter.value = "all";
+        statusFilter.value = "all";
+        renderCards();
+      });
+
+      copyEntryBtn.addEventListener("click", async () => {
+        const entry = byId(state.activeId);
+        if (!entry) return;
+        await copyText(entryToObjectCode(entry));
+      });
+
+      copyJsBtn.addEventListener("click", async () => {
+        await copyText(generateVocabJs());
+      });
+
+      downloadJsBtn.addEventListener("click", () => {
+        downloadText("vocab.updated.js", generateVocabJs());
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          detailCard.hidden = true;
+          detailEmpty.hidden = false;
+          state.activeId = null;
+          renderCards();
+        }
+      });
+
+      (async function init() {
+        console.log(
+          "✅ vocab loaded?",
+          Array.isArray(sourceVocab),
+          sourceVocab.length,
+        );
+        buildPosOptions();
+        await enrichEntries();
+        updateSummary();
+        renderCards();
+      })();
+    </script>
+  </body>
+</html>
