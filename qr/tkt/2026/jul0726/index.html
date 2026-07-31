@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Mehendi Wali Shaam</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img
+          src="/assets/images/homepage/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo" />
+      </a>
+    </header>
+
+    <h1 id="story-title"></h1>
+
+    <div class="container">
+      <div id="book-cover" class="book-placeholder"></div>
+
+      <div class="level-picker" id="level-picker"></div>
+
+      <div class="button-container" id="button-container"></div>
+    </div>
+
+    <script>
+      window.STORY_HOME_CONFIG = {
+        slug: "mehendi-wali-shaam",
+        title: "Mehendi Wali Shaam",
+        coverImage: "./assets/images/bookcover.png",
+        readAloudHref: "/qr/assets/html/audionewsletter.html?issue=jul0726",
+
+        /*
+    ┌────────────────────────────────────────────────────────────────────────┐
+    │  AI HELPER PROMPT — use this to generate content for a new issue.     │
+    └────────────────────────────────────────────────────────────────────────┘
+
+    Step 1: Split the monthly story into story.lines objects:
+      { id, romanUrdu, urdu, english }
+
+    Step 2: Create Fill the Kahani questions using those line IDs in sourceLineIds.
+    For each question include:
+      id, level, sourceLineIds, missingWords,
+      romanUrdu, urdu, english,
+      completedRomanUrdu, completedUrdu, completedEnglish,
+      choices, answer
+
+    Rules:
+    - Use only vocabulary from this story.
+    - Make blanks useful content words (nouns, verbs).
+    - Keep Roman Urdu beginner-friendly.
+    - Urdu script must be correct.
+    - English should be a direct translation.
+    - answer[] entries must match the ___ blanks left-to-right.
+    - Level 1: one blank, 3 choices (auto-check)
+    - Level 2: two blanks, word-bank chips
+    - Level 3: two sentences, 2–3 blanks, word bank
+    - Level 4 (Story Mode): 3–4 sentences, 3–5 blanks, word bank
+    */
+
+        story: {
+          title: "Mehendi Wali Shaam",
+          lines: [
+            {
+              id: "line-1",
+              romanUrdu:
+                "July ki garam shaam thi, aur Karachi ki hawa mein nami chipki hui thi.",
+              urdu: "جولائی کی گرم شام تھی، اور کراچی کی ہوا میں نمی چپکی ہوئی تھی۔",
+              english:
+                "It was a hot July evening, and the air in Karachi felt damp and sticky.",
+            },
+            {
+              id: "line-2",
+              romanUrdu:
+                "Areeba, jo university ke doosray saal mein thi, apni cousin Hina ki mehendi ke liye tayyar ho rahi thi.",
+              urdu: "عریبہ، جو یونیورسٹی کے دوسرے سال میں تھی، اپنی کزن حنا کی مہندی کے لیے تیار ہو رہی تھی۔",
+              english:
+                "Areeba, who was in her second year of university, was getting ready for her cousin Hina’s mehendi.",
+            },
+            {
+              id: "line-3",
+              romanUrdu:
+                "Kamray mein peelay dupattay, chooriyan, makeup, aur kapron ka chhota sa toofan phaila hua tha.",
+              urdu: "کمرے میں پیلے دوپٹے، چوڑیاں، میک اپ، اور کپڑوں کا چھوٹا سا طوفان پھیلا ہوا تھا۔",
+              english:
+                "The room was a small storm of yellow dupattas, bangles, makeup, and clothes scattered everywhere.",
+            },
+            {
+              id: "line-4",
+              romanUrdu:
+                "Bahar gali se horn ki awaaz aa rahi thi, aur andar cousins ki hansi ke saath chooriyon ki chan chan chal rahi thi.",
+              urdu: "باہر گلی سے ہارن کی آواز آ رہی تھی، اور اندر کزنز کی ہنسی کے ساتھ چوڑیوں کی چھن چھن چل رہی تھی۔",
+              english:
+                "Outside, car horns honked from the street, while inside, the cousins’ laughter mixed with the jingle of bangles.",
+            },
+            {
+              id: "line-5",
+              romanUrdu: "Areeba ne aainay mein khud ko dekha.",
+              urdu: "عریبہ نے آئینے میں خود کو دیکھا۔",
+              english: "Areeba looked at herself in the mirror.",
+            },
+            {
+              id: "line-6",
+              romanUrdu:
+                "Usay lag raha tha ke sab cousins usay judge karein gi.",
+              urdu: "اسے لگ رہا تھا کہ سب کزنز اسے جج کریں گی۔",
+              english: "She felt like all her cousins would judge her.",
+            },
+            {
+              id: "line-7",
+              romanUrdu:
+                "Kapray theek thay, lekin eyeliner barabar nahi ho raha tha.",
+              urdu: "کپڑے ٹھیک تھے، لیکن آئی لائنر برابر نہیں ہو رہا تھا۔",
+              english:
+                "Her clothes were fine, but her eyeliner would not come out even.",
+            },
+            {
+              id: "line-8",
+              romanUrdu: "Dil dhad dhad kar raha tha.",
+              urdu: "دل دھڑ دھڑ کر رہا تھا۔",
+              english: "Her heart was pounding.",
+            },
+            {
+              id: "line-9",
+              romanUrdu: "Tabhi pankha achanak ruk gaya.",
+              urdu: "تبھی پنکھا اچانک رک گیا۔",
+              english: "Just then, the fan suddenly stopped.",
+            },
+            {
+              id: "line-10",
+              romanUrdu: "“Shhhhh.”",
+              urdu: "“ششش۔”",
+              english: "“Shhhhh.”",
+            },
+            {
+              id: "line-11",
+              romanUrdu: "Kamra chup sa ho gaya.",
+              urdu: "کمرہ چپ سا ہو گیا۔",
+              english: "The room went quiet.",
+            },
+            {
+              id: "line-12",
+              romanUrdu: "Phir kisi ne kaha, “Bijli chali gayi!”",
+              urdu: "پھر کسی نے کہا، “بجلی چلی گئی!”",
+              english: "Then someone said, “The electricity is gone!”",
+            },
+            {
+              id: "line-13",
+              romanUrdu: "Areeba ka chehra utar gaya.",
+              urdu: "عریبہ کا چہرہ اتر گیا۔",
+              english: "Areeba’s face fell.",
+            },
+            {
+              id: "line-14",
+              romanUrdu:
+                "“Bas ab reh gaya mera kaam,” us ne dheere se kaha.",
+              urdu: "“بس اب رہ گیا میرا کام،” اس نے دھیرے سے کہا۔",
+              english:
+                "“Well, that’s the end of getting ready,” she said softly.",
+            },
+            {
+              id: "line-15",
+              romanUrdu:
+                "Garmi aur paseena usay aur pareshan kar rahe thay.",
+              urdu: "گرمی اور پسینہ اسے اور پریشان کر رہے تھے۔",
+              english:
+                "The heat and sweat were making her even more upset.",
+            },
+            {
+              id: "line-16",
+              romanUrdu:
+                "Neeche se Ammi ki awaaz aayi, “Jaldi karo beta, rickshaw aa gaya hai!”",
+              urdu: "نیچے سے امی کی آواز آئی، “جلدی کرو بیٹا، رکشہ آ گیا ہے!”",
+              english:
+                "From downstairs, Ammi’s voice called out, “Hurry up, beta, the rickshaw is here!”",
+            },
+            {
+              id: "line-17",
+              romanUrdu: "Phir Khala ne phone ki light on ki.",
+              urdu: "پھر خالہ نے فون کی لائٹ آن کی۔",
+              english: "Then Khala turned on her phone’s flashlight.",
+            },
+            {
+              id: "line-18",
+              romanUrdu:
+                "Hina hans kar boli, “Areeba, drama mat banao. Aag ko hawa mat do.”",
+              urdu: "حنا ہنس کر بولی، “عریبہ، ڈرامہ مت بناؤ۔ آگ کو ہوا مت دو۔”",
+              english:
+                "Hina laughed and said, “Areeba, don’t be so dramatic. Don’t make it worse than it is.”",
+            },
+            {
+              id: "line-19",
+              romanUrdu: "Cousins ne phone lights aainay ke paas rakheen.",
+              urdu: "کزنز نے فون لائٹس آئینے کے پاس رکھیں۔",
+              english: "The cousins set their phone lights near the mirror.",
+            },
+            {
+              id: "line-20",
+              romanUrdu:
+                "Dadi ne rechargeable fan laga kar bola, “Andheray mein alag maza aata hai.”",
+              urdu: "دادی نے ری چارج ایبل پنکھا لگا کر بولا، “اندھیرے میں الگ مزہ آتا ہے۔”",
+              english:
+                "Dadi turned on the rechargeable fan and said, “There’s a special fun in the dark.”",
+            },
+            {
+              id: "line-21",
+              romanUrdu: "Sab hans paray.",
+              urdu: "سب ہنس پڑے۔",
+              english: "Everyone burst out laughing.",
+            },
+            {
+              id: "line-22",
+              romanUrdu:
+                "Us andheray mein eyeliner bhi lag gaya, dupatta bhi set ho gaya, aur Areeba ka dil halka ho gaya.",
+              urdu: "اس اندھیرے میں آئی لائنر بھی لگ گیا، دوپٹہ بھی سیٹ ہو گیا، اور عریبہ کا دل ہلکا ہو گیا۔",
+              english:
+                "In that darkness, the eyeliner got done, the dupatta got set, and Areeba’s heart felt light.",
+            },
+            {
+              id: "line-23",
+              romanUrdu:
+                "Jab woh mehendi ke liye nikli, generator ki dhad dhad bahar chal rahi thi.",
+              urdu: "جب وہ مہندی کے لیے نکلی، جنریٹر کی دھڑ دھڑ باہر چل رہی تھی۔",
+              english:
+                "When she left for the mehendi, the generator was thudding away outside.",
+            },
+            {
+              id: "line-24",
+              romanUrdu:
+                "Usay samajh aaya ke har yaad perfect roshni mein nahi banti.",
+              urdu: "اسے سمجھ آیا کہ ہر یاد پرفیکٹ روشنی میں نہیں بنتی۔",
+              english:
+                "She realized that not every memory is made in perfect light.",
+            },
+            {
+              id: "line-25",
+              romanUrdu:
+                "Kuch yaadein andheray, garmi, aur apnon ki hansi mein zyada chamakti hain.",
+              urdu: "کچھ یادیں اندھیرے، گرمی، اور اپنوں کی ہنسی میں زیادہ چمکتی ہیں۔",
+              english:
+                "Some memories shine brighter in the dark, the heat, and the laughter of loved ones.",
+            },
+          ],
+        },
+
+        fillTheKahani: {
+          title: "Fill the Kahani",
+          subtitle: "Fill in missing words from this month's kahani.",
+          questions: [
+            // ── EASY (Level 1) ──────────────────────────────────────
+            {
+              id: "jul26-l1-1",
+              level: 1,
+              sourceLineIds: ["line-2"],
+              missingWords: ["mehendi"],
+              romanUrdu:
+                "Areeba, jo university ke doosray saal mein thi, apni cousin Hina ki ___ ke liye tayyar ho rahi thi.",
+              urdu: "عریبہ، جو یونیورسٹی کے دوسرے سال میں تھی، اپنی کزن حنا کی ___ کے لیے تیار ہو رہی تھی۔",
+              english:
+                "Areeba, who was in her second year of university, was getting ready for her cousin Hina’s mehendi.",
+              completedRomanUrdu:
+                "Areeba, jo university ke doosray saal mein thi, apni cousin Hina ki mehendi ke liye tayyar ho rahi thi.",
+              completedUrdu:
+                "عریبہ، جو یونیورسٹی کے دوسرے سال میں تھی، اپنی کزن حنا کی مہندی کے لیے تیار ہو رہی تھی۔",
+              completedEnglish:
+                "Areeba, who was in her second year of university, was getting ready for her cousin Hina’s mehendi.",
+              choices: [
+                {
+                  value: "mehendi",
+                  romanUrdu: "mehendi",
+                  urdu: "مہندی",
+                  english: "henna event",
+                },
+                {
+                  value: "shaadi",
+                  romanUrdu: "shaadi",
+                  urdu: "شادی",
+                  english: "wedding",
+                },
+                {
+                  value: "dawat",
+                  romanUrdu: "dawat",
+                  urdu: "دعوت",
+                  english: "feast / party",
+                },
+              ],
+              answer: ["mehendi"],
+            },
+
+            {
+              id: "jul26-l1-2",
+              level: 1,
+              sourceLineIds: ["line-9"],
+              missingWords: ["achanak"],
+              romanUrdu: "Tabhi pankha ___ ruk gaya.",
+              urdu: "تبھی پنکھا ___ رک گیا۔",
+              english: "Just then, the fan suddenly stopped.",
+              completedRomanUrdu: "Tabhi pankha achanak ruk gaya.",
+              completedUrdu: "تبھی پنکھا اچانک رک گیا۔",
+              completedEnglish: "Just then, the fan suddenly stopped.",
+              choices: [
+                {
+                  value: "achanak",
+                  romanUrdu: "achanak",
+                  urdu: "اچانک",
+                  english: "suddenly",
+                },
+                {
+                  value: "dheere",
+                  romanUrdu: "dheere",
+                  urdu: "دھیرے",
+                  english: "slowly",
+                },
+                {
+                  value: "jaldi",
+                  romanUrdu: "jaldi",
+                  urdu: "جلدی",
+                  english: "quickly",
+                },
+              ],
+              answer: ["achanak"],
+            },
+
+            {
+              id: "jul26-l1-3",
+              level: 1,
+              sourceLineIds: ["line-25"],
+              missingWords: ["hansi"],
+              romanUrdu:
+                "Kuch yaadein andheray, garmi, aur apnon ki ___ mein zyada chamakti hain.",
+              urdu: "کچھ یادیں اندھیرے، گرمی، اور اپنوں کی ___ میں زیادہ چمکتی ہیں۔",
+              english:
+                "Some memories shine brighter in the dark, the heat, and the laughter of loved ones.",
+              completedRomanUrdu:
+                "Kuch yaadein andheray, garmi, aur apnon ki hansi mein zyada chamakti hain.",
+              completedUrdu:
+                "کچھ یادیں اندھیرے، گرمی، اور اپنوں کی ہنسی میں زیادہ چمکتی ہیں۔",
+              completedEnglish:
+                "Some memories shine brighter in the dark, the heat, and the laughter of loved ones.",
+              choices: [
+                {
+                  value: "hansi",
+                  romanUrdu: "hansi",
+                  urdu: "ہنسی",
+                  english: "laughter",
+                },
+                {
+                  value: "khamoshi",
+                  romanUrdu: "khamoshi",
+                  urdu: "خاموشی",
+                  english: "silence",
+                },
+                {
+                  value: "roshni",
+                  romanUrdu: "roshni",
+                  urdu: "روشنی",
+                  english: "light",
+                },
+              ],
+              answer: ["hansi"],
+            },
+
+            // ── MEDIUM (Level 2) ──────────────────────────────────
+            {
+              id: "jul26-l2-1",
+              level: 2,
+              sourceLineIds: ["line-3"],
+              missingWords: ["dupattay", "chooriyan"],
+              romanUrdu:
+                "Kamray mein peelay ___, ___, makeup, aur kapron ka chhota sa toofan phaila hua tha.",
+              urdu: "کمرے میں پیلے ___، ___، میک اپ، اور کپڑوں کا چھوٹا سا طوفان پھیلا ہوا تھا۔",
+              english:
+                "The room was a small storm of yellow dupattas, bangles, makeup, and clothes scattered everywhere.",
+              completedRomanUrdu:
+                "Kamray mein peelay dupattay, chooriyan, makeup, aur kapron ka chhota sa toofan phaila hua tha.",
+              completedUrdu:
+                "کمرے میں پیلے دوپٹے، چوڑیاں، میک اپ، اور کپڑوں کا چھوٹا سا طوفان پھیلا ہوا تھا۔",
+              completedEnglish:
+                "The room was a small storm of yellow dupattas, bangles, makeup, and clothes scattered everywhere.",
+              choices: [
+                {
+                  value: "dupattay",
+                  romanUrdu: "dupattay",
+                  urdu: "دوپٹے",
+                  english: "dupattas",
+                },
+                {
+                  value: "chooriyan",
+                  romanUrdu: "chooriyan",
+                  urdu: "چوڑیاں",
+                  english: "bangles",
+                },
+                {
+                  value: "kapray",
+                  romanUrdu: "kapray",
+                  urdu: "کپڑے",
+                  english: "clothes",
+                },
+                {
+                  value: "mehendi",
+                  romanUrdu: "mehendi",
+                  urdu: "مہندی",
+                  english: "henna",
+                },
+              ],
+              answer: ["dupattay", "chooriyan"],
+            },
+
+            {
+              id: "jul26-l2-2",
+              level: 2,
+              sourceLineIds: ["line-20"],
+              missingWords: ["andheray", "maza"],
+              romanUrdu:
+                "Dadi ne rechargeable fan laga kar bola, “___ mein alag ___ aata hai.”",
+              urdu: "دادی نے ری چارج ایبل پنکھا لگا کر بولا، “___ میں الگ ___ آتا ہے۔”",
+              english:
+                "Dadi turned on the rechargeable fan and said, “There’s a special fun in the dark.”",
+              completedRomanUrdu:
+                "Dadi ne rechargeable fan laga kar bola, “Andheray mein alag maza aata hai.”",
+              completedUrdu:
+                "دادی نے ری چارج ایبل پنکھا لگا کر بولا، “اندھیرے میں الگ مزہ آتا ہے۔”",
+              completedEnglish:
+                "Dadi turned on the rechargeable fan and said, “There’s a special fun in the dark.”",
+              choices: [
+                {
+                  value: "andheray",
+                  romanUrdu: "andheray",
+                  urdu: "اندھیرے",
+                  english: "darkness",
+                },
+                {
+                  value: "maza",
+                  romanUrdu: "maza",
+                  urdu: "مزہ",
+                  english: "fun",
+                },
+                {
+                  value: "roshni",
+                  romanUrdu: "roshni",
+                  urdu: "روشنی",
+                  english: "light",
+                },
+                {
+                  value: "kaam",
+                  romanUrdu: "kaam",
+                  urdu: "کام",
+                  english: "work",
+                },
+              ],
+              answer: ["andheray", "maza"],
+            },
+
+            // ── HARD (Level 3) ───────────────────────────────────────
+            {
+              id: "jul26-l3-1",
+              level: 3,
+              sourceLineIds: ["line-13", "line-14"],
+              missingWords: ["chehra", "dheere"],
+              romanUrdu:
+                "Areeba ka ___ utar gaya. “Bas ab reh gaya mera kaam,” us ne ___ se kaha.",
+              urdu: "عریبہ کا ___ اتر گیا۔ “بس اب رہ گیا میرا کام،” اس نے ___ سے کہا۔",
+              english:
+                "Areeba’s face fell. “Well, that’s the end of getting ready,” she said softly.",
+              completedRomanUrdu:
+                "Areeba ka chehra utar gaya. “Bas ab reh gaya mera kaam,” us ne dheere se kaha.",
+              completedUrdu:
+                "عریبہ کا چہرہ اتر گیا۔ “بس اب رہ گیا میرا کام،” اس نے دھیرے سے کہا۔",
+              completedEnglish:
+                "Areeba’s face fell. “Well, that’s the end of getting ready,” she said softly.",
+              choices: [
+                {
+                  value: "chehra",
+                  romanUrdu: "chehra",
+                  urdu: "چہرہ",
+                  english: "face",
+                },
+                {
+                  value: "dheere",
+                  romanUrdu: "dheere",
+                  urdu: "دھیرے",
+                  english: "softly",
+                },
+                {
+                  value: "dil",
+                  romanUrdu: "dil",
+                  urdu: "دل",
+                  english: "heart",
+                },
+                {
+                  value: "jaldi",
+                  romanUrdu: "jaldi",
+                  urdu: "جلدی",
+                  english: "quickly",
+                },
+                {
+                  value: "awaaz",
+                  romanUrdu: "awaaz",
+                  urdu: "آواز",
+                  english: "voice",
+                },
+              ],
+              answer: ["chehra", "dheere"],
+            },
+
+            // ── STORY MODE (Level 4) ─────────────────────────────────
+            {
+              id: "jul26-l4-1",
+              level: 4,
+              sourceLineIds: ["line-12", "line-18", "line-24", "line-25"],
+              missingWords: ["bijli", "hawa", "yaad", "chamakti"],
+              romanUrdu:
+                "Phir kisi ne kaha, “___ chali gayi!” Hina hans kar boli, “Areeba, drama mat banao. Aag ko ___ mat do.” Usay samajh aaya ke har ___ perfect roshni mein nahi banti. Kuch yaadein andheray, garmi, aur apnon ki hansi mein zyada ___ hain.",
+              urdu: "پھر کسی نے کہا، “___ چلی گئی!” حنا ہنس کر بولی، “عریبہ، ڈرامہ مت بناؤ۔ آگ کو ___ مت دو۔” اسے سمجھ آیا کہ ہر ___ پرفیکٹ روشنی میں نہیں بنتی۔ کچھ یادیں اندھیرے، گرمی، اور اپنوں کی ہنسی میں زیادہ ___ ہیں۔",
+              english:
+                "Then someone said, “The electricity is gone!” Hina laughed and said, “Areeba, don’t be so dramatic. Don’t make it worse than it is.” She realized that not every memory is made in perfect light. Some memories shine brighter in the dark, the heat, and the laughter of loved ones.",
+              completedRomanUrdu:
+                "Phir kisi ne kaha, “Bijli chali gayi!” Hina hans kar boli, “Areeba, drama mat banao. Aag ko hawa mat do.” Usay samajh aaya ke har yaad perfect roshni mein nahi banti. Kuch yaadein andheray, garmi, aur apnon ki hansi mein zyada chamakti hain.",
+              completedUrdu:
+                "پھر کسی نے کہا، “بجلی چلی گئی!” حنا ہنس کر بولی، “عریبہ، ڈرامہ مت بناؤ۔ آگ کو ہوا مت دو۔” اسے سمجھ آیا کہ ہر یاد پرفیکٹ روشنی میں نہیں بنتی۔ کچھ یادیں اندھیرے، گرمی، اور اپنوں کی ہنسی میں زیادہ چمکتی ہیں۔",
+              completedEnglish:
+                "Then someone said, “The electricity is gone!” Hina laughed and said, “Areeba, don’t be so dramatic. Don’t make it worse than it is.” She realized that not every memory is made in perfect light. Some memories shine brighter in the dark, the heat, and the laughter of loved ones.",
+              choices: [
+                {
+                  value: "bijli",
+                  romanUrdu: "bijli",
+                  urdu: "بجلی",
+                  english: "electricity",
+                },
+                {
+                  value: "hawa",
+                  romanUrdu: "hawa",
+                  urdu: "ہوا",
+                  english: "air / wind",
+                },
+                {
+                  value: "yaad",
+                  romanUrdu: "yaad",
+                  urdu: "یاد",
+                  english: "memory",
+                },
+                {
+                  value: "chamakti",
+                  romanUrdu: "chamakti",
+                  urdu: "چمکتی",
+                  english: "shines",
+                },
+                {
+                  value: "khushi",
+                  romanUrdu: "khushi",
+                  urdu: "خوشی",
+                  english: "happiness",
+                },
+                {
+                  value: "waqt",
+                  romanUrdu: "waqt",
+                  urdu: "وقت",
+                  english: "time",
+                },
+              ],
+              answer: ["bijli", "hawa", "yaad", "chamakti"],
+            },
+          ], // ← end of questions array
+        }, // ← end of fillTheKahani
+
+        orderedWords: [
+          "mehendi",
+          "dupatta",
+          "chooriyan",
+          "kapray",
+          "kamra",
+          "aainay",
+          "pankha",
+          "aag",
+          "bijli",
+          "gali",
+          "chehra",
+          "paseena",
+          "toofan",
+          "dekha",
+          "ruk gaya",
+          "nikli",
+          "chamakti",
+          "garam",
+          "peelay",
+          "chhota",
+          "chup",
+          "tayyar",
+          "pareshan",
+          "neeche",
+          "bahar",
+          "jaldi",
+          "dheere",
+          "achanak",
+          "shaam",
+          "kaha",
+          "samajh",
+          "hawa",
+          "awaaz",
+          "garmi",
+          "nami",
+          "hansi",
+          "roshni",
+          "andheray",
+          "yaad",
+          "dil",
+        ],
+        totalLevels: 5,
+        defaultLevel: 1,
+
+        activityAnswerKeys: [
+          {
+            id: "july-urdu-bingo",
+            title: "Urdu Bingo",
+            subtitle: "Answer Key — example answers, not the only correct answer",
+            type: "text",
+            answers: [
+              {
+                prompt: "Talk about what you wear to a mehendi.",
+                romanUrdu:
+                  "Sawaal: Mehendi par aap kya pehantay hain, is ke baare mein baat karein. Misali jawab: Main mehendi par rang biranga kurta pehanta/pehanti hoon. Mujhe hara rang pasand hai aur main khussay bhi pehanta/pehanti hoon.",
+                urdu:
+                  "سوال: مہندی پر آپ کیا پہنتے ہیں، اس کے بارے میں بات کریں۔ مثالی جواب: میں مہندی پر رنگ برنگا کرتا پہنتا/پہنتی ہوں۔ مجھے ہرا رنگ پسند ہے اور میں کھسے بھی پہنتا/پہنتی ہوں۔",
+              },
+              {
+                prompt: "Talk about what happens when bijli chali jati hai.",
+                romanUrdu:
+                  "Sawaal: Jab bijli chali jati hai to kya hota hai, is ke baare mein baat karein. Misali jawab: Jab bijli chali jati hai to pankha aur lights band ho jati hain. Hum phone ki light ya rechargeable fan istemal karte hain.",
+                urdu:
+                  "سوال: جب بجلی چلی جاتی ہے تو کیا ہوتا ہے، اس کے بارے میں بات کریں۔ مثالی جواب: جب بجلی چلی جاتی ہے تو پنکھا اور لائٹیں بند ہو جاتی ہیں۔ ہم فون کی لائٹ یا ری چارج ایبل پنکھا استعمال کرتے ہیں۔",
+              },
+              {
+                prompt: "Talk about how a pankha helps in the summer.",
+                romanUrdu:
+                  "Sawaal: Garmi mein pankha kaise madad karta hai, is ke baare mein baat karein. Misali jawab: Pankha garmi mein thandi hawa deta hai. Is se paseena kam hota hai aur kamra behtar lagta hai.",
+                urdu:
+                  "سوال: گرمی میں پنکھا کیسے مدد کرتا ہے، اس کے بارے میں بات کریں۔ مثالی جواب: پنکھا گرمی میں ٹھنڈی ہوا دیتا ہے۔ اس سے پسینہ کم ہوتا ہے اور کمرہ بہتر لگتا ہے۔",
+              },
+              {
+                prompt: "Talk about your favorite piece of clothing.",
+                romanUrdu:
+                  "Sawaal: Apne pasandeeda kapray ke baare mein baat karein. Misali jawab: Mera pasandeeda kapra mera neela kurta hai. Woh naram aur aaram deh hai.",
+                urdu:
+                  "سوال: اپنے پسندیدہ کپڑے کے بارے میں بات کریں۔ مثالی جواب: میرا پسندیدہ کپڑا میرا نیلا کرتا ہے۔ وہ نرم اور آرام دہ ہے۔",
+              },
+              {
+                prompt: "Talk about chooriyan or another accessory you like.",
+                romanUrdu:
+                  "Sawaal: Chooriyan ya koi aur cheez jo aapko pasand hai, us ke baare mein baat karein. Misali jawab: Mujhe rang birangi chooriyan pasand hain. Un ki chan chan ki awaaz bohat pyari lagti hai.",
+                urdu:
+                  "سوال: چوڑیاں یا کوئی اور چیز جو آپ کو پسند ہے، اس کے بارے میں بات کریں۔ مثالی جواب: مجھے رنگ برنگی چوڑیاں پسند ہیں۔ ان کی چھن چھن کی آواز بہت پیاری لگتی ہے۔",
+              },
+              {
+                prompt: "Talk about getting ready for a special event.",
+                romanUrdu:
+                  "Sawaal: Kisi khaas event ke liye tayyar hone ke baare mein baat karein. Misali jawab: Kisi khaas event se pehle main kapray pehanta/pehanti hoon, baal banata/banati hoon, aur apni cheezein tayyar karta/karti hoon.",
+                urdu:
+                  "سوال: کسی خاص ایونٹ کے لیے تیار ہونے کے بارے میں بات کریں۔ مثالی جواب: کسی خاص تقریب سے پہلے میں کپڑے پہنتا/پہنتی ہوں، بال بناتا/بناتی ہوں اور اپنی چیزیں تیار کرتا/کرتی ہوں۔",
+              },
+              {
+                prompt:
+                  "Talk about looking in the aaina before going somewhere.",
+                romanUrdu:
+                  "Sawaal: Kahin jaanay se pehle aainay mein dekhne ke baare mein baat karein. Misali jawab: Ghar se nikalne se pehle main aainay mein dekhta/dekhti hoon ke mere kapray aur baal theek hain.",
+                urdu:
+                  "سوال: کہیں جانے سے پہلے آئینے میں دیکھنے کے بارے میں بات کریں۔ مثالی جواب: گھر سے نکلنے سے پہلے میں آئینے میں دیکھتا/دیکھتی ہوں کہ میرے کپڑے اور بال ٹھیک ہیں۔",
+              },
+              {
+                prompt: "Talk about riding in a rickshaw.",
+                romanUrdu:
+                  "Sawaal: Rickshaw mein baithne ke baare mein baat karein. Misali jawab: Main rickshaw mein baith kar bazaar gaya/gayi tha/thi. Rickshaw tez tha aur bahar bohat awaaz thi.",
+                urdu:
+                  "سوال: رکشے میں بیٹھنے کے بارے میں بات کریں۔ مثالی جواب: میں رکشے میں بیٹھ کر بازار گیا/گئی تھا/تھی۔ رکشا تیز تھا اور باہر بہت آواز تھی۔",
+              },
+              {
+                prompt: "Talk about a hot day in July.",
+                romanUrdu:
+                  "Sawaal: July ke kisi garam din ke baare mein baat karein. Misali jawab: July ka din bohat garam tha. Dhoop tez thi aur hum ne thanda paani piya.",
+                urdu:
+                  "سوال: جولائی کے کسی گرم دن کے بارے میں بات کریں۔ مثالی جواب: جولائی کا دن بہت گرم تھا۔ دھوپ تیز تھی اور ہم نے ٹھنڈا پانی پیا۔",
+              },
+              {
+                prompt: "Talk about a time you felt garmi.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aapko garmi mehsoos hui, us ke baare mein baat karein. Misali jawab: Mujhe park mein khelte waqt bohat garmi mehsoos hui. Main saaye mein baith gaya/gayi aur paani piya.",
+                urdu:
+                  "سوال: ایک وقت جب آپ کو گرمی محسوس ہوئی، اس کے بارے میں بات کریں۔ مثالی جواب: مجھے پارک میں کھیلتے وقت بہت گرمی محسوس ہوئی۔ میں سائے میں بیٹھ گیا/گئی اور پانی پیا۔",
+              },
+              {
+                prompt: "Talk about what you do when paseena aata hai.",
+                romanUrdu:
+                  "Sawaal: Jab paseena aata hai to aap kya karte hain, is ke baare mein baat karein. Misali jawab: Jab mujhe paseena aata hai to main paani peeta/peeti hoon, chehra saaf karta/karti hoon, aur thandi jagah baithta/baithti hoon.",
+                urdu:
+                  "سوال: جب پسینہ آتا ہے تو آپ کیا کرتے ہیں، اس کے بارے میں بات کریں۔ مثالی جواب: جب مجھے پسینہ آتا ہے تو میں پانی پیتا/پیتی ہوں، چہرہ صاف کرتا/کرتی ہوں اور ٹھنڈی جگہ بیٹھتا/بیٹھتی ہوں۔",
+              },
+              {
+                prompt:
+                  "Talk about using a phone ki light when it is dark.",
+                romanUrdu:
+                  "Sawaal: Andhera hone par phone ki light istemal karne ke baare mein baat karein. Misali jawab: Jab andhera hota hai to main phone ki light on karta/karti hoon. Is se mujhe raasta aur cheezein nazar aati hain.",
+                urdu:
+                  "سوال: اندھیرا ہونے پر فون کی لائٹ استعمال کرنے کے بارے میں بات کریں۔ مثالی جواب: جب اندھیرا ہوتا ہے تو میں فون کی لائٹ آن کرتا/کرتی ہوں۔ اس سے مجھے راستہ اور چیزیں نظر آتی ہیں۔",
+              },
+              {
+                prompt: "FREE SPACE",
+                romanUrdu:
+                  "Free space — is khanay ke liye koi jawab zaroori nahi.",
+                urdu: "فری اسپیس — اس خانے کے لیے کوئی جواب ضروری نہیں۔",
+              },
+              {
+                prompt: "Urdu Bolo! Speak only Urdu for 30 seconds.",
+                romanUrdu:
+                  "Yeh aik bolne ka challenge hai — sirf 30 second ke liye Urdu bolo, koi ek fixed jawab nahi hai. Misali topic starter: Aaj main apne ghar ke baare mein Urdu mein bolunga/bolungi. Mere ghar mein mera khandan rehta hai. Hum saath khana khate hain aur baatein karte hain.",
+                urdu:
+                  "یہ ایک بولنے کا چیلنج ہے — صرف 30 سیکنڈ کے لیے اردو بولو، کوئی ایک مقررہ جواب نہیں ہے۔ مثالی موضوع: آج میں اپنے گھر کے بارے میں اردو میں بولوں گا/گی۔ میرے گھر میں میرا خاندان رہتا ہے۔ ہم ساتھ کھانا کھاتے ہیں اور باتیں کرتے ہیں۔",
+              },
+              {
+                prompt:
+                  "Talk about something funny your Khala, Phuppo, Mamu, or another family member has said.",
+                romanUrdu:
+                  "Sawaal: Apni Khala, Phuppo, Mamu, ya kisi aur family member ki koi mazakiya baat ke baare mein bataein. Misali jawab: Mere Mamu ne ek baar mazaak mein kaha ke woh saari mithai khud kha jayenge. Sab hans paray.",
+                urdu:
+                  "سوال: اپنی خالہ، پھوپھو، ماموں، یا کسی اور فیملی ممبر کی کوئی مذاحیہ بات کے بارے میں بتائیں۔ مثالی جواب: میرے ماموں نے ایک بار مذاق میں کہا کہ وہ ساری مٹھائی خود کھا جائیں گے۔ سب ہنس پڑے۔",
+              },
+              {
+                prompt: "Talk about a special memory with your Dadi or Nani.",
+                romanUrdu:
+                  "Sawaal: Apni Dadi ya Nani ke saath kisi khaas yaad ke baare mein baat karein. Misali jawab: Meri Dadi ne mujhe ek purani kahani sunayi thi. Hum dono saath baithe aur bohat hansay.",
+                urdu:
+                  "سوال: اپنی دادی یا نانی کے ساتھ کسی خاص یاد کے بارے میں بات کریں۔ مثالی جواب: میری دادی نے مجھے ایک پرانی کہانی سنائی تھی۔ ہم دونوں ساتھ بیٹھے اور بہت ہنسے۔",
+              },
+              {
+                prompt:
+                  "Talk about someone who tells you to hurry when you are getting ready.",
+                romanUrdu:
+                  "Sawaal: Kisi aisay shakhs ke baare mein bataein jo tayyar hotay waqt aap ko jaldi karne ko kehta hai. Misali jawab: Meri Ammi mujhe tayyar hotay waqt kehti hain, “Jaldi karo, dair ho rahi hai!”",
+                urdu:
+                  "سوال: کسی ایسے شخص کے بارے میں بتائیں جو تیار ہوتے وقت آپ کو جلدی کرنے کو کہتا ہے۔ مثالی جواب: میری امی مجھے تیار ہوتے وقت کہتی ہیں، “جلدی کرو، دیر ہو رہی ہے!”",
+              },
+              {
+                prompt:
+                  "Talk about the phrase aag ko hawa mat do. What do you think it means?",
+                romanUrdu:
+                  "Sawaal: Is jumlay ka matlab kya hai, is ke baare mein baat karein. Misali jawab: Is ka matlab hai kisi maslay, behas, ya gussay ko aur zyada na barhana.",
+                urdu:
+                  "سوال: اس جملے کا مطلب کیا ہے، اس کے بارے میں بات کریں۔ مثالی جواب: اس کا مطلب ہے کسی مسئلے، بحث یا غصے کو مزید نہ بڑھانا۔",
+              },
+              {
+                prompt: "Talk about a time your dil dhad dhad kar raha tha.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aapka dil dhad dhad kar raha tha, us ke baare mein baat karein. Misali jawab: School mein stage par janay se pehle mera dil dhad dhad kar raha tha. Phir main ne gehri saans li.",
+                urdu:
+                  "سوال: ایک وقت جب آپ کا دل دھڑ دھڑ کر رہا تھا، اس کے بارے میں بات کریں۔ مثالی جواب: اسکول میں اسٹیج پر جانے سے پہلے میرا دل دھڑ دھڑ کر رہا تھا۔ پھر میں نے گہری سانس لی۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you felt nervous before going somewhere.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aap kahin jaanay se pehle nervous thay, us ke baare mein baat karein. Misali jawab: Nayi class mein janay se pehle main nervous tha/thi. Wahan pohanch kar mujhe naye dost mil gaye.",
+                urdu:
+                  "سوال: ایک وقت جب آپ کہیں جانے سے پہلے گھبرائے ہوئے تھے، اس کے بارے میں بات کریں۔ مثالی جواب: نئی کلاس میں جانے سے پہلے میں گھبرایا ہوا تھا/گھبرائی ہوئی تھی۔ وہاں پہنچ کر مجھے نئے دوست مل گئے۔",
+              },
+              {
+                prompt:
+                  "Talk about what you would do if the lights suddenly went out.",
+                romanUrdu:
+                  "Sawaal: Agar achanak lights chali jayen to aap kya karein gay, is ke baare mein baat karein. Misali jawab: Agar lights achanak band ho jayen to main araam se rahunga/rahungi, phone ki light on karunga/karungi, aur kisi baray ko bulaunga/bulaungi.",
+                urdu:
+                  "سوال: اگر اچانک لائٹس چلی جائیں تو آپ کیا کریں گے، اس کے بارے میں بات کریں۔ مثالی جواب: اگر لائٹیں اچانک بند ہو جائیں تو میں آرام سے رہوں گا/گی، فون کی لائٹ آن کروں گا/گی اور کسی بڑے کو بلاؤں گا/گی۔",
+              },
+              {
+                prompt:
+                  "Talk about something that makes you laugh with your family.",
+                romanUrdu:
+                  "Sawaal: Koi aisi baat jo aap ko apni family ke saath hansati hai, us ke baare mein bataein. Misali jawab: Jab mere cousins mazaakiya awaazein nikalte hain to main apne ghar walon ke saath bohat hansta/hansti hoon.",
+                urdu:
+                  "سوال: کوئی ایسی بات جو آپ کو اپنی فیملی کے ساتھ ہنساتی ہے، اس کے بارے میں بتائیں۔ مثالی جواب: جب میرے کزنز مزاحیہ آوازیں نکالتے ہیں تو میں اپنے گھر والوں کے ساتھ بہت ہنستا/ہنستی ہوں۔",
+              },
+              {
+                prompt: "Talk about your favorite family celebration.",
+                romanUrdu:
+                  "Sawaal: Apni pasandeeda family celebration ke baare mein baat karein. Misali jawab: Meri pasandeeda family celebration Eid hai. Hum achay kapray pehantay hain, miltay hain, aur meetha khatay hain.",
+                urdu:
+                  "سوال: اپنی پسندیدہ خاندانی خوشی کے بارے میں بات کریں۔ مثالی جواب: میری پسندیدہ خاندانی خوشی عید ہے۔ ہم اچھے کپڑے پہنتے ہیں، ملتے ہیں اور میٹھا کھاتے ہیں۔",
+              },
+              {
+                prompt:
+                  "Talk about a memory that was not perfect but still became special.",
+                romanUrdu:
+                  "Sawaal: Aik aisi yaad ke baare mein bataein jo perfect nahi thi lekin phir bhi khaas ban gayi. Misali jawab: Ek picnic par baarish ho gayi thi, lekin hum ne gaari mein baith kar khana khaya aur bohat hansay. Woh yaad phir bhi khaas ban gayi.",
+                urdu:
+                  "سوال: ایک ایسی یاد کے بارے میں بتائیں جو پرفیکٹ نہیں تھی لیکن پھر بھی خاص بن گئی۔ مثالی جواب: ایک پکنک پر بارش ہو گئی تھی، لیکن ہم نے گاڑی میں بیٹھ کر کھانا کھایا اور بہت ہنسے۔ وہ یاد پھر بھی خاص بن گئی۔",
+              },
+              {
+                prompt:
+                  "Talk about something that makes your dil halka ho jata hai.",
+                romanUrdu:
+                  "Sawaal: Kya cheez aap ka dil halka kar deti hai, is ke baare mein baat karein. Misali jawab: Apni Ammi se baat karne aur kisi ko apni pareshani batane se mera dil halka ho jata hai.",
+                urdu:
+                  "سوال: کیا چیز آپ کا دل ہلکا کر دیتی ہے، اس کے بارے میں بات کریں۔ مثالی جواب: اپنی امی سے بات کرنے اور کسی کو اپنی پریشانی بتانے سے میرا دل ہلکا ہو جاتا ہے۔",
+              },
+              {
+                prompt:
+                  "Talk about why some of the best memories happen when things do not go as planned.",
+                romanUrdu:
+                  "Sawaal: Kyun kuch behtareen yaadein tab banti hain jab cheezein plan ke mutabiq nahi hotin, is ke baare mein baat karein. Misali jawab: Jab cheezein plan ke mutabiq nahi hotin to log mil kar masla hal karte hain. Isi dauran funny aur khaas yaadein ban jati hain.",
+                urdu:
+                  "سوال: کیوں کچھ بہترین یادیں تب بنتی ہیں جب چیزیں منصوبے کے مطابق نہیں ہوتیں، اس کے بارے میں بات کریں۔ مثالی جواب: جب چیزیں منصوبے کے مطابق نہیں ہوتیں تو لوگ مل کر مسئلہ حل کرتے ہیں۔ اسی دوران مزاحیہ اور خاص یادیں بن جاتی ہیں۔",
+              },
+            ],
+          },
+        ],
+
+        activities: [
+          {
+            id: "readaloud",
+            label: "Audio",
+            href: "/qr/assets/html/audionewsletter.html?issue=jul0726",
+            useWordsParam: true,
+          },
+          {
+            id: "flashcards",
+            label: "Flashcards",
+            href: "/qr/assets/html/flashcards.html",
+            useWordsParam: true,
+          },
+          {
+            id: "matching",
+            label: "Picture Match",
+            href: "/qr/assets/html/matching.html",
+            useWordsParam: true,
+          },
+          {
+            id: "riddles",
+            label: "Riddles",
+            href: "/qr/assets/html/riddles.html",
+            useWordsParam: true,
+          },
+          {
+            id: "memory",
+            label: "Memory Game",
+            href: "/qr/assets/html/memory.html",
+            useWordsParam: true,
+          },
+          {
+            id: "wordsearch",
+            label: "Word Search",
+            href: "/qr/assets/html/wordsearch.html",
+            useWordsParam: true,
+          },
+        ],
+      };
+    </script>
+
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
+    <script>
+      const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+      for (let i = 0; i < 15; i++) {
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.classList.add("heart");
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDelay = Math.random() * 10 + "s";
+        icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+        icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+        document.body.appendChild(icon);
+      }
+    </script>
+  </body>
+</html>

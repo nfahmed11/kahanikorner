@@ -298,4 +298,63 @@ window.AUDIONEWSLETTER_ISSUES = {
       // },
     ],
   },
+
+  "jul0726": {
+    title: "Mehendi Wali Shaam",
+    monthYear: "July 2026",
+    vol: 2,
+    no: 7,
+    audioBase: "/qr/tkt/2026/jul0726/assets/audio/",
+    pages: [
+      {
+        heading: "Story Time",
+        tag: "Main Story",
+        tagClass: "story",
+        sections: [
+          { audio: "story.mp3", title: "Mehendi Wali Shaam", sub: "This Month's Story" },
+        ],
+      },
+      {
+        heading: "How To: Party Se Pehle Madad Karein",
+        tag: "Articles & Reflections",
+        tagClass: "advice",
+        sections: [
+          { audio: "howto.mp3", title: "How To: Party Se Pehle Madad Karein", sub: "Helping out before the big event" },
+        ],
+      },
+      {
+        heading: "Desi Wedding Survival Kit",
+        tag: "Closing Notes",
+        tagClass: "letter",
+        sections: [
+          { audio: "survival.mp3", title: "Desi Wedding Survival Kit", sub: "Everything you need to get through the day" },
+        ],
+      },
+      // No word.mp3/askdada.mp3/khatt.mp3 this issue — these pages are intentionally omitted:
+      // {
+      //   heading: "Aaj Ka Lafz",
+      //   tag: "Vocabulary Builder",
+      //   tagClass: "vocab",
+      //   sections: [
+      //     { audio: "word.mp3", title: "Aaj Ka Lafz", sub: "Word of the Day" },
+      //   ],
+      // },
+      // {
+      //   heading: "Dada Se Poocho",
+      //   tag: "Advice & Reflections",
+      //   tagClass: "advice",
+      //   sections: [
+      //     { audio: "askdada.mp3", title: "Dada Se Poocho", sub: "Helpful Advice From Dada" },
+      //   ],
+      // },
+      // {
+      //   heading: "Letter From Dada Jee",
+      //   tag: "Closing Notes",
+      //   tagClass: "letter",
+      //   sections: [
+      //     { audio: "khatt.mp3", title: "Letter From Dada Jee", sub: "A Special Message About Peace" },
+      //   ],
+      // },
+    ],
+  },
 };
