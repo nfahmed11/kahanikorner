@@ -2308,13 +2308,13 @@
                 <button
                   id="detail-subscribe-usa-btn"
                   class="add-to-cart-btn large-btn">
-                  USA · $9.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  USA · $10.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button
                   id="detail-subscribe-intl-btn"
                   class="add-to-cart-btn large-btn">
-                  Intl · $11.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  Intl · $12.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
 
@@ -2329,15 +2329,15 @@
                 <button
                   id="detail-subscribe-usa-btn-2"
                   class="add-to-cart-btn large-btn"
-                  onclick="window.location.href='https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08'">
-                  USA · $9.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  onclick="window.location.href='https://buy.stripe.com/dRmcN7e6S59H7R92NN0Fi0m'">
+                  USA · $10.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button
                   id="detail-subscribe-intl-btn-2"
                   class="add-to-cart-btn large-btn"
-                  onclick="window.location.href='https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a'">
-                  Intl · $11.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  onclick="window.location.href='https://buy.stripe.com/28EbJ39QC7hP1sLdsr0Fi0n'">
+                  Intl · $12.99/mo <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
 
@@ -2350,17 +2350,17 @@
           <!-- ===== KAHANI TIMES SHIPPING CYCLE ===== -->
           <section class="kkt-cycle-section" aria-labelledby="kkt-cycle-title">
 
-            <!-- Status banner: currently packing -->
-            <div class="kkt-status-banner" role="status" aria-label="Current mail preparation status">
+            <!-- Status banner: currently packing (hidden by script when no shipment is actively being packed) -->
+            <div class="kkt-status-banner" id="kkt-status-banner" role="status" aria-label="Current mail preparation status">
               <i class="fa-solid fa-box-open kkt-status-banner-icon" aria-hidden="true"></i>
               <div class="kkt-status-banner-body">
-                <p class="kkt-status-banner-title">Currently Packing — June 2026 Mail</p>
-                <p class="kkt-status-banner-text">June mail is being prepared from June 20–30 and ships from the US on June 30.</p>
+                <p class="kkt-status-banner-title" id="kkt-status-title">Currently Packing</p>
+                <p class="kkt-status-banner-text" id="kkt-status-text"></p>
               </div>
             </div>
 
-            <h2 id="kkt-cycle-title" class="kkt-cycle-title">Next Kahani Times — August 2026</h2>
-            <p class="kkt-cycle-subtitle">Subscribe by Jul 20 &middot; Ships from the US Jul 30</p>
+            <h2 id="kkt-cycle-title" class="kkt-cycle-title">Next Kahani Times</h2>
+            <p class="kkt-cycle-subtitle" id="kkt-cycle-subtitle"></p>
 
             <!-- Live countdown -->
             <div id="kkt-countdown"
@@ -2396,39 +2396,37 @@
 
             <!-- Monthly calendars -->
             <div class="kkt-calendars">
-              <div class="kkt-cal-card">
-                <h3 class="kkt-cal-month-title">June 2026</h3>
+              <div class="kkt-cal-card" id="kkt-cal-card-1">
+                <h3 class="kkt-cal-month-title" id="kkt-cal-title-1"></h3>
                 <div class="kkt-cal-grid"
-                     id="kkt-cal-june"
-                     role="grid"
-                     aria-label="June 2026 shipping calendar"></div>
+                     id="kkt-cal-grid-1"
+                     role="grid"></div>
               </div>
-              <div class="kkt-cal-card">
-                <h3 class="kkt-cal-month-title">July 2026</h3>
+              <div class="kkt-cal-card" id="kkt-cal-card-2">
+                <h3 class="kkt-cal-month-title" id="kkt-cal-title-2"></h3>
                 <div class="kkt-cal-grid"
-                     id="kkt-cal-july"
-                     role="grid"
-                     aria-label="July 2026 shipping calendar"></div>
+                     id="kkt-cal-grid-2"
+                     role="grid"></div>
               </div>
             </div>
 
             <!-- Legend -->
             <div class="kkt-legend" aria-label="Calendar legend">
-              <div class="kkt-legend-item">
+              <div class="kkt-legend-item" id="kkt-legend-prep">
                 <span class="kkt-legend-swatch kkt-legend-swatch--prep" aria-hidden="true"></span>
-                <span>Current prep — Jun 20–30</span>
+                <span id="kkt-legend-prep-text"></span>
               </div>
-              <div class="kkt-legend-item">
+              <div class="kkt-legend-item" id="kkt-legend-ship-pack">
                 <span class="kkt-legend-swatch kkt-legend-swatch--shipping" aria-hidden="true"></span>
-                <span>Jun 30 — June mail ships</span>
+                <span id="kkt-legend-ship-pack-text"></span>
               </div>
-              <div class="kkt-legend-item">
+              <div class="kkt-legend-item" id="kkt-legend-cycle">
                 <span class="kkt-legend-swatch kkt-legend-swatch--cycle" aria-hidden="true"></span>
-                <span>Next cycle — Jun 21–Jul 20</span>
+                <span id="kkt-legend-cycle-text"></span>
               </div>
-              <div class="kkt-legend-item">
+              <div class="kkt-legend-item" id="kkt-legend-ship-cycle">
                 <span class="kkt-legend-swatch kkt-legend-swatch--shipping" aria-hidden="true"></span>
-                <span>Jul 30 — next mail ships</span>
+                <span id="kkt-legend-ship-cycle-text"></span>
               </div>
               <div class="kkt-legend-item">
                 <span class="kkt-legend-swatch kkt-legend-swatch--today" aria-hidden="true"></span>
@@ -2582,7 +2580,7 @@
                   <div style="text-align:left;">
                     <p style="font-family:'Grandstander',cursive;font-weight:800;font-size:0.88rem;color:var(--granite);margin:0 0 0.18rem;">The Kahani Times</p>
                     <p style="font-size:0.76rem;color:var(--muted);margin:0 0 0.3rem;">Monthly subscription</p>
-                    <p style="font-size:0.76rem;color:var(--deep-teal);font-weight:700;margin:0;">From $9.99/mo &nbsp;<i class="fa-solid fa-arrow-right" style="font-size:0.65rem;"></i></p>
+                    <p style="font-size:0.76rem;color:var(--deep-teal);font-weight:700;margin:0;">From $10.99/mo &nbsp;<i class="fa-solid fa-arrow-right" style="font-size:0.65rem;"></i></p>
                   </div>
                 </div>
               </button>
@@ -2622,8 +2620,8 @@
 
     <script>
       // --- STRIPE URLS ---
-      const CHECKOUT_USA = "https://buy.stripe.com/7sY9AV1k6dGd0oH0FF0Fi08";
-      const CHECKOUT_INTL = "https://buy.stripe.com/eVq28tgf0gSp5J18870Fi0a";
+      const CHECKOUT_USA = "https://buy.stripe.com/dRmcN7e6S59H7R92NN0Fi0m";
+      const CHECKOUT_INTL = "https://buy.stripe.com/28EbJ39QC7hP1sLdsr0Fi0n";
 
       // --- STRIPE PAYLOAD BUILDER (inline, same as landing) ---
       function buildStripePayload(cartItems) {
@@ -2638,9 +2636,9 @@
       const product = {
         id: "kahani-times",
         name: "The Kahani Times Subscription",
-        priceDisplay: "From $9.99/mo",
-        priceUSA: "$9.99/mo",
-        priceIntl: "$11.99/mo",
+        priceDisplay: "From $10.99/mo",
+        priceUSA: "$10.99/mo",
+        priceIntl: "$12.99/mo",
         description:
           "For those who treasure stories, color, and connection — The Kahani Times revives the charm of old-school storytelling. Each month’s envelope feels like a keepsake from gentler times: printed paper, nostalgic items, and the quiet thrill of opening real mail. Inside are stories, art, and small surprises that make learning Urdu feel natural and joyful — like the way our parents once learned, slowly and beautifully, over a warm cup of chai.",
         image: "/assets/images/products/subscribe/feb.png",
@@ -3450,31 +3448,176 @@
       window.addEventListener("load", init);
 
       // ===== KAHANI TIMES SHIPPING CYCLE =====
+      // Fully date-driven: computes the active packing month and the open
+      // subscription month from today's date (in the store's Central Time
+      // zone) instead of hardcoded month names, so this section never goes stale.
       (function () {
-        // Countdown: July 20, 2026 11:59 PM CDT = July 21, 2026 04:59:00 UTC
-        var DEADLINE    = new Date('2026-07-21T04:59:00Z');
-        // Current prep window (June calendar highlight)
-        var PREP_START  = new Date(2026, 5, 20); // June 20
-        var PREP_END    = new Date(2026, 5, 30); // June 30
-        // Current ship date
-        var SHIP_JUN    = new Date(2026, 5, 30); // June 30
-        // Next subscription cycle (July calendar highlight; Jun 21–30 shows as prep on June)
-        var CYCLE_START = new Date(2026, 6, 1);  // July 1
-        var CYCLE_END   = new Date(2026, 6, 20); // July 20
-        // Next ship date
-        var SHIP_JUL    = new Date(2026, 6, 30); // July 30
+        var TIME_ZONE   = 'America/Chicago';
+        var CUTOFF_DAY  = 20; // subscribe by this day of the month
+        var SHIP_DAY    = 30; // mail ships on this day of the month
+        var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
+                            'July', 'August', 'September', 'October', 'November', 'December'];
+        var MONTH_ABBR  = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        function todayMidnight() {
-          var n = new Date();
-          return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+        function getTZParts(date) {
+          var fmt = new Intl.DateTimeFormat('en-US', {
+            timeZone: TIME_ZONE, hour12: false,
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
+          });
+          var parts = {};
+          fmt.formatToParts(date).forEach(function (p) {
+            if (p.type !== 'literal') parts[p.type] = parseInt(p.value, 10);
+          });
+          if (parts.hour === 24) parts.hour = 0;
+          return parts;
         }
 
+        // Converts a wall-clock date/time in the store's timezone to the UTC instant it represents.
+        function zonedWallTimeToUtc(y, m, d, hh, mi, ss) {
+          var guess = new Date(Date.UTC(y, m, d, hh, mi, ss));
+          var parts = getTZParts(guess);
+          var guessAsWallUtc = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+          return new Date(guess.getTime() + (guess.getTime() - guessAsWallUtc));
+        }
+
+        function addMonths(y, m, delta) {
+          var total = m + delta;
+          return { y: y + Math.floor(total / 12), m: ((total % 12) + 12) % 12 };
+        }
+
+        function label(month) { return MONTH_NAMES[month.m] + ' ' + month.y; }
+        function abbr(month)  { return MONTH_ABBR[month.m]; }
+
+        // ---- Determine cycle state from today's date (in store timezone) ----
+        var nowParts = getTZParts(new Date());
+        var today    = { y: nowParts.year, m: nowParts.month - 1, d: nowParts.day };
+
+        var packMonth = null;   // month currently being packed (only exists days 21–30)
+        var cycleMonth;         // month currently open for new subscriptions
+        if (today.d > CUTOFF_DAY && today.d <= SHIP_DAY) {
+          packMonth  = { y: today.y, m: today.m };
+          cycleMonth = addMonths(today.y, today.m, 1);
+        } else if (today.d > SHIP_DAY) {
+          // 31st of a long month: this month's mail already shipped on the 30th
+          cycleMonth = addMonths(today.y, today.m, 1);
+        } else {
+          cycleMonth = { y: today.y, m: today.m };
+        }
+
+        var deadline = zonedWallTimeToUtc(cycleMonth.y, cycleMonth.m, CUTOFF_DAY, 23, 59, 59);
+
+        // ---- Status banner ----
+        var bannerEl    = document.getElementById('kkt-status-banner');
+        var bannerTitle = document.getElementById('kkt-status-title');
+        var bannerText  = document.getElementById('kkt-status-text');
+        if (packMonth) {
+          bannerEl.style.display = '';
+          var packMonthName = MONTH_NAMES[packMonth.m];
+          bannerTitle.textContent = 'Currently Packing — ' + label(packMonth) + ' Mail';
+          bannerText.textContent  = packMonthName + ' mail is being prepared from '
+            + packMonthName + ' ' + CUTOFF_DAY + '–' + SHIP_DAY + ' and ships from the US on '
+            + packMonthName + ' ' + SHIP_DAY + '.';
+        } else {
+          bannerEl.style.display = 'none';
+        }
+
+        // ---- Heading + subtitle ----
+        document.getElementById('kkt-cycle-title').textContent = 'Next Kahani Times — ' + label(cycleMonth);
+        document.getElementById('kkt-cycle-subtitle').textContent =
+          'Subscribe by ' + abbr(cycleMonth) + ' ' + CUTOFF_DAY + ' · Ships from the US ' + abbr(cycleMonth) + ' ' + SHIP_DAY;
+
+        // ---- Calendars: packMonth (if active) + cycleMonth, else cycleMonth alone ----
+        var card2 = document.getElementById('kkt-cal-card-2');
+        var months = packMonth ? [packMonth, cycleMonth] : [cycleMonth];
+        if (!packMonth) card2.style.display = 'none';
+        else card2.style.display = '';
+
+        function renderCalendar(month, role, titleId, gridId) {
+          var titleEl = document.getElementById(titleId);
+          var grid    = document.getElementById(gridId);
+          titleEl.textContent = label(month);
+          grid.setAttribute('aria-label', label(month) + ' shipping calendar');
+
+          var firstDay  = new Date(month.y, month.m, 1).getDay(); // 0=Sun
+          var offset    = (firstDay === 0) ? 6 : firstDay - 1;    // Mon-based
+          var daysInMon = new Date(month.y, month.m + 1, 0).getDate();
+          var dayNames  = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+          var html      = '';
+
+          dayNames.forEach(function (d) {
+            html += '<div class="kkt-cal-day-header" aria-hidden="true">' + d + '</div>';
+          });
+          for (var i = 0; i < offset; i++) {
+            html += '<div class="kkt-cal-day"></div>';
+          }
+
+          for (var day = 1; day <= daysInMon; day++) {
+            var isToday  = month.y === today.y && month.m === today.m && day === today.d;
+            var isPrep   = role === 'pack'  && day >= CUTOFF_DAY && day <= SHIP_DAY;
+            var isCycle  = role === 'cycle' && day >= 1 && day <= CUTOFF_DAY;
+            var isShip   = day === SHIP_DAY;
+
+            var cls = 'kkt-cal-day';
+            if (isCycle) cls += ' kkt-cal-day--cycle';
+            if (isPrep)  cls += ' kkt-cal-day--prep';
+            if (isToday) cls += ' kkt-cal-day--today';
+            if (isShip)  cls += ' kkt-cal-day--shipping';
+
+            var ariaLbl = day
+              + (isToday ? ', today' : '')
+              + (isPrep  ? ', mail prep window' : '')
+              + (isCycle ? ', open subscription window' : '')
+              + (isShip  ? ', mail ships from US' : '');
+
+            html += '<div class="' + cls + '" aria-label="' + ariaLbl + '">' + day + '</div>';
+          }
+
+          grid.innerHTML = html;
+        }
+
+        if (packMonth) {
+          renderCalendar(packMonth,  'pack',  'kkt-cal-title-1', 'kkt-cal-grid-1');
+          renderCalendar(cycleMonth, 'cycle', 'kkt-cal-title-2', 'kkt-cal-grid-2');
+        } else {
+          renderCalendar(cycleMonth, 'cycle', 'kkt-cal-title-1', 'kkt-cal-grid-1');
+        }
+
+        // ---- Legend ----
+        var legendPrep     = document.getElementById('kkt-legend-prep');
+        var legendShipPack  = document.getElementById('kkt-legend-ship-pack');
+        var legendCycle     = document.getElementById('kkt-legend-cycle');
+        var legendShipCycle = document.getElementById('kkt-legend-ship-cycle');
+
+        if (packMonth) {
+          legendPrep.style.display    = '';
+          legendShipPack.style.display = '';
+          document.getElementById('kkt-legend-prep-text').textContent =
+            'Current prep — ' + abbr(packMonth) + ' ' + CUTOFF_DAY + '–' + SHIP_DAY;
+          document.getElementById('kkt-legend-ship-pack-text').textContent =
+            abbr(packMonth) + ' ' + SHIP_DAY + ' — ' + abbr(packMonth) + ' mail ships';
+          document.getElementById('kkt-legend-cycle-text').textContent =
+            'Next cycle — ' + abbr(cycleMonth) + ' 1–' + CUTOFF_DAY;
+          document.getElementById('kkt-legend-ship-cycle-text').textContent =
+            abbr(cycleMonth) + ' ' + SHIP_DAY + ' — next mail ships';
+        } else {
+          legendPrep.style.display    = 'none';
+          legendShipPack.style.display = 'none';
+          document.getElementById('kkt-legend-cycle-text').textContent =
+            'Open now — ' + abbr(cycleMonth) + ' 1–' + CUTOFF_DAY;
+          document.getElementById('kkt-legend-ship-cycle-text').textContent =
+            abbr(cycleMonth) + ' ' + SHIP_DAY + ' — mail ships';
+        }
+        legendCycle.style.display     = '';
+        legendShipCycle.style.display = '';
+
+        // ---- Countdown ----
         function updateCountdown() {
           var countdownEl = document.getElementById('kkt-countdown');
           var closedEl    = document.getElementById('kkt-closed-msg');
-          if (!countdownEl || !closedEl) return;
 
-          var diff = DEADLINE - new Date();
+          var diff = deadline - new Date();
           if (diff <= 0) {
             countdownEl.style.display = 'none';
             closedEl.style.display    = 'block';
@@ -3494,58 +3637,8 @@
           document.getElementById('kkt-secs').textContent = String(secs).padStart(2, '0');
         }
 
-        function renderCalendar(year, month, gridId) {
-          var grid = document.getElementById(gridId);
-          if (!grid) return;
-
-          var today     = todayMidnight();
-          var firstDay  = new Date(year, month, 1).getDay(); // 0=Sun
-          var offset    = (firstDay === 0) ? 6 : firstDay - 1; // Mon-based
-          var daysInMon = new Date(year, month + 1, 0).getDate();
-          var dayNames  = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-          var html      = '';
-
-          dayNames.forEach(function (d) {
-            html += '<div class="kkt-cal-day-header" aria-hidden="true">' + d + '</div>';
-          });
-
-          for (var i = 0; i < offset; i++) {
-            html += '<div class="kkt-cal-day"></div>';
-          }
-
-          for (var day = 1; day <= daysInMon; day++) {
-            var date     = new Date(year, month, day);
-            var isToday  = date.getTime() === today.getTime();
-            var isPrep   = date >= PREP_START  && date <= PREP_END;
-            var isCycle  = date >= CYCLE_START && date <= CYCLE_END;
-            var isShipJun = date.getTime() === SHIP_JUN.getTime();
-            var isShipJul = date.getTime() === SHIP_JUL.getTime();
-
-            var cls = 'kkt-cal-day';
-            if (isCycle)          cls += ' kkt-cal-day--cycle';
-            if (isPrep)           cls += ' kkt-cal-day--prep';   // overrides cycle if both
-            if (isToday)          cls += ' kkt-cal-day--today';  // always wins via !important
-            if (isShipJun || isShipJul) cls += ' kkt-cal-day--shipping';
-
-            var ariaLbl = day
-              + (isToday   ? ', today'                   : '')
-              + (isPrep    ? ', June mail prep window'   : '')
-              + (isCycle   ? ', next subscription cycle' : '')
-              + (isShipJun ? ', June mail ships from US' : '')
-              + (isShipJul ? ', next mail ships from US' : '');
-
-            html += '<div class="' + cls + '" aria-label="' + ariaLbl + '">' + day + '</div>';
-          }
-
-          grid.innerHTML = html;
-        }
-
-        window.addEventListener('load', function () {
-          renderCalendar(2026, 5, 'kkt-cal-june');
-          renderCalendar(2026, 6, 'kkt-cal-july');
-          updateCountdown();
-          setInterval(updateCountdown, 1000);
-        });
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
       }());
     </script>
     <script src="/assets/js/navbar-loader.js" defer></script>
