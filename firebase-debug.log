@@ -1,91 +1,61 @@
-[debug] [2026-08-21T09:05:21.653Z] ----------------------------------------------------------------------
-[debug] [2026-08-21T09:05:21.656Z] Command:       /usr/local/bin/node /Users/filza/.npm-global/bin/firebase deploy
-[debug] [2026-08-21T09:05:21.656Z] CLI Version:   15.22.1
-[debug] [2026-08-21T09:05:21.656Z] Platform:      darwin
-[debug] [2026-08-21T09:05:21.656Z] Node Version:  v24.16.0
-[debug] [2026-08-21T09:05:21.656Z] Detected Agent: unknown
-[debug] [2026-08-21T09:05:21.656Z] Time:          Fri Aug 21 2026 04:05:21 GMT-0500 (Central Daylight Time)
-[debug] [2026-08-21T09:05:21.657Z] ----------------------------------------------------------------------
+[debug] [2026-08-22T12:33:39.212Z] ----------------------------------------------------------------------
+[debug] [2026-08-22T12:33:39.215Z] Command:       /usr/local/bin/node /Users/filza/.npm-global/bin/firebase deploy
+[debug] [2026-08-22T12:33:39.215Z] CLI Version:   15.22.1
+[debug] [2026-08-22T12:33:39.215Z] Platform:      darwin
+[debug] [2026-08-22T12:33:39.215Z] Node Version:  v24.16.0
+[debug] [2026-08-22T12:33:39.215Z] Detected Agent: unknown
+[debug] [2026-08-22T12:33:39.215Z] Time:          Sat Aug 22 2026 07:33:39 GMT-0500 (Central Daylight Time)
+[debug] [2026-08-22T12:33:39.215Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2026-08-21T09:05:21.658Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2026-08-21T09:05:22.794Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2026-08-21T09:05:22.794Z] > authorizing via signed-in user (nfahmed11@gmail.com)
-[debug] [2026-08-21T09:05:22.794Z] [iam] checking project kahanikorner-8c61e for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2026-08-21T09:05:22.795Z] Checked if tokens are valid: false, expires at: 1785998146931
-[debug] [2026-08-21T09:05:22.795Z] Checked if tokens are valid: false, expires at: 1785998146931
-[debug] [2026-08-21T09:05:22.795Z] > refreshing access token with scopes: []
-[debug] [2026-08-21T09:05:22.796Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2026-08-21T09:05:22.796Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2026-08-21T09:05:22.880Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2026-08-21T09:05:22.880Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[debug] [2026-08-21T09:05:22.895Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2026-08-21T09:05:22.895Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2026-08-21T09:05:22.905Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions [none]
-[debug] [2026-08-21T09:05:22.905Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions  x-goog-user-project=kahanikorner-8c61e
-[debug] [2026-08-21T09:05:22.905Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2026-08-21T09:05:23.057Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions 200
-[debug] [2026-08-21T09:05:23.057Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2026-08-21T09:05:23.057Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.057Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.058Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions [none]
-[debug] [2026-08-21T09:05:23.058Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
-[debug] [2026-08-21T09:05:23.245Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions 200
-[debug] [2026-08-21T09:05:23.246Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
-[debug] [2026-08-21T09:05:23.246Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.246Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.246Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e [none]
-[debug] [2026-08-21T09:05:23.470Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e 200
-[debug] [2026-08-21T09:05:23.470Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e {"projectId":"kahanikorner-8c61e","projectNumber":"168337481169","displayName":"KahaniKorner","name":"projects/kahanikorner-8c61e","resources":{"hostingSite":"kahanikorner-8c61e"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_1c975824-9459-4ea9-8672-f1f5fe12156c"}
+[debug] [2026-08-22T12:33:39.217Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-08-22T12:33:40.715Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-22T12:33:40.715Z] > authorizing via signed-in user (nfahmed11@gmail.com)
+[debug] [2026-08-22T12:33:40.715Z] [iam] checking project kahanikorner-8c61e for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-08-22T12:33:40.716Z] Checked if tokens are valid: false, expires at: 1787306721895
+[debug] [2026-08-22T12:33:40.716Z] Checked if tokens are valid: false, expires at: 1787306721895
+[debug] [2026-08-22T12:33:40.716Z] > refreshing access token with scopes: []
+[debug] [2026-08-22T12:33:40.717Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-08-22T12:33:40.717Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-08-22T12:33:40.905Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-08-22T12:33:40.907Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-08-22T12:33:40.925Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-08-22T12:33:40.925Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-08-22T12:33:40.939Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions [none]
+[debug] [2026-08-22T12:33:40.939Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions  x-goog-user-project=kahanikorner-8c61e
+[debug] [2026-08-22T12:33:40.939Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-08-22T12:33:41.119Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions 200
+[debug] [2026-08-22T12:33:41.119Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-08-22T12:33:41.120Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.120Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.120Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-08-22T12:33:41.120Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-08-22T12:33:41.254Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-08-22T12:33:41.254Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/kahanikorner-8c61e/serviceAccounts/kahanikorner-8c61e@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-08-22T12:33:41.255Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.255Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.255Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e [none]
+[debug] [2026-08-22T12:33:41.485Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e 200
+[debug] [2026-08-22T12:33:41.485Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e {"projectId":"kahanikorner-8c61e","projectNumber":"168337481169","displayName":"KahaniKorner","name":"projects/kahanikorner-8c61e","resources":{"hostingSite":"kahanikorner-8c61e"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_1c975824-9459-4ea9-8672-f1f5fe12156c"}
 [info] 
 [info] === Deploying to 'kahanikorner-8c61e'...
 [info] 
 [info] i  deploying functions, hosting 
-[debug] [2026-08-21T09:05:23.473Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.473Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.473Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e [none]
-[debug] [2026-08-21T09:05:23.624Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e 200
-[debug] [2026-08-21T09:05:23.624Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e {"projectNumber":"168337481169","projectId":"kahanikorner-8c61e","lifecycleState":"ACTIVE","name":"KahaniKorner","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-03-09T20:13:53.544083Z"}
+[debug] [2026-08-22T12:33:41.489Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.489Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.490Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e [none]
+[debug] [2026-08-22T12:33:41.613Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e 200
+[debug] [2026-08-22T12:33:41.614Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/kahanikorner-8c61e {"projectNumber":"168337481169","projectId":"kahanikorner-8c61e","lifecycleState":"ACTIVE","name":"KahaniKorner","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-03-09T20:13:53.544083Z"}
 [info] i  functions: preparing codebase default for deployment 
 [info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
 [info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
 [info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
-[debug] [2026-08-21T09:05:23.626Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.626Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.626Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e/adminSdkConfig [none]
-[debug] [2026-08-21T09:05:23.725Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e/adminSdkConfig 200
-[debug] [2026-08-21T09:05:23.725Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e/adminSdkConfig {"projectId":"kahanikorner-8c61e","storageBucket":"kahanikorner-8c61e.firebasestorage.app"}
-[debug] [2026-08-21T09:05:23.726Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.726Z] Checked if tokens are valid: true, expires at: 1787306721895
-[debug] [2026-08-21T09:05:23.726Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/kahanikorner-8c61e/configs [none]
-[debug] [2026-08-21T09:05:23.883Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/kahanikorner-8c61e/configs 200
-[debug] [2026-08-21T09:05:23.883Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/kahanikorner-8c61e/configs {}
-[debug] [2026-08-21T09:05:23.886Z] Validating nodejs source
-[warn] ⚠  functions: Runtime Node.js 20 was deprecated on 2026-04-30 and will be decommissioned on 2026-10-30, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy 
-[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
-[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
-[debug] [2026-08-21T09:05:24.617Z] > [functions] package.json contents: {
-  "name": "kahani-korner-functions",
-  "description": "Firebase Functions for Kahani Korner",
-  "scripts": {
-    "serve": "firebase emulators:start --only functions",
-    "deploy": "firebase deploy --only functions"
-  },
-  "engines": {
-    "node": "20"
-  },
-  "main": "index.js",
-  "dependencies": {
-    "firebase-functions": "^4.0.0",
-    "openai": "^4.52.0",
-    "stripe": "^14.0.0"
-  },
-  "private": true
-}
-[debug] [2026-08-21T09:05:24.617Z] Building nodejs source
-[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
-[info] i  functions: You are using a version of firebase-functions SDK (4.9.0) that does not have support for the newest Firebase Extensions features. Please update firebase-functions SDK to >=5.1.0 to use them correctly 
-[debug] [2026-08-21T09:05:24.618Z] Could not find functions.yaml. Must use http discovery
-[debug] [2026-08-21T09:05:24.627Z] Found firebase-functions binary at '/Users/filza/Desktop/Kahani Korner/kahanikorner-code/functions/node_modules/.bin/firebase-functions'
-[info] Serving at port 8003
-
-[debug] [2026-08-21T09:05:25.132Z] Got response from /__/functions.yaml {"endpoints":{"createArchiveCheckout":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"createArchiveCheckout"},"createCheckoutSession":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"createCheckoutSession"},"generateSentence":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"secretEnvironmentVariables":[{"key":"OPENAI_API_KEY"}],"httpsTrigger":{},"entryPoint":"generateSentence"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2026-08-22T12:33:41.616Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.616Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.616Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e/adminSdkConfig [none]
+[debug] [2026-08-22T12:33:41.769Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e/adminSdkConfig 200
+[debug] [2026-08-22T12:33:41.769Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/kahanikorner-8c61e/adminSdkConfig {"projectId":"kahanikorner-8c61e","storageBucket":"kahanikorner-8c61e.firebasestorage.app"}
+[debug] [2026-08-22T12:33:41.770Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.770Z] Checked if tokens are valid: true, expires at: 1787405619925
+[debug] [2026-08-22T12:33:41.770Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/kahanikorner-8c61e/configs [none]
+[debug] [2026-08-22T12:33:42.030Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/kahanikorner-8c61e/configs 200
+[debug] [2026-08-22T12:33:42.030Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/kahanikorner-8c61e/configs {}

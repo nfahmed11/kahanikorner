@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Sabz Sufaid Yaadein</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img
+          src="/assets/images/homepage/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo" />
+      </a>
+    </header>
+
+    <h1 id="story-title"></h1>
+
+    <div class="container">
+      <div id="book-cover" class="book-placeholder"></div>
+
+      <div class="level-picker" id="level-picker"></div>
+
+      <div class="button-container" id="button-container"></div>
+    </div>
+
+    <script>
+      window.STORY_HOME_CONFIG = {
+        slug: "sabz-sufaid-yaadein",
+        title: "Sabz Sufaid Yaadein",
+        coverImage: "./assets/images/bookcover.png",
+        readAloudHref: "/qr/assets/html/audionewsletter.html?issue=0826aug",
+
+        /*
+    ┌────────────────────────────────────────────────────────────────────────┐
+    │  AI HELPER PROMPT — use this to generate content for a new issue.     │
+    └────────────────────────────────────────────────────────────────────────┘
+
+    Step 1: Split the monthly story into story.lines objects:
+      { id, romanUrdu, urdu, english }
+
+    Step 2: Create Fill the Kahani questions using those line IDs in sourceLineIds.
+    For each question include:
+      id, level, sourceLineIds, missingWords,
+      romanUrdu, urdu, english,
+      completedRomanUrdu, completedUrdu, completedEnglish,
+      choices, answer
+
+    Rules:
+    - Use only vocabulary from this story.
+    - Make blanks useful content words (nouns, verbs).
+    - Keep Roman Urdu beginner-friendly.
+    - Urdu script must be correct.
+    - English should be a direct translation.
+    - answer[] entries must match the ___ blanks left-to-right.
+    - Level 1: one blank, 3 choices (auto-check)
+    - Level 2: two blanks, word-bank chips
+    - Level 3: two sentences, 2–3 blanks, word bank
+    - Level 4 (Story Mode): 3–4 sentences, 3–5 blanks, word bank
+    */
+
+        story: {
+          title: "Sabz Sufaid Yaadein",
+          lines: [
+            {
+              id: "line-1",
+              romanUrdu:
+                "Chaudah August ki subah thi, aur ghar mein aaj alag hi ronak thi.",
+              urdu: "چودہ اگست کی صبح تھی، اور گھر میں آج الگ ہی رونق تھی۔",
+              english:
+                "It was the morning of August 14, and there was a special liveliness in the house.",
+            },
+            {
+              id: "line-2",
+              romanUrdu: "Zain kai saalon baad Pakistan aaya tha.",
+              urdu: "زین کئی سالوں بعد پاکستان آیا تھا۔",
+              english: "Zain had come to Pakistan after many years.",
+            },
+            {
+              id: "line-3",
+              romanUrdu:
+                "Chhat par uske hum-umar rishtedaar jhandiyan laga rahe thay.",
+              urdu: "چھت پر اس کے ہم عمر رشتہ دار جھنڈیاں لگا رہے تھے۔",
+              english:
+                "His relatives around his age were putting up small flags on the rooftop.",
+            },
+            {
+              id: "line-4",
+              romanUrdu:
+                "Har taraf sabz aur sufaid rang chamak rahe thay.",
+              urdu: "ہر طرف سبز اور سفید رنگ چمک رہے تھے۔",
+              english: "Green and white colors were shining everywhere.",
+            },
+            {
+              id: "line-5",
+              romanUrdu:
+                "Neeche gali mein bachay jhanday bech rahe thay.",
+              urdu: "نیچے گلی میں بچے جھنڈے بیچ رہے تھے۔",
+              english: "Children were selling flags in the street below.",
+            },
+            {
+              id: "line-6",
+              romanUrdu:
+                "Kahin door se milli naghme baj rahe thay.",
+              urdu: "کہیں دور سے ملی نغمے بج رہے تھے۔",
+              english: "Patriotic songs were playing somewhere in the distance.",
+            },
+            {
+              id: "line-7",
+              romanUrdu: "Zain thori dair chup khara raha.",
+              urdu: "زین تھوڑی دیر چپ کھڑا رہا۔",
+              english: "Zain stood quietly for a little while.",
+            },
+            {
+              id: "line-8",
+              romanUrdu: "Uski Urdu itni achi nahi thi.",
+              urdu: "اس کی اردو اتنی اچھی نہیں تھی۔",
+              english: "His Urdu was not very good.",
+            },
+            {
+              id: "line-9",
+              romanUrdu:
+                "Jab sab tez tez bolte aur hanste thay, to usay lagta tha ke woh un se thora alag hai.",
+              urdu:
+                "جب سب تیز تیز بولتے اور ہنستے تھے، تو اسے لگتا تھا کہ وہ ان سے تھوڑا الگ ہے۔",
+              english:
+                "When everyone spoke quickly and laughed, he felt a little different from them.",
+            },
+            {
+              id: "line-10",
+              romanUrdu: "Dil mein aik ajeeb sa sawaal tha:",
+              urdu: "دل میں ایک عجیب سا سوال تھا:",
+              english: "There was a strange question in his heart:",
+            },
+            {
+              id: "line-11",
+              romanUrdu:
+                "Kya yeh waqai mera ghar hai, ya bas Ammi Abbu ki kahaniyon wali jagah?",
+              urdu:
+                "کیا یہ واقعی میرا گھر ہے، یا بس امی ابو کی کہانیوں والی جگہ؟",
+              english:
+                "Is this really my home, or just the place from Ammi and Abbu's stories?",
+            },
+            {
+              id: "line-12",
+              romanUrdu: "Phir uski chhoti cousin usay bulane aayi.",
+              urdu: "پھر اس کی چھوٹی کزن اسے بلانے آئی۔",
+              english: "Then his little cousin came to call him.",
+            },
+            {
+              id: "line-13",
+              romanUrdu: "“Bhai, yeh jhandi pakro na!”",
+              urdu: "“بھائی، یہ جھنڈی پکڑو نا!”",
+              english: "“Bhai, hold this flag!”",
+            },
+            {
+              id: "line-14",
+              romanUrdu:
+                "Zain ne dheere se jhandi pakri aur chhat par charh gaya.",
+              urdu:
+                "زین نے دھیرے سے جھنڈی پکڑی اور چھت پر چڑھ گیا۔",
+              english:
+                "Zain gently took the flag and climbed onto the rooftop.",
+            },
+            {
+              id: "line-15",
+              romanUrdu: "Hawa mein jhandiyan pharr pharr kar rahi thin.",
+              urdu: "ہوا میں جھنڈیاں پھڑ پھڑ کر رہی تھیں۔",
+              english: "The small flags were fluttering in the wind.",
+            },
+            {
+              id: "line-16",
+              romanUrdu: "Dadi chai aur garam samosay le kar aayin.",
+              urdu: "دادی چائے اور گرم سموسے لے کر آئیں۔",
+              english: "Dadi brought tea and hot samosas.",
+            },
+            {
+              id: "line-17",
+              romanUrdu: "Sab chhat par baith gaye.",
+              urdu: "سب چھت پر بیٹھ گئے۔",
+              english: "Everyone sat down on the rooftop.",
+            },
+            {
+              id: "line-18",
+              romanUrdu:
+                "Us bachchi ne Zain ke gaal par sabz aur sufaid rang laga diya.",
+              urdu:
+                "اس بچی نے زین کے گال پر سبز اور سفید رنگ لگا دیا۔",
+              english:
+                "The little girl put green and white color on Zain's cheek.",
+            },
+            {
+              id: "line-19",
+              romanUrdu: "Sab hans paray.",
+              urdu: "سب ہنس پڑے۔",
+              english: "Everyone laughed.",
+            },
+            {
+              id: "line-20",
+              romanUrdu:
+                "Shaam ko jab roshni jali, to poora mohalla sabz aur sufaid chamakne laga.",
+              urdu:
+                "شام کو جب روشنی جلی، تو پورا محلہ سبز اور سفید چمکنے لگا۔",
+              english:
+                "In the evening, when the lights came on, the whole neighborhood began to shine green and white.",
+            },
+            {
+              id: "line-21",
+              romanUrdu:
+                "Kisi ne purana naghma laga diya jo Zain ne bachpan mein suna tha.",
+              urdu:
+                "کسی نے پرانا نغمہ لگا دیا جو زین نے بچپن میں سنا تھا۔",
+              english:
+                "Someone played an old song that Zain had heard in his childhood.",
+            },
+            {
+              id: "line-22",
+              romanUrdu:
+                "Achanak se uski aankhon mein aansoo aa gaye.",
+              urdu: "اچانک سے اس کی آنکھوں میں آنسو آ گئے۔",
+              english: "Suddenly, tears came to his eyes.",
+            },
+            {
+              id: "line-23",
+              romanUrdu:
+                "Usay samajh nahi aa raha tha ke woh khush tha ya udaas.",
+              urdu:
+                "اسے سمجھ نہیں آ رہا تھا کہ وہ خوش تھا یا اداس۔",
+              english:
+                "He could not understand whether he was happy or sad.",
+            },
+            {
+              id: "line-24",
+              romanUrdu: "Lekin phir dil halka ho gaya.",
+              urdu: "لیکن پھر دل ہلکا ہو گیا۔",
+              english: "But then his heart felt lighter.",
+            },
+            {
+              id: "line-25",
+              romanUrdu:
+                "Dadi ne uska haath pakra aur dheere se kaha, “Apne walon ki alag baat hoti hai, beta.”",
+              urdu:
+                "دادی نے اس کا ہاتھ پکڑا اور دھیرے سے کہا، “اپنے والوں کی الگ بات ہوتی ہے، بیٹا۔”",
+              english:
+                "Dadi held his hand and gently said, “There is something special about your own people, beta.”",
+            },
+            {
+              id: "line-26",
+              romanUrdu: "Zain muskaraya.",
+              urdu: "زین مسکرایا۔",
+              english: "Zain smiled.",
+            },
+            {
+              id: "line-27",
+              romanUrdu:
+                "Uski Urdu tooti phooti thi, lekin uska dil sab samajh raha tha.",
+              urdu:
+                "اس کی اردو ٹوٹی پھوٹی تھی، لیکن اس کا دل سب سمجھ رہا تھا۔",
+              english:
+                "His Urdu was broken, but his heart understood everything.",
+            },
+            {
+              id: "line-28",
+              romanUrdu:
+                "Us raat us ne socha ke ghar sirf aik jagah nahi hota.",
+              urdu:
+                "اس رات اس نے سوچا کہ گھر صرف ایک جگہ نہیں ہوتا۔",
+              english: "That night, he thought that home is not just a place.",
+            },
+            {
+              id: "line-29",
+              romanUrdu:
+                "Ghar woh log hotay hain jo tumhara intezaar karte hain.",
+              urdu:
+                "گھر وہ لوگ ہوتے ہیں جو تمہارا انتظار کرتے ہیں۔",
+              english: "Home is the people who wait for you.",
+            },
+            {
+              id: "line-30",
+              romanUrdu:
+                "Aur is chhat par, in awaazon ke beech, woh aakhir apne ghar aa gaya tha.",
+              urdu:
+                "اور اس چھت پر، ان آوازوں کے بیچ، وہ آخر اپنے گھر آ گیا تھا۔",
+              english:
+                "And on this rooftop, among these sounds, he had finally come home.",
+            },
+          ],
+        },
+
+        fillTheKahani: {
+          title: "Fill the Kahani",
+          subtitle: "Fill in missing words from this month's kahani.",
+          questions: [
+            // ── EASY (Level 1) ──────────────────────────────────────
+            {
+              id: "aug26-l1-1",
+              level: 1,
+              sourceLineIds: ["line-4"],
+              missingWords: ["sufaid"],
+              romanUrdu: "Har taraf sabz aur ___ rang chamak rahe thay.",
+              urdu: "ہر طرف سبز اور ___ رنگ چمک رہے تھے۔",
+              english: "Green and white colors were shining everywhere.",
+              completedRomanUrdu:
+                "Har taraf sabz aur sufaid rang chamak rahe thay.",
+              completedUrdu:
+                "ہر طرف سبز اور سفید رنگ چمک رہے تھے۔",
+              completedEnglish:
+                "Green and white colors were shining everywhere.",
+              choices: [
+                {
+                  value: "sufaid",
+                  romanUrdu: "sufaid",
+                  urdu: "سفید",
+                  english: "white",
+                },
+                {
+                  value: "kaala",
+                  romanUrdu: "kaala",
+                  urdu: "کالا",
+                  english: "black",
+                },
+                {
+                  value: "peela",
+                  romanUrdu: "peela",
+                  urdu: "پیلا",
+                  english: "yellow",
+                },
+              ],
+              answer: ["sufaid"],
+            },
+            {
+              id: "aug26-l1-2",
+              level: 1,
+              sourceLineIds: ["line-28"],
+              missingWords: ["jagah"],
+              romanUrdu:
+                "Us raat us ne socha ke ghar sirf aik ___ nahi hota.",
+              urdu:
+                "اس رات اس نے سوچا کہ گھر صرف ایک ___ نہیں ہوتا۔",
+              english: "That night, he thought that home is not just a place.",
+              completedRomanUrdu:
+                "Us raat us ne socha ke ghar sirf aik jagah nahi hota.",
+              completedUrdu:
+                "اس رات اس نے سوچا کہ گھر صرف ایک جگہ نہیں ہوتا۔",
+              completedEnglish:
+                "That night, he thought that home is not just a place.",
+              choices: [
+                {
+                  value: "jagah",
+                  romanUrdu: "jagah",
+                  urdu: "جگہ",
+                  english: "place",
+                },
+                {
+                  value: "khwaab",
+                  romanUrdu: "khwaab",
+                  urdu: "خواب",
+                  english: "dream",
+                },
+                {
+                  value: "kahani",
+                  romanUrdu: "kahani",
+                  urdu: "کہانی",
+                  english: "story",
+                },
+              ],
+              answer: ["jagah"],
+            },
+            {
+              id: "aug26-l1-3",
+              level: 1,
+              sourceLineIds: ["line-22"],
+              missingWords: ["aansoo"],
+              romanUrdu:
+                "Achanak se uski aankhon mein ___ aa gaye.",
+              urdu: "اچانک سے اس کی آنکھوں میں ___ آ گئے۔",
+              english: "Suddenly, tears came to his eyes.",
+              completedRomanUrdu:
+                "Achanak se uski aankhon mein aansoo aa gaye.",
+              completedUrdu:
+                "اچانک سے اس کی آنکھوں میں آنسو آ گئے۔",
+              completedEnglish: "Suddenly, tears came to his eyes.",
+              choices: [
+                {
+                  value: "aansoo",
+                  romanUrdu: "aansoo",
+                  urdu: "آنسو",
+                  english: "tears",
+                },
+                {
+                  value: "khushi",
+                  romanUrdu: "khushi",
+                  urdu: "خوشی",
+                  english: "happiness",
+                },
+                {
+                  value: "neend",
+                  romanUrdu: "neend",
+                  urdu: "نیند",
+                  english: "sleep",
+                },
+              ],
+              answer: ["aansoo"],
+            },
+
+            // ── MEDIUM (Level 2) ──────────────────────────────────
+            {
+              id: "aug26-l2-1",
+              level: 2,
+              sourceLineIds: ["line-16"],
+              missingWords: ["chai", "samosay"],
+              romanUrdu: "Dadi ___ aur garam ___ le kar aayin.",
+              urdu: "دادی ___ اور گرم ___ لے کر آئیں۔",
+              english: "Dadi brought tea and hot samosas.",
+              completedRomanUrdu:
+                "Dadi chai aur garam samosay le kar aayin.",
+              completedUrdu: "دادی چائے اور گرم سموسے لے کر آئیں۔",
+              completedEnglish: "Dadi brought tea and hot samosas.",
+              choices: [
+                {
+                  value: "chai",
+                  romanUrdu: "chai",
+                  urdu: "چائے",
+                  english: "tea",
+                },
+                {
+                  value: "samosay",
+                  romanUrdu: "samosay",
+                  urdu: "سموسے",
+                  english: "samosas",
+                },
+                {
+                  value: "pani",
+                  romanUrdu: "pani",
+                  urdu: "پانی",
+                  english: "water",
+                },
+                {
+                  value: "roti",
+                  romanUrdu: "roti",
+                  urdu: "روٹی",
+                  english: "bread",
+                },
+              ],
+              answer: ["chai", "samosay"],
+            },
+            {
+              id: "aug26-l2-2",
+              level: 2,
+              sourceLineIds: ["line-20"],
+              missingWords: ["mohalla", "chamakne"],
+              romanUrdu:
+                "Shaam ko jab roshni jali, to poora ___ sabz aur sufaid ___ laga.",
+              urdu:
+                "شام کو جب روشنی جلی، تو پورا ___ سبز اور سفید ___ لگا۔",
+              english:
+                "In the evening, when the lights came on, the whole neighborhood began to shine green and white.",
+              completedRomanUrdu:
+                "Shaam ko jab roshni jali, to poora mohalla sabz aur sufaid chamakne laga.",
+              completedUrdu:
+                "شام کو جب روشنی جلی، تو پورا محلہ سبز اور سفید چمکنے لگا۔",
+              completedEnglish:
+                "In the evening, when the lights came on, the whole neighborhood began to shine green and white.",
+              choices: [
+                {
+                  value: "mohalla",
+                  romanUrdu: "mohalla",
+                  urdu: "محلہ",
+                  english: "neighborhood",
+                },
+                {
+                  value: "chamakne",
+                  romanUrdu: "chamakne",
+                  urdu: "چمکنے",
+                  english: "to shine",
+                },
+                {
+                  value: "gali",
+                  romanUrdu: "gali",
+                  urdu: "گلی",
+                  english: "street",
+                },
+                {
+                  value: "ghar",
+                  romanUrdu: "ghar",
+                  urdu: "گھر",
+                  english: "home",
+                },
+              ],
+              answer: ["mohalla", "chamakne"],
+            },
+
+            // ── HARD (Level 3) ───────────────────────────────────────
+            {
+              id: "aug26-l3-1",
+              level: 3,
+              sourceLineIds: ["line-23", "line-24"],
+              missingWords: ["khush", "udaas", "dil"],
+              romanUrdu:
+                "Usay samajh nahi aa raha tha ke woh ___ tha ya ___. Lekin phir ___ halka ho gaya.",
+              urdu:
+                "اسے سمجھ نہیں آ رہا تھا کہ وہ ___ تھا یا ___۔ لیکن پھر ___ ہلکا ہو گیا۔",
+              english:
+                "He could not understand whether he was happy or sad. But then his heart felt lighter.",
+              completedRomanUrdu:
+                "Usay samajh nahi aa raha tha ke woh khush tha ya udaas. Lekin phir dil halka ho gaya.",
+              completedUrdu:
+                "اسے سمجھ نہیں آ رہا تھا کہ وہ خوش تھا یا اداس۔ لیکن پھر دل ہلکا ہو گیا۔",
+              completedEnglish:
+                "He could not understand whether he was happy or sad. But then his heart felt lighter.",
+              choices: [
+                {
+                  value: "khush",
+                  romanUrdu: "khush",
+                  urdu: "خوش",
+                  english: "happy",
+                },
+                {
+                  value: "udaas",
+                  romanUrdu: "udaas",
+                  urdu: "اداس",
+                  english: "sad",
+                },
+                {
+                  value: "dil",
+                  romanUrdu: "dil",
+                  urdu: "دل",
+                  english: "heart",
+                },
+                {
+                  value: "ghar",
+                  romanUrdu: "ghar",
+                  urdu: "گھر",
+                  english: "home",
+                },
+                {
+                  value: "raat",
+                  romanUrdu: "raat",
+                  urdu: "رات",
+                  english: "night",
+                },
+              ],
+              answer: ["khush", "udaas", "dil"],
+            },
+
+            // ── STORY MODE (Level 4) ─────────────────────────────────
+            {
+              id: "aug26-l4-1",
+              level: 4,
+              sourceLineIds: ["line-28", "line-29", "line-30"],
+              missingWords: ["jagah", "intezaar", "awaazon", "ghar"],
+              romanUrdu:
+                "Us raat us ne socha ke ghar sirf aik ___ nahi hota. Ghar woh log hotay hain jo tumhara ___ karte hain. Aur is chhat par, in ___ ke beech, woh aakhir apne ___ aa gaya tha.",
+              urdu:
+                "اس رات اس نے سوچا کہ گھر صرف ایک ___ نہیں ہوتا۔ گھر وہ لوگ ہوتے ہیں جو تمہارا ___ کرتے ہیں۔ اور اس چھت پر، ان ___ کے بیچ، وہ آخر اپنے ___ آ گیا تھا۔",
+              english:
+                "That night, he thought that home is not just a place. Home is the people who wait for you. And on this rooftop, among these sounds, he had finally come home.",
+              completedRomanUrdu:
+                "Us raat us ne socha ke ghar sirf aik jagah nahi hota. Ghar woh log hotay hain jo tumhara intezaar karte hain. Aur is chhat par, in awaazon ke beech, woh aakhir apne ghar aa gaya tha.",
+              completedUrdu:
+                "اس رات اس نے سوچا کہ گھر صرف ایک جگہ نہیں ہوتا۔ گھر وہ لوگ ہوتے ہیں جو تمہارا انتظار کرتے ہیں۔ اور اس چھت پر، ان آوازوں کے بیچ، وہ آخر اپنے گھر آ گیا تھا۔",
+              completedEnglish:
+                "That night, he thought that home is not just a place. Home is the people who wait for you. And on this rooftop, among these sounds, he had finally come home.",
+              choices: [
+                {
+                  value: "jagah",
+                  romanUrdu: "jagah",
+                  urdu: "جگہ",
+                  english: "place",
+                },
+                {
+                  value: "intezaar",
+                  romanUrdu: "intezaar",
+                  urdu: "انتظار",
+                  english: "wait",
+                },
+                {
+                  value: "awaazon",
+                  romanUrdu: "awaazon",
+                  urdu: "آوازوں",
+                  english: "sounds",
+                },
+                {
+                  value: "ghar",
+                  romanUrdu: "ghar",
+                  urdu: "گھر",
+                  english: "home",
+                },
+                {
+                  value: "khushi",
+                  romanUrdu: "khushi",
+                  urdu: "خوشی",
+                  english: "happiness",
+                },
+                {
+                  value: "kahani",
+                  romanUrdu: "kahani",
+                  urdu: "کہانی",
+                  english: "story",
+                },
+              ],
+              answer: ["jagah", "intezaar", "awaazon", "ghar"],
+            },
+          ], // ← end of questions array
+        }, // ← end of fillTheKahani
+
+        orderedWords: [
+          "ghar",
+          "chai",
+          "samosay",
+          "chhat",
+          "gali",
+          "mohalla",
+          "jhandi",
+          "haath",
+          "aankhon",
+          "aansoo",
+          "rang",
+          "roshni",
+          "jagah",
+          "rishtedaar",
+          "kahaniyon",
+          "aaya",
+          "baith gaye",
+          "pakra",
+          "bolte",
+          "hanste",
+          "suna",
+          "muskaraya",
+          "chamakne",
+          "sabz",
+          "sufaid",
+          "khush",
+          "udaas",
+          "purana",
+          "alag",
+          "ajeeb",
+          "dheere",
+          "shaam",
+          "raat",
+          "samajh",
+          "hawa",
+          "awaazon",
+          "naghma",
+          "dil",
+          "sawaal",
+        ],
+        totalLevels: 4,
+        defaultLevel: 1,
+
+        activityAnswerKeys: [
+          {
+            id: "august-urdu-bingo",
+            title: "August Urdu Bingo",
+            subtitle: "Answer Key — example answers, not the only correct answer",
+            type: "text",
+            answers: [
+              {
+                prompt: "Talk about how you celebrate 14 August.",
+                romanUrdu:
+                  "Sawaal: Aap 14 August kaise manatay hain, is ke baare mein baat karein. Misali jawab: Hum 14 August ko ghar par jhandiyan lagatay hain aur sabz sufaid kapray pehantay hain.",
+                urdu:
+                  "سوال: آپ 14 اگست کیسے مناتے ہیں، اس کے بارے میں بات کریں۔ مثالی جواب: ہم 14 اگست کو گھر پر جھنڈیاں لگاتے ہیں اور سبز سفید کپڑے پہنتے ہیں۔",
+              },
+              {
+                prompt: "Talk about putting up jhandiyan at home.",
+                romanUrdu:
+                  "Sawaal: Ghar mein jhandiyan lagane ke baare mein baat karein. Misali jawab: Hum chhat aur gali mein bohat sari jhandiyan lagatay hain. Yeh dekh kar bohat khushi hoti hai.",
+                urdu:
+                  "سوال: گھر میں جھنڈیاں لگانے کے بارے میں بات کریں۔ مثالی جواب: ہم چھت اور گلی میں بہت ساری جھنڈیاں لگاتے ہیں۔ یہ دیکھ کر بہت خوشی ہوتی ہے۔",
+              },
+              {
+                prompt: "Talk about seeing sabz aur sufaid everywhere.",
+                romanUrdu:
+                  "Sawaal: Har taraf sabz aur sufaid rang dekhne ke baare mein baat karein. Misali jawab: 14 August par har jagah sabz aur sufaid rang nazar aata hai — kapron mein, jhandiyon mein, aur roshniyon mein.",
+                urdu:
+                  "سوال: ہر طرف سبز اور سفید رنگ دیکھنے کے بارے میں بات کریں۔ مثالی جواب: 14 اگست پر ہر جگہ سبز اور سفید رنگ نظر آتا ہے — کپڑوں میں، جھنڈیوں میں، اور روشنیوں میں۔",
+              },
+              {
+                prompt: "Talk about decorating a chhat for 14 August.",
+                romanUrdu:
+                  "Sawaal: 14 August ke liye chhat sajane ke baare mein baat karein. Misali jawab: Hum chhat par jhandiyan aur roshniyan lagatay hain. Sab mil kar chhat ko sabz aur sufaid rang mein sajatay hain.",
+                urdu:
+                  "سوال: 14 اگست کے لیے چھت سجانے کے بارے میں بات کریں۔ مثالی جواب: ہم چھت پر جھنڈیاں اور روشنیاں لگاتے ہیں۔ سب مل کر چھت کو سبز اور سفید رنگ میں سجاتے ہیں۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you celebrated Pakistan Day with your family.",
+                romanUrdu:
+                  "Sawaal: Aik dafa jab aap ne apni family ke saath Pakistan Day manaya, us ke baare mein baat karein. Misali jawab: Pichlay saal hum sab chhat par ikkathay huay, jhandiyan lagayin, aur milli naghme sunay.",
+                urdu:
+                  "سوال: ایک دفعہ جب آپ نے اپنی فیملی کے ساتھ پاکستان ڈے منایا، اس کے بارے میں بات کریں۔ مثالی جواب: پچھلے سال ہم سب چھت پر اکٹھے ہوئے، جھنڈیاں لگائیں، اور ملی نغمے سنے۔",
+              },
+              {
+                prompt: "Talk about your favorite milli naghma.",
+                romanUrdu:
+                  "Sawaal: Apne pasandeeda milli naghme ke baare mein baat karein. Misali jawab: Mera pasandeeda milli naghma bohat josh se bhara hota hai. Jab bhi main yeh naghma sunta/sunti hoon, mera dil khush ho jata hai.",
+                urdu:
+                  "سوال: اپنے پسندیدہ ملی نغمے کے بارے میں بات کریں۔ مثالی جواب: میرا پسندیدہ ملی نغمہ بہت جوش سے بھرا ہوتا ہے۔ جب بھی میں یہ نغمہ سنتا/سنتی ہوں، میرا دل خوش ہو جاتا ہے۔",
+              },
+              {
+                prompt:
+                  "Talk about hearing a milli naghma somewhere unexpectedly.",
+                romanUrdu:
+                  "Sawaal: Kahin achanak milli naghma sunne ke baare mein baat karein. Misali jawab: Aik dafa main bazaar mein tha/thi aur achanak door se aik milli naghma sunayi diya. Sun kar mujhe acha laga.",
+                urdu:
+                  "سوال: کہیں اچانک ملی نغمہ سننے کے بارے میں بات کریں۔ مثالی جواب: ایک دفعہ میں بازار میں تھا/تھی اور اچانک دور سے ایک ملی نغمہ سنائی دیا۔ سن کر مجھے اچھا لگا۔",
+              },
+              {
+                prompt: "Talk about going up to the chhat with your cousins.",
+                romanUrdu:
+                  "Sawaal: Apne cousins ke saath chhat par jaane ke baare mein baat karein. Misali jawab: Main aur mere cousins 14 August ki shaam ko chhat par gaye. Wahan hum ne jhandiyan lagayin aur baatein kin.",
+                urdu:
+                  "سوال: اپنے کزنز کے ساتھ چھت پر جانے کے بارے میں بات کریں۔ مثالی جواب: میں اور میرے کزنز 14 اگست کی شام کو چھت پر گئے۔ وہاں ہم نے جھنڈیاں لگائیں اور باتیں کیں۔",
+              },
+              {
+                prompt: "Talk about something fun you do with your cousins.",
+                romanUrdu:
+                  "Sawaal: Apne cousins ke saath koi mazedaar kaam ke baare mein baat karein. Misali jawab: Main aur mere cousins mil kar games kheltay hain aur bohat hanstay hain.",
+                urdu:
+                  "سوال: اپنے کزنز کے ساتھ کوئی مزیدار کام کے بارے میں بات کریں۔ مثالی جواب: میں اور میرے کزنز مل کر گیمز کھیلتے ہیں اور بہت ہنستے ہیں۔",
+              },
+              {
+                prompt: "Talk about eating samosay with your family.",
+                romanUrdu:
+                  "Sawaal: Apni family ke saath samosay khane ke baare mein baat karein. Misali jawab: Hum shaam ko chai ke saath garam samosay khatay hain. Sab mil kar baithtay hain aur baatein kartay hain.",
+                urdu:
+                  "سوال: اپنی فیملی کے ساتھ سموسے کھانے کے بارے میں بات کریں۔ مثالی جواب: ہم شام کو چائے کے ساتھ گرم سموسے کھاتے ہیں۔ سب مل کر بیٹھتے ہیں اور باتیں کرتے ہیں۔",
+              },
+              {
+                prompt: "Talk about drinking chai with your Dadi or Nani.",
+                romanUrdu:
+                  "Sawaal: Apni Dadi ya Nani ke saath chai peenay ke baare mein baat karein. Misali jawab: Meri Dadi mere liye chai banati hain aur hum saath baith kar peetay hain.",
+                urdu:
+                  "سوال: اپنی دادی یا نانی کے ساتھ چائے پینے کے بارے میں بات کریں۔ مثالی جواب: میری دادی میرے لیے چائے بناتی ہیں اور ہم ساتھ بیٹھ کر پیتے ہیں۔",
+              },
+              {
+                prompt:
+                  "Talk about something your Dadi or Nani makes that you love.",
+                romanUrdu:
+                  "Sawaal: Apni Dadi ya Nani ki bani hui kisi cheez ke baare mein baat karein jo aapko pasand hai. Misali jawab: Meri Dadi bohat achay samosay banati hain. Mujhe unke haath ka khana bohat pasand hai.",
+                urdu:
+                  "سوال: اپنی دادی یا نانی کی بنی ہوئی کسی چیز کے بارے میں بات کریں جو آپ کو پسند ہے۔ مثالی جواب: میری دادی بہت اچھے سموسے بناتی ہیں۔ مجھے ان کے ہاتھ کا کھانا بہت پسند ہے۔",
+              },
+              {
+                prompt:
+                  "FREE SPACE — Pakistan Zindabad! Say it in Urdu and share one thing you love about Pakistan.",
+                romanUrdu:
+                  "Free space — “Pakistan Zindabad!” zor se kaho, aur Pakistan ki koi aik pasandeeda baat share karo. Is khanay ke liye koi mustaqil jawab zaroori nahi.",
+                urdu:
+                  "فری اسپیس — “پاکستان زندہ باد!” زور سے کہو، اور پاکستان کی کوئی ایک پسندیدہ بات شیئر کرو۔ اس خانے کے لیے کوئی مستقل جواب ضروری نہیں۔",
+              },
+              {
+                prompt: "Talk about a time your family made you laugh.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aapki family ne aapko hansaya, us ke baare mein baat karein. Misali jawab: Mere chachu ne aik mazakiya baat ki aur sab hans paray.",
+                urdu:
+                  "سوال: ایک وقت جب آپ کی فیملی نے آپ کو ہنسایا، اس کے بارے میں بات کریں۔ مثالی جواب: میرے چچو نے ایک مزاحیہ بات کی اور سب ہنس پڑے۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you felt like you were finally ghar aa gaye.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aapko laga ke aap aakhir ghar aa gaye, us ke baare mein baat karein. Misali jawab: Lambay safar ke baad jab main apni family ke paas pohncha/pohnchi, to mujhe laga ke main ghar aa gaya/gayi hoon.",
+                urdu:
+                  "سوال: ایک وقت جب آپ کو لگا کہ آپ آخر گھر آ گئے، اس کے بارے میں بات کریں۔ مثالی جواب: لمبے سفر کے بعد جب میں اپنی فیملی کے پاس پہنچا/پہنچی، تو مجھے لگا کہ میں گھر آ گیا/گئی ہوں۔",
+              },
+              {
+                prompt: "Talk about what ghar means to you.",
+                romanUrdu:
+                  "Sawaal: Aapke liye ghar ka kya matlab hai, is ke baare mein baat karein. Misali jawab: Mere liye ghar woh jagah hai jahan mere apne log hotay hain aur mujhe pyar milta hai.",
+                urdu:
+                  "سوال: آپ کے لیے گھر کا کیا مطلب ہے، اس کے بارے میں بات کریں۔ مثالی جواب: میرے لیے گھر وہ جگہ ہے جہاں میرے اپنے لوگ ہوتے ہیں اور مجھے پیار ملتا ہے۔",
+              },
+              {
+                prompt: "Talk about a place that feels like ghar to you.",
+                romanUrdu:
+                  "Sawaal: Koi aisi jagah jo aapko ghar jaisi lagti hai, us ke baare mein baat karein. Misali jawab: Meri Dadi ka ghar mujhe bilkul apna ghar jaisa lagta hai.",
+                urdu:
+                  "سوال: کوئی ایسی جگہ جو آپ کو گھر جیسی لگتی ہے، اس کے بارے میں بات کریں۔ مثالی جواب: میری دادی کا گھر مجھے بالکل اپنا گھر جیسا لگتا ہے۔",
+              },
+              {
+                prompt: "Talk about visiting Pakistan after a long time.",
+                romanUrdu:
+                  "Sawaal: Kai saalon baad Pakistan jaane ke baare mein baat karein. Misali jawab: Jab main kai saalon baad Pakistan gaya/gayi, to sab kuch alag lekin phir bhi apna sa laga.",
+                urdu:
+                  "سوال: کئی سالوں بعد پاکستان جانے کے بارے میں بات کریں۔ مثالی جواب: جب میں کئی سالوں بعد پاکستان گیا/گئی، تو سب کچھ الگ لیکن پھر بھی اپنا سا لگا۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you felt thora alag from everyone else.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aap sab se thora alag mehsoos huay, us ke baare mein baat karein. Misali jawab: Nayi jagah par jaane par mujhe sab se thora alag mehsoos hua, kyunke mujhe wahan ki zubaan itni achi nahi aati thi.",
+                urdu:
+                  "سوال: ایک وقت جب آپ سب سے تھوڑا الگ محسوس ہوئے، اس کے بارے میں بات کریں۔ مثالی جواب: نئی جگہ پر جانے پر مجھے سب سے تھوڑا الگ محسوس ہوا، کیونکہ مجھے وہاں کی زبان اتنی اچھی نہیں آتی تھی۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you didn't understand what everyone was saying.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aapko samajh nahi aaya ke sab kya keh rahe hain, us ke baare mein baat karein. Misali jawab: Jab bare log tez tez Urdu boltay thay, to mujhe samajh nahi aata tha ke woh kya keh rahe hain.",
+                urdu:
+                  "سوال: ایک وقت جب آپ کو سمجھ نہیں آیا کہ سب کیا کہہ رہے ہیں، اس کے بارے میں بات کریں۔ مثالی جواب: جب بڑے لوگ تیز تیز اردو بولتے تھے، تو مجھے سمجھ نہیں آتا تھا کہ وہ کیا کہہ رہے ہیں۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you felt happy to be with the people you love.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab aap apne pyaron ke saath ho kar khush huay, us ke baare mein baat karein. Misali jawab: Jab sari family Eid par ikkathi hoti hai, to mujhe bohat khushi hoti hai.",
+                urdu:
+                  "سوال: ایک وقت جب آپ اپنے پیاروں کے ساتھ ہو کر خوش ہوئے، اس کے بارے میں بات کریں۔ مثالی جواب: جب ساری فیملی عید پر اکٹھی ہوتی ہے، تو مجھے بہت خوشی ہوتی ہے۔",
+              },
+              {
+                prompt:
+                  "Talk about a family member who always makes you feel welcome.",
+                romanUrdu:
+                  "Sawaal: Kisi aisay family member ke baare mein bataein jo hamesha aapko khush aamdeed mehsoos karata hai. Misali jawab: Meri Dadi hamesha muskura kar mera istaqbal karti hain aur mujhe pyar se apnati hain.",
+                urdu:
+                  "سوال: کسی ایسے فیملی ممبر کے بارے میں بتائیں جو ہمیشہ آپ کو خوش آمدید محسوس کراتا ہے۔ مثالی جواب: میری دادی ہمیشہ مسکرا کر میرا استقبال کرتی ہیں اور مجھے پیار سے اپناتی ہیں۔",
+              },
+              {
+                prompt:
+                  "Talk about something that makes your dil halka ho jata hai.",
+                romanUrdu:
+                  "Sawaal: Kya cheez aap ka dil halka kar deti hai, is ke baare mein baat karein. Misali jawab: Apni family ke saath hans kar baat karne se mera dil halka ho jata hai.",
+                urdu:
+                  "سوال: کیا چیز آپ کا دل ہلکا کر دیتی ہے، اس کے بارے میں بات کریں۔ مثالی جواب: اپنی فیملی کے ساتھ ہنس کر بات کرنے سے میرا دل ہلکا ہو جاتا ہے۔",
+              },
+              {
+                prompt: "Talk about a memory from when you were little.",
+                romanUrdu:
+                  "Sawaal: Apne bachpan ki kisi yaad ke baare mein baat karein. Misali jawab: Mujhe yaad hai ke bachpan mein main apni Dadi ke ghar chhat par khela karta/karti thi.",
+                urdu:
+                  "سوال: اپنے بچپن کی کسی یاد کے بارے میں بات کریں۔ مثالی جواب: مجھے یاد ہے کہ بچپن میں میں اپنی دادی کے گھر چھت پر کھیلا کرتا/کرتی تھی۔",
+              },
+              {
+                prompt:
+                  "Talk about a time you became emotional because of a happy memory.",
+                romanUrdu:
+                  "Sawaal: Aik waqt jab koi khushi ki yaad yaad aane par aap emotional huay, us ke baare mein baat karein. Misali jawab: Jab mujhe purana naghma suna to mujhe achanak apne bachpan ki yaad aa gayi aur meri aankhon mein aansoo aa gaye.",
+                urdu:
+                  "سوال: ایک وقت جب کوئی خوشی کی یاد یاد آنے پر آپ ایموشنل ہوئے، اس کے بارے میں بات کریں۔ مثالی جواب: جب مجھے پرانا نغمہ سنا تو مجھے اچانک اپنے بچپن کی یاد آ گئی اور میری آنکھوں میں آنسو آ گئے۔",
+              },
+            ],
+          },
+        ],
+
+        activities: [
+          {
+            id: "readaloud",
+            label: "Audio",
+            href: "/qr/assets/html/audionewsletter.html?issue=0826aug",
+            useWordsParam: true,
+          },
+          {
+            id: "flashcards",
+            label: "Flashcards",
+            href: "/qr/assets/html/flashcards.html",
+            useWordsParam: true,
+          },
+          {
+            id: "matching",
+            label: "Picture Match",
+            href: "/qr/assets/html/matching.html",
+            useWordsParam: true,
+          },
+          {
+            id: "riddles",
+            label: "Riddles",
+            href: "/qr/assets/html/riddles.html",
+            useWordsParam: true,
+          },
+          {
+            id: "memory",
+            label: "Memory Game",
+            href: "/qr/assets/html/memory.html",
+            useWordsParam: true,
+          },
+          {
+            id: "wordsearch",
+            label: "Word Search",
+            href: "/qr/assets/html/wordsearch.html",
+            useWordsParam: true,
+          },
+        ],
+      };
+    </script>
+
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
+    <script>
+      const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+      for (let i = 0; i < 15; i++) {
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.classList.add("heart");
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDelay = Math.random() * 10 + "s";
+        icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+        icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+        document.body.appendChild(icon);
+      }
+    </script>
+  </body>
+</html>
