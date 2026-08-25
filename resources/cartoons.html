@@ -41,9 +41,7 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -51,34 +49,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
     <link rel="stylesheet" href="../quicklinks/SharedCSS/common.css" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
 
     <style>
-      /* ── THEME VARIABLES ── */
-      :root {
-        --granite: #4a594a;
-        --deep-teal: #687d70;
-        --ash-grey: #b0c3b7;
-        --white-smoke: #f3f1f0;
-        --soft-blush: #f3dedd;
-        --cotton-rose: #ffc4c3;
-        --rosy-taupe: #d49797;
-        --black: #1c2524;
-        --white: #ffffff;
-        --mint: #c9dcce;
-        --radius-lg: 24px;
-        --radius-pill: 999px;
-        --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
-        --shadow-hover: 0 22px 50px rgba(74, 89, 74, 0.25);
-        --card-bg: #ffffff;
-        --danger: #ef4444;
-        --muted: #5c6b68;
-        --topbar-h: 15px;
-        --header-top-gap: 1.75rem;
-        --header-h: 74px;
-      }
-
       /* ── RESET & BASE ── */
       *,
       *::before,
@@ -133,8 +108,8 @@
       /* ── TOP PROMO BAR ── */
       .topbar {
         width: 100%;
-        background: var(--ash-grey);
-        color: #ffffff;
+        background: var(--kk-mint);
+        color: var(--granite);
         font-size: 13px;
         font-weight: 600;
         overflow: hidden;
@@ -177,11 +152,11 @@
         width: min(1200px, calc(100% - 2rem));
         z-index: 100;
         padding: 0.5rem 2rem;
-        background: rgba(255, 255, 255, 0.55);
+        background: rgba(255, 254, 251, 0.55);
         backdrop-filter: blur(10px);
-        border: 2px solid rgba(176, 195, 183, 0.7);
+        border: 2px solid rgba(170, 174, 154, 0.7);
         border-radius: 999px;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 18px rgba(51, 47, 35, 0.08);
         transition:
           background 0.25s ease,
           border-color 0.25s ease,
@@ -236,7 +211,7 @@
       }
 
       .nav a:hover {
-        color: var(--soft-blush);
+        color: var(--deep-teal);
         font-weight: 700;
         text-shadow:
           -1px -1px 0 var(--granite),
@@ -291,6 +266,10 @@
         box-shadow: 0 4px 0 var(--granite);
         background: var(--ash-grey);
       }
+      .icon-btn-circle:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
 
       .cart-badge-landing {
         position: absolute;
@@ -323,7 +302,7 @@
         width: 8px;
         height: 8px;
         border-radius: 999px;
-        border: 2px solid rgba(212, 151, 151, 0.7);
+        border: 2px solid rgba(204, 139, 139, 0.7);
         opacity: 0;
         transform: translateY(0) scale(0.9);
         pointer-events: none;
@@ -364,12 +343,12 @@
         position: absolute;
         right: 0;
         top: 130%;
-        background: rgba(255, 255, 255, 0.95);
-        border: 2px solid rgba(176, 195, 183, 0.8);
+        background: rgba(255, 254, 251, 0.95);
+        border: 2px solid rgba(170, 174, 154, 0.8);
         color: var(--granite);
         padding: 0.55rem 0.7rem;
         border-radius: 14px;
-        box-shadow: 0 14px 30px rgba(74, 89, 74, 0.18);
+        box-shadow: 0 14px 30px rgba(51, 47, 35, 0.18);
         font-weight: 800;
         font-size: 0.78rem;
         letter-spacing: 0.04em;
@@ -390,9 +369,9 @@
         top: -8px;
         width: 14px;
         height: 14px;
-        background: rgba(255, 255, 255, 0.95);
-        border-left: 2px solid rgba(176, 195, 183, 0.8);
-        border-top: 2px solid rgba(176, 195, 183, 0.8);
+        background: rgba(255, 254, 251, 0.95);
+        border-left: 2px solid rgba(170, 174, 154, 0.8);
+        border-top: 2px solid rgba(170, 174, 154, 0.8);
         transform: rotate(45deg);
       }
 
@@ -406,7 +385,7 @@
       .mobile-menu-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(28, 37, 36, 0.35);
+        background: rgba(51, 47, 35, 0.35);
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
         z-index: 120;
@@ -429,7 +408,7 @@
         height: 100%;
         background: var(--white);
         border-left: 2px solid var(--ash-grey);
-        box-shadow: -4px 0 30px rgba(0, 0, 0, 0.18);
+        box-shadow: -4px 0 30px rgba(51, 47, 35, 0.18);
         border-radius: 24px 0 0 24px;
         padding: 1.75rem 1.5rem 2rem;
         display: flex;
@@ -536,7 +515,7 @@
       .cart-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(74, 89, 74, 0.2);
+        background: rgba(51, 47, 35, 0.2);
         z-index: 110;
         opacity: 0;
         pointer-events: none;
@@ -740,12 +719,12 @@
           var(--topbar-h) + var(--header-top-gap) + var(--header-h) + 0.5rem
         );
         z-index: 50;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 254, 251, 0.9);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         padding: 1rem 0;
         margin: 1.75rem 0 0;
-        border-bottom: 1.5px solid rgba(176, 195, 183, 0.45);
+        border-bottom: 1.5px solid rgba(170, 174, 154, 0.45);
         display: flex;
         flex-direction: column;
         gap: 0.85rem;
@@ -787,7 +766,7 @@
 
       #searchInput:focus {
         border-color: var(--deep-teal);
-        box-shadow: 0 0 0 3px rgba(104, 125, 112, 0.12);
+        box-shadow: 0 0 0 3px rgba(44, 76, 81, 0.12);
       }
 
       #searchInput::placeholder {
@@ -841,14 +820,14 @@
       .lang-pill:hover {
         background: var(--ash-grey);
         transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(74, 89, 74, 0.15);
+        box-shadow: 0 4px 10px rgba(51, 47, 35, 0.15);
       }
 
       .lang-pill[aria-selected="true"] {
         background: var(--deep-teal);
-        color: #fff;
+        color: var(--white);
         border-color: var(--deep-teal);
-        box-shadow: 0 4px 12px rgba(74, 89, 74, 0.25);
+        box-shadow: 0 4px 12px rgba(51, 47, 35, 0.25);
       }
 
       .lang-pill[aria-selected="true"]:hover {
@@ -899,9 +878,9 @@
       /* ── CHANNEL CARD ── */
       .channel-card {
         background: var(--white);
-        border: 1.5px solid rgba(176, 195, 183, 0.5);
+        border: 1.5px solid rgba(170, 174, 154, 0.5);
         border-radius: 18px;
-        box-shadow: 0 6px 20px rgba(74, 89, 74, 0.09);
+        box-shadow: 0 6px 20px rgba(51, 47, 35, 0.09);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -916,8 +895,8 @@
 
       .channel-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 14px 36px rgba(74, 89, 74, 0.16);
-        border-color: rgba(212, 151, 151, 0.5);
+        box-shadow: 0 14px 36px rgba(51, 47, 35, 0.16);
+        border-color: rgba(204, 139, 139, 0.5);
       }
 
       /* ── AVATAR ── */
@@ -930,8 +909,8 @@
         justify-content: center;
         flex-shrink: 0;
         overflow: hidden;
-        border: 3px solid rgba(255, 255, 255, 0.6);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: 3px solid rgba(255, 254, 251, 0.6);
+        box-shadow: 0 2px 10px rgba(51, 47, 35, 0.1);
         position: relative;
       }
 
@@ -976,14 +955,14 @@
       }
 
       .lang-badge.urdu {
-        background: #fce8e8;
-        color: #a85858;
-        border: 1.5px solid #f0b8b8;
+        background: var(--pale-rose);
+        color: var(--kk-rose);
+        border: 1.5px solid var(--dusty-blush);
       }
       .lang-badge.hindi {
-        background: #e4f0e8;
-        color: #3d6b4a;
-        border: 1.5px solid #b0d4bc;
+        background: var(--kk-mint-light);
+        color: var(--deep-teal);
+        border: 1.5px solid var(--light-sage);
       }
 
       .channel-desc {
@@ -1008,7 +987,7 @@
         width: 100%;
         padding: 0.5rem 0.75rem;
         background: var(--deep-teal);
-        color: #ffffff;
+        color: var(--white);
         font-family: inherit;
         font-size: 0.8rem;
         font-weight: 700;
@@ -1785,21 +1764,21 @@
       // ── Avatar colour palettes ─────────────────────────────────────────────────
 
       const URDU_PALETTES = [
-        { bg: "#d49797", text: "#ffffff" },
-        { bg: "#c97878", text: "#ffffff" },
-        { bg: "#e8b8b8", text: "#7a3d3d" },
-        { bg: "#ffc4c3", text: "#8b4040" },
-        { bg: "#f3dedd", text: "#9a5050" },
-        { bg: "#b87a7a", text: "#ffffff" },
+        { bg: "#E19697", text: "#1F2928" },
+        { bg: "#D68588", text: "#1F2928" },
+        { bg: "#C9787C", text: "#1F2928" },
+        { bg: "#E9C7CF", text: "#1F2928" },
+        { bg: "#F6E3E7", text: "#1F2928" },
+        { bg: "#E19697", text: "#1F2928" },
       ];
 
       const HINDI_PALETTES = [
-        { bg: "#687d70", text: "#ffffff" },
-        { bg: "#4a594a", text: "#ffffff" },
-        { bg: "#b0c3b7", text: "#3a4a3a" },
-        { bg: "#c9dcce", text: "#3a4a3a" },
-        { bg: "#8aab94", text: "#ffffff" },
-        { bg: "#5e7a65", text: "#ffffff" },
+        { bg: "#2E6A68", text: "#FFFDF8" },
+        { bg: "#52615D", text: "#FFFDF8" },
+        { bg: "#9EAF8B", text: "#1F2928" },
+        { bg: "#DADEBB", text: "#1F2928" },
+        { bg: "#DAEAE3", text: "#1F2928" },
+        { bg: "#E8E4DC", text: "#1F2928" },
       ];
 
       // ── Card builder ──────────────────────────────────────────────────────────

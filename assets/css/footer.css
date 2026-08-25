@@ -21,7 +21,7 @@ footer.footer {
   grid-template-columns: 1fr 2fr;
   gap: 3rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(218, 222, 187, 0.3);
+  border-bottom: 1px solid rgba(220, 221, 196, 0.3);
 }
 
 /* ── Brand / logo / social column — centered ── */

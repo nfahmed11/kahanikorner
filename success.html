@@ -4,43 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Order Confirmed — Kahani Korner</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --deep-teal: #2e6a68;
-      --sage-green: #9eaf8b;
-      --dusty-blush: #e9c7cf;
-      --pale-rose: #f6e3e7;
-      --rose-pink: #e19697;
-      --warm-white: #fffdf8;
-      --charcoal: #1f2928;
 
-      --granite: var(--charcoal);
-      --soft-blush: var(--pale-rose);
-      --rosy-taupe: var(--rose-pink);
-      --white-smoke: var(--warm-white);
-    }
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Shared Navbar CSS -->
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/navbar.css" />
+
+  <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: "Open Sans", sans-serif;
-      background: var(--white-smoke);
+      background: var(--color-cream);
       color: var(--granite);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
+    }
+    .confirmation-wrap {
+      display: flex;
       align-items: center;
       justify-content: center;
+      flex: 1;
+      width: 100%;
       padding: 2rem;
     }
     .card {
-      background: white;
+      background: var(--warm-white);
       border: 2px solid var(--sage-green);
       border-radius: 2rem;
       padding: 3rem 2.5rem;
       max-width: 480px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 18px 40px rgba(31,41,40,0.12);
+      box-shadow: 0 18px 40px rgba(51,47,35,0.12);
     }
     .icon {
       font-size: 3.5rem;
@@ -49,6 +52,7 @@
     h1 {
       font-family: "Grandstander", cursive;
       font-size: 2rem;
+      font-weight: 800;
       color: var(--granite);
       margin-bottom: 0.75rem;
     }
@@ -57,33 +61,49 @@
       line-height: 1.7;
       margin-bottom: 2rem;
     }
-    a {
+    .card a {
       display: inline-block;
       padding: 0.9rem 2rem;
       background: var(--deep-teal);
-      color: white;
+      color: var(--warm-white);
       border-radius: 1rem;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 4px 0 #234f4d;
+      box-shadow: 0 4px 0 var(--color-teal-dark);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    a:hover {
+    .card a:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 0 #234f4d;
+      box-shadow: 0 6px 0 var(--color-teal-dark);
+    }
+    .card a:active {
+      transform: translateY(0);
+      box-shadow: 0 0 0 var(--color-teal-dark);
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9eaf8b" width="56" height="56"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
-    <h1>Order Confirmed!</h1>
-    <p>Thank you for your purchase from Kahani Korner.<br>You'll receive a confirmation email shortly.</p>
-    <a href="/products.html">Continue Shopping</a>
+  <!-- Edit navbar in one place only: /components/navbar.html -->
+  <div id="navbar-placeholder"></div>
+  <div class="header-spacer" aria-hidden="true"></div>
+
+  <div class="confirmation-wrap">
+    <div class="card">
+      <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9eaf8b" width="56" height="56"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+      <h1>Order Confirmed!</h1>
+      <p>Thank you for your purchase from Kahani Korner.<br>You'll receive a confirmation email shortly.</p>
+      <a href="/products.html">Continue Shopping</a>
+    </div>
   </div>
+
+  <!-- Edit footer in one place only: /components/footer.html -->
+  <div id="footer-placeholder"></div>
+
   <script>
     // Clear the cart after successful payment
     localStorage.removeItem("kahani_cart");
   </script>
+  <script src="/assets/js/navbar-loader.js" defer></script>
+  <script src="/assets/js/footer-loader.js" defer></script>
 </body>
 </html>

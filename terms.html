@@ -38,35 +38,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="/quicklinks/SharedCSS/common.css" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
   <link rel="stylesheet" href="/assets/css/navbar.css" />
 
   <style>
-    :root {
-      --deep-teal: #2e6a68;
-      --sage-green: #9eaf8b;
-      --light-sage: #dadebb;
-      --dusty-blush: #e9c7cf;
-      --pale-rose: #f6e3e7;
-      --rose-pink: #e19697;
-      --rose-pink-hover: #d68588;
-      --rose-pink-active: #c9787c;
-      --warm-white: #fffdf8;
-      --charcoal: #1f2928;
-      --muted-gray: #52615d;
-      --light-neutral: #e8e4dc;
-
-      --granite: var(--charcoal);
-      --ash-grey: var(--sage-green);
-      --white-smoke: var(--warm-white);
-      --soft-blush: var(--pale-rose);
-      --cotton-rose: var(--dusty-blush);
-      --mint: var(--light-sage);
-      --black: var(--charcoal);
-      --white: #ffffff;
-      --radius-lg: 24px;
-      --shadow-soft: 0 18px 40px rgba(31, 41, 40, 0.15);
-    }
-
     *,
     *::before,
     *::after {
@@ -76,9 +51,9 @@
     body {
       font-family: 'Open Sans', sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(246, 227, 231, 0.55), transparent 34rem),
-        radial-gradient(circle at bottom right, rgba(218, 222, 187, 0.55), transparent 32rem),
-        var(--white-smoke);
+        radial-gradient(circle at top left, rgba(243, 227, 228, 0.55), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(220, 221, 196, 0.55), transparent 32rem),
+        var(--color-cream);
       color: var(--black);
       margin: 0;
     }
@@ -90,8 +65,8 @@
     }
 
     .legal-card {
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(46, 106, 104, 0.16);
+      background: rgba(255, 254, 251, 0.92);
+      border: 1px solid rgba(44, 76, 81, 0.16);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-soft);
       padding: clamp(1.5rem, 4vw, 3rem);
@@ -155,8 +130,8 @@
     }
 
     .legal-note {
-      background: rgba(246, 227, 231, 0.45);
-      border: 1px solid rgba(46, 106, 104, 0.14);
+      background: rgba(243, 227, 228, 0.45);
+      border: 1px solid rgba(44, 76, 81, 0.14);
       border-radius: 18px;
       padding: 1rem 1.1rem;
       margin: 1.25rem 0 0;

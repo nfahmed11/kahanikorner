@@ -357,4 +357,30 @@ window.AUDIONEWSLETTER_ISSUES = {
       // },
     ],
   },
+
+  "0826aug": {
+    title: "Sabz Sufaid Yaadein",
+    monthYear: "August 2026",
+    vol: 2,
+    no: 8,
+    audioBase: "/qr/tkt/2026/0826aug/assets/audio/",
+    pages: [
+      {
+        heading: "Story Time",
+        tag: "Main Story",
+        tagClass: "story",
+        sections: [
+          { audio: "story.mp3", title: "Sabz Sufaid Yaadein", sub: "This Month's Story" },
+        ],
+      },
+      {
+        heading: "Letter From Dada Jee",
+        tag: "Closing Notes",
+        tagClass: "letter",
+        sections: [
+          { audio: "khatt.mp3", title: "Letter From Dada Jee", sub: "A Special Message for 14 August" },
+        ],
+      },
+    ],
+  },
 };

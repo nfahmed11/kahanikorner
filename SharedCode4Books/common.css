@@ -6,15 +6,31 @@
 
 
       :root {
-        --feldgrau: #4a594a;
-        --hookers-green: #687d70;
-        --ash-gray: #b0c3b7;
-        --white-smoke: #f3f1f0;
-        --misty-rose: #f3dedd;
-        --tea-rose: #ffc4c3;
-        --rosy-brown: #d49797;
-        --white: #ffffff;
-        --black: #000000;
+        --kk-cream: #fbf9f2;
+        --kk-ivory: #fffefb;
+        --kk-off-white: #f8f5f1;
+        --kk-text-dark: #332f23;
+        --kk-mint: #daeae3;
+        --kk-mint-light: #ecf2ed;
+        --kk-sage-light: #dcddc4;
+        --kk-sage: #aaae9a;
+        --kk-teal-dark: #2c4c51;
+        --kk-teal: #536d70;
+        --kk-rose: #c17d80;
+        --kk-coral: #cc8b8b;
+        --kk-salmon: #d8a5a4;
+        --kk-blush: #e4cbd0;
+        --kk-pink-light: #f3e3e4;
+
+        --feldgrau: var(--kk-text-dark);
+        --hookers-green: var(--kk-teal-dark);
+        --ash-gray: var(--kk-sage);
+        --white-smoke: var(--kk-ivory);
+        --misty-rose: var(--kk-pink-light);
+        --tea-rose: var(--kk-blush);
+        --rosy-brown: var(--kk-coral);
+        --white: var(--kk-ivory);
+        --black: var(--kk-text-dark);
       }
 
 

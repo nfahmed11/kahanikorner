@@ -1,14 +1,10 @@
 /* ========================================================
    KAHANI KORNER — Free Resource Landing Page styles
    Shared by gated free-resource pages (e.g. 20-bilingual-games.html).
-   Load AFTER /assets/css/navbar.css — reuses its :root variables,
-   base typography, header, mobile menu, and footer styles.
+   Load AFTER /assets/css/tokens.css and /assets/css/navbar.css —
+   reuses their :root variables, base typography, header, mobile
+   menu, and footer styles.
    ======================================================== */
-
-:root {
-  --shadow-soft: 0 18px 40px rgba(74, 89, 74, 0.15);
-  --radius-md: 16px;
-}
 
 /* ── PAGE LAYOUT ── */
 .rdl-main {
@@ -137,7 +133,7 @@
 .rdl-btn--primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 0 var(--color-teal-dark);
-  background: var(--color-teal-dark);
+  background: var(--muted-gray);
 }
 .rdl-btn--primary:active { transform: translateY(0); box-shadow: 0 0 0 var(--color-teal-dark); }
 .rdl-btn--primary:disabled {
@@ -156,6 +152,7 @@
   box-shadow: 0 6px 0 var(--ash-grey);
   background: var(--mint);
 }
+.rdl-btn--outline:active { transform: translateY(0); box-shadow: 0 0 0 var(--ash-grey); }
 .rdl-btn--block { width: 100%; }
 .rdl-btn:focus-visible {
   outline: 3px solid var(--deep-teal);
@@ -241,8 +238,8 @@
 .rdl-preview-card__example {
   margin-top: 0.25rem;
   padding: 0.7rem 0.85rem;
-  background: #fff;
-  border: 1px dashed rgba(158, 175, 139, 0.9);
+  background: var(--color-warm-white);
+  border: 1px dashed rgba(170, 174, 154, 0.9);
   border-radius: 12px;
   font-size: 0.88rem;
   color: var(--granite);
@@ -251,7 +248,7 @@
 /* ── SIGNUP FORM PANEL ── */
 .rdl-form-panel {
   background: var(--soft-blush);
-  border: 2px solid rgba(225, 150, 151, 0.6);
+  border: 2px solid rgba(204, 139, 139, 0.6);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   padding: clamp(1.75rem, 3vw, 2.5rem);
@@ -289,13 +286,13 @@
   font-family: "Open Sans", sans-serif;
   font-size: 0.95rem;
   color: var(--granite);
-  background: #fff;
+  background: var(--color-warm-white);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .rdl-field input:focus {
   border-color: var(--deep-teal);
-  box-shadow: 0 0 0 3px rgba(225, 150, 151, 0.4);
+  box-shadow: 0 0 0 3px rgba(218, 234, 227, 0.6);
 }
 .rdl-field input[aria-invalid="true"] {
   border-color: var(--danger);
@@ -372,7 +369,7 @@
 .rdl-bridge {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed rgba(158, 175, 139, 0.7);
+  border-top: 1px dashed rgba(170, 174, 154, 0.7);
   text-align: center;
   font-size: 0.92rem;
   color: var(--muted);
