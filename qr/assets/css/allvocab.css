@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap");
+/* Fonts + shared type tokens come from qr-base.css (linked first) */
 
 /* ===================================================================
    ALL CARDS — Premium vocabulary explorer
@@ -77,7 +76,7 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: "Fredoka", "Grandstander", sans-serif;
+  font-family: var(--qr-font-body);
   background: linear-gradient(160deg, var(--bg-start) 0%, var(--bg-end) 100%);
   color: var(--text);
   min-height: 100vh;
@@ -139,15 +138,15 @@ body::before {
 .hero-text { flex: 1; min-width: 0; }
 
 .hero-title {
-  font-family: "Grandstander", "Fredoka", cursive;
-  font-size: clamp(20px, 5vw, 28px);
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-title-bar);
   font-weight: 700;
   color: var(--white);
   line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: var(--qr-text-small);
   font-weight: 400;
   color: rgba(255,255,255,0.85);
   margin-top: 2px;
@@ -544,7 +543,7 @@ body::before {
 }
 
 .card-urdu {
-  font-family: "Noto Nastaliq Urdu", serif;
+  font-family: var(--qr-font-urdu);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text);
@@ -614,7 +613,8 @@ body::before {
 }
 
 .variant-roman { font-weight: 600; color: var(--purple); opacity: 0.8; }
-.variant-urdu { font-family: "Noto Nastaliq Urdu", serif; direction: rtl; font-size: 0.82rem; }
+.variant-urdu { font-family: var(--qr-font-urdu); direction: rtl; font-size: 0.82rem; }
+.variant-english { font-style: italic; color: var(--text-muted); }
 .variant-meta { font-size: 0.62rem; color: var(--text-soft); }
 
 /* Flip hint */
@@ -705,7 +705,7 @@ body::before {
 }
 
 .empty-title {
-  font-family: "Grandstander", "Fredoka", cursive;
+  font-family: var(--qr-font-display);
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--purple);
@@ -733,9 +733,10 @@ body::before {
   padding: 10px 22px;
   border-radius: var(--r-md);
   border: none;
-  font-family: inherit;
-  font-size: 0.88rem;
-  font-weight: 600;
+  min-height: var(--qr-tap);
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-button);
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s var(--ease);
 }
@@ -784,7 +785,7 @@ body::before {
   .card { min-height: 170px; }
   .card-urdu { font-size: 1.3rem; }
   .card-english { font-size: 1.05rem; }
-  .hero-title { font-size: 20px; }
+  .hero-title { font-size: var(--qr-text-title-bar); }
 }
 
 /* ---------- Reduced motion ---------- */

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Microsoft Analytics tag to track analytics  -->
@@ -33,13 +33,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Subscribe — Kahani Korner</title>
-    <link rel="icon" href="/assets/images/homepage/logo2.png" type="image/png" />
-    <meta name="description" content="Subscribe to The Kahani Times — a monthly Urdu-English snail mail package of stories, art, and cultural treasures for kids." />
+    <link
+      rel="icon"
+      href="/assets/images/homepage/logo2.png"
+      type="image/png" />
+    <meta
+      name="description"
+      content="Subscribe to The Kahani Times — a monthly Urdu-English snail mail package of stories, art, and cultural treasures for kids." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kahanikorner.com/subscribe.html" />
     <meta property="og:title" content="Subscribe — Kahani Korner" />
-    <meta property="og:description" content="Subscribe to The Kahani Times — a monthly Urdu-English snail mail package of stories, art, and cultural treasures for kids." />
-    <meta property="og:image" content="https://kahanikorner.com/assets/images/homepage/logo.png" />
+    <meta
+      property="og:description"
+      content="Subscribe to The Kahani Times — a monthly Urdu-English snail mail package of stories, art, and cultural treasures for kids." />
+    <meta
+      property="og:image"
+      content="https://kahanikorner.com/assets/images/homepage/logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Font Awesome Icons -->
@@ -58,6 +67,7 @@
       rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/tokens.css" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
+    <link rel="stylesheet" href="/assets/css/product-cards.css" />
 
     <style>
       /* --- RESET & BASE --- */
@@ -98,8 +108,11 @@
         line-height: 1.2;
         margin: 0 0 1rem;
         color: var(--white-smoke);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
       }
 
       .hidden {
@@ -172,7 +185,9 @@
         border: 2px solid rgba(170, 174, 154, 0.7);
         border-radius: 999px;
         box-shadow: 0 4px 18px rgba(51, 47, 35, 0.08);
-        transition: background 0.25s ease, border-color 0.25s ease,
+        transition:
+          background 0.25s ease,
+          border-color 0.25s ease,
           box-shadow 0.25s ease;
       }
 
@@ -213,111 +228,278 @@
         color: var(--rose-pink);
         font-weight: 700;
         transform: scale(1.05);
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
       }
 
       /* ---- FREE RESOURCES DROPDOWN ---- */
-      .nav-dropdown { position: relative; }
+      .nav-dropdown {
+        position: relative;
+      }
       .nav-dropdown__trigger {
-        background: none; border: none; padding: 0;
-        font-family: inherit; font-size: inherit; font-weight: inherit;
-        text-transform: inherit; letter-spacing: inherit; color: inherit;
-        cursor: pointer; display: inline-flex; align-items: center; gap: 0.3em;
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        text-transform: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
       }
       .nav-dropdown__trigger:hover {
-        color: var(--rose-pink); font-weight: 700;
-        text-shadow: -1px -1px 0 var(--granite), 1px -1px 0 var(--granite),
-          -1px 1px 0 var(--granite), 1px 1px 0 var(--granite);
+        color: var(--rose-pink);
+        font-weight: 700;
+        text-shadow:
+          -1px -1px 0 var(--granite),
+          1px -1px 0 var(--granite),
+          -1px 1px 0 var(--granite),
+          1px 1px 0 var(--granite);
       }
-      .nav-dropdown__trigger:focus-visible { outline: 2px solid var(--deep-teal); outline-offset: 3px; border-radius: 4px; }
-      .nav-dropdown__chevron { font-size: 0.65em; transition: transform 0.22s ease; }
+      .nav-dropdown__trigger:focus-visible {
+        outline: 2px solid var(--deep-teal);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .nav-dropdown__chevron {
+        font-size: 0.65em;
+        transition: transform 0.22s ease;
+      }
       .nav-dropdown.is-open .nav-dropdown__chevron,
       .nav-dropdown:hover .nav-dropdown__chevron,
-      .nav-dropdown:focus-within .nav-dropdown__chevron { transform: rotate(180deg); }
+      .nav-dropdown:focus-within .nav-dropdown__chevron {
+        transform: rotate(180deg);
+      }
       .dropdown-menu {
-        position: absolute; top: calc(100% + 14px); left: 50%;
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 50%;
         transform: translateX(-50%) translateY(-8px);
-        min-width: 230px; background: var(--color-warm-white);
-        border: 2px solid rgba(170, 174, 154, 0.7); border-radius: 18px;
+        min-width: 230px;
+        background: var(--color-warm-white);
+        border: 2px solid rgba(170, 174, 154, 0.7);
+        border-radius: 18px;
         box-shadow: 0 8px 32px rgba(51, 47, 35, 0.14);
-        padding: 0.45rem 0.4rem 0.55rem; opacity: 0; pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
+        padding: 0.45rem 0.4rem 0.55rem;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+        z-index: 200;
       }
       .dropdown-menu::before {
-        content: ""; position: absolute; top: -18px; left: 0; right: 0; height: 18px;
+        content: "";
+        position: absolute;
+        top: -18px;
+        left: 0;
+        right: 0;
+        height: 18px;
       }
       .nav-dropdown:hover .dropdown-menu,
       .nav-dropdown:focus-within .dropdown-menu,
       .nav-dropdown.is-open .dropdown-menu {
-        opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
       }
       .dropdown-menu__header {
         padding: 0.6rem 0.85rem 0.5rem;
-        border-bottom: 1px solid rgba(170, 174, 154, 0.5); margin-bottom: 0.3rem;
+        border-bottom: 1px solid rgba(170, 174, 154, 0.5);
+        margin-bottom: 0.3rem;
       }
       .dropdown-menu__title {
-        display: block; font-family: "Grandstander", cursive; font-size: 0.77rem;
-        font-weight: 800; color: var(--granite); text-transform: none; letter-spacing: 0; margin-bottom: 0.15rem;
+        display: block;
+        font-family: "Grandstander", cursive;
+        font-size: 0.77rem;
+        font-weight: 800;
+        color: var(--granite);
+        text-transform: none;
+        letter-spacing: 0;
+        margin-bottom: 0.15rem;
       }
-      .dropdown-menu__desc { display: block; font-size: 0.71rem; color: var(--muted); text-transform: none; letter-spacing: 0; line-height: 1.4; }
+      .dropdown-menu__desc {
+        display: block;
+        font-size: 0.71rem;
+        color: var(--muted);
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1.4;
+      }
       .dropdown-menu__item {
-        display: flex; align-items: center; gap: 0.55rem;
-        padding: 0.52rem 0.85rem; font-size: 0.84rem; font-weight: 500;
-        text-transform: none; letter-spacing: 0; color: var(--granite); border-radius: 10px;
-        transition: background 0.15s, color 0.15s, transform 0.1s;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.52rem 0.85rem;
+        font-size: 0.84rem;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--granite);
+        border-radius: 10px;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          transform 0.1s;
       }
-      .dropdown-menu__item i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
-      .dropdown-menu__item:hover, .dropdown-menu__item:focus-visible {
-        background: var(--soft-blush); color: var(--granite); transform: translateX(3px); outline: none;
+      .dropdown-menu__item i {
+        width: 1.1em;
+        text-align: center;
+        color: var(--deep-teal);
+        flex-shrink: 0;
+      }
+      .dropdown-menu__item:hover,
+      .dropdown-menu__item:focus-visible {
+        background: var(--soft-blush);
+        color: var(--granite);
+        transform: translateX(3px);
+        outline: none;
       }
       .dropdown-menu__item--submit {
-        margin-top: 0.3rem; padding-top: 0.6rem; color: var(--deep-teal); font-weight: 700;
+        margin-top: 0.3rem;
+        padding-top: 0.6rem;
+        color: var(--deep-teal);
+        font-weight: 700;
         border-top: 1px dashed rgba(170, 174, 154, 0.5);
       }
-      .dropdown-menu__item--submit:hover { background: var(--mint); color: var(--granite); }
+      .dropdown-menu__item--submit:hover {
+        background: var(--mint);
+        color: var(--granite);
+      }
       /* Mobile sliding panel */
       .mobile-free-resources-btn {
-        width: 100%; display: flex; align-items: center; justify-content: space-between;
-        background: none; border: none; border-bottom: 1px dashed var(--white-smoke);
-        padding: 0.75rem 0.25rem; font-family: inherit; font-size: 0.95rem;
-        text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
-        color: var(--granite); cursor: pointer; transition: color 0.2s, transform 0.1s;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: none;
+        border: none;
+        border-bottom: 1px dashed var(--white-smoke);
+        padding: 0.75rem 0.25rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+        color: var(--granite);
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          transform 0.1s;
       }
-      .mobile-free-resources-btn:hover { color: var(--cotton-rose); transform: translateX(3px); }
-      .mobile-menu__body { flex: 1; position: relative; overflow: hidden; min-height: 0; }
+      .mobile-free-resources-btn:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
+      .mobile-menu__body {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        min-height: 0;
+      }
       .mobile-panel {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        overflow-y: auto; -webkit-overflow-scrolling: touch;
-        transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1), opacity 0.25s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition:
+          transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+          opacity 0.25s ease;
       }
-      .mobile-panel--main { transform: translateX(0); opacity: 1; }
-      .mobile-panel--main.slide-away { transform: translateX(-30%); opacity: 0; pointer-events: none; }
-      .mobile-panel--resources { transform: translateX(100%); opacity: 0; pointer-events: none; }
-      .mobile-panel--resources.slide-in { transform: translateX(0); opacity: 1; pointer-events: auto; }
+      .mobile-panel--main {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      .mobile-panel--main.slide-away {
+        transform: translateX(-30%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-panel--resources {
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-panel--resources.slide-in {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
       .mobile-panel__back {
-        display: inline-flex; align-items: center; gap: 0.45rem;
-        background: none; border: none; color: var(--deep-teal); font-family: inherit;
-        font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
-        cursor: pointer; padding: 0.2rem 0 0.2rem 0.1rem; margin-bottom: 0.85rem;
-        transition: color 0.2s, transform 0.1s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        background: none;
+        border: none;
+        color: var(--deep-teal);
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        cursor: pointer;
+        padding: 0.2rem 0 0.2rem 0.1rem;
+        margin-bottom: 0.85rem;
+        transition:
+          color 0.2s,
+          transform 0.1s;
       }
-      .mobile-panel__back:hover { color: var(--granite); transform: translateX(-2px); }
+      .mobile-panel__back:hover {
+        color: var(--granite);
+        transform: translateX(-2px);
+      }
       .mobile-panel__title {
-        font-family: "Grandstander", cursive; font-size: 1rem; font-weight: 800;
-        color: var(--granite); margin: 0 0 0.65rem; padding-bottom: 0.65rem;
+        font-family: "Grandstander", cursive;
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--granite);
+        margin: 0 0 0.65rem;
+        padding-bottom: 0.65rem;
         border-bottom: 2px solid var(--white-smoke);
       }
-      .mobile-resources-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
-      .mobile-resources-links li a {
-        display: flex; align-items: center; gap: 0.55rem;
-        padding: 0.75rem 0.25rem; font-size: 0.95rem; font-weight: 500;
-        color: var(--granite); border-bottom: 1px dashed var(--white-smoke);
-        transition: color 0.2s, transform 0.1s;
+      .mobile-resources-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
       }
-      .mobile-resources-links li a i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
-      .mobile-resources-links li:last-child a { border-bottom: none; }
-      .mobile-resources-links li a:hover { color: var(--cotton-rose); transform: translateX(3px); }
+      .mobile-resources-links li a {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.75rem 0.25rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--granite);
+        border-bottom: 1px dashed var(--white-smoke);
+        transition:
+          color 0.2s,
+          transform 0.1s;
+      }
+      .mobile-resources-links li a i {
+        width: 1.1em;
+        text-align: center;
+        color: var(--deep-teal);
+        flex-shrink: 0;
+      }
+      .mobile-resources-links li:last-child a {
+        border-bottom: none;
+      }
+      .mobile-resources-links li a:hover {
+        color: var(--cotton-rose);
+        transform: translateX(3px);
+      }
 
       .mobile-toggle {
         display: none;
@@ -368,7 +550,9 @@
         align-items: center;
         justify-content: center;
         color: var(--granite);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         cursor: pointer;
         font-size: 1rem;
       }
@@ -502,7 +686,9 @@
         font-size: 1.25rem;
         color: var(--granite);
         cursor: pointer;
-        transition: background 0.2s ease, transform 0.1s ease;
+        transition:
+          background 0.2s ease,
+          transform 0.1s ease;
       }
 
       .mobile-menu__links {
@@ -523,7 +709,9 @@
         font-weight: 600;
         color: var(--granite);
         border-bottom: 1px dashed var(--white-smoke);
-        transition: color 0.2s ease, transform 0.1s ease;
+        transition:
+          color 0.2s ease,
+          transform 0.1s ease;
       }
 
       .mobile-menu__links li:last-child a {
@@ -692,7 +880,9 @@
         border-radius: var(--radius-pill);
         font-size: 1.125rem;
         font-weight: 700;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         box-shadow: 0 4px 0 0 var(--color-teal-dark);
       }
 
@@ -734,7 +924,9 @@
         height: 26px;
         filter: invert(1);
         opacity: 0.85;
-        transition: opacity 0.2s ease, transform 0.2s ease;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
       }
 
       .social-icons a:hover img {
@@ -938,7 +1130,10 @@
         flex-direction: column;
         background: var(--card-bg);
         border: 2px solid var(--ash-grey);
-        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s,
+          border-color 0.3s;
         cursor: pointer;
       }
 
@@ -967,6 +1162,385 @@
       .product-card:hover img {
         transform: scale(1.03);
         filter: brightness(1.05) saturate(1.1);
+      }
+
+      /* ---------- Kahani Times mail-package composition (subscription card image) ----------
+         Every PNG is a 750×750 square with transparent padding. Each piece is placed by the
+         centre of its *visible* artwork. All numbers are unitless percentages of the square stage:
+           --cx / --cy  final centre of the artwork
+           --w          final width of the 750px square (includes transparent padding)
+           --r          final rotation
+           --sx / --sy  centre of its brief "spotlight" moment during the reveal
+           --sw         visible artwork width during the spotlight
+         --fx/--fy (where the artwork sits inside its square) and --vw (visible share of the
+         square's width) were measured from the files' alpha channel — leave those alone. */
+      .product-image-container.kt-mailbox {
+        /* Box padding. Edge pieces use --dx/--dy of ±var(--kt-pad) to sit flush with the box edge. */
+        --kt-pad: 1.25rem;
+        padding: var(--kt-pad);
+        background: #f8eeee;
+      }
+
+      .kt-stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s;
+      }
+
+      .product-card:hover .kt-stage {
+        transform: scale(1.03);
+      }
+
+      .kt-item {
+        position: absolute;
+        left: calc((var(--cx) - var(--fx) * var(--w)) * 1% + var(--dx));
+        top: calc((var(--cy) - var(--fy) * var(--w)) * 1% + var(--dy));
+        width: calc(var(--w) * 1%);
+        aspect-ratio: 1;
+        /* Scale and rotate around the artwork's own centre, not the padded square's. */
+        transform-origin: calc(var(--fx) * 100%) calc(var(--fy) * 100%);
+        transform: translate(0, 0) rotate(var(--r)) scale(1);
+        /* Layered shadow for depth: a tight contact shadow, a mid shadow and a soft ambient one. */
+        --shadow: drop-shadow(0 1px 1.5px rgba(31, 41, 40, 0.22))
+          drop-shadow(0 5px 8px rgba(31, 41, 40, 0.16))
+          drop-shadow(0 14px 22px rgba(31, 41, 40, 0.12));
+        /* Deeper shadow while a piece is lifted for its spotlight moment. */
+        --shadow-lift: drop-shadow(0 2px 3px rgba(31, 41, 40, 0.18))
+          drop-shadow(0 12px 16px rgba(31, 41, 40, 0.16))
+          drop-shadow(0 28px 40px rgba(31, 41, 40, 0.14));
+        filter: var(--shadow);
+        pointer-events: none;
+        user-select: none;
+        /* Spotlight offset (in % of the item's own box) and scale, derived from the numbers above. */
+        --tx: calc((var(--sx) - var(--cx)) / var(--w) * 100% - var(--dx));
+        --ty: calc((var(--sy) - var(--cy)) / var(--w) * 100% - var(--dy));
+        --s: calc(var(--sw) / (var(--vw) * var(--w)));
+        --ex: 0px;
+        --dx: 0px; /* extra horizontal nudge, e.g. var(--kt-pad) to reach past the box padding */
+        --dy: 0px; /* extra vertical nudge, same idea */
+        --ey: 0px;
+        --s0: 0.96;
+        --sr: 0deg; /* rotation during the spotlight moment */
+      }
+
+      .product-image-container .kt-item img,
+      .product-card:hover .kt-item img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 0;
+        mix-blend-mode: normal;
+        transform: none;
+        filter: none;
+      }
+
+      /* Final flat lay. z-index follows the hierarchy; the bookmark lies on top of the newspaper.
+         Edge pieces are placed so their artwork touches the edge of the stage. */
+      .kt-closed {
+        --cx: 50;
+        --cy: 49.7;
+        --w: 88.9;
+        --fx: 0.499;
+        --fy: 0.706;
+        --r: 0deg;
+        z-index: 2;
+        opacity: 0;
+      }
+      .kt-open {
+        --cx: 50;
+        --cy: 47;
+        --w: 86.8;
+        --fx: 0.5;
+        --fy: 0.668;
+        --r: -0.5deg;
+        z-index: 1;
+        --shadow: drop-shadow(0 1px 1px rgba(31, 41, 40, 0.14))
+          drop-shadow(0 6px 10px rgba(31, 41, 40, 0.12))
+          drop-shadow(0 18px 28px rgba(31, 41, 40, 0.1));
+      }
+      .kt-bookmark {
+        --cx: 58.5;
+        --cy: 44;
+        --w: 42;
+        --fx: 0.511;
+        --fy: 0.467;
+        --r: 82deg;
+        z-index: 4;
+        --sr: 86deg;
+        --vw: 0.923;
+        --sx: 50;
+        --sy: 47;
+        --sw: 54;
+        --shadow: drop-shadow(0 1px 1px rgba(31, 41, 40, 0.24))
+          drop-shadow(0 4px 6px rgba(31, 41, 40, 0.16))
+          drop-shadow(0 10px 16px rgba(31, 41, 40, 0.11));
+      }
+      .kt-paper {
+        --cx: 23.9;
+        --cy: 32.8;
+        --w: 76;
+        --fx: 0.511;
+        --fy: 0.497;
+        --r: -1.5deg;
+        z-index: 3;
+        --dx: calc(var(--kt-pad) * -1);
+        --dy: calc(var(--kt-pad) * -1);
+        --vw: 0.629;
+        --sx: 50;
+        --sy: 48;
+        --sw: 54;
+        --ey: 30px;
+      }
+      .kt-calendar {
+        --cx: 83.5;
+        --cy: 44;
+        --w: 65;
+        --fx: 0.501;
+        --fy: 0.477;
+        --r: 0deg;
+        z-index: 4;
+        --dx: var(--kt-pad);
+        --vw: 0.509;
+        --sx: 53;
+        --sy: 48;
+        --sw: 48;
+      }
+      .kt-recipe {
+        --cx: 76.1;
+        --cy: 81.8;
+        --w: 50;
+        --fx: 0.519;
+        --fy: 0.561;
+        --r: -3deg;
+        z-index: 5;
+        --dx: var(--kt-pad);
+        --dy: var(--kt-pad);
+        --vw: 0.961;
+        --sx: 53;
+        --sy: 52;
+        --sw: 50;
+      }
+      .kt-activity {
+        --cx: 24.4;
+        --cy: 81.7;
+        --w: 49.5;
+        --fx: 0.505;
+        --fy: 0.525;
+        --r: -3deg;
+        z-index: 6;
+        --dx: calc(var(--kt-pad) * -1);
+        --dy: var(--kt-pad);
+        --vw: 0.967;
+        --sx: 50;
+        --sy: 50;
+        --sw: 58;
+        --ex: -20px;
+      }
+      .kt-snack {
+        --cx: 58.5;
+        --cy: 14.3;
+        --w: 48;
+        --fx: 0.505;
+        --fy: 0.561;
+        --r: 8deg;
+        z-index: 7;
+        --dy: calc(var(--kt-pad) * -1);
+        --vw: 0.4;
+        --sx: 50;
+        --sy: 54;
+        --sw: 27;
+        --s0: 0.94;
+        --shadow: drop-shadow(0 1px 1px rgba(31, 41, 40, 0.24))
+          drop-shadow(0 4px 6px rgba(31, 41, 40, 0.16))
+          drop-shadow(0 10px 16px rgba(31, 41, 40, 0.11));
+      }
+      .kt-stickers {
+        --cx: 87.5;
+        --cy: 11.4;
+        --w: 56.6;
+        --fx: 0.483;
+        --fy: 0.396;
+        --r: 4deg;
+        z-index: 7;
+        --dx: var(--kt-pad);
+        --dy: calc(var(--kt-pad) * -1);
+        --vw: 0.425;
+        --sx: 54;
+        --sy: 44;
+        --sw: 35;
+        --s0: 0.94;
+        --shadow: drop-shadow(0 1px 1px rgba(31, 41, 40, 0.24))
+          drop-shadow(0 4px 6px rgba(31, 41, 40, 0.16))
+          drop-shadow(0 10px 16px rgba(31, 41, 40, 0.11));
+      }
+
+      /* Mobile: supporting pieces a little smaller and pulled in toward the newspaper. */
+      @media (max-width: 600px) {
+        .kt-bookmark {
+          --cx: 58.5;
+          --cy: 44;
+          --w: 40;
+        }
+        .kt-calendar {
+          --cx: 84.2;
+          --w: 62;
+        }
+        .kt-recipe {
+          --cx: 77;
+          --cy: 82.5;
+          --w: 48;
+        }
+        .kt-activity {
+          --cx: 23.2;
+          --cy: 82.6;
+          --w: 47;
+        }
+        .kt-snack {
+          --cx: 58.5;
+          --cy: 13.7;
+          --w: 46;
+        }
+        .kt-stickers {
+          --cx: 88.2;
+          --cy: 10.8;
+          --w: 53.5;
+        }
+      }
+
+      /* Before the reveal the box is calm and empty. JS adds .kt-armed only when it will animate. */
+      .kt-stage.kt-armed .kt-item {
+        opacity: 0;
+      }
+
+      .kt-stage.kt-play .kt-item {
+        animation-fill-mode: both;
+      }
+
+      /* Envelope: closed one arrives, then crossfades into the open one (the permanent back layer). */
+      .kt-stage.kt-play .kt-closed {
+        animation: kt-closed 700ms ease-out 0ms both;
+      }
+      .kt-stage.kt-play .kt-open {
+        animation: kt-open 380ms cubic-bezier(0.22, 0.61, 0.36, 1) 350ms both;
+      }
+
+      /* Each piece: brief spotlight near the centre, then shrinks and glides into the spread.
+         Every piece starts while the previous one is settling, so the flow never stalls. */
+      .kt-stage.kt-play .kt-paper,
+      .kt-stage.kt-play .kt-activity,
+      .kt-stage.kt-play .kt-calendar,
+      .kt-stage.kt-play .kt-recipe,
+      .kt-stage.kt-play .kt-bookmark,
+      .kt-stage.kt-play .kt-snack,
+      .kt-stage.kt-play .kt-stickers {
+        animation-name: kt-spotlight;
+      }
+
+      .kt-stage.kt-play .kt-paper {
+        animation-duration: 820ms;
+        animation-delay: 700ms;
+      }
+      .kt-stage.kt-play .kt-activity {
+        animation-duration: 720ms;
+        animation-delay: 1200ms;
+      }
+      .kt-stage.kt-play .kt-calendar {
+        animation-duration: 680ms;
+        animation-delay: 1600ms;
+      }
+      .kt-stage.kt-play .kt-recipe {
+        animation-duration: 680ms;
+        animation-delay: 2000ms;
+      }
+      .kt-stage.kt-play .kt-snack {
+        animation-duration: 560ms;
+        animation-delay: 2400ms;
+      }
+      .kt-stage.kt-play .kt-stickers {
+        animation-duration: 620ms;
+        animation-delay: 2700ms;
+      }
+      /* The bookmark sits in the middle of the spread, so it is the final piece to arrive. */
+      .kt-stage.kt-play .kt-bookmark {
+        animation-duration: 620ms;
+        animation-delay: 3050ms;
+      }
+
+      @keyframes kt-closed {
+        0% {
+          opacity: 0;
+          transform: translate(0, 10px) rotate(0deg) scale(0.97);
+          animation-timing-function: ease-out;
+        }
+        55% {
+          opacity: 1;
+          transform: translate(0, 0) rotate(0deg) scale(1);
+          animation-timing-function: ease-in-out;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+      }
+
+      @keyframes kt-open {
+        from {
+          opacity: 0;
+          transform: translate(0, 0) rotate(var(--r)) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translate(0, 0) rotate(var(--r)) scale(1);
+        }
+      }
+
+      /* Spotlight pieces sit above the spread (z-index 20) and sink to their own layer as they settle. */
+      @keyframes kt-spotlight {
+        0% {
+          opacity: 0;
+          z-index: 20;
+          filter: var(--shadow-lift);
+          transform: translate(
+              calc(var(--tx) + var(--ex)),
+              calc(var(--ty) + var(--ey))
+            )
+            rotate(var(--sr)) scale(calc(var(--s) * var(--s0)));
+          animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        30% {
+          opacity: 1;
+          z-index: 20;
+          filter: var(--shadow-lift);
+          transform: translate(var(--tx), var(--ty)) rotate(var(--sr))
+            scale(var(--s));
+          animation-timing-function: linear;
+        }
+        46% {
+          opacity: 1;
+          z-index: 20;
+          filter: var(--shadow-lift);
+          transform: translate(var(--tx), var(--ty)) rotate(var(--sr))
+            scale(var(--s));
+          animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
+        }
+        100% {
+          opacity: 1;
+          filter: var(--shadow);
+          transform: translate(0, 0) rotate(var(--r)) scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .kt-stage.kt-armed .kt-item,
+        .kt-stage.kt-play .kt-item {
+          opacity: 1;
+          animation: none;
+        }
+        .kt-stage .kt-item.kt-closed {
+          opacity: 0;
+        }
       }
 
       .product-info {
@@ -1005,9 +1579,10 @@
         width: 100%;
         margin-top: 0.75rem;
         padding: 0.9rem;
-        background: var(--granite);
+        /* Same dark-teal treatment as the shared .kk-cta and the Shop's Buy Now. */
+        background: var(--deep-teal);
         color: var(--warm-white);
-        border: 2px solid var(--granite);
+        border: 2px solid var(--deep-teal);
         border-radius: var(--radius-pill);
         font-weight: 700;
         font-size: 0.95rem;
@@ -1016,12 +1591,12 @@
         justify-content: center;
         gap: 0.5rem;
         transition: all 0.2s;
-        box-shadow: 0 4px 0 var(--deep-teal);
+        box-shadow: 0 4px 0 var(--color-teal-dark);
       }
 
       .add-to-cart-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 0 var(--deep-teal);
+        box-shadow: 0 6px 0 var(--color-teal-dark);
       }
 
       .add-to-cart-btn:active {
@@ -1159,6 +1734,7 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        min-width: 0; /* lets the sideways-scrolling slides and thumbnails stay inside the column */
       }
 
       .detail-image-wrapper {
@@ -1213,6 +1789,459 @@
         mix-blend-mode: multiply;
       }
 
+      /* ---------- Current-month gallery (subscription detail view) ----------
+         Slide 1 is the full envelope reveal; the rest are the individual pieces.
+         Browsing is visitor-controlled only: thumbnails, arrows, swipe or arrow keys. */
+      .kt-sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .kt-gallery {
+        position: relative;
+      }
+
+      .kt-gallery-viewport {
+        width: 100%;
+        aspect-ratio: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        border-radius: 1.5rem;
+        background: #f8eeee;
+        outline: none;
+      }
+
+      .kt-gallery-viewport::-webkit-scrollbar {
+        display: none;
+      }
+
+      .kt-gallery-viewport:focus-visible {
+        box-shadow: 0 0 0 3px var(--deep-teal);
+      }
+
+      .kt-gallery-track {
+        display: flex;
+        height: 100%;
+      }
+
+      .kt-gallery-slide {
+        position: relative;
+        flex: 0 0 100%;
+        height: 100%;
+        overflow: hidden;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+
+      .kt-gallery-slide > .product-image-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Individual pieces: each PNG is a 750×750 square with transparent padding, so it is
+         scaled (--k) and re-centred on its visible artwork (--fx/--fy) to fill the preview.
+         The shadow sits on the untransformed wrapper so it stays the same for every piece. */
+      .kt-gallery-item {
+        position: absolute;
+        inset: 0;
+        filter: drop-shadow(0 1px 1.5px rgba(31, 41, 40, 0.2))
+          drop-shadow(0 6px 12px rgba(31, 41, 40, 0.12))
+          drop-shadow(0 16px 28px rgba(31, 41, 40, 0.08));
+      }
+
+      .kt-gallery-item img,
+      .kt-thumb-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: scale(var(--k))
+          translate(
+            calc((0.5 - var(--fx)) * 100%),
+            calc((0.5 - var(--fy)) * 100%)
+          );
+        user-select: none;
+      }
+
+      .kt-gallery-arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 30;
+        display: grid;
+        place-items: center;
+        width: 2.6rem;
+        height: 2.6rem;
+        padding: 0;
+        border: 2px solid var(--ash-grey);
+        border-radius: 50%;
+        background: rgba(255, 253, 248, 0.94);
+        color: var(--deep-teal);
+        font-size: 0.95rem;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(31, 41, 40, 0.12);
+        transform: translateY(-50%);
+        transition:
+          opacity 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+
+      .kt-gallery-prev {
+        left: 0.75rem;
+      }
+
+      .kt-gallery-next {
+        right: 0.75rem;
+      }
+
+      .kt-gallery-arrow:hover {
+        border-color: var(--deep-teal);
+        background: var(--warm-white);
+      }
+
+      .kt-gallery-arrow:focus-visible,
+      .kt-gallery-replay:focus-visible {
+        outline: 3px solid var(--deep-teal);
+        outline-offset: 2px;
+      }
+
+      .kt-gallery-arrow:disabled {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .kt-gallery-replay,
+      .kt-gallery-count {
+        position: absolute;
+        bottom: 0.75rem;
+        z-index: 30;
+        padding: 0.35rem 0.8rem;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 253, 248, 0.94);
+        border: 1.5px solid var(--ash-grey);
+        color: var(--granite);
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .kt-gallery-replay {
+        left: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+        font-family: inherit;
+        color: var(--deep-teal);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s,
+          visibility 0.3s,
+          border-color 0.2s;
+      }
+
+      .kt-gallery-replay.is-visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .kt-gallery-replay:hover {
+        border-color: var(--deep-teal);
+      }
+
+      .kt-gallery-count {
+        right: 0.75rem;
+        pointer-events: none;
+      }
+
+      /* Thumbnail strip: scrolls sideways rather than shrinking thumbnails. */
+      .detail-thumbnails.kt-thumbs {
+        display: flex;
+        gap: 0.75rem;
+        overflow-x: auto;
+        padding: 4px 2px 10px;
+        scroll-snap-type: x proximity;
+        scrollbar-width: thin;
+      }
+
+      .kt-thumbs .thumbnail {
+        position: relative;
+        flex: 0 0 clamp(64px, 17%, 88px);
+        padding: 0.3rem;
+        background: #f8eeee;
+        font: inherit;
+        scroll-snap-align: start;
+        appearance: none;
+      }
+
+      .kt-thumbs .thumbnail:focus-visible {
+        outline: 3px solid var(--deep-teal);
+        outline-offset: 2px;
+      }
+
+      .kt-thumbs .thumbnail .kt-thumb-img {
+        mix-blend-mode: normal;
+        border-radius: 0;
+      }
+
+      /* First thumbnail: a static mini copy of the finished spread, marked as the animation. */
+      .product-image-container.kt-mailbox.kt-thumb-stage {
+        --kt-pad: 3px;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.6rem;
+      }
+
+      .kt-thumb-stage .kt-item {
+        filter: drop-shadow(0 1px 1px rgba(31, 41, 40, 0.22));
+      }
+
+      .kt-thumb-badge {
+        position: absolute;
+        z-index: 10;
+        right: 4px;
+        bottom: 4px;
+        display: grid;
+        place-items: center;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        background: var(--deep-teal);
+        color: var(--warm-white);
+        font-size: 0.55rem;
+        box-shadow: 0 2px 4px rgba(31, 41, 40, 0.2);
+      }
+
+      @media (max-width: 600px) {
+        .kt-gallery-viewport {
+          border-radius: 1.1rem;
+        }
+        .kt-gallery-arrow {
+          width: 2.3rem;
+          height: 2.3rem;
+        }
+        .kt-gallery-prev {
+          left: 0.5rem;
+        }
+        .kt-gallery-next {
+          right: 0.5rem;
+        }
+      }
+
+      /* ---------- Featured cards: larger versions of the shared product card ---------- */
+      .product-card--primary {
+        border-color: var(--deep-teal);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .product-card--featured .kk-card-title {
+        font-size: 1.2rem;
+      }
+
+      /* Keep the pricing rows level across the two featured cards. */
+      @media (min-width: 600px) {
+        .product-card--featured .kk-card-lede {
+          min-height: calc(2 * 1.5em);
+        }
+      }
+
+      .product-card--featured .subscribe-pricing,
+      .product-card--featured .kk-price {
+        margin-top: 0.85rem;
+      }
+
+      /* Two checkout buttons sit side by side when there is room, otherwise stack
+         as full-width rows rather than squeezing their labels onto two lines. */
+      .product-card--featured .kk-card-actions {
+        flex-wrap: wrap;
+      }
+
+      .product-card--featured .kk-cta {
+        flex: 1 1 9.5rem;
+        white-space: nowrap;
+      }
+
+      /* Archive cover: the real past editions cascaded like a small stack of mail, oldest at
+         the back. Each step down leaves the edition's printed title band visible above the next. */
+      .product-image-container.kt-archive-cover {
+        background: var(--white-smoke);
+      }
+
+      .kt-collection {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .kt-collection img.kt-collection-ed {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--w, 60%);
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 2px solid var(--warm-white);
+        mix-blend-mode: normal;
+        filter: none;
+        box-shadow: 0 1px 2px rgba(31, 41, 40, 0.14),
+          0 6px 14px rgba(31, 41, 40, 0.12);
+        transform: rotate(var(--rot));
+        transition: transform 0.4s ease;
+      }
+
+      .product-card:hover .kt-collection img.kt-collection-ed {
+        transform: rotate(var(--rot)) translateY(-2px);
+      }
+
+      /* Fade-in: each edition settles in turn, oldest first. JS adds .kt-armed, then
+         .kt-play once the stack is on screen. Fill mode "backwards" hands the final
+         transform back to the normal rules, so the hover lift still works afterwards. */
+      .kt-collection.kt-armed img.kt-collection-ed {
+        opacity: 0;
+      }
+
+      .kt-collection.kt-play img.kt-collection-ed {
+        opacity: 1;
+        animation: kt-ed-in 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+        animation-delay: calc(var(--i) * 260ms);
+      }
+
+      @keyframes kt-ed-in {
+        from {
+          opacity: 0;
+          transform: translateY(12px) rotate(var(--rot));
+        }
+        to {
+          opacity: 1;
+          transform: rotate(var(--rot));
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .kt-collection.kt-armed img.kt-collection-ed {
+          opacity: 1;
+        }
+        .kt-collection.kt-play img.kt-collection-ed {
+          animation: none;
+        }
+      }
+
+      .kt-ed-1 { --x: 4%;  --y: 3%;  --rot: -2deg; }
+      .kt-ed-2 { --x: 12%; --y: 14%; --rot: 1deg; }
+      .kt-ed-3 { --x: 20%; --y: 25%; --rot: -1deg; }
+      .kt-ed-4 { --x: 28%; --y: 36%; --rot: 1.5deg; }
+
+      /* Tablet and phone: three larger editions read better than four small ones. */
+      @media (max-width: 768px) {
+        .kt-collection img.kt-ed-1 {
+          display: none;
+        }
+        .kt-collection img.kt-collection-ed {
+          --w: 64%;
+        }
+        .kt-ed-2 { --x: 6%;  --y: 3%; }
+        .kt-ed-3 { --x: 18%; --y: 17%; }
+        .kt-ed-4 { --x: 30%; --y: 31%; }
+      }
+
+      /* Archive view: the collection until a month with its own image is chosen. */
+      .detail-image-wrapper .kt-collection {
+        max-width: 100%;
+      }
+
+      #archive-detail-image[hidden],
+      .kt-collection[hidden] {
+        display: none;
+      }
+
+      /* ---------- Past editions ("Every month is different") ---------- */
+      .kt-past {
+        margin-top: 2.5rem;
+        padding: 2rem 1.75rem;
+        background: var(--warm-white);
+        border: 2px solid var(--ash-grey);
+        border-radius: 2rem;
+        text-align: center;
+      }
+
+      .kt-past-title {
+        font-size: 1.35rem;
+        margin: 0 0 0.4rem;
+      }
+
+      .kt-past-sub {
+        max-width: 36rem;
+        margin: 0 auto 1.75rem;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      .kt-past-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .kt-past-card {
+        margin: 0;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 2px solid var(--ash-grey);
+        border-radius: var(--radius-md);
+        background: var(--white-smoke);
+        box-shadow: 0 6px 16px rgba(31, 41, 40, 0.07);
+      }
+
+      .kt-past-card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      @media (max-width: 900px) {
+        .kt-past-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      /* Phones: a swipeable row that shows part of the next card. */
+      @media (max-width: 600px) {
+        .kt-past {
+          padding: 1.75rem 1rem;
+        }
+        .kt-past-grid {
+          display: flex;
+          gap: 0.9rem;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          padding-bottom: 0.5rem;
+          scrollbar-width: thin;
+        }
+        .kt-past-grid > li {
+          flex: 0 0 78%;
+          scroll-snap-align: center;
+        }
+      }
+
       .detail-info {
         display: flex;
         flex-direction: column;
@@ -1259,7 +2288,8 @@
         font-size: 1.2rem;
         margin-bottom: 1.1rem;
         letter-spacing: 0.04em;
-        text-shadow: 0 1px 0 rgba(51, 47, 35, 0.18),
+        text-shadow:
+          0 1px 0 rgba(51, 47, 35, 0.18),
           0 2px 4px rgba(51, 47, 35, 0.08);
       }
 
@@ -1513,32 +2543,67 @@
         margin-bottom: 0.5rem;
       }
 
-      /* ===== ARCHIVE SELECTOR SECTION ===== */
-      .arch-selector-section {
-        margin-top: 1.75rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.25rem;
+      /* ===== ARCHIVE: one section — artwork left, full purchase flow right ===== */
+      .arch-builder {
         align-items: start;
       }
 
-      @media (max-width: 767px) {
-        .arch-selector-section { grid-template-columns: 1fr; }
+      .detail-info.arch-flow {
+        justify-content: flex-start;
       }
 
-      .arch-left-col,
-      .arch-right-col {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+      /* Steps are sections of the same card, separated by thin dividers — not cards of their own. */
+      .arch-step,
+      .arch-flow .arch-summary-box {
+        margin-top: 1.4rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--ash-grey);
       }
 
-      .arch-step-box {
-        background: var(--color-warm-white);
-        border: 2px solid var(--ash-grey);
-        border-radius: 1.5rem;
-        padding: 1.25rem;
-        box-shadow: 0 4px 14px rgba(51, 47, 35, 0.06);
+      .arch-flow .archive-note-box {
+        margin-bottom: 0;
+      }
+
+      .arch-flow .arch-summary-box {
+        background: none;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-radius: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        box-shadow: none;
+      }
+
+      /* Desktop: artwork ~47%, purchase flow ~53%; the artwork stays in view while choosing. */
+      @media (min-width: 900px) {
+        .detail-container.arch-builder {
+          grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+        }
+
+        .arch-media {
+          position: sticky;
+          top: 7.5rem;
+        }
+
+        /* Wider column: two compact rows of six months instead of three rows of four. */
+        .arch-flow .arch-month-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+      }
+
+      /* Tablet: stack the artwork above the purchase flow. */
+      @media (min-width: 768px) and (max-width: 899px) {
+        .detail-container.arch-builder {
+          grid-template-columns: 1fr;
+        }
+
+        .arch-media {
+          max-width: 460px;
+          width: 100%;
+          margin: 0 auto;
+        }
       }
 
       .arch-step-title {
@@ -1672,7 +2737,11 @@
 
       /* Summary box */
       .arch-summary-box {
-        background: linear-gradient(180deg, #fffdf8 0%, var(--white-smoke) 100%);
+        background: linear-gradient(
+          180deg,
+          #fffdf8 0%,
+          var(--white-smoke) 100%
+        );
         border: 2px solid var(--ash-grey);
         border-radius: 1.5rem;
         padding: 1.25rem;
@@ -1687,7 +2756,7 @@
         text-transform: uppercase;
         letter-spacing: 0.04em;
         text-shadow: none;
-        margin: 0 0 0.85rem;
+        margin: 0 0 0.6rem;
       }
 
       .arch-summary-empty {
@@ -1708,7 +2777,10 @@
         margin-bottom: 0.3rem;
       }
 
-      .arch-summary-label { color: var(--muted); font-weight: 500; }
+      .arch-summary-label {
+        color: var(--muted);
+        font-weight: 500;
+      }
 
       .arch-summary-months {
         font-size: 0.81rem;
@@ -1737,15 +2809,36 @@
         margin-top: 0.1rem;
       }
 
-      /* Packaging note */
+      /* Buy Now / Add to Cart: full width, directly under the selection */
+      .arch-summary-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+
+      .arch-summary-actions .add-to-cart-btn,
+      .arch-summary-actions .secondary-btn {
+        width: 100%;
+        margin-top: 0;
+      }
+
+      /* Until an edition is chosen the buttons are disabled; show that plainly. */
+      .arch-summary-actions button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* Shipping note: a section inside the summary card, set off by a thin divider */
       .arch-packaging-note {
         display: flex;
         align-items: flex-start;
         gap: 0.75rem;
-        background: var(--white-smoke);
-        border: 1.5px solid var(--ash-grey);
-        border-radius: 1.1rem;
-        padding: 1rem 1.1rem;
+        margin-top: 1.15rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--ash-grey);
         font-size: 0.81rem;
         color: var(--muted);
         line-height: 1.55;
@@ -1762,12 +2855,16 @@
         display: block;
         color: var(--granite);
         font-size: 0.84rem;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.2rem;
         font-weight: 700;
       }
 
-      .arch-packaging-note p { margin: 0 0 0.3rem; }
-      .arch-packaging-note p:last-child { margin-bottom: 0; }
+      .arch-packaging-note p {
+        margin: 0 0 0.2rem;
+      }
+      .arch-packaging-note p:last-child {
+        margin-bottom: 0;
+      }
 
       /* CTA message */
       .arch-cta-msg {
@@ -1807,8 +2904,12 @@
       }
 
       @media (max-width: 480px) {
-        .arch-month-grid { grid-template-columns: repeat(3, 1fr); }
-        .arch-sub-callout-inner { padding: 1rem 1.1rem; }
+        .arch-month-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .arch-sub-callout-inner {
+          padding: 1rem 1.1rem;
+        }
       }
 
       /* ===== WHAT YOU NEED TO KNOW — ACCORDION ===== */
@@ -1873,7 +2974,9 @@
         justify-content: center;
         flex-shrink: 0;
         font-size: 0.72rem;
-        transition: background 0.15s ease, color 0.15s ease;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
       }
 
       .kkt-faq-trigger[aria-expanded="true"] .kkt-faq-icon {
@@ -1911,7 +3014,9 @@
         grid-template-rows: 1fr;
       }
 
-      .kkt-faq-panel-inner { overflow: hidden; }
+      .kkt-faq-panel-inner {
+        overflow: hidden;
+      }
 
       .kkt-faq-body {
         padding: 0.1rem 0.9rem 0.9rem 3.3rem;
@@ -1925,7 +3030,11 @@
       .kkt-cycle-section {
         margin-top: 2.5rem;
         padding: 2rem 1.75rem;
-        background: linear-gradient(180deg, #fffdf8 0%, var(--white-smoke) 100%);
+        background: linear-gradient(
+          180deg,
+          #fffdf8 0%,
+          var(--white-smoke) 100%
+        );
         border: 2px solid var(--ash-grey);
         border-radius: 2rem;
         box-shadow: var(--shadow-soft);
@@ -1959,7 +3068,9 @@
         margin-top: 0.1rem;
       }
 
-      .kkt-status-banner-body { flex: 1; }
+      .kkt-status-banner-body {
+        flex: 1;
+      }
 
       .kkt-status-banner-title {
         font-family: "Grandstander", cursive;
@@ -2082,7 +3193,7 @@
         font-size: 0.62rem;
         font-weight: 700;
         text-transform: uppercase;
-        color: var(--muted);
+        color: var(--muted);    
         text-align: center;
         padding: 0.25rem 0;
         letter-spacing: 0.04em;
@@ -2189,14 +3300,34 @@
           margin-top: 2rem;
         }
 
-        .kkt-status-banner { border-radius: 1rem; padding: 0.85rem 1rem; gap: 0.65rem; }
-        .kkt-cycle-title { font-size: 1.1rem; }
-        .kkt-count { font-size: 1.5rem; }
-        .kkt-countdown-sep { font-size: 1.3rem; padding-bottom: 1rem; }
-        .kkt-countdown-unit { min-width: 3rem; padding: 0.55rem 0.65rem; }
-        .kkt-calendars { flex-direction: column; }
-        .kkt-cal-card { max-width: 100%; }
-        .kkt-shipping-copy { text-align: center; }
+        .kkt-status-banner {
+          border-radius: 1rem;
+          padding: 0.85rem 1rem;
+          gap: 0.65rem;
+        }
+        .kkt-cycle-title {
+          font-size: 1.1rem;
+        }
+        .kkt-count {
+          font-size: 1.5rem;
+        }
+        .kkt-countdown-sep {
+          font-size: 1.3rem;
+          padding-bottom: 1rem;
+        }
+        .kkt-countdown-unit {
+          min-width: 3rem;
+          padding: 0.55rem 0.65rem;
+        }
+        .kkt-calendars {
+          flex-direction: column;
+        }
+        .kkt-cal-card {
+          max-width: 100%;
+        }
+        .kkt-shipping-copy {
+          text-align: center;
+        }
       }
     </style>
   </head>
@@ -2211,7 +3342,7 @@
         <!-- Shop hero text (UNCHANGED) -->
         <section id="shop-hero" aria-labelledby="shop-heading">
           <h1 id="shop-heading" class="shop-hero-heading">
-            Kahani Korner Subscriptions
+            The Kahani Times Subscription
           </h1>
           <p class="shop-hero-sub">
             Get our curated nostalgia packed monthly subscription snail mail,
@@ -2254,10 +3385,55 @@
 
           <div class="detail-container">
             <div class="detail-gallery">
-              <div class="detail-image-wrapper">
-                <img id="detail-image" src="" alt="Product Image" />
+              <!-- Current-month gallery: slides and thumbnails are built by buildCurrentGallery() -->
+              <div
+                class="kt-gallery"
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="What's inside this month's Kahani Times">
+                <div
+                  id="kt-gallery-viewport"
+                  class="kt-gallery-viewport"
+                  tabindex="0"
+                  aria-label="Use the left and right arrow keys to browse">
+                  <div id="kt-gallery-track" class="kt-gallery-track"></div>
+                </div>
+                <button
+                  type="button"
+                  class="kt-gallery-arrow kt-gallery-prev"
+                  id="kt-gallery-prev"
+                  aria-label="Previous image">
+                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button
+                  type="button"
+                  class="kt-gallery-arrow kt-gallery-next"
+                  id="kt-gallery-next"
+                  aria-label="Next image">
+                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <button
+                  type="button"
+                  class="kt-gallery-replay"
+                  id="kt-gallery-replay"
+                  aria-label="Replay the envelope animation">
+                  <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                  Replay
+                </button>
+                <span
+                  class="kt-gallery-count"
+                  id="kt-gallery-count"
+                  aria-hidden="true"></span>
+                <p
+                  class="kt-sr-only"
+                  id="kt-gallery-status"
+                  aria-live="polite"></p>
               </div>
-              <div id="detail-thumbnails" class="detail-thumbnails"></div>
+              <div
+                id="detail-thumbnails"
+                class="detail-thumbnails kt-thumbs"
+                role="group"
+                aria-label="Choose an image"></div>
             </div>
 
             <div class="detail-info">
@@ -2273,19 +3449,22 @@
                 <button
                   id="detail-subscribe-usa-btn"
                   class="add-to-cart-btn large-btn">
-                  USA · $10.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  Subscribe · USA <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button
                   id="detail-subscribe-intl-btn"
                   class="add-to-cart-btn large-btn">
-                  Intl · $12.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  Subscribe · Intl <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
 
               <div class="detail-features-box">
                 <h3>What You Need to Know</h3>
-                <p class="kkt-faq-helper-text">Quick answers about shipping, payments, and your Kahani Times subscription.</p>
+                <p class="kkt-faq-helper-text">
+                  Quick answers about shipping, payments, and your Kahani Times
+                  subscription.
+                </p>
                 <div id="detail-features" class="detail-feature-sections"></div>
               </div>
 
@@ -2294,15 +3473,21 @@
                 <button
                   id="detail-subscribe-usa-btn-2"
                   class="add-to-cart-btn large-btn"
-                  onclick="window.location.href='https://buy.stripe.com/dRmcN7e6S59H7R92NN0Fi0m'">
-                  USA · $10.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  onclick="
+                    window.location.href =
+                      'https://buy.stripe.com/dRmcN7e6S59H7R92NN0Fi0m'
+                  ">
+                  Subscribe · USA <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
                 <button
                   id="detail-subscribe-intl-btn-2"
                   class="add-to-cart-btn large-btn"
-                  onclick="window.location.href='https://buy.stripe.com/28EbJ39QC7hP1sLdsr0Fi0n'">
-                  Intl · $12.99/mo <i class="fa-solid fa-arrow-right"></i>
+                  onclick="
+                    window.location.href =
+                      'https://buy.stripe.com/28EbJ39QC7hP1sLdsr0Fi0n'
+                  ">
+                  Subscribe · Intl <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
 
@@ -2314,24 +3499,34 @@
 
           <!-- ===== KAHANI TIMES SHIPPING CYCLE ===== -->
           <section class="kkt-cycle-section" aria-labelledby="kkt-cycle-title">
-
             <!-- Status banner: currently packing (hidden by script when no shipment is actively being packed) -->
-            <div class="kkt-status-banner" id="kkt-status-banner" role="status" aria-label="Current mail preparation status">
-              <i class="fa-solid fa-box-open kkt-status-banner-icon" aria-hidden="true"></i>
+            <div
+              class="kkt-status-banner"
+              id="kkt-status-banner"
+              role="status"
+              aria-label="Current mail preparation status">
+              <i
+                class="fa-solid fa-box-open kkt-status-banner-icon"
+                aria-hidden="true"></i>
               <div class="kkt-status-banner-body">
-                <p class="kkt-status-banner-title" id="kkt-status-title">Currently Packing</p>
+                <p class="kkt-status-banner-title" id="kkt-status-title">
+                  Currently Packing
+                </p>
                 <p class="kkt-status-banner-text" id="kkt-status-text"></p>
               </div>
             </div>
 
-            <h2 id="kkt-cycle-title" class="kkt-cycle-title">Next Kahani Times</h2>
+            <h2 id="kkt-cycle-title" class="kkt-cycle-title">
+              Next Kahani Times
+            </h2>
             <p class="kkt-cycle-subtitle" id="kkt-cycle-subtitle"></p>
 
             <!-- Live countdown -->
-            <div id="kkt-countdown"
-                 class="kkt-countdown"
-                 aria-live="polite"
-                 aria-label="Time remaining to subscribe for the next cycle">
+            <div
+              id="kkt-countdown"
+              class="kkt-countdown"
+              aria-live="polite"
+              aria-label="Time remaining to subscribe for the next cycle">
               <div class="kkt-countdown-unit">
                 <span class="kkt-count" id="kkt-days">00</span>
                 <span class="kkt-count-label">Days</span>
@@ -2352,10 +3547,11 @@
                 <span class="kkt-count-label">Secs</span>
               </div>
             </div>
-            <p id="kkt-closed-msg"
-               class="kkt-closed-msg"
-               style="display:none;"
-               role="status">
+            <p
+              id="kkt-closed-msg"
+              class="kkt-closed-msg"
+              style="display: none"
+              role="status">
               This month's subscription window has closed.
             </p>
 
@@ -2363,53 +3559,76 @@
             <div class="kkt-calendars">
               <div class="kkt-cal-card" id="kkt-cal-card-1">
                 <h3 class="kkt-cal-month-title" id="kkt-cal-title-1"></h3>
-                <div class="kkt-cal-grid"
-                     id="kkt-cal-grid-1"
-                     role="grid"></div>
+                <div class="kkt-cal-grid" id="kkt-cal-grid-1" role="grid"></div>
               </div>
               <div class="kkt-cal-card" id="kkt-cal-card-2">
                 <h3 class="kkt-cal-month-title" id="kkt-cal-title-2"></h3>
-                <div class="kkt-cal-grid"
-                     id="kkt-cal-grid-2"
-                     role="grid"></div>
+                <div class="kkt-cal-grid" id="kkt-cal-grid-2" role="grid"></div>
               </div>
             </div>
 
             <!-- Legend -->
             <div class="kkt-legend" aria-label="Calendar legend">
               <div class="kkt-legend-item" id="kkt-legend-prep">
-                <span class="kkt-legend-swatch kkt-legend-swatch--prep" aria-hidden="true"></span>
+                <span
+                  class="kkt-legend-swatch kkt-legend-swatch--prep"
+                  aria-hidden="true"></span>
                 <span id="kkt-legend-prep-text"></span>
               </div>
               <div class="kkt-legend-item" id="kkt-legend-ship-pack">
-                <span class="kkt-legend-swatch kkt-legend-swatch--shipping" aria-hidden="true"></span>
+                <span
+                  class="kkt-legend-swatch kkt-legend-swatch--shipping"
+                  aria-hidden="true"></span>
                 <span id="kkt-legend-ship-pack-text"></span>
               </div>
               <div class="kkt-legend-item" id="kkt-legend-cycle">
-                <span class="kkt-legend-swatch kkt-legend-swatch--cycle" aria-hidden="true"></span>
+                <span
+                  class="kkt-legend-swatch kkt-legend-swatch--cycle"
+                  aria-hidden="true"></span>
                 <span id="kkt-legend-cycle-text"></span>
               </div>
               <div class="kkt-legend-item" id="kkt-legend-ship-cycle">
-                <span class="kkt-legend-swatch kkt-legend-swatch--shipping" aria-hidden="true"></span>
+                <span
+                  class="kkt-legend-swatch kkt-legend-swatch--shipping"
+                  aria-hidden="true"></span>
                 <span id="kkt-legend-ship-cycle-text"></span>
               </div>
               <div class="kkt-legend-item">
-                <span class="kkt-legend-swatch kkt-legend-swatch--today" aria-hidden="true"></span>
+                <span
+                  class="kkt-legend-swatch kkt-legend-swatch--today"
+                  aria-hidden="true"></span>
                 <span>Today</span>
               </div>
             </div>
-            <p class="kkt-timezone-note">Dates follow our store's timezone (Central Time, US).</p>
+            <p class="kkt-timezone-note">
+              Dates follow our store's timezone (Central Time, US).
+            </p>
 
             <!-- Shipping information -->
             <p class="kkt-shipping-copy">
-              Your first envelope ships from the United States on July 30, and typically
-              arrives within 2–4 weeks for USA subscribers, and 4–6 weeks internationally.<br><br>
-              Delivery times can vary depending on your location and local postal service.
-              Feel free to email us if you do not receive yours — we're happy to help.
+              Your first envelope ships from the United States the 30th, and
+              typically arrives within 2–4 weeks for USA subscribers, and 4–6
+              weeks internationally.<br /><br />
+              Delivery times can vary depending on your location and local
+              postal service. Feel free to email us if you do not receive yours
+              — we're happy to help.
             </p>
-
           </section>
 
+          <!-- ===== PAST EDITIONS (examples only — not for purchase here) ===== -->
+          <section class="kt-past" aria-labelledby="kt-past-title">
+            <h2 id="kt-past-title" class="kt-past-title">
+              Every month is different
+            </h2>
+            <p class="kt-past-sub">
+              Take a peek at a few past Kahani Times editions. Each month brings
+              a new story, theme, activities, and little pieces of Pakistan to
+              discover.
+            </p>
+            <ul id="kt-past-grid" class="kt-past-grid">
+              <!-- Injected via JS from pastEditions -->
+            </ul>
+          </section>
         </section>
 
         <!-- ===== ARCHIVE DETAIL VIEW ===== -->
@@ -2418,63 +3637,92 @@
             <i class="fa-solid fa-arrow-left"></i> Back to Store
           </button>
 
-          <div class="detail-container">
-            <div class="detail-gallery">
-              <div class="detail-image-wrapper">
-                <img id="archive-detail-image"
-                     src="/assets/images/products/subscribe/feb.png"
-                     alt="The Kahani Times Archive — past editions" />
+          <!-- One archive section: artwork on the left, the whole purchase flow on the right -->
+          <div class="detail-container arch-builder">
+            <div class="detail-gallery arch-media">
+              <div class="detail-image-wrapper" id="archive-detail-media">
+                <!-- Collection cover is injected by showArchiveImage(); a single edition replaces it once chosen -->
+                <img
+                  id="archive-detail-image"
+                  src=""
+                  alt=""
+                  hidden />
               </div>
             </div>
 
-            <div class="detail-info">
+            <div class="detail-info arch-flow">
               <span class="archive-badge">Past Editions</span>
-              <h1 style="text-shadow:none;color:var(--granite);margin-top:0;">The Kahani Times Archive</h1>
+              <h1
+                style="text-shadow: none; color: var(--granite); margin-top: 0">
+                The Kahani Times Archive
+              </h1>
               <div class="archive-price-display">
-                $15.99 <span style="font-size:0.65em;font-weight:600;opacity:0.8;">per edition</span>
+                $15.99
+                <span style="font-size: 0.65em; font-weight: 600; opacity: 0.8"
+                  >/ edition</span
+                >
               </div>
-              <p class="archive-subtitle">Own a piece of Kahani Korner history. Select the year and months you'd like — we'll ship them together in one package.</p>
+              <p class="archive-subtitle">
+                Own a piece of Kahani Korner history. Select the year and months
+                you'd like — we'll ship them together in one package.
+              </p>
               <div class="archive-note-box">
-                <i class="fa-solid fa-circle-info" style="color:var(--rosy-taupe);margin-right:0.45rem;" aria-hidden="true"></i>
-                Each archived edition is $15.99. Select multiple months and all items ship together as one bundle.
+                <i
+                  class="fa-solid fa-circle-info"
+                  style="color: var(--rosy-taupe); margin-right: 0.45rem"
+                  aria-hidden="true"></i>
+                Each archived edition is $15.99. Select multiple months and all
+                items ship together as one bundle.
               </div>
-            </div>
-          </div>
 
-          <!-- Selector -->
-          <div class="arch-selector-section">
-
-            <div class="arch-left-col">
               <!-- Step 1: Year -->
-              <div class="arch-step-box">
-                <h3 class="arch-step-title">
+              <section class="arch-step" aria-labelledby="arch-step-year">
+                <h3 class="arch-step-title" id="arch-step-year">
                   <span class="arch-step-num" aria-hidden="true">1</span>
                   Choose a Year
                 </h3>
-                <div id="arch-year-grid" class="arch-year-grid" role="group" aria-label="Select a year"></div>
-              </div>
+                <div
+                  id="arch-year-grid"
+                  class="arch-year-grid"
+                  role="group"
+                  aria-label="Select a year"></div>
+              </section>
 
               <!-- Step 2: Months -->
-              <div class="arch-step-box">
-                <h3 class="arch-step-title">
+              <section class="arch-step" aria-labelledby="arch-step-months">
+                <h3 class="arch-step-title" id="arch-step-months">
                   <span class="arch-step-num" aria-hidden="true">2</span>
                   Choose Month(s)
                 </h3>
-                <div id="arch-month-grid" class="arch-month-grid" role="group" aria-label="Select one or more months">
-                  <p style="font-size:0.82rem;color:var(--muted);font-style:italic;grid-column:1/-1;margin:0;">
+                <div
+                  id="arch-month-grid"
+                  class="arch-month-grid"
+                  role="group"
+                  aria-label="Select one or more months">
+                  <p
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--muted);
+                      font-style: italic;
+                      grid-column: 1/-1;
+                      margin: 0;
+                    ">
                     Select a year above to see available months.
                   </p>
                 </div>
-                <p class="arch-hint">You can pick multiple months — they all ship together.</p>
-              </div>
-            </div>
+                <p class="arch-hint">
+                  You can pick multiple months — they all ship together.
+                </p>
+              </section>
 
-            <div class="arch-right-col">
-              <!-- Summary -->
+              <!-- Selection → checkout → shipping note -->
               <div class="arch-summary-box">
                 <p class="arch-summary-title">Your Selection</p>
-                <p id="arch-summary-empty" class="arch-summary-empty">No editions selected yet. Choose a year and at least one month to continue.</p>
-                <div id="arch-summary-content" style="display:none;">
+                <p id="arch-summary-empty" class="arch-summary-empty">
+                  No editions selected yet. Choose a year and at least one month
+                  to continue.
+                </p>
+                <div id="arch-summary-content" style="display: none">
                   <div class="arch-summary-row">
                     <span class="arch-summary-label">Year</span>
                     <span id="arch-summary-year"></span>
@@ -2486,45 +3734,75 @@
                   <p id="arch-summary-months" class="arch-summary-months"></p>
                   <div class="arch-summary-price">
                     <span id="arch-summary-price-total"></span>
-                    <span class="arch-summary-price-note" id="arch-summary-price-note"></span>
+                    <span
+                      class="arch-summary-price-note"
+                      id="arch-summary-price-note"></span>
                   </div>
                 </div>
-                <p id="arch-error-msg" style="display:none;font-size:0.8rem;color:#c0392b;margin:0.5rem 0 0;line-height:1.4;"></p>
-                <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.65rem;">
-                  <button id="arch-add-btn"
-                          class="add-to-cart-btn large-btn"
-                          style="width:100%;margin-top:0;"
-                          disabled
-                          onclick="handleArchiveCheckout()">
-                    Buy Now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <p
+                  id="arch-error-msg"
+                  style="
+                    display: none;
+                    font-size: 0.8rem;
+                    color: #c0392b;
+                    margin: 0.5rem 0 0;
+                    line-height: 1.4;
+                  "></p>
+                <label class="cart-ship-region" style="margin: 0.75rem 0 0.5rem">
+                  <span>Shipping to</span>
+                  <select id="arch-ship-region" onchange="setArchiveShipRegion(this.value)">
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="INTL">International</option>
+                  </select>
+                </label>
+                <div class="arch-summary-actions">
+                  <button
+                    id="arch-add-btn"
+                    class="add-to-cart-btn large-btn"
+                    style="width: 100%; margin-top: 0"
+                    disabled
+                    onclick="handleArchiveCheckout()">
+                    Buy Now
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                   </button>
-                  <button id="arch-cart-btn"
-                          class="secondary-btn"
-                          style="margin-top:0;"
-                          disabled
-                          onclick="window.addArchiveToCart()">
-                    <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                  <button
+                    id="arch-cart-btn"
+                    class="secondary-btn"
+                    style="margin-top: 0"
+                    disabled
+                    onclick="window.addArchiveToCart()">
+                    <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Add
+                    to Cart
                   </button>
                 </div>
-              </div>
 
-              <!-- Packaging note -->
-              <div class="arch-packaging-note">
-                <i class="fa-solid fa-box arch-packaging-icon" aria-hidden="true"></i>
-                <div>
-                  <strong>Bundled &amp; Protected</strong>
-                  <p>All selected editions ship together from the United States.</p>
-                  <p>Each edition will be sent in a clear protective sleeve.</p>
-                  <p>Delivery: 2–4 weeks USA &nbsp;·&nbsp; 4–6 weeks international</p>
+                <!-- Shipping note: a section of the same card, set off by a divider -->
+                <div class="arch-packaging-note">
+                  <i
+                    class="fa-solid fa-box arch-packaging-icon"
+                    aria-hidden="true"></i>
+                  <div>
+                    <strong>Bundled &amp; Protected</strong>
+                    <p>
+                      All selected editions ship together from the United States.
+                    </p>
+                    <p>
+                      Delivery: 2–4 weeks USA &nbsp;·&nbsp; 4–6 weeks
+                      international
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Archive FAQ -->
-          <div class="detail-features-box" style="margin-top:1.75rem;">
+          <div class="detail-features-box" style="margin-top: 1.75rem">
             <h3>Archive Questions</h3>
-            <p class="kkt-faq-helper-text">Everything you need to know about ordering past editions.</p>
+            <p class="kkt-faq-helper-text">
+              Everything you need to know about ordering past editions.
+            </p>
             <div id="archive-features" class="detail-feature-sections"></div>
           </div>
 
@@ -2532,28 +3810,85 @@
           <div class="arch-sub-callout">
             <div class="arch-sub-callout-inner">
               <p>Love collecting Kahani Times?</p>
-              <p>Never miss an edition — subscribe monthly and get each new issue delivered to your door.</p>
+              <p>
+                Never miss an edition — subscribe monthly and get each new issue
+                delivered to your door.
+              </p>
               <button
-                onclick="closeArchiveDetails(); openProductDetails();"
-                style="background:none;border:none;padding:0;cursor:pointer;margin-top:0.85rem;display:block;width:100%;">
-                <div style="display:flex;align-items:center;gap:0.9rem;background:var(--color-warm-white);border:2px solid var(--ash-grey);border-radius:1.1rem;padding:0.65rem 0.85rem;transition:box-shadow 0.18s ease;"
-                     onmouseenter="this.style.boxShadow='0 6px 18px rgba(51,47,35,0.15)'"
-                     onmouseleave="this.style.boxShadow='none'">
-                  <img src="/assets/images/products/subscribe/feb.png"
-                       alt="The Kahani Times Subscription"
-                       style="width:62px;height:62px;object-fit:cover;border-radius:0.65rem;flex-shrink:0;">
-                  <div style="text-align:left;">
-                    <p style="font-family:'Grandstander',cursive;font-weight:800;font-size:0.88rem;color:var(--granite);margin:0 0 0.18rem;">The Kahani Times</p>
-                    <p style="font-size:0.76rem;color:var(--muted);margin:0 0 0.3rem;">Monthly subscription</p>
-                    <p style="font-size:0.76rem;color:var(--deep-teal);font-weight:700;margin:0;">From $10.99/mo &nbsp;<i class="fa-solid fa-arrow-right" style="font-size:0.65rem;"></i></p>
+                onclick="
+                  closeArchiveDetails();
+                  openProductDetails();
+                "
+                style="
+                  background: none;
+                  border: none;
+                  padding: 0;
+                  cursor: pointer;
+                  margin-top: 0.85rem;
+                  display: block;
+                  width: 100%;
+                ">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.9rem;
+                    background: var(--color-warm-white);
+                    border: 2px solid var(--ash-grey);
+                    border-radius: 1.1rem;
+                    padding: 0.65rem 0.85rem;
+                    transition: box-shadow 0.18s ease;
+                  "
+                  onmouseenter="
+                    this.style.boxShadow = '0 6px 18px rgba(51,47,35,0.15)'
+                  "
+                  onmouseleave="this.style.boxShadow = 'none'">
+                  <img
+                    src="/assets/images/products/subscribe/feb.png"
+                    alt="The Kahani Times Subscription"
+                    style="
+                      width: 62px;
+                      height: 62px;
+                      object-fit: cover;
+                      border-radius: 0.65rem;
+                      flex-shrink: 0;
+                    " />
+                  <div style="text-align: left">
+                    <p
+                      style="
+                        font-family: &quot;Grandstander&quot;, cursive;
+                        font-weight: 800;
+                        font-size: 0.88rem;
+                        color: var(--granite);
+                        margin: 0 0 0.18rem;
+                      ">
+                      The Kahani Times
+                    </p>
+                    <p
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--muted);
+                        margin: 0 0 0.3rem;
+                      ">
+                      Monthly subscription
+                    </p>
+                    <p
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--deep-teal);
+                        font-weight: 700;
+                        margin: 0;
+                      ">
+                      From $10.99/mo &nbsp;<i
+                        class="fa-solid fa-arrow-right"
+                        style="font-size: 0.65rem"></i>
+                    </p>
                   </div>
                 </div>
               </button>
             </div>
           </div>
-
         </section>
-
       </div>
     </main>
 
@@ -2601,38 +3936,109 @@
       const product = {
         id: "kahani-times",
         name: "The Kahani Times Subscription",
+        badge: "Monthly",
         priceDisplay: "From $10.99/mo",
         priceUSA: "$10.99/mo",
         priceIntl: "$12.99/mo",
         description:
           "For those who treasure stories, color, and connection — The Kahani Times revives the charm of old-school storytelling. Each month’s envelope feels like a keepsake from gentler times: printed paper, nostalgic items, and the quiet thrill of opening real mail. Inside are stories, art, and small surprises that make learning Urdu feel natural and joyful — like the way our parents once learned, slowly and beautifully, over a warm cup of chai.",
-        image: "/assets/images/products/subscribe/feb.png",
-        images: [
-          "/assets/images/products/subscribe/feb.png",
-          "/assets/images/products/subscribe/jan.png",
-          "/assets/images/products/subscribe/dec.png",
-          "/assets/images/products/subscribe/nov.png",
+        // Current-month gallery. Slide 1 is the envelope reveal; the rest are the individual
+        // pieces. fx/fy = centre of each PNG's visible artwork inside its 750×750 square and
+        // k = how much to enlarge it so the artwork fills the preview (measured from the files).
+        gallery: [
+          {
+            type: "reveal",
+            label: "Everything in this month's envelope",
+            alt: "Kahani Times current monthly Urdu subscription: an opened envelope with the newspaper, calendar and idiom cards, recipe card and postcard, suitcase craft, stickers, Milo snack and boarding-pass bookmark",
+          },
+          {
+            src: "newspaper.png",
+            label: "Newspaper",
+            alt: "The Kahani Times monthly newspaper",
+            fx: 0.511,
+            fy: 0.497,
+            k: 0.99,
+          },
+          {
+            src: "bookmark.png",
+            label: "Boarding-pass bookmark",
+            alt: "Kahani Airways boarding pass bookmark",
+            fx: 0.511,
+            fy: 0.467,
+            k: 0.91,
+          },
+          {
+            src: "calendar-idiom.png",
+            label: "Calendar and idiom cards",
+            alt: "Kahani Times monthly calendar card and Urdu idiom card",
+            fx: 0.501,
+            fy: 0.477,
+            k: 1.42,
+          },
+          {
+            src: "recipe-postcard.png",
+            label: "Recipe card and postcard",
+            alt: "Kahani Times recipe card and postcard",
+            fx: 0.519,
+            fy: 0.562,
+            k: 0.87,
+          },
+          {
+            src: "activity.png",
+            label: "Suitcase craft activity",
+            alt: "Suitcase craft activity with its cut-out instruction sheet",
+            fx: 0.506,
+            fy: 0.526,
+            k: 0.87,
+          },
+          {
+            src: "stickers.png",
+            label: "Sticker sheet",
+            alt: "Kahani Times travel sticker sheet",
+            fx: 0.483,
+            fy: 0.397,
+            k: 1.75,
+          },
+          {
+            src: "snack-bag.png",
+            label: "Milo snack",
+            alt: "Milo snack included in this month's envelope",
+            fx: 0.505,
+            fy: 0.562,
+            k: 1.52,
+          },
+        ],
+        // Previous editions, shown lower on the page as examples only.
+        pastEditions: [
+          { src: "nov.png", year: 2025, month: 10, alt: "Kahani Times past November edition" },
+          { src: "dec.png", year: 2025, month: 11, alt: "Kahani Times past December edition" },
+          { src: "jan.png", year: 2026, month: 0, alt: "Kahani Times past January edition" },
+          { src: "feb.png", year: 2026, month: 1, alt: "Kahani Times past February edition" },
         ],
         featureSections: [
           {
             title: "When does my package ship?",
             icon: "shipping",
-            answer: "Packages ship during the last week of each month. Orders placed after the 20th begin with the following month’s shipment. For example, if you subscribe on December 21, your first package ships at the end of January and typically arrives in early February. Shipping is free.",
+            answer:
+              "Packages ship during the last week of each month. Orders placed after the 20th begin with the following month’s shipment. For example, if you subscribe on December 21, your first package ships at the end of January and typically arrives in early February. Shipping is free.",
           },
           {
             title: "What is the monthly cutoff date?",
             icon: "calendar",
-            answer: "Subscribe by the 20th to be included in that month’s upcoming shipment. Orders placed after the 20th roll into the next month’s mail cycle.",
+            answer:
+              "Subscribe by the 20th to be included in that month’s upcoming shipment. Orders placed after the 20th roll into the next month’s mail cycle.",
           },
           {
             title: "How do payments work?",
             icon: "card",
-            answer: "Your first payment is charged on the day you subscribe. After that, future payments are charged on the 1st of the next month you have not yet paid for.",
+            answer:
+              "Your first payment is charged on the day you subscribe. After that, future payments are charged on the 1st of the next month you have not yet paid for.",
           },
           {
             title: "When should I update my address?",
             icon: "location",
-            answer: "Please update your address before the 20th so your next shipment goes to the correct place.",
+            answer:
+              "Please update your address before the 20th so your next shipment goes to the correct place.",
           },
           {
             title: "Where does Kahani Times ship from?",
@@ -2643,48 +4049,115 @@
       };
 
       // --- ARCHIVE DATA ---
+      // Same name, type and price wording as the Shop grid (products.html).
+      const archiveProduct = {
+        name: "The Kahani Times Archive",
+        badge: "Past Editions",
+        ctaLabel: "Browse Past Editions",
+      };
       // Update ARCHIVE_PRICE_PER_MONTH to change pricing.
       const ARCHIVE_PRICE_PER_MONTH = 15.99;
-      const MONTH_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const MONTH_FULL   = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      archiveProduct.priceDisplay = `$${ARCHIVE_PRICE_PER_MONTH.toFixed(2)} / edition`;
+      const MONTH_LABELS = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const MONTH_FULL = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
 
-      // ARCHIVE_AVAILABILITY: year → array[12] — true=available, false=sold out, null=not released
-      // Update this object to add years, mark months sold-out, or remove unavailable months.
-      const ARCHIVE_AVAILABILITY = {
-        2025: [false, false, false, false, false, false, false, false, false, false, true, true],
-        2026: [true, true, true, true, true, true, null, null, null, null, null, null],
+      // The Kahani Times archive begins here — months before this are marked
+      // unavailable (the publication didn't exist yet).
+      const ARCHIVE_START_YEAR = 2025;
+      const ARCHIVE_START_MONTH = 10; // November (0-indexed)
+
+      // ARCHIVE_SOLD_OUT: year → array of 0-indexed months that are sold out
+      // even though they were released. Add entries here as editions sell out.
+      const ARCHIVE_SOLD_OUT = {
+        // 2025: [0, 1], // e.g. Jan and Feb 2025 sold out
       };
+
+      // ARCHIVE_AVAILABILITY is derived automatically from today's date, so the
+      // current month opens up for selection as soon as the calendar rolls over —
+      // no manual updates needed month to month. true=available, false=sold out
+      // (or not yet published at launch), null=not released yet.
+      function buildArchiveAvailability() {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth();
+        const availability = {};
+        for (let year = ARCHIVE_START_YEAR; year <= currentYear; year++) {
+          const soldOut = new Set(ARCHIVE_SOLD_OUT[year] || []);
+          availability[year] = MONTH_LABELS.map((_, i) => {
+            const beforeStart =
+              year === ARCHIVE_START_YEAR && i < ARCHIVE_START_MONTH;
+            const afterCurrent = year === currentYear && i > currentMonth;
+            if (beforeStart || soldOut.has(i)) return false;
+            if (afterCurrent) return null;
+            return true;
+          });
+        }
+        return availability;
+      }
+
+      const ARCHIVE_AVAILABILITY = buildArchiveAvailability();
 
       const archiveFaqSections = [
         {
           title: "Can I order just one month?",
           icon: "calendar",
-          answer: "Yes! You can order any single month or any combination of months from a given year. Each edition is $15.99.",
+          answer:
+            "Yes! You can order any single month or any combination of months from a given year. Each edition is $15.99.",
         },
         {
           title: "Can I order months from different years?",
           icon: "package",
-          answer: "Each cart item covers one year at a time. Add them to your cart separately to order across multiple years — we'll still ship everything together.",
+          answer:
+            "Each cart item covers one year at a time. Add them to your cart separately to order across multiple years — we'll still ship everything together.",
         },
         {
           title: "What condition are the archived editions in?",
           icon: "mail",
-          answer: "Each archived edition is in new condition and protected in a clear sleeve.",
+          answer:
+            "Each archived edition is in new condition and protected in a clear sleeve.",
         },
         {
           title: "How long does archive shipping take?",
           icon: "shipping",
-          answer: "Archive bundles ship from the United States within 1–3 business days of your order. Delivery typically takes 2–4 weeks for USA and 4–6 weeks internationally.",
+          answer:
+            "Archive bundles ship from the United States within 1–3 business days of your order. Delivery typically takes 2–4 weeks for USA and 4–6 weeks internationally.",
         },
         {
           title: "What if a month I want is sold out?",
           icon: "card",
-          answer: "Sold-out months are shown with a 'Sold Out' label and cannot be added. We unfortunately cannot restock past editions, but you can still order any available months.",
+          answer:
+            "Sold-out months are shown with a 'Sold Out' label and cannot be added. We unfortunately cannot restock past editions, but you can still order any available months.",
         },
       ];
 
       const archiveState = {
-        selectedYear:   null,
+        selectedYear: null,
         selectedMonths: new Set(),
       };
 
@@ -2693,7 +4166,7 @@
       // so they are available immediately. cart-btn / cartBadge / cartOverlay are in the
       // dynamically-loaded navbar and are managed by cart.js after it loads.
       const cartItemsContainer = document.getElementById("cart-items");
-      const cartTotalAmount    = document.getElementById("cart-total-amount");
+      const cartTotalAmount = document.getElementById("cart-total-amount");
 
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
@@ -2701,26 +4174,25 @@
       const productGrid = document.getElementById("product-grid");
       const productDetailView = document.getElementById("product-detail-view");
       const backToStoreBtn = document.getElementById("back-to-store-btn");
-      const detailImage = document.getElementById("detail-image");
       const detailTitle = document.getElementById("detail-title");
       const detailPrice = document.getElementById("detail-price");
       const detailDescription = document.getElementById("detail-description");
       const detailFeatures = document.getElementById("detail-features");
 
       const detailSubscribeUsaBtn = document.getElementById(
-        "detail-subscribe-usa-btn"
+        "detail-subscribe-usa-btn",
       );
       const detailSubscribeIntlBtn = document.getElementById(
-        "detail-subscribe-intl-btn"
+        "detail-subscribe-intl-btn",
       );
 
       const manageSubscriptionBtn = document.getElementById(
-        "manage-subscription-btn"
+        "manage-subscription-btn",
       );
 
       const successModal = document.getElementById("success-modal");
       const continueShoppingBtn = document.getElementById(
-        "continue-shopping-btn"
+        "continue-shopping-btn",
       );
 
       // ✅ IMPORTANT: hero + filter nodes (for hide/show on detail view)
@@ -2730,6 +4202,8 @@
       // --- INIT ---
       function init() {
         renderProducts();
+        // /subscribe.html#archive (linked from the Shop grid) opens the archive directly.
+        if (window.location.hash === "#archive") openArchiveDetails();
         updateCartUI();
 
         // mobile menu
@@ -2739,14 +4213,14 @@
             if (e.target === mobileMenuOverlay) closeMobileMenu();
           });
           const closeBtn = mobileMenuOverlay.querySelector(
-            ".mobile-menu__close"
+            ".mobile-menu__close",
           );
           const menuLinks = mobileMenuOverlay.querySelectorAll(
-            ".mobile-menu__links a"
+            ".mobile-menu__links a",
           );
           if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
           menuLinks.forEach((link) =>
-            link.addEventListener("click", closeMobileMenu)
+            link.addEventListener("click", closeMobileMenu),
           );
         }
 
@@ -2820,15 +4294,12 @@
         if (!productGrid) return;
 
         productGrid.innerHTML = `
-          <article class="product-card" onclick="openProductDetails()">
-            <div class="product-image-container">
-              <img src="${product.image}" alt="${product.name}">
-            </div>
-            <div class="product-info">
-              <div class="product-header">
-                <h3>${product.name}</h3>
-                <span class="price" style="font-size:0.85rem;">Monthly</span>
-              </div>
+          <article class="product-card product-card--featured product-card--primary" onclick="openProductDetails()">
+            ${ktStageMarkup(`${product.name}: an opened Kahani Times envelope with the monthly newspaper, suitcase craft activity, calendar and idiom cards, recipe postcard, boarding-pass bookmark, snack and stickers`)}
+            <div class="product-info kk-card-body">
+              <div class="kk-badge-row"><span class="kk-badge">${product.badge}</span></div>
+              <h3 class="kk-card-title">${product.name}</h3>
+              <p class="kk-card-lede">Get the newest Kahani Times Urdu mail edition delivered every month.</p>
 
               <div class="subscribe-pricing">
                 <div class="subscribe-pricing-item">
@@ -2843,72 +4314,403 @@
                 </div>
               </div>
 
-              <div class="subscribe-btns">
-                <button class="add-to-cart-btn"
+              <!-- Separate USA and International checkout links, so both buttons stay. -->
+              <div class="kk-card-actions">
+                <button class="kk-cta"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_USA}'">
-                  USA · ${product.priceUSA} <i class="fa-solid fa-arrow-right"></i>
+                  Subscribe · USA <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </button>
-                <button class="add-to-cart-btn"
+                <button class="kk-cta"
                   onclick="event.stopPropagation(); window.location.href='${CHECKOUT_INTL}'">
-                  Intl · ${product.priceIntl} <i class="fa-solid fa-arrow-right"></i>
+                  Subscribe · Intl <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
           </article>
 
-          <article class="product-card" onclick="openArchiveDetails()">
-            <div class="product-image-container">
-              <img src="/assets/images/products/subscribe/jan.png" alt="The Kahani Times Archive — past editions">
+          <article class="product-card product-card--featured" onclick="openArchiveDetails()">
+            <div class="product-image-container kt-archive-cover">
+              ${ktCollectionMarkup()}
             </div>
-            <div class="product-info" style="justify-content: center;">
-              <div class="product-header">
-                <h3>The Kahani Times Archive</h3>
-                <span class="price" style="font-size:0.85rem;">Per Edition</span>
-              </div>
-
+            <div class="product-info kk-card-body">
+              <div class="kk-badge-row"><span class="kk-badge">${archiveProduct.badge}</span></div>
+              <h3 class="kk-card-title">${archiveProduct.name}</h3>
+              <p class="kk-card-lede">Choose individual past editions.</p>
+              <!-- Same pricing-box component as the subscription card; one box spans the full width. -->
               <div class="subscribe-pricing">
-                <div class="subscribe-pricing-item" style="grid-column:1/-1;">
-                  <span class="subscribe-pricing-label">Price</span>
-                  <span class="subscribe-pricing-value">$15.99</span>
-                  <span class="subscribe-pricing-note">Per past edition</span>
+                <div class="subscribe-pricing-item">
+                  <span class="subscribe-pricing-label">Per edition</span>
+                  <span class="subscribe-pricing-value">$${ARCHIVE_PRICE_PER_MONTH.toFixed(2)}</span>
+                  <span class="subscribe-pricing-note">One-time purchase</span>
                 </div>
               </div>
 
-              <div class="subscribe-btns">
-                <button class="add-to-cart-btn"
+              <div class="kk-card-actions">
+                <button class="kk-cta"
                   onclick="event.stopPropagation(); openArchiveDetails()">
-                  Browse Archive <i class="fa-solid fa-arrow-right"></i>
+                  ${archiveProduct.ctaLabel} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
           </article>
         `;
+
+        initStickerStage();
+        revealCollection(productGrid.querySelector(".kt-collection"));
+      }
+
+      // --- KAHANI TIMES MAIL-PACKAGE REVEAL ---
+      const SUBSCRIBE_IMG = "/assets/images/products/subscribe/";
+      const KT_PIECES = [
+        ["kt-closed", "closed-envelope.png"],
+        ["kt-open", "open-envelope.png"],
+        ["kt-bookmark", "bookmark.png"],
+        ["kt-paper", "newspaper.png"],
+        ["kt-calendar", "calendar-idiom.png"],
+        ["kt-recipe", "recipe-postcard.png"],
+        ["kt-activity", "activity.png"],
+        ["kt-snack", "snack-bag.png"],
+        ["kt-stickers", "stickers.png"],
+      ];
+
+      // The layered envelope composition. With a label it is announced as one image;
+      // without one (thumbnails) it is hidden from assistive tech.
+      function ktStageMarkup(label, extraClass = "") {
+        const a11y = label
+          ? `role="img" aria-label="${label}"`
+          : `aria-hidden="true"`;
+        const pieces = KT_PIECES.map(
+          ([cls, file]) =>
+            `<span class="kt-item ${cls}"><img src="${SUBSCRIBE_IMG}${file}" alt="" draggable="false"></span>`,
+        ).join("");
+        return `<div class="product-image-container kt-mailbox ${extraClass}"><div class="kt-stage" ${a11y}>${pieces}</div></div>`;
+      }
+
+      // Archive cover: the real past-edition images, oldest at the back, newest in front.
+      // Only the group is announced; the individual images are decorative within it.
+      function ktCollectionMarkup() {
+        const eds = product.pastEditions
+          .map(
+            (ed, i) =>
+              `<img class="kt-collection-ed kt-ed-${i + 1}" style="--i:${i};" src="${SUBSCRIBE_IMG}${ed.src}" alt="" loading="lazy" decoding="async">`,
+          )
+          .join("");
+        return `<div class="kt-collection" role="img" aria-label="Collection of past editions of The Kahani Times">${eds}</div>`;
+      }
+
+      // Fades a stack of past editions in once it is on screen and its images have loaded.
+      function revealCollection(cover) {
+        if (!cover || cover.dataset.revealed) return;
+        cover.dataset.revealed = "1";
+        if (
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          !("IntersectionObserver" in window)
+        )
+          return;
+        cover.classList.add("kt-armed");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            observer.disconnect();
+            // Only wait on editions that are displayed: a lazy image hidden by CSS
+            // (kt-ed-1 on small screens) never loads, so its decode() never settles.
+            // The timeout keeps a slow image from holding the stack invisible.
+            const visible = [...cover.querySelectorAll("img")].filter(
+              (img) => img.getClientRects().length > 0,
+            );
+            Promise.race([
+              Promise.all(visible.map((img) => img.decode().catch(() => {}))),
+              new Promise((resolve) => setTimeout(resolve, 2500)),
+            ]).then(() => {
+              cover.classList.remove("kt-armed");
+              cover.classList.add("kt-play");
+            });
+          },
+          { threshold: 0.3 },
+        );
+        observer.observe(cover);
+      }
+
+      const prefersReducedMotion = () =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Plays (or replays) the reveal on one stage once its PNGs have decoded.
+      // Resolves when the last piece has settled. Reduced motion: shows the final spread.
+      function playReveal(stage) {
+        if (!stage || prefersReducedMotion()) return Promise.resolve();
+        stage.classList.remove("kt-play");
+        stage.classList.add("kt-armed");
+        const imagesReady = Promise.all(
+          [...stage.querySelectorAll("img")].map((img) =>
+            img.decode().catch(() => {}),
+          ),
+        );
+        return imagesReady.then(
+          () =>
+            new Promise((resolve) => {
+              void stage.offsetWidth; // restart the CSS animations on replay
+              stage.classList.add("kt-play");
+              const last = stage.querySelector(".kt-bookmark");
+              const timer = setTimeout(resolve, 4200);
+              last.addEventListener(
+                "animationend",
+                () => {
+                  clearTimeout(timer);
+                  resolve();
+                },
+                { once: true },
+              );
+            }),
+        );
+      }
+
+      // Grid card: plays once per page visit, when the card first scrolls into view.
+      let stickerRevealPlayed = false;
+      let stickerObserver = null;
+
+      function initStickerStage() {
+        if (stickerObserver) stickerObserver.disconnect();
+        const stage = productGrid.querySelector(".kt-stage");
+        if (!stage || stickerRevealPlayed) return;
+
+        if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+          stickerRevealPlayed = true;
+          return; // final composition is the default state
+        }
+
+        stage.classList.add("kt-armed");
+        stickerObserver = new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            stickerObserver.disconnect();
+            stickerRevealPlayed = true;
+            playReveal(stage);
+          },
+          { threshold: 0.35 },
+        );
+        stickerObserver.observe(stage);
+      }
+
+      // --- CURRENT-MONTH GALLERY (detail view) ---
+      // Visitor-controlled only: thumbnails, arrows, swipe/trackpad, or arrow keys. No autoplay.
+      const gallery = {
+        built: false,
+        index: 0,
+        revealDone: false,
+        viewport: null,
+        track: null,
+        thumbs: null,
+        stage: null,
+      };
+
+      function gallerySlideMarkup(item, i, total) {
+        const slideLabel = `${i + 1} of ${total}: ${item.label}`;
+        if (item.type === "reveal") {
+          return `<div class="kt-gallery-slide" role="group" aria-roledescription="slide" aria-label="${slideLabel}">${ktStageMarkup(item.alt)}</div>`;
+        }
+        return `
+          <div class="kt-gallery-slide" role="group" aria-roledescription="slide" aria-label="${slideLabel}">
+            <div class="kt-gallery-item" style="--fx:${item.fx};--fy:${item.fy};--k:${item.k};">
+              <img src="${SUBSCRIBE_IMG}${item.src}" alt="${item.alt}" loading="lazy" decoding="async" draggable="false">
+            </div>
+          </div>`;
+      }
+
+      function galleryThumbMarkup(item, i) {
+        const inner =
+          item.type === "reveal"
+            ? `${ktStageMarkup(null, "kt-thumb-stage")}<span class="kt-thumb-badge" aria-hidden="true"><i class="fa-solid fa-play"></i></span>`
+            : `<img class="kt-thumb-img" style="--fx:${item.fx};--fy:${item.fy};--k:${item.k};" src="${SUBSCRIBE_IMG}${item.src}" alt="" loading="lazy" decoding="async">`;
+        const name =
+          item.type === "reveal" ? "the envelope animation" : item.label;
+        return `<button type="button" class="thumbnail" data-index="${i}" aria-label="Show ${name}">${inner}</button>`;
+      }
+
+      function renderPastEditions() {
+        const grid = document.getElementById("kt-past-grid");
+        if (!grid) return;
+        grid.innerHTML = product.pastEditions
+          .map(
+            (ed) => `
+            <li>
+              <figure class="kt-past-card">
+                <img src="${SUBSCRIBE_IMG}${ed.src}" alt="${ed.alt}" loading="lazy" decoding="async" width="600" height="600">
+              </figure>
+            </li>`,
+          )
+          .join("");
+      }
+
+      function buildCurrentGallery() {
+        if (gallery.built) return;
+        gallery.viewport = document.getElementById("kt-gallery-viewport");
+        gallery.track = document.getElementById("kt-gallery-track");
+        gallery.thumbs = document.getElementById("detail-thumbnails");
+        if (!gallery.viewport || !gallery.track || !gallery.thumbs) return;
+
+        const items = product.gallery;
+        gallery.track.innerHTML = items
+          .map((item, i) => gallerySlideMarkup(item, i, items.length))
+          .join("");
+        gallery.thumbs.innerHTML = items.map(galleryThumbMarkup).join("");
+        gallery.stage = gallery.track.querySelector(".kt-stage");
+
+        gallery.thumbs.addEventListener("click", (e) => {
+          const btn = e.target.closest(".thumbnail");
+          if (btn) goToSlide(Number(btn.dataset.index));
+        });
+        document
+          .getElementById("kt-gallery-prev")
+          .addEventListener("click", () => goToSlide(gallery.index - 1));
+        document
+          .getElementById("kt-gallery-next")
+          .addEventListener("click", () => goToSlide(gallery.index + 1));
+        document
+          .getElementById("kt-gallery-replay")
+          .addEventListener("click", () => {
+            goToSlide(0);
+            runGalleryReveal();
+          });
+
+        gallery.viewport.addEventListener("keydown", (e) => {
+          const last = items.length - 1;
+          const target = {
+            ArrowLeft: gallery.index - 1,
+            ArrowRight: gallery.index + 1,
+            Home: 0,
+            End: last,
+          }[e.key];
+          if (target === undefined) return;
+          e.preventDefault();
+          goToSlide(target);
+        });
+
+        // Swipes and trackpad scrolling move the strip natively (scroll-snap);
+        // keep the thumbnails, arrows and counter in sync with wherever it lands.
+        let ticking = false;
+        gallery.viewport.addEventListener(
+          "scroll",
+          () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+              ticking = false;
+              const w = gallery.viewport.clientWidth;
+              if (!w) return;
+              const i = Math.round(gallery.viewport.scrollLeft / w);
+              if (i !== gallery.index) setActiveSlide(i);
+            });
+          },
+          { passive: true },
+        );
+
+        window.addEventListener("resize", () => {
+          if (!gallery.viewport.clientWidth) return;
+          gallery.viewport.scrollTo({
+            left: gallery.index * gallery.viewport.clientWidth,
+            behavior: "instant",
+          });
+        });
+
+        renderPastEditions();
+        gallery.built = true;
+      }
+
+      function setActiveSlide(i) {
+        const items = product.gallery;
+        gallery.index = i;
+        const thumbs = [...gallery.thumbs.querySelectorAll(".thumbnail")];
+        thumbs.forEach((t, n) => {
+          t.classList.toggle("active", n === i);
+          if (n === i) t.setAttribute("aria-current", "true");
+          else t.removeAttribute("aria-current");
+        });
+        document.getElementById("kt-gallery-prev").disabled = i === 0;
+        document.getElementById("kt-gallery-next").disabled =
+          i === items.length - 1;
+        document.getElementById("kt-gallery-count").textContent =
+          `${i + 1} / ${items.length}`;
+        document.getElementById("kt-gallery-status").textContent =
+          `Image ${i + 1} of ${items.length}: ${items[i].label}`;
+        updateReplayButton();
+
+        // Keep the active thumbnail visible in the strip without scrolling the page.
+        const active = thumbs[i];
+        if (active) {
+          const strip = gallery.thumbs.getBoundingClientRect();
+          const box = active.getBoundingClientRect();
+          if (box.left < strip.left || box.right > strip.right) {
+            gallery.thumbs.scrollBy({
+              left:
+                box.left < strip.left
+                  ? box.left - strip.left - 8
+                  : box.right - strip.right + 8,
+              behavior: "smooth",
+            });
+          }
+        }
+      }
+
+      function goToSlide(i, instant = false) {
+        const last = product.gallery.length - 1;
+        const target = Math.max(0, Math.min(last, i));
+        gallery.viewport.scrollTo({
+          left: target * gallery.viewport.clientWidth,
+          behavior: instant ? "instant" : "smooth",
+        });
+        setActiveSlide(target);
+      }
+
+      function updateReplayButton() {
+        const btn = document.getElementById("kt-gallery-replay");
+        const show =
+          gallery.index === 0 && gallery.revealDone && !prefersReducedMotion();
+        btn.classList.toggle("is-visible", show);
+        btn.tabIndex = show ? 0 : -1;
+      }
+
+      function runGalleryReveal() {
+        gallery.revealDone = false;
+        updateReplayButton();
+        playReveal(gallery.stage).then(() => {
+          gallery.revealDone = true;
+          updateReplayButton();
+        });
+      }
+
+      // Called each time the subscription detail view opens: start on the animation and play it in full.
+      function openCurrentGallery() {
+        buildCurrentGallery();
+        if (!gallery.built) return;
+        goToSlide(0, true);
+        requestAnimationFrame(runGalleryReveal);
       }
 
       // --- DETAIL VIEW ---
 
-      function renderFeatureSections(sections = [], prefix = 'kkt-faq') {
+      function renderFeatureSections(sections = [], prefix = "kkt-faq") {
         if (!sections.length) return "";
 
         const iconMap = {
-          shipping: 'fa-truck-fast',
-          calendar: 'fa-calendar-check',
-          card:     'fa-credit-card',
-          location: 'fa-location-dot',
-          mail:     'fa-envelope',
-          package:  'fa-box',
+          shipping: "fa-truck-fast",
+          calendar: "fa-calendar-check",
+          card: "fa-credit-card",
+          location: "fa-location-dot",
+          mail: "fa-envelope",
+          package: "fa-box",
         };
 
-        const items = sections.map((section, i) => {
-          const faIcon    = iconMap[section.icon] || 'fa-circle-info';
-          const panelId   = `${prefix}-panel-${i}`;
-          const triggerId = `${prefix}-trigger-${i}`;
-          const isFirst   = i === 0;
-          return `
+        const items = sections
+          .map((section, i) => {
+            const faIcon = iconMap[section.icon] || "fa-circle-info";
+            const panelId = `${prefix}-panel-${i}`;
+            const triggerId = `${prefix}-trigger-${i}`;
+            const isFirst = i === 0;
+            return `
             <div class="kkt-faq-item">
               <button class="kkt-faq-trigger"
                       id="${triggerId}"
-                      aria-expanded="${isFirst ? 'true' : 'false'}"
+                      aria-expanded="${isFirst ? "true" : "false"}"
                       aria-controls="${panelId}">
                 <span class="kkt-faq-icon" aria-hidden="true">
                   <i class="fa-solid ${faIcon}"></i>
@@ -2917,7 +4719,7 @@
                 <i class="fa-solid fa-chevron-down kkt-faq-chevron" aria-hidden="true"></i>
               </button>
               <div id="${panelId}"
-                   class="kkt-faq-panel${isFirst ? ' is-open' : ''}"
+                   class="kkt-faq-panel${isFirst ? " is-open" : ""}"
                    role="region"
                    aria-labelledby="${triggerId}">
                 <div class="kkt-faq-panel-inner">
@@ -2926,45 +4728,50 @@
               </div>
             </div>
           `;
-        }).join('');
+          })
+          .join("");
 
         return `<div class="kkt-faq-list" role="list">${items}</div>`;
       }
 
       function initFaqAccordion(root) {
         var scope = root || document;
-        const triggers = Array.from(scope.querySelectorAll('.kkt-faq-trigger'));
+        const triggers = Array.from(scope.querySelectorAll(".kkt-faq-trigger"));
         triggers.forEach(function (trigger) {
-          trigger.addEventListener('click', function () {
-            const isOpen = this.getAttribute('aria-expanded') === 'true';
-            const panel  = document.getElementById(this.getAttribute('aria-controls'));
+          trigger.addEventListener("click", function () {
+            const isOpen = this.getAttribute("aria-expanded") === "true";
+            const panel = document.getElementById(
+              this.getAttribute("aria-controls"),
+            );
 
             // Collapse all
             triggers.forEach(function (t) {
-              t.setAttribute('aria-expanded', 'false');
-              const p = document.getElementById(t.getAttribute('aria-controls'));
-              if (p) p.classList.remove('is-open');
+              t.setAttribute("aria-expanded", "false");
+              const p = document.getElementById(
+                t.getAttribute("aria-controls"),
+              );
+              if (p) p.classList.remove("is-open");
             });
 
             // Expand this one only if it was closed
             if (!isOpen) {
-              this.setAttribute('aria-expanded', 'true');
-              if (panel) panel.classList.add('is-open');
+              this.setAttribute("aria-expanded", "true");
+              if (panel) panel.classList.add("is-open");
             }
           });
 
-          trigger.addEventListener('keydown', function (e) {
+          trigger.addEventListener("keydown", function (e) {
             const idx = triggers.indexOf(this);
-            if (e.key === 'ArrowDown') {
+            if (e.key === "ArrowDown") {
               e.preventDefault();
               if (triggers[idx + 1]) triggers[idx + 1].focus();
-            } else if (e.key === 'ArrowUp') {
+            } else if (e.key === "ArrowUp") {
               e.preventDefault();
               if (idx > 0) triggers[idx - 1].focus();
-            } else if (e.key === 'Home') {
+            } else if (e.key === "Home") {
               e.preventDefault();
               triggers[0].focus();
-            } else if (e.key === 'End') {
+            } else if (e.key === "End") {
               e.preventDefault();
               triggers[triggers.length - 1].focus();
             }
@@ -2975,7 +4782,6 @@
       window.openProductDetails = () => {
         if (!productDetailView) return;
 
-        detailImage.src = product.image;
         detailTitle.textContent = product.name;
         // Show labeled prices in the detail view
         detailPrice.innerHTML = `
@@ -2986,28 +4792,9 @@
           </span>`;
         detailDescription.textContent = product.description;
 
-        const thumbnailsContainer =
-          document.getElementById("detail-thumbnails");
-        if (product.images && product.images.length > 0) {
-          thumbnailsContainer.innerHTML = product.images
-            .slice(0, 5)
-            .map(
-              (img, index) => `
-              <div class="thumbnail ${
-                index === 0 ? "active" : ""
-              }" onmouseover="updateMainImage('${img}', this)">
-                <img src="${img}" alt="View ${index + 1}">
-              </div>
-            `
-            )
-            .join("");
-        } else {
-          thumbnailsContainer.innerHTML = "";
-        }
-
         if (product.featureSections) {
           detailFeatures.innerHTML = renderFeatureSections(
-            product.featureSections
+            product.featureSections,
           );
           initFaqAccordion();
         } else {
@@ -3020,21 +4807,8 @@
 
         productGrid.classList.add("hidden");
         productDetailView.classList.remove("hidden");
+        openCurrentGallery();
         window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-
-      window.updateMainImage = (src, thumbnailElement) => {
-        const mainImage = document.getElementById("detail-image");
-        mainImage.style.opacity = "0.8";
-        setTimeout(() => {
-          mainImage.src = src;
-          mainImage.style.opacity = "1";
-        }, 150);
-
-        document
-          .querySelectorAll(".thumbnail")
-          .forEach((t) => t.classList.remove("active"));
-        thumbnailElement.classList.add("active");
       };
 
       function closeProductDetails() {
@@ -3053,7 +4827,7 @@
         if (!archiveView) return;
 
         // Reset selector state
-        archiveState.selectedYear   = null;
+        archiveState.selectedYear = null;
         archiveState.selectedMonths = new Set();
 
         // Populate year buttons and reset month grid
@@ -3067,7 +4841,10 @@
         // Render archive FAQ scoped to this view
         const archiveFeatures = document.getElementById("archive-features");
         if (archiveFeatures) {
-          archiveFeatures.innerHTML = renderFeatureSections(archiveFaqSections, "arch-faq");
+          archiveFeatures.innerHTML = renderFeatureSections(
+            archiveFaqSections,
+            "arch-faq",
+          );
           initFaqAccordion(archiveView);
         }
 
@@ -3091,11 +4868,15 @@
         const grid = document.getElementById("arch-year-grid");
         if (!grid) return;
         const years = Object.keys(ARCHIVE_AVAILABILITY).sort((a, b) => b - a);
-        grid.innerHTML = years.map(year => `
+        grid.innerHTML = years
+          .map(
+            (year) => `
           <button class="arch-year-btn" data-year="${year}"
                   onclick="window.archSelectYear(${year})">
             ${year}
-          </button>`).join("");
+          </button>`,
+          )
+          .join("");
       }
 
       function renderArchiveMonthGrid(year) {
@@ -3103,7 +4884,7 @@
         if (!grid) return;
         const availability = ARCHIVE_AVAILABILITY[year] || [];
         grid.innerHTML = MONTH_LABELS.map((label, i) => {
-          const status     = availability[i]; // true=available, false=sold out, null=unreleased
+          const status = availability[i]; // true=available, false=sold out, null=unreleased
           const isSelected = archiveState.selectedMonths.has(i);
 
           if (status === null || status === undefined) {
@@ -3117,7 +4898,7 @@
               <span class="arch-soldout-label">Sold Out</span>
             </button>`;
           }
-          return `<button class="arch-month-btn${isSelected ? ' selected' : ''}"
+          return `<button class="arch-month-btn${isSelected ? " selected" : ""}"
             onclick="window.archToggleMonth(${i})"
             aria-pressed="${isSelected}"
             title="${MONTH_FULL[i]} ${year}">
@@ -3126,48 +4907,79 @@
         }).join("");
       }
 
+      // Shows the newest selected month that has its own edition image, otherwise the collection.
+      function showArchiveImage() {
+        const media = document.getElementById("archive-detail-media");
+        const img = document.getElementById("archive-detail-image");
+        if (!media || !img) return;
+        let cover = media.querySelector(".kt-collection");
+        if (!cover) {
+          media.insertAdjacentHTML("afterbegin", ktCollectionMarkup());
+          cover = media.querySelector(".kt-collection");
+          revealCollection(cover);
+        }
+        const { selectedYear, selectedMonths } = archiveState;
+        const match = product.pastEditions
+          .filter((ed) => ed.year === selectedYear && selectedMonths.has(ed.month))
+          .sort((a, b) => b.month - a.month)[0];
+        if (match) {
+          img.src = SUBSCRIBE_IMG + match.src;
+          img.alt = match.alt;
+          img.hidden = false;
+          cover.hidden = true;
+        } else {
+          img.hidden = true;
+          cover.hidden = false;
+        }
+      }
+
       function updateArchiveSummary() {
-        const emptyEl   = document.getElementById("arch-summary-empty");
+        showArchiveImage();
+        const emptyEl = document.getElementById("arch-summary-empty");
         const contentEl = document.getElementById("arch-summary-content");
-        const yearEl    = document.getElementById("arch-summary-year");
-        const countEl   = document.getElementById("arch-summary-count");
-        const monthsEl  = document.getElementById("arch-summary-months");
-        const priceEl   = document.getElementById("arch-summary-price-total");
-        const noteEl    = document.getElementById("arch-summary-price-note");
-        const addBtn    = document.getElementById("arch-add-btn");
-        const cartBtn   = document.getElementById("arch-cart-btn");
+        const yearEl = document.getElementById("arch-summary-year");
+        const countEl = document.getElementById("arch-summary-count");
+        const monthsEl = document.getElementById("arch-summary-months");
+        const priceEl = document.getElementById("arch-summary-price-total");
+        const noteEl = document.getElementById("arch-summary-price-note");
+        const addBtn = document.getElementById("arch-add-btn");
+        const cartBtn = document.getElementById("arch-cart-btn");
 
         const { selectedYear, selectedMonths } = archiveState;
         const count = selectedMonths.size;
 
         if (!selectedYear || count === 0) {
-          if (emptyEl)   emptyEl.style.display   = "";
+          if (emptyEl) emptyEl.style.display = "";
           if (contentEl) contentEl.style.display = "none";
-          if (addBtn)    addBtn.disabled          = true;
-          if (cartBtn)   cartBtn.disabled         = true;
+          if (addBtn) addBtn.disabled = true;
+          if (cartBtn) cartBtn.disabled = true;
           return;
         }
 
-        if (emptyEl)   emptyEl.style.display   = "none";
+        if (emptyEl) emptyEl.style.display = "none";
         if (contentEl) contentEl.style.display = "";
 
-        const monthNames = Array.from(selectedMonths).sort((a, b) => a - b).map(m => MONTH_FULL[m]);
+        const monthNames = Array.from(selectedMonths)
+          .sort((a, b) => a - b)
+          .map((m) => MONTH_FULL[m]);
         const total = (count * ARCHIVE_PRICE_PER_MONTH).toFixed(2);
 
-        if (yearEl)   yearEl.textContent  = selectedYear;
-        if (countEl)  countEl.textContent = `${count} edition${count !== 1 ? "s" : ""}`;
+        if (yearEl) yearEl.textContent = selectedYear;
+        if (countEl)
+          countEl.textContent = `${count} edition${count !== 1 ? "s" : ""}`;
         if (monthsEl) monthsEl.textContent = monthNames.join(", ");
-        if (priceEl)  priceEl.textContent = `$${total}`;
-        if (noteEl)   noteEl.textContent  = `$${ARCHIVE_PRICE_PER_MONTH.toFixed(2)} × ${count} edition${count !== 1 ? "s" : ""}`;
-        if (addBtn)   addBtn.disabled     = false;
-        if (cartBtn)  cartBtn.disabled    = false;
+        if (priceEl) priceEl.textContent = `$${total}`;
+        if (noteEl)
+          noteEl.textContent = `$${ARCHIVE_PRICE_PER_MONTH.toFixed(2)} × ${count} edition${count !== 1 ? "s" : ""}`;
+        if (addBtn) addBtn.disabled = false;
+        if (cartBtn) cartBtn.disabled = false;
       }
 
       window.archSelectYear = function (year) {
-        archiveState.selectedYear   = year;
+        archiveState.selectedYear = year;
         archiveState.selectedMonths = new Set();
 
-        document.querySelectorAll(".arch-year-btn").forEach(btn => {
+        document.querySelectorAll(".arch-year-btn").forEach((btn) => {
           btn.classList.toggle("selected", parseInt(btn.dataset.year) === year);
         });
 
@@ -3193,20 +5005,48 @@
       }
 
       function setArchiveLoading(loading) {
-        const btn     = document.getElementById("arch-add-btn");
+        const btn = document.getElementById("arch-add-btn");
         const cartBtn = document.getElementById("arch-cart-btn");
         if (!btn) return;
         if (loading) {
           btn.disabled = true;
-          btn.innerHTML = 'Preparing checkout… <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+          btn.innerHTML =
+            'Preparing checkout… <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
           if (cartBtn) cartBtn.disabled = true;
         } else {
-          const hasSelection = archiveState.selectedYear && archiveState.selectedMonths.size > 0;
+          const hasSelection =
+            archiveState.selectedYear && archiveState.selectedMonths.size > 0;
           btn.disabled = !hasSelection;
-          btn.innerHTML = 'Buy Now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+          btn.innerHTML =
+            'Buy Now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
           if (cartBtn) cartBtn.disabled = !hasSelection;
         }
       }
+
+      // Shares the cart's "Shipping to" preference (cart.js reads the same key).
+      function normalizeArchiveShipRegion(value) {
+        return value === "CA" || value === "INTL" ? value : "US";
+      }
+
+      function getArchiveShipRegion() {
+        try {
+          return normalizeArchiveShipRegion(
+            localStorage.getItem("kahani_ship_region"),
+          );
+        } catch (_) {
+          return "US";
+        }
+      }
+
+      window.setArchiveShipRegion = function (value) {
+        try {
+          localStorage.setItem(
+            "kahani_ship_region",
+            normalizeArchiveShipRegion(value),
+          );
+        } catch (_) {}
+        updateCartUI();
+      };
 
       window.handleArchiveCheckout = async function () {
         const { selectedYear, selectedMonths } = archiveState;
@@ -3221,6 +5061,21 @@
         }
 
         setArchiveError("");
+
+        const monthNames = Array.from(selectedMonths)
+          .sort((a, b) => a - b)
+          .map((m) => MONTH_FULL[m]);
+
+        // Same destination step as Shop Buy Now (cart.js); the server prices
+        // shipping and the customer picks a service on Stripe Checkout.
+        let shipping = { shippingRegion: getArchiveShipRegion() };
+        if (typeof window.ensureShippingDestination === "function") {
+          shipping = await window.ensureShippingDestination({
+            title: `The Kahani Times Archive — ${monthNames.length} edition${monthNames.length === 1 ? "" : "s"}`,
+          });
+          if (!shipping) return; // dialog closed
+        }
+
         setArchiveLoading(true);
 
         try {
@@ -3229,14 +5084,18 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               selectedYear: String(selectedYear),
-              selectedMonths: Array.from(selectedMonths).sort((a, b) => a - b).map(m => MONTH_FULL[m]),
+              selectedMonths: monthNames,
+              shippingRegion: shipping.shippingRegion,
+              destination: shipping.destination,
             }),
           });
 
-          const data = await response.json();
+          const data = await response.json().catch(() => ({}));
 
           if (!response.ok) {
-            throw new Error(data.error || "Unable to create checkout.");
+            const err = new Error(data.error || "Unable to create checkout.");
+            err.fromServer = Boolean(data.error) && response.status === 400;
+            throw err;
           }
           if (!data.url) {
             throw new Error("Checkout URL missing.");
@@ -3245,7 +5104,11 @@
           window.location.href = data.url;
         } catch (err) {
           console.error("[Archive checkout]", err);
-          setArchiveError("Something went wrong creating your checkout. Please try again.");
+          setArchiveError(
+            err.fromServer
+              ? err.message
+              : "Something went wrong creating your checkout. Please try again.",
+          );
           setArchiveLoading(false);
         }
       };
@@ -3254,26 +5117,30 @@
         const { selectedYear, selectedMonths } = archiveState;
         if (!selectedYear || selectedMonths.size === 0) return;
 
-        const months     = Array.from(selectedMonths).sort((a, b) => a - b);
-        const monthNames = months.map(m => MONTH_FULL[m]);
-        const count      = months.length;
-        const total      = count * ARCHIVE_PRICE_PER_MONTH;
+        const months = Array.from(selectedMonths).sort((a, b) => a - b);
+        const monthNames = months.map((m) => MONTH_FULL[m]);
+        const count = months.length;
+        const total = count * ARCHIVE_PRICE_PER_MONTH;
 
         const cartItem = {
-          id:             `archive-${selectedYear}`,
-          productType:    "kahani_times_archive",
-          name:           "The Kahani Times Archive",
-          selectedYear:   String(selectedYear),
+          id: `archive-${selectedYear}`,
+          productType: "kahani_times_archive",
+          name: "The Kahani Times Archive",
+          selectedYear: String(selectedYear),
           selectedMonths: monthNames,
-          quantity:       count,
-          price:          ARCHIVE_PRICE_PER_MONTH,
-          total:          total,
-          image:          "/assets/images/products/subscribe/jan.png",
-          packaging:      "Bundled together in one clear protective plastic sleeve",
+          quantity: count,
+          price: ARCHIVE_PRICE_PER_MONTH,
+          total: total,
+          image: "/assets/images/products/subscribe/jan.png",
+          packaging: "Bundled together in one clear protective plastic sleeve",
         };
 
         // Replace existing archive item for same year (per-year dedup)
-        const existingIdx = cart.findIndex(item => item.productType === "kahani_times_archive" && item.selectedYear === String(selectedYear));
+        const existingIdx = cart.findIndex(
+          (item) =>
+            item.productType === "kahani_times_archive" &&
+            item.selectedYear === String(selectedYear),
+        );
         if (existingIdx >= 0) {
           cart[existingIdx] = cartItem;
         } else {
@@ -3294,34 +5161,49 @@
       // Reads directly from localStorage so it is safe to call before cart.js loads.
       // Queries DOM elements live so timing of navbar injection doesn't matter.
       function updateCartUI() {
-        const currentCart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
+        const currentCart =
+          JSON.parse(localStorage.getItem("kahani_cart")) || [];
 
         const badge = document.getElementById("cart-badge");
-        const totalItems = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalItems = currentCart.reduce(
+          (sum, item) => sum + item.quantity,
+          0,
+        );
         if (badge) {
           badge.textContent = totalItems;
           badge.classList.toggle("hidden", totalItems === 0);
         }
 
         const totalEl = document.getElementById("cart-total-amount");
-        const total = currentCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = currentCart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
         if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+        // Defined by cart.js, which loads after the navbar; it re-renders on init.
+        if (window.renderCartShipping) window.renderCartShipping(currentCart);
+        const archShipRegion = document.getElementById("arch-ship-region");
+        if (archShipRegion) archShipRegion.value = getArchiveShipRegion();
 
         const cartBox = document.getElementById("cart-items");
         if (!cartBox) return;
         if (currentCart.length === 0) {
-          cartBox.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
+          cartBox.innerHTML =
+            '<div class="empty-cart-msg">Your cart is empty.</div>';
           return;
         }
 
-        cartBox.innerHTML = currentCart.map((item) => {
-          const itemTotal = (item.price * item.quantity).toFixed(2);
+        cartBox.innerHTML = currentCart
+          .map((item) => {
+            const itemTotal = (item.price * item.quantity).toFixed(2);
 
-          if (item.productType === "kahani_times_archive") {
-            const monthList = Array.isArray(item.selectedMonths) ? item.selectedMonths.join(", ") : (item.selectedMonths || "");
-            return `
+            if (item.productType === "kahani_times_archive") {
+              const monthList = Array.isArray(item.selectedMonths)
+                ? item.selectedMonths.join(", ")
+                : item.selectedMonths || "";
+              return `
               <div class="cart-item">
-                <img src="${item.image || '/assets/images/products/subscribe/jan.png'}" alt="${item.name}">
+                <img src="${item.image || "/assets/images/products/subscribe/jan.png"}" alt="${item.name}">
                 <div class="cart-item-details">
                   <h4>${item.name}</h4>
                   <div style="font-size:0.75rem;color:var(--muted,#52615D);margin-top:0.15rem;line-height:1.65;">
@@ -3335,11 +5217,11 @@
                   </div>
                 </div>
               </div>`;
-          }
+            }
 
-          return `
+            return `
             <div class="cart-item">
-              <img src="${item.image || ''}" alt="${item.name}">
+              <img src="${item.image || ""}" alt="${item.name}">
               <div class="cart-item-details">
                 <h4>${item.name}</h4>
                 <div class="cart-item-price">$${itemTotal}</div>
@@ -3351,7 +5233,8 @@
                 </div>
               </div>
             </div>`;
-        }).join("");
+          })
+          .join("");
       }
 
       function closeSuccessModal() {
@@ -3364,18 +5247,34 @@
       // Registered before cart.js loads so cart.js delegates to it via the
       // window.customHandleCheckout hook.
       window.customHandleCheckout = async function () {
-        const currentCart = JSON.parse(localStorage.getItem("kahani_cart")) || [];
+        const currentCart =
+          JSON.parse(localStorage.getItem("kahani_cart")) || [];
         if (currentCart.length === 0) return;
+
+        // Destination from the cart's ZIP / postal fields (cart.js); null
+        // means it is prompting the customer. Services are chosen on Stripe.
+        const shipping = window.getCartShippingSelection
+          ? window.getCartShippingSelection()
+          : { shippingRegion: window.getCartShipRegion ? window.getCartShipRegion() : "US" };
+        if (!shipping) return;
 
         const btn = document.getElementById("checkout-btn");
         const originalText = btn ? btn.innerText : "Checkout";
-        if (btn) { btn.disabled = true; btn.innerText = "Redirecting to Stripe…"; }
+        if (btn) {
+          btn.disabled = true;
+          btn.innerText = "Redirecting to Stripe…";
+        }
 
         try {
           const response = await fetch("/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cartItems: currentCart, cancelUrl: "https://kahanikorner.com/subscribe.html" }),
+            body: JSON.stringify({
+              cartItems: currentCart,
+              cancelUrl: "https://kahanikorner.com/subscribe.html",
+              shippingRegion: shipping.shippingRegion,
+              destination: shipping.destination,
+            }),
           });
 
           const data = await response.json().catch(() => ({}));
@@ -3389,7 +5288,10 @@
         } catch (err) {
           console.error("[Cart checkout]", err);
           alert(err.message || "Something went wrong. Please try again.");
-          if (btn) { btn.disabled = false; btn.innerText = originalText; }
+          if (btn) {
+            btn.disabled = false;
+            btn.innerText = originalText;
+          }
         }
       };
 
@@ -3417,23 +5319,52 @@
       // subscription month from today's date (in the store's Central Time
       // zone) instead of hardcoded month names, so this section never goes stale.
       (function () {
-        var TIME_ZONE   = 'America/Chicago';
-        var CUTOFF_DAY  = 20; // subscribe by this day of the month
-        var SHIP_DAY    = 30; // mail ships on this day of the month
-        var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
-                            'July', 'August', 'September', 'October', 'November', 'December'];
-        var MONTH_ABBR  = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var TIME_ZONE = "America/Chicago";
+        var CUTOFF_DAY = 20; // subscribe by this day of the month
+        var SHIP_DAY = 30; // mail ships on this day of the month
+        var MONTH_NAMES = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        var MONTH_ABBR = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
 
         function getTZParts(date) {
-          var fmt = new Intl.DateTimeFormat('en-US', {
-            timeZone: TIME_ZONE, hour12: false,
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
+          var fmt = new Intl.DateTimeFormat("en-US", {
+            timeZone: TIME_ZONE,
+            hour12: false,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
           });
           var parts = {};
           fmt.formatToParts(date).forEach(function (p) {
-            if (p.type !== 'literal') parts[p.type] = parseInt(p.value, 10);
+            if (p.type !== "literal") parts[p.type] = parseInt(p.value, 10);
           });
           if (parts.hour === 24) parts.hour = 0;
           return parts;
@@ -3443,7 +5374,14 @@
         function zonedWallTimeToUtc(y, m, d, hh, mi, ss) {
           var guess = new Date(Date.UTC(y, m, d, hh, mi, ss));
           var parts = getTZParts(guess);
-          var guessAsWallUtc = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+          var guessAsWallUtc = Date.UTC(
+            parts.year,
+            parts.month - 1,
+            parts.day,
+            parts.hour,
+            parts.minute,
+            parts.second,
+          );
           return new Date(guess.getTime() + (guess.getTime() - guessAsWallUtc));
         }
 
@@ -3452,17 +5390,25 @@
           return { y: y + Math.floor(total / 12), m: ((total % 12) + 12) % 12 };
         }
 
-        function label(month) { return MONTH_NAMES[month.m] + ' ' + month.y; }
-        function abbr(month)  { return MONTH_ABBR[month.m]; }
+        function label(month) {
+          return MONTH_NAMES[month.m] + " " + month.y;
+        }
+        function abbr(month) {
+          return MONTH_ABBR[month.m];
+        }
 
         // ---- Determine cycle state from today's date (in store timezone) ----
         var nowParts = getTZParts(new Date());
-        var today    = { y: nowParts.year, m: nowParts.month - 1, d: nowParts.day };
+        var today = {
+          y: nowParts.year,
+          m: nowParts.month - 1,
+          d: nowParts.day,
+        };
 
-        var packMonth = null;   // month currently being packed (only exists days 21–30)
-        var cycleMonth;         // month currently open for new subscriptions
+        var packMonth = null; // month currently being packed (only exists days 21–30)
+        var cycleMonth; // month currently open for new subscriptions
         if (today.d > CUTOFF_DAY && today.d <= SHIP_DAY) {
-          packMonth  = { y: today.y, m: today.m };
+          packMonth = { y: today.y, m: today.m };
           cycleMonth = addMonths(today.y, today.m, 1);
         } else if (today.d > SHIP_DAY) {
           // 31st of a long month: this month's mail already shipped on the 30th
@@ -3471,140 +5417,213 @@
           cycleMonth = { y: today.y, m: today.m };
         }
 
-        var deadline = zonedWallTimeToUtc(cycleMonth.y, cycleMonth.m, CUTOFF_DAY, 23, 59, 59);
+        var deadline = zonedWallTimeToUtc(
+          cycleMonth.y,
+          cycleMonth.m,
+          CUTOFF_DAY,
+          23,
+          59,
+          59,
+        );
 
         // ---- Status banner ----
-        var bannerEl    = document.getElementById('kkt-status-banner');
-        var bannerTitle = document.getElementById('kkt-status-title');
-        var bannerText  = document.getElementById('kkt-status-text');
+        var bannerEl = document.getElementById("kkt-status-banner");
+        var bannerTitle = document.getElementById("kkt-status-title");
+        var bannerText = document.getElementById("kkt-status-text");
         if (packMonth) {
-          bannerEl.style.display = '';
+          bannerEl.style.display = "";
           var packMonthName = MONTH_NAMES[packMonth.m];
-          bannerTitle.textContent = 'Currently Packing — ' + label(packMonth) + ' Mail';
-          bannerText.textContent  = packMonthName + ' mail is being prepared from '
-            + packMonthName + ' ' + CUTOFF_DAY + '–' + SHIP_DAY + ' and ships from the US on '
-            + packMonthName + ' ' + SHIP_DAY + '.';
+          bannerTitle.textContent =
+            "Currently Packing — " + label(packMonth) + " Mail";
+          bannerText.textContent =
+            packMonthName +
+            " mail is being prepared from " +
+            packMonthName +
+            " " +
+            CUTOFF_DAY +
+            "–" +
+            SHIP_DAY +
+            " and ships from the US on " +
+            packMonthName +
+            " " +
+            SHIP_DAY +
+            ".";
         } else {
-          bannerEl.style.display = 'none';
+          bannerEl.style.display = "none";
         }
 
         // ---- Heading + subtitle ----
-        document.getElementById('kkt-cycle-title').textContent = 'Next Kahani Times — ' + label(cycleMonth);
-        document.getElementById('kkt-cycle-subtitle').textContent =
-          'Subscribe by ' + abbr(cycleMonth) + ' ' + CUTOFF_DAY + ' · Ships from the US ' + abbr(cycleMonth) + ' ' + SHIP_DAY;
+        document.getElementById("kkt-cycle-title").textContent =
+          "Next Kahani Times — " + label(cycleMonth);
+        document.getElementById("kkt-cycle-subtitle").textContent =
+          "Subscribe by " +
+          abbr(cycleMonth) +
+          " " +
+          CUTOFF_DAY +
+          " · Ships from the US " +
+          abbr(cycleMonth) +
+          " " +
+          SHIP_DAY;
 
         // ---- Calendars: packMonth (if active) + cycleMonth, else cycleMonth alone ----
-        var card2 = document.getElementById('kkt-cal-card-2');
+        var card2 = document.getElementById("kkt-cal-card-2");
         var months = packMonth ? [packMonth, cycleMonth] : [cycleMonth];
-        if (!packMonth) card2.style.display = 'none';
-        else card2.style.display = '';
+        if (!packMonth) card2.style.display = "none";
+        else card2.style.display = "";
 
         function renderCalendar(month, role, titleId, gridId) {
           var titleEl = document.getElementById(titleId);
-          var grid    = document.getElementById(gridId);
+          var grid = document.getElementById(gridId);
           titleEl.textContent = label(month);
-          grid.setAttribute('aria-label', label(month) + ' shipping calendar');
+          grid.setAttribute("aria-label", label(month) + " shipping calendar");
 
-          var firstDay  = new Date(month.y, month.m, 1).getDay(); // 0=Sun
-          var offset    = (firstDay === 0) ? 6 : firstDay - 1;    // Mon-based
+          var firstDay = new Date(month.y, month.m, 1).getDay(); // 0=Sun
+          var offset = firstDay === 0 ? 6 : firstDay - 1; // Mon-based
           var daysInMon = new Date(month.y, month.m + 1, 0).getDate();
-          var dayNames  = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-          var html      = '';
+          var dayNames = ["M", "T", "W", "T", "F", "S", "S"];
+          var html = "";
 
           dayNames.forEach(function (d) {
-            html += '<div class="kkt-cal-day-header" aria-hidden="true">' + d + '</div>';
+            html +=
+              '<div class="kkt-cal-day-header" aria-hidden="true">' +
+              d +
+              "</div>";
           });
           for (var i = 0; i < offset; i++) {
             html += '<div class="kkt-cal-day"></div>';
           }
 
           for (var day = 1; day <= daysInMon; day++) {
-            var isToday  = month.y === today.y && month.m === today.m && day === today.d;
-            var isPrep   = role === 'pack'  && day >= CUTOFF_DAY && day <= SHIP_DAY;
-            var isCycle  = role === 'cycle' && day >= 1 && day <= CUTOFF_DAY;
-            var isShip   = day === SHIP_DAY;
+            var isToday =
+              month.y === today.y && month.m === today.m && day === today.d;
+            var isPrep =
+              role === "pack" && day >= CUTOFF_DAY && day <= SHIP_DAY;
+            var isCycle = role === "cycle" && day >= 1 && day <= CUTOFF_DAY;
+            var isShip = day === SHIP_DAY;
 
-            var cls = 'kkt-cal-day';
-            if (isCycle) cls += ' kkt-cal-day--cycle';
-            if (isPrep)  cls += ' kkt-cal-day--prep';
-            if (isToday) cls += ' kkt-cal-day--today';
-            if (isShip)  cls += ' kkt-cal-day--shipping';
+            var cls = "kkt-cal-day";
+            if (isCycle) cls += " kkt-cal-day--cycle";
+            if (isPrep) cls += " kkt-cal-day--prep";
+            if (isToday) cls += " kkt-cal-day--today";
+            if (isShip) cls += " kkt-cal-day--shipping";
 
-            var ariaLbl = day
-              + (isToday ? ', today' : '')
-              + (isPrep  ? ', mail prep window' : '')
-              + (isCycle ? ', open subscription window' : '')
-              + (isShip  ? ', mail ships from US' : '');
+            var ariaLbl =
+              day +
+              (isToday ? ", today" : "") +
+              (isPrep ? ", mail prep window" : "") +
+              (isCycle ? ", open subscription window" : "") +
+              (isShip ? ", mail ships from US" : "");
 
-            html += '<div class="' + cls + '" aria-label="' + ariaLbl + '">' + day + '</div>';
+            html +=
+              '<div class="' +
+              cls +
+              '" aria-label="' +
+              ariaLbl +
+              '">' +
+              day +
+              "</div>";
           }
 
           grid.innerHTML = html;
         }
 
         if (packMonth) {
-          renderCalendar(packMonth,  'pack',  'kkt-cal-title-1', 'kkt-cal-grid-1');
-          renderCalendar(cycleMonth, 'cycle', 'kkt-cal-title-2', 'kkt-cal-grid-2');
+          renderCalendar(
+            packMonth,
+            "pack",
+            "kkt-cal-title-1",
+            "kkt-cal-grid-1",
+          );
+          renderCalendar(
+            cycleMonth,
+            "cycle",
+            "kkt-cal-title-2",
+            "kkt-cal-grid-2",
+          );
         } else {
-          renderCalendar(cycleMonth, 'cycle', 'kkt-cal-title-1', 'kkt-cal-grid-1');
+          renderCalendar(
+            cycleMonth,
+            "cycle",
+            "kkt-cal-title-1",
+            "kkt-cal-grid-1",
+          );
         }
 
         // ---- Legend ----
-        var legendPrep     = document.getElementById('kkt-legend-prep');
-        var legendShipPack  = document.getElementById('kkt-legend-ship-pack');
-        var legendCycle     = document.getElementById('kkt-legend-cycle');
-        var legendShipCycle = document.getElementById('kkt-legend-ship-cycle');
+        var legendPrep = document.getElementById("kkt-legend-prep");
+        var legendShipPack = document.getElementById("kkt-legend-ship-pack");
+        var legendCycle = document.getElementById("kkt-legend-cycle");
+        var legendShipCycle = document.getElementById("kkt-legend-ship-cycle");
 
         if (packMonth) {
-          legendPrep.style.display    = '';
-          legendShipPack.style.display = '';
-          document.getElementById('kkt-legend-prep-text').textContent =
-            'Current prep — ' + abbr(packMonth) + ' ' + CUTOFF_DAY + '–' + SHIP_DAY;
-          document.getElementById('kkt-legend-ship-pack-text').textContent =
-            abbr(packMonth) + ' ' + SHIP_DAY + ' — ' + abbr(packMonth) + ' mail ships';
-          document.getElementById('kkt-legend-cycle-text').textContent =
-            'Next cycle — ' + abbr(cycleMonth) + ' 1–' + CUTOFF_DAY;
-          document.getElementById('kkt-legend-ship-cycle-text').textContent =
-            abbr(cycleMonth) + ' ' + SHIP_DAY + ' — next mail ships';
+          legendPrep.style.display = "";
+          legendShipPack.style.display = "";
+          document.getElementById("kkt-legend-prep-text").textContent =
+            "Current prep — " +
+            abbr(packMonth) +
+            " " +
+            CUTOFF_DAY +
+            "–" +
+            SHIP_DAY;
+          document.getElementById("kkt-legend-ship-pack-text").textContent =
+            abbr(packMonth) +
+            " " +
+            SHIP_DAY +
+            " — " +
+            abbr(packMonth) +
+            " mail ships";
+          document.getElementById("kkt-legend-cycle-text").textContent =
+            "Next cycle — " + abbr(cycleMonth) + " 1–" + CUTOFF_DAY;
+          document.getElementById("kkt-legend-ship-cycle-text").textContent =
+            abbr(cycleMonth) + " " + SHIP_DAY + " — next mail ships";
         } else {
-          legendPrep.style.display    = 'none';
-          legendShipPack.style.display = 'none';
-          document.getElementById('kkt-legend-cycle-text').textContent =
-            'Open now — ' + abbr(cycleMonth) + ' 1–' + CUTOFF_DAY;
-          document.getElementById('kkt-legend-ship-cycle-text').textContent =
-            abbr(cycleMonth) + ' ' + SHIP_DAY + ' — mail ships';
+          legendPrep.style.display = "none";
+          legendShipPack.style.display = "none";
+          document.getElementById("kkt-legend-cycle-text").textContent =
+            "Open now — " + abbr(cycleMonth) + " 1–" + CUTOFF_DAY;
+          document.getElementById("kkt-legend-ship-cycle-text").textContent =
+            abbr(cycleMonth) + " " + SHIP_DAY + " — mail ships";
         }
-        legendCycle.style.display     = '';
-        legendShipCycle.style.display = '';
+        legendCycle.style.display = "";
+        legendShipCycle.style.display = "";
 
         // ---- Countdown ----
         function updateCountdown() {
-          var countdownEl = document.getElementById('kkt-countdown');
-          var closedEl    = document.getElementById('kkt-closed-msg');
+          var countdownEl = document.getElementById("kkt-countdown");
+          var closedEl = document.getElementById("kkt-closed-msg");
 
           var diff = deadline - new Date();
           if (diff <= 0) {
-            countdownEl.style.display = 'none';
-            closedEl.style.display    = 'block';
+            countdownEl.style.display = "none";
+            closedEl.style.display = "block";
             return;
           }
-          closedEl.style.display    = 'none';
-          countdownEl.style.display = 'flex';
+          closedEl.style.display = "none";
+          countdownEl.style.display = "flex";
 
           var days = Math.floor(diff / 86400000);
-          var hrs  = Math.floor((diff % 86400000) / 3600000);
-          var mins = Math.floor((diff % 3600000)  / 60000);
-          var secs = Math.floor((diff % 60000)    / 1000);
+          var hrs = Math.floor((diff % 86400000) / 3600000);
+          var mins = Math.floor((diff % 3600000) / 60000);
+          var secs = Math.floor((diff % 60000) / 1000);
 
-          document.getElementById('kkt-days').textContent = String(days).padStart(2, '0');
-          document.getElementById('kkt-hrs').textContent  = String(hrs).padStart(2, '0');
-          document.getElementById('kkt-mins').textContent = String(mins).padStart(2, '0');
-          document.getElementById('kkt-secs').textContent = String(secs).padStart(2, '0');
+          document.getElementById("kkt-days").textContent = String(
+            days,
+          ).padStart(2, "0");
+          document.getElementById("kkt-hrs").textContent = String(hrs).padStart(
+            2,
+            "0",
+          );
+          document.getElementById("kkt-mins").textContent = String(
+            mins,
+          ).padStart(2, "0");
+          document.getElementById("kkt-secs").textContent = String(
+            secs,
+          ).padStart(2, "0");
         }
 
         updateCountdown();
         setInterval(updateCountdown, 1000);
-      }());
+      })();
     </script>
     <script src="/assets/js/navbar-loader.js" defer></script>
     <script src="/assets/js/footer-loader.js" defer></script>

@@ -1,7 +1,94 @@
-const config = window.STORY_HOME_CONFIG;
+// ── Page config ───────────────────────────────────────────────
+// Issues from Oct 2026 on: <script type="application/json" id="issue-config"> is the single
+// source of truth (see issue-loader.js). LEGACY: older tkt issues and /qr/book pages still
+// define window.STORY_HOME_CONFIG inline, and keep rendering exactly as before.
+
+// Shared practice games, in display order. An issue shows one when games.<id> is present.
+const PRACTICE_GAMES = [
+  { id: "flashcards", label: "Flashcards", href: "/qr/assets/html/flashcards.html" },
+  { id: "quiz", label: "Quiz", href: "/qr/assets/html/quiz.html" },
+  { id: "fillblank", label: "Fill in the Blank", href: "/qr/assets/html/fillblank.html" },
+  { id: "matching", label: "Picture Match", href: "/qr/assets/html/matching.html" },
+  { id: "riddles", label: "Riddles", href: "/qr/assets/html/riddles.html" },
+  { id: "memory", label: "Memory Game", href: "/qr/assets/html/memory.html" },
+  { id: "wordsearch", label: "Word Search", href: "/qr/assets/html/wordsearch.html" },
+  { id: "speedgrid", label: "Speed Grid", href: "/qr/assets/html/speedgrid.html" },
+  { id: "fallingwords", label: "Falling Words", href: "/qr/assets/html/fallingwords.html" },
+];
+
+// Default routes for issue-content games (an issue can override with games.<key>.route)
+const GAME_ROUTES = {
+  audioNewsletter: "/qr/assets/html/audionewsletter.html",
+  fillTheKahani: "/qr/assets/html/fill-the-kahani.html",
+  madLib: "/qr/assets/html/urdu-mad-lib.html",
+};
+
+function fromIssueConfig(json) {
+  const games = {};
+  for (const [key, game] of Object.entries(json.games || {})) {
+    if (game && game.enabled !== false) games[key] = game;
+  }
+
+  return {
+    issueId: json.issue.id,
+    slug: json.issue.id,
+    title: json.issue.title,
+    coverImage: json.issue.coverImage,
+    orderedWords: json.vocabulary?.words || [],
+    activityAnswerKeys: json.activityAnswerKeys || [],
+    games,
+  };
+}
+
+function loadPageConfig() {
+  const el = document.getElementById("issue-config");
+  if (!el) return window.STORY_HOME_CONFIG || null;
+
+  try {
+    const json = window.KKIssue
+      ? window.KKIssue.readConfigFromDocument(document)
+      : JSON.parse(el.textContent);
+    if (!json?.issue?.id) throw new Error('issue-config is missing "issue.id"');
+    return fromIssueConfig(json);
+  } catch (e) {
+    console.error("[KK issue] Could not read issue-config on this page:", e);
+    return null;
+  }
+}
+
+const config = loadPageConfig();
 
 if (!config) {
-  throw new Error("STORY_HOME_CONFIG is missing on this page.");
+  const container = document.getElementById("button-container");
+  if (container) {
+    container.innerHTML = `<p class="ne-section__sub">This issue's activities aren't available right now. Please check back soon!</p>`;
+  }
+  throw new Error("No issue config found on this page.");
+}
+
+function gameHref(key) {
+  const route = config.games[key].route || GAME_ROUTES[key];
+  return `${route}?issue=${encodeURIComponent(config.issueId)}`;
+}
+
+// Static answer keys + a link card for every interactive game that defines games.<key>.card
+function getAnswerKeys() {
+  const keys = [...(config.activityAnswerKeys || [])];
+
+  for (const [key, game] of Object.entries(config.games || {})) {
+    if (!game.card) continue;
+    keys.push({
+      id: key,
+      type: "link",
+      title: game.card.title,
+      subtitle: game.card.subtitle,
+      description: game.card.description,
+      linkLabel: game.card.linkLabel,
+      href: gameHref(key),
+    });
+  }
+
+  return keys;
 }
 
 const pageTitle = document.getElementById("page-title");
@@ -126,6 +213,9 @@ const ACTIVITY_ICONS = {
 };
 
 function getStoryAudioHref() {
+  if (config.games) {
+    return config.games.audioNewsletter ? gameHref("audioNewsletter") : null;
+  }
   return config.activities?.find((a) => a.id === "readaloud")?.href ?? null;
 }
 
@@ -148,7 +238,7 @@ function renderNewspaperExtrasSection() {
 
   // Main 2×2 card grid: Story Audio, Answer Keys, Fill the Kahani, Full Word Bank
   const audioHref = getStoryAudioHref();
-  const hasAnswerKeys = !!config.activityAnswerKeys?.length;
+  const hasAnswerKeys = getAnswerKeys().length > 0;
   const mainGrid = document.createElement("div");
   mainGrid.className = "ne-main-grid";
 
@@ -183,7 +273,9 @@ function renderNewspaperExtrasSection() {
   }
 
   // Fill the Kahani card
-  const ftkQuestions = config?.fillTheKahani?.questions;
+  const ftkQuestions = config.games
+    ? config.games.fillTheKahani?.game?.questions
+    : config.fillTheKahani?.questions;
   const hasFtk = Array.isArray(ftkQuestions) && ftkQuestions.length > 0;
 
   const fillKahaniCard = document.createElement(hasFtk ? "a" : "div");
@@ -200,7 +292,11 @@ function renderNewspaperExtrasSection() {
     <div class="ne-card__sub">${hasFtk ? "Fill in missing words from this month's kahani" : "Coming soon"}</div>
   `;
 
-  if (hasFtk) {
+  if (hasFtk && config.games) {
+    // The game loads this issue's content itself from ?issue=
+    fillKahaniCard.href = gameHref("fillTheKahani");
+  } else if (hasFtk) {
+    // LEGACY: hand the inline config to the game through sessionStorage
     const FTK_HREF = "/qr/assets/html/fill-the-kahani.html";
     fillKahaniCard.href = FTK_HREF;
     fillKahaniCard.addEventListener("click", function (event) {
@@ -331,6 +427,20 @@ function buildPracticeGameButtons() {
   const wordsParam = buildWordsParam(activeWords);
   const buttons = [];
 
+  if (config.games) {
+    for (const game of PRACTICE_GAMES) {
+      if (!config.games[game.id]) continue;
+      buttons.push({
+        id: game.id,
+        label: config.games[game.id].label || game.label,
+        href: `${game.href}?words=${wordsParam}`,
+      });
+    }
+    return buttons;
+  }
+
+  // LEGACY: inline `activities` list (quiz/fill-in-the-blank and speed grid/falling words
+  // were added implicitly after flashcards and word search)
   for (const activity of config.activities) {
     if (activity.id === "readaloud") continue;
 
@@ -458,7 +568,7 @@ function openActivityAnswerKeysModal() {
   const content = document.createElement("div");
   content.className = "ak-full-content";
 
-  const cards = config.activityAnswerKeys.map((ak) => {
+  const cards = getAnswerKeys().map((ak) => {
     const card = renderAnswerKeyCard(ak);
     content.appendChild(card);
     return card;
@@ -601,6 +711,27 @@ function renderAnswerKeyCard(ak) {
     imgWrapper.appendChild(openBtn);
 
     body.appendChild(imgWrapper);
+  }
+
+  // Interactive version of a newspaper activity (e.g. the Urdu Mad Lib)
+  if (ak.type === "link" && ak.href) {
+    const linkWrapper = document.createElement("div");
+    linkWrapper.className = "ak-link-wrapper";
+
+    if (ak.description) {
+      const descEl = document.createElement("p");
+      descEl.className = "ak-link-text";
+      descEl.textContent = ak.description;
+      linkWrapper.appendChild(descEl);
+    }
+
+    const playBtn = document.createElement("a");
+    playBtn.className = "ak-download-btn";
+    playBtn.href = ak.href;
+    playBtn.textContent = `${ak.linkLabel || "Play online"} →`;
+    linkWrapper.appendChild(playBtn);
+
+    body.appendChild(linkWrapper);
   }
 
   card.appendChild(body);

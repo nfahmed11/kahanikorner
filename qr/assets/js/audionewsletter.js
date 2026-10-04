@@ -116,13 +116,48 @@ function initInteractions() {
   });
 }
 
+function showUnavailable() {
+  document.getElementById("storyTitle").textContent = "Coming Soon!";
+  document.querySelector(".subtitle").textContent = "This issue's audio hasn't been added yet. Check back soon!";
+}
+
+// Issues from Oct 2026 on: games.audioNewsletter in the monthly index.html.
+// audioBase may be relative to the issue folder (e.g. "./assets/audio/").
+function loadFromIssueConfig() {
+  return window.KKIssue.loadGame("audioNewsletter").then(({ issue, game, baseUrl }) => ({
+    title: game.title || issue.title,
+    monthYear: issue.monthYear,
+    vol: issue.vol,
+    no: issue.no,
+    audioBase: new URL(game.audioBase || "./assets/audio/", baseUrl).pathname,
+    pages: game.pages || [],
+  }));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Only the shared template has these containers (thekahanitimes.html reuses this
+  // script with its own static markup and no issue data)
+  if (!document.getElementById("pageWrapper")) return;
+
   const slug = new URL(window.location.href).searchParams.get("issue");
-  const issues = window.AUDIONEWSLETTER_ISSUES || {};
-  const issue = issues[slug] || issues[Object.keys(issues).pop()];
+  const legacyIssues = window.AUDIONEWSLETTER_ISSUES || {};
 
-  if (!issue) return;
+  // LEGACY: issues up to Sept 2026 (and links with no ?issue=) use audionewsletter-data.js
+  const legacyIssue = slug ? legacyIssues[slug] : legacyIssues[Object.keys(legacyIssues).pop()];
+  const loading = legacyIssue ? Promise.resolve(legacyIssue) : loadFromIssueConfig();
 
-  renderIssue(issue);
-  initInteractions();
+  loading.then(
+    (issue) => {
+      if (!issue.pages.length) {
+        showUnavailable();
+        return;
+      }
+      renderIssue(issue);
+      initInteractions();
+    },
+    (error) => {
+      window.KKIssue.logFailure("Audio newsletter", error);
+      showUnavailable();
+    }
+  );
 });

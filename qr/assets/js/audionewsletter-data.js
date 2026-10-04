@@ -1,4 +1,6 @@
-// Per-issue content for the shared audio newsletter template (qr/assets/html/audionewsletter.html).
+// LEGACY audio content for issues up to September 2026 — keeps already-printed QR codes working.
+// Don't add new issues here: from October 2026 on, each issue defines games.audioNewsletter
+// in its own qr/tkt/<YYYY>/<slug>/index.html (issue-config), which audionewsletter.js loads.
 // Selected at runtime via the ?issue=<slug> query param.
 window.AUDIONEWSLETTER_ISSUES = {
   "1225": {
@@ -381,6 +383,42 @@ window.AUDIONEWSLETTER_ISSUES = {
           { audio: "khatt.mp3", title: "Letter From Dada Jee", sub: "A Special Message for 14 August" },
         ],
       },
+    ],
+  },
+
+  "0926sep": {
+    title: "Do Ghar, Aik Dil",
+    monthYear: "September 2026",
+    vol: 2,
+    no: 9,
+    audioBase: "/qr/tkt/2026/sept0926/assets/audio/",
+    pages: [
+      {
+        heading: "Story Time",
+        tag: "Main Story",
+        tagClass: "story",
+        sections: [
+          { audio: "story.mp3", title: "Do Ghar, Aik Dil", sub: "This Month's Story" },
+        ],
+      },
+      {
+        heading: "Aaj Ka Lafz",
+        tag: "Vocabulary Builder",
+        tagClass: "vocab",
+        sections: [
+          { audio: "word.mp3", title: "Aaj Ka Lafz", sub: "Word of the Day — Pardes" },
+        ],
+      },
+      // No khatt.mp3 this issue — uncomment and add the audio file to
+      // qr/tkt/2026/0926sep/assets/audio/ to bring this page back:
+      // {
+      //   heading: "Letter From Dada Jee",
+      //   tag: "Closing Notes",
+      //   tagClass: "letter",
+      //   sections: [
+      //     { audio: "khatt.mp3", title: "Letter From Dada Jee", sub: "Dada Jee's Letter About Mango Season" },
+      //   ],
+      // },
     ],
   },
 };

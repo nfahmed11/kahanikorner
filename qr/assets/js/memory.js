@@ -116,34 +116,57 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --------------------
   // Helpers for NEW vocab schema
   // --------------------
-  function getRomanForms(card) {
+  // Each roman form (base or variant) paired with ITS OWN english/urdu, so a
+  // variant like "parathay" resolves to "parathas", not the base's "paratha".
+  function getWordForms(card) {
     if (!card) return [];
 
     const forms = [];
+    const seen = new Set();
+    const add = (ru, en, ur) => {
+      ru = String(ru || "").trim();
+      if (!ru || seen.has(ru.toLowerCase())) return;
+      seen.add(ru.toLowerCase());
+      forms.push({ ru, en: en || "", ur: ur || "" });
+    };
 
     if (card.word?.baseRomanUrdu) {
-      forms.push(card.word.baseRomanUrdu);
+      add(card.word.baseRomanUrdu, card.word.english, card.word.baseUrdu);
     }
 
     if (Array.isArray(card.variants)) {
       card.variants.forEach((variant) => {
-        if (variant?.romanUrdu) forms.push(variant.romanUrdu);
+        if (variant?.romanUrdu) {
+          add(variant.romanUrdu, variant.english || card.word?.english, variant.urdu || card.word?.baseUrdu);
+        }
       });
     }
 
-    return [...new Set(forms)];
+    return forms;
+  }
+
+  function getRomanForms(card) {
+    return getWordForms(card).map((f) => f.ru);
   }
 
   function getBaseRoman(card) {
     return card?.word?.baseRomanUrdu || "";
   }
 
+  // The form (base or variant) actually matching ALLOWED_WORDS — used so the
+  // roman/urdu/english shown together always describe the same form.
+  function getMatchedForm(card) {
+    const forms = getWordForms(card);
+    const matched = forms.find((f) => ALLOWED_WORDS?.has(f.ru));
+    return matched || forms[0] || { ru: "", en: "", ur: "" };
+  }
+
   function getUrdu(card) {
-    return card?.word?.baseUrdu || "";
+    return getMatchedForm(card).ur;
   }
 
   function getEnglish(card) {
-    return card?.word?.english || "";
+    return getMatchedForm(card).en;
   }
 
   function matchesAllowed(card) {
@@ -153,9 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function displayRoman(card) {
-    const forms = getRomanForms(card);
-    const matched = forms.find((w) => ALLOWED_WORDS?.has(w));
-    return matched || getBaseRoman(card) || "";
+    return getMatchedForm(card).ru;
   }
 
   function hasImagePath(card) {

@@ -3,23 +3,46 @@ import { vocab as originalVocab } from "./mastervocab.js";
 // --------------------
 // Vocab helpers
 // --------------------
-function getRomanForms(card) {
+// Each roman form (base or variant) paired with ITS OWN english/urdu, so a
+// variant like "parathay" resolves to "parathas", not the base's "paratha".
+function getWordForms(card) {
   if (!card) return [];
   const forms = [];
-  if (card.word?.baseRomanUrdu) forms.push(card.word.baseRomanUrdu);
-  if (Array.isArray(card.variants)) {
-    card.variants.forEach((v) => { if (v?.romanUrdu) forms.push(v.romanUrdu); });
+  const seen = new Set();
+  const add = (ru, en, ur) => {
+    ru = String(ru || "").trim();
+    if (!ru || seen.has(ru.toLowerCase())) return;
+    seen.add(ru.toLowerCase());
+    forms.push({ ru, en: en || "", ur: ur || "" });
+  };
+  if (card.word?.baseRomanUrdu) {
+    add(card.word.baseRomanUrdu, card.word.english, card.word.baseUrdu);
   }
-  return [...new Set(forms)];
+  if (Array.isArray(card.variants)) {
+    card.variants.forEach((v) => {
+      if (v?.romanUrdu) add(v.romanUrdu, v.english || card.word?.english, v.urdu || card.word?.baseUrdu);
+    });
+  }
+  return forms;
 }
 
-function getUrdu(card) { return card?.word?.baseUrdu || ""; }
-function getEnglish(card) { return card?.word?.english || ""; }
+function getRomanForms(card) {
+  return getWordForms(card).map((f) => f.ru);
+}
+
+// The form (base or variant) actually matching ALLOWED_WORDS — used so the
+// roman/urdu shown together always describe the same form.
+function getMatchedForm(card) {
+  const forms = getWordForms(card);
+  const matched = forms.find((f) => window.ALLOWED_WORDS?.has(f.ru));
+  return matched || forms[0] || { ru: "", en: "", ur: "" };
+}
+
+function getUrdu(card) { return getMatchedForm(card).ur; }
+function getEnglish(card) { return getMatchedForm(card).en; }
 
 function displayRoman(card) {
-  const forms = getRomanForms(card);
-  const matched = forms.find((w) => window.ALLOWED_WORDS?.has(w));
-  return matched || card?.word?.baseRomanUrdu || "";
+  return getMatchedForm(card).ru;
 }
 
 function matchesAllowed(card) {

@@ -111,7 +111,7 @@ html, body {
 }
 
 body {
-  font-family: "Grandstander", "Segoe UI", sans-serif;
+  font-family: var(--qr-font-body);
   background: linear-gradient(160deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
   color: var(--text-main);
   -webkit-tap-highlight-color: transparent;
@@ -158,9 +158,10 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   filter: drop-shadow(0 2px 4px rgba(0,0,0,.2));
 }
 .menu-title {
+  font-family: var(--qr-font-display);
   margin: 0; padding: 0;
-  font-size: clamp(1.4rem, 5vw, 1.9rem);
-  font-weight: 900;
+  font-size: var(--qr-text-title-bar);
+  font-weight: 700;
   color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,.2);
   line-height: 1.1;
@@ -184,6 +185,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .menu-section { margin-bottom: 24px; }
 
 .menu-section-title {
+  font-family: var(--qr-font-display);
   font-size: .8rem;
   font-weight: 700;
   letter-spacing: .08em;
@@ -247,7 +249,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   color: #fff;
   box-shadow: 0 4px 14px var(--accent-glow);
 }
-.diff-num { font-size: 1.1rem; font-weight: 700; line-height: 1; }
+.diff-num { font-family: var(--qr-font-display); font-size: 1.1rem; font-weight: 700; line-height: 1; }
 .diff-lbl { font-size: .65rem; font-weight: 600; opacity: .8; margin-top: 2px; }
 
 /* Display options */
@@ -298,6 +300,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 /* Start button */
 .btn-start {
+  font-family: var(--qr-font-display);
   display: block;
   width: 100%;
   padding: 18px;
@@ -362,7 +365,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: flex; align-items: baseline; gap: 2px;
 }
 .hud-score {
-  font-size: 1.3rem; font-weight: 900; color: #fff;
+  font-family: var(--qr-font-display);
+  font-size: 1.3rem; font-weight: 700; color: #fff;
   transition: transform .15s ease;
 }
 .hud-score.bump { transform: scale(1.3); }
@@ -616,7 +620,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   color: var(--text-sub); line-height: 1.2;
 }
 .card-urdu {
-  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+  font-family: var(--qr-font-urdu);
   font-size: 1rem; font-weight: 400;
   color: var(--text-main); line-height: 1.8;
   direction: rtl; text-align: right;
@@ -635,6 +639,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 /* ─── HINT BUTTON ─────────────────────────────────────────────────── */
 
 .btn-hint {
+  font-family: var(--qr-font-display);
   position: fixed;
   bottom: 20px; right: 16px;
   padding: 10px 16px;
@@ -681,8 +686,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .overlay-emoji { font-size: 3rem; line-height: 1; margin-bottom: 12px; }
 .overlay-title {
+  font-family: var(--qr-font-display);
   margin: 0 0 8px;
-  font-size: 1.5rem; font-weight: 900;
+  font-size: 1.5rem; font-weight: 700;
   color: var(--text-main);
 }
 .overlay-sub {
@@ -701,7 +707,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 .round-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .round-stat-val {
-  font-size: 1.6rem; font-weight: 900;
+  font-family: var(--qr-font-display);
+  font-size: 1.6rem; font-weight: 700;
   color: var(--accent-1);
 }
 .round-stat-lbl { font-size: .7rem; font-weight: 600; color: var(--text-sub); }
@@ -719,6 +726,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   text-align: left;
 }
 .insights-title {
+  font-family: var(--qr-font-display);
   font-size: .78rem; font-weight: 700; color: var(--accent-1);
   margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em;
 }
@@ -737,6 +745,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 .btn-primary {
+  font-family: var(--qr-font-display);
   padding: 14px;
   border-radius: 12px;
   background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
@@ -749,6 +758,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
 
 .btn-secondary {
+  font-family: var(--qr-font-display);
   padding: 12px;
   border-radius: 12px;
   background: transparent;
@@ -807,7 +817,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 /* Urdu text helper used outside cards */
 .urdu-text {
-  font-family: "Noto Nastaliq Urdu", serif;
+  font-family: var(--qr-font-urdu);
   direction: rtl;
 }
 

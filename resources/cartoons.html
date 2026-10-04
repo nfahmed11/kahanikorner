@@ -152,7 +152,7 @@
         width: min(1200px, calc(100% - 2rem));
         z-index: 100;
         padding: 0.5rem 2rem;
-        background: rgba(255, 254, 251, 0.55);
+        background: rgba(255, 254, 251, 0.65);
         backdrop-filter: blur(10px);
         border: 2px solid rgba(170, 174, 154, 0.7);
         border-radius: 999px;
@@ -188,7 +188,7 @@
       }
 
       .brand-logo {
-        height: 32px;
+        height: 44px;
         width: auto;
         display: block;
       }
@@ -196,9 +196,9 @@
       .nav {
         display: flex;
         align-items: center;
-        gap: 40px;
+        gap: 32px;
         font-weight: 300;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
       }
@@ -211,7 +211,7 @@
       }
 
       .nav a:hover {
-        color: var(--deep-teal);
+        color: var(--rose-pink);
         font-weight: 700;
         text-shadow:
           -1px -1px 0 var(--granite),
@@ -222,7 +222,18 @@
 
       .nav a.nav-active {
         font-weight: 700;
-        color: var(--rosy-taupe);
+        position: relative;
+      }
+
+      .nav a.nav-active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--deep-teal);
+        border-radius: 999px;
       }
 
       .mobile-toggle {
@@ -472,7 +483,8 @@
       }
 
       .mobile-menu__links li a.nav-active {
-        color: var(--rosy-taupe);
+        font-weight: 700;
+        color: var(--deep-teal);
       }
 
       @media (min-width: 769px) {
@@ -508,6 +520,9 @@
         }
         .nav {
           display: none !important;
+        }
+        .brand-logo {
+          height: 34px;
         }
       }
 

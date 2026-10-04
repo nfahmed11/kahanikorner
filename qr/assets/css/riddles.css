@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap");
+/* Fonts + shared type tokens come from qr-base.css (linked first) */
 
 :root {
   --bg: #fdf1ea;
@@ -58,9 +58,9 @@
   --container-max: 960px;
   --tap: 58px;
 
-  --font-ui: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-title: "Baloo 2", system-ui, sans-serif;
-  --font-urdu: "Noto Nastaliq Urdu", serif;
+  --font-ui: var(--qr-font-body);
+  --font-title: var(--qr-font-display);
+  --font-urdu: var(--qr-font-urdu);
 
   --transition-fast: 140ms ease;
   --transition-med: 220ms ease;
@@ -385,22 +385,23 @@ border: 1px solid #e4c979;
 .english-text {
   margin: 0;
   color: var(--text);
-  font-size: clamp(1.02rem, 2vw, 1.2rem);
-  font-weight: 700;
-  line-height: 1.5;
+  font-size: var(--qr-text-read);
+  font-weight: var(--qr-weight-read);
+  line-height: 1.6;
 }
 
 .english-text {
   color: var(--text-soft);
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
 .urdu-text {
   margin: 0;
   color: var(--text);
   font-family: var(--font-urdu);
-  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-  line-height: 2;
+  font-size: var(--qr-text-urdu-read);
+  line-height: var(--qr-leading-urdu);
 }
 
 .status-card {
@@ -663,8 +664,9 @@ border: 1px solid #cdb0f3;
   color: var(--text);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
-  font-size: 0.98rem;
-  font-weight: 800;
+  font-family: var(--font-title);
+  font-size: var(--qr-text-button);
+  font-weight: 700;
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast),
@@ -789,7 +791,7 @@ border: 1px solid #cdb0f3;
 
 .word .roman-text {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .word .urdu-text {
@@ -1087,9 +1089,10 @@ border: 1px solid #bfa5ef;
 }
 
 .completion-screen h2 {
+  font-family: var(--font-title);
   margin: 0;
-  font-size: 1.55rem;
-  font-weight: 800;
+  font-size: var(--qr-text-result);
+  font-weight: 700;
 }
 
 .completion-screen p {

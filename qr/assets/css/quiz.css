@@ -15,7 +15,7 @@ body {
 
 /* Header pops on vibrant bg */
 .app-title {
-  font-size: 1.5rem;
+  font-size: var(--qr-text-title-bar);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -140,9 +140,9 @@ body {
 
 /* ---------- Question label ---------- */
 .quiz-question-label {
-  font-family: "Fredoka", sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+  font-family: var(--qr-font-body);
+  font-weight: var(--qr-weight-ui);
+  font-size: var(--qr-text-ui);
   color: #6c5ce7;
   letter-spacing: 0.3px;
 }

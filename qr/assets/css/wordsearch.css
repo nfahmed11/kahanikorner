@@ -26,7 +26,7 @@ input[type="range"],
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:"Baloo 2",cursive;
+  font-family:var(--qr-font-body);
   /* Funky permanent gradient background */
   background: linear-gradient(135deg, #76eefe 0%, #fce4ec 50%, #f3e5f5 100%);
   background-size:cover;
@@ -257,7 +257,8 @@ main{
 
 .panel h2{
   margin:6px 0 10px;
-  font-size:24px;
+  font-family:var(--qr-font-display);
+  font-size:var(--qr-text-section);
   text-align:center;
   font-weight:700;
 }
@@ -376,7 +377,7 @@ main{
 
 /* Urdu script cells */
 .urdu-cell{
-  font-family:"Noto Nastaliq Urdu","Baloo 2",cursive;
+  font-family:var(--qr-font-urdu);
   text-transform:none;
   direction:ltr;
 }
@@ -599,6 +600,7 @@ header.scrolled{
 
 /* Make controls feel consistent (pill look) */
 select, button{
+  font-family:inherit;
   border-radius: 999px;
   padding: 8px 12px;
   box-shadow: none;

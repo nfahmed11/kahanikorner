@@ -7,9 +7,9 @@
 <div class="topbar">
   <div class="topbar__inner">
     <div class="topbar__track">
-      <span>Free Urdu Resources</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-      <span>Free Urdu Resources</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
-      <span>Free Urdu Resources</span><span>•</span><span>Free Shipping on All US Orders</span><span>•</span>
+      <span>Free Urdu Resources</span><span>•</span><span>Free US Shipping on Orders $65+</span><span>•</span>
+      <span>Free Urdu Resources</span><span>•</span><span>Free US Shipping on Orders $65+</span><span>•</span>
+      <span>Free Urdu Resources</span><span>•</span><span>Free US Shipping on Orders $65+</span><span>•</span>
     </div>
   </div>
 </div>
@@ -76,9 +76,23 @@
       <div class="empty-cart-msg">Your cart is empty.</div>
     </div>
     <div class="cart-footer">
+      <label class="cart-ship-region">
+        <span>Shipping to</span>
+        <select id="cart-ship-region">
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="INTL">International</option>
+        </select>
+      </label>
+      <div id="cart-ship-estimator"></div>
       <div class="cart-total">
-        <span>Total</span><span id="cart-total-amount">$0.00</span>
+        <span>Subtotal</span><span id="cart-total-amount">$0.00</span>
       </div>
+      <div class="cart-shipping-row">
+        <span>Shipping</span><span id="cart-shipping-amount">Calculated at checkout</span>
+      </div>
+      <p id="cart-ship-progress" class="cart-ship-progress" hidden></p>
+      <p id="cart-ship-note" class="cart-ship-note">Free US shipping on $65+</p>
       <button id="checkout-btn" class="checkout-btn">Checkout</button>
     </div>
   </div>

@@ -251,7 +251,7 @@ function buildNumberItems(storyVocab) {
         key:      `${n.id}__plural_${i}`,
         roman:    v.romanUrdu  || n.roman,
         urdu:     v.urdu       || n.urdu,
-        english:  `${n.english} (plural)`,
+        english:  v.english    || `${n.english} (plural)`,
         category: "plural",
         hint:     `${cap(v.romanUrdu || n.roman)} is a plural form.`,
       });

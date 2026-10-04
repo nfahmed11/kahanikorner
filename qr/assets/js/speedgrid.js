@@ -5,20 +5,47 @@ import { vocab as originalVocab } from "./mastervocab.js";
 // ==========================================================
 
 // ---------- Vocab helpers ----------
-function getRomanForms(card) {
+// Each roman form (base or variant) paired with ITS OWN english/urdu, so a
+// variant like "parathay" resolves to "parathas", not the base's "paratha".
+function getWordForms(card) {
   if (!card) return [];
   const forms = [];
-  if (card.word?.baseRomanUrdu) forms.push(card.word.baseRomanUrdu);
-  if (Array.isArray(card.variants)) {
-    card.variants.forEach((v) => { if (v?.romanUrdu) forms.push(v.romanUrdu); });
+  const seen = new Set();
+  const add = (ru, en, ur) => {
+    ru = String(ru || "").trim();
+    if (!ru || seen.has(ru.toLowerCase())) return;
+    seen.add(ru.toLowerCase());
+    forms.push({ ru, en: en || "", ur: ur || "" });
+  };
+  if (card.word?.baseRomanUrdu) {
+    add(card.word.baseRomanUrdu, card.word.english, card.word.baseUrdu);
   }
-  return [...new Set(forms)];
+  if (Array.isArray(card.variants)) {
+    card.variants.forEach((v) => {
+      if (v?.romanUrdu) add(v.romanUrdu, v.english || card.word?.english, v.urdu || card.word?.baseUrdu);
+    });
+  }
+  return forms;
+}
+
+function getRomanForms(card) {
+  return getWordForms(card).map((f) => f.ru);
+}
+
+// The form (base or variant) actually matching ALLOWED_WORDS — used so the
+// roman/urdu shown together always describe the same form.
+function getMatchedForm(card) {
+  const forms = getWordForms(card);
+  const matched = forms.find((f) => window.ALLOWED_WORDS?.has(f.ru));
+  return matched || forms[0] || { ru: "", en: "", ur: "" };
 }
 
 function displayRoman(card) {
-  const forms = getRomanForms(card);
-  const matched = forms.find((w) => window.ALLOWED_WORDS?.has(w));
-  return matched || card?.word?.baseRomanUrdu || "";
+  return getMatchedForm(card).ru;
+}
+
+function displayUrdu(card) {
+  return getMatchedForm(card).ur;
 }
 
 function matchesAllowed(card) {
@@ -385,17 +412,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (isMixed) {
       const roman = displayRoman(target);
-      const urdu = target.word?.baseUrdu || "";
+      const urdu = displayUrdu(target);
       promptWord.className = "prompt-word";
       promptWord.innerHTML = `<span class="prompt-roman">${roman}</span>${urdu ? `<span class="prompt-urdu urdu-text">${urdu}</span>` : ""}`;
     } else {
       const pType = promptTypes[0];
       let word;
       if (pType === "urdu") {
-        word = target.word?.baseUrdu || displayRoman(target);
+        word = displayUrdu(target) || displayRoman(target);
         promptWord.className = "prompt-word urdu-text";
       } else if (pType === "english") {
-        word = target.word?.english || displayRoman(target);
+        word = getMatchedForm(target).en || displayRoman(target);
         promptWord.className = "prompt-word";
       } else {
         word = displayRoman(target);

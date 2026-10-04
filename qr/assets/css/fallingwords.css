@@ -4,8 +4,7 @@
    4 themes: sky · candy · jungle · stars
 ══════════════════════════════════════════════════ */
 
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap");
+/* Fonts + shared type tokens come from qr-base.css (linked first) */
 
 /* ── Reset ───────────────────────────────────────── */
 *,
@@ -25,7 +24,7 @@ body {
   height: 100%;
   height: 100dvh;
   overflow: hidden;
-  font-family: "Fredoka", "Nunito", sans-serif;
+  font-family: var(--qr-font-body);
   overscroll-behavior: none;
   touch-action: manipulation;
 }
@@ -253,7 +252,8 @@ body {
   }
 }
 .game-title {
-  font-size: clamp(34px, 9vw, 54px);
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-title);
   font-weight: 700;
   color: var(--text);
   text-shadow:
@@ -263,7 +263,7 @@ body {
   margin-bottom: 6px;
 }
 .game-tagline {
-  font-size: clamp(13px, 3.2vw, 15px);
+  font-size: var(--qr-text-subtitle);
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -304,7 +304,7 @@ body {
   border: 2px solid var(--prompt-bdr);
   border-radius: 12px;
   padding: 10px 36px 10px 14px;
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: clamp(13px, 3.3vw, 15px);
   font-weight: 500;
   color: var(--text);
@@ -332,7 +332,7 @@ body {
   border: 2px solid var(--prompt-bdr);
   border-radius: 12px;
   background: transparent;
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: clamp(12px, 3vw, 14px);
   font-weight: 600;
   color: var(--text-muted);
@@ -380,7 +380,7 @@ body {
   flex-shrink: 0;
 }
 .tc-name {
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: 10px;
   font-weight: 600;
   color: var(--text);
@@ -398,7 +398,7 @@ body {
   text-align: center;
 }
 .instr-card p {
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: var(--qr-text-helper);
   color: var(--text-muted);
   font-weight: 500;
   line-height: 1.6;
@@ -418,8 +418,8 @@ body {
   background: var(--btn-bg);
   border: none;
   border-radius: 20px;
-  font-family: "Fredoka", sans-serif;
-  font-size: clamp(20px, 5vw, 24px);
+  font-family: var(--qr-font-display);
+  font-size: clamp(1.15rem, 4.5vw, 1.35rem);
   font-weight: 700;
   color: #fff;
   cursor: pointer;
@@ -684,7 +684,7 @@ body {
   word-break: break-word;
 }
 .prompt-word.is-urdu {
-  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+  font-family: var(--qr-font-urdu);
   font-size: clamp(28px, 8vw, 44px);
   direction: rtl;
   line-height: 1.6;
@@ -711,7 +711,7 @@ body {
   padding: 13px 18px;
   cursor: pointer;
   text-align: center;
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: clamp(14px, 3.6vw, 17px);
   font-weight: 600;
   color: var(--text);
@@ -724,7 +724,7 @@ body {
 }
 
 .ans-box.is-urdu {
-  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+  font-family: var(--qr-font-urdu);
   font-size: clamp(16px, 4.5vw, 20px);
   direction: rtl;
   padding: 14px 16px 10px;
@@ -885,7 +885,8 @@ body {
 }
 
 .ov-title {
-  font-size: clamp(24px, 6vw, 32px);
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-result);
   font-weight: 700;
   color: var(--ov-text);
   margin-bottom: 20px;
@@ -901,8 +902,8 @@ body {
   padding: 14px 20px;
   border: none;
   border-radius: 14px;
-  font-family: "Fredoka", sans-serif;
-  font-size: clamp(15px, 4vw, 17px);
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-button);
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -994,7 +995,7 @@ body {
 }
 .score-pop {
   position: absolute;
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: clamp(16px, 4vw, 22px);
   font-weight: 700;
   color: var(--accent);
@@ -1169,7 +1170,7 @@ body {
 
 /* ─── Force Urdu font for game-over text if needed ─── */
 .urdu-display {
-  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+  font-family: var(--qr-font-urdu);
   direction: rtl;
   font-size: 1.2em;
   line-height: 1.8;

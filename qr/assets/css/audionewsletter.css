@@ -22,8 +22,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
-  font-family: "Authentic Sans", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: var(--qr-font-body);
   background-color: var(--bg);
   background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
   background-size: 20px 20px;
@@ -40,7 +39,7 @@ body {
 ===================================================================== */
 main {
   width: 100%;
-  max-width: 680px;
+  max-width: var(--qr-page-max);
   background: var(--cream);
   border: 2px solid var(--ink);
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.18), 0 20px 50px rgba(0, 0, 0, 0.14);
@@ -54,7 +53,7 @@ main {
   background: var(--ink);
   color: var(--cream);
   text-align: center;
-  font-family: "Grandstander", system-ui, sans-serif;
+  font-family: var(--qr-font-display);
   font-size: 0.6rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -76,8 +75,8 @@ main {
 }
 
 h1 {
-  font-family: "Grandstander", system-ui, sans-serif;
-  font-size: 2.5rem;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-title);
   font-weight: 700;
   color: var(--ink);
   margin: 0 0 0.35rem;
@@ -94,7 +93,7 @@ h1 {
 
 .subtitle {
   color: var(--ink-light);
-  font-size: 0.87rem;
+  font-size: var(--qr-text-subtitle);
   margin: 0 0 1rem;
   letter-spacing: 0.03em;
 }
@@ -128,7 +127,7 @@ h1 {
   background: var(--parchment);
   border: 1px dashed var(--tan);
   border-radius: 3px;
-  font-size: 0.8rem;
+  font-size: var(--qr-text-helper);
 }
 
 .how-to-title {
@@ -167,7 +166,7 @@ h1 {
   color: var(--ink);
   padding: 0.35rem 1.1rem;
   border-radius: 4px;
-  font-family: "Grandstander", system-ui, sans-serif;
+  font-family: var(--qr-font-display);
   font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
@@ -226,7 +225,7 @@ h1 {
 }
 
 .page-heading h2 {
-  font-family: "Grandstander", system-ui, sans-serif;
+  font-family: var(--qr-font-display);
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0.1rem 0 0.45rem;
@@ -325,7 +324,7 @@ h1 {
 }
 
 .label-main {
-  font-family: "Grandstander", system-ui, sans-serif;
+  font-family: var(--qr-font-display);
   font-weight: 700;
   font-size: 1rem;
   color: var(--ink);
@@ -333,7 +332,7 @@ h1 {
 }
 
 .label-sub {
-  font-size: 0.8rem;
+  font-size: var(--qr-text-helper);
   color: var(--ink-muted);
   line-height: 1.3;
 }
@@ -389,7 +388,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  max-width: 680px;
+  max-width: var(--qr-page-max);
   margin: 0 auto;
 }
 
@@ -402,7 +401,7 @@ h1 {
 }
 
 .now-playing-badge {
-  font-family: "Grandstander", system-ui, sans-serif;
+  font-family: var(--qr-font-display);
   font-size: 0.6rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -450,10 +449,6 @@ audio {
 @media (max-width: 520px) {
   body {
     padding: 0.75rem 0.5rem 170px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
   }
 
   .masthead-body {

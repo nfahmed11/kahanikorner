@@ -31,36 +31,44 @@ const letters = "abcdefghijklmnopqrstuvwxyz";
 const urduLetters = "ابپتٹثجچحخدڈذرڑزژسشصضطظعغفقکگلمنوہھیے";
 
 /* ===================== Helpers ===================== */
-function getRomanForms(item) {
+// Returns [{ ru, en, ur }] — each roman form (base or variant) paired with
+// ITS OWN english/urdu, so a variant like "parathay" gets "parathas", not
+// the base word's "paratha".
+function getWordForms(item) {
   if (!item) return [];
 
   const forms = [];
+  const seen = new Set();
+
+  const add = (ru, en, ur) => {
+    ru = String(ru || "").trim();
+    if (!ru) return;
+    const key = ru.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    forms.push({ ru, en: String(en || "").trim(), ur: String(ur || "").trim() });
+  };
 
   if (item.word?.baseRomanUrdu) {
-    forms.push(String(item.word.baseRomanUrdu).trim());
+    add(item.word.baseRomanUrdu, item.word.english, item.word.baseUrdu);
   }
 
   if (Array.isArray(item.variants)) {
     item.variants.forEach((variant) => {
-      if (variant?.romanUrdu) {
-        forms.push(String(variant.romanUrdu).trim());
-      }
+      if (!variant?.romanUrdu) return;
+      add(
+        variant.romanUrdu,
+        variant.english || item.word?.english,
+        variant.urdu || item.word?.baseUrdu
+      );
     });
   }
 
-  return [...new Set(forms.filter(Boolean))];
-}
-
-function getBaseRoman(item) {
-  return item?.word?.baseRomanUrdu ? String(item.word.baseRomanUrdu).trim() : "";
+  return forms;
 }
 
 function getEnglish(item) {
   return item?.word?.english ? String(item.word.english).trim() : "";
-}
-
-function getUrdu(item) {
-  return item?.word?.baseUrdu ? String(item.word.baseUrdu).trim() : "";
 }
 
 function buildWords() {
@@ -73,16 +81,8 @@ function buildWords() {
   const source = Array.isArray(originalVocab) ? originalVocab : [];
 
   const words = source
-    .filter((item) => getEnglish(item) && getRomanForms(item).length)
-    .flatMap((item) => {
-      const en = getEnglish(item);
-      const ur = getUrdu(item);
-      return getRomanForms(item).map((ru) => ({
-        en,
-        ru: String(ru).trim(),
-        ur,
-      }));
-    })
+    .filter((item) => getEnglish(item) && getWordForms(item).length)
+    .flatMap((item) => getWordForms(item).filter((w) => w.en))
     .filter((w) => {
       if (!ALLOWED_WORDS_LOWER) return true;
       return ALLOWED_WORDS_LOWER.has(w.ru.toLowerCase());
@@ -98,7 +98,7 @@ function buildWords() {
 
   const vocabRoman = new Set(
     source
-      .flatMap((item) => getRomanForms(item))
+      .flatMap((item) => getWordForms(item).map((w) => w.ru))
       .map((w) => String(w).trim().toLowerCase())
       .filter(Boolean)
   );

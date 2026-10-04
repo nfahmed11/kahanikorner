@@ -1,5 +1,5 @@
 /* memory.css */
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+/* Fonts + shared type tokens come from qr-base.css (linked first) */
 
 :root {
   --primary: #1777af;
@@ -9,7 +9,7 @@
 * { box-sizing: border-box; }
 
 body {
-  font-family: "Quicksand", sans-serif;
+  font-family: var(--qr-font-body);
   background: linear-gradient(135deg, #f9f7fe 0%, #e4f1fe 100%);
   min-height: 100vh;
   margin: 0;
@@ -42,8 +42,9 @@ header.hud {
 
 .hud-h1 {
   margin: 0;
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-title-bar);
+  font-weight: 700;
   line-height: 1.1;
 }
 
@@ -134,7 +135,8 @@ header.hud {
 }
 
 .hud-popover-title {
-  font-weight: 800;
+  font-family: var(--qr-font-display);
+  font-weight: 700;
   color: #1f3a8a;
 }
 
@@ -188,8 +190,10 @@ header.hud {
   border: none;
   border-radius: 12px;
   padding: 10px 12px;
+  min-height: var(--qr-tap);
   cursor: pointer;
-  font-weight: 800;
+  font-family: var(--qr-font-display);
+  font-weight: 700;
   color: white;
   background: linear-gradient(135deg, #6366f1, #a855f7);
   box-shadow: 0 10px 22px rgba(99,102,241,0.25);
@@ -335,8 +339,9 @@ header.hud {
 }
 
 .fit-text-urdu {
+  font-family: var(--qr-font-urdu);
   font-size: clamp(0.75rem, 1.25vw, 1.1rem);
-  line-height: 1.2;
+  line-height: 1.7;
   max-width: 100%;
   text-align: center;
   overflow-wrap: anywhere;

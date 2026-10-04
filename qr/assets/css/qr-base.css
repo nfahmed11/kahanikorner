@@ -1,0 +1,65 @@
+/* ── QR base — shared typography & layout tokens ──────────────────────────
+   Taken from the Urdu Mad Lib, the reference QR page.
+   Link this BEFORE a game's own stylesheet. It only loads fonts and defines
+   custom properties — no element styles, no colours — so each game keeps its
+   own palette and mechanics and opts in selector by selector.
+
+   Font roles
+     display → titles, section titles, buttons, badges, short word chips
+     body    → instructions, sentences, Roman Urdu / English reading text, labels
+     urdu    → Urdu script only
+   ──────────────────────────────────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Fredoka:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap");
+
+:root {
+  /* font roles */
+  --qr-font-display: "Grandstander", "Fredoka", cursive;
+  --qr-font-body:    "Fredoka", system-ui, sans-serif;
+  --qr-font-urdu:    "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+
+  /* type scale */
+  --qr-text-eyebrow:    0.7rem;                          /* uppercase, tracked */
+  --qr-text-tag:        0.62rem;                         /* badges / pills */
+  --qr-text-title:      clamp(1.75rem, 7.5vw, 2.4rem);   /* page / start-screen title */
+  --qr-text-title-bar:  1.2rem;                          /* title inside a compact game header bar */
+  --qr-text-section:    1.2rem;                          /* card / panel heading */
+  --qr-text-result:     clamp(1.3rem, 5.5vw, 1.6rem);    /* result / completion heading */
+  --qr-text-subtitle:   1rem;                            /* instruction under a title */
+  --qr-text-read:       clamp(1.02rem, 4.2vw, 1.12rem);  /* sentences, story, Roman Urdu */
+  --qr-text-ui:         0.92rem;                         /* labels, answer text, controls */
+  --qr-text-helper:     0.84rem;                         /* secondary / supporting lines */
+  --qr-text-small:      0.76rem;                         /* examples, captions, meta */
+  --qr-text-button:     0.92rem;
+  --qr-text-button-lg:  1.15rem;                         /* the one primary CTA */
+  --qr-text-urdu-read:  clamp(1.2rem, 4.8vw, 1.4rem);    /* Urdu shown beside --qr-text-read */
+
+  /* weights */
+  --qr-weight-read:     500;
+  --qr-weight-ui:       600;
+  --qr-weight-strong:   700;
+
+  /* line-heights */
+  --qr-leading-tight:   1.15;   /* titles */
+  --qr-leading-ui:      1.45;   /* labels, subtitles, short UI text */
+  --qr-leading-read:    1.8;    /* multi-line reading text */
+  --qr-leading-urdu:    2.2;    /* Nastaliq needs extra room */
+
+  /* letter-spacing */
+  --qr-tracking-eyebrow: 0.14em;
+  --qr-tracking-tag:     0.1em;
+
+  /* layout */
+  --qr-page-max:        640px;  /* reading / form games */
+  --qr-page-gutter:     1rem;
+  --qr-card-radius:     20px;
+  --qr-card-pad:        1.3rem 1.15rem 1.45rem;
+  --qr-card-pad-wide:   1.5rem 1.5rem 1.7rem;   /* ≥ 600px */
+  --qr-stack:           0.95rem;                /* gap between stacked fields / cards */
+
+  /* buttons */
+  --qr-btn-radius:      12px;
+  --qr-btn-min-h:       48px;
+  --qr-btn-pad:         0.72rem 1rem;
+  --qr-tap:             44px;   /* minimum tap target */
+}

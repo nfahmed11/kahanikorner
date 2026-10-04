@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+/* Fonts + shared type tokens come from qr-base.css (linked first) */
 
 /* ---------- Variables — candy pop ---------- */
 :root {
@@ -23,7 +22,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   background: linear-gradient(160deg, #fff0f6 0%, #e0fffe 50%, #f0fdf4 100%);
   color: var(--text);
   min-height: 100vh;
@@ -59,7 +58,8 @@ body::before {
 }
 
 .header-title {
-  font-size: 1.2rem;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-title-bar);
   font-weight: 700;
   color: #fff;
 }
@@ -189,7 +189,7 @@ body::before {
   border-radius: 18px;
   background: var(--surface);
   color: var(--text);
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -215,7 +215,7 @@ body::before {
 }
 
 .answer-btn .urdu {
-  font-family: "Noto Nastaliq Urdu", serif;
+  font-family: var(--qr-font-urdu);
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--text);
@@ -359,15 +359,16 @@ body::before {
 }
 
 .modal-title {
-  font-size: 1.5rem;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-result);
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
 .modal-stat {
+  font-size: var(--qr-text-subtitle);
   color: var(--text-muted);
-  font-size: 1rem;
   margin-bottom: 1.25rem;
 }
 
@@ -378,11 +379,12 @@ body::before {
 }
 
 .modal-btn {
-  font-family: "Fredoka", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.7rem 1.5rem;
-  border-radius: 14px;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-button);
+  font-weight: 700;
+  min-height: var(--qr-btn-min-h);
+  padding: 0.72rem 1.5rem;
+  border-radius: var(--qr-btn-radius);
   border: none;
   cursor: pointer;
   transition: all 0.2s;

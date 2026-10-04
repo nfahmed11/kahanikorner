@@ -299,25 +299,39 @@ function loadSettings(difficultyRange, languageCheckboxes) {
   } catch {}
 }
 
-function getRomanForms(card) {
+// Each roman form (base or variant) paired with ITS OWN english/urdu, so a
+// variant like "parathay" resolves to "parathas", not the base's "paratha".
+function getWordForms(card) {
   if (!card) return [];
-
   const forms = [];
-  if (card.word?.baseRomanUrdu) forms.push(card.word.baseRomanUrdu);
-
+  const seen = new Set();
+  const add = (ru, en, ur) => {
+    ru = String(ru || "").trim();
+    if (!ru || seen.has(ru.toLowerCase())) return;
+    seen.add(ru.toLowerCase());
+    forms.push({ ru, en: en || "", ur: ur || "" });
+  };
+  if (card.word?.baseRomanUrdu) {
+    add(card.word.baseRomanUrdu, card.word.english, card.word.baseUrdu);
+  }
   if (Array.isArray(card.variants)) {
     card.variants.forEach((variant) => {
-      if (variant?.romanUrdu) forms.push(variant.romanUrdu);
+      if (variant?.romanUrdu) add(variant.romanUrdu, variant.english || card.word?.english, variant.urdu || card.word?.baseUrdu);
     });
   }
+  return forms;
+}
 
-  return [...new Set(forms)];
+function getRomanForms(card) {
+  return getWordForms(card).map((f) => f.ru);
 }
 
 function getBaseRoman(card) {
   return card?.word?.baseRomanUrdu || "";
 }
 
+// Base-only urdu — pairs with getBaseRoman() for Hard mode, where the
+// expected typed answer is always the base spelling.
 function getUrdu(card) {
   return card?.word?.baseUrdu || "";
 }
@@ -326,10 +340,20 @@ function getEnglish(card) {
   return card?.word?.english || "";
 }
 
+// The form (base or variant) actually matching ALLOWED_WORDS — used in
+// multiple-choice mode so the roman/urdu shown together match.
+function getMatchedForm(card) {
+  const forms = getWordForms(card);
+  const matched = forms.find((f) => window.ALLOWED_WORDS?.has(f.ru));
+  return matched || forms[0] || { ru: "", en: "", ur: "" };
+}
+
+function getMatchedUrdu(card) {
+  return getMatchedForm(card).ur;
+}
+
 function displayRoman(card) {
-  const forms = getRomanForms(card);
-  const matched = forms.find((w) => window.ALLOWED_WORDS?.has(w));
-  return matched || getBaseRoman(card) || "";
+  return getMatchedForm(card).ru;
 }
 
 function normalizeRomanUrdu(input) {
@@ -690,7 +714,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     options.forEach((card, index) => {
       const romanUrdu = displayRoman(card);
-      const urdu = getUrdu(card);
+      const urdu = getMatchedUrdu(card);
       const image = card.image || "/qr/assets/images/noimage.png";
 
       const el = document.createElement("div");

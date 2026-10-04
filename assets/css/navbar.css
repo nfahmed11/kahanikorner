@@ -176,7 +176,7 @@ header.header {
 }
 
 .brand-logo {
-  height: 32px;
+  height: 44px;
   width: auto;
   display: block;
 }
@@ -185,9 +185,9 @@ header.header {
 .nav {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
   font-weight: 300;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -199,7 +199,7 @@ header.header {
 }
 
 .nav a:hover {
-  color: var(--deep-teal);
+  color: var(--rose-pink);
   font-weight: 700;
   text-shadow:
     -1px -1px 0 var(--granite),
@@ -208,9 +208,22 @@ header.header {
      1px  1px 0 var(--granite);
 }
 
-.nav a.nav-active {
+.nav a.nav-active,
+.nav-dropdown__trigger.nav-active {
   font-weight: 700;
-  color: var(--deep-teal);
+  position: relative;
+}
+
+.nav a.nav-active::after,
+.nav-dropdown__trigger.nav-active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--deep-teal);
+  border-radius: 999px;
 }
 
 /* ── MOBILE TOGGLE ── */
@@ -452,6 +465,43 @@ header.header {
   margin-bottom: 1rem;
 }
 
+.cart-ship-region {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.cart-ship-region select {
+  font: inherit;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--ash-grey);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.cart-shipping-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin: -0.5rem 0 0.75rem;
+}
+
+.cart-ship-progress {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--deep-teal);
+}
+
+.cart-ship-note {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
 .checkout-btn {
   width: 100%;
   padding: 0.85rem;
@@ -467,6 +517,85 @@ header.header {
 }
 
 .checkout-btn:hover { background: var(--muted-gray); }
+
+/* ── SHIPPING DESTINATION (cart footer + Buy Now dialog; built by cart.js) ── */
+.ship-est { margin-bottom: 0.75rem; font-size: 0.85rem; }
+
+/* The ZIP field makes the cart footer taller: keep about one item visible
+   and let the footer scroll on short screens instead of crushing the list. */
+.cart-sidebar .cart-items { min-height: 8.5rem; }
+.cart-sidebar .cart-footer { overflow-y: auto; }
+
+/* Free shipping unlocked: the "$65+" note is hidden, so keep its gap. */
+.cart-ship-note[hidden] + .checkout-btn { margin-top: 0.65rem; }
+
+.ship-est__fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.ship-est__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1 1 7rem;
+  min-width: 0;
+}
+
+.ship-est__field[hidden] { display: none; }
+.ship-est__country { flex-basis: 100%; }
+
+.ship-est__field input,
+.ship-est__field select {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--ash-grey);
+  border-radius: 6px;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ship-est__msg { margin: 0.35rem 0 0; font-size: 0.8rem; color: var(--muted); }
+.ship-est__msg:empty { display: none; }
+.ship-est__msg--error { color: #b03a2e; }
+
+/* Buy Now destination dialog */
+.ship-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(51, 47, 35, 0.35);
+}
+
+.ship-modal__card {
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: var(--white-smoke);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 40px rgba(51, 47, 35, 0.2);
+}
+
+.ship-modal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.ship-modal__title { margin: 0; font-size: 1.15rem; color: var(--granite); }
+.ship-modal__item { margin: 0 0 0.75rem; font-size: 0.85rem; color: var(--muted); }
+.ship-modal__item[hidden] { display: none; }
 
 /* ── MOBILE MENU ── */
 .mobile-menu-overlay {
@@ -641,6 +770,8 @@ footer.footer a:hover { color: var(--pale-rose); }
   }
 
   .nav { display: none !important; }
+
+  .brand-logo { height: 34px; }
 }
 
 /* ============================================================
@@ -654,13 +785,10 @@ footer.footer a:hover { color: var(--pale-rose); }
   cursor: pointer; display: inline-flex; align-items: center; gap: 0.3em;
 }
 .nav-dropdown__trigger:hover {
-  color: var(--deep-teal); font-weight: 700;
+  color: var(--rose-pink); font-weight: 700;
   text-shadow:
     -1px -1px 0 var(--granite),  1px -1px 0 var(--granite),
     -1px  1px 0 var(--granite),  1px  1px 0 var(--granite);
-}
-.nav-dropdown__trigger.nav-active {
-  color: var(--deep-teal); font-weight: 700;
 }
 .nav-dropdown__trigger:focus-visible {
   outline: 2px solid var(--deep-teal); outline-offset: 3px; border-radius: 4px;
@@ -709,7 +837,7 @@ footer.footer a:hover { color: var(--pale-rose); }
 }
 .dropdown-menu__item i { width: 1.1em; text-align: center; color: var(--deep-teal); flex-shrink: 0; }
 .dropdown-menu__item:hover, .dropdown-menu__item:focus-visible {
-  background: var(--kk-mint-light); color: var(--granite);
+  background: var(--soft-blush); color: var(--granite);
   transform: translateX(3px); outline: none;
 }
 .dropdown-menu__item--submit {

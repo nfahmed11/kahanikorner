@@ -534,6 +534,8 @@ function renderCardBackContent(entry) {
         html += `<span class="variant-roman">${escHtml(v.romanUrdu)}</span>`;
       if (v.urdu)
         html += `<span class="variant-urdu">${escHtml(v.urdu)}</span>`;
+      if (v.english)
+        html += `<span class="variant-english">${escHtml(v.english)}</span>`;
       const meta = [v.gender, v.number].filter(Boolean).join(", ");
       if (meta) html += `<span class="variant-meta">(${escHtml(meta)})</span>`;
       html += `</div>`;

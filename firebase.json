@@ -3,6 +3,7 @@
     "public": ".",
     "ignore": [
       "firebase.json",
+      "functions/**",
       "**/.*",
       "**/node_modules/**"
     ],
@@ -14,6 +15,10 @@
       {
         "source": "/api/checkout/kahani-times-archive",
         "function": "createArchiveCheckout"
+      },
+      {
+        "source": "/api/shipping-options",
+        "function": "getShippingOptions"
       },
       {
         "source": "/api/generate-sentence",

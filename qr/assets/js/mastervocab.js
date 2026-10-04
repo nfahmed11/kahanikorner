@@ -106,7 +106,7 @@ export const vocab = [
       {
         romanUrdu: "aloo",
         urdu: "آلو",
-        english: "potato (alternate spelling)",
+        english: "potato",
         gender: "masculine",
         number: "singular",
         form: "alternate spelling",
@@ -641,7 +641,7 @@ export const vocab = [
       {
         romanUrdu: "azaan",
         urdu: "اذان",
-        english: "call to prayer (alternate spelling)",
+        english: "call to prayer",
         gender: "feminine",
         number: "singular",
         form: "alternate spelling",
@@ -4070,10 +4070,10 @@ export const vocab = [
       {
         romanUrdu: "hanste",
         urdu: "ہنستے",
-        english: "laughing (alternate spelling)",
+        english: "laughing ",
         gender: "masculine",
         number: "plural",
-        form: "habitual (alternate spelling)",
+        form: "habitual ",
       },
     ],
     image: "/qr/assets/images/hansna.png",
@@ -6908,7 +6908,7 @@ export const vocab = [
         english: "songs",
         gender: "masculine",
         number: "plural",
-        form: "plural / oblique (alternate spelling)",
+        form: "plural / oblique ",
       },
     ],
     image: "/qr/assets/images/naghma.png",
@@ -9082,7 +9082,7 @@ export const vocab = [
       {
         romanUrdu: "sufaid",
         urdu: "سفید",
-        english: "white (alternate spelling)",
+        english: "white ",
         gender: null,
         number: null,
         form: "alternate spelling",
@@ -10338,7 +10338,7 @@ export const vocab = [
     },
     grammar: { baseGender: "feminine" },
     variants: [],
-    image: "/qr/assets/images/udaasi.png",
+    image: "/qr/assets/images/udaas.png",
     riddles: {
       english: "A heavy feeling, soft and gray,\nWhen smiles seem far away.",
       romanUrdu: "Dil par halka bojh sa chhaye,\nMuskaan kahin kho jaye.",

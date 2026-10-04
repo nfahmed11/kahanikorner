@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+/* Fonts + shared type tokens come from qr-base.css (linked first) */
 
 /* ---------- Palette ---------- */
 :root {
@@ -32,14 +31,14 @@ html, body {
 }
 
 body {
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   background: var(--bg);
   color: var(--text);
   -webkit-tap-highlight-color: transparent;
 }
 
 .noto-nastaliq-urdu {
-  font-family: "Noto Nastaliq Urdu", serif;
+  font-family: var(--qr-font-urdu);
 }
 
 /* ---------- Screens ---------- */
@@ -76,7 +75,8 @@ body {
 }
 
 .start-title {
-  font-size: 2.5rem;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-title);
   font-weight: 700;
   background: linear-gradient(135deg, var(--coral), var(--purple));
   -webkit-background-clip: text;
@@ -87,7 +87,7 @@ body {
 
 .start-sub {
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: var(--qr-text-subtitle);
   font-weight: 500;
   margin-bottom: 1.25rem;
 }
@@ -104,7 +104,7 @@ body {
 }
 
 .mode-btn {
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-body);
   font-size: 0.9rem;
   font-weight: 600;
   padding: 0.5rem 1.1rem;
@@ -132,8 +132,9 @@ body {
 
 /* Play button */
 .btn {
-  font-family: "Fredoka", sans-serif;
-  font-size: 1.15rem;
+  font-family: var(--qr-font-display);
+  min-height: var(--qr-btn-min-h);
+  font-size: var(--qr-text-button-lg);
   font-weight: 700;
   border: none;
   border-radius: 16px;
@@ -264,7 +265,7 @@ body {
 }
 
 .prompt-word.urdu-text {
-  font-family: "Noto Nastaliq Urdu", serif;
+  font-family: var(--qr-font-urdu);
   font-size: clamp(1.6rem, 5vw, 2.2rem);
   direction: rtl;
   min-height: 3rem;
@@ -281,7 +282,7 @@ body {
 
 .prompt-urdu {
   display: block;
-  font-family: "Noto Nastaliq Urdu", serif;
+  font-family: var(--qr-font-urdu);
   font-size: clamp(1.3rem, 4vw, 1.8rem);
   direction: rtl;
   color: var(--purple);
@@ -392,7 +393,7 @@ body {
 /* ---------- Floating +score text ---------- */
 .float-score {
   position: fixed;
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-display);
   font-size: 1.2rem;
   font-weight: 700;
   pointer-events: none;
@@ -423,7 +424,8 @@ body {
 .end-emoji { font-size: 3.5rem; margin-bottom: 0.5rem; }
 
 .end-title {
-  font-size: 1.8rem;
+  font-family: var(--qr-font-display);
+  font-size: var(--qr-text-result);
   font-weight: 700;
   color: var(--purple);
   margin-bottom: 1.25rem;
@@ -488,7 +490,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Fredoka", sans-serif;
+  font-family: var(--qr-font-display);
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--purple);

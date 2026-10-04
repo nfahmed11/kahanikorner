@@ -1,7 +1,8 @@
 /*
  * Fill the Kahani — Game Engine
  * Multi-line rounds · drag-and-drop · bilingual chips
- * Data: window.STORY_HOME_CONFIG.story.lines via sessionStorage "KAHANI_CURRENT_ISSUE"
+ * Data: ?issue=<slug> → story + games.fillTheKahani.game from the monthly index.html (issue-loader.js)
+ *       LEGACY: window.STORY_HOME_CONFIG via sessionStorage "KAHANI_CURRENT_ISSUE"
  */
 
 var genericTalkPrompts = [
@@ -290,7 +291,14 @@ var storyTalkPrompts = [
   }
 
   // ── Data reading ──────────────────────────────────────────────────────────
+  // Set when the page is opened with ?issue=<slug> (issue-config in the monthly index.html)
+  var loadedIssue = null;
+
   function getCurrentIssue() {
+    if (loadedIssue) return loadedIssue;
+
+    // LEGACY (issues before Oct 2026): the newspaper page hands its inline
+    // config over through sessionStorage when the card is tapped
     try {
       var s = sessionStorage.getItem("KAHANI_CURRENT_ISSUE");
 
@@ -2911,6 +2919,33 @@ var storyTalkPrompts = [
   function init() {
     initRefs();
 
+    var slug = window.KKIssue && window.KKIssue.getIssueSlug();
+    if (!slug) {
+      run();
+      return;
+    }
+
+    // Opened with ?issue=<slug>: read this game's content from the monthly index.html
+    window.KKIssue.loadGame("fillTheKahani").then(
+      function (result) {
+        loadedIssue = {
+          title: result.issue.title,
+          story: result.config.story || {},
+          fillTheKahani: result.game,
+        };
+        run();
+      },
+      function (error) {
+        window.KKIssue.logFailure("Fill the Kahani", error);
+        showEmptyState(
+          "Coming Soon!",
+          "Fill the Kahani hasn't been added for this issue yet.<br>Check back soon!"
+        );
+      }
+    );
+  }
+
+  function run() {
     var issue =
       getCurrentIssue();
 

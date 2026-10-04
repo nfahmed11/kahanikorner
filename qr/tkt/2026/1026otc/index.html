@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Kahani Korner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img
+          src="/assets/images/homepage/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo" />
+      </a>
+    </header>
+
+    <h1 id="story-title"></h1>
+
+    <div class="container">
+      <div id="book-cover" class="book-placeholder"></div>
+
+      <div class="level-picker" id="level-picker"></div>
+
+      <div class="button-container" id="button-container"></div>
+    </div>
+
+    <!--
+      ┌──────────────────────────────────────────────────────────────────────┐
+      │  ISSUE CONFIG — the single source of truth for this newspaper issue. │
+      │  Every QR game for this issue reads from this block.                 │
+      │  Must be valid JSON: no comments, no trailing commas.                │
+      │  New month: copy this folder, then edit only this block.            │
+      └──────────────────────────────────────────────────────────────────────┘
+    -->
+    <script type="application/json" id="issue-config">
+      {
+        "issue": {
+          "id": "1026otc",
+          "monthYear": "October 2026",
+          "vol": 2,
+          "no": 10,
+          "title": "Do Ghar, Aik Dil",
+          "coverImage": "./assets/images/bookcover.png"
+        },
+        "story": {
+          "title": "Do Ghar, Aik Dil",
+          "lines": [
+            {
+              "id": "line-1",
+              "romanUrdu": "September ki pehli subah thi.",
+              "urdu": "ستمبر کی پہلی صبح تھی۔",
+              "english": "It was the first morning of September."
+            },
+            {
+              "id": "line-2",
+              "romanUrdu": "Mahnoor ka school bag tayyar tha, lekin Pakistan wala suitcase abhi tak aadha khula zameen par para tha.",
+              "urdu": "مہنور کا سکول بیگ تیار تھا، لیکن پاکستان والا سوٹ کیس ابھی تک آدھا کھلا زمین پر پڑا تھا۔",
+              "english": "Mahnoor's school bag was ready, but the suitcase from Pakistan still lay half-open on the floor."
+            },
+            {
+              "id": "line-3",
+              "romanUrdu": "Counter par mithai ka dabba rakha tha, aur kamray mein Nani ke diye huay tohfay bikhray huay thay.",
+              "urdu": "کاؤنٹر پر مٹھائی کا ڈبہ رکھا تھا، اور کمرے میں نانی کے دیے ہوئے تحفے بکھرے ہوئے تھے۔",
+              "english": "A box of sweets sat on the counter, and the gifts Nani had given were scattered around the room."
+            },
+            {
+              "id": "line-4",
+              "romanUrdu": "America ka ghar kitna khamosh lagta tha.",
+              "urdu": "امریکہ کا گھر کتنا خاموش لگتا تھا۔",
+              "english": "The house in America felt so quiet."
+            },
+            {
+              "id": "line-5",
+              "romanUrdu": "Na cousins ki awaazein, na chhat wali hawa, na gali ka shor.",
+              "urdu": "نہ کزنز کی آوازیں، نہ چھت والی ہوا، نہ گلی کا شور۔",
+              "english": "No cousins' voices, no rooftop breeze, no noise from the street."
+            },
+            {
+              "id": "line-6",
+              "romanUrdu": "Yahan sirf clock ki tik tik sunai deti thi.",
+              "urdu": "یہاں صرف کلاک کی ٹک ٹک سنائی دیتی تھی۔",
+              "english": "Here, only the tick-tick of the clock could be heard."
+            },
+            {
+              "id": "line-7",
+              "romanUrdu": "Ajeeb baat thi: Pakistan mein bhi woh kabhi kabhi alag mehsoos karti thi.",
+              "urdu": "عجیب بات تھی: پاکستان میں بھی وہ کبھی کبھی الگ محسوس کرتی تھی۔",
+              "english": "It was strange: even in Pakistan, she sometimes felt different too."
+            },
+            {
+              "id": "line-8",
+              "romanUrdu": "Cousins uske lehjay par hanste thay, aur tez Urdu uski samajh se nikal jati thi.",
+              "urdu": "کزنز اس کے لہجے پر ہنستے تھے، اور تیز اردو اس کی سمجھ سے نکل جاتی تھی۔",
+              "english": "Her cousins would laugh at her accent, and fast Urdu would slip past her understanding."
+            },
+            {
+              "id": "line-9",
+              "romanUrdu": "Phir bhi ab usay wahi shor yaad aa raha tha.",
+              "urdu": "پھر بھی اب اسے وہی شور یاد آ رہا تھا۔",
+              "english": "Even so, now she missed that very noise."
+            },
+            {
+              "id": "line-10",
+              "romanUrdu": "Dopahar ko us ne lunch box khola to Ammi ke haath ke aloo parathay ki khushboo aayi.",
+              "urdu": "دوپہر کو اس نے لنچ باکس کھولا تو امی کے ہاتھ کے آلو پراٹھے کی خوشبو آئی۔",
+              "english": "At noon, when she opened her lunch box, the smell of Ammi's homemade aloo paratha drifted out."
+            },
+            { "id": "line-11", "romanUrdu": "Aankhen bhar aayin.", "urdu": "آنکھیں بھر آئیں۔", "english": "Her eyes filled with tears." },
+            {
+              "id": "line-12",
+              "romanUrdu": "Ghar aa kar cousin ka voice note suna: “Jaldi wapas aana, tumhare baghair maza nahi aata.”",
+              "urdu": "گھر آ کر کزن کا وائس نوٹ سنا: “جلدی واپس آنا، تمہارے بغیر مزا نہیں آتا۔”",
+              "english": "When she got home, she listened to a voice note from her cousin: “Come back soon, it's not fun without you.”"
+            },
+            {
+              "id": "line-13",
+              "romanUrdu": "Peechay se Nani ki awaaz aayi.",
+              "urdu": "پیچھے سے نانی کی آواز آئی۔",
+              "english": "In the background, she could hear Nani's voice."
+            },
+            {
+              "id": "line-14",
+              "romanUrdu": "Us shaam Mahnoor ko samajh aaya ke udaasi sirf Pakistan yaad aane ki nahi thi.",
+              "urdu": "اس شام مہنور کو سمجھ آیا کہ اداسی صرف پاکستان یاد آنے کی نہیں تھی۔",
+              "english": "That evening, Mahnoor understood that her sadness was not only about missing Pakistan."
+            },
+            {
+              "id": "line-15",
+              "romanUrdu": "Asal sawaal yeh tha ke Pakistan ko apne saath kaise laaye.",
+              "urdu": "اصل سوال یہ تھا کہ پاکستان کو اپنے ساتھ کیسے لائے۔",
+              "english": "The real question was how to bring Pakistan along with her."
+            },
+            {
+              "id": "line-16",
+              "romanUrdu": "Us ne suitcase khola aur aik chhota sa tohfa nikala — Nani ki di hui chandi ki chooriyan.",
+              "urdu": "اس نے سوٹ کیس کھولا اور ایک چھوٹا سا تحفہ نکالا — نانی کی دی ہوئی چاندی کی چوڑیاں۔",
+              "english": "She opened the suitcase and took out one small gift — the silver bangles Nani had given her."
+            },
+            {
+              "id": "line-17",
+              "romanUrdu": "Unki halki chan chan mein usay Nani ke ghar ki raunak sunai di, aur door se azaan ki goonj bhi.",
+              "urdu": "ان کی ہلکی چن چن میں اسے نانی کے گھر کی رونق سنائی دی، اور دور سے اذان کی گونج بھی۔",
+              "english": "In their soft jingling, she could hear the liveliness of Nani's house, and the distant echo of the azaan too."
+            },
+            {
+              "id": "line-18",
+              "romanUrdu": "Us ne chooriyan apni study table ke paas rakh deen.",
+              "urdu": "اس نے چوڑیاں اپنی سٹڈی ٹیبل کے پاس رکھ دیں۔",
+              "english": "She placed the bangles beside her study table."
+            },
+            {
+              "id": "line-19",
+              "romanUrdu": "Suitcase ab bhi aadha khula tha, lekin dil thora halka ho gaya.",
+              "urdu": "سوٹ کیس اب بھی آدھا کھلا تھا، لیکن دل تھوڑا ہلکا ہو گیا۔",
+              "english": "The suitcase was still half-open, but her heart felt a little lighter."
+            },
+            {
+              "id": "line-20",
+              "romanUrdu": "Pakistan sirf garmiyon ki chhutti nahi tha.",
+              "urdu": "پاکستان صرف گرمیوں کی چھٹی نہیں تھا۔",
+              "english": "Pakistan was not just a summer vacation."
+            },
+            {
+              "id": "line-21",
+              "romanUrdu": "Woh chai mein, Urdu ke lafzon mein, aur Nani ki awaaz mein har roz saath reh sakta tha.",
+              "urdu": "وہ چائے میں، اردو کے لفظوں میں، اور نانی کی آواز میں ہر روز ساتھ رہ سکتا تھا۔",
+              "english": "It could stay with her every day — in her tea, in Urdu words, and in Nani's voice."
+            },
+            {
+              "id": "line-22",
+              "romanUrdu": "Do ghar hona koi kami nahi — yeh bhi aik tohfa tha.",
+              "urdu": "دو گھر ہونا کوئی کمی نہیں — یہ بھی ایک تحفہ تھا۔",
+              "english": "Having two homes was not a shortcoming — this too was a gift."
+            }
+          ]
+        },
+        "vocabulary": {
+          "words": [
+            "mithai",
+            "dabba",
+            "tohfa",
+            "chooriyan",
+            "chandi",
+            "parathay",
+            "aloo",
+            "chai",
+            "kamray",
+            "ghar",
+            "chhat",
+            "gali",
+            "haath",
+            "aankhen",
+            "khola",
+            "bikhray",
+            "hanste",
+            "suna",
+            "chhota",
+            "halka",
+            "khamosh",
+            "ajeeb",
+            "alag",
+            "subah",
+            "dopahar",
+            "shaam",
+            "chhutti",
+            "samajh",
+            "khushboo",
+            "hawa",
+            "awaaz",
+            "shor",
+            "goonj",
+            "azaan",
+            "lehjay",
+            "lafzon",
+            "raunak",
+            "sawaal",
+            "yaad",
+            "udaasi"
+          ]
+        },
+        "activityAnswerKeys": [
+          {
+            "id": "september-urdu-crossword",
+            "title": "September Urdu Crossword",
+            "subtitle": "Use the English clues to fill in the Urdu words in Roman Urdu. Use the story to check the correct spelling.",
+            "type": "image",
+            "image": "./assets/images/crossword-answer-key.png",
+            "imageAlt": "September Urdu Crossword answer key"
+          }
+        ],
+        "games": {
+          "audioNewsletter": {
+            "enabled": true,
+            "route": "/qr/assets/html/audionewsletter.html",
+            "game": {
+              "title": "Do Ghar, Aik Dil",
+              "audioBase": "./assets/audio/",
+              "pages": [
+                {
+                  "heading": "Story Time",
+                  "tag": "Main Story",
+                  "tagClass": "story",
+                  "sections": [{ "audio": "story.mp3", "title": "Do Ghar, Aik Dil", "sub": "This Month's Story" }]
+                },
+                {
+                  "heading": "Aaj Ka Lafz",
+                  "tag": "Vocabulary Builder",
+                  "tagClass": "vocab",
+                  "sections": [{ "audio": "word.mp3", "title": "Aaj Ka Lafz", "sub": "Word of the Day — Pardes" }]
+                }
+              ]
+            }
+          },
+          "fillTheKahani": {
+            "enabled": true,
+            "route": "/qr/assets/html/fill-the-kahani.html",
+            "game": {
+              "title": "Fill the Kahani",
+              "subtitle": "Fill in missing words from this month's kahani.",
+              "questions": [
+                {
+                  "id": "sep26-l1-1",
+                  "level": 1,
+                  "sourceLineIds": ["line-3"],
+                  "missingWords": ["tohfay"],
+                  "romanUrdu": "Counter par mithai ka dabba rakha tha, aur kamray mein Nani ke diye huay ___ bikhray huay thay.",
+                  "urdu": "کاؤنٹر پر مٹھائی کا ڈبہ رکھا تھا، اور کمرے میں نانی کے دیے ہوئے ___ بکھرے ہوئے تھے۔",
+                  "english": "A box of sweets sat on the counter, and the gifts Nani had given were scattered around the room.",
+                  "completedRomanUrdu": "Counter par mithai ka dabba rakha tha, aur kamray mein Nani ke diye huay tohfay bikhray huay thay.",
+                  "completedUrdu": "کاؤنٹر پر مٹھائی کا ڈبہ رکھا تھا، اور کمرے میں نانی کے دیے ہوئے تحفے بکھرے ہوئے تھے۔",
+                  "completedEnglish": "A box of sweets sat on the counter, and the gifts Nani had given were scattered around the room.",
+                  "choices": [
+                    { "value": "tohfay", "romanUrdu": "tohfay", "urdu": "تحفے", "english": "gifts" },
+                    { "value": "kapray", "romanUrdu": "kapray", "urdu": "کپڑے", "english": "clothes" },
+                    { "value": "khilonay", "romanUrdu": "khilonay", "urdu": "کھلونے", "english": "toys" }
+                  ],
+                  "answer": ["tohfay"]
+                },
+                {
+                  "id": "sep26-l1-2",
+                  "level": 1,
+                  "sourceLineIds": ["line-19"],
+                  "missingWords": ["halka"],
+                  "romanUrdu": "Suitcase ab bhi aadha khula tha, lekin dil thora ___ ho gaya.",
+                  "urdu": "سوٹ کیس اب بھی آدھا کھلا تھا، لیکن دل تھوڑا ___ ہو گیا۔",
+                  "english": "The suitcase was still half-open, but her heart felt a little lighter.",
+                  "completedRomanUrdu": "Suitcase ab bhi aadha khula tha, lekin dil thora halka ho gaya.",
+                  "completedUrdu": "سوٹ کیس اب بھی آدھا کھلا تھا، لیکن دل تھوڑا ہلکا ہو گیا۔",
+                  "completedEnglish": "The suitcase was still half-open, but her heart felt a little lighter.",
+                  "choices": [
+                    { "value": "halka", "romanUrdu": "halka", "urdu": "ہلکا", "english": "light" },
+                    { "value": "bhari", "romanUrdu": "bhari", "urdu": "بھاری", "english": "heavy" },
+                    { "value": "khali", "romanUrdu": "khali", "urdu": "خالی", "english": "empty" }
+                  ],
+                  "answer": ["halka"]
+                },
+                {
+                  "id": "sep26-l1-3",
+                  "level": 1,
+                  "sourceLineIds": ["line-22"],
+                  "missingWords": ["tohfa"],
+                  "romanUrdu": "Do ghar hona koi kami nahi — yeh bhi aik ___ tha.",
+                  "urdu": "دو گھر ہونا کوئی کمی نہیں — یہ بھی ایک ___ تھا۔",
+                  "english": "Having two homes was not a shortcoming — this too was a gift.",
+                  "completedRomanUrdu": "Do ghar hona koi kami nahi — yeh bhi aik tohfa tha.",
+                  "completedUrdu": "دو گھر ہونا کوئی کمی نہیں — یہ بھی ایک تحفہ تھا۔",
+                  "completedEnglish": "Having two homes was not a shortcoming — this too was a gift.",
+                  "choices": [
+                    { "value": "tohfa", "romanUrdu": "tohfa", "urdu": "تحفہ", "english": "gift" },
+                    { "value": "khwaab", "romanUrdu": "khwaab", "urdu": "خواب", "english": "dream" },
+                    { "value": "kahani", "romanUrdu": "kahani", "urdu": "کہانی", "english": "story" }
+                  ],
+                  "answer": ["tohfa"]
+                },
+                {
+                  "id": "sep26-l2-1",
+                  "level": 2,
+                  "sourceLineIds": ["line-5"],
+                  "missingWords": ["awaazein", "shor"],
+                  "romanUrdu": "Na cousins ki ___, na chhat wali hawa, na gali ka ___.",
+                  "urdu": "نہ کزنز کی ___، نہ چھت والی ہوا، نہ گلی کا ___۔",
+                  "english": "No cousins' voices, no rooftop breeze, no noise from the street.",
+                  "completedRomanUrdu": "Na cousins ki awaazein, na chhat wali hawa, na gali ka shor.",
+                  "completedUrdu": "نہ کزنز کی آوازیں، نہ چھت والی ہوا، نہ گلی کا شور۔",
+                  "completedEnglish": "No cousins' voices, no rooftop breeze, no noise from the street.",
+                  "choices": [
+                    { "value": "awaazein", "romanUrdu": "awaazein", "urdu": "آوازیں", "english": "voices" },
+                    { "value": "shor", "romanUrdu": "shor", "urdu": "شور", "english": "noise" },
+                    { "value": "khamoshi", "romanUrdu": "khamoshi", "urdu": "خاموشی", "english": "silence" },
+                    { "value": "hawa", "romanUrdu": "hawa", "urdu": "ہوا", "english": "breeze" }
+                  ],
+                  "answer": ["awaazein", "shor"]
+                },
+                {
+                  "id": "sep26-l2-2",
+                  "level": 2,
+                  "sourceLineIds": ["line-17"],
+                  "missingWords": ["raunak", "goonj"],
+                  "romanUrdu": "Unki halki chan chan mein usay Nani ke ghar ki ___ sunai di, aur door se azaan ki ___ bhi.",
+                  "urdu": "ان کی ہلکی چن چن میں اسے نانی کے گھر کی ___ سنائی دی، اور دور سے اذان کی ___ بھی۔",
+                  "english": "In their soft jingling, she could hear the liveliness of Nani's house, and the distant echo of the azaan too.",
+                  "completedRomanUrdu": "Unki halki chan chan mein usay Nani ke ghar ki raunak sunai di, aur door se azaan ki goonj bhi.",
+                  "completedUrdu": "ان کی ہلکی چن چن میں اسے نانی کے گھر کی رونق سنائی دی، اور دور سے اذان کی گونج بھی۔",
+                  "completedEnglish": "In their soft jingling, she could hear the liveliness of Nani's house, and the distant echo of the azaan too.",
+                  "choices": [
+                    { "value": "raunak", "romanUrdu": "raunak", "urdu": "رونق", "english": "liveliness" },
+                    { "value": "goonj", "romanUrdu": "goonj", "urdu": "گونج", "english": "echo" },
+                    { "value": "awaaz", "romanUrdu": "awaaz", "urdu": "آواز", "english": "voice" },
+                    { "value": "khamoshi", "romanUrdu": "khamoshi", "urdu": "خاموشی", "english": "silence" }
+                  ],
+                  "answer": ["raunak", "goonj"]
+                },
+                {
+                  "id": "sep26-l3-1",
+                  "level": 3,
+                  "sourceLineIds": ["line-14", "line-15"],
+                  "missingWords": ["udaasi", "sawaal", "laaye"],
+                  "romanUrdu": "Us shaam Mahnoor ko samajh aaya ke ___ sirf Pakistan yaad aane ki nahi thi. Asal ___ yeh tha ke Pakistan ko apne saath kaise ___.",
+                  "urdu": "اس شام مہنور کو سمجھ آیا کہ ___ صرف پاکستان یاد آنے کی نہیں تھی۔ اصل ___ یہ تھا کہ پاکستان کو اپنے ساتھ کیسے ___۔",
+                  "english": "That evening, Mahnoor understood that her sadness was not only about missing Pakistan. The real question was how to bring Pakistan along with her.",
+                  "completedRomanUrdu": "Us shaam Mahnoor ko samajh aaya ke udaasi sirf Pakistan yaad aane ki nahi thi. Asal sawaal yeh tha ke Pakistan ko apne saath kaise laaye.",
+                  "completedUrdu": "اس شام مہنور کو سمجھ آیا کہ اداسی صرف پاکستان یاد آنے کی نہیں تھی۔ اصل سوال یہ تھا کہ پاکستان کو اپنے ساتھ کیسے لائے۔",
+                  "completedEnglish": "That evening, Mahnoor understood that her sadness was not only about missing Pakistan. The real question was how to bring Pakistan along with her.",
+                  "choices": [
+                    { "value": "udaasi", "romanUrdu": "udaasi", "urdu": "اداسی", "english": "sadness" },
+                    { "value": "sawaal", "romanUrdu": "sawaal", "urdu": "سوال", "english": "question" },
+                    { "value": "laaye", "romanUrdu": "laaye", "urdu": "لائے", "english": "bring" },
+                    { "value": "khushi", "romanUrdu": "khushi", "urdu": "خوشی", "english": "happiness" },
+                    { "value": "khwaab", "romanUrdu": "khwaab", "urdu": "خواب", "english": "dream" }
+                  ],
+                  "answer": ["udaasi", "sawaal", "laaye"]
+                },
+                {
+                  "id": "sep26-l4-1",
+                  "level": 4,
+                  "sourceLineIds": ["line-19", "line-20", "line-21", "line-22"],
+                  "missingWords": ["halka", "chhutti", "awaaz", "kami"],
+                  "romanUrdu": "Suitcase ab bhi aadha khula tha, lekin dil thora ___ ho gaya. Pakistan sirf garmiyon ki ___ nahi tha. Woh chai mein, Urdu ke lafzon mein, aur Nani ki ___ mein har roz saath reh sakta tha. Do ghar hona koi ___ nahi — yeh bhi aik tohfa tha.",
+                  "urdu": "سوٹ کیس اب بھی آدھا کھلا تھا، لیکن دل تھوڑا ___ ہو گیا۔ پاکستان صرف گرمیوں کی ___ نہیں تھا۔ وہ چائے میں، اردو کے لفظوں میں، اور نانی کی ___ میں ہر روز ساتھ رہ سکتا تھا۔ دو گھر ہونا کوئی ___ نہیں — یہ بھی ایک تحفہ تھا۔",
+                  "english": "The suitcase was still half-open, but her heart felt a little lighter. Pakistan was not just a summer vacation. It could stay with her every day — in her tea, in Urdu words, and in Nani's voice. Having two homes was not a shortcoming — this too was a gift.",
+                  "completedRomanUrdu": "Suitcase ab bhi aadha khula tha, lekin dil thora halka ho gaya. Pakistan sirf garmiyon ki chhutti nahi tha. Woh chai mein, Urdu ke lafzon mein, aur Nani ki awaaz mein har roz saath reh sakta tha. Do ghar hona koi kami nahi — yeh bhi aik tohfa tha.",
+                  "completedUrdu": "سوٹ کیس اب بھی آدھا کھلا تھا، لیکن دل تھوڑا ہلکا ہو گیا۔ پاکستان صرف گرمیوں کی چھٹی نہیں تھا۔ وہ چائے میں، اردو کے لفظوں میں، اور نانی کی آواز میں ہر روز ساتھ رہ سکتا تھا۔ دو گھر ہونا کوئی کمی نہیں — یہ بھی ایک تحفہ تھا۔",
+                  "completedEnglish": "The suitcase was still half-open, but her heart felt a little lighter. Pakistan was not just a summer vacation. It could stay with her every day — in her tea, in Urdu words, and in Nani's voice. Having two homes was not a shortcoming — this too was a gift.",
+                  "choices": [
+                    { "value": "halka", "romanUrdu": "halka", "urdu": "ہلکا", "english": "light" },
+                    { "value": "chhutti", "romanUrdu": "chhutti", "urdu": "چھٹی", "english": "vacation" },
+                    { "value": "awaaz", "romanUrdu": "awaaz", "urdu": "آواز", "english": "voice" },
+                    { "value": "kami", "romanUrdu": "kami", "urdu": "کمی", "english": "shortage" },
+                    { "value": "tohfa", "romanUrdu": "tohfa", "urdu": "تحفہ", "english": "gift" },
+                    { "value": "khwaab", "romanUrdu": "khwaab", "urdu": "خواب", "english": "dream" }
+                  ],
+                  "answer": ["halka", "chhutti", "awaaz", "kami"]
+                }
+              ]
+            }
+          },
+          "madLib": {
+            "enabled": true,
+            "route": "/qr/assets/html/urdu-mad-lib.html",
+            "card": {
+              "title": "Purani Haveli Ka Raaz",
+              "subtitle": "Urdu Mad Lib · Play the interactive version",
+              "description": "Choose your words first, then unlock a very strange haveli mystery.",
+              "linkLabel": "Play the Mad Lib"
+            },
+            "game": {
+              "title": "Purani Haveli Ka Raaz",
+              "fields": [
+                { "id": "character1", "label": "Character name", "helper": "naam" },
+                { "id": "character2", "label": "Second character name", "helper": "naam" },
+                { "id": "familyMember", "label": "Family member", "helper": "rishtedaar", "example": "Nani, Chacha, Khala" },
+                { "id": "animal", "label": "Animal", "helper": "jaanwar" },
+                { "id": "food", "label": "Food", "helper": "khana" },
+                { "id": "color", "label": "Color", "helper": "rang" },
+                { "id": "sound", "label": "Funny or scary sound", "helper": "awaaz", "example": "dhamaak, meow, choo choo" },
+                { "id": "clothing", "label": "Something you wear", "helper": "pehnay ki cheez" },
+                { "id": "number", "label": "Number", "helper": "ginti", "example": "3, 47, hazaar" },
+                { "id": "place", "label": "Place", "helper": "jagah" },
+                { "id": "action", "label": "Action", "helper": "harkat", "example": "naachna, bhaagna, cheekhna" },
+                { "id": "unexpected", "label": "Something unexpected", "helper": "koi ajeeb cheez" }
+              ],
+              "romanUrdu": [
+                [{ "blank": "character1" }, " aur ", { "blank": "character2" }, " kuch din ke liye apne ", { "blank": "familyMember" }, " ke saath ek bohat purani haveli mein rukay hue thay."],
+                ["Haveli din mein bohat khoobsurat lagti thi, lekin raat hote hi har kamra ajeeb si khamoshi mein doob jata."],
+                ["Sab se ajeeb baat upar wale kamray ki thi."],
+                ["Har raat, bilkul aadhi raat ko, us kamray ki khirki khud-ba-khud khul jati."],
+                ["Ek raat ", { "blank": "character1" }, " aur ", { "blank": "character2" }, " ne faisla kiya ke aaj woh is raaz ka pata laga kar hi rahenge."],
+                ["Jaise hi woh seedhiyan charh rahe thay, andar se..."],
+                {
+                  "style": "sound",
+                  "parts": ["“", { "blank": "sound" }, "!”"]
+                },
+                ["ki awaaz aayi."],
+                ["Dono aik dum ruk gaye."],
+                ["Darwaze ke paas unhein ", { "blank": "number" }, " ajeeb nishaan nazar aaye, aur kone mein ek ", { "blank": "animal" }, " bilkul chup chaap baitha tha."],
+                ["Uske paas ek plate mein ", { "blank": "food" }, " bhi rakha hua tha."],
+                {
+                  "style": "dialogue",
+                  "parts": ["“Yeh sab kya ho raha hai?” ", { "blank": "character2" }, " ne dheemi awaaz mein kaha."]
+                },
+                ["Phir unhon ne dekha ke kamray ke andar se ", { "blank": "color" }, " rang ki roshni aa rahi thi."],
+                [{ "blank": "character1" }, " ne himmat ki aur darwaza khol diya."],
+                ["Andar jo manzar tha, uske liye woh bilkul tayyar nahi thay."],
+                ["Kamray ke beech mein koi ", { "blank": "clothing" }, " pehne hue ", { "blank": "action" }, " kar raha tha!"],
+                ["Aur uske peeche, deewar par, ", { "blank": "place" }, " ki ek bohat bari tasveer lagi hui thi."],
+                [{ "blank": "character1" }, " aur ", { "blank": "character2" }, " abhi samajhne ki koshish hi kar rahe thay ke achanak purane sandook ka dhakkan khula..."],
+                {
+                  "style": "reveal",
+                  "parts": ["Aur uske andar se ", { "blank": "unexpected" }, " nikal aaya."]
+                },
+                ["Dono ne ek doosre ko dekha."],
+                ["Phir ", { "blank": "character1" }, " bola:"],
+                {
+                  "style": "dialogue",
+                  "parts": ["“Mujhe lagta hai yeh haveli bhoot se zyada ajeeb hai.”"]
+                }
+              ],
+              "english": [
+                [{ "blank": "character1" }, " and ", { "blank": "character2" }, " were staying for a few days with their ", { "blank": "familyMember" }, " in a very old family haveli."],
+                ["The haveli looked beautiful during the day, but as soon as night fell, every room sank into a strange silence."],
+                ["The strangest thing was the upstairs room."],
+                ["Every night, exactly at midnight, its window opened all by itself."],
+                ["One night, ", { "blank": "character1" }, " and ", { "blank": "character2" }, " decided they were finally going to solve the mystery."],
+                ["Just as they started climbing the stairs, they heard..."],
+                {
+                  "style": "sound",
+                  "parts": ["“", { "blank": "sound" }, "!”"]
+                },
+                ["Both of them froze."],
+                ["Near the door they spotted ", { "blank": "number" }, " strange marks, and in the corner sat ", { "blank": "animal", "article": true }, ", completely silent."],
+                ["Next to it was a plate of ", { "blank": "food" }, "."],
+                {
+                  "style": "dialogue",
+                  "parts": ["“What is going on here?” ", { "blank": "character2" }, " whispered."]
+                },
+                ["Then they noticed a ", { "blank": "color" }, " light glowing from inside the room."],
+                [{ "blank": "character1" }, " gathered their courage and opened the door."],
+                ["They were completely unprepared for what they saw."],
+                ["In the middle of the room, someone wearing ", { "blank": "clothing" }, " was busy ", { "blank": "action" }, "!"],
+                ["Behind them, hanging on the wall, was an enormous picture of ", { "blank": "place" }, "."],
+                [{ "blank": "character1" }, " and ", { "blank": "character2" }, " were still trying to understand what was happening when the lid of an old trunk suddenly opened..."],
+                {
+                  "style": "reveal",
+                  "parts": ["And out came ", { "blank": "unexpected" }, "."]
+                },
+                ["They looked at each other."],
+                ["Then ", { "blank": "character1" }, " said:"],
+                {
+                  "style": "dialogue",
+                  "parts": ["“I think this haveli is stranger than it is haunted.”"]
+                }
+              ]
+            }
+          },
+          "flashcards": { "enabled": true },
+          "quiz": { "enabled": true },
+          "fillblank": { "enabled": true },
+          "matching": { "enabled": true },
+          "riddles": { "enabled": true },
+          "memory": { "enabled": true },
+          "wordsearch": { "enabled": true },
+          "speedgrid": { "enabled": true },
+          "fallingwords": { "enabled": true }
+        }
+      }
+    </script>
+
+    <script src="/qr/assets/js/issue-loader.js"></script>
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
+    <script>
+      const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+      for (let i = 0; i < 15; i++) {
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.classList.add("heart");
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDelay = Math.random() * 10 + "s";
+        icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+        icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+        document.body.appendChild(icon);
+      }
+    </script>
+  </body>
+</html>

@@ -67,6 +67,7 @@
       rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/tokens.css" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
+    <link rel="stylesheet" href="/assets/css/product-cards.css" />
 
     <style>
       /* --- RESET & BASE --- */
@@ -1299,12 +1300,6 @@
         padding-bottom: 4rem;
       }
 
-      /* Bundle card spans full grid width and uses horizontal layout */
-      @media (max-width: 767px) {
-        .product-card--bundle .product-header h3 {
-          font-size: 1rem;
-        }
-      }
 
       /* Section dividers inside the product grid */
       .grid-section-header {
@@ -1409,6 +1404,35 @@
         }
         .btn-label {
           display: none;
+        }
+        .kk-card-title {
+          font-size: 0.85rem;
+          line-height: 1.25;
+        }
+        .kk-badge-row {
+          margin-bottom: 0.35rem;
+        }
+        .kk-badge {
+          font-size: 0.6rem;
+          padding: 0.2rem 0.5rem;
+        }
+        .kk-price {
+          font-size: 0.85rem;
+          margin-top: 0.2rem;
+        }
+        .kk-card-actions {
+          padding-top: 0.5rem;
+        }
+        .kk-cta {
+          padding: 0.5rem 0.4rem;
+          font-size: 0.72rem;
+          box-shadow: 0 3px 0 var(--color-teal-dark);
+        }
+        /* Same tap height for every card button, even when a label wraps. */
+        .kk-cta,
+        .add-to-cart-btn,
+        .buy-now-btn {
+          min-height: 2.9rem;
         }
         .add-to-cart-btn,
         .buy-now-btn {
@@ -2260,10 +2284,13 @@
         // ── SECTION: SUBSCRIPTIONS ───────────────────────────────────────
         {
           id: "kahani-times-subscription",
-          name: "The Kahani Times",
+          name: "The Kahani Times Subscription",
+          badge: "Monthly",
           price: null,
           priceDisplay: "From $10.99/mo",
-          subscribeUrl: "/subscribe.html",
+          // Navigation product: one CTA that takes the customer to its page.
+          pageUrl: "/subscribe.html",
+          ctaLabel: "Subscribe",
           description:
             "A monthly Urdu-English snail mail package filled with stories, art, and cultural treasures — delivered right to your door. Each envelope is packed with nostalgia and designed to make Urdu feel natural, joyful, and beautiful.",
           image: "/assets/images/products/subscribe/feb.png",
@@ -2282,9 +2309,11 @@
         {
           id: "kahani-times-archive",
           name: "The Kahani Times Archive",
+          badge: "Past Editions",
           price: null,
-          priceDisplay: "$15.99/edition",
-          subscribeUrl: "/subscribe.html",
+          priceDisplay: "$15.99 / edition",
+          pageUrl: "/subscribe.html#archive",
+          ctaLabel: "Browse Past Editions",
           description:
             "Miss an issue? Order any past Kahani Times edition. Select the year and month(s) you'd like — they all ship together as one bundle, bundled in a clear protective sleeve.",
           image: "/assets/images/products/subscribe/jan.png",
@@ -2292,7 +2321,7 @@
           features: [
             "Order any past edition from 2025 or 2026.",
             "Select one month or multiple — everything ships together.",
-            "$15.99 per edition.",
+            "$15.99 / edition.",
             "Ships within 1–3 business days; USA 2–4 weeks, International 4–6 weeks.",
           ],
           images: [
@@ -2485,7 +2514,7 @@
             "./assets/images/products/stickers/mango/mango10.png",
             "./assets/images/products/stickers/mango/kulfi.png",
           ],
-        },
+        }, 
         {
           id: "price_1SvrPwP4FFhr5UNAhWnlzbu5",
           name: "Stickers",
@@ -2735,18 +2764,77 @@
           });
         }
 
-        // Detail "Buy Now" → Stripe link, or email-to-order if no Stripe link yet
+        // Shipping-aware single-product checkout.
+        window.buyProductNow = async function (productId) {
+          const product = products.find((p) => p.id === productId);
+          if (!product) return;
+
+          if (!product.checkoutUrl) {
+            window.location.href =
+              `mailto:admin@kahanikorner.com?subject=Order: ${encodeURIComponent(product.name)}` +
+              `&body=Hi%2C%20I'd%20like%20to%20order%20${encodeURIComponent(product.name)}.%20Please%20let%20me%20know%20availability%20and%20pricing.`;
+            return;
+          }
+
+          // Destination (ZIP / postal / country) from cart.js — the saved one,
+          // or a quick dialog. Shipping services are chosen on Stripe Checkout.
+          let shipping = null;
+
+          if (typeof window.ensureShippingDestination === "function") {
+            shipping = await window.ensureShippingDestination({ title: product.name });
+            if (!shipping) return; // dialog closed
+          } else {
+            let shippingRegion = "US";
+            try {
+              const saved = localStorage.getItem("kahani_ship_region");
+              if (saved === "CA" || saved === "INTL") shippingRegion = saved;
+            } catch (_) {}
+            shipping = { shippingRegion };
+          }
+
+          try {
+            const response = await fetch("/create-checkout-session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                cartItems: [{
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                  quantity: 1,
+                }],
+                cancelUrl: window.location.href,
+                shippingRegion: shipping.shippingRegion,
+                destination: shipping.destination,
+              }),
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+              throw new Error(
+                data.error || "There was a problem starting checkout."
+              );
+            }
+
+            if (!data.url) {
+              throw new Error("Checkout URL missing.");
+            }
+
+            window.location.href = data.url;
+          } catch (err) {
+            console.error("[Buy Now checkout]", err);
+            alert(err.message || "Something went wrong. Please try again.");
+          }
+        };
+
+        // Detail "Buy Now" → same shipping-aware backend as cart checkout.
         if (detailBuyNowBtn) {
           detailBuyNowBtn.addEventListener("click", () => {
             const product = products.find((p) => p.id === currentProductId);
             if (!product) return;
-            if (product.checkoutUrl) {
-              window.location.href = product.checkoutUrl;
-            } else {
-              window.location.href =
-                `mailto:admin@kahanikorner.com?subject=Order: ${encodeURIComponent(product.name)}` +
-                `&body=Hi%2C%20I'd%20like%20to%20order%20${encodeURIComponent(product.name)}.%20Please%20let%20me%20know%20availability%20and%20pricing.`;
-            }
+            window.buyProductNow(product.id);
           });
         }
 
@@ -2755,20 +2843,35 @@
       }
 
       // --- PRODUCT RENDERING ---
+      // Product-type pills. Navigation products (subscription, archive) set their own `badge`.
+      const PRODUCT_TYPE_LABELS = {
+        bundle: "Book Bundle",
+        books: "Urdu Book",
+        stickers: "Stickers",
+        coloringbooks: "Coloring Book",
+      };
+
+      function productPriceText(product) {
+        if (product.priceDisplay) return product.priceDisplay;
+        if (product.price !== null) return `$${product.price.toFixed(2)}`;
+        return null;
+      }
+
       function renderProductCard(product) {
-        const priceLabel = product.priceDisplay
-          ? `<span class="price" style="font-size:0.82rem;">${product.priceDisplay}</span>`
-          : product.price !== null
-            ? `<span class="price">$${product.price.toFixed(2)}</span>`
-            : `<span class="price" style="font-size:0.8rem;padding:0.2rem 0.5rem;">Email to Order</span>`;
+        const badge = product.badge || PRODUCT_TYPE_LABELS[product.category] || "";
+        const priceText = productPriceText(product);
+        const priceLabel = priceText
+          ? `<p class="kk-price">${priceText}</p>`
+          : `<p class="kk-price kk-price--muted">Email to order</p>`;
 
         const cartSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>`;
         const boltSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
 
-        const actionButtons = product.subscribeUrl
-          ? `<button class="buy-now-btn" style="flex:1;"
-               onclick="event.stopPropagation(); window.location.href='${product.subscribeUrl}';">
-               Subscribe <i class="fa-solid fa-arrow-right" style="font-size:0.8em;"></i>
+        // Type A (navigation): one full-width CTA. Type B (direct purchase): Add + Buy Now.
+        const actionButtons = product.pageUrl
+          ? `<button class="kk-cta"
+               onclick="event.stopPropagation(); window.location.href='${product.pageUrl}';">
+               ${product.ctaLabel} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
              </button>`
           : product.checkoutUrl
             ? `<button class="add-to-cart-btn"
@@ -2776,7 +2879,7 @@
                   ${cartSvg}<span class="btn-label">Add</span>
                 </button>
                 <button class="buy-now-btn"
-                  onclick="event.stopPropagation(); window.location.href='${product.checkoutUrl}';">
+                  onclick="event.stopPropagation(); window.buyProductNow('${product.id}');">
                   ${boltSvg}<span class="btn-label">Buy Now</span>
                 </button>`
             : `<button class="add-to-cart-btn" disabled onclick="event.stopPropagation()">
@@ -2787,7 +2890,7 @@
                </button>`;
 
         const soonBadge = product.comingSoon
-          ? `<span class="product-soon-badge">Coming Soon</span>`
+          ? `<span class="kk-status">Coming Soon</span>`
           : "";
 
         return `
@@ -2795,13 +2898,14 @@
             <div class="product-image-container">
               <img src="${product.image}" alt="${product.name}">
             </div>
-            <div class="product-info">
-              <div class="product-header">
+            <div class="product-info kk-card-body">
+              <div class="kk-badge-row">
+                ${badge ? `<span class="kk-badge">${badge}</span>` : ""}
                 ${soonBadge}
-                <h3>${product.name}</h3>
-                ${priceLabel}
               </div>
-              <div class="product-actions">
+              <h3 class="kk-card-title">${product.name}</h3>
+              ${priceLabel}
+              <div class="product-actions kk-card-actions">
                 ${actionButtons}
               </div>
             </div>
@@ -2893,8 +2997,8 @@
         if (!product) return;
 
         // Subscription products live on their own page — send the user there
-        if (product.subscribeUrl) {
-          window.location.href = product.subscribeUrl;
+        if (product.pageUrl) {
+          window.location.href = product.pageUrl;
           return;
         }
 

@@ -22,6 +22,480 @@ const ARCHIVE_AVAILABILITY = {
   },
 };
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Checkout shipping (cart, Shop Buy Now, Archive Buy Now)
+//   US:     sticker-only (flat) orders up to 3 oz: Untracked Letter Mail at
+//           stamped letter prices. Other orders: live USPS rates via EasyPost
+//           (Ground Advantage / Priority / Express) when configured, otherwise
+//           the fixed $4.99 rate. Free at $65.00+.
+//   Canada / International: fixed tiers by total product weight (no packaging).
+// Trusted product weights/classes, rates and option rules live in shipping.js;
+// EasyPost calls live in usps-rates.js; this file verifies prices and rates
+// against Stripe and builds the Checkout Session.
+//
+// Two steps: getShippingOptions quotes services for a cart + destination;
+// createCheckoutSession / createArchiveCheckout receive the chosen service code
+// and RE-RATE it server-side before creating the session. No shipping amount
+// from the browser is ever used.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const {
+  checkoutError,
+  calculateShipmentProfile,
+  validateDestination,
+  getAvailableShippingServices,
+  selectShippingOptions,
+  US_SHIPPING_COUNTRIES,
+  CA_SHIPPING_COUNTRIES,
+  INTL_SHIPPING_COUNTRIES,
+  SHIPPING_MODE,
+} = require("./shipping");
+const { fetchUspsRates, getLiveRatingReadiness } = require("./usps-rates");
+
+// Abuse limits for public checkout / quote endpoints.
+const MAX_REQUEST_BODY_CHARS = 32000;
+const MAX_CART_LINES = 30;
+const MAX_QUANTITY_PER_LINE = 50;
+
+async function getTrustedSubtotalCents(stripeClient, lineItems) {
+  const priceIds = [...new Set(lineItems.map((li) => li.price))];
+  const prices = await Promise.all(
+    priceIds.map((id) => stripeClient.prices.retrieve(id))
+  );
+  const priceById = new Map(prices.map((p) => [p.id, p]));
+
+  let subtotal = 0;
+
+  for (const li of lineItems) {
+    const price = priceById.get(li.price);
+
+    if (
+      !price ||
+      !price.active ||
+      price.type !== "one_time" ||
+      price.currency !== "usd" ||
+      !Number.isInteger(price.unit_amount)
+    ) {
+      throw checkoutError(
+        `Price ${li.price} is not available for checkout.`,
+        400
+      );
+    }
+
+    subtotal += price.unit_amount * li.quantity;
+  }
+
+  return subtotal;
+}
+
+function getAllowedCountries(region) {
+  if (region === "US") return US_SHIPPING_COUNTRIES;
+  return region === "CA" ? CA_SHIPPING_COUNTRIES : INTL_SHIPPING_COUNTRIES;
+}
+
+function parseShippingRegion(value) {
+  return value === "CA" || value === "INTL" ? value : "US";
+}
+
+function isOversizedBody(body) {
+  try {
+    return JSON.stringify(body || {}).length > MAX_REQUEST_BODY_CHARS;
+  } catch (_) {
+    return true;
+  }
+}
+
+// Validates one archive selection; returns its de-duplicated month names.
+function validateArchiveSelection(year, months) {
+  if (!ARCHIVE_AVAILABILITY[year]) {
+    throw checkoutError(`Year ${year} is not available.`, 400);
+  }
+
+  const uniqueMonths = [...new Set(months)];
+  const yearAvailability = ARCHIVE_AVAILABILITY[year];
+  for (const month of uniqueMonths) {
+    if (typeof month !== "string" || !Object.prototype.hasOwnProperty.call(yearAvailability, month)) {
+      throw checkoutError(`"${month}" is not a valid month name.`, 400);
+    }
+    if (!yearAvailability[month]) {
+      throw checkoutError(`Archive item has unavailable month: ${month} ${year}.`, 400);
+    }
+  }
+  return uniqueMonths;
+}
+
+// Raw cart items from the browser → trusted Stripe line items + order metadata.
+// Only price IDs, quantities and archive selections are read; the browser's
+// name / price / image fields are ignored.
+function buildCartLineItems(cartItems, archivePriceId) {
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    throw checkoutError("No items in cart.", 400);
+  }
+  if (cartItems.length > MAX_CART_LINES) {
+    throw checkoutError("Your cart has too many items for online checkout. Please contact us to place this order.", 400);
+  }
+
+  const lineItems = [];
+  const metadata = {};
+
+  // ── Regular products ──────────────────────────────────────────────────────
+  const regularItems = cartItems.filter((item) => !item || item.productType !== "kahani_times_archive");
+  for (const item of regularItems) {
+    if (!item || !item.id || typeof item.id !== "string" || item.id.length > 100) {
+      throw checkoutError(`Cart item "${(item && item.name) || "unknown"}" is missing a valid price ID.`, 400);
+    }
+    const quantity = item.quantity || 1;
+
+    if (!Number.isInteger(quantity) || quantity < 1) {
+      throw checkoutError(`Cart item "${item.name || "unknown"}" has an invalid quantity.`, 400);
+    }
+    if (quantity > MAX_QUANTITY_PER_LINE) {
+      throw checkoutError(`Cart item "${item.name || "unknown"}" quantity is too large for online checkout. Please contact us for bulk orders.`, 400);
+    }
+
+    lineItems.push({ price: item.id, quantity });
+  }
+
+  // ── Archive products ──────────────────────────────────────────────────────
+  const archiveItems = cartItems.filter((item) => item && item.productType === "kahani_times_archive");
+  if (archiveItems.length > 0) {
+    if (!archivePriceId) {
+      console.error("[checkout] STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID is not set.");
+      throw checkoutError("Server configuration error: archive price ID is not configured.", 500);
+    }
+
+    let totalArchiveQty = 0;
+    const archiveSummaries = [];
+
+    for (const archiveItem of archiveItems) {
+      const year   = String(archiveItem.selectedYear || "");
+      const months = archiveItem.selectedMonths;
+
+      if (!year) {
+        throw checkoutError("Archive item missing selectedYear.", 400);
+      }
+      if (!ARCHIVE_AVAILABILITY[year]) {
+        throw checkoutError(`Year ${year} is not available.`, 400);
+      }
+      if (months === undefined || months === null) {
+        throw checkoutError("Archive item missing selectedMonths.", 400);
+      }
+      if (!Array.isArray(months)) {
+        throw checkoutError("Archive item selectedMonths must be an array.", 400);
+      }
+      if (months.length === 0) {
+        throw checkoutError("Archive item selectedMonths must not be empty.", 400);
+      }
+
+      const uniqueMonths = validateArchiveSelection(year, months);
+
+      totalArchiveQty += uniqueMonths.length;
+      archiveSummaries.push({ year, months: uniqueMonths, count: uniqueMonths.length });
+    }
+
+    lineItems.push({ price: archivePriceId, quantity: totalArchiveQty });
+
+    metadata.has_archive = "true";
+    if (archiveSummaries.length === 1) {
+      metadata.archive_selected_year   = archiveSummaries[0].year;
+      metadata.archive_selected_months = archiveSummaries[0].months.join(", ");
+      metadata.archive_selected_count  = String(archiveSummaries[0].count);
+      metadata.archive_packaging       = "Bundled together in one clear protective plastic sleeve";
+    } else {
+      // Multiple archive years — compact to stay within Stripe's 500-char limit per value
+      metadata.archive_items = archiveSummaries
+        .map((s) => `${s.year}: ${s.months.join(", ")}`)
+        .join(" | ")
+        .substring(0, 500);
+    }
+  }
+
+  return { lineItems, metadata };
+}
+
+// Shared by the quote endpoint and both checkout endpoints, so every path
+// prices shipping the same way. Live USPS rating is attempted only for US;
+// any failure falls back to the fixed rates (logged, never thrown).
+async function resolveShippingOptions(stripeClient, lineItems, region, rawDestination, logTag) {
+  const destination = validateDestination(region, rawDestination);
+
+  const subtotalCents =
+    await getTrustedSubtotalCents(stripeClient, lineItems);
+
+  const shipmentProfile = calculateShipmentProfile(
+    lineItems,
+    process.env.STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID || ""
+  );
+
+  let liveRates = null;
+  let liveUnavailableReason = null;
+
+  if (region === "US") {
+    const readiness = getLiveRatingReadiness(shipmentProfile);
+
+    if (!readiness.ok) {
+      liveUnavailableReason = readiness.reason;
+    } else if (!destination) {
+      // Live rating is set up, so a ZIP is required to price shipping.
+      throw checkoutError("Please enter your ZIP code to see shipping options.", 400);
+    } else {
+      const live = await fetchUspsRates({ shipmentProfile, destination });
+      if (live.ok) liveRates = live.rates;
+      else liveUnavailableReason = live.reason;
+    }
+
+    if (liveUnavailableReason) {
+      console.warn(
+        `[${logTag}] Live USPS rating unavailable, using fixed US shipping: ${liveUnavailableReason}`
+      );
+    }
+  }
+
+  const options = getAvailableShippingServices(
+    shipmentProfile,
+    region,
+    subtotalCents,
+    liveRates
+  );
+
+  return { destination, subtotalCents, shipmentProfile, options, liveUnavailableReason };
+}
+
+async function getVerifiedShippingRateId(stripeClient, rate) {
+  const rateId = process.env[rate.env] || "";
+
+  if (!rateId) {
+    throw checkoutError(
+      `Server configuration error: ${rate.env} is not set.`,
+      500
+    );
+  }
+
+  const shippingRate =
+    await stripeClient.shippingRates.retrieve(rateId);
+
+  const fixed = shippingRate.fixed_amount || {};
+
+  if (
+    !shippingRate.active ||
+    shippingRate.type !== "fixed_amount" ||
+    fixed.currency !== "usd" ||
+    fixed.amount !== rate.amountCents
+  ) {
+    throw checkoutError(
+      `Server configuration error: ${rate.env} (${rateId}) is not an active $${(
+        rate.amountCents / 100
+      ).toFixed(2)} USD fixed-amount rate.`,
+      500
+    );
+  }
+
+  return rateId;
+}
+
+// Fixed options → verified Stripe shipping-rate ID. Live / letter options →
+// shipping_rate_data built from the server's own fresh quote.
+async function toStripeShippingOption(stripeClient, option) {
+  if (option.rate) {
+    return { shipping_rate: await getVerifiedShippingRateId(stripeClient, option.rate) };
+  }
+
+  if (!Number.isInteger(option.amountCents) || option.amountCents < 0) {
+    throw checkoutError(`Server error: invalid shipping amount for ${option.service}.`, 500);
+  }
+
+  const data = {
+    type: "fixed_amount",
+    fixed_amount: { amount: option.amountCents, currency: "usd" },
+    display_name: option.stripeDisplayName || option.displayName,
+    metadata: { shipping_service: option.service, shipping_mode: option.mode },
+  };
+
+  if (option.deliveryEstimate) {
+    data.delivery_estimate = {
+      minimum: { unit: "business_day", value: option.deliveryEstimate.minBusinessDays },
+      maximum: { unit: "business_day", value: option.deliveryEstimate.maxBusinessDays },
+    };
+  }
+
+  return { shipping_rate_data: data };
+}
+
+async function buildCheckoutShipping(
+  stripeClient,
+  lineItems,
+  region,
+  logTag,
+  { destination: rawDestination, selectedShippingService } = {}
+) {
+  const {
+    destination,
+    subtotalCents,
+    shipmentProfile,
+    options,
+    liveUnavailableReason,
+  } = await resolveShippingOptions(stripeClient, lineItems, region, rawDestination, logTag);
+
+  const services = selectShippingOptions(options, selectedShippingService);
+
+  const shippingOptions = await Promise.all(
+    services.map((s) => toStripeShippingOption(stripeClient, s))
+  );
+
+  const freeUsShipping = services.some((s) => s.freeUsShipping);
+  const modes = [...new Set(services.map((s) => s.mode))];
+
+  console.log(
+    `[${logTag}] Shipping:`,
+    JSON.stringify({
+      region,
+      destination,
+      subtotalCents,
+      ...shipmentProfile,
+      freeUsShipping,
+      selectedShippingService: selectedShippingService || null,
+      liveUnavailableReason,
+      services: services.map((s, i) => ({
+        service: s.service,
+        mode: s.mode,
+        amountCents: s.amountCents,
+        quotedAmountCents: s.quotedAmountCents,
+        rate: s.rate ? s.rate.env : undefined,
+        rateId: shippingOptions[i].shipping_rate,
+      })),
+    })
+  );
+
+  const metadata = {
+    shipping_region: region,
+    merchandise_subtotal_cents: String(subtotalCents),
+    free_us_shipping: String(freeUsShipping),
+    shipment_weight_oz: String(shipmentProfile.totalWeightOz),
+    shipment_class: shipmentProfile.shippingClass,
+    shipping_mode: modes.join(","),
+    shipping_service:
+      services.length === 1 ? services[0].service : "customer_choice_at_checkout",
+  };
+
+  if (services.length === 1) {
+    metadata.shipping_amount_cents = String(services[0].amountCents);
+  }
+  if (destination) {
+    metadata.quoted_destination_country = destination.country;
+    if (destination.postalCode) metadata.quoted_postal_code = destination.postalCode;
+  }
+  if (liveUnavailableReason) {
+    metadata.live_rate_unavailable_reason = liveUnavailableReason.substring(0, 300);
+  }
+
+  return {
+    sessionFields: {
+      shipping_address_collection: {
+        allowed_countries: getAllowedCountries(region),
+      },
+      shipping_options: shippingOptions,
+    },
+    metadata,
+  };
+}
+
+// Small per-instance limiter for the quote endpoint (each call can hit
+// EasyPost). Not a security boundary — just blunts accidental/abusive loops.
+const QUOTE_WINDOW_MS = 10 * 60 * 1000;
+const QUOTE_MAX_PER_WINDOW = 60;
+const quoteHits = new Map();
+
+function isQuoteRateLimited(req) {
+  const forwarded = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim();
+  const ip = forwarded || req.ip || "unknown";
+  const now = Date.now();
+
+  if (quoteHits.size > 5000) {
+    for (const [key, entry] of quoteHits) {
+      if (now - entry.start > QUOTE_WINDOW_MS) quoteHits.delete(key);
+    }
+  }
+
+  const entry = quoteHits.get(ip);
+  if (!entry || now - entry.start > QUOTE_WINDOW_MS) {
+    quoteHits.set(ip, { start: now, count: 1 });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > QUOTE_MAX_PER_WINDOW;
+}
+
+// Step 1 of checkout: quote shipping services for a cart + destination.
+// Returns display data only — no EasyPost rate IDs, weights or shipping class.
+exports.getShippingOptions = functions.https.onRequest(async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    res.status(204).send("");
+    return;
+  }
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method Not Allowed" });
+    return;
+  }
+  if (isOversizedBody(req.body)) {
+    res.status(413).json({ error: "Request too large." });
+    return;
+  }
+  if (isQuoteRateLimited(req)) {
+    res.status(429).json({ error: "Too many shipping quote requests. Please wait a few minutes and try again." });
+    return;
+  }
+
+  const key = process.env.STRIPE_SECRET_KEY || "";
+  if (!key.startsWith("sk_live_") && !key.startsWith("sk_test_")) {
+    console.error("[getShippingOptions] STRIPE_SECRET_KEY is missing or invalid.");
+    res.status(500).json({ error: "Server configuration error." });
+    return;
+  }
+
+  const body = req.body || {};
+  const shippingRegion = parseShippingRegion(body.shippingRegion);
+
+  try {
+    const { lineItems } = buildCartLineItems(
+      body.cartItems,
+      process.env.STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID || ""
+    );
+
+    const { options } = await resolveShippingOptions(
+      stripe(key),
+      lineItems,
+      shippingRegion,
+      body.destination,
+      "getShippingOptions"
+    );
+
+    res.status(200).json({
+      shippingRegion,
+      liveRates: options.some((o) => o.mode === SHIPPING_MODE.LIVE_USPS),
+      options: options.map((o) => ({
+        code: o.service,
+        label: o.displayName,
+        amountCents: o.amountCents,
+        isFree: o.amountCents === 0,
+        tracked: typeof o.tracked === "boolean" ? o.tracked : null,
+        deliveryEstimate: o.deliveryEstimate || null,
+      })),
+    });
+  } catch (err) {
+    console.error("[getShippingOptions] Error:", err.message);
+    res.status(err.statusCode === 400 ? 400 : 500).json({
+      error: err.statusCode === 400
+        ? err.message
+        : "We couldn't load shipping options right now. Please try again.",
+    });
+  }
+});
+
 exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -33,6 +507,10 @@ exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
   }
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method Not Allowed" });
+    return;
+  }
+  if (isOversizedBody(req.body)) {
+    res.status(413).json({ error: "Request too large." });
     return;
   }
 
@@ -85,42 +563,60 @@ exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
   }
 
   // ── Create Stripe Checkout Session ────────────────────────────────────────
+  const shippingRegion = parseShippingRegion(req.body.shippingRegion);
+
   try {
     const stripeClient = stripe(stripeKey);
+
+    const lineItems = [
+      {
+        price: archivePriceId,
+        quantity: uniqueMonths.length,
+      },
+    ];
+
+    const shipping = await buildCheckoutShipping(
+      stripeClient,
+      lineItems,
+      shippingRegion,
+      "createArchiveCheckout",
+      {
+        destination: req.body.destination,
+        selectedShippingService: req.body.selectedShippingService,
+      }
+    );
+
+    const metadata = {
+      product_type: "kahani_times_archive",
+      selected_year: selectedYear,
+      selected_months: uniqueMonths.join(", "),
+      selected_count: String(uniqueMonths.length),
+      packaging: "Bundled together in one clear protective plastic sleeve",
+      ...shipping.metadata,
+    };
 
     const session = await stripeClient.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
-      line_items: [
-        {
-          price: archivePriceId,
-          quantity: uniqueMonths.length,
-        },
-      ],
-      metadata: {
-        product_type:    "kahani_times_archive",
-        selected_year:   selectedYear,
-        selected_months: uniqueMonths.join(", "),
-        selected_count:  String(uniqueMonths.length),
-        packaging:       "Bundled together in one clear protective plastic sleeve",
-      },
-      payment_intent_data: {
-        metadata: {
-          product_type:    "kahani_times_archive",
-          selected_year:   selectedYear,
-          selected_months: uniqueMonths.join(", "),
-          selected_count:  String(uniqueMonths.length),
-          packaging:       "Bundled together in one clear protective plastic sleeve",
-        },
-      },
-      success_url: "https://kahanikorner.com/success.html?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url:  "https://kahanikorner.com/subscribe.html",
+      line_items: lineItems,
+      ...shipping.sessionFields,
+      metadata,
+      payment_intent_data: { metadata },
+      success_url:
+        "https://kahanikorner.com/success.html?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "https://kahanikorner.com/subscribe.html",
     });
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error("[createArchiveCheckout] Stripe error:", err.message);
-    res.status(500).json({ error: err.message });
+    console.error(
+      "[createArchiveCheckout] Stripe error:",
+      err.message
+    );
+
+    res.status(err.statusCode === 400 ? 400 : 500).json({
+      error: err.message,
+    });
   }
 });
 
@@ -153,6 +649,11 @@ exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
     return;
   }
 
+  if (isOversizedBody(req.body)) {
+    res.status(413).json({ error: "Request too large." });
+    return;
+  }
+
   // Accept raw cart items (cartItems) from the frontend
   const { cartItems } = req.body || {};
 
@@ -163,114 +664,59 @@ exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
 
   console.log("[createCheckoutSession] Incoming cart items:", JSON.stringify(cartItems));
 
-  const lineItems = [];
-  const metadata = {};
+  let lineItems;
+  let metadata;
 
-  // ── Regular products ──────────────────────────────────────────────────────
-  const regularItems = cartItems.filter((item) => item.productType !== "kahani_times_archive");
-  for (const item of regularItems) {
-    if (!item.id || typeof item.id !== "string") {
-      res.status(400).json({ error: `Cart item "${item.name || "unknown"}" is missing a valid price ID.` });
-      return;
-    }
-    lineItems.push({ price: item.id, quantity: item.quantity || 1 });
-  }
-
-  // ── Archive products ──────────────────────────────────────────────────────
-  const archiveItems = cartItems.filter((item) => item.productType === "kahani_times_archive");
-  if (archiveItems.length > 0) {
-    if (!archivePriceId) {
-      console.error("[createCheckoutSession] STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID is not set.");
-      res.status(500).json({ error: "Server configuration error: archive price ID is not configured." });
-      return;
-    }
-
-    let totalArchiveQty = 0;
-    const archiveSummaries = [];
-
-    for (const archiveItem of archiveItems) {
-      const year   = String(archiveItem.selectedYear || "");
-      const months = archiveItem.selectedMonths;
-
-      if (!year) {
-        res.status(400).json({ error: "Archive item missing selectedYear." });
-        return;
-      }
-      if (!ARCHIVE_AVAILABILITY[year]) {
-        res.status(400).json({ error: `Year ${year} is not available.` });
-        return;
-      }
-      if (months === undefined || months === null) {
-        res.status(400).json({ error: "Archive item missing selectedMonths." });
-        return;
-      }
-      if (!Array.isArray(months)) {
-        res.status(400).json({ error: "Archive item selectedMonths must be an array." });
-        return;
-      }
-      if (months.length === 0) {
-        res.status(400).json({ error: "Archive item selectedMonths must not be empty." });
-        return;
-      }
-
-      const uniqueMonths = [...new Set(months)];
-      const yearAvailability = ARCHIVE_AVAILABILITY[year];
-      for (const month of uniqueMonths) {
-        if (!Object.prototype.hasOwnProperty.call(yearAvailability, month)) {
-          res.status(400).json({ error: `"${month}" is not a valid month name.` });
-          return;
-        }
-        if (!yearAvailability[month]) {
-          res.status(400).json({ error: `Archive item has unavailable month: ${month} ${year}.` });
-          return;
-        }
-      }
-
-      totalArchiveQty += uniqueMonths.length;
-      archiveSummaries.push({ year, months: uniqueMonths, count: uniqueMonths.length });
-    }
-
-    lineItems.push({ price: archivePriceId, quantity: totalArchiveQty });
-
-    metadata.has_archive = "true";
-    if (archiveSummaries.length === 1) {
-      metadata.archive_selected_year   = archiveSummaries[0].year;
-      metadata.archive_selected_months = archiveSummaries[0].months.join(", ");
-      metadata.archive_selected_count  = String(archiveSummaries[0].count);
-      metadata.archive_packaging       = "Bundled together in one clear protective plastic sleeve";
-    } else {
-      // Multiple archive years — compact to stay within Stripe's 500-char limit per value
-      metadata.archive_items = archiveSummaries
-        .map((s) => `${s.year}: ${s.months.join(", ")}`)
-        .join(" | ")
-        .substring(0, 500);
-    }
+  try {
+    ({ lineItems, metadata } = buildCartLineItems(cartItems, archivePriceId));
+  } catch (err) {
+    res.status(err.statusCode === 400 ? 400 : 500).json({ error: err.message });
+    return;
   }
 
   console.log("[createCheckoutSession] Built Stripe line items:", JSON.stringify(lineItems));
   console.log("[createCheckoutSession] Checkout metadata:", JSON.stringify(metadata));
 
+  const shippingRegion = parseShippingRegion(req.body.shippingRegion);
+
   try {
     const stripeClient = stripe(key);
 
-    const sessionConfig = {
+    const shipping = await buildCheckoutShipping(
+      stripeClient,
+      lineItems,
+      shippingRegion,
+      "createCheckoutSession",
+      {
+        destination: req.body.destination,
+        selectedShippingService: req.body.selectedShippingService,
+      }
+    );
+
+    Object.assign(metadata, shipping.metadata);
+
+    const session = await stripeClient.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
+      ...shipping.sessionFields,
       success_url: "https://kahanikorner.com/success.html",
-      cancel_url:  req.body.cancelUrl || "https://kahanikorner.com/products.html",
-    };
+      cancel_url:
+        req.body.cancelUrl || "https://kahanikorner.com/products.html",
+      metadata,
+      payment_intent_data: { metadata },
+    });
 
-    if (Object.keys(metadata).length > 0) {
-      sessionConfig.metadata = metadata;
-      sessionConfig.payment_intent_data = { metadata };
-    }
-
-    const session = await stripeClient.checkout.sessions.create(sessionConfig);
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error("[createCheckoutSession] Stripe error:", err.message);
-    res.status(500).json({ error: err.message });
+    console.error(
+      "[createCheckoutSession] Stripe error:",
+      err.message
+    );
+
+    res.status(err.statusCode === 400 ? 400 : 500).json({
+      error: err.message,
+    });
   }
 });
 
