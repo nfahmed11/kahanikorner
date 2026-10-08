@@ -2776,20 +2776,17 @@
             return;
           }
 
-          // Destination (ZIP / postal / country) from cart.js — the saved one,
-          // or a quick dialog. Shipping services are chosen on Stripe Checkout.
-          let shipping = null;
+          // Shipping region from the cart's "Shipping to" selector; the server
+          // prices shipping from trusted product weights.
+          let shippingRegion = "US";
 
-          if (typeof window.ensureShippingDestination === "function") {
-            shipping = await window.ensureShippingDestination({ title: product.name });
-            if (!shipping) return; // dialog closed
+          if (typeof window.getCartShipRegion === "function") {
+            shippingRegion = window.getCartShipRegion();
           } else {
-            let shippingRegion = "US";
             try {
               const saved = localStorage.getItem("kahani_ship_region");
               if (saved === "CA" || saved === "INTL") shippingRegion = saved;
             } catch (_) {}
-            shipping = { shippingRegion };
           }
 
           try {
@@ -2805,8 +2802,7 @@
                   quantity: 1,
                 }],
                 cancelUrl: window.location.href,
-                shippingRegion: shipping.shippingRegion,
-                destination: shipping.destination,
+                shippingRegion,
               }),
             });
 

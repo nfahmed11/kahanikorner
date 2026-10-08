@@ -17,10 +17,6 @@
         "function": "createArchiveCheckout"
       },
       {
-        "source": "/api/shipping-options",
-        "function": "getShippingOptions"
-      },
-      {
         "source": "/api/generate-sentence",
         "function": "generateSentence"
       }

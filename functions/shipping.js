@@ -2,44 +2,24 @@
 // Checkout shipping — trusted configuration and pure calculation helpers.
 //
 // Everything here is derived from server-side config only. The browser sends
-// Stripe price IDs, quantities, a shipping region, a destination (country +
-// postal code) and the shipping service code it picked; it never supplies
+// Stripe price IDs, quantities and a shipping region; it never supplies
 // weight, shipping class, shipping cost or free-shipping eligibility.
 //
-// No Stripe or EasyPost calls live here (index.js verifies prices / rates with
-// Stripe, usps-rates.js fetches live USPS quotes), so these functions can be
-// unit-tested in isolation:
+// assets/cart.js keeps a display-only copy of the weights and rate tables so
+// the cart can show shipping instantly; shipping.test.js fails if the two
+// copies drift apart. This file is the authority — checkout always re-prices
+// here. Run the tests with:
 //   node --test functions/shipping.test.js
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Shipping classes ─────────────────────────────────────────────────────────
-// flat:   could go as untracked letter mail, but only if EVERY item in the cart
+// flat:   can go as untracked letter mail, but only if EVERY item in the cart
 //         is flat.
 // parcel: needs parcel shipping. One parcel item makes the whole shipment a
 //         parcel.
 const SHIPPING_CLASS = {
   FLAT: "flat",
   PARCEL: "parcel",
-};
-
-// Trusted outer package used for live USPS rating, by shipment class.
-// Fill in EITHER all three dimensions (inches, measured on the packed mailer)
-// OR an EasyPost predefinedPackage name (e.g. "FlatRateEnvelope") — not both.
-// Until a class is configured, live rating is skipped for that class and the
-// fixed US rate is used instead. Never derived from customer input.
-const PACKAGE_DIMENSIONS = {
-  [SHIPPING_CLASS.FLAT]: {
-    lengthIn: null,
-    widthIn: null,
-    heightIn: null,
-    predefinedPackage: null,
-  },
-  [SHIPPING_CLASS.PARCEL]: {
-    lengthIn: null,
-    widthIn: null,
-    heightIn: null,
-    predefinedPackage: null,
-  },
 };
 
 // Trusted per-unit shipping data, keyed by Stripe price ID. Shipping weight is
@@ -59,14 +39,14 @@ const PRODUCT_SHIPPING_DATA = {
 };
 
 // Kahani Times Archive is priced per edition via STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID
-// (an env var, so it can't be a literal key above). Treated as parcel for now:
+// (an env var, so it can't be a literal key above). Treated as parcel:
 // editions ship together in a protective sleeve, not as a letter.
 const ARCHIVE_SHIPPING_DATA = {
   weightOz: 1,
   shippingClass: SHIPPING_CLASS.PARCEL,
 };
 
-// ── Destinations ─────────────────────────────────────────────────────────────
+// ── Destinations (Stripe Checkout collects the full address) ─────────────────
 
 const US_SHIPPING_COUNTRIES = ["US"];
 const CA_SHIPPING_COUNTRIES = ["CA"];
@@ -83,18 +63,41 @@ const INTL_SHIPPING_COUNTRIES = (
 ).split(" ");
 
 // ── Rates ────────────────────────────────────────────────────────────────────
-// Each fixed rate names the env var holding its Stripe shipping-rate ID and the
-// amount that Stripe rate must have; index.js rejects any mismatch.
 
 const FREE_US_SHIPPING_THRESHOLD_CENTS = 6500;
 
-// Fixed US rates: used whenever live USPS rating is unavailable.
-const US_SHIPPING_RATES = {
-  standard: { env: "STRIPE_US_STANDARD_SHIPPING_RATE_ID", amountCents: 499 },
-  free:     { env: "STRIPE_US_FREE_SHIPPING_RATE_ID", amountCents: 0 },
-};
+// Free US shipping ($65+ subtotal) uses this Stripe shipping-rate object;
+// index.js verifies it is an active $0 USD fixed-amount rate.
+const US_FREE_SHIPPING_RATE = { env: "STRIPE_US_FREE_SHIPPING_RATE_ID", amountCents: 0 };
 
-// Canada / International: tier is chosen by totalWeightOz (product weight only).
+// US parcel rates in cents, by billable whole pound (index = pounds, 1–70).
+// Billable pounds = total product weight rounded UP to the next whole pound.
+const US_WEIGHT_RATES_CENTS = [
+  null, // 0 lb is never looked up
+  439, 513, 586, 660, 734, 808, 881, 955, 1029, 1102,              // 1–10 lb
+  1176, 1250, 1323, 1397, 1471, 1544, 1618, 1692, 1765, 1839,      // 11–20 lb
+  1913, 1986, 2060, 2134, 2207, 2281, 2355, 2429, 2502, 2576,      // 21–30 lb
+  2650, 2723, 2797, 2871, 2944, 3018, 3092, 3165, 3239, 3313,      // 31–40 lb
+  3386, 3460, 3534, 3607, 3681, 3755, 3828, 3902, 3976, 4049,      // 41–50 lb
+  4123, 4197, 4271, 4344, 4418, 4492, 4565, 4639, 4713, 4786,      // 51–60 lb
+  4860, 4934, 5007, 5081, 5155, 5228, 5302, 5376, 5449, 5523,      // 61–70 lb
+];
+const US_MAX_WEIGHT_LB = US_WEIGHT_RATES_CENTS.length - 1; // 70
+
+// Untracked US letter mail for sticker-only (all-flat) orders up to 6 oz:
+// $0.82 first ounce + $0.29 each additional ounce. Heavier or mixed orders
+// use the pound table. US-only on purpose: stickers sent to Canada / abroad
+// are merchandise and need a customs-capable package service.
+const US_UNTRACKED_LETTER_RATES = [
+  { maxOz: 1, amountCents: 82 },
+  { maxOz: 2, amountCents: 111 },
+  { maxOz: 3, amountCents: 140 },
+  { maxOz: 4, amountCents: 169 },
+  { maxOz: 5, amountCents: 198 },
+  { maxOz: 6, amountCents: 227 },
+];
+
+// Canada / International: Stripe shipping-rate objects by total product weight.
 // 8 / 16 / 32 / 48 / 64 oz = 0.5 / 1 / 2 / 3 / 4 lb.
 const WEIGHT_SHIPPING_RATES = {
   CA: [
@@ -113,52 +116,12 @@ const WEIGHT_SHIPPING_RATES = {
   ],
 };
 
-// Untracked US letter mail (USPS stamped First-Class Mail letter prices:
-// $0.82 first ounce + $0.29 each additional ounce). Used instead of the US
-// parcel rate when the order is US, every item is flat, and the total product
-// weight is within the last tier. Heavier or mixed orders use parcel shipping.
-// US-only on purpose: stickers sent to Canada / abroad are merchandise and need
-// a customs-capable package service.
-const US_UNTRACKED_LETTER_RATES = [
-  { maxOz: 1, amountCents: 82 },
-  { maxOz: 2, amountCents: 111 },
-  { maxOz: 3, amountCents: 140 },
-];
-
-// Service codes shared with the frontend (it sends one back as
-// selectedShippingService). Dollar amounts are never accepted from the browser.
-const SHIPPING_SERVICE = {
-  USPS_GROUND_ADVANTAGE: "GroundAdvantage",
-  USPS_PRIORITY: "Priority",
-  USPS_EXPRESS: "Express",
-  UNTRACKED_LETTER: "UNTRACKED_LETTER",
-  US_STANDARD: "FIXED_STANDARD",        // fixed $4.99 / free-over-$65 fallback
-  WEIGHT_TIER: "FIXED_WEIGHT_TIER",     // Canada / International tiers
-};
-
 // Recorded in Stripe metadata as shipping_mode.
 const SHIPPING_MODE = {
-  LIVE_USPS: "live_usps",
-  FIXED_FALLBACK: "fixed_fallback",
+  US_WEIGHT_TABLE: "us_weight_table",
+  US_FREE: "us_free",
   UNTRACKED_LETTER: "untracked_letter",
-};
-
-// Approved live USPS services, keyed by EasyPost's service name. Anything else
-// EasyPost returns (other carriers, Media Mail, etc.) is discarded.
-// deliveryEstimate is USPS's published service standard, shown to customers.
-const USPS_SERVICES = {
-  [SHIPPING_SERVICE.USPS_GROUND_ADVANTAGE]: {
-    displayName: "USPS Ground Advantage",
-    deliveryEstimate: { minBusinessDays: 2, maxBusinessDays: 5 },
-  },
-  [SHIPPING_SERVICE.USPS_PRIORITY]: {
-    displayName: "USPS Priority Mail",
-    deliveryEstimate: { minBusinessDays: 1, maxBusinessDays: 3 },
-  },
-  [SHIPPING_SERVICE.USPS_EXPRESS]: {
-    displayName: "USPS Priority Mail Express",
-    deliveryEstimate: { minBusinessDays: 1, maxBusinessDays: 2 },
-  },
+  WEIGHT_TIER: "weight_tier",
 };
 
 // ── Errors ───────────────────────────────────────────────────────────────────
@@ -185,7 +148,7 @@ function getShippingProductData(priceId, archivePriceId) {
 // lineItems: [{ price, quantity }] as sent to Stripe (quantity already validated).
 // Throws a customer-safe 400 if any product has no trusted shipping data.
 function calculateShipmentProfile(lineItems, archivePriceId) {
-  let itemWeightOz = 0;
+  let totalWeightOz = 0;
   let hasParcelItem = false;
   const unknown = [];
 
@@ -197,7 +160,7 @@ function calculateShipmentProfile(lineItems, archivePriceId) {
       continue;
     }
 
-    itemWeightOz += data.weightOz * li.quantity;
+    totalWeightOz += data.weightOz * li.quantity;
     if (data.shippingClass !== SHIPPING_CLASS.FLAT) hasParcelItem = true;
   }
 
@@ -217,109 +180,45 @@ function calculateShipmentProfile(lineItems, archivePriceId) {
     : SHIPPING_CLASS.FLAT;
 
   return {
-    itemWeightOz,
-    totalWeightOz: itemWeightOz, // product weight only — no packaging added
+    totalWeightOz,
     shippingClass,
     flatEligible: shippingClass === SHIPPING_CLASS.FLAT,
   };
 }
 
-// Trusted parcel for live rating: { parcel } or { missing: [...] }.
-// EasyPost weight is in ounces; dimensions in inches.
-function getRatingParcel(shipmentProfile) {
-  const dims = PACKAGE_DIMENSIONS[shipmentProfile.shippingClass] || {};
-  const weight = Math.ceil(shipmentProfile.totalWeightOz * 10) / 10;
+// ── US rates ─────────────────────────────────────────────────────────────────
 
-  if (dims.predefinedPackage) {
-    return { parcel: { weight, predefined_package: dims.predefinedPackage } };
+// Total weight in pounds → billable whole pounds (always ≥ 1). Rounded to 4
+// decimals first so float noise (e.g. 0.1 × 10 = 1.0000000000000002) can't
+// push an exact pound up a tier.
+function getBillablePounds(totalWeightLb) {
+  return Math.max(1, Math.ceil(Math.round(totalWeightLb * 10000) / 10000));
+}
+
+// US parcel rate in cents for a total weight in pounds; 400 over 70 lb.
+function getUSShippingRateCents(totalWeightLb) {
+  const pounds = getBillablePounds(totalWeightLb);
+
+  if (pounds > US_MAX_WEIGHT_LB) {
+    throw checkoutError(
+      "Please contact us for shipping on orders over 70 lb.",
+      400
+    );
   }
 
-  const missing = ["lengthIn", "widthIn", "heightIn"].filter(
-    (k) => !(typeof dims[k] === "number" && dims[k] > 0)
+  return US_WEIGHT_RATES_CENTS[pounds];
+}
+
+// Letter postage in cents for an all-flat US shipment, or null if ineligible.
+function getUSLetterRateCents(shipmentProfile) {
+  if (!shipmentProfile.flatEligible) return null;
+  const tier = US_UNTRACKED_LETTER_RATES.find(
+    (t) => shipmentProfile.totalWeightOz <= t.maxOz
   );
-
-  if (missing.length > 0) {
-    return {
-      missing: missing.map(
-        (k) => `PACKAGE_DIMENSIONS.${shipmentProfile.shippingClass}.${k}`
-      ),
-    };
-  }
-
-  return {
-    parcel: {
-      weight,
-      length: dims.lengthIn,
-      width: dims.widthIn,
-      height: dims.heightIn,
-    },
-  };
+  return tier ? tier.amountCents : null;
 }
 
-// ── Destination ──────────────────────────────────────────────────────────────
-
-const US_ZIP_RE = /^(\d{5})(?:-\d{4})?$/;
-const CA_POSTAL_RE = /^([A-Z]\d[A-Z]) ?(\d[A-Z]\d)$/;
-const INTL_POSTAL_RE = /^[A-Z0-9][A-Z0-9 -]{1,9}$/;
-
-// Validates the browser's destination against the chosen shipping region and
-// returns a normalized { country, postalCode } — or null when none was sent.
-// Used only for carrier rating and region consistency; Stripe Checkout still
-// collects the full address.
-function validateDestination(region, destination) {
-  if (destination === undefined || destination === null) return null;
-
-  const bad = (msg) => checkoutError(msg, 400);
-
-  if (typeof destination !== "object" || Array.isArray(destination)) {
-    throw bad("Please enter a valid shipping destination.");
-  }
-
-  const country =
-    typeof destination.country === "string"
-      ? destination.country.trim().toUpperCase()
-      : "";
-  const rawPostal =
-    typeof destination.postalCode === "string"
-      ? destination.postalCode.trim().toUpperCase()
-      : "";
-
-  if (!/^[A-Z]{2}$/.test(country) || rawPostal.length > 12) {
-    throw bad("Please enter a valid shipping destination.");
-  }
-
-  if (region === "US") {
-    if (country !== "US") {
-      throw bad("That destination isn't in the United States. Please change “Shipping to” and try again.");
-    }
-    const m = US_ZIP_RE.exec(rawPostal);
-    if (!m) throw bad("Please enter a valid 5-digit US ZIP code.");
-    return { country, postalCode: m[1] };
-  }
-
-  if (region === "CA") {
-    if (country !== "CA") {
-      throw bad("That destination isn't in Canada. Please change “Shipping to” and try again.");
-    }
-    const m = CA_POSTAL_RE.exec(rawPostal);
-    if (!m) throw bad("Please enter a valid Canadian postal code (e.g. K1A 0B1).");
-    return { country, postalCode: `${m[1]} ${m[2]}` };
-  }
-
-  // INTL: any supported country other than US / CA; postal code optional.
-  if (country === "US" || country === "CA") {
-    throw bad("For the United States or Canada, please choose that option under “Shipping to”.");
-  }
-  if (!INTL_SHIPPING_COUNTRIES.includes(country)) {
-    throw bad("Sorry, we can't ship to that country online yet. Please contact us.");
-  }
-  if (rawPostal && !INTL_POSTAL_RE.test(rawPostal)) {
-    throw bad("Please enter a valid postal code, or leave it blank if your country doesn't use one.");
-  }
-  return { country, postalCode: rawPostal };
-}
-
-// ── Service selection ────────────────────────────────────────────────────────
+// ── Shipping option ──────────────────────────────────────────────────────────
 
 function getWeightTierRate(region, totalWeightOz) {
   const rate = WEIGHT_SHIPPING_RATES[region].find(
@@ -336,175 +235,76 @@ function getWeightTierRate(region, totalWeightOz) {
   return rate;
 }
 
-// US-only untracked letter option for flat-only shipments within the letter
-// weight tiers, or null.
-function getLetterMailOption(shipmentProfile, region) {
-  if (region !== "US" || !shipmentProfile.flatEligible) return null;
-
-  const tier = US_UNTRACKED_LETTER_RATES.find(
-    (t) => shipmentProfile.totalWeightOz <= t.maxOz
-  );
-  if (!tier) return null;
-
-  return {
-    service: SHIPPING_SERVICE.UNTRACKED_LETTER,
-    mode: SHIPPING_MODE.UNTRACKED_LETTER,
-    displayName: "Untracked Letter Mail",
-    amountCents: tier.amountCents,
-    tracked: false,
-    freeUsShipping: false,
-  };
-}
-
-function fixedOption(service, displayName, rate, freeUsShipping) {
-  return {
-    service,
-    mode: SHIPPING_MODE.FIXED_FALLBACK,
-    displayName,
-    amountCents: rate.amountCents,
-    rate, // verified against Stripe and passed as a shipping_rate ID
-    freeUsShipping,
-  };
-}
-
-// Returns the shipping options to offer, cheapest first. Each option is
-// { service, mode, displayName, amountCents, freeUsShipping, ... } plus either
-// `rate` (a fixed Stripe shipping-rate config) or nothing (index.js then sends
-// trusted shipping_rate_data with amountCents).
+// The single shipping option for this order:
+//   { mode, displayName, amountCents, rate? }
+// `rate` (a Stripe shipping-rate config) is set for options backed by a
+// pre-made Stripe rate (free US, Canada / International tiers); otherwise
+// index.js sends trusted shipping_rate_data with amountCents.
 //
-// liveUspsRates: normalized rates from usps-rates.js, or null/[] when live
-// rating is unavailable — in which case the fixed rates are used (fallback).
-//
-// US letter-eligible orders (all flat, within the letter tiers, under $65):
-//   fixed: Untracked Letter Mail replaces the $4.99 parcel rate.
-//   live:  Untracked Letter Mail is offered alongside the live USPS services.
-//
-// Free US shipping ($65+ merchandise subtotal) always wins over letter postage:
-//   live:  the cheapest TRACKED service (normally Ground Advantage) becomes $0;
-//          faster services keep their real price; letter mail is not offered.
-//   fixed: the existing $0 Stripe rate, as before.
-function getAvailableShippingServices(
-  shipmentProfile,
-  region,
-  subtotalCents,
-  liveUspsRates
-) {
+// US order of precedence:
+//   over 70 lb            → 400, contact us
+//   subtotal ≥ $65        → free
+//   all flat, ≤ 6 oz      → Untracked Letter Mail
+//   otherwise             → pound table
+function getShippingOption(shipmentProfile, region, subtotalCents) {
   if (region === "US") {
-    const freeUsShipping = subtotalCents >= FREE_US_SHIPPING_THRESHOLD_CENTS;
-    const letter = freeUsShipping
-      ? null
-      : getLetterMailOption(shipmentProfile, region);
-    const options = [];
+    const parcelCents = getUSShippingRateCents(shipmentProfile.totalWeightOz / 16);
 
-    if (Array.isArray(liveUspsRates) && liveUspsRates.length > 0) {
-      const tracked = liveUspsRates
-        .map((r) => ({
-          service: r.serviceCode,
-          mode: SHIPPING_MODE.LIVE_USPS,
-          displayName: r.displayName,
-          amountCents: r.amountCents,
-          quotedAmountCents: r.amountCents,
-          tracked: true,
-          freeUsShipping: false,
-          estimatedDays: r.estimatedDays,
-          deliveryEstimate: USPS_SERVICES[r.serviceCode].deliveryEstimate,
-        }))
-        .sort((a, b) => a.amountCents - b.amountCents);
-
-      if (freeUsShipping) {
-        tracked[0].amountCents = 0;
-        tracked[0].freeUsShipping = true; // Stripe Checkout labels $0 rates "Free"
-      }
-
-      options.push(...tracked);
-    } else if (freeUsShipping) {
-      options.push(fixedOption(SHIPPING_SERVICE.US_STANDARD, "Free US Shipping", US_SHIPPING_RATES.free, true));
-    } else if (!letter) {
-      options.push(fixedOption(SHIPPING_SERVICE.US_STANDARD, "Standard US Shipping", US_SHIPPING_RATES.standard, false));
+    if (subtotalCents >= FREE_US_SHIPPING_THRESHOLD_CENTS) {
+      return {
+        mode: SHIPPING_MODE.US_FREE,
+        displayName: "Free US Shipping",
+        amountCents: 0,
+        rate: US_FREE_SHIPPING_RATE,
+      };
     }
 
-    if (letter) options.push(letter);
+    const letterCents = getUSLetterRateCents(shipmentProfile);
+    if (letterCents !== null) {
+      return {
+        mode: SHIPPING_MODE.UNTRACKED_LETTER,
+        displayName: "Untracked Letter Mail",
+        amountCents: letterCents,
+      };
+    }
 
-    return options.sort((a, b) => a.amountCents - b.amountCents);
+    return {
+      mode: SHIPPING_MODE.US_WEIGHT_TABLE,
+      displayName: "US Shipping",
+      amountCents: parcelCents,
+    };
   }
 
-  // Canada / International: current fixed weight tiers (no letter mail —
-  // merchandise needs a customs-capable package service).
-  const tierRate = getWeightTierRate(region, shipmentProfile.totalWeightOz);
-
-  return [
-    fixedOption(
-      SHIPPING_SERVICE.WEIGHT_TIER,
-      region === "CA" ? "Canada Shipping" : "International Shipping",
-      tierRate,
-      false
-    ),
-  ];
-}
-
-const LIVE_SERVICE_CODES = Object.keys(USPS_SERVICES);
-
-// Picks what to send to Stripe for the customer's chosen service code.
-//   - no code sent        → every available option (customer picks in Stripe)
-//   - code available      → just that option, at today's trusted price
-//   - live code, but live rating is down right now → the fixed fallback rate,
-//     so checkout keeps working
-//   - otherwise           → 400 asking the customer to refresh shipping options
-function selectShippingOptions(options, selectedShippingService) {
-  if (
-    selectedShippingService === undefined ||
-    selectedShippingService === null ||
-    selectedShippingService === ""
-  ) {
-    return options;
-  }
-
-  const refresh = checkoutError(
-    "The shipping option you picked is no longer available for this order. Please refresh shipping options and try again.",
-    400
-  );
-
-  if (
-    typeof selectedShippingService !== "string" ||
-    selectedShippingService.length > 40
-  ) {
-    throw refresh;
-  }
-
-  const match = options.find((o) => o.service === selectedShippingService);
-  if (match) return [match];
-
-  const liveOffered = options.some((o) => o.mode === SHIPPING_MODE.LIVE_USPS);
-  if (!liveOffered && LIVE_SERVICE_CODES.includes(selectedShippingService)) {
-    const fallback = options.filter(
-      (o) => o.mode === SHIPPING_MODE.FIXED_FALLBACK
-    );
-    if (fallback.length > 0) return fallback;
-  }
-
-  throw refresh;
+  // Canada / International: fixed weight tiers (no letter mail — merchandise
+  // needs a customs-capable package service).
+  const rate = getWeightTierRate(region, shipmentProfile.totalWeightOz);
+  return {
+    mode: SHIPPING_MODE.WEIGHT_TIER,
+    displayName: region === "CA" ? "Canada Shipping" : "International Shipping",
+    amountCents: rate.amountCents,
+    rate,
+  };
 }
 
 module.exports = {
   SHIPPING_CLASS,
-  PACKAGE_DIMENSIONS,
   PRODUCT_SHIPPING_DATA,
   ARCHIVE_SHIPPING_DATA,
   US_SHIPPING_COUNTRIES,
   CA_SHIPPING_COUNTRIES,
   INTL_SHIPPING_COUNTRIES,
   FREE_US_SHIPPING_THRESHOLD_CENTS,
-  US_SHIPPING_RATES,
-  WEIGHT_SHIPPING_RATES,
+  US_FREE_SHIPPING_RATE,
+  US_WEIGHT_RATES_CENTS,
+  US_MAX_WEIGHT_LB,
   US_UNTRACKED_LETTER_RATES,
-  SHIPPING_SERVICE,
+  WEIGHT_SHIPPING_RATES,
   SHIPPING_MODE,
-  USPS_SERVICES,
   checkoutError,
   getShippingProductData,
   calculateShipmentProfile,
-  getRatingParcel,
-  validateDestination,
-  getAvailableShippingServices,
-  selectShippingOptions,
+  getBillablePounds,
+  getUSShippingRateCents,
+  getUSLetterRateCents,
+  getShippingOption,
 };

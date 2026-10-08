@@ -4,26 +4,48 @@
 // ---- CONFIG ----
 const CART_KEY = "kahani_cart";
 const SHIP_REGION_KEY = "kahani_ship_region";
-// Display only — the server recomputes the subtotal from Stripe prices and decides shipping.
-const FREE_US_SHIPPING_THRESHOLD_CENTS = 6500;
-// Shipping destination (ZIP / postal code / country) saved per region. The
-// server prices shipping from it; services are chosen on Stripe Checkout.
-const SHIP_DEST_KEY = "kahani_ship_destination";
-// Mirrors INTL_SHIPPING_COUNTRIES in functions/shipping.js (server re-validates).
-const INTL_COUNTRY_CODES = (
-  "AC AD AE AF AG AI AL AM AO AQ AR AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ " +
-  "BR BS BT BV BW BY BZ CD CF CG CH CI CK CL CM CN CO CR CV CW CY CZ DE DJ DK DM DO DZ EC " +
-  "EE EG EH ER ES ET FI FJ FK FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY " +
-  "HK HN HR HT HU ID IE IL IM IN IO IQ IS IT JE JM JO JP KE KG KH KI KM KN KR KW KY KZ LA LB " +
-  "LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MK ML MM MN MO MQ MR MS MT MU MV MW MX MY MZ " +
-  "NA NC NE NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PY QA RE RO RS RU " +
-  "RW SA SB SC SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SZ TA TC TD TF TG TH TJ TK TL TM " +
-  "TN TO TR TT TV TW TZ UA UG UY UZ VA VC VE VG VN VU WF WS XK YE YT ZA ZM ZW"
-).split(" ");
+
+// ---- SHIPPING TABLES (display only) ----
+// The cart shows shipping instantly from these; checkout re-prices everything
+// on the server (functions/shipping.js), which is the authority.
+// BEGIN SHIPPING TABLES — must match functions/shipping.js (shipping.test.js checks).
+const SHIPPING_TABLES = {
+  freeUsThresholdCents: 6500,
+  // Stripe price ID → [weight in oz, "flat" | "parcel"]
+  products: {
+    price_1SYLwPP4FFhr5UNAc6JmV0iR: [24, "parcel"],
+    price_1TbIF6P4FFhr5UNAXn6meNvr: [6, "parcel"],
+    price_1TbIHDP4FFhr5UNAeyIkRrax: [6, "parcel"],
+    price_1TbIIEP4FFhr5UNAaJeT8y6Y: [6, "parcel"],
+    price_1TbIGJP4FFhr5UNAeGEVz0Ko: [6, "parcel"],
+    price_1Tb6jbP4FFhr5UNAHcybrHON: [1, "flat"],
+    price_1Tb6DjP4FFhr5UNApKWkP5wA: [1, "flat"],
+    price_1SvrPwP4FFhr5UNAhWnlzbu5: [1, "flat"],
+    price_1TjQGxP4FFhr5UNAMtrY7cJq: [5, "parcel"],
+  },
+  archiveEditionWeightOz: 1, // Kahani Times Archive, per edition (parcel)
+  // US parcel rate in cents by billable whole pound (index = pounds, 1–70)
+  usWeightRatesCents: [
+    null,
+    439, 513, 586, 660, 734, 808, 881, 955, 1029, 1102,
+    1176, 1250, 1323, 1397, 1471, 1544, 1618, 1692, 1765, 1839,
+    1913, 1986, 2060, 2134, 2207, 2281, 2355, 2429, 2502, 2576,
+    2650, 2723, 2797, 2871, 2944, 3018, 3092, 3165, 3239, 3313,
+    3386, 3460, 3534, 3607, 3681, 3755, 3828, 3902, 3976, 4049,
+    4123, 4197, 4271, 4344, 4418, 4492, 4565, 4639, 4713, 4786,
+    4860, 4934, 5007, 5081, 5155, 5228, 5302, 5376, 5449, 5523,
+  ],
+  // US untracked letter mail, all-flat orders only: [max oz, cents]
+  usLetterRates: [[1, 82], [2, 111], [3, 140], [4, 169], [5, 198], [6, 227]],
+  // Canada / International: [max oz, cents]
+  caRates: [[8, 1299], [16, 1499], [32, 1899], [48, 2299], [64, 2999]],
+  intlRates: [[8, 1499], [16, 1899], [32, 2299], [48, 2999], [64, 3399]],
+};
+// END SHIPPING TABLES
+const FREE_US_SHIPPING_THRESHOLD_CENTS = SHIPPING_TABLES.freeUsThresholdCents;
 
 // ---- STATE ----
 let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
-let cartDestination = null; // ZIP / postal fields in the cart footer (set in initCart)
 
 // ---- DOM HOOKS (gracefully null on pages that don't have them) ----
 const cartBtn      = document.getElementById("cart-btn");
@@ -60,36 +82,114 @@ window.getCartShipRegion = function () {
   }
 };
 
-// Free-shipping progress in the cart footer. Integer cents avoid float drift
-// (e.g. 4 × 15.99). Called by both the default and subscribe.html cart UIs.
-window.renderCartShipping = function (items) {
-  const region = window.getCartShipRegion();
-  const subtotal = items.reduce(
+// Integer cents for display; avoids float drift (e.g. 4 × 15.99).
+function formatCents(cents) {
+  return `$${(cents / 100).toFixed(2)}`;
+}
+
+function getCartSubtotalCents(items) {
+  return items.reduce(
     (sum, item) => sum + Math.round(item.price * 100) * item.quantity,
     0,
   );
+}
+
+// Shipping weight of one cart line in ounces (weight × quantity), or null
+// when the product has no shipping data here.
+function getItemWeightOz(item) {
+  if (item.productType === "kahani_times_archive") {
+    return SHIPPING_TABLES.archiveEditionWeightOz * item.quantity;
+  }
+  const data = SHIPPING_TABLES.products[item.id];
+  return data ? data[0] * item.quantity : null;
+}
+
+// Mirrors getShippingOption() in functions/shipping.js. Returns
+//   { status: "empty" }
+//   { status: "unknown" }                       — server prices it at checkout
+//   { status: "too_heavy", message }
+//   { status: "ok", cents, letterMail }
+function estimateCartShipping(items, region) {
+  if (items.length === 0) return { status: "empty" };
+
+  let weightOz = 0;
+  let allFlat = true;
+  for (const item of items) {
+    const oz = getItemWeightOz(item);
+    if (oz === null) return { status: "unknown" };
+    weightOz += oz;
+    const data = SHIPPING_TABLES.products[item.id];
+    if (!data || data[1] !== "flat") allFlat = false;
+  }
+
+  if (region === "US") {
+    const pounds = Math.max(1, Math.ceil(Math.round((weightOz / 16) * 10000) / 10000));
+    if (pounds >= SHIPPING_TABLES.usWeightRatesCents.length) {
+      return { status: "too_heavy", message: "Please contact us for shipping on orders over 70 lb." };
+    }
+    if (getCartSubtotalCents(items) >= FREE_US_SHIPPING_THRESHOLD_CENTS) {
+      return { status: "ok", cents: 0, letterMail: false };
+    }
+    const letter = allFlat && SHIPPING_TABLES.usLetterRates.find(([maxOz]) => weightOz <= maxOz);
+    if (letter) return { status: "ok", cents: letter[1], letterMail: true };
+    return { status: "ok", cents: SHIPPING_TABLES.usWeightRatesCents[pounds], letterMail: false };
+  }
+
+  const tiers = region === "CA" ? SHIPPING_TABLES.caRates : SHIPPING_TABLES.intlRates;
+  const tier = tiers.find(([maxOz]) => weightOz <= maxOz);
+  if (!tier) {
+    return {
+      status: "too_heavy",
+      message: "Orders over 4 lb can't be shipped to Canada or internationally online yet. Please contact us to place this order.",
+    };
+  }
+  return { status: "ok", cents: tier[1], letterMail: false };
+}
+
+// Shipping, total and free-shipping messages in the cart footer. Called on
+// every cart render by both the default and subscribe.html cart UIs, so they
+// update whenever items, quantities or the region change.
+window.renderCartShipping = function (items) {
+  const region = window.getCartShipRegion();
+  const subtotal = getCartSubtotalCents(items);
+  const estimate = estimateCartShipping(items, region);
   const unlocked = region === "US" && subtotal >= FREE_US_SHIPPING_THRESHOLD_CENTS;
 
   const select = document.getElementById("cart-ship-region");
   const shipEl = document.getElementById("cart-shipping-amount");
+  const grandTotalEl = document.getElementById("cart-grand-total");
   const progressEl = document.getElementById("cart-ship-progress");
   const noteEl = document.getElementById("cart-ship-note");
 
   if (select) select.value = region;
-  if (cartDestination) cartDestination.syncRegion();
-  // Service and price are chosen on Stripe Checkout.
-  if (shipEl) shipEl.textContent = "Calculated at checkout";
+
+  if (shipEl) {
+    shipEl.textContent =
+      estimate.status === "ok" ? (estimate.cents === 0 ? "FREE" : formatCents(estimate.cents))
+      : estimate.status === "empty" ? formatCents(0)
+      : estimate.status === "too_heavy" ? "Contact us"
+      : "Calculated at checkout";
+  }
+  if (grandTotalEl) {
+    grandTotalEl.textContent = estimate.status === "ok"
+      ? formatCents(subtotal + estimate.cents)
+      : formatCents(subtotal);
+  }
+
   if (noteEl) {
-    noteEl.hidden = unlocked;
-    noteEl.textContent = region === "US"
-      ? "Free US shipping on $65+"
-      : "Shipping is based on package weight and destination.";
+    noteEl.hidden = unlocked && estimate.status !== "too_heavy";
+    noteEl.classList.toggle("cart-ship-note--error", estimate.status === "too_heavy");
+    noteEl.textContent =
+      estimate.status === "too_heavy" ? estimate.message
+      : region !== "US" ? "Shipping is based on package weight."
+      : estimate.letterMail ? "Sticker-only orders ship by untracked letter mail. Free US shipping on $65+"
+      : "Free US shipping on $65+";
   }
   if (progressEl) {
-    progressEl.hidden = region !== "US" || subtotal === 0;
+    progressEl.hidden = region !== "US" || subtotal === 0 || estimate.status === "too_heavy";
     progressEl.textContent = unlocked
       ? "Free US shipping unlocked"
-      : `You're $${((FREE_US_SHIPPING_THRESHOLD_CENTS - subtotal) / 100).toFixed(2)} away from free US shipping.`;
+      : `You're ${formatCents(FREE_US_SHIPPING_THRESHOLD_CENTS - subtotal)} away from free US shipping.`;
   }
 };
 
@@ -212,286 +312,26 @@ function closeCart() {
   setTimeout(() => cartOverlay.classList.add("hidden"), 300);
 }
 
-// ---- SHIPPING DESTINATION ----
-// The cart collects only what the server needs to price shipping: region +
-// ZIP / postal code (+ country for International). The server builds the
-// shipping choices (live USPS rates or the fixed fallback) and the customer
-// picks one on Stripe Checkout. No prices, weights or services are sent from here.
-
-function readShipStore(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key));
-  } catch (_) {
+// Cart checkout (default and subscribe.html) asks this for the shipping
+// fields to send. Returns null — after telling the customer why — when the
+// order can't be checked out online (e.g. over the weight limit).
+window.getCartShippingSelection = function () {
+  const region = window.getCartShipRegion();
+  const estimate = estimateCartShipping(getStoredCartItems(), region);
+  if (estimate.status === "too_heavy") {
+    alert(estimate.message);
     return null;
   }
-}
-
-function writeShipStore(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (_) {}
-}
-
-function getStoredDestination(region) {
-  const all = readShipStore(SHIP_DEST_KEY);
-  const d = all && typeof all === "object" ? all[region] : null;
-  return d && typeof d === "object"
-    ? { country: String(d.country || ""), postalCode: String(d.postalCode || "") }
-    : null;
-}
-
-function storeDestination(region, destination) {
-  const all = readShipStore(SHIP_DEST_KEY);
-  const next = all && typeof all === "object" && !Array.isArray(all) ? all : {};
-  next[region] = destination;
-  writeShipStore(SHIP_DEST_KEY, next);
-}
-
-// Basic client-side check; the server validates again and is the authority.
-function checkDestination(region, destination) {
-  const postal = (destination.postalCode || "").trim();
-  if (region === "US") {
-    return /^\d{5}(-\d{4})?$/.test(postal) ? "" : "Please enter a valid 5-digit ZIP code.";
-  }
-  if (region === "CA") {
-    return /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test(postal) ? "" : "Please enter a valid Canadian postal code (e.g. K1A 0B1).";
-  }
-  return destination.country ? "" : "Please choose your country.";
-}
-
-// Saved destination for the current region, if it is complete and valid.
-function getValidStoredDestination(region) {
-  const d = getStoredDestination(region);
-  if (!d) return null;
-  const destination = {
-    country: region === "US" ? "US" : region === "CA" ? "CA" : d.country,
-    postalCode: d.postalCode.trim().toUpperCase(),
-  };
-  return checkDestination(region, destination) ? null : destination;
-}
-
-let intlCountryOptions = null;
-function getIntlCountryOptions() {
-  if (intlCountryOptions) return intlCountryOptions;
-  let names = null;
-  try {
-    names = new Intl.DisplayNames(["en"], { type: "region" });
-  } catch (_) {}
-  intlCountryOptions = INTL_COUNTRY_CODES.map((code) => {
-    let name = code;
-    try {
-      name = (names && names.of(code)) || code;
-    } catch (_) {}
-    return { code, name };
-  }).sort((a, b) => a.name.localeCompare(b.name));
-  return intlCountryOptions;
-}
-
-// ZIP / postal code (+ country for International) fields, used in the cart
-// footer and the Buy Now destination dialog.
-function createDestinationFields(root, getRegion) {
-  root.classList.add("ship-est");
-  root.innerHTML = `
-    <div class="ship-est__fields">
-      <label class="ship-est__field ship-est__country" hidden>
-        <span>Country</span>
-        <select class="ship-est__country-select" autocomplete="country">
-          <option value="">Select a country</option>
-        </select>
-      </label>
-      <label class="ship-est__field">
-        <span class="ship-est__postal-label">ZIP code</span>
-        <input class="ship-est__postal" type="text" autocomplete="postal-code" maxlength="10" spellcheck="false" />
-      </label>
-    </div>
-    <p class="ship-est__msg" role="status" aria-live="polite"></p>`;
-
-  const countryField = root.querySelector(".ship-est__country");
-  const countrySelect = root.querySelector(".ship-est__country-select");
-  const postalLabel = root.querySelector(".ship-est__postal-label");
-  const postalInput = root.querySelector(".ship-est__postal");
-  const msgEl = root.querySelector(".ship-est__msg");
-  let currentRegion = null;
-
-  function setMsg(text) {
-    msgEl.textContent = text || "";
-    msgEl.classList.toggle("ship-est__msg--error", Boolean(text));
-  }
-
-  function read() {
-    const region = getRegion();
-    return {
-      country: region === "US" ? "US" : region === "CA" ? "CA" : countrySelect.value,
-      postalCode: postalInput.value.trim().toUpperCase(),
-    };
-  }
-
-  function save() {
-    storeDestination(getRegion(), read());
-    setMsg("");
-  }
-
-  postalInput.addEventListener("input", save);
-  countrySelect.addEventListener("change", save);
-
-  const api = {
-    // Match labels / fields to the selected region and restore its saved destination.
-    syncRegion() {
-      const region = getRegion();
-      if (region === currentRegion) return;
-      currentRegion = region;
-
-      countryField.hidden = region !== "INTL";
-      if (region === "INTL" && countrySelect.options.length === 1) {
-        getIntlCountryOptions().forEach(({ code, name }) => {
-          countrySelect.add(new Option(name, code));
-        });
-      }
-      postalLabel.textContent =
-        region === "US" ? "ZIP code" : region === "CA" ? "Postal code" : "Postal code (if used)";
-      postalInput.inputMode = region === "US" ? "numeric" : "text";
-
-      const stored = getStoredDestination(region);
-      postalInput.value = stored ? stored.postalCode : "";
-      if (region === "INTL") countrySelect.value = stored ? stored.country : "";
-      setMsg("");
-    },
-
-    // { shippingRegion, destination } when valid; otherwise shows why,
-    // focuses the field and returns null.
-    validate() {
-      api.syncRegion();
-      const region = getRegion();
-      const destination = read();
-      const problem = checkDestination(region, destination);
-      if (problem) {
-        setMsg(problem);
-        (region === "INTL" && !destination.country ? countrySelect : postalInput).focus();
-        return null;
-      }
-      storeDestination(region, destination);
-      setMsg("");
-      return { shippingRegion: region, destination };
-    },
-
-    focus() {
-      (getRegion() === "INTL" && !countrySelect.value ? countrySelect : postalInput).focus();
-    },
-  };
-
-  api.syncRegion();
-  return api;
-}
-
-// Cart checkout (default and subscribe.html) asks this for the shipping
-// fields. Returns null — after prompting in the cart — until they're valid.
-window.getCartShippingSelection = function () {
-  if (!cartDestination) return { shippingRegion: window.getCartShipRegion() };
-  return cartDestination.validate();
+  return { shippingRegion: region };
 };
 
-// ---- BUY NOW DESTINATION DIALOG ----
-// window.ensureShippingDestination({ title }) → Promise resolving to
-// { shippingRegion, destination }, or null if the customer closes the dialog.
-// Uses the saved destination when it is already complete; otherwise asks for
-// it in a compact dialog built from the same cart fields.
-let destinationDialog = null;
-
-function getDestinationDialog() {
-  if (destinationDialog) return destinationDialog;
-
-  const overlay = document.createElement("div");
-  overlay.className = "ship-modal hidden";
-  overlay.innerHTML = `
-    <div class="ship-modal__card" role="dialog" aria-modal="true" aria-labelledby="ship-modal-title">
-      <div class="ship-modal__head">
-        <h3 id="ship-modal-title" class="ship-modal__title">Where are we shipping?</h3>
-        <button type="button" class="close-btn ship-modal__close" aria-label="Close">
-          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-      </div>
-      <p class="ship-modal__item"></p>
-      <label class="cart-ship-region">
-        <span>Shipping to</span>
-        <select class="ship-modal__region">
-          <option value="US">United States</option>
-          <option value="CA">Canada</option>
-          <option value="INTL">International</option>
-        </select>
-      </label>
-      <div class="ship-modal__fields"></div>
-      <p class="cart-ship-note">Shipping options and prices are shown at checkout.</p>
-      <button type="button" class="checkout-btn ship-modal__continue">Continue to checkout</button>
-    </div>`;
-  document.body.appendChild(overlay);
-
-  const itemEl = overlay.querySelector(".ship-modal__item");
-  const regionSelect = overlay.querySelector(".ship-modal__region");
-  const fields = createDestinationFields(
-    overlay.querySelector(".ship-modal__fields"),
-    window.getCartShipRegion,
-  );
-  let resolver = null;
-  let returnFocus = null;
-
-  function close(result) {
-    overlay.classList.add("hidden");
-    document.removeEventListener("keydown", onKeydown);
-    const resolve = resolver;
-    resolver = null;
-    if (returnFocus && typeof returnFocus.focus === "function") returnFocus.focus();
-    if (resolve) resolve(result);
+function getStoredCartItems() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  } catch (_) {
+    return [];
   }
-
-  function onKeydown(e) {
-    if (e.key === "Escape") close(null);
-    if (e.key === "Enter" && e.target.classList.contains("ship-est__postal")) {
-      e.preventDefault();
-      submit();
-    }
-  }
-
-  function submit() {
-    const selection = fields.validate();
-    if (selection) close(selection);
-  }
-
-  regionSelect.addEventListener("change", () => {
-    try {
-      localStorage.setItem(SHIP_REGION_KEY, normalizeShipRegion(regionSelect.value));
-    } catch (_) {}
-    fields.syncRegion();
-    window.updateCartUI(); // keep the cart's / archive's "Shipping to" in sync
-  });
-  overlay.querySelector(".ship-modal__continue").addEventListener("click", submit);
-  overlay.querySelector(".ship-modal__close").addEventListener("click", () => close(null));
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) close(null);
-  });
-
-  destinationDialog = {
-    open(options, resolve) {
-      if (resolver) close(null);
-      resolver = resolve;
-      returnFocus = document.activeElement;
-      itemEl.textContent = (options && options.title) || "";
-      itemEl.hidden = !itemEl.textContent;
-      regionSelect.value = window.getCartShipRegion();
-      fields.syncRegion();
-      overlay.classList.remove("hidden");
-      document.addEventListener("keydown", onKeydown);
-      fields.focus();
-    },
-  };
-  return destinationDialog;
 }
-
-window.ensureShippingDestination = function (options) {
-  const region = window.getCartShipRegion();
-  const saved = getValidStoredDestination(region);
-  if (saved) return Promise.resolve({ shippingRegion: region, destination: saved });
-  return new Promise((resolve) => getDestinationDialog().open(options, resolve));
-};
 
 // ---- CHECKOUT ----
 async function handleCheckout() {
@@ -513,7 +353,6 @@ async function handleCheckout() {
         cartItems: cart,
         cancelUrl: window.location.href,
         shippingRegion: shipping.shippingRegion,
-        destination: shipping.destination,
       }),
     });
 
@@ -550,11 +389,6 @@ function initCart() {
   // could theoretically be called more than once if the loader runs twice.
   if (_cartInitialized) return;
   _cartInitialized = true;
-
-  const destinationRoot = document.getElementById("cart-ship-estimator");
-  if (destinationRoot) {
-    cartDestination = createDestinationFields(destinationRoot, window.getCartShipRegion);
-  }
 
   updateCartUI();
 

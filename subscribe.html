@@ -5066,16 +5066,6 @@
           .sort((a, b) => a - b)
           .map((m) => MONTH_FULL[m]);
 
-        // Same destination step as Shop Buy Now (cart.js); the server prices
-        // shipping and the customer picks a service on Stripe Checkout.
-        let shipping = { shippingRegion: getArchiveShipRegion() };
-        if (typeof window.ensureShippingDestination === "function") {
-          shipping = await window.ensureShippingDestination({
-            title: `The Kahani Times Archive — ${monthNames.length} edition${monthNames.length === 1 ? "" : "s"}`,
-          });
-          if (!shipping) return; // dialog closed
-        }
-
         setArchiveLoading(true);
 
         try {
@@ -5085,8 +5075,7 @@
             body: JSON.stringify({
               selectedYear: String(selectedYear),
               selectedMonths: monthNames,
-              shippingRegion: shipping.shippingRegion,
-              destination: shipping.destination,
+              shippingRegion: getArchiveShipRegion(),
             }),
           });
 
@@ -5251,8 +5240,8 @@
           JSON.parse(localStorage.getItem("kahani_cart")) || [];
         if (currentCart.length === 0) return;
 
-        // Destination from the cart's ZIP / postal fields (cart.js); null
-        // means it is prompting the customer. Services are chosen on Stripe.
+        // Shipping region from cart.js; null means the order can't be
+        // checked out online (cart.js has told the customer why).
         const shipping = window.getCartShippingSelection
           ? window.getCartShippingSelection()
           : { shippingRegion: window.getCartShipRegion ? window.getCartShipRegion() : "US" };
@@ -5273,7 +5262,6 @@
               cartItems: currentCart,
               cancelUrl: "https://kahanikorner.com/subscribe.html",
               shippingRegion: shipping.shippingRegion,
-              destination: shipping.destination,
             }),
           });
 

@@ -12,6 +12,16 @@
 (function () {
   var FORM_ENDPOINT = "https://formspree.io/f/mdaqoegj";
   var MAX_PARAM_LEN = 60;
+  var SUPPORT_CARD_SRC = "/assets/js/support-card.js";
+
+  // Every free resource page gets the shared "Buy Me A Chai" support popup
+  // (scroll-triggered, on every page view) — no per-page markup needed.
+  if (!document.querySelector('script[src="' + SUPPORT_CARD_SRC + '"]')) {
+    var supportScript = document.createElement("script");
+    supportScript.src = SUPPORT_CARD_SRC;
+    supportScript.defer = true;
+    document.body.appendChild(supportScript);
+  }
 
   var form = document.getElementById("rdl-form");
 

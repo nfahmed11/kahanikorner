@@ -25,35 +25,25 @@ const ARCHIVE_AVAILABILITY = {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Checkout shipping (cart, Shop Buy Now, Archive Buy Now)
-//   US:     sticker-only (flat) orders up to 3 oz: Untracked Letter Mail at
-//           stamped letter prices. Other orders: live USPS rates via EasyPost
-//           (Ground Advantage / Priority / Express) when configured, otherwise
-//           the fixed $4.99 rate. Free at $65.00+.
-//   Canada / International: fixed tiers by total product weight (no packaging).
-// Trusted product weights/classes, rates and option rules live in shipping.js;
-// EasyPost calls live in usps-rates.js; this file verifies prices and rates
-// against Stripe and builds the Checkout Session.
-//
-// Two steps: getShippingOptions quotes services for a cart + destination;
-// createCheckoutSession / createArchiveCheckout receive the chosen service code
-// and RE-RATE it server-side before creating the session. No shipping amount
-// from the browser is ever used.
+//   US:     sticker-only (flat) orders up to 6 oz: Untracked Letter Mail.
+//           Everything else: fixed pound table (total weight rounded up to the
+//           next whole pound, up to 70 lb). Free at $65.00+.
+//   Canada / International: fixed tiers by total product weight.
+// Trusted product weights/classes and rate tables live in shipping.js; this
+// file verifies prices and rates against Stripe and builds the Checkout
+// Session. No shipping amount or weight from the browser is ever used.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const {
   checkoutError,
   calculateShipmentProfile,
-  validateDestination,
-  getAvailableShippingServices,
-  selectShippingOptions,
+  getShippingOption,
   US_SHIPPING_COUNTRIES,
   CA_SHIPPING_COUNTRIES,
   INTL_SHIPPING_COUNTRIES,
-  SHIPPING_MODE,
 } = require("./shipping");
-const { fetchUspsRates, getLiveRatingReadiness } = require("./usps-rates");
 
-// Abuse limits for public checkout / quote endpoints.
+// Abuse limits for the public checkout endpoints.
 const MAX_REQUEST_BODY_CHARS = 32000;
 const MAX_CART_LINES = 30;
 const MAX_QUANTITY_PER_LINE = 50;
@@ -214,12 +204,8 @@ function buildCartLineItems(cartItems, archivePriceId) {
   return { lineItems, metadata };
 }
 
-// Shared by the quote endpoint and both checkout endpoints, so every path
-// prices shipping the same way. Live USPS rating is attempted only for US;
-// any failure falls back to the fixed rates (logged, never thrown).
-async function resolveShippingOptions(stripeClient, lineItems, region, rawDestination, logTag) {
-  const destination = validateDestination(region, rawDestination);
-
+// Shared by both checkout endpoints so every path prices shipping the same way.
+async function resolveShipping(stripeClient, lineItems, region) {
   const subtotalCents =
     await getTrustedSubtotalCents(stripeClient, lineItems);
 
@@ -228,38 +214,9 @@ async function resolveShippingOptions(stripeClient, lineItems, region, rawDestin
     process.env.STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID || ""
   );
 
-  let liveRates = null;
-  let liveUnavailableReason = null;
+  const option = getShippingOption(shipmentProfile, region, subtotalCents);
 
-  if (region === "US") {
-    const readiness = getLiveRatingReadiness(shipmentProfile);
-
-    if (!readiness.ok) {
-      liveUnavailableReason = readiness.reason;
-    } else if (!destination) {
-      // Live rating is set up, so a ZIP is required to price shipping.
-      throw checkoutError("Please enter your ZIP code to see shipping options.", 400);
-    } else {
-      const live = await fetchUspsRates({ shipmentProfile, destination });
-      if (live.ok) liveRates = live.rates;
-      else liveUnavailableReason = live.reason;
-    }
-
-    if (liveUnavailableReason) {
-      console.warn(
-        `[${logTag}] Live USPS rating unavailable, using fixed US shipping: ${liveUnavailableReason}`
-      );
-    }
-  }
-
-  const options = getAvailableShippingServices(
-    shipmentProfile,
-    region,
-    subtotalCents,
-    liveRates
-  );
-
-  return { destination, subtotalCents, shipmentProfile, options, liveUnavailableReason };
+  return { subtotalCents, shipmentProfile, option };
 }
 
 async function getVerifiedShippingRateId(stripeClient, rate) {
@@ -294,76 +251,45 @@ async function getVerifiedShippingRateId(stripeClient, rate) {
   return rateId;
 }
 
-// Fixed options → verified Stripe shipping-rate ID. Live / letter options →
-// shipping_rate_data built from the server's own fresh quote.
+// Pre-made Stripe rates (free US, Canada / International tiers) → verified
+// shipping-rate ID. Pound-table and letter-mail amounts → shipping_rate_data
+// built from the server's own trusted table.
 async function toStripeShippingOption(stripeClient, option) {
   if (option.rate) {
     return { shipping_rate: await getVerifiedShippingRateId(stripeClient, option.rate) };
   }
 
   if (!Number.isInteger(option.amountCents) || option.amountCents < 0) {
-    throw checkoutError(`Server error: invalid shipping amount for ${option.service}.`, 500);
+    throw checkoutError(`Server error: invalid shipping amount for ${option.mode}.`, 500);
   }
 
-  const data = {
-    type: "fixed_amount",
-    fixed_amount: { amount: option.amountCents, currency: "usd" },
-    display_name: option.stripeDisplayName || option.displayName,
-    metadata: { shipping_service: option.service, shipping_mode: option.mode },
+  return {
+    shipping_rate_data: {
+      type: "fixed_amount",
+      fixed_amount: { amount: option.amountCents, currency: "usd" },
+      display_name: option.displayName,
+      metadata: { shipping_mode: option.mode },
+    },
   };
-
-  if (option.deliveryEstimate) {
-    data.delivery_estimate = {
-      minimum: { unit: "business_day", value: option.deliveryEstimate.minBusinessDays },
-      maximum: { unit: "business_day", value: option.deliveryEstimate.maxBusinessDays },
-    };
-  }
-
-  return { shipping_rate_data: data };
 }
 
-async function buildCheckoutShipping(
-  stripeClient,
-  lineItems,
-  region,
-  logTag,
-  { destination: rawDestination, selectedShippingService } = {}
-) {
-  const {
-    destination,
-    subtotalCents,
-    shipmentProfile,
-    options,
-    liveUnavailableReason,
-  } = await resolveShippingOptions(stripeClient, lineItems, region, rawDestination, logTag);
+async function buildCheckoutShipping(stripeClient, lineItems, region, logTag) {
+  const { subtotalCents, shipmentProfile, option } =
+    await resolveShipping(stripeClient, lineItems, region);
 
-  const services = selectShippingOptions(options, selectedShippingService);
-
-  const shippingOptions = await Promise.all(
-    services.map((s) => toStripeShippingOption(stripeClient, s))
-  );
-
-  const freeUsShipping = services.some((s) => s.freeUsShipping);
-  const modes = [...new Set(services.map((s) => s.mode))];
+  const shippingOption = await toStripeShippingOption(stripeClient, option);
+  const freeUsShipping = region === "US" && option.amountCents === 0;
 
   console.log(
     `[${logTag}] Shipping:`,
     JSON.stringify({
       region,
-      destination,
       subtotalCents,
       ...shipmentProfile,
-      freeUsShipping,
-      selectedShippingService: selectedShippingService || null,
-      liveUnavailableReason,
-      services: services.map((s, i) => ({
-        service: s.service,
-        mode: s.mode,
-        amountCents: s.amountCents,
-        quotedAmountCents: s.quotedAmountCents,
-        rate: s.rate ? s.rate.env : undefined,
-        rateId: shippingOptions[i].shipping_rate,
-      })),
+      mode: option.mode,
+      amountCents: option.amountCents,
+      rate: option.rate ? option.rate.env : undefined,
+      rateId: shippingOption.shipping_rate,
     })
   );
 
@@ -373,128 +299,20 @@ async function buildCheckoutShipping(
     free_us_shipping: String(freeUsShipping),
     shipment_weight_oz: String(shipmentProfile.totalWeightOz),
     shipment_class: shipmentProfile.shippingClass,
-    shipping_mode: modes.join(","),
-    shipping_service:
-      services.length === 1 ? services[0].service : "customer_choice_at_checkout",
+    shipping_mode: option.mode,
+    shipping_amount_cents: String(option.amountCents),
   };
-
-  if (services.length === 1) {
-    metadata.shipping_amount_cents = String(services[0].amountCents);
-  }
-  if (destination) {
-    metadata.quoted_destination_country = destination.country;
-    if (destination.postalCode) metadata.quoted_postal_code = destination.postalCode;
-  }
-  if (liveUnavailableReason) {
-    metadata.live_rate_unavailable_reason = liveUnavailableReason.substring(0, 300);
-  }
 
   return {
     sessionFields: {
       shipping_address_collection: {
         allowed_countries: getAllowedCountries(region),
       },
-      shipping_options: shippingOptions,
+      shipping_options: [shippingOption],
     },
     metadata,
   };
 }
-
-// Small per-instance limiter for the quote endpoint (each call can hit
-// EasyPost). Not a security boundary — just blunts accidental/abusive loops.
-const QUOTE_WINDOW_MS = 10 * 60 * 1000;
-const QUOTE_MAX_PER_WINDOW = 60;
-const quoteHits = new Map();
-
-function isQuoteRateLimited(req) {
-  const forwarded = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim();
-  const ip = forwarded || req.ip || "unknown";
-  const now = Date.now();
-
-  if (quoteHits.size > 5000) {
-    for (const [key, entry] of quoteHits) {
-      if (now - entry.start > QUOTE_WINDOW_MS) quoteHits.delete(key);
-    }
-  }
-
-  const entry = quoteHits.get(ip);
-  if (!entry || now - entry.start > QUOTE_WINDOW_MS) {
-    quoteHits.set(ip, { start: now, count: 1 });
-    return false;
-  }
-  entry.count += 1;
-  return entry.count > QUOTE_MAX_PER_WINDOW;
-}
-
-// Step 1 of checkout: quote shipping services for a cart + destination.
-// Returns display data only — no EasyPost rate IDs, weights or shipping class.
-exports.getShippingOptions = functions.https.onRequest(async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.set("Access-Control-Allow-Headers", "Content-Type");
-
-  if (req.method === "OPTIONS") {
-    res.status(204).send("");
-    return;
-  }
-  if (req.method !== "POST") {
-    res.status(405).json({ error: "Method Not Allowed" });
-    return;
-  }
-  if (isOversizedBody(req.body)) {
-    res.status(413).json({ error: "Request too large." });
-    return;
-  }
-  if (isQuoteRateLimited(req)) {
-    res.status(429).json({ error: "Too many shipping quote requests. Please wait a few minutes and try again." });
-    return;
-  }
-
-  const key = process.env.STRIPE_SECRET_KEY || "";
-  if (!key.startsWith("sk_live_") && !key.startsWith("sk_test_")) {
-    console.error("[getShippingOptions] STRIPE_SECRET_KEY is missing or invalid.");
-    res.status(500).json({ error: "Server configuration error." });
-    return;
-  }
-
-  const body = req.body || {};
-  const shippingRegion = parseShippingRegion(body.shippingRegion);
-
-  try {
-    const { lineItems } = buildCartLineItems(
-      body.cartItems,
-      process.env.STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID || ""
-    );
-
-    const { options } = await resolveShippingOptions(
-      stripe(key),
-      lineItems,
-      shippingRegion,
-      body.destination,
-      "getShippingOptions"
-    );
-
-    res.status(200).json({
-      shippingRegion,
-      liveRates: options.some((o) => o.mode === SHIPPING_MODE.LIVE_USPS),
-      options: options.map((o) => ({
-        code: o.service,
-        label: o.displayName,
-        amountCents: o.amountCents,
-        isFree: o.amountCents === 0,
-        tracked: typeof o.tracked === "boolean" ? o.tracked : null,
-        deliveryEstimate: o.deliveryEstimate || null,
-      })),
-    });
-  } catch (err) {
-    console.error("[getShippingOptions] Error:", err.message);
-    res.status(err.statusCode === 400 ? 400 : 500).json({
-      error: err.statusCode === 400
-        ? err.message
-        : "We couldn't load shipping options right now. Please try again.",
-    });
-  }
-});
 
 exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
@@ -579,11 +397,7 @@ exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
       stripeClient,
       lineItems,
       shippingRegion,
-      "createArchiveCheckout",
-      {
-        destination: req.body.destination,
-        selectedShippingService: req.body.selectedShippingService,
-      }
+      "createArchiveCheckout"
     );
 
     const metadata = {
@@ -686,11 +500,7 @@ exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
       stripeClient,
       lineItems,
       shippingRegion,
-      "createCheckoutSession",
-      {
-        destination: req.body.destination,
-        selectedShippingService: req.body.selectedShippingService,
-      }
+      "createCheckoutSession"
     );
 
     Object.assign(metadata, shipping.metadata);

@@ -84,12 +84,14 @@
           <option value="INTL">International</option>
         </select>
       </label>
-      <div id="cart-ship-estimator"></div>
-      <div class="cart-total">
+      <div class="cart-shipping-row">
         <span>Subtotal</span><span id="cart-total-amount">$0.00</span>
       </div>
       <div class="cart-shipping-row">
-        <span>Shipping</span><span id="cart-shipping-amount">Calculated at checkout</span>
+        <span>Shipping</span><span id="cart-shipping-amount">$0.00</span>
+      </div>
+      <div class="cart-total">
+        <span>Total</span><span id="cart-grand-total">$0.00</span>
       </div>
       <p id="cart-ship-progress" class="cart-ship-progress" hidden></p>
       <p id="cart-ship-note" class="cart-ship-note">Free US shipping on $65+</p>
@@ -126,6 +128,25 @@
           </li>
           <li><a href="/#faq" data-nav="help">Help</a></li>
           <li><a href="/#contact" data-nav="contact">Contact</a></li>
+          <li>
+            <a
+              href="https://buy.stripe.com/cNiaEZ2oa31zefxcon0Fi0b"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mobile-menu__chai"
+              data-testid="link-mobile-buy-chai"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-coffee" aria-hidden="true" focusable="false">
+                <path d="M10 2v2"></path>
+                <path d="M14 2v2"></path>
+                <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path>
+                <path d="M6 2v2"></path>
+              </svg>
+              Buy Me A Chai
+            </a>
+          </li>
         </ul>
       </div>
       <!-- Panel 2: Free Resources sub-menu -->
