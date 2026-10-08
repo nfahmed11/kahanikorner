@@ -22,8 +22,12 @@
     </button>
     <a href="/" class="brand" aria-label="Kahani Korner Home">
       <picture>
-        <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png" />
-        <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" />
+        <source media="(max-width: 768px)" type="image/webp" width="640" height="640" sizes="34px"
+          srcset="/assets/images/opt/logo2-40.a0bf1221.webp 40w, /assets/images/opt/logo2-80.1a60dfdc.webp 80w, /assets/images/opt/logo2-120.6230f6d0.webp 120w" />
+        <source media="(max-width: 768px)" width="640" height="640" srcset="/assets/images/homepage/logo2.png" />
+        <source type="image/webp" width="640" height="261" sizes="108px"
+          srcset="/assets/images/opt/logo-120.a360215f.webp 120w, /assets/images/opt/logo-240.1bed3725.webp 240w, /assets/images/opt/logo-360.dd0b2a1f.webp 360w" />
+        <img src="/assets/images/homepage/logo.png" alt="Kahani Korner" class="brand-logo" width="640" height="261" />
       </picture>
     </a>
     <nav class="nav" aria-label="Main navigation">
@@ -106,7 +110,13 @@
     <div class="mobile-menu__header">
       <a href="/" class="mobile-menu__brand" aria-label="Kahani Korner Home">
         <picture>
+          <source media="(max-width: 768px)" type="image/webp" sizes="34px"
+            srcset="/assets/images/opt/logo2-40.a0bf1221.webp 40w, /assets/images/opt/logo2-80.1a60dfdc.webp 80w, /assets/images/opt/logo2-120.6230f6d0.webp 120w" />
           <source media="(max-width: 768px)" srcset="/assets/images/homepage/logo2.png" />
+          <source type="image/webp" sizes="84px"
+            srcset="/assets/images/opt/logo-120.a360215f.webp 120w, /assets/images/opt/logo-240.1bed3725.webp 240w, /assets/images/opt/logo-360.dd0b2a1f.webp 360w" />
+          <!-- No width/height here: this logo sits in the closed (display:none)
+               menu, has a fixed 34px height, and so can't cause layout shift. -->
           <img src="/assets/images/homepage/logo.png" alt="Kahani Korner"
             style="height: 34px; width: auto; display: block" />
         </picture>

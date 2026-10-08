@@ -36,7 +36,12 @@
     <link
       rel="icon"
       type="image/png"
-      href="/assets/images/homepage/logo2.png" />
+      sizes="48x48"
+      href="/assets/images/opt/favicon-48.5c00ca9d.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/images/opt/favicon-180.2cc29c80.png" />
     <meta
       name="description"
       content="Everything your family needs to make Urdu part of everyday life — free resources, bilingual books, stickers, games, and monthly snail mail." />
@@ -66,7 +71,14 @@
       rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/tokens.css" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
-    <link rel="preload" as="image" href="/assets/images/homepage/fam.png" />
+    <!-- Hero background (LCP). type= makes browsers without WebP skip this
+         preload and use the PNG fallback in .hero__bg-image instead. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/images/opt/fam-1552.3512ae90.webp"
+      type="image/webp"
+      fetchpriority="high" />
 
     <style>
       /* ============================================================
@@ -909,6 +921,17 @@
             rgba(44, 33, 23, 0.28)
           ),
           url("/assets/images/homepage/fam.png");
+        /* Same image as WebP; browsers without image-set type() keep the PNG above. */
+        background-image:
+          linear-gradient(
+            120deg,
+            rgba(44, 33, 23, 0.6),
+            rgba(44, 33, 23, 0.28)
+          ),
+          image-set(
+            url("/assets/images/opt/fam-1552.3512ae90.webp") type("image/webp"),
+            url("/assets/images/homepage/fam.png") type("image/png")
+          );
         background-size: cover;
         background-position: center top;
         will-change: transform;
@@ -1312,6 +1335,52 @@
         width: 100%;
         height: 100%;
         border: 0;
+      }
+      .video-facade {
+        position: absolute;
+        inset: 0;
+        display: block;
+        cursor: pointer;
+        color: #fff;
+      }
+      .video-facade__thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-facade__title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 0.9rem 1.1rem 2rem;
+        font-size: 1.05rem;
+        font-weight: 600;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        background: linear-gradient(rgba(0, 0, 0, 0.55), transparent);
+      }
+      .video-facade__play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 0;
+      }
+      .video-facade__play-bg {
+        fill: #ff0033;
+        transition: fill 0.15s;
+      }
+      .video-facade:hover .video-facade__play-bg,
+      .video-facade:focus-visible .video-facade__play-bg {
+        fill: #cc0029;
+      }
+      .video-facade:focus-visible {
+        outline: 3px solid var(--deep-teal);
+        outline-offset: -3px;
       }
       .starter-video__overlay {
         position: absolute;
@@ -2997,9 +3066,24 @@
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-card__img-wrapper">
-            <img
-              src="/assets/images/products/books/bundle/fourbundle.png"
-              alt="Urdu–English bilingual picture books spread on a rug" />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="
+                  /assets/images/opt/fourbundle-400.12aac38b.webp    400w,
+                  /assets/images/opt/fourbundle-600.1c7c2473.webp    600w,
+                  /assets/images/opt/fourbundle-800.2b79202e.webp    800w,
+                  /assets/images/opt/fourbundle-1254.08988ab0.webp  1254w
+                "
+                sizes="(max-width: 700px) calc(100vw - 64px), 360px" />
+              <img
+                src="/assets/images/products/books/bundle/fourbundle.png"
+                alt="Urdu–English bilingual picture books spread on a rug"
+                width="1254"
+                height="1254"
+                loading="lazy"
+                decoding="async" />
+            </picture>
           </div>
           <div class="feature-card__content">
             <span class="feature-tag">Bilingual Books</span>
@@ -3016,9 +3100,24 @@
 
         <div class="feature-card">
           <div class="feature-card__img-wrapper">
-            <img
-              src="/assets/images/products/subscribe/jan.png"
-              alt="Kahani Times snail mail subscription pack with stickers and activities" />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="
+                  /assets/images/opt/jan-400.60a561c9.webp    400w,
+                  /assets/images/opt/jan-600.505512ed.webp    600w,
+                  /assets/images/opt/jan-800.f51fc821.webp    800w,
+                  /assets/images/opt/jan-1024.7c08ae72.webp  1024w
+                "
+                sizes="(max-width: 700px) calc(100vw - 64px), 360px" />
+              <img
+                src="/assets/images/products/subscribe/jan.png"
+                alt="Kahani Times snail mail subscription pack with stickers and activities"
+                width="1024"
+                height="1020"
+                loading="lazy"
+                decoding="async" />
+            </picture>
           </div>
           <div class="feature-card__content">
             <span class="feature-tag">Monthly Fun Snail Mail</span>
@@ -3035,9 +3134,22 @@
 
         <div class="feature-card">
           <div class="feature-card__img-wrapper">
-            <img
-              src="/assets/images/products/stickers/all/all.png"
-              alt="Pakistani-inspired holographic sticker sets — mango season collection" />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="
+                  /assets/images/opt/stickers-all-400.3481bce9.webp  400w,
+                  /assets/images/opt/stickers-all-600.40c722bc.webp  600w
+                "
+                sizes="(max-width: 700px) calc(100vw - 64px), 360px" />
+              <img
+                src="/assets/images/products/stickers/all/all.png"
+                alt="Pakistani-inspired holographic sticker sets — mango season collection"
+                width="600"
+                height="600"
+                loading="lazy"
+                decoding="async" />
+            </picture>
           </div>
           <div class="feature-card__content">
             <span class="feature-tag">Cultural Stickers</span>
@@ -3077,23 +3189,44 @@
           </div>
           <div class="starter-media">
             <div class="starter-video">
-              <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/PonnXQJ7Jnk?si=zZA2s23n6UVxf21D"
-                title="YouTube video player — What's inside a Kahani Korner bundle"
-                frameborder="0"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share;
-                "
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen></iframe>
+              <!-- Click-to-load: YouTube's player (~1 MB) is only fetched when
+                   the visitor presses play. Without JS the link opens YouTube. -->
+              <a
+                class="video-facade"
+                id="bundle-video"
+                href="https://www.youtube.com/watch?v=PonnXQJ7Jnk"
+                data-embed="https://www.youtube.com/embed/PonnXQJ7Jnk?si=zZA2s23n6UVxf21D&autoplay=1&playsinline=1"
+                data-title="YouTube video player — What's inside a Kahani Korner bundle"
+                aria-label="Play video: What a Kahani Korner Bundle Includes">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="
+                      /assets/images/opt/video-bundle-640.a7999469.webp    640w,
+                      /assets/images/opt/video-bundle-1280.f2868808.webp  1280w
+                    "
+                    sizes="(max-width: 880px) calc(100vw - 4rem), 520px" />
+                  <img
+                    class="video-facade__thumb"
+                    src="/assets/images/opt/video-bundle-640.3a0fada5.jpg"
+                    alt=""
+                    width="640"
+                    height="360"
+                    loading="lazy"
+                    decoding="async" />
+                </picture>
+                <span class="video-facade__title" aria-hidden="true"
+                  >What a Kahani Korner Bundle Includes</span
+                >
+                <span class="video-facade__play" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" width="68" height="48">
+                    <path
+                      class="video-facade__play-bg"
+                      d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" />
+                    <path d="M45 24 27 14v20" fill="#fff" />
+                  </svg>
+                </span>
+              </a>
               <div class="starter-video__overlay"></div>
             </div>
           </div>
@@ -3663,9 +3796,25 @@
             aria-live="polite"></div>
         </div>
         <div class="contact-image">
-          <img
-            src="/assets/images/homepage/contact.png"
-            alt="Vintage phone illustration" />
+          <!-- sizes reflects object-fit: cover — on desktop the square image is
+               drawn ~743px tall, wider than its 423px box. -->
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                /assets/images/opt/contact-640.97c5716a.webp    640w,
+                /assets/images/opt/contact-960.d08bec2c.webp    960w,
+                /assets/images/opt/contact-1254.f1ce7fc8.webp  1254w
+              "
+              sizes="(max-width: 768px) 100vw, 750px" />
+            <img
+              src="/assets/images/homepage/contact.png"
+              alt="Vintage phone illustration"
+              width="1254"
+              height="1254"
+              loading="lazy"
+              decoding="async" />
+          </picture>
         </div>
       </div>
     </section>
@@ -3928,6 +4077,27 @@
           });
         });
       });
+
+      // --- Bundle video: swap the thumbnail for the YouTube player on click ---
+      (function () {
+        const facade = document.getElementById("bundle-video");
+        if (!facade) return;
+        facade.addEventListener("click", (e) => {
+          e.preventDefault();
+          const iframe = document.createElement("iframe");
+          iframe.src = facade.dataset.embed;
+          iframe.title = facade.dataset.title;
+          iframe.width = "560";
+          iframe.height = "315";
+          iframe.setAttribute("frameborder", "0");
+          iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.allowFullscreen = true;
+          facade.replaceWith(iframe);
+          iframe.focus();
+        });
+      })();
 
       // --- Floating hearts (once per session) ---
       window.addEventListener("load", () => {
