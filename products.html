@@ -1134,6 +1134,17 @@
         background: var(--soft-blush);
       }
 
+      /* <picture> wrappers that only add a WebP source: no box of their own,
+         so every img rule (including the collage grid) applies unchanged.
+         <source> defaults to display: inline and would otherwise become an
+         empty grid/flex item. */
+      .kk-pic {
+        display: contents;
+      }
+      .kk-pic > source {
+        display: none;
+      }
+
       .category-card__image img {
         width: 100%;
         height: 100%;
@@ -1341,6 +1352,10 @@
       .product-grid
         .product-card:not(.product-card--bundle):first-child:last-child {
         grid-column: 1 / -1;
+        /* Explicit width: the card used to grow to max-width only because the
+           PNG's large natural width pushed it there; a srcset image reports its
+           smaller sizes width, which would shrink the card. */
+        width: 100%;
         max-width: 50%;
         justify-self: center;
       }
@@ -2053,12 +2068,14 @@
             <div class="category-card" onclick="showProductView('all-products')">
               <div class="category-card__image">
                 <div class="category-card__image--collage">
-                  <img src="./assets/images/products/books/abbu/abbu-cover.png" alt="Books" />
-                  <img src="./assets/images/products/stickers/15pack/stickers.png" alt="Stickers" />
-                  <img src="/assets/images/products/subscribe/feb.png" alt="Subscriptions" />
-                  <img src="./assets/images/products/colorbook/mockcoloring.png" alt="Coloring Books" />
-                  <img src="./assets/images/products/books/bundle/fourbundle.png" alt="Bundle" />
-                  <img src="./assets/images/products/stickers/mango/mango-all.png" alt="Mango Stickers" />
+                  <!-- Tiles shared with the category cards below use the cards' sizes, so
+                       each image downloads once (the PNG version shared one file too). -->
+                  <picture class="kk-pic"><source type="image/webp" sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw" srcset="/assets/images/opt/p-abbu-cover-240.c07f0c61.webp 240w, /assets/images/opt/p-abbu-cover-480.736532b0.webp 480w, /assets/images/opt/p-abbu-cover-640.d55718d9.webp 640w" /><img src="./assets/images/products/books/abbu/abbu-cover.png" alt="Books" /></picture>
+                  <picture class="kk-pic"><source type="image/webp" sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw" srcset="/assets/images/opt/p-stickers-240.90cb3d91.webp 240w, /assets/images/opt/p-stickers-480.6f6a7602.webp 480w, /assets/images/opt/p-stickers-639.c887d1b3.webp 639w" /><img src="./assets/images/products/stickers/15pack/stickers.png" alt="Stickers" /></picture>
+                  <picture class="kk-pic"><source type="image/webp" sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw" srcset="/assets/images/opt/ed-feb-200.714ac35b.webp 200w, /assets/images/opt/ed-feb-400.6f1c1c06.webp 400w, /assets/images/opt/ed-feb-600.598401ba.webp 600w, /assets/images/opt/ed-feb-800.4ef78aec.webp 800w, /assets/images/opt/ed-feb-1216.b7b5e206.webp 1216w" /><img src="/assets/images/products/subscribe/feb.png" alt="Subscriptions" /></picture>
+                  <picture class="kk-pic"><source type="image/webp" sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw" srcset="/assets/images/opt/p-mockcoloring-240.15d5e8be.webp 240w, /assets/images/opt/p-mockcoloring-480.96b25f93.webp 480w, /assets/images/opt/p-mockcoloring-800.7cc27140.webp 800w, /assets/images/opt/p-mockcoloring-1254.3acd25be.webp 1254w" /><img src="./assets/images/products/colorbook/mockcoloring.png" alt="Coloring Books" /></picture>
+                  <picture class="kk-pic"><source type="image/webp" sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw" srcset="/assets/images/opt/fourbundle-400.12aac38b.webp 400w, /assets/images/opt/fourbundle-600.1c7c2473.webp 600w, /assets/images/opt/fourbundle-800.2b79202e.webp 800w, /assets/images/opt/fourbundle-1254.08988ab0.webp 1254w" /><img src="./assets/images/products/books/bundle/fourbundle.png" alt="Bundle" /></picture>
+                  <picture class="kk-pic"><source type="image/webp" sizes="(min-width: 1024px) 175px, 40vw" srcset="/assets/images/opt/p-mango-all-240.34d8e1e8.webp 240w, /assets/images/opt/p-mango-all-480.14cbcc87.webp 480w, /assets/images/opt/p-mango-all-800.6b0712c6.webp 800w, /assets/images/opt/p-mango-all-1448.e7f23b53.webp 1448w" /><img src="./assets/images/products/stickers/mango/mango-all.png" alt="Mango Stickers" /></picture>
                 </div>
               </div>
               <div class="category-card__body">
@@ -2075,9 +2092,15 @@
             <!-- Individual Books -->
             <div class="category-card" onclick="showProductView('books')">
               <div class="category-card__image">
-                <img
-                  src="./assets/images/products/books/abbu/abbu-cover.png"
-                  alt="Individual Books" />
+                <picture class="kk-pic">
+                  <source
+                    type="image/webp"
+                    sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw"
+                    srcset="/assets/images/opt/p-abbu-cover-240.c07f0c61.webp 240w, /assets/images/opt/p-abbu-cover-480.736532b0.webp 480w, /assets/images/opt/p-abbu-cover-640.d55718d9.webp 640w" />
+                  <img
+                    src="./assets/images/products/books/abbu/abbu-cover.png"
+                    alt="Individual Books" />
+                </picture>
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Individual Books</h2>
@@ -2092,9 +2115,15 @@
             <!-- Bundle -->
             <div class="category-card" onclick="showProductView('bundle')">
               <div class="category-card__image">
-                <img
-                  src="./assets/images/products/books/bundle/fourbundle.png"
-                  alt="Bundle" />
+                <picture class="kk-pic">
+                  <source
+                    type="image/webp"
+                    sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw"
+                    srcset="/assets/images/opt/fourbundle-400.12aac38b.webp 400w, /assets/images/opt/fourbundle-600.1c7c2473.webp 600w, /assets/images/opt/fourbundle-800.2b79202e.webp 800w, /assets/images/opt/fourbundle-1254.08988ab0.webp 1254w" />
+                  <img
+                    src="./assets/images/products/books/bundle/fourbundle.png"
+                    alt="Bundle" />
+                </picture>
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Bundle</h2>
@@ -2109,9 +2138,17 @@
             <!-- Stickers -->
             <div class="category-card" onclick="showProductView('stickers')">
               <div class="category-card__image">
-                <img
-                  src="./assets/images/products/stickers/15pack/stickers.png"
-                  alt="Stickers" />
+                <picture class="kk-pic">
+                  <source
+                    type="image/webp"
+                    sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw"
+                    srcset="/assets/images/opt/p-stickers-240.90cb3d91.webp 240w, /assets/images/opt/p-stickers-480.6f6a7602.webp 480w, /assets/images/opt/p-stickers-639.c887d1b3.webp 639w" />
+                  <img
+                    src="./assets/images/products/stickers/15pack/stickers.png"
+                    alt="Stickers"
+                    loading="lazy"
+                    decoding="async" />
+                </picture>
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Stickers</h2>
@@ -2129,10 +2166,18 @@
               class="category-card"
               onclick="showProductView('coloringbooks')">
               <div class="category-card__image">
-                <img
-                  src="./assets/images/products/colorbook/mockcoloring.png"
-                  alt="Coloring Books"
-                  onerror="this.style.display = 'none'" />
+                <picture class="kk-pic">
+                  <source
+                    type="image/webp"
+                    sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw"
+                    srcset="/assets/images/opt/p-mockcoloring-240.15d5e8be.webp 240w, /assets/images/opt/p-mockcoloring-480.96b25f93.webp 480w, /assets/images/opt/p-mockcoloring-800.7cc27140.webp 800w, /assets/images/opt/p-mockcoloring-1254.3acd25be.webp 1254w" />
+                  <img
+                    src="./assets/images/products/colorbook/mockcoloring.png"
+                    alt="Coloring Books"
+                    loading="lazy"
+                    decoding="async"
+                    onerror="this.style.display = 'none'" />
+                </picture>
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Coloring Books</h2>
@@ -2150,9 +2195,17 @@
               class="category-card"
               onclick="showProductView('subscriptions')">
               <div class="category-card__image">
-                <img
-                  src="/assets/images/products/subscribe/feb.png"
-                  alt="Subscriptions" />
+                <picture class="kk-pic">
+                  <source
+                    type="image/webp"
+                    sizes="(min-width: 1024px) 350px, (min-width: 700px) 310px, 92vw"
+                    srcset="/assets/images/opt/ed-feb-200.714ac35b.webp 200w, /assets/images/opt/ed-feb-400.6f1c1c06.webp 400w, /assets/images/opt/ed-feb-600.598401ba.webp 600w, /assets/images/opt/ed-feb-800.4ef78aec.webp 800w, /assets/images/opt/ed-feb-1216.b7b5e206.webp 1216w" />
+                  <img
+                    src="/assets/images/products/subscribe/feb.png"
+                    alt="Subscriptions"
+                    loading="lazy"
+                    decoding="async" />
+                </picture>
               </div>
               <div class="category-card__body">
                 <h2 class="category-card__title">Subscriptions</h2>
@@ -2207,7 +2260,18 @@
                   aria-label="Previous image">
                   <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <img id="detail-image" src="" alt="Product Image" />
+                <picture class="kk-pic">
+                  <!-- srcset is set with the PNG by renderGallery() -->
+                  <!-- The detail view is the product close-up, so it gets the
+                       full-resolution WebP: a 4:3 image in the square box is drawn
+                       ~1.33× wider than the box, and Chrome downscales a larger
+                       master more crisply (matches the PNG; a 800px copy looked soft). -->
+                  <source
+                    id="detail-source"
+                    type="image/webp"
+                    sizes="(min-width: 1024px) 1000px, 107vw" />
+                  <img id="detail-image" src="" alt="Product Image" />
+                </picture>
                 <button
                   class="gallery-arrow gallery-next"
                   onclick="navigateGallery(1)"
@@ -2583,6 +2647,142 @@
       const productDetailView = document.getElementById("product-detail-view");
       const backToStoreBtn = document.getElementById("back-to-store-btn");
       const detailImage = document.getElementById("detail-image");
+      const detailSource = document.getElementById("detail-source");
+
+      // WebP copies of the product PNGs (generated by tools/optimize-images.sh into
+      // /assets/images/opt/), keyed by path under /assets/images/products/.
+      // The PNG stays as the <img> fallback; images not listed here stay as-is.
+      const PRODUCT_WEBP = {
+        "books/aaloo/aaloo-bookopen.png":
+          "p-aaloo-bookopen-480.58128281.webp 480w, p-aaloo-bookopen-640.60a61744.webp 640w",
+        "books/aaloo/aaloo-bundle.png":
+          "p-aaloo-bundle-480.f75fbc91.webp 480w, p-aaloo-bundle-800.4583d8e7.webp 800w",
+        "books/aaloo/aaloo-cover.png":
+          "p-aaloo-cover-480.8f29518d.webp 480w, p-aaloo-cover-800.4651b577.webp 800w",
+        "books/aaloo/aaloo-flashcard.png":
+          "p-aaloo-flashcard-480.6c69b3e8.webp 480w, p-aaloo-flashcard-800.3df98644.webp 800w",
+        "books/aaloo/aaloo-flashcardeng.png":
+          "p-aaloo-flashcardeng-480.eb9f3345.webp 480w, p-aaloo-flashcardeng-800.97ed8019.webp 800w",
+        "books/aaloo/aaloo-sequence.png":
+          "p-aaloo-sequence-480.569190a5.webp 480w, p-aaloo-sequence-800.1abc548d.webp 800w",
+        "books/aaloo/aaloo-stickers.png":
+          "p-aaloo-stickers-480.73ef767c.webp 480w, p-aaloo-stickers-800.023a9f5c.webp 800w",
+        "books/abbu/abbu-activitybook.png":
+          "p-abbu-activitybook-480.c9c00f58.webp 480w, p-abbu-activitybook-640.d9476f4d.webp 640w",
+        "books/abbu/abbu-bookopen.png":
+          "p-abbu-bookopen-480.8b528fc4.webp 480w, p-abbu-bookopen-640.4cf59fcf.webp 640w",
+        "books/abbu/abbu-bundle.png":
+          "p-abbu-bundle-480.351d57d5.webp 480w, p-abbu-bundle-622.5e61b9b5.webp 622w",
+        "books/abbu/abbu-cover.png":
+          "p-abbu-cover-240.c07f0c61.webp 240w, p-abbu-cover-480.736532b0.webp 480w, p-abbu-cover-640.d55718d9.webp 640w",
+        "books/abbu/abbu-flashcards-eng.png":
+          "p-abbu-flashcards-eng-480.f210d3c2.webp 480w, p-abbu-flashcards-eng-640.9249b1b2.webp 640w",
+        "books/abbu/abbu-flashcards.png":
+          "p-abbu-flashcards-480.4770dbaa.webp 480w, p-abbu-flashcards-640.7c09bc2d.webp 640w",
+        "books/abbu/abbu-sequence.png":
+          "p-abbu-sequence-480.3d4e2b3d.webp 480w, p-abbu-sequence-640.03041e01.webp 640w",
+        "books/abbu/abbu-stickers.png":
+          "p-abbu-stickers-480.c20bcdb7.webp 480w, p-abbu-stickers-640.8eefd7bf.webp 640w",
+        "books/bundle/bookcontents.png":
+          "p-bookcontents-480.3fecfc80.webp 480w, p-bookcontents-640.e62958a2.webp 640w",
+        "books/bundle/fourbundle.png":
+          "fourbundle-400.12aac38b.webp 400w, fourbundle-600.1c7c2473.webp 600w, fourbundle-800.2b79202e.webp 800w, fourbundle-1254.08988ab0.webp 1254w",
+        "books/chuchu/chuchu-activitybook.png":
+          "p-chuchu-activitybook-480.0a00cd68.webp 480w, p-chuchu-activitybook-640.e18b592f.webp 640w",
+        "books/chuchu/chuchu-bookopen.png":
+          "p-chuchu-bookopen-480.727b0652.webp 480w, p-chuchu-bookopen-640.df3dafd2.webp 640w",
+        "books/chuchu/chuchu-bundle.png":
+          "p-chuchu-bundle-480.fac8eb1d.webp 480w, p-chuchu-bundle-640.a9794a06.webp 640w",
+        "books/chuchu/chuchu-cover.png":
+          "p-chuchu-cover-480.ed7641dd.webp 480w, p-chuchu-cover-640.18c62460.webp 640w",
+        "books/chuchu/chuchu-flashcard.png":
+          "p-chuchu-flashcard-480.5629ee9a.webp 480w, p-chuchu-flashcard-640.39d88ba8.webp 640w",
+        "books/chuchu/chuchu-flashcards-eng.png":
+          "p-chuchu-flashcards-eng-480.42da4164.webp 480w, p-chuchu-flashcards-eng-640.d9502815.webp 640w",
+        "books/chuchu/chuchu-sequence.png":
+          "p-chuchu-sequence-480.1f82553c.webp 480w, p-chuchu-sequence-640.8d024fb4.webp 640w",
+        "books/dada/dada-act-open.png":
+          "p-dada-act-open-480.ff12249c.webp 480w, p-dada-act-open-640.b0b958cd.webp 640w",
+        "books/dada/dada-act.png":
+          "p-dada-act-480.89493745.webp 480w, p-dada-act-640.323085b4.webp 640w",
+        "books/dada/dada-bundle.png":
+          "p-dada-bundle-480.f96fd3b5.webp 480w, p-dada-bundle-640.04ca54d5.webp 640w",
+        "books/dada/dada-cover.png":
+          "p-dada-cover-480.7cc74b3c.webp 480w, p-dada-cover-640.99f9cae9.webp 640w",
+        "books/dada/dada-flashurdu.png":
+          "p-dada-flashurdu-480.7fc99502.webp 480w, p-dada-flashurdu-640.7ecbf64a.webp 640w",
+        "books/dada/dada-open.png":
+          "p-dada-open-480.cd7cdde9.webp 480w, p-dada-open-640.048379f9.webp 640w",
+        "books/dada/dada-sticker.png":
+          "p-dada-sticker-480.139003e5.webp 480w, p-dada-sticker-640.d7d6e499.webp 640w",
+        "books/dada/dada7.png":
+          "p-dada7-480.7adf9ccb.webp 480w, p-dada7-640.f9553ea5.webp 640w",
+        "colorbook/coloring.png":
+          "p-coloring-480.505b82ae.webp 480w, p-coloring-800.658cd373.webp 800w, p-coloring-1254.925d731f.webp 1254w",
+        "colorbook/glue.png":
+          "p-glue-480.e76c7d67.webp 480w, p-glue-800.0f51c3e0.webp 800w, p-glue-1098.88a21e40.webp 1098w",
+        "colorbook/mockcoloring.png":
+          "p-mockcoloring-240.15d5e8be.webp 240w, p-mockcoloring-480.96b25f93.webp 480w, p-mockcoloring-800.7cc27140.webp 800w, p-mockcoloring-1254.3acd25be.webp 1254w",
+        "colorbook/tearoff.png":
+          "p-tearoff-480.0fcf84d3.webp 480w, p-tearoff-800.a32e63ef.webp 800w, p-tearoff-1254.5a43016f.webp 1254w",
+        "stickers/15pack/falooda.png":
+          "p-falooda-480.a9a5da92.webp 480w, p-falooda-512.ef757399.webp 512w",
+        "stickers/15pack/gol.png":
+          "p-gol-480.a678b4c0.webp 480w, p-gol-512.c307f1ea.webp 512w",
+        "stickers/15pack/khussay.png":
+          "p-khussay-480.1d092758.webp 480w, p-khussay-640.757a0e13.webp 640w",
+        "stickers/15pack/pakola.png":
+          "p-pakola-480.6205b696.webp 480w",
+        "stickers/15pack/rooh.png":
+          "p-rooh-480.4dbcd7c3.webp 480w, p-rooh-512.70cc26b0.webp 512w",
+        "stickers/15pack/rupee.png":
+          "p-rupee-480.23da67e5.webp 480w, p-rupee-512.54151ac9.webp 512w",
+        "stickers/15pack/stickers.png":
+          "p-stickers-240.90cb3d91.webp 240w, p-stickers-480.6f6a7602.webp 480w, p-stickers-639.c887d1b3.webp 639w",
+        "stickers/mango/kulfi.png":
+          "p-kulfi-480.ae877031.webp 480w, p-kulfi-512.96d76a6a.webp 512w",
+        "stickers/mango/mango-all.png":
+          "p-mango-all-240.34d8e1e8.webp 240w, p-mango-all-480.14cbcc87.webp 480w, p-mango-all-800.6b0712c6.webp 800w, p-mango-all-1448.e7f23b53.webp 1448w",
+        "stickers/mango/mango1.png":
+          "p-mango1-480.1509270c.webp 480w, p-mango1-640.db948127.webp 640w",
+        "stickers/mango/mango10.png":
+          "p-mango10-480.125abe60.webp 480w, p-mango10-640.6918bd57.webp 640w",
+        "stickers/mango/mango2.png":
+          "p-mango2-480.f5ddc098.webp 480w, p-mango2-640.883258e1.webp 640w",
+        "stickers/mango/mango3.png":
+          "p-mango3-480.04a9dc17.webp 480w, p-mango3-640.78f5bdee.webp 640w",
+        "stickers/mango/mango4.png":
+          "p-mango4-480.d545c2a7.webp 480w, p-mango4-640.1f0a7ccb.webp 640w",
+        "stickers/mango/mango5.png":
+          "p-mango5-480.f5ddc098.webp 480w, p-mango5-640.883258e1.webp 640w",
+        "stickers/mango/mango6.png":
+          "p-mango6-480.8961d387.webp 480w, p-mango6-640.b1fab2d8.webp 640w",
+        "stickers/mango/mango8.png":
+          "p-mango8-480.261fe7dc.webp 480w, p-mango8-640.4111a483.webp 640w",
+        "stickers/mango/mango9.png":
+          "p-mango9-480.868897d5.webp 480w, p-mango9-640.675c5448.webp 640w",
+        "stickers/oopsies/oopsies.png":
+          "p-oopsies-480.2e8a0cd8.webp 480w, p-oopsies-600.ec3f6b75.webp 600w",
+        "subscribe/feb.png":
+          "ed-feb-200.714ac35b.webp 200w, ed-feb-400.6f1c1c06.webp 400w, ed-feb-600.598401ba.webp 600w, ed-feb-800.4ef78aec.webp 800w, ed-feb-1216.b7b5e206.webp 1216w",
+        "subscribe/jan.png":
+          "ed-jan-200.5a148052.webp 200w, ed-jan-400.4e3bca54.webp 400w, ed-jan-600.43c714e6.webp 600w, ed-jan-800.c348ca83.webp 800w, ed-jan-1024.fb7613fd.webp 1024w",
+      };
+      const productWebpSrcset = (src) =>
+        (PRODUCT_WEBP[(src || "").replace(/^\.?\/?assets\/images\/products\//, "")] || "")
+          .split(", ")
+          .filter(Boolean)
+          .map((c) => "/assets/images/opt/" + c)
+          .join(", ");
+
+      // <img> for a product image, wrapped in a .kk-pic <picture> (no layout box)
+      // that offers the WebP copy. `sizes` is the image's rendered width.
+      function productPicture(src, sizes, imgAttrs) {
+        const img = `<img src="${src}" ${imgAttrs}>`;
+        const srcset = productWebpSrcset(src);
+        if (!srcset) return img;
+        return `<picture class="kk-pic"><source type="image/webp" srcset="${srcset}" sizes="${sizes}">${img}</picture>`;
+      }
       const detailTitle = document.getElementById("detail-title");
       const detailPrice = document.getElementById("detail-price");
       const detailDescription = document.getElementById("detail-description");
@@ -2892,7 +3092,7 @@
         return `
           <article class="product-card${product.category === "bundle" ? " product-card--bundle" : ""}" onclick="openProductDetails('${product.id}')">
             <div class="product-image-container">
-              <img src="${product.image}" alt="${product.name}">
+              ${productPicture(product.image, "(min-width: 1024px) 300px, (min-width: 700px) 380px, (min-width: 400px) 220px, 410px", `alt="${product.name}" loading="lazy" decoding="async"`)}
             </div>
             <div class="product-info kk-card-body">
               <div class="kk-badge-row">
@@ -2950,6 +3150,7 @@
 
       function renderGallery() {
         const single = galleryImages.length <= 1;
+        if (detailSource) detailSource.srcset = productWebpSrcset(galleryImages[galleryIndex]);
         detailImage.src = galleryImages[galleryIndex] || "";
 
         const prevBtn = document.querySelector(".gallery-prev");
