@@ -4219,8 +4219,21 @@
       const filterContainerEl = document.querySelector(".filter-container");
 
       // --- INIT ---
-      function init() {
+      // The store grid is built as soon as the page's own HTML and scripts are
+      // ready (DOMContentLoaded) instead of on window load. Waiting for every
+      // image and analytics script let the footer paint first and then jump
+      // down when the grid appeared (Lighthouse CLS ~0.37). Built once only:
+      // rebuilding would restart the envelope-reveal cards.
+      let storeGridRendered = false;
+      function renderStoreGridOnce() {
+        if (storeGridRendered) return;
+        storeGridRendered = true;
         renderProducts();
+      }
+      document.addEventListener("DOMContentLoaded", renderStoreGridOnce);
+
+      function init() {
+        renderStoreGridOnce();
         // /subscribe.html#archive (linked from the Shop grid) opens the archive directly.
         if (window.location.hash === "#archive") openArchiveDetails();
         updateCartUI();
