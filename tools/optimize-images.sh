@@ -15,6 +15,9 @@
 #     what makes the 7-day cache on /assets/images/opt/** (firebase.json) safe.
 #   - Nothing is ever deleted. --list-unused only reports orphans.
 #   - Refuses to upscale, and stops on any missing source or encoder error.
+#   - Keeps colours exact: ICC profiles are embedded (-metadata icc in the
+#     config) and PNGs tagged gAMA/cHRM get an equivalent profile first
+#     (tools/gamma22-srgb.py).
 #   - HTML is never edited automatically; update srcset/href by hand.
 #
 # Requires: cwebp (brew install webp) and sips (built into macOS).
@@ -85,6 +88,17 @@ while IFS='|' read -r name src widths args || [ -n "$name" ]; do
   srcw="$(sips -g pixelWidth "$IMG/$src" | awk '/pixelWidth/{print $2}')"
   [ -n "$srcw" ] || die "$name: couldn't read the width of $src"
 
+  # PNGs tagged gAMA/cHRM instead of an ICC profile: encode from a copy carrying
+  # an equivalent profile (pixels unchanged) so the WebP displays the same colours.
+  input="$IMG/$src"
+  if [ "$ext" = webp ]; then
+    set +e; python3 "$ROOT/tools/gamma22-srgb.py" --tag "$IMG/$src" "$TMP/$name-tagged.png"; rc=$?; set -e
+    case $rc in 0) input="$TMP/$name-tagged.png" ;; 3) ;; *) die "$name: colour-profile check failed" ;; esac
+    # Does the encoder input carry an ICC profile the WebP must keep?
+    set +e; python3 "$ROOT/tools/gamma22-srgb.py" --has-icc "$input"; rc=$?; set -e
+    case $rc in 0) needs_icc=1 ;; 3) needs_icc=0 ;; *) die "$name: colour-profile check failed" ;; esac
+  fi
+
   for w in $widths; do
     [ "$w" = full ] && w="$srcw"
     [[ "$w" =~ ^[0-9]+$ ]] || die "$name: bad width '$w'"
@@ -95,12 +109,17 @@ while IFS='|' read -r name src widths args || [ -n "$name" ]; do
       sips -Z "$w" "$IMG/$src" --out "$tmp" >/dev/null
     elif [ "$w" = "$srcw" ]; then
       # shellcheck disable=SC2086  # args is a deliberate list of options
-      cwebp -quiet $args "$IMG/$src" -o "$tmp"
+      cwebp -quiet $args "$input" -o "$tmp"
     else
       # shellcheck disable=SC2086
-      cwebp -quiet $args -resize "$w" 0 "$IMG/$src" -o "$tmp"
+      cwebp -quiet $args -resize "$w" 0 "$input" -o "$tmp"
     fi
     [ -s "$tmp" ] || die "$name: encoder produced no output for ${w}px"
+    # Colour safeguard: a WebP made from a colour-profiled PNG must embed the
+    # profile (WebP "ICCP" chunk), or browsers show it with shifted colours.
+    if [ "$ext" = webp ] && [ "$needs_icc" = 1 ] && ! LC_ALL=C grep -q 'ICCP' "$tmp"; then
+      die "$name: WebP lost the source's colour profile — add -metadata icc to its encoder args"
+    fi
 
     hash="$(shasum -a 256 "$tmp" | cut -c1-8)"
     file="$name-$w.$hash.$ext"
