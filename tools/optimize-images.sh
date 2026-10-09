@@ -7,6 +7,14 @@
 #   tools/optimize-images.sh --list-unused # list opt/ files no HTML references
 #   tools/optimize-images.sh --config FILE # use another config file
 #
+# A config line whose name ends in "*" covers a whole folder, e.g.
+#   v-* | ../../qr/assets/images/*.png | 256 512 | -q 85 ...
+# Each matching file becomes its own entry named <prefix><slug>-<id>, where
+# slug is the lowercased filename and id the first 6 hex digits of the SHA-1
+# of the original filename (so "le jaana.png" and "le_jaana.png" never clash;
+# tools/vocab-image-map.mjs uses the same rule). Widths at or above a file's
+# own width become its full size. --only accepts the "v-*" name too.
+#
 # Safeguards:
 #   - Original images are only read, never modified, moved or deleted.
 #   - Output goes only to assets/images/opt/. Filenames contain a hash of the
@@ -73,11 +81,48 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 [ "$DRY_RUN" = 1 ] || mkdir -p "$OUT"
 
-written=0; skipped=0; matched=0
+# Expand folder entries ("name*" | "path/*.png") into one line per file.
+EXPANDED="$TMP/expanded.conf"
+: > "$EXPANDED"
 while IFS='|' read -r name src widths args || [ -n "$name" ]; do
   name="$(trim "$name")"
   case "$name" in ''|'#'*) continue ;; esac
-  [ -z "$ONLY" ] || [ "$name" = "$ONLY" ] || continue
+  src="$(trim "$src")"; widths="$(trim "$widths")"; args="$(trim "$args")"
+  if [[ "$name" != *'*' ]]; then
+    printf '%s|%s|%s|%s|%s\n' "$name" "$src" "$widths" "$args" "$name" >> "$EXPANDED"
+    continue
+  fi
+  prefix="${name%\*}"
+  [[ "$prefix" =~ ^[a-z0-9-]*$ ]] || die "$name: folder entry prefix may only use a-z, 0-9 and -"
+  dir="$(dirname "$src")"; pattern="$(basename "$src")"
+  [ -d "$IMG/$dir" ] || die "$name: folder not found: assets/images/$dir"
+  count=0
+  while IFS= read -r file; do
+    base="$(basename "$file")"
+    # A damaged file in a folder (e.g. a PNG whose header lost its CR byte to a
+    # line-ending conversion) is reported and skipped, not allowed to stop the run.
+    if [ "$(xxd -p -l 8 "$IMG/$dir/$base")" != "89504e470d0a1a0a" ]; then
+      echo "warning: $name: skipping $dir/$base — not a valid PNG (damaged file)" >&2
+      continue
+    fi
+    slug="$(printf '%s' "${base%.*}" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
+    id="$(printf '%s' "$base" | shasum | cut -c1-6)"
+    fw="$(sips -g pixelWidth "$IMG/$dir/$base" | awk '/pixelWidth/{print $2}')"
+    [ -n "$fw" ] || die "$name: couldn't read the width of $dir/$base"
+    ws=""
+    for w in $widths; do
+      if [ "$w" = full ] || [ "$w" -ge "$fw" ]; then w=full; fi
+      case " $ws " in *" $w "*) ;; *) ws="$ws $w" ;; esac
+    done
+    printf '%s|%s|%s|%s|%s\n' "$prefix$slug-$id" "$dir/$base" "$(trim "$ws")" "$args" "$name" >> "$EXPANDED"
+    count=$((count + 1))
+  done < <(cd "$IMG/$dir" && find . -maxdepth 1 -type f -name "$pattern" | sed 's#^\./##' | LC_ALL=C sort)
+  [ "$count" -gt 0 ] || die "$name: no files match $src"
+done < "$CONFIG"
+
+written=0; skipped=0; matched=0
+while IFS='|' read -r name src widths args group || [ -n "$name" ]; do
+  [ -z "$ONLY" ] || [ "$name" = "$ONLY" ] || [ "$group" = "$ONLY" ] || continue
   matched=1
   src="$(trim "$src")"; widths="$(trim "$widths")"; args="$(trim "$args")"
   [ -n "$src" ] && [ -n "$widths" ] && [ -n "$args" ] || die "$name: malformed line in $CONFIG"
@@ -136,7 +181,7 @@ while IFS='|' read -r name src widths args || [ -n "$name" ]; do
       written=$((written + 1))
     fi
   done
-done < "$CONFIG"
+done < "$EXPANDED"
 
 [ -z "$ONLY" ] || [ "$matched" = 1 ] || die "no entry named '$ONLY' in $CONFIG"
 echo "done: $written added, $skipped unchanged$([ "$DRY_RUN" = 1 ] && echo ' (dry run, nothing written)')"

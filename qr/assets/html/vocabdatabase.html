@@ -921,6 +921,23 @@
 
     <script type="module">
       import { vocab as sourceVocab } from "../js/mastervocab.js";
+      import { vocabSrcset } from "../js/vocab-images.js";
+
+      const NO_IMAGE = "/qr/assets/images/noimage.png";
+      // srcset/sizes attributes for a vocabulary picture's optimized WebP copies.
+      function vocabImgAttrs(path, sizes) {
+        const srcset = vocabSrcset(path);
+        return srcset ? `srcset="${escapeHtml(srcset)}" sizes="${sizes}"` : "";
+      }
+      // If a WebP copy fails, retry the original PNG; if that fails, show noimage.
+      window.vocabImgError = (img) => {
+        if (img.hasAttribute("srcset")) {
+          img.removeAttribute("srcset");
+          return;
+        }
+        img.onerror = null;
+        img.src = NO_IMAGE;
+      };
 
       const cardsGrid = document.getElementById("cards-grid");
       const detailEmpty = document.getElementById("detail-empty");
@@ -1054,6 +1071,14 @@
         if (!path) return false;
         if (state.imageStatusCache.has(path))
           return state.imageStatusCache.get(path);
+
+        // Pictures with optimized copies were decoded successfully when the copies
+        // were generated, so skip downloading the full PNG (~175 MB for all of them).
+        // Anything else (missing, damaged, newly added) is still checked by loading it.
+        if (vocabSrcset(path)) {
+          state.imageStatusCache.set(path, true);
+          return true;
+        }
 
         const ok = await new Promise((resolve) => {
           const img = new Image();
@@ -1345,8 +1370,11 @@
             <div class="mini-image">
               <img
   src="${escapeHtml(entry.image || "/qr/assets/images/noimage.png")}"
+  ${vocabImgAttrs(entry.image, "150px")}
   alt="${escapeHtml(entry.word?.baseRomanUrdu || entry.id)}"
-  onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+  loading="lazy"
+  decoding="async"
+  onerror="vocabImgError(this)"
 />
               <div class="image-overlay ${entry._imageOk ? "" : "show"}">
                 ${entry._missingImagePath ? "No image path" : "Broken image"}
@@ -1470,8 +1498,9 @@
             <div class="detail-image">
               <img
   src="${escapeHtml(entry.image || "/qr/assets/images/noimage.png")}"
+  ${vocabImgAttrs(entry.image, "140px")}
   alt="${escapeHtml(entry.word?.baseRomanUrdu || entry.id)}"
-  onerror="this.onerror=null; this.src='/qr/assets/images/noimage.png';"
+  onerror="vocabImgError(this)"
 />
               <div class="image-overlay ${enriched._imageOk ? "" : "show"}">
                 ${enriched._missingImagePath ? "No image path" : "Broken image"}

@@ -1,4 +1,5 @@
 import { vocab as originalVocab } from "./mastervocab.js";
+import { vocabSrcset, useVocabImage } from "./vocab-images.js";
 
 // ==========================================================
 // SPEED GRID — fast-paced image recognition game
@@ -55,6 +56,10 @@ function matchesAllowed(card) {
 function imageLoads(src) {
   return new Promise((resolve) => {
     if (!src) return resolve(false);
+    // Images with optimized copies were decoded when the copies were generated
+    // (tools/vocab-image-map.mjs), so there is no need to download the full PNG
+    // just to check it — that preloaded every vocabulary picture (~150 MB).
+    if (vocabSrcset(src)) return resolve(true);
     const img = new Image();
     img.onload = () => resolve(true);
     img.onerror = () => resolve(false);
@@ -444,7 +449,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       cell.dataset.id = card.id;
 
       const img = document.createElement("img");
-      img.src = card.image;
+      // Grid cells are at most ~185px wide: use the 256/512px WebP copies.
+      useVocabImage(img, card.image, "(min-width: 700px) 190px, 46vw");
       img.alt = card.word?.english || "";
       img.draggable = false;
 
