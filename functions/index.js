@@ -338,7 +338,10 @@ async function buildCheckoutShipping(stripeClient, lineItems, region, logTag) {
   };
 }
 
-exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
+// STRIPE_SECRET_KEY is a Secret Manager secret (not in .env), set with:
+//   firebase functions:secrets:set STRIPE_SECRET_KEY
+// Both checkout functions declare it; deploy grants them access.
+exports.createArchiveCheckout = functions.runWith({ secrets: ["STRIPE_SECRET_KEY"] }).https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
@@ -446,7 +449,7 @@ exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
   }
 });
 
-exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
+exports.createCheckoutSession = functions.runWith({ secrets: ["STRIPE_SECRET_KEY"] }).https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
