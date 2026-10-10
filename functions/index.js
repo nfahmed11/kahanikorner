@@ -1,4 +1,6 @@
-const functions = require("firebase-functions");
+// 1st-gen API: these functions were created as 1st gen and must stay that way
+// (moving to 2nd gen means deleting and recreating them).
+const functions = require("firebase-functions/v1");
 const stripe = require("stripe");
 const OpenAI = require("openai");
 
