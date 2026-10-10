@@ -3,24 +3,47 @@ const stripe = require("stripe");
 const OpenAI = require("openai");
 
 // ─────────────────────────────────────────────────────────────────────────────
-// archiveAvailability — server-side source of truth for which months can be
-// purchased. Update this whenever inventory changes; it mirrors the frontend
-// ARCHIVE_AVAILABILITY constant but uses month names as keys for easy validation.
+// Archive availability — server-side source of truth for which months can be
+// purchased. Derived from today's date with the same rules as
+// buildArchiveAvailability() in subscribe.html, so a new month opens on both
+// sides at once with no manual update. Keep ARCHIVE_START_* and
+// ARCHIVE_SOLD_OUT in sync with subscribe.html.
 // true = available, false = sold out / not yet released (both are rejected).
 // ─────────────────────────────────────────────────────────────────────────────
-const ARCHIVE_AVAILABILITY = {
-  "2025": {
-    January: false, February: false, March: false, April: false,
-    May: false,     June: false,     July: false,  August: false,
-    September: false, October: false, November: true, December: true,
-  },
-  "2026": {
-    January: true, February: true, March: true, April: true,
-    May: true,     June: true,
-    July: false,   August: false,  September: false, October: false,
-    November: false, December: false,
-  },
+const ARCHIVE_START_YEAR = 2025;
+const ARCHIVE_START_MONTH = 10; // November (0-indexed)
+
+// year → array of 0-indexed months that are sold out.
+const ARCHIVE_SOLD_OUT = {
+  // 2025: [0, 1], // e.g. Jan and Feb 2025 sold out
 };
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+// Uses the date in the earliest time zone (UTC+14), so a customer whose
+// calendar has already rolled over to a new month is never rejected.
+function getArchiveAvailability(now = new Date()) {
+  const ahead = new Date(now.getTime() + 14 * 60 * 60 * 1000);
+  const currentYear = ahead.getUTCFullYear();
+  const currentMonth = ahead.getUTCMonth();
+  const availability = {};
+
+  for (let year = ARCHIVE_START_YEAR; year <= currentYear; year++) {
+    const soldOut = new Set(ARCHIVE_SOLD_OUT[year] || []);
+    const months = {};
+    MONTH_NAMES.forEach((name, i) => {
+      const beforeStart = year === ARCHIVE_START_YEAR && i < ARCHIVE_START_MONTH;
+      const afterCurrent = year === currentYear && i > currentMonth;
+      months[name] = !beforeStart && !afterCurrent && !soldOut.has(i);
+    });
+    availability[String(year)] = months;
+  }
+
+  return availability;
+}
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -28,7 +51,9 @@ const ARCHIVE_AVAILABILITY = {
 //   US:     sticker-only (flat) orders up to 6 oz: Untracked Letter Mail.
 //           Everything else: fixed pound table (total weight rounded up to the
 //           next whole pound, up to 70 lb). Free at $65.00+.
-//   Canada / International: fixed tiers by total product weight.
+//   Canada / International: archive-only orders up to 3.5 oz: Untracked
+//           International Letter Mail. Everything else: fixed tiers by total
+//           product weight, up to 20 lb.
 // Trusted product weights/classes and rate tables live in shipping.js; this
 // file verifies prices and rates against Stripe and builds the Checkout
 // Session. No shipping amount or weight from the browser is ever used.
@@ -98,12 +123,12 @@ function isOversizedBody(body) {
 
 // Validates one archive selection; returns its de-duplicated month names.
 function validateArchiveSelection(year, months) {
-  if (!ARCHIVE_AVAILABILITY[year]) {
+  const yearAvailability = getArchiveAvailability()[year];
+  if (!yearAvailability) {
     throw checkoutError(`Year ${year} is not available.`, 400);
   }
 
   const uniqueMonths = [...new Set(months)];
-  const yearAvailability = ARCHIVE_AVAILABILITY[year];
   for (const month of uniqueMonths) {
     if (typeof month !== "string" || !Object.prototype.hasOwnProperty.call(yearAvailability, month)) {
       throw checkoutError(`"${month}" is not a valid month name.`, 400);
@@ -164,9 +189,6 @@ function buildCartLineItems(cartItems, archivePriceId) {
 
       if (!year) {
         throw checkoutError("Archive item missing selectedYear.", 400);
-      }
-      if (!ARCHIVE_AVAILABILITY[year]) {
-        throw checkoutError(`Year ${year} is not available.`, 400);
       }
       if (months === undefined || months === null) {
         throw checkoutError("Archive item missing selectedMonths.", 400);
@@ -359,25 +381,13 @@ exports.createArchiveCheckout = functions.https.onRequest(async (req, res) => {
     res.status(400).json({ error: "Please select at least one month." });
     return;
   }
-  if (!ARCHIVE_AVAILABILITY[selectedYear]) {
-    res.status(400).json({ error: `Year ${selectedYear} is not available.` });
+  // Deduplicate and validate each month against server-side availability
+  let uniqueMonths;
+  try {
+    uniqueMonths = validateArchiveSelection(selectedYear, selectedMonths);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
     return;
-  }
-
-  // Deduplicate
-  const uniqueMonths = [...new Set(selectedMonths)];
-
-  // Validate each month against server-side availability
-  const yearAvailability = ARCHIVE_AVAILABILITY[selectedYear];
-  for (const month of uniqueMonths) {
-    if (typeof month !== "string" || !yearAvailability.hasOwnProperty(month)) {
-      res.status(400).json({ error: `"${month}" is not a valid month name.` });
-      return;
-    }
-    if (!yearAvailability[month]) {
-      res.status(400).json({ error: `${month} ${selectedYear} is not available for purchase.` });
-      return;
-    }
   }
 
   // ── Create Stripe Checkout Session ────────────────────────────────────────

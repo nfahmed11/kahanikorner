@@ -14,6 +14,7 @@ const {
   US_FREE_SHIPPING_RATE,
   US_WEIGHT_RATES_CENTS,
   US_UNTRACKED_LETTER_RATES,
+  INTL_LETTER_RATES,
   WEIGHT_SHIPPING_RATES,
   calculateShipmentProfile,
   getBillablePounds,
@@ -43,17 +44,17 @@ const quietly = (fn) => {
 // ── Shipment profile ─────────────────────────────────────────────────────────
 
 test("profile: product weight × quantity only", () => {
-  assert.deepEqual(profile([{ price: BOOK, quantity: 1 }]), { totalWeightOz: 6, shippingClass: "parcel", flatEligible: false });
+  assert.deepEqual(profile([{ price: BOOK, quantity: 1 }]), { totalWeightOz: 6, shippingClass: "parcel", flatEligible: false, printedMatterOnly: false });
   assert.equal(profile([{ price: BUNDLE, quantity: 1 }]).totalWeightOz, 24);
   assert.equal(profile([{ price: BOOK, quantity: 3 }]).totalWeightOz, 18);
   assert.equal(profile([{ price: BOOK, quantity: 1 }, { price: BOOK_2, quantity: 1 }]).totalWeightOz, 12);
 });
 
-test("profile: stickers flat; books, coloring book, bundle, archive parcel", () => {
-  for (const id of [STICKER, STICKER_2, STICKER_3]) {
+test("profile: stickers and archive flat; books, coloring book, bundle parcel", () => {
+  for (const id of [STICKER, STICKER_2, STICKER_3, ARCHIVE]) {
     assert.equal(profile([{ price: id, quantity: 1 }]).shippingClass, "flat", id);
   }
-  for (const id of [BOOK, BUNDLE, COLORING, ARCHIVE]) {
+  for (const id of [BOOK, BUNDLE, COLORING]) {
     assert.equal(profile([{ price: id, quantity: 1 }]).shippingClass, "parcel", id);
   }
   assert.equal(profile([{ price: STICKER, quantity: 1 }, { price: BOOK, quantity: 1 }]).shippingClass, "parcel");
@@ -159,9 +160,21 @@ test("7 oz sticker cart → pound table, not letter mail", () => {
   assert.deepEqual([o.mode, o.amountCents], ["us_weight_table", 439]);
 });
 
-test("sticker + book / light archive → pound table, never letter mail", () => {
+test("sticker + book / archive + book → pound table, never letter mail", () => {
   assert.equal(usOption([{ price: STICKER, quantity: 1 }, { price: BOOK, quantity: 1 }]).mode, "us_weight_table");
-  assert.equal(usOption([{ price: ARCHIVE, quantity: 1 }]).mode, "us_weight_table");
+  assert.equal(usOption([{ price: ARCHIVE, quantity: 1 }, { price: BOOK, quantity: 1 }]).mode, "us_weight_table");
+});
+
+test("US archive priced per ounce: letter mail 1–6 editions, pound table from 7", () => {
+  for (const { maxOz: editions, amountCents } of US_UNTRACKED_LETTER_RATES) {
+    const o = usOption([{ price: ARCHIVE, quantity: editions }]);
+    assert.deepEqual([o.mode, o.amountCents], ["untracked_letter", amountCents], `${editions} editions`);
+  }
+  assert.equal(usOption([{ price: ARCHIVE, quantity: 2 }, { price: STICKER, quantity: 1 }]).amountCents, 140);
+  assert.deepEqual(
+    [usOption([{ price: ARCHIVE, quantity: 7 }]).mode, usOption([{ price: ARCHIVE, quantity: 7 }]).amountCents],
+    ["us_weight_table", 439]
+  );
 });
 
 test("US $65+ → free (Stripe free rate), overriding both letter and table rates", () => {
@@ -180,29 +193,64 @@ test("Canada tiers by product weight (8 oz → $12.99, 9 oz → $14.99)", () => 
   assert.equal(tier("CA", [{ price: STICKER, quantity: 8 }]).amountCents, 1299);
   assert.equal(tier("CA", [{ price: STICKER, quantity: 9 }]).amountCents, 1499);
   assert.equal(tier("CA", [{ price: BOOK, quantity: 1 }]).rate.env, "STRIPE_CA_SHIPPING_8OZ_RATE_ID");
-  assert.deepEqual(WEIGHT_SHIPPING_RATES.CA.map((t) => [t.maxOz, t.amountCents]), [[8, 1299], [16, 1499], [32, 1899], [48, 2299], [64, 2999]]);
+  assert.deepEqual(WEIGHT_SHIPPING_RATES.CA.map((t) => [t.maxOz / 16, t.amountCents / 100]), [
+    [0.5, 12.99], [1, 14.99], [2, 18.99], [3, 22.99], [4, 29.99], [5, 38.99], [6, 40.99],
+    [7, 42.99], [8, 44.99], [9, 49.99], [10, 54.99], [11, 59.99], [12, 63.99], [13, 68.99],
+    [14, 72.99], [15, 76.99], [16, 80.99], [17, 85.99], [18, 90.99], [19, 95.99], [20, 100.99],
+  ]);
 });
 
 test("International tiers by product weight (8 oz → $14.99, 9 oz → $18.99)", () => {
   assert.equal(tier("INTL", [{ price: STICKER, quantity: 8 }]).amountCents, 1499);
   assert.equal(tier("INTL", [{ price: STICKER, quantity: 9 }]).amountCents, 1899);
-  assert.deepEqual(WEIGHT_SHIPPING_RATES.INTL.map((t) => [t.maxOz, t.amountCents]), [[8, 1499], [16, 1899], [32, 2299], [48, 2999], [64, 3399]]);
+  assert.deepEqual(WEIGHT_SHIPPING_RATES.INTL.map((t) => [t.maxOz / 16, t.amountCents / 100]), [
+    [0.5, 14.99], [1, 18.99], [2, 22.99], [3, 29.99], [4, 33.99], [5, 56.99], [6, 59.99],
+    [7, 63.99], [8, 67.99], [9, 71.99], [10, 74.99], [11, 77.99], [12, 80.99], [13, 83.99],
+    [14, 86.99], [15, 89.99], [16, 92.99], [17, 95.99], [18, 98.99], [19, 101.99], [20, 104.99],
+  ]);
 });
 
-test("Canada / International never use letter mail or the US pound table", () => {
+test("Canada / International 5–20 lb tiers → no Stripe rate object, priced by the server", () => {
+  const o = tier("CA", [{ price: BUNDLE, quantity: 3 }]); // 72 oz → 5 lb
+  assert.deepEqual([o.mode, o.amountCents, o.rate], ["weight_tier", 3899, undefined]);
+  assert.equal(tier("INTL", [{ price: BUNDLE, quantity: 3 }]).amountCents, 5699);
+  assert.equal(tier("INTL", [{ price: BUNDLE, quantity: 2 }, { price: STICKER, quantity: 17 }]).amountCents, 5699); // 65 oz
+});
+
+test("Canada / International: stickers never go by letter mail or the US pound table", () => {
   for (const region of ["CA", "INTL"]) {
-    const o = tier(region, [{ price: STICKER, quantity: 1 }]);
-    assert.equal(o.mode, "weight_tier");
-    assert.equal(o.rate, WEIGHT_SHIPPING_RATES[region][0]);
+    for (const items of [
+      [{ price: STICKER, quantity: 1 }],
+      [{ price: ARCHIVE, quantity: 1 }, { price: STICKER, quantity: 1 }],
+    ]) {
+      const o = tier(region, items);
+      assert.equal(o.mode, "weight_tier");
+      assert.equal(o.rate, WEIGHT_SHIPPING_RATES[region][0]);
+    }
   }
 });
 
-test("Canada / International over 64 oz → rejected; exactly 64 oz allowed", () => {
+test("Canada / International archive-only ≤ 3.5 oz → international letter mail, then tiers", () => {
+  assert.deepEqual(INTL_LETTER_RATES.map((r) => [r.maxOz, r.amountCents]), [[1, 175], [2, 204], [3, 233], [3.5, 262]]);
   for (const region of ["CA", "INTL"]) {
-    assert.equal(tier(region, [{ price: BUNDLE, quantity: 2 }, { price: STICKER, quantity: 16 }]).rate.maxOz, 64);
+    for (const [editions, cents] of [[1, 175], [2, 204], [3, 233]]) {
+      const o = tier(region, [{ price: ARCHIVE, quantity: editions }]);
+      assert.deepEqual([o.mode, o.displayName, o.amountCents, o.rate],
+        ["intl_letter", "Untracked International Letter Mail", cents, undefined], `${region} ${editions}`);
+    }
+    // 4 editions (4 oz) is over the 3.5 oz letter limit → 0.5 lb tier
+    const four = tier(region, [{ price: ARCHIVE, quantity: 4 }]);
+    assert.deepEqual([four.mode, four.amountCents], ["weight_tier", WEIGHT_SHIPPING_RATES[region][0].amountCents]);
+  }
+});
+
+test("Canada / International over 20 lb → rejected; exactly 20 lb allowed", () => {
+  for (const region of ["CA", "INTL"]) {
+    const exact = tier(region, [{ price: BUNDLE, quantity: 13 }, { price: STICKER, quantity: 8 }]); // 320 oz
+    assert.equal(exact.amountCents, WEIGHT_SHIPPING_RATES[region].at(-1).amountCents);
     assert.throws(
-      () => tier(region, [{ price: BUNDLE, quantity: 2 }, { price: STICKER, quantity: 17 }]),
-      (err) => err.statusCode === 400 && /over 4 lb/.test(err.message)
+      () => tier(region, [{ price: BUNDLE, quantity: 13 }, { price: STICKER, quantity: 9 }]),
+      (err) => err.statusCode === 400 && /over 20 lb/.test(err.message)
     );
   }
 });
@@ -241,9 +289,10 @@ test("cart.js tables match shipping.js", () => {
     JSON.parse(JSON.stringify(t.products)),
     Object.fromEntries(Object.entries(PRODUCT_SHIPPING_DATA).map(([id, d]) => [id, [d.weightOz, d.shippingClass]]))
   );
-  assert.equal(t.archiveEditionWeightOz, ARCHIVE_SHIPPING_DATA.weightOz);
+  assert.deepEqual(JSON.parse(JSON.stringify(t.archiveEdition)), [ARCHIVE_SHIPPING_DATA.weightOz, ARCHIVE_SHIPPING_DATA.shippingClass]);
   assert.deepEqual(JSON.parse(JSON.stringify(t.usWeightRatesCents)), US_WEIGHT_RATES_CENTS);
   assert.deepEqual(JSON.parse(JSON.stringify(t.usLetterRates)), US_UNTRACKED_LETTER_RATES.map((r) => [r.maxOz, r.amountCents]));
+  assert.deepEqual(JSON.parse(JSON.stringify(t.intlLetterRates)), INTL_LETTER_RATES.map((r) => [r.maxOz, r.amountCents]));
   assert.deepEqual(JSON.parse(JSON.stringify(t.caRates)), WEIGHT_SHIPPING_RATES.CA.map((r) => [r.maxOz, r.amountCents]));
   assert.deepEqual(JSON.parse(JSON.stringify(t.intlRates)), WEIGHT_SHIPPING_RATES.INTL.map((r) => [r.maxOz, r.amountCents]));
 });
@@ -254,8 +303,9 @@ test("cart.js estimate equals the server's price for every sample cart", () => {
   const carts = [
     [[STICKER, 1]], [[STICKER, 3]], [[STICKER, 6]], [[STICKER, 7]], [[STICKER, 14]],
     [[STICKER, 1], [BOOK, 1]], [[BOOK, 1]], [[BOOK, 3]], [[BOOK, 17]], [[BUNDLE, 1]], [[BUNDLE, 2]],
-    [[COLORING, 2], [STICKER_2, 1]], [[BOOK, 11]], [[BUNDLE, 46]], [[BUNDLE, 47]],
-    [["archive", 3]], [["archive", 1], [STICKER, 1]],
+    [[COLORING, 2], [STICKER_2, 1]], [[BOOK, 11]], [[BUNDLE, 46]], [[BUNDLE, 47]], [[BUNDLE, 3]], [[BUNDLE, 13]], [[BUNDLE, 14]],
+    [["archive", 1]], [["archive", 2]], [["archive", 3]], [["archive", 4]], [["archive", 6]], [["archive", 7]], [["archive", 12]],
+    [["archive", 1], [STICKER, 1]], [["archive", 5], [STICKER, 2]], [["archive", 2], [BOOK, 1]],
   ];
   for (const region of ["US", "CA", "INTL"]) {
     for (const lines of carts) {

@@ -39,11 +39,14 @@ const PRODUCT_SHIPPING_DATA = {
 };
 
 // Kahani Times Archive is priced per edition via STRIPE_KAHANI_TIMES_ARCHIVE_PRICE_ID
-// (an env var, so it can't be a literal key above). Treated as parcel:
-// editions ship together in a protective sleeve, not as a letter.
+// (an env var, so it can't be a literal key above). Flat: editions are paper
+// mail, so small US orders get per-ounce letter postage like stickers.
+// printedMatter: the only item allowed in an international letter (USPS bars
+// merchandise such as stickers from international letters and flats).
 const ARCHIVE_SHIPPING_DATA = {
   weightOz: 1,
-  shippingClass: SHIPPING_CLASS.PARCEL,
+  shippingClass: SHIPPING_CLASS.FLAT,
+  printedMatter: true,
 };
 
 // ── Destinations (Stripe Checkout collects the full address) ─────────────────
@@ -97,22 +100,66 @@ const US_UNTRACKED_LETTER_RATES = [
   { maxOz: 6, amountCents: 227 },
 ];
 
-// Canada / International: Stripe shipping-rate objects by total product weight.
-// 8 / 16 / 32 / 48 / 64 oz = 0.5 / 1 / 2 / 3 / 4 lb.
+// Untracked international letter mail (Global Forever stamp + 29¢ additional
+// ounces), same price for Canada and every other country. Archive-only
+// orders up to 3.5 oz; heavier ones use the weight tiers below.
+const INTL_LETTER_RATES = [
+  { maxOz: 1,   amountCents: 175 },
+  { maxOz: 2,   amountCents: 204 },
+  { maxOz: 3,   amountCents: 233 },
+  { maxOz: 3.5, amountCents: 262 },
+];
+
+// Canada / International tiers by total product weight ("weight not over"),
+// 0.5 lb then every whole pound up to 20 lb. Tiers with `env` (0.5–4 lb) are
+// backed by pre-made Stripe shipping-rate objects; heavier tiers are sent as
+// trusted shipping_rate_data like the US pound table.
 const WEIGHT_SHIPPING_RATES = {
   CA: [
-    { maxOz: 8,  env: "STRIPE_CA_SHIPPING_8OZ_RATE_ID",  amountCents: 1299 },
-    { maxOz: 16, env: "STRIPE_CA_SHIPPING_16OZ_RATE_ID", amountCents: 1499 },
-    { maxOz: 32, env: "STRIPE_CA_SHIPPING_32OZ_RATE_ID", amountCents: 1899 },
-    { maxOz: 48, env: "STRIPE_CA_SHIPPING_48OZ_RATE_ID", amountCents: 2299 },
-    { maxOz: 64, env: "STRIPE_CA_SHIPPING_64OZ_RATE_ID", amountCents: 2999 },
+    { maxOz: 8,   env: "STRIPE_CA_SHIPPING_8OZ_RATE_ID",  amountCents: 1299 },
+    { maxOz: 16,  env: "STRIPE_CA_SHIPPING_16OZ_RATE_ID", amountCents: 1499 },
+    { maxOz: 32,  env: "STRIPE_CA_SHIPPING_32OZ_RATE_ID", amountCents: 1899 },
+    { maxOz: 48,  env: "STRIPE_CA_SHIPPING_48OZ_RATE_ID", amountCents: 2299 },
+    { maxOz: 64,  env: "STRIPE_CA_SHIPPING_64OZ_RATE_ID", amountCents: 2999 },
+    { maxOz: 80,  amountCents: 3899 },  // 5 lb
+    { maxOz: 96,  amountCents: 4099 },  // 6 lb
+    { maxOz: 112, amountCents: 4299 },  // 7 lb
+    { maxOz: 128, amountCents: 4499 },  // 8 lb
+    { maxOz: 144, amountCents: 4999 },  // 9 lb
+    { maxOz: 160, amountCents: 5499 },  // 10 lb
+    { maxOz: 176, amountCents: 5999 },  // 11 lb
+    { maxOz: 192, amountCents: 6399 },  // 12 lb
+    { maxOz: 208, amountCents: 6899 },  // 13 lb
+    { maxOz: 224, amountCents: 7299 },  // 14 lb
+    { maxOz: 240, amountCents: 7699 },  // 15 lb
+    { maxOz: 256, amountCents: 8099 },  // 16 lb
+    { maxOz: 272, amountCents: 8599 },  // 17 lb
+    { maxOz: 288, amountCents: 9099 },  // 18 lb
+    { maxOz: 304, amountCents: 9599 },  // 19 lb
+    { maxOz: 320, amountCents: 10099 }, // 20 lb
   ],
   INTL: [
-    { maxOz: 8,  env: "STRIPE_INTL_SHIPPING_8OZ_RATE_ID",  amountCents: 1499 },
-    { maxOz: 16, env: "STRIPE_INTL_SHIPPING_16OZ_RATE_ID", amountCents: 1899 },
-    { maxOz: 32, env: "STRIPE_INTL_SHIPPING_32OZ_RATE_ID", amountCents: 2299 },
-    { maxOz: 48, env: "STRIPE_INTL_SHIPPING_48OZ_RATE_ID", amountCents: 2999 },
-    { maxOz: 64, env: "STRIPE_INTL_SHIPPING_64OZ_RATE_ID", amountCents: 3399 },
+    { maxOz: 8,   env: "STRIPE_INTL_SHIPPING_8OZ_RATE_ID",  amountCents: 1499 },
+    { maxOz: 16,  env: "STRIPE_INTL_SHIPPING_16OZ_RATE_ID", amountCents: 1899 },
+    { maxOz: 32,  env: "STRIPE_INTL_SHIPPING_32OZ_RATE_ID", amountCents: 2299 },
+    { maxOz: 48,  env: "STRIPE_INTL_SHIPPING_48OZ_RATE_ID", amountCents: 2999 },
+    { maxOz: 64,  env: "STRIPE_INTL_SHIPPING_64OZ_RATE_ID", amountCents: 3399 },
+    { maxOz: 80,  amountCents: 5699 },  // 5 lb
+    { maxOz: 96,  amountCents: 5999 },  // 6 lb
+    { maxOz: 112, amountCents: 6399 },  // 7 lb
+    { maxOz: 128, amountCents: 6799 },  // 8 lb
+    { maxOz: 144, amountCents: 7199 },  // 9 lb
+    { maxOz: 160, amountCents: 7499 },  // 10 lb
+    { maxOz: 176, amountCents: 7799 },  // 11 lb
+    { maxOz: 192, amountCents: 8099 },  // 12 lb
+    { maxOz: 208, amountCents: 8399 },  // 13 lb
+    { maxOz: 224, amountCents: 8699 },  // 14 lb
+    { maxOz: 240, amountCents: 8999 },  // 15 lb
+    { maxOz: 256, amountCents: 9299 },  // 16 lb
+    { maxOz: 272, amountCents: 9599 },  // 17 lb
+    { maxOz: 288, amountCents: 9899 },  // 18 lb
+    { maxOz: 304, amountCents: 10199 }, // 19 lb
+    { maxOz: 320, amountCents: 10499 }, // 20 lb
   ],
 };
 
@@ -121,6 +168,7 @@ const SHIPPING_MODE = {
   US_WEIGHT_TABLE: "us_weight_table",
   US_FREE: "us_free",
   UNTRACKED_LETTER: "untracked_letter",
+  INTL_LETTER: "intl_letter",
   WEIGHT_TIER: "weight_tier",
 };
 
@@ -150,6 +198,7 @@ function getShippingProductData(priceId, archivePriceId) {
 function calculateShipmentProfile(lineItems, archivePriceId) {
   let totalWeightOz = 0;
   let hasParcelItem = false;
+  let allPrintedMatter = true;
   const unknown = [];
 
   for (const li of lineItems) {
@@ -162,6 +211,7 @@ function calculateShipmentProfile(lineItems, archivePriceId) {
 
     totalWeightOz += data.weightOz * li.quantity;
     if (data.shippingClass !== SHIPPING_CLASS.FLAT) hasParcelItem = true;
+    if (!data.printedMatter) allPrintedMatter = false;
   }
 
   if (unknown.length > 0) {
@@ -183,6 +233,7 @@ function calculateShipmentProfile(lineItems, archivePriceId) {
     totalWeightOz,
     shippingClass,
     flatEligible: shippingClass === SHIPPING_CLASS.FLAT,
+    printedMatterOnly: allPrintedMatter,
   };
 }
 
@@ -227,7 +278,7 @@ function getWeightTierRate(region, totalWeightOz) {
 
   if (!rate) {
     throw checkoutError(
-      "Orders over 4 lb can't be shipped to Canada or internationally online yet. Please contact us to place this order.",
+      "Orders over 20 lb can't be shipped to Canada or internationally online yet. Please contact us to place this order.",
       400
     );
   }
@@ -238,7 +289,7 @@ function getWeightTierRate(region, totalWeightOz) {
 // The single shipping option for this order:
 //   { mode, displayName, amountCents, rate? }
 // `rate` (a Stripe shipping-rate config) is set for options backed by a
-// pre-made Stripe rate (free US, Canada / International tiers); otherwise
+// pre-made Stripe rate (free US, Canada / International tiers up to 4 lb); otherwise
 // index.js sends trusted shipping_rate_data with amountCents.
 //
 // US order of precedence:
@@ -275,14 +326,29 @@ function getShippingOption(shipmentProfile, region, subtotalCents) {
     };
   }
 
-  // Canada / International: fixed weight tiers (no letter mail — merchandise
-  // needs a customs-capable package service).
+  // Canada / International:
+  //   archive only, ≤ 3.5 oz → Untracked International Letter Mail
+  //   otherwise              → weight tiers (merchandise such as stickers
+  //                            needs a customs-capable package service)
+  if (shipmentProfile.printedMatterOnly) {
+    const letter = INTL_LETTER_RATES.find(
+      (t) => shipmentProfile.totalWeightOz <= t.maxOz
+    );
+    if (letter) {
+      return {
+        mode: SHIPPING_MODE.INTL_LETTER,
+        displayName: "Untracked International Letter Mail",
+        amountCents: letter.amountCents,
+      };
+    }
+  }
+
   const rate = getWeightTierRate(region, shipmentProfile.totalWeightOz);
   return {
     mode: SHIPPING_MODE.WEIGHT_TIER,
     displayName: region === "CA" ? "Canada Shipping" : "International Shipping",
     amountCents: rate.amountCents,
-    rate,
+    rate: rate.env ? rate : undefined,
   };
 }
 
@@ -298,6 +364,7 @@ module.exports = {
   US_WEIGHT_RATES_CENTS,
   US_MAX_WEIGHT_LB,
   US_UNTRACKED_LETTER_RATES,
+  INTL_LETTER_RATES,
   WEIGHT_SHIPPING_RATES,
   SHIPPING_MODE,
   checkoutError,

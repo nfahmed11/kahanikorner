@@ -23,7 +23,7 @@ const SHIPPING_TABLES = {
     price_1SvrPwP4FFhr5UNAhWnlzbu5: [1, "flat"],
     price_1TjQGxP4FFhr5UNAMtrY7cJq: [5, "parcel"],
   },
-  archiveEditionWeightOz: 1, // Kahani Times Archive, per edition (parcel)
+  archiveEdition: [1, "flat"], // Kahani Times Archive, per edition
   // US parcel rate in cents by billable whole pound (index = pounds, 1–70)
   usWeightRatesCents: [
     null,
@@ -37,9 +37,21 @@ const SHIPPING_TABLES = {
   ],
   // US untracked letter mail, all-flat orders only: [max oz, cents]
   usLetterRates: [[1, 82], [2, 111], [3, 140], [4, 169], [5, 198], [6, 227]],
-  // Canada / International: [max oz, cents]
-  caRates: [[8, 1299], [16, 1499], [32, 1899], [48, 2299], [64, 2999]],
-  intlRates: [[8, 1499], [16, 1899], [32, 2299], [48, 2999], [64, 3399]],
+  // Canada / International untracked letter mail, archive-only orders: [max oz, cents]
+  intlLetterRates: [[1, 175], [2, 204], [3, 233], [3.5, 262]],
+  // Canada / International: [max oz, cents] — 0.5 lb, then each whole lb to 20 lb
+  caRates: [
+    [8, 1299], [16, 1499], [32, 1899], [48, 2299], [64, 2999],
+    [80, 3899], [96, 4099], [112, 4299], [128, 4499], [144, 4999],
+    [160, 5499], [176, 5999], [192, 6399], [208, 6899], [224, 7299],
+    [240, 7699], [256, 8099], [272, 8599], [288, 9099], [304, 9599], [320, 10099],
+  ],
+  intlRates: [
+    [8, 1499], [16, 1899], [32, 2299], [48, 2999], [64, 3399],
+    [80, 5699], [96, 5999], [112, 6399], [128, 6799], [144, 7199],
+    [160, 7499], [176, 7799], [192, 8099], [208, 8399], [224, 8699],
+    [240, 8999], [256, 9299], [272, 9599], [288, 9899], [304, 10199], [320, 10499],
+  ],
 };
 // END SHIPPING TABLES
 const FREE_US_SHIPPING_THRESHOLD_CENTS = SHIPPING_TABLES.freeUsThresholdCents;
@@ -94,14 +106,13 @@ function getCartSubtotalCents(items) {
   );
 }
 
-// Shipping weight of one cart line in ounces (weight × quantity), or null
+// [weight in oz, "flat" | "parcel"] for one unit of a cart line, or null
 // when the product has no shipping data here.
-function getItemWeightOz(item) {
+function getItemShippingData(item) {
   if (item.productType === "kahani_times_archive") {
-    return SHIPPING_TABLES.archiveEditionWeightOz * item.quantity;
+    return SHIPPING_TABLES.archiveEdition;
   }
-  const data = SHIPPING_TABLES.products[item.id];
-  return data ? data[0] * item.quantity : null;
+  return SHIPPING_TABLES.products[item.id] || null;
 }
 
 // Mirrors getShippingOption() in functions/shipping.js. Returns
@@ -114,12 +125,13 @@ function estimateCartShipping(items, region) {
 
   let weightOz = 0;
   let allFlat = true;
+  let allArchive = true; // printed matter only — the one thing allowed in an international letter
   for (const item of items) {
-    const oz = getItemWeightOz(item);
-    if (oz === null) return { status: "unknown" };
-    weightOz += oz;
-    const data = SHIPPING_TABLES.products[item.id];
-    if (!data || data[1] !== "flat") allFlat = false;
+    const data = getItemShippingData(item);
+    if (!data) return { status: "unknown" };
+    weightOz += data[0] * item.quantity;
+    if (data[1] !== "flat") allFlat = false;
+    if (item.productType !== "kahani_times_archive") allArchive = false;
   }
 
   if (region === "US") {
@@ -135,12 +147,15 @@ function estimateCartShipping(items, region) {
     return { status: "ok", cents: SHIPPING_TABLES.usWeightRatesCents[pounds], letterMail: false };
   }
 
+  const intlLetter = allArchive && SHIPPING_TABLES.intlLetterRates.find(([maxOz]) => weightOz <= maxOz);
+  if (intlLetter) return { status: "ok", cents: intlLetter[1], letterMail: true };
+
   const tiers = region === "CA" ? SHIPPING_TABLES.caRates : SHIPPING_TABLES.intlRates;
   const tier = tiers.find(([maxOz]) => weightOz <= maxOz);
   if (!tier) {
     return {
       status: "too_heavy",
-      message: "Orders over 4 lb can't be shipped to Canada or internationally online yet. Please contact us to place this order.",
+      message: "Orders over 20 lb can't be shipped to Canada or internationally online yet. Please contact us to place this order.",
     };
   }
   return { status: "ok", cents: tier[1], letterMail: false };
@@ -181,8 +196,9 @@ window.renderCartShipping = function (items) {
     noteEl.classList.toggle("cart-ship-note--error", estimate.status === "too_heavy");
     noteEl.textContent =
       estimate.status === "too_heavy" ? estimate.message
-      : region !== "US" ? "Shipping is based on package weight."
-      : estimate.letterMail ? "Sticker-only orders ship by untracked letter mail. Free US shipping on $65+"
+      : region !== "US"
+        ? (estimate.letterMail ? "Small archive orders ship by untracked letter mail." : "Shipping is based on package weight.")
+      : estimate.letterMail ? "Small sticker and archive orders ship by untracked letter mail. Free US shipping on $65+"
       : "Free US shipping on $65+";
   }
   if (progressEl) {
