@@ -148,9 +148,18 @@ test("Canada / International → existing weight-tier Stripe rates", async () =>
   assert.equal(stripeOption(intl.session), "shr_STRIPE_INTL_SHIPPING_8OZ_RATE_ID");
   assert.ok(intl.session.shipping_address_collection.allowed_countries.includes("GB"));
 
-  const tooHeavy = await call("createCheckoutSession", { cartItems: cart([BUNDLE, 3]), shippingRegion: "INTL" });
+  const tooHeavy = await call("createCheckoutSession", { cartItems: cart([BUNDLE, 14]), shippingRegion: "INTL" });
   assert.equal(tooHeavy.status, 400);
-  assert.match(tooHeavy.json.error, /over 4 lb/);
+  assert.match(tooHeavy.json.error, /over 20 lb/);
+});
+
+test("Canada / International over 4 lb → server-priced tier, no Stripe rate needed", async () => {
+  const ca = await call("createCheckoutSession", { cartItems: cart([BUNDLE, 3]), shippingRegion: "CA" });
+  assert.equal(ca.status, 200);
+  assert.deepEqual(stripeOption(ca.session), ["Canada Shipping", 3899]); // 72 oz → 5 lb
+
+  const intl = await call("createCheckoutSession", { cartItems: cart([BUNDLE, 13]), shippingRegion: "INTL" });
+  assert.deepEqual(stripeOption(intl.session), ["International Shipping", 10499]); // 312 oz → 20 lb
 });
 
 test("frontend shipping amounts, weights, ZIP and service codes are ignored", async () => {
@@ -180,7 +189,7 @@ test("unknown product → safe 400 rejection", async () => {
   assert.equal(sessions.length, 0);
 });
 
-test("Archive Buy Now: parcel class, pound table", async () => {
+test("Archive Buy Now: flat class, per-ounce letter mail", async () => {
   const { status, session } = await call("createArchiveCheckout", {
     selectedYear: "2026",
     selectedMonths: ["January", "February", "March"],
@@ -188,16 +197,47 @@ test("Archive Buy Now: parcel class, pound table", async () => {
   });
   assert.equal(status, 200);
   assert.equal(session.metadata.product_type, "kahani_times_archive");
-  assert.equal(session.metadata.shipment_class, "parcel");
-  assert.deepEqual(stripeOption(session), ["US Shipping", 439]); // 3 oz parcel, not letter mail
+  assert.equal(session.metadata.shipment_class, "flat");
+  assert.deepEqual(stripeOption(session), ["Untracked Letter Mail", 140]); // 3 oz
 });
 
-test("archive inside the cart → parcel, pound table", async () => {
+test("Archive Buy Now abroad: letter mail up to 3 editions, then the 0.5 lb tier", async () => {
+  const intl = await call("createArchiveCheckout", {
+    selectedYear: "2026", selectedMonths: ["January", "February"], shippingRegion: "INTL",
+  });
+  assert.equal(intl.status, 200);
+  assert.deepEqual(stripeOption(intl.session), ["Untracked International Letter Mail", 204]); // 2 oz
+  assert.equal(intl.session.metadata.shipping_mode, "intl_letter");
+
+  const ca = await call("createArchiveCheckout", {
+    selectedYear: "2026", selectedMonths: ["January", "February", "March", "April"], shippingRegion: "CA",
+  });
+  assert.equal(stripeOption(ca.session), "shr_STRIPE_CA_SHIPPING_8OZ_RATE_ID"); // 4 oz > 3.5 oz letter limit
+});
+
+test("Archive Buy Now: months up to the current one are accepted, later ones rejected", async () => {
+  const now = new Date();
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"];
+  const ok = await call("createArchiveCheckout", {
+    selectedYear: String(now.getUTCFullYear()),
+    selectedMonths: [monthNames[now.getUTCMonth()]],
+  });
+  assert.equal(ok.status, 200);
+
+  const future = await call("createArchiveCheckout", {
+    selectedYear: String(now.getUTCFullYear() + 1),
+    selectedMonths: ["June"],
+  });
+  assert.equal(future.status, 400);
+});
+
+test("archive inside the cart → flat with stickers, letter mail", async () => {
   const { session } = await checkout([
     { productType: "kahani_times_archive", selectedYear: "2026", selectedMonths: ["January"] },
     { id: STICKER, quantity: 1 },
   ]);
-  assert.deepEqual(stripeOption(session), ["US Shipping", 439]);
+  assert.deepEqual(stripeOption(session), ["Untracked Letter Mail", 111]); // 2 oz
   assert.equal(session.metadata.has_archive, "true");
 });
 
