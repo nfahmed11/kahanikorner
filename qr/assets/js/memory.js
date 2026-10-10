@@ -1,5 +1,6 @@
 // ✅ Import vocab
 import { vocab as originalVocab } from "./mastervocab.js";
+import { gameSound } from "./sfx.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const ALLOWED_WORDS = window.ALLOWED_WORDS;
@@ -42,10 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const difficultySlider = document.getElementById("difficulty-slider");
   const difficultyLabel = document.getElementById("difficulty-label");
 
-  const cardFlipSound = new Audio("/qr/assets/audio/cardflip.mp3");
-  cardFlipSound.preload = "auto";
-  const correctSound = new Audio("/qr/assets/audio/success.wav");
-  correctSound.preload = "auto";
+  const cardFlipSound = gameSound("/qr/assets/audio/cardflip.mp3");
+  const correctSound = gameSound("/qr/assets/audio/success.wav");
 
   const btn = document.getElementById("settings-btn");
   const pop = document.getElementById("settings-popover");
@@ -473,10 +472,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    try {
-      cardFlipSound.currentTime = 0;
-      cardFlipSound.play().catch(() => {});
-    } catch {}
+    cardFlipSound.play();
 
     card.classList.add("flipped");
     flippedCards.push(card);
@@ -496,10 +492,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (isMatch) {
       setTimeout(() => {
-        try {
-          correctSound.currentTime = 0;
-          correctSound.play().catch(() => {});
-        } catch {}
+        correctSound.play();
 
         card1.classList.add("match-animation");
         card2.classList.add("match-animation");

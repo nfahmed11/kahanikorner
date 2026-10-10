@@ -1,5 +1,6 @@
 import { vocab as originalVocab } from "./mastervocab.js";
 import { vocabSrcset, useVocabImage } from "./vocab-images.js";
+import { gameSound } from "./sfx.js";
 
 // ==========================================================
 // SPEED GRID — fast-paced image recognition game
@@ -69,15 +70,14 @@ function imageLoads(src) {
 
 // ---------- Audio ----------
 const sounds = {
-  correct: new Audio("/qr/assets/audio/success.wav"),
-  wrong: new Audio("/qr/assets/audio/incorrect.wav"),
+  correct: gameSound("/qr/assets/audio/success.wav"),
+  wrong: gameSound("/qr/assets/audio/incorrect.wav"),
 };
 
 function playSound(name) {
   const s = sounds[name];
   if (!s) return;
-  s.currentTime = 0;
-  s.play().catch(() => {});
+  s.play();
 }
 
 // ---------- Build deck ----------
