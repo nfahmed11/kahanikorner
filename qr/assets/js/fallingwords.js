@@ -5,7 +5,6 @@
 // ═══════════════════════════════════════════════════
 
 import { vocab as masterVocab } from "./mastervocab.js";
-import { gameSound } from "./sfx.js";
 
 // ═══════════════════════════════════════════════════
 //  CONFIGURATION — easy to tweak
@@ -211,19 +210,37 @@ const S = {
 const SFX = { correct: null, wrong: null, miss: null };
 
 function initAudio() {
-  SFX.correct = gameSound("/qr/assets/audio/success.wav");
-  SFX.wrong = gameSound("/qr/assets/audio/incorrect.wav");
-  SFX.miss = gameSound("/qr/assets/audio/incorrect.wav");
+  try {
+    SFX.correct = new Audio("/qr/assets/audio/success.wav");
+  } catch (_) {}
+  try {
+    SFX.wrong = new Audio("/qr/assets/audio/incorrect.wav");
+  } catch (_) {}
+  try {
+    SFX.miss = new Audio("/qr/assets/audio/incorrect.wav");
+  } catch (_) {}
 }
 
 function playCorrectSound() {
-  SFX.correct?.play();
+  if (!SFX.correct) return;
+  try {
+    SFX.correct.currentTime = 0;
+    SFX.correct.play().catch(() => {});
+  } catch (_) {}
 }
 function playWrongSound() {
-  SFX.wrong?.play();
+  if (!SFX.wrong) return;
+  try {
+    SFX.wrong.currentTime = 0;
+    SFX.wrong.play().catch(() => {});
+  } catch (_) {}
 }
 function playMissSound() {
-  SFX.miss?.play();
+  if (!SFX.miss) return;
+  try {
+    SFX.miss.currentTime = 0;
+    SFX.miss.play().catch(() => {});
+  } catch (_) {}
 }
 
 // ═══════════════════════════════════════════════════

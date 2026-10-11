@@ -1,5 +1,4 @@
 import { vocab as originalVocab } from "./mastervocab.js";
-import { gameSound } from "./sfx.js";
 
 // --------------------
 // Card border colors (cycles per card)
@@ -13,9 +12,10 @@ const CARD_COLORS = [
 // Audio (lazy — created once, shared)
 // --------------------
 const audio = {
-  sparkle: gameSound("/qr/assets/audio/sparkle.mp3"),
-  correct: gameSound("/qr/assets/audio/success.wav"),
-  incorrect: gameSound("/qr/assets/audio/incorrect.wav"),
+  sparkle: new Audio("/qr/assets/audio/sparkle.mp3"),
+  correct: new Audio("/qr/assets/audio/success.wav"),
+  incorrect: new Audio("/qr/assets/audio/incorrect.wav"),
+  cardFlip: new Audio("/qr/assets/audio/cardflip.mp3"),
 };
 
 // --------------------
@@ -121,7 +121,8 @@ function createSparkle(x, y) {
 }
 
 function triggerSparkles(centerX, centerY) {
-  audio.sparkle.play();
+  audio.sparkle.currentTime = 0;
+  audio.sparkle.play().catch(() => {});
   for (let i = 0; i < 10; i++) {
     createSparkle(
       centerX + (Math.random() * 60 - 30),
@@ -448,14 +449,16 @@ function updateQuizCard(index) {
       });
 
       if (isCorrect) {
-        audio.correct.play();
+        audio.correct.currentTime = 0;
+        audio.correct.play().catch(() => {});
         launchConfetti();
         e.target.classList.remove("opacity-50");
         e.target.classList.add("border-green-400", "text-green-600");
         correctAnswers++;
         updateScore();
       } else {
-        audio.incorrect.play();
+        audio.incorrect.currentTime = 0;
+        audio.incorrect.play().catch(() => {});
         e.target.classList.remove("opacity-50");
         e.target.classList.add("border-red-400", "text-red-600", "shake");
         setTimeout(() => e.target.classList.remove("shake"), 400);

@@ -1,5 +1,4 @@
 import { vocab as originalVocab } from "./mastervocab.js";
-import { gameSound } from "./sfx.js";
 
 // --------------------
 // Vocab helpers
@@ -63,8 +62,8 @@ function imageLoads(src) {
 // --------------------
 // Audio
 // --------------------
-const correctSound = gameSound("/qr/assets/audio/success.wav");
-const incorrectSound = gameSound("/qr/assets/audio/incorrect.wav");
+const correctSound = new Audio("/qr/assets/audio/success.wav");
+const incorrectSound = new Audio("/qr/assets/audio/incorrect.wav");
 
 // --------------------
 // Build deck (only cards with working images)
@@ -235,7 +234,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       clickedBtn.classList.add("correct");
       imageCard.classList.add("correct");
 
-      correctSound.play();
+      correctSound.currentTime = 0;
+      correctSound.play().catch(() => {});
 
       // Particles from the clicked button
       const rect = clickedBtn.getBoundingClientRect();
@@ -258,7 +258,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       clickedBtn.classList.add("wrong");
       imageCard.classList.add("wrong");
 
-      incorrectSound.play();
+      incorrectSound.currentTime = 0;
+      incorrectSound.play().catch(() => {});
 
       // Reveal the correct answer
       allBtns.forEach((b) => {
