@@ -6,10 +6,10 @@
  * inside
  *   <script type="application/json" id="issue-config"> … </script>
  *
- * Game pages are opened as  /qr/assets/html/<game>.html?issue=<slug>
+ * Game pages are opened as  /qr/assets/html/<game>?issue=<slug>
  * and call KKIssue.loadGame("<gameKey>") to get that game's section.
  *
- * Slug format: MMYY + 3 lowercase letters, e.g. "1026otc" → /qr/tkt/2026/1026otc/index.html
+ * Slug format: MMYY + 3 lowercase letters, e.g. "1026otc" → /qr/tkt/2026/1026otc/
  * (Issues published before Oct 2026 use older page formats — see LEGACY notes in
  * index.js, fill-the-kahani.js and audionewsletter.js.)
  */
@@ -31,7 +31,7 @@
   function issuePath(slug) {
     if (!isValidSlug(slug)) return null;
     var year = "20" + slug.slice(2, 4);
-    return "/qr/tkt/" + year + "/" + slug + "/index.html";
+    return "/qr/tkt/" + year + "/" + slug + "/";
   }
 
   // Parses the issue-config block out of a document (the current page, or a fetched one).
