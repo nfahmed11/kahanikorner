@@ -22,7 +22,7 @@ import { vocab } from "./mastervocab.js";
 //   );
 //
 //   // Then link to All Cards (the activity button):
-//   // href="/qr/assets/html/allvocab.html"
+//   // href="/qr/assets/html/allvocab"
 //
 // The allvocab page also supports ?words= query param
 // (same format as other games: ?words=chaand,raat,gali,...).

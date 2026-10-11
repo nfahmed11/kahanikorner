@@ -5,22 +5,22 @@
 
 // Shared practice games, in display order. An issue shows one when games.<id> is present.
 const PRACTICE_GAMES = [
-  { id: "flashcards", label: "Flashcards", href: "/qr/assets/html/flashcards.html" },
-  { id: "quiz", label: "Quiz", href: "/qr/assets/html/quiz.html" },
-  { id: "fillblank", label: "Fill in the Blank", href: "/qr/assets/html/fillblank.html" },
-  { id: "matching", label: "Picture Match", href: "/qr/assets/html/matching.html" },
-  { id: "riddles", label: "Riddles", href: "/qr/assets/html/riddles.html" },
-  { id: "memory", label: "Memory Game", href: "/qr/assets/html/memory.html" },
-  { id: "wordsearch", label: "Word Search", href: "/qr/assets/html/wordsearch.html" },
-  { id: "speedgrid", label: "Speed Grid", href: "/qr/assets/html/speedgrid.html" },
-  { id: "fallingwords", label: "Falling Words", href: "/qr/assets/html/fallingwords.html" },
+  { id: "flashcards", label: "Flashcards", href: "/qr/assets/html/flashcards" },
+  { id: "quiz", label: "Quiz", href: "/qr/assets/html/quiz" },
+  { id: "fillblank", label: "Fill in the Blank", href: "/qr/assets/html/fillblank" },
+  { id: "matching", label: "Picture Match", href: "/qr/assets/html/matching" },
+  { id: "riddles", label: "Riddles", href: "/qr/assets/html/riddles" },
+  { id: "memory", label: "Memory Game", href: "/qr/assets/html/memory" },
+  { id: "wordsearch", label: "Word Search", href: "/qr/assets/html/wordsearch" },
+  { id: "speedgrid", label: "Speed Grid", href: "/qr/assets/html/speedgrid" },
+  { id: "fallingwords", label: "Falling Words", href: "/qr/assets/html/fallingwords" },
 ];
 
 // Default routes for issue-content games (an issue can override with games.<key>.route)
 const GAME_ROUTES = {
-  audioNewsletter: "/qr/assets/html/audionewsletter.html",
-  fillTheKahani: "/qr/assets/html/fill-the-kahani.html",
-  madLib: "/qr/assets/html/urdu-mad-lib.html",
+  audioNewsletter: "/qr/assets/html/audionewsletter",
+  fillTheKahani: "/qr/assets/html/fill-the-kahani",
+  madLib: "/qr/assets/html/urdu-mad-lib",
 };
 
 function fromIssueConfig(json) {
@@ -297,7 +297,7 @@ function renderNewspaperExtrasSection() {
     fillKahaniCard.href = gameHref("fillTheKahani");
   } else if (hasFtk) {
     // LEGACY: hand the inline config to the game through sessionStorage
-    const FTK_HREF = "/qr/assets/html/fill-the-kahani.html";
+    const FTK_HREF = "/qr/assets/html/fill-the-kahani";
     fillKahaniCard.href = FTK_HREF;
     fillKahaniCard.addEventListener("click", function (event) {
       event.preventDefault();
@@ -407,7 +407,7 @@ function updateBankCard(level) {
 
   const totalWords = config.orderedWords.length;
   const words = getWordsForLevel(config.orderedWords, level);
-  card.href = `/qr/assets/html/allvocab.html?words=${buildWordsParam(words)}`;
+  card.href = `/qr/assets/html/allvocab?words=${buildWordsParam(words)}`;
 
   const titleEl = document.getElementById("ne-bank-title");
   const subEl = document.getElementById("ne-bank-sub");
@@ -455,12 +455,12 @@ function buildPracticeGameButtons() {
       buttons.push({
         id: "quiz",
         label: "Quiz",
-        href: `/qr/assets/html/quiz.html?words=${wordsParam}`,
+        href: `/qr/assets/html/quiz?words=${wordsParam}`,
       });
       buttons.push({
         id: "fillblank",
         label: "Fill in the Blank",
-        href: `/qr/assets/html/fillblank.html?words=${wordsParam}`,
+        href: `/qr/assets/html/fillblank?words=${wordsParam}`,
       });
     }
 
@@ -468,12 +468,12 @@ function buildPracticeGameButtons() {
       buttons.push({
         id: "speedgrid",
         label: "Speed Grid",
-        href: `/qr/assets/html/speedgrid.html?words=${wordsParam}`,
+        href: `/qr/assets/html/speedgrid?words=${wordsParam}`,
       });
       buttons.push({
         id: "fallingwords",
         label: "Falling Words",
-        href: `/qr/assets/html/fallingwords.html?words=${wordsParam}`,
+        href: `/qr/assets/html/fallingwords?words=${wordsParam}`,
       });
     }
   }

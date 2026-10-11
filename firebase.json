@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": ".",
+    "cleanUrls": true,
     "ignore": [
       "firebase.json",
       "functions/**",
@@ -27,6 +28,23 @@
             "value": "public, max-age=31536000, immutable"
           }
         ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "regex": "^/(?P<dir>.+)/index\\.html$",
+        "destination": "/:dir/",
+        "type": 301
+      },
+      {
+        "regex": "^/(?P<dir>resources/free|qr/tkt/[^/.]+|qr/tkt/20[0-9]{2}/[^/.]+|qr/book/[^/.]+|qr/book/[^/.]+/TheKahaniTimes)$",
+        "destination": "/:dir/",
+        "type": 301
       }
     ],
     "rewrites": [
