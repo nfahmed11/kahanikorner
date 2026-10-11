@@ -2546,17 +2546,21 @@
       .nl-close:hover {
         color: var(--granite);
       }
+      /* Popup text uses a deeper shade of --sage-green (same hue): 5.1:1 on
+         the cream modal. Sage was 2.3:1, and against the global h2 teal
+         outline the title was 2.2:1, so the title drops that outline. */
       .nl-title {
         font-family: "Grandstander", cursive;
         font-size: clamp(1.35rem, 4vw, 1.65rem);
-        color: var(--sage-green);
+        color: #62734f;
+        text-shadow: none;
         margin: 0 0 0.65rem;
         display: flex;
         align-items: center;
         gap: 0.4em;
       }
       .nl-body {
-        color: var(--sage-green);
+        color: #62734f;
         font-size: 0.95rem;
         line-height: 1.6;
         margin: 0 0 1.5rem;
