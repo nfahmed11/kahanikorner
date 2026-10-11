@@ -75,7 +75,7 @@ footer.footer {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-sage-light);
+  color: #dde1c0; /* light sage, nudged lighter for 4.6:1 on teal (AA) */
   margin: 0 0 0.75rem;
 }
 
@@ -110,7 +110,7 @@ footer.footer {
   padding-top: 1.5rem;
   text-align: center;
   font-size: 0.82rem;
-  color: var(--sage-green);
+  color: #d9e0d2; /* lighter sage: 4.6:1 on teal (sage was 2.7:1) */
 }
 
 /* ── Tablet ── */

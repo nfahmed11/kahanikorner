@@ -68,12 +68,22 @@
     <link rel="stylesheet" href="/assets/css/tokens.css" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
     <!-- Hero background (LCP). type= makes browsers without WebP skip this
-         preload and use the PNG fallback in .hero__bg-image instead. -->
+         preload and use the PNG fallback in .hero__bg-image instead. The
+         media= queries must match the .hero__bg-image rules, so each screen
+         preloads only the image it shows (phones get the centre crop). -->
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/images/opt/fam-crop896.fe879627.webp"
+      type="image/webp"
+      media="(max-width: 480px)"
+      fetchpriority="high" />
     <link
       rel="preload"
       as="image"
       href="/assets/images/opt/fam-1552.3512ae90.webp"
       type="image/webp"
+      media="(min-width: 481px)"
       fetchpriority="high" />
 
     <style>
@@ -136,6 +146,21 @@
       }
       .hidden {
         display: none !important;
+      }
+
+      /* Decorative symbols. Open Sans has none of these glyphs, but its
+         "symbols" subset claims their code points, so leaving Open Sans in
+         the stack downloads 23 KB for nothing. Same system glyphs either way. */
+      .sym {
+        font-family: system-ui, sans-serif;
+        line-height: 1; /* don't let the system font's metrics grow the line */
+      }
+
+      /* navbar-loader.js swaps this for the navbar after first paint. The
+         topbar is the only in-flow part (13px text × 1.6 line-height), so
+         reserving its height keeps the hero from jumping down on mobile. */
+      #navbar-placeholder {
+        height: 20.8px;
       }
 
       /* Floating hearts */
@@ -949,6 +974,25 @@
             1.5rem 3rem;
         }
       }
+      /* Phones: the hero is portrait, so "cover" only ever shows the middle
+         of the photo. fam-crop896 is exactly that middle (same pixels, same
+         scale, 40% fewer bytes); it stays correct while the hero is narrower
+         than 0.88 × its height, which holds up to 480px wide. */
+      @media (max-width: 480px) {
+        .hero__bg-image {
+          background-image:
+            linear-gradient(
+              120deg,
+              rgba(44, 33, 23, 0.6),
+              rgba(44, 33, 23, 0.28)
+            ),
+            image-set(
+              url("/assets/images/opt/fam-crop896.fe879627.webp")
+                type("image/webp"),
+              url("/assets/images/homepage/fam.png") type("image/png")
+            );
+        }
+      }
       .hero__inner {
         position: relative;
         width: 100%;
@@ -1505,7 +1549,8 @@
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: var(--rosy-taupe);
+        /* Deeper shade of --rosy-taupe (same hue): 4.7:1 on cream for AA. */
+        color: #ad5a5d;
         margin-bottom: 0.8rem;
       }
       .card-link {
@@ -1529,12 +1574,14 @@
       .why {
         background: var(--green);
       }
+      /* Outline in a deeper shade of the brand rose (was --dusty-blush,
+         which left the white heading at 1.7:1 against the sage). */
       .why .section__title {
         text-shadow:
-          -1px -1px 0 var(--dusty-blush),
-          1px -1px 0 var(--dusty-blush),
-          -1px 1px 0 var(--dusty-blush),
-          1px 1px 0 var(--dusty-blush);
+          -1px -1px 0 #ad5a5d,
+          1px -1px 0 #ad5a5d,
+          -1px 1px 0 #ad5a5d,
+          1px 1px 0 #ad5a5d;
       }
       .why-grid {
         display: grid;
@@ -1647,19 +1694,28 @@
       .why-float:nth-child(8) {
         animation-duration: 4.9s;
       }
+      /* `translate` rather than margin-top: it runs on the compositor and
+         doesn't resize the grid rows (which used to nudge everything below
+         by up to 6px). It also stacks with the :hover/.active `transform`,
+         which a transform keyframe would override. */
       @keyframes whyFloat {
         0% {
-          margin-top: 0;
+          translate: 0 0;
         }
         100% {
-          margin-top: 6px;
+          translate: 0 6px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .why-float {
+          animation: none;
         }
       }
       .why-hint {
         text-align: center;
         font-size: 0.8rem;
         color: var(--granite);
-        opacity: 0.7;
+        opacity: 0.85; /* 4.8:1 on the sage background (0.7 was 3.6:1) */
         margin: 0 0 0.75rem;
         letter-spacing: 0.02em;
         display: none;
@@ -1854,23 +1910,33 @@
         outline: 2px solid var(--deep-teal);
         outline-offset: 2px;
       }
+      /* Each dot is a 24×44 tap target; the visible 8px dot is ::before.
+         The negative margins cancel the extra 36px of height, so the dots
+         and everything after them sit exactly where they did before. */
       .reviews-dots {
         display: flex;
         justify-content: center;
-        gap: 0.45rem;
-        margin-top: 1rem;
+        margin: calc(1rem - 18px) 0 -18px;
       }
       .rev-dot {
+        width: 24px;
+        height: 44px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: grid;
+        place-items: center;
+      }
+      .rev-dot::before {
+        content: "";
         width: 8px;
         height: 8px;
         border-radius: 50%;
         background: var(--ash-grey);
-        border: none;
-        cursor: pointer;
-        padding: 0;
         transition: all 0.2s;
       }
-      .rev-dot.active {
+      .rev-dot.active::before {
         background: var(--rosy-taupe);
         transform: scale(1.35);
       }
@@ -1916,7 +1982,7 @@
         flex-shrink: 0;
         letter-spacing: 0.03em;
       }
-      .review-author h4 {
+      .review-author h3 {
         margin: 0;
         font-size: 1.1rem;
         color: var(--white-smoke);
@@ -2402,7 +2468,7 @@
       .email-form button {
         padding: 0.75rem 1.75rem;
         background: var(--rose-pink);
-        color: var(--warm-white);
+        color: var(--charcoal); /* white on rose is 2.3:1; this is 6.4:1 */
         border: none;
         border-radius: var(--radius-pill);
         font-family: "Grandstander", cursive;
@@ -2480,17 +2546,21 @@
       .nl-close:hover {
         color: var(--granite);
       }
+      /* Popup text uses a deeper shade of --sage-green (same hue): 5.1:1 on
+         the cream modal. Sage was 2.3:1, and against the global h2 teal
+         outline the title was 2.2:1, so the title drops that outline. */
       .nl-title {
         font-family: "Grandstander", cursive;
         font-size: clamp(1.35rem, 4vw, 1.65rem);
-        color: var(--sage-green);
+        color: #62734f;
+        text-shadow: none;
         margin: 0 0 0.65rem;
         display: flex;
         align-items: center;
         gap: 0.4em;
       }
       .nl-body {
-        color: var(--sage-green);
+        color: #62734f;
         font-size: 0.95rem;
         line-height: 1.6;
         margin: 0 0 1.5rem;
@@ -2541,7 +2611,7 @@
       .nl-submit {
         padding: 0.8rem 1.75rem;
         background: var(--rose-pink);
-        color: var(--warm-white);
+        color: var(--charcoal); /* white on rose is 2.3:1; this is 6.4:1 */
         border: none;
         border-radius: var(--radius-pill);
         font-family: "Grandstander", cursive;
@@ -2836,6 +2906,7 @@
       </div>
     </div>
 
+    <main>
     <!-- ============================================================
          1. HERO
          ============================================================ -->
@@ -2870,9 +2941,10 @@
     <!-- ============================================================
          2. TRUST STRIP
          ============================================================ -->
-    <div class="trust-strip" role="banner" aria-label="Our promise">
+    <div class="trust-strip">
       <p>
-        Start simple <span>✦</span> Build slowly <span>✦</span> Watch the Urdu
+        Start simple <span aria-hidden="true">✦</span> Build slowly
+        <span aria-hidden="true">✦</span> Watch the Urdu
         Grow
       </p>
     </div>
@@ -2977,41 +3049,37 @@
             teacher tools — gathered in one place to make Urdu easier to teach
             and more fun to learn.
           </p>
-          <div class="journey-free-chips" role="list">
-            <a href="/resources/songs" class="free-chip" role="listitem"
+          <div class="journey-free-chips">
+            <a href="/resources/songs" class="free-chip"
               ><i class="fa-solid fa-music"></i> Songs</a
             >
-            <a href="/resources/cartoons" class="free-chip" role="listitem"
+            <a href="/resources/cartoons" class="free-chip"
               ><i class="fa-solid fa-tv"></i> Cartoons</a
             >
-            <a href="/resources/vlogs" class="free-chip" role="listitem"
+            <a href="/resources/vlogs" class="free-chip"
               ><i class="fa-solid fa-video"></i> Vlogs</a
             >
-            <a href="/resources/teachers" class="free-chip" role="listitem"
+            <a href="/resources/teachers" class="free-chip"
               ><i class="fa-solid fa-chalkboard-user"></i> Teachers</a
             >
             <a
               href="/resources/printables"
               class="free-chip"
-              role="listitem"
               ><i class="fa-solid fa-print"></i> Printables</a
             >
             <a
               href="/resources/parentguide"
               class="free-chip"
-              role="listitem"
               ><i class="fa-solid fa-heart"></i> Parent Guide</a
             >
             <a
               href="/resources/resources"
               class="free-chip"
-              role="listitem"
               ><i class="fa-solid fa-gamepad"></i> Games</a
             >
             <a
               href="/resources/resources"
               class="free-chip"
-              role="listitem"
               ><i class="fa-solid fa-layer-group"></i> Flashcards</a
             >
           </div>
@@ -3068,6 +3136,7 @@
                 srcset="
                   /assets/images/opt/fourbundle-400.12aac38b.webp    400w,
                   /assets/images/opt/fourbundle-600.1c7c2473.webp    600w,
+                  /assets/images/opt/fourbundle-640.dc7c6e2b.webp    640w,
                   /assets/images/opt/fourbundle-800.2b79202e.webp    800w,
                   /assets/images/opt/fourbundle-1254.08988ab0.webp  1254w
                 "
@@ -3102,6 +3171,7 @@
                 srcset="
                   /assets/images/opt/jan-400.4e3bca54.webp    400w,
                   /assets/images/opt/jan-600.43c714e6.webp    600w,
+                  /assets/images/opt/jan-640.85a866e0.webp    640w,
                   /assets/images/opt/jan-800.c348ca83.webp    800w,
                   /assets/images/opt/jan-1024.fb7613fd.webp  1024w
                 "
@@ -3317,7 +3387,9 @@
         </div>
 
         <!-- Mobile floating icon mode -->
-        <p class="why-hint">Tap each card to learn more ✨</p>
+        <p class="why-hint">
+          Tap each card to learn more <span class="sym" aria-hidden="true">✨</span>
+        </p>
         <div
           class="why-mobile-grid"
           role="tablist"
@@ -3483,7 +3555,7 @@
                     SA
                   </div>
                   <div class="review-author">
-                    <h4>Sarah Ahmed</h4>
+                    <h3>Sarah Ahmed</h3>
                     <span>London, UK</span>
                   </div>
                 </div>
@@ -3500,7 +3572,7 @@
                     OK
                   </div>
                   <div class="review-author">
-                    <h4>Omar Khan</h4>
+                    <h3>Omar Khan</h3>
                     <span>Toronto, CA</span>
                   </div>
                 </div>
@@ -3518,7 +3590,7 @@
                     FZ
                   </div>
                   <div class="review-author">
-                    <h4>Fatima Z.</h4>
+                    <h3>Fatima Z.</h3>
                     <span>Chicago, USA</span>
                   </div>
                 </div>
@@ -3534,7 +3606,7 @@
                     AM
                   </div>
                   <div class="review-author">
-                    <h4>Ayesha Malik</h4>
+                    <h3>Ayesha Malik</h3>
                     <span>Sydney, AU</span>
                   </div>
                 </div>
@@ -3551,7 +3623,7 @@
                     IS
                   </div>
                   <div class="review-author">
-                    <h4>Imran &amp; Sana</h4>
+                    <h3>Imran &amp; Sana</h3>
                     <span>Houston, USA</span>
                   </div>
                 </div>
@@ -3739,7 +3811,8 @@
             to hear from you.
           </p>
           <p class="contact-note" style="margin-top: 0.25rem">
-            Send us a little paighaam and we'll get back to you soon. ✿
+            Send us a little paighaam and we'll get back to you soon.
+            <span class="sym" aria-hidden="true">✿</span>
           </p>
           <form
             id="contact-form"
@@ -3854,6 +3927,8 @@
         </p>
       </form>
     </section>
+
+    </main>
 
     <!-- Edit footer in one place only: /components/footer.html -->
     <div id="footer-placeholder"></div>
@@ -4098,11 +4173,14 @@
       // --- Floating hearts (once per session) ---
       window.addEventListener("load", () => {
         if (sessionStorage.getItem("heartsShown")) return;
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         sessionStorage.setItem("heartsShown", "true");
         const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
         for (let i = 0; i < 8; i++) {
           const icon = document.createElement("img");
           icon.src = iconSrc;
+          icon.alt = "";
+          icon.setAttribute("aria-hidden", "true");
           icon.classList.add("heart");
           icon.style.left = Math.random() * 100 + "vw";
           icon.style.opacity = "0.35";

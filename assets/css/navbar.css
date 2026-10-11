@@ -69,7 +69,7 @@ h1, h2, h3, h4 {
 
 .btn--ghost {
   background: var(--light-sage);
-  color: var(--deep-teal);
+  color: #2d6866; /* a hair darker than --deep-teal: 4.6:1 on light sage (AA) */
   border: 2px solid var(--deep-teal);
   box-shadow: 0 4px 0 0 var(--color-teal-dark);
 }
