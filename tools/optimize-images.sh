@@ -20,7 +20,7 @@
 #   - Output goes only to assets/images/opt/. Filenames contain a hash of the
 #     file's content, so an existing file is never overwritten: identical
 #     output is skipped, and changed output always gets a new name. That is
-#     what makes the 7-day cache on /assets/images/opt/** (firebase.json) safe.
+#     what makes the 1-year immutable cache on /assets/images/opt/** (firebase.json) safe.
 #   - Nothing is ever deleted. --list-unused only reports orphans.
 #   - Refuses to upscale, and stops on any missing source or encoder error.
 #   - Keeps colours exact: ICC profiles are embedded (-metadata icc in the
