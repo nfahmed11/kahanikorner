@@ -2984,11 +2984,30 @@
             } catch (_) {}
           }
 
+                    // Get the GA4 client_id (not personal data) so the server can
+          // verify this purchase and send one accurate GA4 purchase event
+          // after Stripe confirms payment. No email/name/address involved.
+          function getGaClientId() {
+            return new Promise((resolve) => {
+              try {
+                if (typeof gtag !== "function") return resolve(null);
+                const timer = setTimeout(() => resolve(null), 300);
+                gtag("get", "G-N97Z02BGG4", "client_id", (id) => {
+                  clearTimeout(timer);
+                  resolve(id || null);
+                });
+              } catch (_) {
+                resolve(null);
+              }
+            });
+          }
+
           try {
             const response = await fetch("/create-checkout-session", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
+                gaClientId: await getGaClientId(),
                 cartItems: [{
                   id: product.id,
                   name: product.name,

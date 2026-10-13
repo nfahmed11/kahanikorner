@@ -5140,6 +5140,24 @@
         updateCartUI();
       };
 
+            // Get the GA4 client_id (not personal data) so the server can verify
+      // this purchase and send one accurate GA4 purchase event after Stripe
+      // confirms payment. No email/name/address is ever involved.
+      function getGaClientId() {
+        return new Promise((resolve) => {
+          try {
+            if (typeof gtag !== "function") return resolve(null);
+            const timer = setTimeout(() => resolve(null), 300);
+            gtag("get", "G-N97Z02BGG4", "client_id", (id) => {
+              clearTimeout(timer);
+              resolve(id || null);
+            });
+          } catch (_) {
+            resolve(null);
+          }
+        });
+      }
+
       window.handleArchiveCheckout = async function () {
         const { selectedYear, selectedMonths } = archiveState;
 
@@ -5165,6 +5183,7 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              gaClientId: await getGaClientId(),
               selectedYear: String(selectedYear),
               selectedMonths: monthNames,
               shippingRegion: getArchiveShipRegion(),
@@ -5346,11 +5365,12 @@
           btn.innerText = "Redirecting to Stripe…";
         }
 
-        try {
+try {
           const response = await fetch("/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              gaClientId: await getGaClientId(),
               cartItems: currentCart,
               cancelUrl: "https://kahanikorner.com/subscribe.html",
               shippingRegion: shipping.shippingRegion,

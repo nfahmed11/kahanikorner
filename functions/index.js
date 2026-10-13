@@ -3,6 +3,8 @@
 const functions = require("firebase-functions/v1");
 const stripe = require("stripe");
 const OpenAI = require("openai");
+const admin = require("firebase-admin");
+if (!admin.apps.length) admin.initializeApp();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Archive availability — server-side source of truth for which months can be
@@ -417,6 +419,7 @@ exports.createArchiveCheckout = functions.runWith({ secrets: ["STRIPE_SECRET_KEY
 
     const metadata = {
       product_type: "kahani_times_archive",
+      ...(req.body.gaClientId ? { ga_client_id: String(req.body.gaClientId).slice(0, 60) } : {}),
       selected_year: selectedYear,
       selected_months: uniqueMonths.join(", "),
       selected_count: String(uniqueMonths.length),
@@ -498,6 +501,7 @@ exports.createCheckoutSession = functions.runWith({ secrets: ["STRIPE_SECRET_KEY
 
   try {
     ({ lineItems, metadata } = buildCartLineItems(cartItems, archivePriceId));
+    if (req.body.gaClientId) metadata.ga_client_id = String(req.body.gaClientId).slice(0, 60);
   } catch (err) {
     res.status(err.statusCode === 400 ? 400 : 500).json({ error: err.message });
     return;
@@ -958,4 +962,100 @@ exports.generateSentence = functions
       success: false,
       error: "The AI returned an unexpected response. Please try again.",
     });
+  });
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Stripe webhook → verified purchase tracking (GA4 Measurement Protocol).
+// Read-only with respect to Stripe: never changes prices, sessions, or orders.
+// Verifies the Stripe signature, records each event id in Firestore so a
+// retried/duplicate delivery is ignored, and only then sends one GA4
+// "purchase" event. No PII (no email/name/address) is ever sent to GA4.
+// ─────────────────────────────────────────────────────────────────────────────
+async function sendGa4Purchase(session) {
+  const measurementId = "G-N97Z02BGG4";
+  const apiSecret = process.env.GA4_MP_API_SECRET || "";
+  const clientId = session.metadata && session.metadata.ga_client_id;
+  if (!apiSecret || !clientId) {
+    console.log("[stripeWebhook] Skipping GA4 send (missing api secret or client_id) for", session.id);
+    return;
+  }
+  const productType = (session.metadata && session.metadata.product_type) === "kahani_times_archive"
+    ? "kahani_times_archive"
+    : "product";
+  const body = {
+    client_id: clientId,
+    events: [{
+      name: "purchase",
+      params: {
+        transaction_id: session.id,
+        value: (session.amount_total || 0) / 100,
+        currency: session.currency ? session.currency.toUpperCase() : "USD",
+        item_category: productType,
+      },
+    }],
+  };
+  try {
+    const res = await fetch(
+      `https://www.google-analytics.com/mp/collect?measurement_id=${measurementId}&api_secret=${apiSecret}`,
+      { method: "POST", body: JSON.stringify(body) }
+    );
+    console.log("[stripeWebhook] GA4 send status:", res.status, "for", session.id);
+  } catch (err) {
+    console.error("[stripeWebhook] GA4 send failed:", err.message);
+  }
+}
+
+exports.stripeWebhook = functions
+  .runWith({ secrets: ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "GA4_MP_API_SECRET"] })
+  .https.onRequest(async (req, res) => {
+    const sig = req.headers["stripe-signature"];
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+    const key = process.env.STRIPE_SECRET_KEY || "";
+
+    if (!webhookSecret || !key) {
+      console.error("[stripeWebhook] Missing STRIPE_SECRET_KEY or STRIPE_WEBHOOK_SECRET.");
+      res.status(500).send("Server configuration error.");
+      return;
+    }
+
+    let event;
+    try {
+      event = stripe(key).webhooks.constructEvent(req.rawBody, sig, webhookSecret);
+    } catch (err) {
+      console.error("[stripeWebhook] Signature verification failed:", err.message);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
+
+    if (event.type !== "checkout.session.completed") {
+      res.status(200).send("Ignored (not checkout.session.completed).");
+      return;
+    }
+
+    const session = event.data.object;
+
+    // Idempotency: only ever process a given Stripe event id once, even if
+    // Stripe retries delivery or sends it more than once.
+    const eventRef = admin.firestore().collection("processed_stripe_events").doc(event.id);
+    try {
+      await eventRef.create({
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        sessionId: session.id,
+      });
+    } catch (err) {
+      console.log("[stripeWebhook] Already processed event", event.id, "- skipping.");
+      res.status(200).send("Already processed.");
+      return;
+    }
+
+    // A completed Checkout Session only means payment collection is done;
+    // only a session whose payment_status is "paid" is a verified purchase.
+    if (session.payment_status === "paid") {
+      await sendGa4Purchase(session);
+    } else {
+      console.log("[stripeWebhook] Session", session.id, "not paid (status:", session.payment_status, ") - no purchase event sent.");
+    }
+
+    res.status(200).send("OK");
   });
