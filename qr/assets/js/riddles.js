@@ -1,3 +1,4 @@
+import "./book-words.js";
 import { vocab as originalVocab } from "./mastervocab.js";
 
 function startHeaderTitleRotation() {
@@ -326,14 +327,22 @@ function getRomanForms(card) {
   return getWordForms(card).map((f) => f.ru);
 }
 
+// The book's own spelling of this word, when the book uses one (see
+// book-words.js). Hard mode expects and reveals it instead of the base.
+function getBookSpelling(card) {
+  return (card?.variants || []).find(
+    (v) => v.bookSpelling && window.ALLOWED_WORDS?.has(v.romanUrdu)
+  );
+}
+
 function getBaseRoman(card) {
-  return card?.word?.baseRomanUrdu || "";
+  return getBookSpelling(card)?.romanUrdu || card?.word?.baseRomanUrdu || "";
 }
 
 // Base-only urdu — pairs with getBaseRoman() for Hard mode, where the
 // expected typed answer is always the base spelling.
 function getUrdu(card) {
-  return card?.word?.baseUrdu || "";
+  return getBookSpelling(card)?.urdu || card?.word?.baseUrdu || "";
 }
 
 function getEnglish(card) {

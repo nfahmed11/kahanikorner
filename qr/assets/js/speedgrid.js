@@ -1,3 +1,4 @@
+import "./book-words.js";
 import { vocab as originalVocab } from "./mastervocab.js";
 import { vocabSrcset, useVocabImage } from "./vocab-images.js";
 import { gameSound } from "./sfx.js";

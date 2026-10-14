@@ -1,4 +1,5 @@
 // ✅ Import vocab
+import "./book-words.js";
 import { vocab as originalVocab } from "./mastervocab.js";
 import { gameSound } from "./sfx.js";
 

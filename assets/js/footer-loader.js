@@ -23,7 +23,7 @@
   /* ── Fetch footer HTML and inject into placeholder ── */
   injectCSS();
 
-  fetch('/components/footer.html')
+  fetch('/components/footer')
     .then(function (r) {
       if (!r.ok) throw new Error('footer fetch failed: ' + r.status);
       return r.text();

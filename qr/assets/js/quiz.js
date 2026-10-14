@@ -1,3 +1,4 @@
+import "./book-words.js";
 import { vocab as originalVocab } from "./mastervocab.js";
 import { gameSound } from "./sfx.js";
 
@@ -339,7 +340,7 @@ function showQuizCompleteCard() {
   const raw = params.get("words");
   const backLink = document.getElementById("back-to-cards");
   if (backLink && raw) {
-    backLink.href = `/qr/assets/html/flashcards.html?words=${raw}`;
+    backLink.href = `/qr/assets/html/flashcards?words=${raw}`;
   }
 
   document.getElementById("try-again")?.addEventListener("click", () => {
@@ -366,7 +367,7 @@ function updateQuizCard(index) {
           <div class="text-4xl">📚</div>
           <h2 class="text-xl font-bold text-gray-700 kid-title">No words loaded</h2>
           <p class="text-gray-500 text-sm">Open Quiz Mode from the Flashcards page to load your words.</p>
-          <a href="/qr/assets/html/flashcards.html" class="btn bg-purple-600 text-white px-6 py-2 rounded-full text-base shadow-sm no-underline">Go to Flashcards</a>
+          <a href="/qr/assets/html/flashcards" class="btn bg-purple-600 text-white px-6 py-2 rounded-full text-base shadow-sm no-underline">Go to Flashcards</a>
         </div>
       </div>`;
     flashcardBack.innerHTML = "";

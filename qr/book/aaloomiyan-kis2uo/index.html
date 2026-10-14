@@ -39,6 +39,7 @@
       href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="/qr/assets/css/index.css" />
+    <link rel="stylesheet" href="/qr/assets/css/story-audio.css" />
   </head>
 
   <body>
@@ -54,7 +55,18 @@
     <h1 id="story-title"></h1>
 
     <div class="container">
-      <div id="book-cover" class="book-placeholder"></div>
+      <p class="story-audio-hint">Tap the book cover to play audio</p>
+      <button
+        type="button"
+        class="story-audio-cover"
+        id="story-audio-btn"
+        aria-label="Play story audio: Aaloo Miyan">
+        <span id="book-cover" class="book-placeholder">
+          <span class="story-audio-cover__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+          </span>
+        </span>
+      </button>
       <div class="level-picker" id="level-picker"></div>
       <div class="button-container" id="button-container"></div>
     </div>
@@ -64,21 +76,21 @@
         slug: "aaloo-miyan",
         title: "Aaloo Miyan",
         coverImage: "./images/bookcover.png",
-        readAloudHref: "./video.html",
+        readAloudHref: "#story-audio",
 
         orderedWords: [
-          "Aaloo",
-          "Sabzi",
-          "Tokri",
-          "Darna",
-          "Baigan",
-          "Laat",
-          "Rona",
-          "Gajar",
-          "Pyaar",
+          "aaloo",
+          "sabzi",
+          "tokri",
+          "darna",
+          "baigan",
+          "laat",
+          "rona",
+          "gajar",
+          "pyaar",
           "hansna",
-          "Matar",
-          "Keera",
+          "matar",
+          "keera",
         ],
 
         totalLevels: 5,
@@ -88,37 +100,37 @@
           {
             id: "readaloud",
             label: "Read Aloud",
-            href: "./video.html",
+            href: "#story-audio",
             useWordsParam: false,
           },
           {
             id: "flashcards",
             label: "Flashcards",
-            href: "/qr/assets/html/flashcards.html",
+            href: "/qr/assets/html/flashcards",
             useWordsParam: true,
           },
           {
             id: "matching",
             label: "Picture Match",
-            href: "/qr/assets/html/matching.html",
+            href: "/qr/assets/html/matching",
             useWordsParam: true,
           },
           {
             id: "riddles",
             label: "Riddles",
-            href: "/qr/assets/html/riddles.html",
+            href: "/qr/assets/html/riddles",
             useWordsParam: true,
           },
           {
             id: "memory",
             label: "Memory Game",
-            href: "/qr/assets/html/memory.html",
+            href: "/qr/assets/html/memory",
             useWordsParam: true,
           },
           {
             id: "wordsearch",
             label: "Word Search",
-            href: "/qr/assets/html/wordsearch.html",
+            href: "/qr/assets/html/wordsearch",
             useWordsParam: true,
           },
         ],
@@ -141,49 +153,14 @@
       }
     </script>
 
-    <iframe
-      id="ytplayer"
-      src="https://www.youtube.com/embed/LKK2Qlr8ozY?enablejsapi=1&autoplay=1&mute=1&start=0&loop=1&playlist=LKK2Qlr8ozY"
-      title="YouTube video player"
-      frameborder="0"
-      allow="
-        autoplay;
-        encrypted-media;
-        accelerometer;
-        clipboard-write;
-        gyroscope;
-        picture-in-picture;
-      "
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen
-      style="display: none"></iframe>
-
     <script>
-      let tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-
-      let player, loopInterval;
-
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player("ytplayer", {
-          events: {
-            onReady: () => player.playVideo(),
-            onStateChange: onPlayerStateChange,
-          },
-        });
-      }
-
-      function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.PLAYING) {
-          clearInterval(loopInterval);
-          loopInterval = setInterval(() => {
-            if (player.getCurrentTime() >= 150) player.seekTo(0, true);
-          }, 500);
-        } else {
-          clearInterval(loopInterval);
-        }
-      }
+      window.STORY_AUDIO = {
+        videoId: "LKK2Qlr8ozY",
+        start: 0,
+        end: 150,
+        title: "Aaloo Miyan",
+      };
     </script>
+    <script defer src="/qr/assets/js/story-audio.js"></script>
   </body>
 </html>

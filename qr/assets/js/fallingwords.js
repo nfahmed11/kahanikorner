@@ -4,6 +4,7 @@
 //  Vanilla JS · ES Modules · No frameworks
 // ═══════════════════════════════════════════════════
 
+import "./book-words.js";
 import { vocab as masterVocab } from "./mastervocab.js";
 import { gameSound } from "./sfx.js";
 
@@ -254,9 +255,19 @@ function buildPool() {
     window.ALLOWED_WORDS instanceof Set &&
     window.ALLOWED_WORDS.size > 0
   ) {
-    base = masterVocab.filter((e) => {
+    base = masterVocab.flatMap((e) => {
       const roman = e?.word?.baseRomanUrdu;
-      return roman && window.ALLOWED_WORDS.has(roman);
+      if (roman && window.ALLOWED_WORDS.has(roman)) return [e];
+      // A book's own spelling of this word (see book-words.js): play it
+      // with that spelling and the card's Urdu and English.
+      const book = (e?.variants || []).find(
+        (v) => v.bookSpelling && window.ALLOWED_WORDS.has(v.romanUrdu)
+      );
+      if (!book) return [];
+      return [{
+        ...e,
+        word: { ...e.word, baseRomanUrdu: book.romanUrdu, baseUrdu: book.urdu, english: book.english },
+      }];
     });
   } else {
     base = masterVocab;

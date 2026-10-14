@@ -1,0 +1,119 @@
+/* ---------- Story audio: tappable book cover + player popup ---------- */
+.story-audio-hint {
+  margin: 16px 0 0;
+  font-size: 0.9rem;
+  color: var(--slate);
+}
+
+.story-audio-cover {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.story-audio-cover .book-placeholder {
+  display: block;
+  position: relative;
+  margin: 10px auto 20px;
+}
+
+.story-audio-cover:focus-visible {
+  outline: none;
+}
+
+.story-audio-cover:focus-visible .book-placeholder {
+  outline: 3px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.story-audio-cover__play {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 2px 8px rgba(124, 92, 191, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.story-audio-cover__play svg {
+  width: 16px;
+  height: 16px;
+  margin-left: 2px;
+  fill: var(--purple);
+}
+
+.story-audio-cover:hover .story-audio-cover__play,
+.story-audio-cover:focus-visible .story-audio-cover__play {
+  transform: scale(1.08);
+  background: var(--white);
+}
+
+.story-audio-open,
+.story-audio-open body {
+  overflow: hidden;
+}
+
+.story-audio-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1c1432;
+}
+
+.story-audio-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.story-audio-status {
+  min-height: 1.2em;
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.story-audio-status a {
+  color: var(--purple);
+}
+
+.story-audio-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.story-audio-ctrl {
+  min-width: 96px;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--purple), var(--coral));
+  color: var(--white);
+  font-family: "Grandstander", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(124, 92, 191, 0.25);
+}
+
+.story-audio-ctrl:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
