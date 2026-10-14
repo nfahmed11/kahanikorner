@@ -55,13 +55,13 @@
 
         orderedWords: [
           "naani",
-          "pyaari",
+          "pyari",
           "russa rusi",
           "de de",
           "paisa",
           "kanjoosi",
           "jaldi",
-          "achhi",
+          "achi",
           "baaki",
           "le gaye",
           "baithay",
@@ -71,8 +71,15 @@
           "motay",
           "chor",
           "rail",
-          "dibba",
+          "dabba",
         ],
+
+        // Backward-compat aliases for old QR/shared links using book spellings.
+        aliases: {
+          pyaari: "pyari",
+          achhi: "achi",
+          dibba: "dabba",
+        },
 
         totalLevels: 5,
         defaultLevel: 1,

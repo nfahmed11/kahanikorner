@@ -55,18 +55,27 @@
 
         orderedWords: [
           "gaari",
-          "piyay",
+          "pahiye",
           "chaabi",
           "aagai",
-          "peechai",
-          "daeyn",
-          "baeyn",
+          "peechay",
+          "daen",
+          "baen",
           "aik",
           "do",
-          "theen",
+          "teen",
           "chaar",
           "paanch",
         ],
+
+        // Backward-compat aliases for old QR/shared links using book spellings.
+        aliases: {
+          piyay: "pahiye",
+          peechai: "peechay",
+          daeyn: "daen",
+          baeyn: "baen",
+          theen: "teen",
+        },
 
         totalLevels: 5,
         defaultLevel: 1,

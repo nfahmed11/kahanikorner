@@ -19,6 +19,7 @@
  * 5. Add a label to MODE_LABELS.
  */
 
+import "./book-words.js";
 import { vocab as masterVocab } from "./mastervocab.js";
 
 // ═══════════════════════════════════════════════════════════════════════
