@@ -6,6 +6,7 @@
  * filtered from the master vocab list.
  */
 
+import { bookWords, bookSpellingByCardId } from "./book-words.js";
 import { vocab } from "./mastervocab.js";
 
 // ============================================================
@@ -22,7 +23,7 @@ import { vocab } from "./mastervocab.js";
 //   );
 //
 //   // Then link to All Cards (the activity button):
-//   // href="/qr/assets/html/allvocab.html"
+//   // href="/qr/assets/html/allvocab"
 //
 // The allvocab page also supports ?words= query param
 // (same format as other games: ?words=chaand,raat,gali,...).
@@ -277,13 +278,7 @@ function saveDensity() {
 function readStoryVocabIds() {
   // Priority 1: ?words= query param (consistent with other games)
   const params = new URLSearchParams(location.search);
-  const wordsParam = params.get("words");
-  if (wordsParam) {
-    return wordsParam
-      .split(",")
-      .map((w) => w.trim())
-      .filter(Boolean);
-  }
+  if (params.get("words")) return bookWords;
 
   // Priority 2: sessionStorage
   const raw = sessionStorage.getItem(STORAGE_KEYS.storyVocab);
@@ -472,7 +467,18 @@ function escHtml(str) {
   return d.innerHTML;
 }
 
+// A book's own spelling of a shared word (see book-words.js) is shown in
+// place of the shared spelling, with that form's Urdu and English.
+function shownForm(entry) {
+  const roman = bookSpellingByCardId.get(entry.id);
+  const v = roman && entry.variants?.find((x) => x.bookSpelling && x.romanUrdu === roman);
+  return v
+    ? { roman: v.romanUrdu, urdu: v.urdu, english: v.english }
+    : { roman: entry.word?.baseRomanUrdu, urdu: entry.word?.baseUrdu, english: entry.word?.english };
+}
+
 function renderCardFrontContent(entry) {
+  const shown = shownForm(entry);
   const isUrduFirst = state.direction === "urdu-english";
   const showImage = state.displayMode !== "word";
   const showWord = state.displayMode !== "image";
@@ -480,24 +486,24 @@ function renderCardFrontContent(entry) {
   let html = "";
 
   if (showImage && imgSrc) {
-    html += `<img class="card-image" src="${escHtml(imgSrc)}" alt="${escHtml(entry.word?.english || "")}" loading="lazy" onerror="window.kkVocabDebug.imageFailed(this)" />`;
+    html += `<img class="card-image" src="${escHtml(imgSrc)}" alt="${escHtml(shown.english || "")}" loading="lazy" onerror="window.kkVocabDebug.imageFailed(this)" />`;
   }
 
   if (showWord) {
     if (isUrduFirst) {
-      html += `<span class="card-urdu">${escHtml(entry.word?.baseUrdu)}</span>`;
-      html += `<span class="card-roman">${escHtml(entry.word?.baseRomanUrdu)}</span>`;
+      html += `<span class="card-urdu">${escHtml(shown.urdu)}</span>`;
+      html += `<span class="card-roman">${escHtml(shown.roman)}</span>`;
     } else {
-      html += `<span class="card-english">${escHtml(entry.word?.english)}</span>`;
+      html += `<span class="card-english">${escHtml(shown.english)}</span>`;
     }
   }
 
   // In image-only mode, still show a tiny label hint so front isn't totally empty if no image
   if (state.displayMode === "image" && !imgSrc) {
     if (isUrduFirst) {
-      html += `<span class="card-urdu">${escHtml(entry.word?.baseUrdu)}</span>`;
+      html += `<span class="card-urdu">${escHtml(shown.urdu)}</span>`;
     } else {
-      html += `<span class="card-english">${escHtml(entry.word?.english)}</span>`;
+      html += `<span class="card-english">${escHtml(shown.english)}</span>`;
     }
   }
 
@@ -505,14 +511,15 @@ function renderCardFrontContent(entry) {
 }
 
 function renderCardBackContent(entry) {
+  const shown = shownForm(entry);
   const isUrduFirst = state.direction === "urdu-english";
   let html = "";
 
   if (isUrduFirst) {
-    html += `<span class="card-english">${escHtml(entry.word?.english)}</span>`;
+    html += `<span class="card-english">${escHtml(shown.english)}</span>`;
   } else {
-    html += `<span class="card-urdu">${escHtml(entry.word?.baseUrdu)}</span>`;
-    html += `<span class="card-roman">${escHtml(entry.word?.baseRomanUrdu)}</span>`;
+    html += `<span class="card-urdu">${escHtml(shown.urdu)}</span>`;
+    html += `<span class="card-roman">${escHtml(shown.roman)}</span>`;
   }
 
   // Part of speech
@@ -526,9 +533,10 @@ function renderCardBackContent(entry) {
   }
 
   // Variants
-  if (Array.isArray(entry.variants) && entry.variants.length > 0) {
+  const variants = (entry.variants || []).filter((v) => !v.bookSpelling);
+  if (variants.length > 0) {
     html += `<div class="card-variants">`;
-    for (const v of entry.variants) {
+    for (const v of variants) {
       html += `<div class="variant-row">`;
       if (v.romanUrdu)
         html += `<span class="variant-roman">${escHtml(v.romanUrdu)}</span>`;

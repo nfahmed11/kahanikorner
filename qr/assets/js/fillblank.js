@@ -14,6 +14,7 @@
 
 "use strict";
 
+import "./book-words.js";
 import { vocab as masterVocab } from "./mastervocab.js";
 
 // ─────────────────────────────────────────────────────────────

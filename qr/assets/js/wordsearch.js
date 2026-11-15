@@ -5,6 +5,7 @@
 // word.english
 // variants[]
 
+import "./book-words.js";
 import { vocab as originalVocab } from "./mastervocab.js";
 
 /* ===================== Config ===================== */

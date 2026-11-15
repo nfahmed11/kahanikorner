@@ -136,7 +136,7 @@
   var placeholder = document.getElementById('navbar-placeholder');
   if (!placeholder) return;
 
-  fetch('/components/navbar.html')
+  fetch('/components/navbar')
     .then(function (r) {
       if (!r.ok) throw new Error('navbar fetch failed');
       return r.text();

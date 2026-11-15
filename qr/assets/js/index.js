@@ -156,8 +156,14 @@ function saveLevel(level) {
   localStorage.setItem(storageKey, String(level));
 }
 
+// A book can keep its printed spelling of a word the shared vocabulary spells
+// differently: config.aliases maps it ("piyay": "pahiye") and the games
+// resolve "piyay=pahiye" (see book-words.js).
 function buildWordsParam(words) {
-  return encodeURIComponent(words.join(","));
+  const aliases = config.aliases || {};
+  return encodeURIComponent(
+    words.map((w) => (aliases[w] ? `${w}=${aliases[w]}` : w)).join(",")
+  );
 }
 
 function renderHeader() {
