@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Microsoft Analytics tag to track analytics -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "tp6dow982y");
+    </script>
+
+    <!-- Google tag -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N97Z02BGG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N97Z02BGG4");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Kahani Korner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Authentic+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/qr/assets/css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://kahanikorner.com/">
+        <img
+          src="/assets/images/homepage/logo.png"
+          alt="Kahani Korner Logo"
+          class="logo" />
+      </a>
+    </header>
+
+    <h1 id="story-title"></h1>
+
+    <div class="container">
+      <div id="book-cover" class="book-placeholder"></div>
+
+      <div class="level-picker" id="level-picker"></div>
+
+      <div class="button-container" id="button-container"></div>
+    </div>
+
+    <!--
+      ┌──────────────────────────────────────────────────────────────────────┐
+      │  ISSUE CONFIG — the single source of truth for this newspaper issue. │
+      │  Every QR game for this issue reads from this block.                 │
+      │  Must be valid JSON: no comments, no trailing commas.                │
+      │  New month: copy this folder, then edit only this block.            │
+      └──────────────────────────────────────────────────────────────────────┘
+    -->
+    <script type="application/json" id="issue-config">
+      {
+        "issue": {
+          "id": "1026otc",
+          "monthYear": "October 2026",
+          "vol": 2,
+          "no": 10,
+          "title": "Purani Haveli Ka Raaz",
+          "coverImage": "./assets/images/bookcover.webp"
+        },
+        "story": {
+          "title": "Purani Haveli Ka Raaz",
+          "lines": [
+            {
+              "id": "line-1",
+              "romanUrdu": "Dadi ki purani haveli din mein bohat pyari lagti thi.",
+              "urdu": "دادی کی پرانی حویلی دن میں بہت پیاری لگتی تھی۔",
+              "english": "Grandma's old haveli looked very lovely during the day."
+            },
+            {
+              "id": "line-2",
+              "romanUrdu": "Baray sehan mein charpaiyan bichhi rehti thin.",
+              "urdu": "بڑے صحن میں چارپائیاں بچھی رہتی تھیں۔",
+              "english": "Charpais were always laid out in the large courtyard."
+            },
+            {
+              "id": "line-3",
+              "romanUrdu": "Aur lakri ke darwazon par purane naqsh bane huay thay.",
+              "urdu": "اور لکڑی کے دروازوں پر پرانے نقش بنے ہوئے تھے۔",
+              "english": "And the wooden doors had old patterns on them."
+            },
+            {
+              "id": "line-4",
+              "romanUrdu": "Magar raat ko aisi khamoshi chha jati ke apni saans ki awaaz bhi sunai deti.",
+              "urdu": "مگر رات کو ایسی خاموشی چھا جاتی کہ اپنی سانس کی آواز بھی سنائی دیتی۔",
+              "english": "But at night, it became so quiet that you could even hear your own breathing."
+            },
+            {
+              "id": "line-5",
+              "romanUrdu": "Teesri raat Hoorain ne phir dekha ke upar wale kamray ki khirki khuli hui thi.",
+              "urdu": "تیسری رات حورین نے پھر دیکھا کہ اوپر والے کمرے کی کھڑکی کھلی ہوئی تھی۔",
+              "english": "On the third night, Hoorain again saw that the upstairs room's window was open."
+            },
+            {
+              "id": "line-6",
+              "romanUrdu": "\"Dadi, woh kamra to khaali hai na?\"",
+              "urdu": "\"دادی، وہ کمرہ تو خالی ہے نا؟\"",
+              "english": "\"Grandma, that room is empty, isn't it?\""
+            },
+            {
+              "id": "line-7",
+              "romanUrdu": "Dadi ne chai ki pyali rakhte huay kaha, \"Haan beta, barson se band hai.\"",
+              "urdu": "دادی نے چائے کی پیالی رکھتے ہوئے کہا، \"ہاں بیٹا، برسوں سے بند ہے۔\"",
+              "english": "Grandma put down her cup of tea and said, \"Yes, dear, it has been closed for years.\""
+            },
+            {
+              "id": "line-8",
+              "romanUrdu": "Hoorain ne yeh baat Ayaan ko batayi.",
+              "urdu": "حورین نے یہ بات عیان کو بتائی۔",
+              "english": "Hoorain told Ayaan about this."
+            },
+            {
+              "id": "line-9",
+              "romanUrdu": "\"Kahin wahan bhoot to nahi?\" Ayaan ne ghabra kar kaha.",
+              "urdu": "\"کہیں وہاں بھوت تو نہیں؟\" عیان نے گھبرا کر کہا۔",
+              "english": "\"Could there be a ghost in there?\" Ayaan said nervously."
+            },
+            {
+              "id": "line-10",
+              "romanUrdu": "Hoorain ne kaha, \"Pehle dekhte hain ke asal baat kya hai.\"",
+              "urdu": "حورین نے کہا، \"پہلے دیکھتے ہیں کہ اصل بات کیا ہے۔\"",
+              "english": "Hoorain said, \"First, let's see what is really going on.\""
+            },
+            {
+              "id": "line-11",
+              "romanUrdu": "Agli raat dono chupke se ghar ke andar se guzarte huay purani seeriyan charhne lagay.",
+              "urdu": "اگلی رات دونوں چپکے سے گھر کے اندر سے گزرتے ہوئے پرانی سیڑھیاں چڑھنے لگے۔",
+              "english": "The next night, they quietly went through the house and began climbing the old stairs."
+            },
+            {
+              "id": "line-12",
+              "romanUrdu": "Hoorain ka dil zor zor se dharakne laga.",
+              "urdu": "حورین کا دل زور زور سے دھڑکنے لگا۔",
+              "english": "Hoorain's heart began pounding hard."
+            },
+            {
+              "id": "line-13",
+              "romanUrdu": "Upar pohanch kar unhon ne dekha ke zameen par kisi ke qadmon ke nishaan thay.",
+              "urdu": "اوپر پہنچ کر انہوں نے دیکھا کہ زمین پر کسی کے قدموں کے نشان تھے۔",
+              "english": "When they reached upstairs, they saw someone's footprints on the floor."
+            },
+            {
+              "id": "line-14",
+              "romanUrdu": "Nishaan seedha band kamray ke darwaze tak ja rahe thay.",
+              "urdu": "نشان سیدھا بند کمرے کے دروازے تک جا رہے تھے۔",
+              "english": "The footprints led straight to the door of the closed room."
+            },
+            {
+              "id": "line-15",
+              "romanUrdu": "Darwaze par taala laga tha.",
+              "urdu": "دروازے پر تالا لگا تھا۔",
+              "english": "There was a lock on the door."
+            },
+            {
+              "id": "line-16",
+              "romanUrdu": "Hoorain ne dheere se haath darwaze par rakha.",
+              "urdu": "حورین نے دھیرے سے ہاتھ دروازے پر رکھا۔",
+              "english": "Hoorain gently placed her hand on the door."
+            },
+            {
+              "id": "line-17",
+              "romanUrdu": "Lekin andar se koi awaaz nahi aa rahi thi.",
+              "urdu": "لیکن اندر سے کوئی آواز نہیں آ رہی تھی۔",
+              "english": "But no sound was coming from inside."
+            },
+            {
+              "id": "line-18",
+              "romanUrdu": "Achanak unhein peeche se kisi ke chalne ki awaaz sunai di.",
+              "urdu": "اچانک انہیں پیچھے سے کسی کے چلنے کی آواز سنائی دی۔",
+              "english": "Suddenly, they heard someone walking behind them."
+            },
+            {
+              "id": "line-19",
+              "romanUrdu": "Dono foran deewar ke paas chhup gaye.",
+              "urdu": "دونوں فوراً دیوار کے پاس چھپ گئے۔",
+              "english": "They both quickly hid beside the wall."
+            },
+            {
+              "id": "line-20",
+              "romanUrdu": "Seeriyon par halki roshni nazar aayi.",
+              "urdu": "سیڑھیوں پر ہلکی روشنی نظر آئی۔",
+              "english": "A faint light appeared on the stairs."
+            },
+            {
+              "id": "line-21",
+              "romanUrdu": "Haath mein laaltain liye Chacha Kareem upar aaye.",
+              "urdu": "ہاتھ میں لالٹین لیے چچا کریم اوپر آئے۔",
+              "english": "Uncle Kareem came upstairs holding a lantern."
+            },
+            {
+              "id": "line-22",
+              "romanUrdu": "Aur purani chaabi se darwaza khola.",
+              "urdu": "اور پرانی چابی سے دروازہ کھولا۔",
+              "english": "And he opened the door with an old key."
+            },
+            {
+              "id": "line-23",
+              "romanUrdu": "\"Chacha!\" Ayaan ke munh se nikla.",
+              "urdu": "\"چچا!\" عیان کے منہ سے نکلا۔",
+              "english": "\"Uncle!\" Ayaan blurted out."
+            },
+            {
+              "id": "line-24",
+              "romanUrdu": "Chacha Kareem muskuraye.",
+              "urdu": "چچا کریم مسکرائے۔",
+              "english": "Uncle Kareem smiled."
+            },
+            {
+              "id": "line-25",
+              "romanUrdu": "\"Dadi ne kaha tha ke yeh kamra chupke se theek karoon.",
+              "urdu": "\"دادی نے کہا تھا کہ یہ کمرہ چپکے سے ٹھیک کروں۔",
+              "english": "\"Grandma asked me to fix up this room quietly."
+            },
+            {
+              "id": "line-26",
+              "romanUrdu": "Kamray mein bohat ghutan hoti hai.",
+              "urdu": "کمرے میں بہت گھٹن ہوتی ہے۔",
+              "english": "The room gets very stuffy."
+            },
+            {
+              "id": "line-27",
+              "romanUrdu": "Is liye main kaam karte waqt khirki khol deta hoon.\"",
+              "urdu": "اس لیے میں کام کرتے وقت کھڑکی کھول دیتا ہوں۔\"",
+              "english": "So I open the window while I work.\""
+            },
+            {
+              "id": "line-28",
+              "romanUrdu": "Itne mein Dadi bhi wahan aa gayin.",
+              "urdu": "اتنے میں دادی بھی وہاں آ گئیں۔",
+              "english": "Just then, Grandma arrived there too."
+            },
+            {
+              "id": "line-29",
+              "romanUrdu": "Oonchi chhat ke neeche purani kitaabein shelf par sajayi hui thin.",
+              "urdu": "اونچی چھت کے نیچے پرانی کتابیں شیلف پر سجائی ہوئی تھیں۔",
+              "english": "Under the high ceiling, old books were arranged on the shelf."
+            },
+            {
+              "id": "line-30",
+              "romanUrdu": "Aur aik purane sandook mein tasveerein aur khat rakhe thay.",
+              "urdu": "اور ایک پرانے صندوق میں تصویریں اور خط رکھے تھے۔",
+              "english": "And photographs and letters were kept in an old trunk."
+            },
+            {
+              "id": "line-31",
+              "romanUrdu": "\"Yeh tumhare Dada ka parhne ka kamra tha,\" Dadi ne naram awaaz mein kaha.",
+              "urdu": "\"یہ تمہارے دادا کا پڑھنے کا کمرہ تھا،\" دادی نے نرم آواز میں کہا۔",
+              "english": "\"This was your grandfather's reading room,\" Grandma said softly."
+            },
+            {
+              "id": "line-32",
+              "romanUrdu": "Hoorain ne sandook se aik purani tasveer uthayi.",
+              "urdu": "حورین نے صندوق سے ایک پرانی تصویر اٹھائی۔",
+              "english": "Hoorain picked up an old photograph from the trunk."
+            },
+            {
+              "id": "line-33",
+              "romanUrdu": "Tasveer mein Dada isi kamray mein baithe kitaab parh rahe thay.",
+              "urdu": "تصویر میں دادا اسی کمرے میں بیٹھے کتاب پڑھ رہے تھے۔",
+              "english": "In the photograph, Grandfather was sitting in this very room, reading a book."
+            },
+            {
+              "id": "line-34",
+              "romanUrdu": "Dadi tasveer dekh kar muskurayin.",
+              "urdu": "دادی تصویر دیکھ کر مسکرائیں۔",
+              "english": "Grandma smiled as she looked at the photograph."
+            },
+            {
+              "id": "line-35",
+              "romanUrdu": "\"Tumhare Dada ko yeh kamra bohat pasand tha,\" unhon ne kaha.",
+              "urdu": "\"تمہارے دادا کو یہ کمرہ بہت پسند تھا،\" انہوں نے کہا۔",
+              "english": "\"Your grandfather liked this room very much,\" she said."
+            },
+            {
+              "id": "line-36",
+              "romanUrdu": "Hoorain ne dobara kamray ki khuli hui khirki ki taraf dekha.",
+              "urdu": "حورین نے دوبارہ کمرے کی کھلی ہوئی کھڑکی کی طرف دیکھا۔",
+              "english": "Hoorain looked again toward the room's open window."
+            },
+            {
+              "id": "line-37",
+              "romanUrdu": "Haveli ka raaz koi bhoot nahi tha.",
+              "urdu": "حویلی کا راز کوئی بھوت نہیں تھا۔",
+              "english": "The secret of the haveli was not a ghost."
+            },
+            {
+              "id": "line-38",
+              "romanUrdu": "Woh unke apne ghar ki aik purani kahani thi.",
+              "urdu": "وہ ان کے اپنے گھر کی ایک پرانی کہانی تھی۔",
+              "english": "It was an old story from their own home."
+            }
+          ]
+        },
+        "vocabulary": {
+          "words": [
+            "haveli",
+            "darwaza",
+            "khirki",
+            "kamra",
+            "haath",
+            "munh",
+            "chaabi",
+            "taala",
+            "laaltain",
+            "kitaab",
+            "tasveer",
+            "pyali",
+            "charpaiyan",
+            "sandook",
+            "deewar",
+            "chhat",
+            "seeriyan",
+            "sehan",
+            "zameen",
+            "lakri",
+            "khat",
+            "qadmon",
+            "nishaan",
+            "dekha",
+            "khola",
+            "uthayi",
+            "charhne",
+            "chhup gaye",
+            "parhne",
+            "muskuraye",
+            "dharakne",
+            "purani",
+            "oonchi",
+            "khaali",
+            "band",
+            "upar",
+            "peeche",
+            "bhoot",
+            "khamoshi",
+            "raaz"
+          ]
+        },
+        "activityAnswerKeys": [
+          {
+            "id": "october-urdu-wordsearch",
+            "title": "October Urdu Word Search",
+            "subtitle": "Find all the hidden Urdu words from this month's story.",
+            "type": "image",
+            "image": "./assets/images/wordsearch-answer-key.webp",
+            "imageAlt": "October Urdu Word Search answer key"
+          },
+          {
+            "id": "haveli-how-to",
+            "title": "How To: Build Your Haveli",
+            "subtitle": "Step-by-step instructions for this month's paper craft activity.",
+            "type": "link",
+            "description": "Follow along to cut, layer, and assemble your very own haveli tunnel paper craft.",
+            "href": "https://www.instagram.com/p/DecTwg7zkcO/",
+            "linkLabel": "View the tutorial"
+          }
+        ],
+        "games": {
+          "audioNewsletter": {
+            "enabled": true,
+            "game": {
+              "title": "Purani Haveli Ka Raaz",
+              "audioBase": "./assets/audio/",
+              "pages": [
+                {
+                  "heading": "Story Time",
+                  "tag": "Main Story",
+                  "tagClass": "story",
+                  "sections": [{ "audio": "story.mp3", "title": "Purani Haveli Ka Raaz", "sub": "This Month's Story" }]
+                },
+                {
+                  "heading": "Aaj Ka Lafz",
+                  "tag": "Vocabulary Builder",
+                  "tagClass": "vocab",
+                  "sections": [{ "audio": "word.mp3", "title": "Aaj Ka Lafz", "sub": "Word of the Day — Yaadein" }]
+                }
+              ]
+            }
+          },
+          "fillTheKahani": {
+            "enabled": true,
+            "game": {
+              "title": "Fill the Kahani",
+              "subtitle": "Fill in missing words from this month's kahani.",
+              "questions": [
+                {
+                  "id": "oct26-l1-1",
+                  "level": 1,
+                  "sourceLineIds": ["line-2"],
+                  "missingWords": ["sehan"],
+                  "romanUrdu": "Baray ___ mein charpaiyan bichhi rehti thin.",
+                  "urdu": "بڑے ___ میں چارپائیاں بچھی رہتی تھیں۔",
+                  "english": "Charpais were always laid out in the large courtyard.",
+                  "completedRomanUrdu": "Baray sehan mein charpaiyan bichhi rehti thin.",
+                  "completedUrdu": "بڑے صحن میں چارپائیاں بچھی رہتی تھیں۔",
+                  "completedEnglish": "Charpais were always laid out in the large courtyard.",
+                  "choices": [
+                    { "value": "sehan", "romanUrdu": "sehan", "urdu": "صحن", "english": "courtyard" },
+                    { "value": "kamra", "romanUrdu": "kamra", "urdu": "کمرہ", "english": "room" },
+                    { "value": "ghar", "romanUrdu": "ghar", "urdu": "گھر", "english": "house" }
+                  ],
+                  "answer": ["sehan"]
+                },
+                {
+                  "id": "oct26-l1-2",
+                  "level": 1,
+                  "sourceLineIds": ["line-9"],
+                  "missingWords": ["bhoot"],
+                  "romanUrdu": "\"Kahin wahan ___ to nahi?\" Ayaan ne ghabra kar kaha.",
+                  "urdu": "\"کہیں وہاں ___ تو نہیں؟\" عیان نے گھبرا کر کہا۔",
+                  "english": "\"Could there be a ghost in there?\" Ayaan said nervously.",
+                  "completedRomanUrdu": "\"Kahin wahan bhoot to nahi?\" Ayaan ne ghabra kar kaha.",
+                  "completedUrdu": "\"کہیں وہاں بھوت تو نہیں؟\" عیان نے گھبرا کر کہا۔",
+                  "completedEnglish": "\"Could there be a ghost in there?\" Ayaan said nervously.",
+                  "choices": [
+                    { "value": "bhoot", "romanUrdu": "bhoot", "urdu": "بھوت", "english": "ghost" },
+                    { "value": "raaz", "romanUrdu": "raaz", "urdu": "راز", "english": "secret" },
+                    { "value": "awaaz", "romanUrdu": "awaaz", "urdu": "آواز", "english": "sound" }
+                  ],
+                  "answer": ["bhoot"]
+                },
+                {
+                  "id": "oct26-l1-3",
+                  "level": 1,
+                  "sourceLineIds": ["line-31"],
+                  "missingWords": ["Dada"],
+                  "romanUrdu": "\"Yeh tumhare ___ ka parhne ka kamra tha,\" Dadi ne naram awaaz mein kaha.",
+                  "urdu": "\"یہ تمہارے ___ کا پڑھنے کا کمرہ تھا،\" دادی نے نرم آواز میں کہا۔",
+                  "english": "\"This was your grandfather's reading room,\" Grandma said softly.",
+                  "completedRomanUrdu": "\"Yeh tumhare Dada ka parhne ka kamra tha,\" Dadi ne naram awaaz mein kaha.",
+                  "completedUrdu": "\"یہ تمہارے دادا کا پڑھنے کا کمرہ تھا،\" دادی نے نرم آواز میں کہا۔",
+                  "completedEnglish": "\"This was your grandfather's reading room,\" Grandma said softly.",
+                  "choices": [
+                    { "value": "Dada", "romanUrdu": "Dada", "urdu": "دادا", "english": "grandfather" },
+                    { "value": "Abba", "romanUrdu": "Abba", "urdu": "ابا", "english": "father" },
+                    { "value": "Chacha", "romanUrdu": "Chacha", "urdu": "چچا", "english": "uncle" }
+                  ],
+                  "answer": ["Dada"]
+                },
+                {
+                  "id": "oct26-l2-1",
+                  "level": 2,
+                  "sourceLineIds": ["line-13", "line-14"],
+                  "missingWords": ["qadmon", "nishaan"],
+                  "romanUrdu": "Upar pohanch kar unhon ne dekha ke zameen par kisi ke ___ ke ___ thay. Nishaan seedha band kamray ke darwaze tak ja rahe thay.",
+                  "urdu": "اوپر پہنچ کر انہوں نے دیکھا کہ زمین پر کسی کے ___ کے ___ تھے۔ نشان سیدھا بند کمرے کے دروازے تک جا رہے تھے۔",
+                  "english": "When they reached upstairs, they saw someone's footprints on the floor. The footprints led straight to the door of the closed room.",
+                  "completedRomanUrdu": "Upar pohanch kar unhon ne dekha ke zameen par kisi ke qadmon ke nishaan thay. Nishaan seedha band kamray ke darwaze tak ja rahe thay.",
+                  "completedUrdu": "اوپر پہنچ کر انہوں نے دیکھا کہ زمین پر کسی کے قدموں کے نشان تھے۔ نشان سیدھا بند کمرے کے دروازے تک جا رہے تھے۔",
+                  "completedEnglish": "When they reached upstairs, they saw someone's footprints on the floor. The footprints led straight to the door of the closed room.",
+                  "choices": [
+                    { "value": "qadmon", "romanUrdu": "qadmon", "urdu": "قدموں", "english": "footsteps" },
+                    { "value": "nishaan", "romanUrdu": "nishaan", "urdu": "نشان", "english": "marks" },
+                    { "value": "haath", "romanUrdu": "haath", "urdu": "ہاتھ", "english": "hands" },
+                    { "value": "roshni", "romanUrdu": "roshni", "urdu": "روشنی", "english": "light" }
+                  ],
+                  "answer": ["qadmon", "nishaan"]
+                },
+                {
+                  "id": "oct26-l2-2",
+                  "level": 2,
+                  "sourceLineIds": ["line-21", "line-22"],
+                  "missingWords": ["laaltain", "chaabi"],
+                  "romanUrdu": "Haath mein ___ liye Chacha Kareem upar aaye. Aur purani ___ se darwaza khola.",
+                  "urdu": "ہاتھ میں ___ لیے چچا کریم اوپر آئے۔ اور پرانی ___ سے دروازہ کھولا۔",
+                  "english": "Uncle Kareem came upstairs holding a lantern. And he opened the door with an old key.",
+                  "completedRomanUrdu": "Haath mein laaltain liye Chacha Kareem upar aaye. Aur purani chaabi se darwaza khola.",
+                  "completedUrdu": "ہاتھ میں لالٹین لیے چچا کریم اوپر آئے۔ اور پرانی چابی سے دروازہ کھولا۔",
+                  "completedEnglish": "Uncle Kareem came upstairs holding a lantern. And he opened the door with an old key.",
+                  "choices": [
+                    { "value": "laaltain", "romanUrdu": "laaltain", "urdu": "لالٹین", "english": "lantern" },
+                    { "value": "chaabi", "romanUrdu": "chaabi", "urdu": "چابی", "english": "key" },
+                    { "value": "kitaab", "romanUrdu": "kitaab", "urdu": "کتاب", "english": "book" },
+                    { "value": "taala", "romanUrdu": "taala", "urdu": "تالا", "english": "lock" }
+                  ],
+                  "answer": ["laaltain", "chaabi"]
+                },
+                {
+                  "id": "oct26-l3-1",
+                  "level": 3,
+                  "sourceLineIds": ["line-25", "line-26", "line-27"],
+                  "missingWords": ["chupke", "ghutan", "khirki"],
+                  "romanUrdu": "\"Dadi ne kaha tha ke yeh kamra ___ se theek karoon. Kamray mein bohat ___ hoti hai. Is liye main kaam karte waqt ___ khol deta hoon.\"",
+                  "urdu": "\"دادی نے کہا تھا کہ یہ کمرہ ___ سے ٹھیک کروں۔ کمرے میں بہت ___ ہوتی ہے۔ اس لیے میں کام کرتے وقت ___ کھول دیتا ہوں۔\"",
+                  "english": "\"Grandma asked me to fix up this room quietly. The room gets very stuffy. So I open the window while I work.\"",
+                  "completedRomanUrdu": "\"Dadi ne kaha tha ke yeh kamra chupke se theek karoon. Kamray mein bohat ghutan hoti hai. Is liye main kaam karte waqt khirki khol deta hoon.\"",
+                  "completedUrdu": "\"دادی نے کہا تھا کہ یہ کمرہ چپکے سے ٹھیک کروں۔ کمرے میں بہت گھٹن ہوتی ہے۔ اس لیے میں کام کرتے وقت کھڑکی کھول دیتا ہوں۔\"",
+                  "completedEnglish": "\"Grandma asked me to fix up this room quietly. The room gets very stuffy. So I open the window while I work.\"",
+                  "choices": [
+                    { "value": "chupke", "romanUrdu": "chupke", "urdu": "چپکے", "english": "quietly" },
+                    { "value": "ghutan", "romanUrdu": "ghutan", "urdu": "گھٹن", "english": "stuffiness" },
+                    { "value": "khirki", "romanUrdu": "khirki", "urdu": "کھڑکی", "english": "window" },
+                    { "value": "taala", "romanUrdu": "taala", "urdu": "تالا", "english": "lock" },
+                    { "value": "awaaz", "romanUrdu": "awaaz", "urdu": "آواز", "english": "sound" }
+                  ],
+                  "answer": ["chupke", "ghutan", "khirki"]
+                },
+                {
+                  "id": "oct26-l4-1",
+                  "level": 4,
+                  "sourceLineIds": ["line-11", "line-12"],
+                  "missingWords": ["chupke", "seeriyan", "dil", "dharakne"],
+                  "romanUrdu": "Agli raat dono ___ se ghar ke andar se guzarte huay purani ___ charhne lagay. Hoorain ka ___ zor zor se ___ laga.",
+                  "urdu": "اگلی رات دونوں ___ سے گھر کے اندر سے گزرتے ہوئے پرانی ___ چڑھنے لگے۔ حورین کا ___ زور زور سے ___ لگا۔",
+                  "english": "The next night, they quietly went through the house and began climbing the old stairs. Hoorain's heart began pounding hard.",
+                  "completedRomanUrdu": "Agli raat dono chupke se ghar ke andar se guzarte huay purani seeriyan charhne lagay. Hoorain ka dil zor zor se dharakne laga.",
+                  "completedUrdu": "اگلی رات دونوں چپکے سے گھر کے اندر سے گزرتے ہوئے پرانی سیڑھیاں چڑھنے لگے۔ حورین کا دل زور زور سے دھڑکنے لگا۔",
+                  "completedEnglish": "The next night, they quietly went through the house and began climbing the old stairs. Hoorain's heart began pounding hard.",
+                  "choices": [
+                    { "value": "chupke", "romanUrdu": "chupke", "urdu": "چپکے", "english": "quietly" },
+                    { "value": "seeriyan", "romanUrdu": "seeriyan", "urdu": "سیڑھیاں", "english": "stairs" },
+                    { "value": "dil", "romanUrdu": "dil", "urdu": "دل", "english": "heart" },
+                    { "value": "dharakne", "romanUrdu": "dharakne", "urdu": "دھڑکنے", "english": "pounding" },
+                    { "value": "awaaz", "romanUrdu": "awaaz", "urdu": "آواز", "english": "sound" },
+                    { "value": "roshni", "romanUrdu": "roshni", "urdu": "روشنی", "english": "light" }
+                  ],
+                  "answer": ["chupke", "seeriyan", "dil", "dharakne"]
+                }
+              ]
+            }
+          },
+          "madLib": {
+            "enabled": true,
+            "route": "/qr/assets/html/urdu-mad-lib",
+            "game": {
+              "title": "Purani Haveli Ka Raaz",
+              "fields": [
+                { "id": "character1", "label": "Character name", "helper": "naam" },
+                { "id": "character2", "label": "Second character name", "helper": "naam" },
+                { "id": "familyMember", "label": "Family member", "helper": "rishtedaar", "example": "Nani, Chacha, Khala" },
+                { "id": "animal", "label": "Animal", "helper": "jaanwar" },
+                { "id": "food", "label": "Food", "helper": "khana" },
+                { "id": "color", "label": "Color", "helper": "rang" },
+                { "id": "sound", "label": "Funny or scary sound", "helper": "awaaz", "example": "dhamaak, meow, choo choo" },
+                { "id": "clothing", "label": "Something you wear", "helper": "pehnay ki cheez" },
+                { "id": "number", "label": "Number", "helper": "ginti", "example": "3, 47, hazaar" },
+                { "id": "place", "label": "Place", "helper": "jagah" },
+                { "id": "action", "label": "Action", "helper": "harkat", "example": "naachna, bhaagna, cheekhna" },
+                { "id": "unexpected", "label": "Something unexpected", "helper": "koi ajeeb cheez" }
+              ],
+              "romanUrdu": [
+                [{ "blank": "character1" }, " aur ", { "blank": "character2" }, " kuch din ke liye apne ", { "blank": "familyMember" }, " ke saath ek bohat purani haveli mein rukay hue thay."],
+                ["Haveli din mein bohat khoobsurat lagti thi, lekin raat hote hi har kamra ajeeb si khamoshi mein doob jata."],
+                ["Sab se ajeeb baat upar wale kamray ki thi."],
+                ["Har raat, bilkul aadhi raat ko, us kamray ki khirki khud-ba-khud khul jati."],
+                ["Ek raat ", { "blank": "character1" }, " aur ", { "blank": "character2" }, " ne faisla kiya ke aaj woh is raaz ka pata laga kar hi rahenge."],
+                ["Jaise hi woh seedhiyan charh rahe thay, andar se..."],
+                {
+                  "style": "sound",
+                  "parts": ["“", { "blank": "sound" }, "!”"]
+                },
+                ["ki awaaz aayi."],
+                ["Dono aik dum ruk gaye."],
+                ["Darwaze ke paas unhein ", { "blank": "number" }, " ajeeb nishaan nazar aaye, aur kone mein ek ", { "blank": "animal" }, " bilkul chup chaap baitha tha."],
+                ["Uske paas ek plate mein ", { "blank": "food" }, " bhi rakha hua tha."],
+                {
+                  "style": "dialogue",
+                  "parts": ["“Yeh sab kya ho raha hai?” ", { "blank": "character2" }, " ne dheemi awaaz mein kaha."]
+                },
+                ["Phir unhon ne dekha ke kamray ke andar se ", { "blank": "color" }, " rang ki roshni aa rahi thi."],
+                [{ "blank": "character1" }, " ne himmat ki aur darwaza khol diya."],
+                ["Andar jo manzar tha, uske liye woh bilkul tayyar nahi thay."],
+                ["Kamray ke beech mein koi ", { "blank": "clothing" }, " pehne hue ", { "blank": "action" }, " kar raha tha!"],
+                ["Aur uske peeche, deewar par, ", { "blank": "place" }, " ki ek bohat bari tasveer lagi hui thi."],
+                [{ "blank": "character1" }, " aur ", { "blank": "character2" }, " abhi samajhne ki koshish hi kar rahe thay ke achanak purane sandook ka dhakkan khula..."],
+                {
+                  "style": "reveal",
+                  "parts": ["Aur uske andar se ", { "blank": "unexpected" }, " nikal aaya."]
+                },
+                ["Dono ne ek doosre ko dekha."],
+                ["Phir ", { "blank": "character1" }, " bola:"],
+                {
+                  "style": "dialogue",
+                  "parts": ["“Mujhe lagta hai yeh haveli bhoot se zyada ajeeb hai.”"]
+                }
+              ],
+              "english": [
+                [{ "blank": "character1" }, " and ", { "blank": "character2" }, " were staying for a few days with their ", { "blank": "familyMember" }, " in a very old family haveli."],
+                ["The haveli looked beautiful during the day, but as soon as night fell, every room sank into a strange silence."],
+                ["The strangest thing was the upstairs room."],
+                ["Every night, exactly at midnight, its window opened all by itself."],
+                ["One night, ", { "blank": "character1" }, " and ", { "blank": "character2" }, " decided they were finally going to solve the mystery."],
+                ["Just as they started climbing the stairs, they heard..."],
+                {
+                  "style": "sound",
+                  "parts": ["“", { "blank": "sound" }, "!”"]
+                },
+                ["Both of them froze."],
+                ["Near the door they spotted ", { "blank": "number" }, " strange marks, and in the corner sat ", { "blank": "animal", "article": true }, ", completely silent."],
+                ["Next to it was a plate of ", { "blank": "food" }, "."],
+                {
+                  "style": "dialogue",
+                  "parts": ["“What is going on here?” ", { "blank": "character2" }, " whispered."]
+                },
+                ["Then they noticed a ", { "blank": "color" }, " light glowing from inside the room."],
+                [{ "blank": "character1" }, " gathered their courage and opened the door."],
+                ["They were completely unprepared for what they saw."],
+                ["In the middle of the room, someone wearing ", { "blank": "clothing" }, " was busy ", { "blank": "action" }, "!"],
+                ["Behind them, hanging on the wall, was an enormous picture of ", { "blank": "place" }, "."],
+                [{ "blank": "character1" }, " and ", { "blank": "character2" }, " were still trying to understand what was happening when the lid of an old trunk suddenly opened..."],
+                {
+                  "style": "reveal",
+                  "parts": ["And out came ", { "blank": "unexpected" }, "."]
+                },
+                ["They looked at each other."],
+                ["Then ", { "blank": "character1" }, " said:"],
+                {
+                  "style": "dialogue",
+                  "parts": ["“I think this haveli is stranger than it is haunted.”"]
+                }
+              ]
+            }
+          },
+          "flashcards": { "enabled": true },
+          "quiz": { "enabled": true },
+          "matching": { "enabled": true },
+          "riddles": { "enabled": true },
+          "memory": { "enabled": true },
+          "wordsearch": { "enabled": true },
+          "speedgrid": { "enabled": true },
+          "fallingwords": { "enabled": true }
+        }
+      }
+    </script>
+
+    <script src="/qr/assets/js/issue-loader.js"></script>
+    <script type="module" src="/qr/assets/js/index.js"></script>
+
+    <script>
+      const iconSrc = "https://img.icons8.com/color/96/like--v1.png";
+
+      for (let i = 0; i < 15; i++) {
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.classList.add("heart");
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDelay = Math.random() * 10 + "s";
+        icon.style.width = (16 + Math.random() * 10).toFixed(2) + "px";
+        icon.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s";
+        document.body.appendChild(icon);
+      }
+    </script>
+  </body>
+</html>
