@@ -1,5 +1,6 @@
 import "./book-words.js";
 import { vocab as originalVocab } from "./mastervocab.js";
+import { gameSound } from "./sfx.js";
 
 // --------------------
 // Card border colors (cycles per card)
@@ -13,10 +14,8 @@ const CARD_COLORS = [
 // Audio (lazy — created once, shared)
 // --------------------
 const audio = {
-  sparkle: new Audio("/qr/assets/audio/sparkle.mp3"),
-  correct: new Audio("/qr/assets/audio/success.wav"),
-  incorrect: new Audio("/qr/assets/audio/incorrect.wav"),
-  cardFlip: new Audio("/qr/assets/audio/cardflip.mp3"),
+  sparkle: gameSound("/qr/assets/audio/sparkle.mp3"),
+  cardFlip: gameSound("/qr/assets/audio/cardflip.mp3"),
 };
 
 // --------------------
@@ -122,8 +121,7 @@ function createSparkle(x, y) {
 }
 
 function triggerSparkles(centerX, centerY) {
-  audio.sparkle.currentTime = 0;
-  audio.sparkle.play().catch(() => {});
+  audio.sparkle.play();
   for (let i = 0; i < 10; i++) {
     createSparkle(
       centerX + (Math.random() * 60 - 30),
@@ -375,8 +373,7 @@ function updateFlashcard(index) {
 flashcard.addEventListener("click", (e) => {
   if (e.target.closest("#hint-btn")) return;
   removeHintBlock();
-  audio.cardFlip.currentTime = 0;
-  audio.cardFlip.play().catch(() => {});
+  audio.cardFlip.play();
   const isNowFlipped = flashcard.classList.toggle("flipped");
   if (!isNowFlipped) {
     setTimeout(() => updateFlashcard(currentIndex), 500);
